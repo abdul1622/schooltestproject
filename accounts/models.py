@@ -90,6 +90,8 @@ class User(AbstractBaseUser):
 
 
 class Profile(models.Model):
+    def upload_design_to(self, filename):
+        return f'user_profile/{self.user.id}/{filename}'
     user = models.OneToOneField(User,on_delete=models.CASCADE,null =True)
     first_name = models.CharField(max_length=15)
     last_name = models.CharField(max_length=15)
@@ -101,6 +103,8 @@ class Profile(models.Model):
     )
     section = models.CharField(max_length=2)
     address = models.CharField(max_length=45)
+    profile_picture = models.ImageField(upload_to=upload_design_to,blank=False,null=True)
+
 
     def __str__(self):
         return str(self.user)

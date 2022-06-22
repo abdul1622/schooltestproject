@@ -1,6 +1,9 @@
+import re
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 import random
 import http.client
+from rest_framework.renderers import TemplateHTMLRenderer
 from requests import request
 from rest_framework.response import Response
 from django.contrib.auth import login,logout
@@ -14,7 +17,8 @@ from.models import User,Profile,OTP
 from.serializers import OtpVerificationserializer, SigninSerializer, SignupSerializer,ProfileSerializer,UserDetailsSerializer
 from .permission import IsAdminUser,IsStaffUser
 from .auth_backend import PasswordlessAuthBackend
-
+from .forms import *
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 class SignupView(CreateAPIView):
     serializer_class=SignupSerializer
@@ -96,20 +100,14 @@ class UserDetailsView(ListAPIView):
         elif user.user_type == 'is_admin':
             queryset = User.objects.all()
         return queryset
-
     def list(self, request):
         queryset = self.get_queryset()
-        serializer = UserDetailsSerializer(queryset, many=True)
+        serializer = UserDetailsSerializer(queryset)
         return Response(serializer.data)
-
-
 class UserDetailsEditView(RetrieveUpdateDestroyAPIView):
-
     serializer_class=UserDetailsSerializer
     permission_classes = [IsStaffUser | IsAdminUser]
     queryset=User.objects.all()
-
-
     def retrieve(self,request,pk):
         if self.request.user.id == pk:
             user = User.objects.get(pk=pk)
@@ -131,15 +129,19 @@ class SimpleLoginView(APIView):
     def post(self,request):
         email=request.data.get('email')
         phone=request.data.get('phone')
+        print(email)
+        print(phone)
         if email and phone:
             try:
                 user=PasswordlessAuthBackend.authenticate(request,email=email,phone=phone)
             except:
                 return Response({"status": "User doesn't exits"}, status=HTTP_400_BAD_REQUEST)
         if user:
+            print(user)
             token, created = Token.objects.get_or_create(user=user)
             login(request,user)
             serializer = UserDetailsSerializer(user)
-            return Response({"status": "success",'data':serializer.data}, status=HTTP_200_OK)
+            return Response({"status": "success",'data':serializer.data,'token':token.key}, status=HTTP_200_OK)
         return Response({"status": "failed"}, status=HTTP_400_BAD_REQUEST)
+
 

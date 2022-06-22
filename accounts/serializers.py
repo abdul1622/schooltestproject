@@ -1,3 +1,5 @@
+from dataclasses import fields
+from click import style
 from rest_framework import serializers
 from django.shortcuts import get_list_or_404, redirect
 from django.contrib.auth import get_user_model
@@ -10,45 +12,20 @@ usertype_choice={
     ('is_staff','is_staff'),
     ('is_admin','is_admin'),
 }
-
-class SignupSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-    phone = serializers.CharField(max_length=10)
-    register_number = serializers.CharField(max_length=15)
-    date_of_birth = serializers.DateField()
-    user_type = serializers.ChoiceField(
-        choices = usertype_choice,
-        default='0'
-    )
-    
-    first_name = serializers.CharField(max_length=15)
-    last_name = serializers.CharField(max_length=15)
-    full_name =serializers.CharField(max_length=30)
-    standard = serializers.IntegerField()
-    section = serializers.CharField(max_length=2)
-    address = serializers.CharField(max_length=45)
-    is_data_entry = serializers.BooleanField()      
-    def create(self, validated_data):
-        email = validated_data.pop("email")
-        phone = validated_data.pop("phone")
-        register_number = validated_data.pop("register_number")
-        date_of_birth = validated_data.pop("date_of_birth")
-        user_type = validated_data.pop("user_type")
-        first_name = validated_data.pop("first_name")
-        last_name = validated_data.pop("last_name")         
-        full_name = validated_data.pop("full_name")
-        standard = validated_data.pop("standard")
-        section = validated_data.pop("section")
-        address = validated_data.pop("address")
-        is_data_entry =  validated_data.pop("is_data_entry")      
-        user =   User.objects.create(email =email,phone=phone,date_of_birth=date_of_birth,register_number=register_number,user_type = user_type,is_data_entry=is_data_entry)
-        user.save()
-        # subject = 'welcome to myapp'
-        # message = f'Hi {user.username}, thank you for registering in our new app'
-        # email_from = settings.EMAIL_HOST_USER
-        # recipient_list = [user.email,]
-        # send_mail(subject,message,email_from,recipient_list)
-        Profile.objects.create(user=user,first_name=first_name,last_name=last_name,standard=standard,section=section,address=address, full_name=full_name)
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=User
+        fields = ['email','phone','register_number','date_of_birth','user_type']
+class SignupSerializer(serializers.ModelSerializer):
+    Signup=UserSerializer()
+    class Meta:
+        model=Profile
+        fields=['Signup','first_name','last_name','full_name',"standard","section","address"]
+    def create(self,validated_data):
+        user=validated_data.pop('Signup')
+        user= User.objects.create(**user)
+        Profile.objects.create(user=user,**validated_data)
+        return user
 class SigninSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

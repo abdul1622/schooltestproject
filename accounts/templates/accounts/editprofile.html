@@ -1,0 +1,5 @@
+<form  enctype="multipart/form-data" method="POST">
+    {{form.as_p}}
+    {% csrf_token %}
+    <input type="submit" id="signup">
+</form>

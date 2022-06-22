@@ -111,7 +111,6 @@ class ChaptersOfSubjectsView(APIView):
                     "chapter_no": object.chapter_no,
                     "description": object.description,
                     })
-
             except:
                 return Response({"status": "Not found"}, status=HTTP_404_NOT_FOUND)
             return Response({"status": "success", "data": data}, status=HTTP_200_OK)
