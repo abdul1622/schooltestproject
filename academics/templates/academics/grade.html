@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+{% block content %}
+    {% for i in data %}
+    <p>{{i.grade}}</p>
+    {% endfor %}
+    <form action="http://127.0.0.1:8000/academics/grades/" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Create">
+    </form>
+{% endblock %}
