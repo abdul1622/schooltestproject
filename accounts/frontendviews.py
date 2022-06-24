@@ -16,10 +16,11 @@ from django.contrib.auth.decorators import login_required
 from .auth_backend import PasswordlessAuthBackend
 import requests
 def signupview(request):
-    form=signup()
-   
-    context={'response':response}
-    return render(request,'accounts/signup.html',context)
+    form=signup(data=request.POST)
+    if request.method=='POST':
+        if form.is_valid():
+            form.save()
+    return render(request,'accounts/signup.html')
 def signin(request):
     form=Loginform()
     if request.method=='POST':
@@ -56,16 +57,20 @@ def otpverify(request):
             login(request,user)
             return Response({"status":'loggedin','data':user.email})
     return Response({"status":'recheck'})
+
 def simple(request):
-    return render(request,'accounts/login.html')
+    return render(request,'accounts/login2.html')
+def home(request):
+    return render(request,'base.html')
 def websignout(request):
     url='http://127.0.0.1:8000/logout/'
     response=requests.get(url,params=request.user)
     print(response)
     return redirect('/websimplelogin')
+@login_required(login_url='/websimplelogin')
 def profile(request):
     return render(request,'accounts/profile.html')
-@login_required(login_url='/websimplelogin')
+
 def editprofile(request):
     user = Profile.objects.get(user_id=request.user.id)
     form=ProfileEdit(instance=user)

@@ -25,8 +25,9 @@ class SignupView(CreateAPIView):
     def post(self, request):
         serializer = SignupSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response({"status": "success"},status=HTTP_201_CREATED)
+            result = serializer.save()
+     
+            return Response({"status": "success","result":result},status=HTTP_201_CREATED)
         return Response({"status": "failure", "data": serializer.errors})
 class LoginView(APIView):
     serializer_class=SigninSerializer
@@ -93,6 +94,7 @@ class UserDetailsView(ListAPIView):
     serializer_class=UserDetailsSerializer
     def get_queryset(self):
         user = self.request.user
+
         if user.user_type == 'is_student':
             queryset = User.objects.get(id = user.id)
         elif user.user_type == 'is_staff':
@@ -129,17 +131,15 @@ class SimpleLoginView(APIView):
     def post(self,request):
         email=request.data.get('email')
         phone=request.data.get('phone')
-        print(email)
-        print(phone)
         if email and phone:
             try:
                 user=PasswordlessAuthBackend.authenticate(request,email=email,phone=phone)
             except:
                 return Response({"status": "User doesn't exits"}, status=HTTP_400_BAD_REQUEST)
         if user:
-            print(user)
             token, created = Token.objects.get_or_create(user=user)
             login(request,user)
+            print(user,'yes')
             serializer = UserDetailsSerializer(user)
             return Response({"status": "success",'data':serializer.data,'token':token.key}, status=HTTP_200_OK)
         return Response({"status": "failed"}, status=HTTP_400_BAD_REQUEST)
