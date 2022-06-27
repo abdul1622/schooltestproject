@@ -34,7 +34,6 @@ class signup(forms.Form):
         attrs={"class": "form-control", "placeholder": "Section"}))
     profilepic=forms.FileField(required=False)
     data_entry_user = forms.BooleanField(required=False)
-  
 class Loginform(forms.Form):
     email = forms.EmailField(widget=forms.TextInput(
         attrs={"class": "form-control", "placeholder": "Email"}))

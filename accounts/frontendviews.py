@@ -17,10 +17,8 @@ from .auth_backend import PasswordlessAuthBackend
 import requests
 def signupview(request):
     form=signup(data=request.POST)
-    if request.method=='POST':
-        if form.is_valid():
-            form.save()
-    return render(request,'accounts/signup.html')
+  
+    return render(request,'accounts/signup.html',{'form':form})
 def signin(request):
     form=Loginform()
     if request.method=='POST':

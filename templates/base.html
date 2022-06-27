@@ -8,7 +8,9 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <style>
         .login {
             margin-left: 670px;
@@ -84,9 +86,7 @@
             border-radius: 2px;
             border: none;
             opacity: 1px;
-
         }
-
         #login {
             width: 120px;
             border-radius: 5px;
@@ -94,14 +94,12 @@
             border: none;
             margin-left: 160px;
         }
-
         input[type=file] {
             border: none;
             margin-left: 116px;
             margin-top: -9px;
             position: absolute;
         }
-
         .profile {
             margin-top: 200px;
             margin-left: 600px;
@@ -281,12 +279,23 @@ h1 {
 
 
 }
+table {
+  font-family: arial, sans-serif;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
 
     </style>
 
 <script>
  function profile(){
-    let token=localStorage.getItem("token")
+    let token=localStorage.getItem('token')
     console.log(token)
     fetch('https://schooltestproject.herokuapp.com/auth/profile/', {
       method: 'GET',
@@ -297,23 +306,54 @@ h1 {
   })
   .then(response => response.json())
       .then(data => {
-          console.log("data=", data)})
+          console.log("data=", data.data.email)
+          console.log("data=", data)
+
           let htmlSegment = `<div class="user">
-            <div class="email"><p>${data.email}</p></div>
-            <div class="phone"><p>${data.phone}</p></div>
-            <div class="fullname"><p>${users.profile.full_name}</p></div>
-            <div class="firstname"><p>${users.profile.first_name}</p></div>
-            <div class="lastname"><p>${users.profile.last_name}</p></div>
-            <div class="DOB"><p>${users.date_of_birth}</p></div>
-            <div class="reg"><p>${users.register_number}</p></div>
-          
-        
+            <div class="email"><p>${data.data.email}</p></div>
+            <div class="phone"><p>${data.data.phone}</p></div>
+            <div class="fullname"><p>${data.data.profile.full_name}</p></div>
+            <div class="firstname"><p>${data.data.profile.first_name}</p></div>
+            <div class="lastname"><p>${data.data.profile.last_name}</p></div>
+            <div class="DOB"><p>${data.data.date_of_birth}</p></div>
+            <div class="reg"><p>${data.data.register_number}</p></div>
             </div>`;
             let container = document.querySelector('.container');
            container.innerHTML = htmlSegment;
+        }
+          )
+      }    
+function userdetails(){
+  let token=localStorage.getItem("token")
+  console.log(token)
+  fetch('https://schooltestproject.herokuapp.com/auth/user-details/',{
+    method:'GET',
+    headers: new Headers({
+      'Authorization': 'token'+' '+token,
+      'Content-Type': 'application/json'
+    })
+  }).then(res=>{
+    return res.json()
+  }).then(data=>{
+    console.log('data',data)
+    let table = '<table>';
+   table += `<tr><th>Email</th><th>Phone</th><th>Full name</th><th>user type</th></tr>`;
+     data.forEach((d,index) => {
+        
+           table = table + '<tr>';
+           table = table + '<td>' + `${d.email}` + '</td>';
+           table = table + '<td>' + `${d.phone}` + '</td>';
+           table = table + '<td>' + `${d.profile?.full_name}` + '</td>';
+           table = table + '<td>' + `${d.user_type}` + '</td>',
+           table = table + `</tr>`;
 
+           });
+    table += "</table>";
+    let container = document.querySelector('.container');
+    container.innerHTML = table;
+    
+  })
 }
-
 function logout(){
   let token=localStorage.getItem("token")
   console.log(token)
@@ -324,52 +364,11 @@ function logout(){
           'Content-Type': 'application/json',
           'Authorization':'token'+' '+token,
           // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
+      }
   }) .then(response => response.text())
+  
   window.location.href='websimplelogin'
-
-      
 }
-
- /* async function getUsers() {
-   
-
-    let token =localStorage.getItem("token")
-    console.log(token)
-    headers=new Headers({
-      'Authorization': 'Token'+token,'Content-Type': 'application/x-www-form-urlencoded'})
-    try {
-      console.log(headers)
-    let res = await fetch('https://schooltestproject.herokuapp.com/auth/profile/?format=json',headers);
-    console.log(res)
-    return await res.text();
-   
-    } catch (error) {
-    console.log(error);
-    }
-    
-    }
-  // console.log(getUsers())
-  async function profileDetails(){
-    let users = await getUsers();
-    console.log(users);
-    let htmlSegment = `<div class="user">
-      <div class="email"><p>${users.email}</p></div>
-      <div class="phone"><p>${users.phone}</p></div>
-      <div class="fullname"><p>${users.profile.full_name}</p></div>
-      <div class="firstname"><p>${users.profile.first_name}</p></div>
-      <div class="lastname"><p>${users.profile.last_name}</p></div>
-      <div class="DOB"><p>${users.date_of_birth}</p></div>
-      <div class="reg"><p>${users.register_number}</p></div>
-    
-
-      </div>`;
-      let container = document.querySelector('.container');
-     container.innerHTML = htmlSegment;
-    
-  }*/
-
-
 </script>
 </head>
 
@@ -392,13 +391,21 @@ function logout(){
                     <li class="nav-item">
                         <a href="#">Edit</a>
                     </li>
+               
+                    <li class="nav-item">
+                      <a href="#" onclick="userdetails()">userdetails
+                      </a>
+                  </li>
                 </ul>
             </div>
             <p></p>
         </div>
     </nav>
     <div class="container">
+      <div class="userData">
+      </div>
     </div>
+   
     {% block content %}{% endblock %}
    
 </body>
