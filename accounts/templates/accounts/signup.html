@@ -12,7 +12,16 @@
             margin-left:700px ;
             width:25%;
             padding: 20px;
-            background-color:blue;
+            background-color:rgb(245, 245, 252);
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+          }
+          .signbox label{
+            width: 150px;
+            display: inline-block;
+          }
+          .signbox input{
+            outline: none;
+            border: none;
           }
           input[type=file] {
             border: none;
@@ -67,24 +76,6 @@
         var fullname = document.getElementById('id_full_name').value
         var address = document.getElementById('id_address').value
         var is_dataentry = document.getElementById('id_data_entry_user').value 
-        let dataArray = [{firstname,lastname,fullname,standard,section}]; 
-       /* var email="raja123@gmail.com"
-        var phone="1234568888"
-        var reg='542312'
-        var dob="01-01-2022"
-        var standard="1"
-        var section="A"
-        var type="is_student"
-        var firstname="Raja"
-        var lastname="Raja"
-        var fullname="RajaM"
-        var address="Madurai"
-        var is_dataentry="False"
-        console.log(typeof email)*/
-        d=JSON.stringify({ 'email': email, 'phone': phone, 'date_of_birth': dob,  'user_type': type, 
-        'is_data_entry': is_dataentry, 'first_name':firstname,'last_name':lastname,'standard':standard,'section':section,'full_name':fullname,'address':address,}
-        )
-        console.log(d)
         fetch('https://schooltestproject.herokuapp.com/auth/signup/',
              {
             method: 'POST',

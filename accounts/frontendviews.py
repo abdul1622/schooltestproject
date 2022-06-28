@@ -65,7 +65,7 @@ def websignout(request):
     response=requests.get(url,params=request.user)
     print(response)
     return redirect('/websimplelogin')
-@login_required(login_url='/websimplelogin')
+
 def profile(request):
     return render(request,'accounts/profile.html')
 

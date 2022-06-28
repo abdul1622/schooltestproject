@@ -1,5 +1,57 @@
-<form  enctype="multipart/form-data" method="POST">
-    {{form.as_p}}
-    {% csrf_token %}
-    <input type="submit" id="signup">
-</form>
+{% extends 'base.html'%}
+{% block user%}
+<div class="chapter-list">
+    <input type="email" placeholder="email">
+    <input type="email" placeholder="email">
+    <input type="email" placeholder="email">
+    <input type="email" placeholder="email">
+    <input type="email" placeholder="email">
+    <input type="email" placeholder="email">
+    <input type="email" placeholder="email">
+    <input type="email" placeholder="email">
+    <input type="email" placeholder="email">
+    <input type="email" placeholder="email">
+    <input type="email" placeholder="email">
+    <input type="email" placeholder="email">
+  </div>
+  
+  <script>
+    function userdetails() {
+        let token = localStorage.getItem("token")
+        console.log(token)
+        fetch('https://schooltestproject.herokuapp.com/auth/user-details/', {
+          method: 'GET',
+          headers: new Headers({
+            'Authorization': 'token' + ' ' + token,
+            'Content-Type': 'application/json'
+          })
+        }).then(res => {
+          return res.json()
+        }).then(data => {
+          console.log('data', data)
+          let htmlSegment = ''
+          data.forEach((d, index) => {
+            htmlSegment = htmlSegment + `<div class="user">
+              <pclass="email">${d.email}</p>
+              <p class="phone">${d.phone}</p>
+             <p class="fullname">${d.profile?.full_name}</p>
+           <pclass="firstname">${d.profile?.first_name}</p>
+           <pclass="lastname">${d.profile?.last_name}</p>
+             <p class="DOB">${d.date_of_birth}</p>
+             <p class="reg">${d.register_number}</p>
+      
+             <p class="reg">${d.profile?.address}</p>
+            
+                  <a href=#" id='edit'>Edit</a>&nbsp<a href=# onclick="deletedata(${d.id})" ">Delete</a></div>`
+  
+  
+          });
+  
+          const container = document.querySelector('.container');
+          container.innerHTML = htmlSegment;
+  
+  
+        })
+      }
+  </script>
+{% endblock %}

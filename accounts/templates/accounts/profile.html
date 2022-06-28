@@ -1,7 +1,41 @@
-
 {% extends 'base.html' %}
-{%  block content %}
+{% block profile %}
 
-   <div class="profile">
-    </div>
+<div class="container">
+</div>
+<script>
+    function profile() {
+        let token = localStorage.getItem('token')
+        console.log(token)
+        fetch('https://schooltestproject.herokuapp.com/auth/profile/', {
+          method: 'GET',
+          headers: new Headers({
+            'Authorization': 'token' + ' ' + token,
+            'Content-Type': 'application/x-www-form-urlencoded'
+          })
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log("data=", data.data.email)
+            console.log("data=", data)
+  
+            let htmlSegment = `<div class="user">
+                   <div class="email"><p>${data.data.email}</p></div>
+                   <div class="phone"><p>${data.data.phone}</p></div>
+                   <div class="fullname"><p>${data.data.profile.full_name}</p></div>
+                   <div class="firstname"><p>${data.data.profile.first_name}</p></div>
+                   <div class="lastname"><p>${data.data.profile.last_name}</p></div>
+                   <div class="DOB"><p>${data.data.date_of_birth}</p></div>
+                   <div class="reg"><p>${data.data.register_number}</p></div>
+                   </div>`;
+            let container = document.querySelector('.container');
+            container.innerHTML = htmlSegment;
+          }
+          )
+      }
+      
+</script>
+
 {% endblock %}
+
+
