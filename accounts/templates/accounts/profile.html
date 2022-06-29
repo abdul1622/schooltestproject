@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 {% block profile %}
-
 <div class="container">
 </div>
+<input type="text" id="fname" placeholder="First Name"> 
+<input type="text" id="lname" placeholder="Last Name"> 
+<input type="text" id="ffname"placeholder="Full Name"> 
+<input type="number" id="std" placeholder="Standard"> 
+<input type="text" id="sec" placeholder="Section"> 
+<input type="text" id="address"placeholder="Address"> 
+<button id="submit">submit</button>
 <script>
+  let container = document.querySelector('.container');
+  
+
     function profile() {
         let token = localStorage.getItem('token')
         console.log(token)
@@ -19,21 +28,70 @@
             console.log("data=", data.data.email)
             console.log("data=", data)
   
-            let htmlSegment = `<div class="user">
-                   <div class="email"><p>${data.data.email}</p></div>
-                   <div class="phone"><p>${data.data.phone}</p></div>
-                   <div class="fullname"><p>${data.data.profile.full_name}</p></div>
-                   <div class="firstname"><p>${data.data.profile.first_name}</p></div>
-                   <div class="lastname"><p>${data.data.profile.last_name}</p></div>
-                   <div class="DOB"><p>${data.data.date_of_birth}</p></div>
-                   <div class="reg"><p>${data.data.register_number}</p></div>
+            let htmlSegment = `<div class="user" id='${data.data.id}'>
+                   <p class="fullname">${data.data.profile?.full_name}</p>
+                   <p class="firstname">${data.data.profile?.first_name}</p>
+                   <p class="lastname">${data.data.profile?.last_name}</p>
+                   <p class="std">${data.data.profile?.standard}</p>
+                   <p class="sec">${data.data.profile?.section}</p>
+                   <p class="address">${data.data.profile?.address}</p>
+                   <a href=#" id='edit'>Edit</a>
                    </div>`;
-            let container = document.querySelector('.container');
             container.innerHTML = htmlSegment;
           }
           )
+        }
+        container.addEventListener('click',(e)=>{
+        fname= document.getElementById('fname');
+        lname= document.getElementById('lname');
+        ffname= document.getElementById('ffname');
+        std= document.getElementById('std');
+        sec= document.getElementById('sec');
+        ad=document.getElementById('address');
+        button= document.getElementById('submit')
+        e.preventDefault();
+        let editbutton = e.target.id == 'edit';
+        let id = e.target.parentElement.id;
+        console.log(id)
+        if (editbutton)
+        {
+          url="https://schooltestproject.herokuapp.com/auth/student-profile/"
+          const parent = e.target.parentElement;
+          console.log(parent)
+          let fullname = parent.querySelector('.fullname').textContent;
+          let lastname= parent.querySelector('.lastname').textContent;
+          let firstname= parent.querySelector('.firstname').textContent;
+          let standard= parent.querySelector('.std').textContent;
+          let section= parent.querySelector('.sec').textContent;
+          let address= parent.querySelector('.address').textContent;
+          document.getElementById('ffname').value=fullname
+          document.getElementById('lname').value=lastname
+          document.getElementById('fname').value=firstname
+          document.getElementById('std').value=standard
+          document.getElementById('sec').value=section
+          document.getElementById('address').value=address
+          d=JSON.stringify({ 
+          'profile':{'first_name':fname.value,'last_name':lname.value,'full_name':ffname.value,'standard':std.value,'section':sec.value,'address':ad.value}}
+           )
+           console.log(d)
+           button.addEventListener('click',()=>{
+            fetch(`${url}${id}/`,{
+              method : 'PUT',
+              headers : {
+                'Content-Type' : 'application/json',
+                'Authorization':'token'+ +localStorage.getItem('toke')
+              },
+              body:JSON.stringify({
+              'profile':{'first_name':fname.value,'last_name':lname.value,'standard':std.value,'section':sec.value,'full_name':ffname.value,'address':ad.value}}
+              )
+          }).then(res => console.log(res.json()))
+        }) 
+      }
+    
       }
       
+    );
+        
 </script>
 
 {% endblock %}

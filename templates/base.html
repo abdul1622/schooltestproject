@@ -101,6 +101,9 @@
       margin-bottom: 50px;
       width: 400px;
     }
+    .user-details{
+      position: sticky;
+    }
   </style>
 
 
@@ -117,7 +120,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a href="accounts/webprofile" onclick=" profile()">Profile</a>
+            <a href=" #" onclick=" profile()">Profile</a>
           </li>
           <li class="nav-item">
             <a href="#" onclick="logout()">Signout</a>
@@ -135,149 +138,16 @@
       <p></p>
     </div>
   </nav>
-   <div class="userDetails">
-   <input type="text" placeholder="Email"> 
-   <input type="text" placeholder="Phone"> 
-   <input type="text" placeholder="Reg"> 
-   <input type="text" placeholder="DOB"> 
-   <input type="text" placeholder="Standard"> 
-   <input type="text" placeholder="Section"> 
-   <input type="text" placeholder="First Name"> 
-   <input type="text" placeholder="Last Name"> 
-   <input type="text" placeholder="Full Name"> 
-   <input type="file"> 
-
-   </div>
-  {% block content %}{% endblock %}
-  {% block user %}{% endblock %}
-  <div class="container"></div>
-  <script>
-    const container = document.querySelector('.container');
-    function userdetails() {
-      let token = localStorage.getItem("token")
-      console.log(token)
-      fetch('https://schooltestproject.herokuapp.com/auth/user-details/', {
-        method: 'GET',
-        headers: new Headers({
-          'Authorization': 'token' + ' ' + token,
-          'Content-Type': 'application/json'
-        })
-      }).then(res => {
-        return res.json()
-      }).then(data => {
-        console.log('data', data)
-        let htmlSegment = ''
-        data.forEach((d, index) => {
-          htmlSegment = htmlSegment + `<div class="user">
-            <p class="email">${d.email}</p>
-            <p class="phone">${d.phone}</p>
-          <p   class="fullname">${d.profile?.full_name}</p>
-         <p   class="firstname">${d.profile?.first_name}</p>
-         <p   class="lastname">${d.profile?.last_name}</p>
-           <p class="DOB">${d.date_of_birth}</p>
-           <p class="reg">${d.register_number}</p>
-           <p class="standard">${d.profile?.standard}</p>
-           <p class="section">${d.profile?.section}</p>
-           <p class="address">${d.profile?.address}</p>
-                <a href=#" id='edit'>Edit</a>&nbsp<a href="#" >Delete</a></div>`
-        });
-
-        
-        console.log(container)
-        container.innerHTML = htmlSegment;
-
-      })
-    }
-    
-    function profile() {
-      let token = localStorage.getItem('token')
-      console.log(token)
-      fetch('https://schooltestproject.herokuapp.com/auth/profile/', {
-        method: 'GET',
-        headers: new Headers({
-          'Authorization': 'token' + ' ' + token,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        })
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log("data=", data.data.email)
-          console.log("data=", data)
-
-          let htmlSegment = `<div class="user">
-                 <div class="email"><p>${data.data.email}</p></div>
-                 <div class="phone"><p>${data.data.phone}</p></div>
-                 <div class="fullname"><p>${data.data.profile.full_name}</p></div>
-                 <div class="firstname"><p>${data.data.profile.first_name}</p></div>
-                 <div class="lastname"><p>${data.data.profile.last_name}</p></div>
-                 <div class="DOB"><p>${data.data.date_of_birth}</p></div>
-                 <div class="reg"><p>${data.data.register_number}</p></div>
-                 </div>`;
-          let container = document.querySelector('.container');
-          container.innerHTML = htmlSegment;
-        }
-        )
-    }
-      container.addEventListener('click',(e) => {
-      form_subject = document.getElementById('id_subject')
-      form_chapter_no = document.getElementById('id_chapter_no')
-      form_name = document.getElementById('id_name')
-      form_description = document.getElementById('id_description');
-      chapter_btn = document.getElementById('chapter-btn')
-      e.preventDefault();
-      let delbutton = e.target.id == 'delete';
-      let editbutton = e.target.id == 'edit';
-      let id = e.target.parentElement.parentElement.id
-      console.log(e.target.parentElement.parentElement.id)
-      if(delbutton){
-        fetch(`${url}${id}/`,{
-          method : 'DELETE',
-        }).then(res => res.json()).then(() => location.reload())
-      }
-    
-      if(editbutton){
-        const parent = e.target.parentElement.parentElement;
-        let email = parent.querySelector(".email").textContent;
-        let phone= parent.querySelector('.phone').textContent;
-        let reg = parent.querySelector('.reg').textContent;
-        let dob = parent.querySelector('.DOB').textContent;
-        let fullname = parent.querySelector('.fullname').textContent;
-        let lastname= parent.querySelector('.lastname').textContent;
-        let firstname= parent.querySelector('.firstname').textContent;
-        let standard= parent.querySelector('.standard').textContent;
-        let section= parent.querySelector('.section').textContent;
-        let address= parent.querySelector('.address').textContent;
-        document.getElementById('Email').value='hi' 
-        document.getElementById('Phone')=phone
-        document.getElementById('Reg')=reg
-        document.getElementById('DOB')=dob
-        document.getElementById('Full Name')=fullname
-        document.getElementById('Last Name')=lastname
-        document.getElementById('First Name')=firstname
-        document.getElementById('Standard')=standard
-        document.getElementById('Section')=section
-    
-
-    
-        chapter_btn.addEventListener('click',()=>{
-          console.log(
-            "mfmgngne"
-          )
-          fetch(`${url}${id}/`,{
-            method : 'PUT',
-            headers : {
-              'content-Type' : 'application/json'
-            },
-            body: JSON.stringify({ 'subject' : form_subject.value,
-            'chapter_no': form_chapter_no.value,
-            'name' : form_name.value,
-            'description': form_description.value,
-          })
-        }).then(res => res.json()).then(()=> location.reload())
-      }) 
-    }
   
-  });
+   
+ 
+
+  {% block content %}{% endblock %}
+  {% block profile %}{% endblock %}
+  {% block user %}{% endblock %}
+
+  
+  <script>
     function logout() {
       let token = localStorage.getItem("token")
       console.log(token)
@@ -293,8 +163,7 @@
 
       window.location.href = 'websimplelogin'
     }
-
-
+   
   </script>
 </body>
 

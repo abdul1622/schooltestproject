@@ -70,13 +70,5 @@ def profile(request):
     return render(request,'accounts/profile.html')
 
 def editprofile(request):
-    user = Profile.objects.get(user_id=request.user.id)
-    form=ProfileEdit(instance=user)
-    if request.method== 'POST':
-        form=ProfileEdit(request.POST,instance=user,files=request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')
-    context={'form':form}
-    return render(request,'accounts/editprofile.html',context)
+    return render(request,'accounts/editprofile.html')
         
