@@ -56,15 +56,22 @@
 </head>
 
 <body>
-    <div class="signbox">
-
+    <div id="signbox" class="signbox">
+        
     {{form.as_p}}
+    <img id="image" width="100">
+
     <button onclick=signup()>Register</button>
 </div>
 </body>
 <script>
+    document.getElementById('id_profilepic').onchange = function () {
+        var src = URL.createObjectURL(this.files[0])
+        console.log(src)
+        document.getElementById('image').src = src
+      }
     function signup() {
-         var email = document.getElementById('id_email').value
+        var email = document.getElementById('id_email').value
         var phone = document.getElementById('id_phone').value
         var dob = document.getElementById('id_date_of_birth').value
         var reg = document.getElementById('id_register_number').value
@@ -76,14 +83,18 @@
         var fullname = document.getElementById('id_full_name').value
         var address = document.getElementById('id_address').value
         var is_dataentry = document.getElementById('id_data_entry_user').value 
+        var profile=document.getElementById('id_profilepic').files[0]['name']
+        console.log(profile)
+        d= JSON.stringify({ 'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type, 
+        'is_data_entry': is_dataentry, 'first_name':firstname,'last_name':lastname,'standard':standard,'section':section,'full_name':fullname,'address':address,'profile_picture':profile}
+        )
+        console.log(d)
         fetch('https://schooltestproject.herokuapp.com/auth/signup/',
              {
             method: 'POST',
-            body: JSON.stringify({ 'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type, 
-            'is_data_entry': is_dataentry, 'first_name':firstname,'last_name':lastname,'standard':standard,'section':section,'full_name':fullname,'address':address,}
-            ),
+            body: d,
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type':"multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW "
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
         })

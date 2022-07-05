@@ -2,6 +2,7 @@
 {% block profile %}
 <div class="container">
 </div>
+<div class="img-container"></div>
 <input type="text" id="fname" placeholder="First Name"> 
 <input type="text" id="lname" placeholder="Last Name"> 
 <input type="text" id="ffname"placeholder="Full Name"> 
@@ -11,8 +12,6 @@
 <button id="submit">submit</button>
 <script>
   let container = document.querySelector('.container');
-  
-
     function profile() {
         let token = localStorage.getItem('token')
         console.log(token)
@@ -25,10 +24,9 @@
         })
           .then(response => response.json())
           .then(data => {
-            console.log("data=", data.data.email)
-            console.log("data=", data)
-  
+            console.log( data)
             let htmlSegment = `<div class="user" id='${data.data.id}'>
+           <div class='image'>   <img  src='https://schooltestproject.herokuapp.com${data.data.profile?.profile_picture}'></div>
                    <p class="fullname">${data.data.profile?.full_name}</p>
                    <p class="firstname">${data.data.profile?.first_name}</p>
                    <p class="lastname">${data.data.profile?.last_name}</p>
@@ -37,6 +35,7 @@
                    <p class="address">${data.data.profile?.address}</p>
                    <a href=#" id='edit'>Edit</a>
                    </div>`;
+      
             container.innerHTML = htmlSegment;
           }
           )
@@ -79,7 +78,7 @@
               method : 'PUT',
               headers : {
                 'Content-Type' : 'application/json',
-                'Authorization':'token'+ +localStorage.getItem('toke')
+                'Authorization':'token'+" "+localStorage.getItem('token')
               },
               body:JSON.stringify({
               'profile':{'first_name':fname.value,'last_name':lname.value,'standard':std.value,'section':sec.value,'full_name':ffname.value,'address':ad.value}}
