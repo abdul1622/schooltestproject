@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="header">
+    <h2 class="text-center">Grade - <span id="grade-head"></span></h2>
+    <hr>
+  </div>
+<div class="test-list">
+
+</div>
+<div class="messages container-fluid">
+
+</div>
+<div class="error-messages container-fluid">
+
+</div>
+
+<script>
+    var token = localStorage.getItem('token')
+    let messages = document.querySelector('.messages')
+    let error_messages = document.querySelector('.error-messages')
+    let head = document.querySelector('.header')
+    head.style.display = 'none'
+    let set_id = false
+    url = 'https://schooltestproject.herokuapp.com/api/test/'
+    var container = document.querySelector('.test-list')
+
+function get_user_standard() {
+        fetch('https://schooltestproject.herokuapp.com/api/profile/', {
+      method: 'GET',
+      headers: {
+        'content-Type': 'application/json',
+        'Authorization': 'token' + ' ' + token,
+      }
+    }).then(res => {
+      return res.json()
+    }).then(data => {
+      let user_type = data.data.user_type
+      let standard = data.data.profile.standard
+      console.log(standard)
+      console.log(user_type,standard)
+      if(user_type != 'is_student'){
+        messages.innerHTML = `<p class='test-warning'>sorry you don't have a access do this page</p>`
+        
+        
+        return
+      }
+    //   return standard
+    get_test(standard);
+    })
+    
+    }
+
+    get_user_standard();
+function get_test(standard){
+    if(standard){
+        head.style.display = 'block';
+        document.getElementById('grade-head').textContent = `${standard}`
+        let content = '';
+        fetch(url, {
+      method: 'GET',
+      headers: {
+        'content-Type': 'application/json',
+        'Authorization': 'token' + ' ' + token,
+      }
+    }).then(res => {
+      return res.json()
+    }).then(data => {
+        data.forEach((d, index) => {
+        if(d.grade_name = standard){
+            content = content + `<div class="questions-paper-card" id='${d.id}'>
+<p> Subject : <span class="subject"> ${d.subject_name}<span></p>
+<p > Remarks : <span class="remarks">${d.remarks}</span></p>
+
+<p > Marks : <span class="marks">${d.marks}</span></p>
+
+<p> Duration : ${d.duration} </p>
+
+<p> Description : ${d.description} </p>
+
+</div>
+`}
+    })
+    container.innerHTML = content;
+    })
+}
+}
+
+</script>
+{% endblock %}

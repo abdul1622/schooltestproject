@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+{% block login %}
+
+<div id = 'loginerror' > Invalid Email or Phone</div >
+
+<div class="login-box">
+    <h1>Login</h1>
+    {%csrf_token%}
+    {{form.as_p}}
+    <button class="login-btn" onClick="login()">Login</button><br>
+    <a class="signInLink" href="/signup">Signup?</a>
+</div>
+<script>
+
+    var host = window.location.protocol + "//" + window.location.host;
+    function login() {
+        var email = document.getElementById('id_email').value
+        var phone = document.getElementById('id_phone').value
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        fetch('https://schooltestproject.herokuapp.com/api/simple-login/',
+            {
+                method: 'POST',
+                body: JSON.stringify({ 'email': email, 'phone': phone }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status == 'success') {
+                    console.log("data=", data)
+                    console.log("email=1", data.data.email)
+                    console.log("tokendata=", data.data.token)
+                    localStorage.setItem('user_type',data.data.user_type)
+                    localStorage.setItem("token", data.data.token);
+                    window.location.href = `${host}/home`
+                }
+                else {
+                    document.getElementById('loginerror').style.display = 'block';
+
+                }
+            })
+    }
+
+
+
+</script>
+{% endblock %}

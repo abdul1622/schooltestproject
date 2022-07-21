@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block profile %}
+<div class="container">
+</div>
+<div id='profile-box'>
+  
+    {%csrf_token%}
+<label >Standard:</label><br><input type="text" id="std" placeholder="Standard"> 
+<label >Section:</label><br><input type="text" id="sec" placeholder="Section"> 
+<label >Firstname:</label><br><input type="text" id="fname" placeholder="First Name"> 
+<label >Lastname:</label><br><input type="text" id="lname" placeholder="Last Name"> 
+<label >Fullname:</label><br><input type="text" id="ffname"placeholder="Full Name"> 
+<label >Address:</label><br><input type="text" id="address"placeholder="Address"> 
+<button id='profile-btn'>update</button>
+  
+</div>
+<script>
+  var host = window.location.protocol + "//" + window.location.host;
+  let container = document.querySelector('.container');
+  let form=document.getElementById('profile-box')
+  let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    function profile() {
+        let token = localStorage.getItem('token')
+        console.log(token)
+        if (token){
+          fetch('https://schooltestproject.herokuapp.com/api/profile/', {
+            method: 'GET',
+            headers: new Headers({
+              'Authorization': 'token' + ' ' + token,
+              'Content-Type': 'application/x-www-form-urlencoded',
+             
+            })
+          })
+            .then(response => response.json())
+            .then(data => {
+              console.log("data=", data.data.email)
+              console.log("data=", data)
+    
+              let htmlSegment = `<div class="user" id='${data.data.id}'>
+                <div class='image'> <img src='https://schooltestproject.herokuapp.com${data.data.profile?.profile_picture}'></div>  
+                <label class=profile-label>Full Name:</label><p class="fullname">${data.data.profile?.full_name}</p><br>
+                <label class=profile-label>First Name:</label><p  class="firstname">${data.data.profile?.first_name}</p><br>
+                  <label class=profile-label>Last Name:</label><p class="lastname">${data.data.profile?.last_name}</p><br>
+                    <label class=profile-label>Standard:</label><p  class="std">${data.data.profile?.standard}</p><br>
+                       <label class=profile-label>Section:</label><p class="sec">${data.data.profile?.section}</p></br>
+                       <label class=profile-label>Address: </label><p class="address">${data.data.profile?.address}</p><br>
+  
+                     <button href=#" id='profile-edit'>Edit</button>
+  
+                     </div>`;
+              container.innerHTML = htmlSegment;
+            }
+            )
+        }
+        else{
+          window.location.href=`${host}/login`  
+        }
+       
+        }profile();
+ 
+            container.addEventListener('click',(e)=>{
+            fname= document.getElementById('fname');
+            lname= document.getElementById('lname');
+            ffname= document.getElementById('ffname');
+            std= document.getElementById('std');
+            sec= document.getElementById('sec');
+            ad=document.getElementById('address');
+            button= document.getElementById('profile-btn')
+            e.preventDefault();
+            let editbutton = e.target.id == 'profile-edit';
+            let id = e.target.parentElement.id;
+            console.log(id)
+            if (editbutton) 
+            {
+              form.style.display='block'
+              console.log('hi')
+              url="https://schooltestproject.herokuapp.com/api/student-profile/"
+              const parent = e.target.parentElement;
+              console.log(parent)
+              let fullname = parent.querySelector('.fullname').textContent;
+              let lastname= parent.querySelector('.lastname').textContent;
+              let firstname= parent.querySelector('.firstname').textContent;
+              let standard= parent.querySelector('.std').textContent;
+              let section= parent.querySelector('.sec').textContent;
+              let address= parent.querySelector('.address').textContent;
+              document.getElementById('ffname').value=fullname
+              document.getElementById('lname').value=lastname
+              document.getElementById('fname').value=firstname
+              document.getElementById('std').value=standard
+              document.getElementById('sec').value=section
+              document.getElementById('address').value=address
+               button.addEventListener('click',()=>{
+                fetch(`${url}${id}/`,{
+                  method : 'PUT',
+                  headers : {
+                    'Content-Type' : 'application/json',
+                    'Authorization':'token'+" " +localStorage.getItem('token'),
+                    'X-CSRFToken': csrftoken
+                  },
+                  body:JSON.stringify(
+                  {'first_name':fname.value,'last_name':lname.value,'standard':std.value,'section':sec.value,'full_name':ffname.value,'address':ad.value}
+                  )
+              }).then(res => console.log(res.json()),location.reload())
+            })
+           
+          }
+        
+         
+          }
+         
+        );
+      
+      
+</script>
+
+{% endblock %}
+
+
