@@ -33,10 +33,37 @@
         {{form.data_entry_user}}
     </div>
 
-    <button id="signup-btn" onclick=signup()>Register</button>
+    <button data-toggle="modal" data-target="#messageModal-signup" id="signup-btn" onclick=signup()>Register</button>
+</div>
+<div class="modal fade" id="messageModal-signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="messages container-fluid">
+
+        </div>
+        <div class="error-messages container-fluid">
+    
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+    </div>
+  </div>
+</div>
 </div>
 </body>
 <script>
+    let messages = document.querySelector('.messages')
+    let error_messages = document.querySelector('.error-messages')
     function signup() {
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         var email = document.getElementById('id_email').value

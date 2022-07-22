@@ -35,6 +35,34 @@ aria-hidden="true">
   </div>
 </div>
 </div>
+
+<div class="modal fade" id="messageModal-student" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="messages container-fluid">
+
+        </div>
+        <div class="error-messages container-fluid">
+    
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+    </div>
+  </div>
+</div>
+</div>
+
+
 <button id="add" onclick=adduser()>Add Student</button>
 <div>
 <input type="number" id="grades" placeholder="grade" min="0" max="12">
@@ -81,7 +109,7 @@ aria-hidden="true">
   
   <input type="file" id="file">
   
-  <button id="userdetail-btn">submit</button></div>
+  <button data-toggle="modal" data-target="#messageModal-student" id="userdetail-btn">submit</button></div>
   
   
 
@@ -90,6 +118,8 @@ aria-hidden="true">
 <div class="container2"></div>
 
 <script>
+  let messages = document.querySelector('.messages')
+  let error_messages = document.querySelector('.error-messages')
   let token = localStorage.getItem("token")
   button = document.getElementById('userdetail-btn');
   var host = window.location.protocol + "//" + window.location.host;
@@ -243,7 +273,9 @@ function back(){
                 'Content-Type' : 'application/json',
                 'Authorization':'token'+' '+localStorage.getItem('token')
               },
-            }).then(res => res.json()).then(() => location.reload())
+            }).then(res => {res.json()
+            userdetails();
+            })
           }
   
       }
@@ -286,7 +318,21 @@ function back(){
               'profile': { 'first_name': form_fname.value, 'last_name': form_lname.value, 'standard': form_std.value, 'section': form_sec.value, 'full_name': form_fullname.value, 'address': form_ad.value }
             }
             )
-          }).then(res => console.log(res.json()), location.reload())
+          }).then(response => {
+            if (response.status == 200) {
+                console.log("Sucess response", response)
+                messages.innerHTML = 'updated successfully'
+                error_messages.innerHTML= ''
+                userdetails
+            }
+            return response.json();
+        }).then(function (data) {
+            console.log(data)
+            if (data.status != 'success'){
+            error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+            messages.innerHTML = ''
+            }
+        })
         })
       }
     })
@@ -332,7 +378,21 @@ function back(){
                 'X-CSRFToken': csrftoken
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             }
-        }).then(data => {console.log(data)})
+        }).then(response => {
+          if (response.status == 201) {
+              console.log("Sucess response", response)
+              messages.innerHTML = 'created successfully'
+              error_messages.innerHTML= ''
+
+          }
+          return response.json();
+      }).then(function (data) {
+          console.log(data)
+          if (data.status != 'success'){
+          error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+          messages.innerHTML = ''
+          }
+      })
         })
       }
   } 

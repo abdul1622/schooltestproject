@@ -5,20 +5,51 @@
 <div id='profile-box'>
   
     {%csrf_token%}
+    <button onclick=back() class='delete-grade profile-back-btn'>&#x2715; </button>
 <label >Standard:</label><br><input type="text" id="std" placeholder="Standard"> 
 <label >Section:</label><br><input type="text" id="sec" placeholder="Section"> 
 <label >Firstname:</label><br><input type="text" id="fname" placeholder="First Name"> 
 <label >Lastname:</label><br><input type="text" id="lname" placeholder="Last Name"> 
 <label >Fullname:</label><br><input type="text" id="ffname"placeholder="Full Name"> 
 <label >Address:</label><br><input type="text" id="address"placeholder="Address"> 
-<button id='profile-btn'>update</button>
+<button data-toggle="modal" data-target="#messageModal-profile" id='profile-btn'>update</button>
   
+</div>
+<div class="modal fade" id="messageModal-profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="messages container-fluid">
+
+        </div>
+        <div class="error-messages container-fluid">
+    
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+    </div>
+  </div>
+</div>
 </div>
 <script>
   var host = window.location.protocol + "//" + window.location.host;
   let container = document.querySelector('.container');
+  let messages = document.querySelector('.messages')
+  let error_messages = document.querySelector('.error-messages')
   let form=document.getElementById('profile-box')
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  function back(){
+    form.style.display='none'
+  }
     function profile() {
         let token = localStorage.getItem('token')
         console.log(token)
@@ -100,8 +131,21 @@
                   body:JSON.stringify(
                   {'first_name':fname.value,'last_name':lname.value,'standard':std.value,'section':sec.value,'full_name':ffname.value,'address':ad.value}
                   )
-              }).then(res => console.log(res.json()),location.reload())
-            })
+              }).then(response => {
+                if (response.status == 200) {
+                    console.log("Sucess response", response)
+                    messages.innerHTML = 'updated successfully'
+                    error_messages.innerHTML= ''
+                  profile();
+                }
+                return response.json();
+            }).then(function (data) {
+                console.log(data)
+                if (data.status != 'success'){
+                error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+                messages.innerHTML = ''
+                }
+            })            })
            
           }
         

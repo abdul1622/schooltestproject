@@ -27,6 +27,32 @@ aria-hidden="true">
  
   </div>
 </div>
+
+</div>
+<div class="modal fade" id="messageModal-staff" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="messages container-fluid">
+
+        </div>
+        <div class="error-messages container-fluid">
+    
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+    </div>
+  </div>
+</div>
 </div>
   <button id="addstaff" onclick=addstaff()>Add Staff</button>
 
@@ -69,12 +95,14 @@ aria-hidden="true">
     
     <input type="file" id="file">
     
-    <button id="userdetail-btn">submit</button></div>
+    <button data-toggle="modal" data-target="#messageModal-staff" id="userdetail-btn">submit</button></div>
    
     </form>
   <div class="container2"></div>
   
   <script>
+    let messages = document.querySelector('.messages')
+    let error_messages = document.querySelector('.error-messages')
     let token = localStorage.getItem("token")
     add=document.getElementById('addstaff')
     button = document.getElementById('userdetail-btn');
@@ -179,7 +207,21 @@ function back(){
                   'X-CSRFToken': csrftoken
                   // 'Content-Type': 'application/x-www-form-urlencoded',
               }
-          }).then(data => {console.log(data)})
+          }).then(response => {
+            if (response.status == 201) {
+                console.log("Sucess response", response)
+                messages.innerHTML = 'created successfully'
+                error_messages.innerHTML= ''
+
+            }
+            return response.json();
+        }).then(function (data) {
+            console.log(data)
+            if (data.status != 'success'){
+            error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+            messages.innerHTML = ''
+            }
+        })
           })
        }
           container2.addEventListener('click',(e) => {
@@ -211,7 +253,9 @@ function back(){
                     'Content-Type' : 'application/json',
                     'Authorization':'token'+' '+localStorage.getItem('token'),
                   },   
-                 }).then(res =>console.log( res.json()))  
+                 }).then(res =>{console.log( res.json())
+                userdetails();
+                })  
                }           
           }
            if(editbutton){
@@ -255,7 +299,21 @@ function back(){
                  body:JSON.stringify({ 'email':form_email.value, 'phone': form_phone.value, 'date_of_birth': form_dob.value, 'register_number': form_reg.value,
                  'profile':{'first_name':form_fname.value,'last_name':form_lname.value,'standard':form_std.value,'section':form_sec.value,'full_name':form_fullname.value,'address':form_ad.value}}
                  )
-             }).then(res => console.log(res.json()),location.reload())
+             }).then(response => {
+              if (response.status == 200) {
+                  console.log("Sucess response", response)
+                  messages.innerHTML = 'updated successfully'
+                  error_messages.innerHTML= ''
+  
+              }
+              return response.json();
+          }).then(function (data) {
+              console.log(data)
+              if (data.status != 'success'){
+              error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+              messages.innerHTML = ''
+              }
+          })
            }) 
          }
         

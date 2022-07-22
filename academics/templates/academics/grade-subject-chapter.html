@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="grade-container">
+<div class="grade-container container">
 
     <div id="grade-list" class="grade-list container">
 
@@ -14,7 +14,7 @@
         <a type="button" class="btn btn-primary" id="back-btn" onclick=get()>Back</a>
         <h3 class="subject-title-subjects"> Subjects </h3>
         </div>
-        <div class="cards container">
+        <div class="cards container-fluid">
         </div>
     </div>
 
@@ -63,7 +63,7 @@
       </div>
       <div class="modal-footer">
         <button id="delete-btn-yes" data-dismiss="modal" class="delete-btn-yes btn btn-danger">Yes</button>
-        <button id="delete-btn-no" data-dismiss="modal" aria-label="Close" class="delete-btn-no btn btn-primary">Back</button>
+        <button id="delete-btn-no" data-dismiss="modal" class="delete-btn-no btn btn-primary">Back</button>
       </div>
     </div>
   </div>
@@ -84,7 +84,7 @@
         <a type="button" class="btn btn-primary" id="back-btn-chapter">Back</a>
     <h3 class="subject-title-subjects"> Chapters </h3>
     </div>
-        <div class="chapter-cards">
+        <div class="chapter-cards container">
         </div>
     </div>
     <!-- <div class="delete-box">
@@ -108,8 +108,8 @@
 <script>
     // document.getElementById('messagemodal-btn').style.display = 'hidden'
 
-    var delete_box = document.querySelector('.delete-box');
-    delete_box.style.display = 'none';
+    // var delete_box = document.querySelector('.delete-box');
+    // delete_box.style.display = 'none';
     var token = localStorage.getItem('token')
     var form_all = document.querySelector('.form-all')
     let edit = null
@@ -148,7 +148,7 @@
         }).then(data => {
             console.log(data.data)
             data.data.forEach((d, index) => {
-                content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegrade(${d.id}) class='delete-grade'>&#x2715; </button>
+                content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button>
         <p  onclick=getsubject(${d.grade},${d.id}) class="grade">${d.grade} </p>
         
  </div>`
@@ -158,7 +158,7 @@
             container.innerHTML = ''
             document.getElementById('back-btn').style.display = "none"
             document.getElementById('back-btn-chapter').style.display = "none"
-            document.getElementById('grade').style.height = '22vh';
+            document.getElementById('grade').style.height = '20vh';
             document.getElementById('subject-btn').style.display = "none"
             document.getElementById('chapter-btn').style.display = "none"
             document.getElementById('grade-btn').style.display = "block"
@@ -166,9 +166,6 @@
             document.getElementById('chapterlist').style.display = "none"
             form_all.innerHTML = `<div class='grade-form-box'>{{gradeform.as_p}}</div>`
             document.getElementById('subjects-by-grade').style.display = "none"
-            messages.innerHTML = ''
-            error_messages.innerHTML = ''
-            delete_box.style.display = 'none';
         })
     };
     if(token){
@@ -177,31 +174,28 @@
         window.location.href=`${host}/login`  
     }
     // delete grade 
-function deletegrade(id){
-    delete_box.style.display = 'block';
+function deletegradesetup(id){
     let url = 'https://schooltestproject.herokuapp.com/api/grades/'
     let yes_button = document.getElementById('delete-btn-yes')
     let no_btn = document.getElementById('delete-btn-no')
-no_btn.addEventListener('click',()=>{
-    get();
-})
+    yes_button.setAttribute( "onClick", `deletegrade(${id})` );
+}
 
-yes_button.addEventListener('click',()=>{
+function deletegrade(id){
+    let url = 'https://schooltestproject.herokuapp.com/api/grades/'
     fetch(`${url}${id}/`, {
         method: 'DELETE',
         headers: {
             'Authorization': 'token' + ' ' + token,
         },
     }).then(res => {console.log(res)
-        get();
+       return get();
     }
     )
-
-})
-
 }
+    
 
-    // create grade 
+// create grade 
     grade_create.addEventListener('click', () => {
         var grade = document.getElementById('id_grade').value
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -220,7 +214,7 @@ yes_button.addEventListener('click',()=>{
                 if (response.status == 201) {
                     console.log("Sucess response", response)
                     messages.innerHTML = 'created successfully'
-                    error_messages.innerHTML = ''
+                    error_messages.innerHTML= ''
                     get();
                 }
                 return response.json();
@@ -252,9 +246,8 @@ yes_button.addEventListener('click',()=>{
         document.getElementById('grade-list').style.display = "none"
         document.getElementById('chapterlist').style.display = "none"
         document.getElementById('subjects-by-grade').style.display = "block"
-        delete_box.style.display = 'none';
-
-
+        // delete_box.style.display = 'none';
+        let temp;
         document.getElementById('grade').style.height = '37vh';
         url2 = new URL('https://schooltestproject.herokuapp.com/api/subject-list/');
         url2.searchParams.append('grade', grade_val);
@@ -270,11 +263,14 @@ yes_button.addEventListener('click',()=>{
         }).then(data => {
             console.log(data)
             data.forEach((d, index) => {
+                temp = `${d.name}`
+                temp = temp.replace(/\s/g, '_')
+                console.log(temp)
                 // <p><label> Grade </label> <span>: <span class="grade">${d.grade_name}</span></span></p>
                 content = content + `<div class="subject-card"   id=${d.id}>
         <p><label> Subject </label> <span>: <span class="name">${d.name}</span></span></p>
         <p><label> Subject-code </label> <span>: <span class="code">${d.code}</span></span></p>
-        <p> <a type="button" class="btn btn-primary ch-btn" href=# onclick=getchapter(${d.grade_name},'${d.name}',${d.id})>Chapters</a></p>
+        <p> <a type="button" class="btn btn-primary ch-btn" href=# onclick=getchapter(${d.grade_name},"${temp}",${d.id})>Chapters</a></p>
         <br>
         <p> <a style="color:blue;" href=# id="edit" >Edit</a> <a data-toggle="modal" data-target="#delete-box-Modal" style="color:blue;" href=# id="delete" >delete</a></p>
  </div>`
@@ -311,6 +307,7 @@ yes_button.addEventListener('click',()=>{
                         console.log("Sucess response", response)
                         messages.innerHTML = `${name} is created succesfully`;
                         error_messages.innerHTML = ''
+                        // get();
                         getsubject(grade_val,grade_id);
                     } else {
                         console.log(response);
@@ -328,6 +325,19 @@ yes_button.addEventListener('click',()=>{
 
 
     // edit subjects
+    function deletesubject(id){
+        let url = 'https://schooltestproject.herokuapp.com/api/subjects/'
+                fetch(`${url}${id}/`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': 'token' + ' ' + token,
+                    },
+                }).then(res => {console.log(res)
+                    getsubject(grade_val,grade_id);
+                }
+                )
+    
+            }
 
     container2.addEventListener('click', (e) => {
         //   form_grade = document.getElementById('id_grade')
@@ -339,32 +349,18 @@ yes_button.addEventListener('click',()=>{
         let delbutton = e.target.id == 'delete';
         let editbutton = e.target.id == 'edit';
         edit = editbutton
-        console.log(edit)
         let id = e.target.parentElement.parentElement.id;
         console.log(e.target.parentElement.parentElement.id)
         let yes_button = document.getElementById('delete-btn-yes')
         let no_btn = document.getElementById('delete-btn-no')
         if (delbutton) {
-            delete_box.style.display = 'block';
 
-            const parent1 = e.target.parentElement.parentElement;
-            var name = parent1.querySelector('.name').textContent
-            no_btn.addEventListener('click',()=>{
-                getsubject(grade_val,grade_id);
-            })
-
-            yes_button.addEventListener('click',()=>{
-                fetch(`${url}${id}/`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': 'token' + ' ' + token,
-                    },
-                }).then(res => {console.log(res)
-                    getsubject(grade_val,grade_id);
-                }
-                )
-                
-            })
+            yes_button.setAttribute( "onClick", `deletesubject(${id})`);
+            // const parent1 = e.target.parentElement.parentElement;
+            // var name = parent1.querySelector('.name').textContent
+            // no_btn.addEventListener('click',()=>{
+            //     getsubject(grade_val,grade_id);
+            // })
 
         }
         console.log(editbutton, 'dfg')
@@ -377,14 +373,11 @@ yes_button.addEventListener('click',()=>{
             var name = parent.querySelector('.name').textContent;
             form_code.value = code
             form_name.value = name
-            let id = e.target.parentElement.parentElement.id
-            console.log(e.target.parentElement.parentElement.id)
-            console.log(e.target.parentElement.parentElement)
+            let id = e.target.parentElement.parentElement.id;
             console.log(id)
             console.log(grade_val)
             let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             subject_btn.addEventListener('click', () => {
-                console.log(edit)
                 if (edit) {
                     fetch(`${url}${id}/`, {
                         method: 'PUT',
@@ -415,6 +408,8 @@ yes_button.addEventListener('click',()=>{
                         error_messages.innerHTML = `<li>${(data.data.error)}</li>`
                         messages.innerHTML=''
                     }
+                    edit =false
+                    return
                 })
 
                 }
@@ -426,7 +421,9 @@ yes_button.addEventListener('click',()=>{
 
     function getchapter(val1, val2,val3) {
         grade_val = val1
+        val2 = val2.replace('_', ' ')
         subject_val = val2
+        console.log(subject_val)
         subject_id = val3
         subject_val = (subject_val).toUpperCase()
         console.log(grade_val);
@@ -444,7 +441,7 @@ yes_button.addEventListener('click',()=>{
         document.getElementById('grade-list').style.display = "none"
         document.getElementById('chapterlist').style.display = "block"
         document.getElementById('subjects-by-grade').style.display = "none"
-        delete_box.style.display = 'none';
+        // delete_box.style.display = 'none';
 
         document.getElementById('grade').style.height = '44vh';
         url3 = ('https://schooltestproject.herokuapp.com/api/chapter-list/');
@@ -482,6 +479,17 @@ yes_button.addEventListener('click',()=>{
 
     // chapter edit
 
+    function deletechapter(id)
+ {
+                fetch(`https://schooltestproject.herokuapp.com/api/chapters/${id}/`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': 'token' + ' ' + token
+                    },
+                }).then(() =>{
+            getchapter(grade_val,subject_val,subject_id);  }
+                )
+            }
 
     container3.addEventListener('click', (e) => {
         //   form_subject = document.getElementById('id_subject')
@@ -498,24 +506,14 @@ yes_button.addEventListener('click',()=>{
         let yes_button = document.getElementById('delete-btn-yes')
         let no_btn = document.getElementById('delete-btn-no')
         if (delbutton) {
-            delete_box.style.display = 'block';
+            // delete_box.style.display = 'block';
             const parent1 = e.target.parentElement.parentElement;
             var name = parent1.querySelector('.name').textContent
-            no_btn.addEventListener('click',()=>{
-                getchapter(grade_val,subject_val,subject_id);
-            })
-
-            yes_button.addEventListener('click',()=>
- {
-                fetch(`https://schooltestproject.herokuapp.com/api/chapters/${id}/`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': 'token' + ' ' + token
-                    },
-                }).then(() =>{
-            getchapter(grade_val,subject_val,subject_id);  }
-                )
-            })
+            // no_btn.addEventListener('click',()=>{
+            //     getchapter(grade_val,subject_val,subject_id);
+            // })
+            
+            yes_button.setAttribute( "onClick", `deletechapter(${id})`);
 
         }
 
@@ -564,6 +562,8 @@ yes_button.addEventListener('click',()=>{
                         error_messages.innerHTML = `<li>${(data.data.error)}</li>`
                         messages.innerHTML = ''
                     }
+                    edit =false
+                    return
                 }
                     )
 

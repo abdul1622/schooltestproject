@@ -55,12 +55,18 @@ aria-hidden="true">
 <div id="message">
 
 </div>
-
+<div class="header">
+  <h2 class="text-center">Grade - <span id="grade-head-question"></span></h2>
+  <hr>
+  <h3 class="text-center">Subject - <span id="subject-head-question"></span></h3>
+</div>
 <div class="question-list">
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
+  let head = document.querySelector('.header')
+  head.style.display = 'none'
 function back(){
   document.getElementById('questionForm').style.display='none'
   document.getElementById('question-box').style.display='block'
@@ -88,32 +94,35 @@ let no_btn = document.getElementById('delete-btn-no')
       console.log(data.name[0])
       console.log(data.status)
       data.data.forEach((d, index) => {
+   //     <p >Option A : <span class="option_a">${d.answers.option_a}</span></p>
+//<p >Option B : <span class="option_b">${d.answers.option_b}</span></p>
+///<p >Option C : <span class="option_c">${d.answers.option_c}</span></p>
+//<p >Option D : <span class="option_d">${d.answers.option_d}</span></p> 
+//<p >answer : <span class="answer">${d.answers.answer}</span></p> 
         name_value = data.name[index]
        // console.log(name_value)
        console.log(`  {{form.as_p}}`)
         if(grade == name_value.grade && subject == name_value.subject){
         content = content + `<div class="question-card" id='${d.id}'>
-<p >Grade : <span id='${d.grade}'  class="grade">${name_value.grade}</span></p>
-<p >Subject : <span id='${d.subject}' class="subject">${name_value.subject}</span></p>
 <p >Chapter : <span id='${d.chapter}' class="chapter-name">${name_value.chapter}</span></p>
 <p >Question Type : <span class="question_type">${d.question_type}</span></p>
 <p >Cognitive Level : <span class="cognitive_level">${d.cognitive_level}</span></p>
 <p >Difficulty Level : <span class="difficulty_level">${d.difficulty_level}</span></p>
 <p >Question : <span class="question">${d.question}</span></p>
-<p >Option A : <span class="option_a">${d.answers.option_a}</span></p>
-<p >Option B : <span class="option_b">${d.answers.option_b}</span></p>
-<p >Option C : <span class="option_c">${d.answers.option_c}</span></p>
-<p >Option D : <span class="option_d">${d.answers.option_d}</span></p> 
-<p >answer : <span class="answer">${d.answers.answer}</span></p> 
-<button href=#" id='edit'>Edit</button>&nbsp<button href="#" data-toggle="modal" data-target="#delete-box-Modal-question" id="delete">Delete</button></div>`
+<div class="d-flex justify-content-around question-edit-btn"><button href=#" id='edit'>Edit</button>&nbsp<button data-toggle="modal" data-target="#delete-box-Modal-question"  href="#" id="delete">Delete</button></div>
+</div>`
       }})
+      head.style.display = 'block'
+      document.getElementById('grade-head-question').textContent = grade
+      document.getElementById('subject-head-question').textContent = subject
       container2.innerHTML = content;
+      edit = false
     })
   };
   var edit = null;
 
   $("#id_grade").change(function () {
-      var url_for_change = 'https://schooltestproject.herokuapp.com/academics/ajax/load-subject/'; 
+      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
       var gradeId = $(this).val(); 
 
       $.ajax({                       
@@ -129,7 +138,7 @@ let no_btn = document.getElementById('delete-btn-no')
     });
 
     $('#id_subject').change(function(){
-        var url_for_change = 'https://schooltestproject.herokuapp.com/academics/ajax/load-subject/'; 
+        var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
         var subjectId = $(this).val();
 
         $.ajax({
