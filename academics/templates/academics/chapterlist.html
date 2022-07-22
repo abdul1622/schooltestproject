@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+{% block chapterlist %}
+<div class="form-box">
+    <div class="box"id="mediabox">
+
+        {% csrf_token %}
+        {{form.as_p}}
+        <button id="chapterlist-btn" onclick=getchapter()>Getchapters</button>
+    </div>
+</div>
+<div class="modal fade" id="messageModal-chapterlist" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="messages container-fluid">
+
+                </div>
+                <div class="error-messages container-fluid">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="delete-box-Modal-chapterlist" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="delete-box">
+                    <h4>Are you want to delete?</h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="delete-btn-yes" data-dismiss="modal" class="delete-btn-yes btn btn-danger">Yes</button>
+                <button id="delete-btn-no" data-dismiss="modal" class="delete-btn-no btn btn-primary">Back</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="chapter-table">
+
+</div>
+<div class="form box">
+    {% csrf_token %}
+    {{form2.as_p}}
+    <button class="submit-btn" id="chapter-btn">Submit</button>
+</div>
+<div class="messages container-fluid">
+
+</div>
+<div class="error-messages container-fluid">
+
+</div>
+
+<script>
+    var token = localStorage.getItem("token")
+    let form = document.querySelector('.form')
+
+    form.style.display = 'none'
+    let messages = document.querySelector('.messages')
+    let edit = null;
+    var host = window.location.protocol + "//" + window.location.host;
+    // form.style.display = 'none'
+    let container3 = document.querySelector('.chapter-table')
+    let error_messages = document.querySelector('.error-messages')
+    var grade;
+    var subject;
+    function back() {
+        document.querySelector('.box').style.display = "block"
+        document.querySelector('.form').style.display = "none"
+        container3.innerHTML = ''
+    }
+function get(grade,subject){
+    document.getElementById('id_grade').value = grade;
+    document.getElementById('id_subject').value = subject;
+    getchapter();
+}
+
+    function getchapter() {
+        if (token) {
+            let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            var grade = document.getElementById('id_grade').value
+            var subject = document.getElementById('id_subject').value
+            console.log(grade,subject)
+            console.log(grade + subject)
+            fetch('https://schooltestproject.herokuapp.com/api/chapter-list/', {
+                method: 'POST',
+                body: JSON.stringify({ 'grade': grade, 'subject': subject }
+                ),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'token' + ' ' + token,
+                    'X-CSRFToken': csrftoken
+                }
+            }).then(response => response.json()).then(data => {
+                if (data.status == 'success') {
+                    console.log(data);
+                    let table2 = '   <a type="button" class="btn btn-primary" id="back-btn" onclick=back()>Back</a> <table>';
+                    table2 += `<thead class="thead"><th>Grade</th><th>Subject</th><th>Chapter No</th><th>Chapter</th><th>Description</th><th>Edit</th><th>Delete</th></thead>`;
+                    data.data.map(d => {
+                        table2 = table2 + `<tr id=${d.id}>`;
+                        table2 = table2 + `<td class="grade">` + `${d.grade}` + `</td>`,
+                            table2 = table2 + `<td class="subject" id=${d.subject_id}>` + `${d.subject}` + '</td>';
+                        table2 = table2 + '<td class="chapter_no">' + `${d.chapter_no}` + '</td>';
+                        table2 = table2 + '<td class="name">' + `${d.name}` + '</td>';
+                        table2 = table2 + '<td class="description">' + `${d.description}` + '</td>',
+                            table2 = table2 + '<td>' + `<button id="edit" >Edit</button>` + '</td>',
+                            table2 = table2 + '<td>' + `<button data-toggle="modal" data-target="#delete-box-Modal-chapterlist" id="delete" >delete</button>` + '</td>',
+                            table2 = table2 + `</tr>`;
+                    })
+                    table2 += "</table>";
+
+                    // console.log(path)
+                    let container = document.querySelector('.chapter-table');
+                    container.innerHTML = table2;
+                    document.querySelector('.box').style.display = "none"
+                    document.getElementById('id_chapter_no').value = ''
+                    document.getElementById('id_name').value = ''
+                    document.getElementById('id_description').value = ''
+                    edit = null
+                }
+                else {
+                    error_messages.innerHTML = `${data.status}`
+                }
+            })
+        } else {
+            window.location.href = `${host}/login`
+        }
+        return
+    }
+
+
+    // edit chapter
+
+    function deletechapter(id,grade_name,subject_name) {
+        // subject_name = subject_name.replace('_', ' ')
+        fetch(`https://schooltestproject.herokuapp.com/api/chapters/${id}/`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'token' + ' ' + token
+            },
+        }).then(() => {
+            form.style.display = 'none'
+            get(grade_name,subject_name)
+        }
+        )
+    }
+
+    container3.addEventListener('click', (e) => {
+        // form_subject = document.getElementById('id_subject')
+        form_chapter_no = document.getElementById('id_chapter_no')
+        form_name = document.getElementById('id_name')
+        form_description = document.getElementById('id_description');
+        chapter_btn = document.getElementById('chapter-btn')
+        var subject_name = e.target.parentElement.parentElement.querySelector('.subject').textContent;
+        console.log(subject_name)
+        var grade_name = e.target.parentElement.parentElement.querySelector('.grade').textContent;
+        e.preventDefault();
+        let delbutton = e.target.id == 'delete';
+        let editbutton = e.target.id == 'edit';
+        edit = editbutton
+        let id = e.target.parentElement.parentElement.id;
+        console.log(e.target.parentElement.parentElement)
+        let yes_button = document.getElementById('delete-btn-yes')
+        let no_btn = document.getElementById('delete-btn-no')
+        if (delbutton) {
+            yes_button.setAttribute("onClick", `deletechapter(${id},${grade_name},'${subject_name}')`)
+        }
+
+        if (editbutton) {
+            window.location.href = '#grade';
+            form.style.display = 'block'
+            const parent = e.target.parentElement.parentElement;
+            var subject = parent.querySelector('.subject').id;
+            console.log(subject)
+            var chapter_no = parent.querySelector('.chapter_no').textContent;
+            var name = parent.querySelector('.name').textContent;
+            var description = parent.querySelector('.description').textContent;
+            console.log(chapter_no)
+            form_chapter_no.value = chapter_no
+            form_name.value = name
+            form_description.value = description
+            let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            url3 = 'https://schooltestproject.herokuapp.com/api/chapters/'
+            chapter_btn.addEventListener('click', () => {
+                if (edit) {
+                    fetch(`${url3}${id}/`, {
+                        method: 'PUT',
+                        headers: {
+                            'content-Type': 'application/json',
+                            'Authorization': 'token' + ' ' + token,
+                            'X-CSRFToken': csrftoken
+                        },
+                        body: JSON.stringify({
+                            'subject': subject,
+                            'chapter_no': form_chapter_no.value,
+                            'name': form_name.value,
+                            'description': form_description.value,
+                        })
+                    }).then(function (response) {
+                        if (response.status == 200) {
+                            console.log("Sucess response", response)
+                            messages.innerHTML = `${name} is updated succesfully`;
+                            error_messages.innerHTML = ''
+                            form.style.display = 'none'
+                            get(grade_name,subject_name)
+                        } else {
+                            console.log(response);
+                        }
+                        return response.json()
+
+                    }).then(data => {
+                        console.log(data)
+                        if (data.status != 'success') {
+                            error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+                            messages.innerHTML = ''
+                            form.innerHTML = ``
+                            form.style.display = 'none'
+                            get(grade_name,subject_name)
+                        }
+                    }
+                    )
+
+                }
+            })
+        }
+    });
+
+
+    function logout() {
+        let token = localStorage.getItem("token")
+        console.log(token)
+        fetch('https://schooltestproject.herokuapp.com/api/logout/',
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'token' + ' ' + token,
+                    // 'Content-Type': 'application/x-www-form-urlencoded',            
+                }
+            }).then(response => response.text())
+        window.location.href = 'login'
+    } 
+</script>
+<div class="chapters">
+
+</div>
+
+{% endblock %}
