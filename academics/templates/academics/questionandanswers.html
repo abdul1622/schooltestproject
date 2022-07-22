@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <button id="--question" onclick=show()>Add Question</button>
-<form id="questionForm" class="question_create">
+<div id="questionForm" class="question_create">
   <button onclick=back() class='back-btn'>&#x2715; </button>
 <div class='grid-item'> {{questionform.grade.label_tag}} <br>{{questionform.grade}}</div>
 <div class='grid-item'> {{questionform.subject.label_tag}} <br> {{questionform.subject}}</div>
@@ -21,8 +21,8 @@
 
 
 
-<div class='grid-item'><button class="question-btn" id="question-btn">Submit</button></div>
-</form>
+<div class='grid-item'><button class="question-btn" data-toggle="modal" data-target="#messageModal-question" id="question-btn">Submit</button></div>
+</div>
 
 <div class="modal fade" id="delete-box-Modal-question" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true">
@@ -46,15 +46,39 @@ aria-hidden="true">
 </div>
 </div>
 
+<div class="modal fade" id="messageModal-question" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="messages container-fluid">
+
+        </div>
+        <div class="error-messages container-fluid">
+    
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+    </div>
+  </div>
+</div>
+</div>
+
 <div id="question-box">
   {% csrf_token %}  
   <p><label for="id_grade">Grade:</label> <input type="text" name="grade" maxlength="14" required id="id_grade_name"></p>
 <p><label for="id_subject">Subject:</label> <input type="text" name="subject" maxlength="20" required id="id_subject_name"></p>
   <button id="questioncreate-btn" onclick=get()>Get Question</button>
 </div> 
-<div id="message">
 
-</div>
 <div class="header">
   <h2 class="text-center">Grade - <span id="grade-head-question"></span></h2>
   <hr>
@@ -67,6 +91,8 @@ aria-hidden="true">
 <script>
   let head = document.querySelector('.header')
   head.style.display = 'none'
+  let messages = document.querySelector('.messages')
+  let error_messages = document.querySelector('.error-messages')
 function back(){
   document.getElementById('questionForm').style.display='none'
   document.getElementById('question-box').style.display='block'
@@ -79,7 +105,6 @@ let no_btn = document.getElementById('delete-btn-no')
   var token = localStorage.getItem('token')
   if (token){
     const container2 = document.querySelector('.question-list');
-  var messages = document.getElementById('message')
   url = 'https://schooltestproject.herokuapp.com/api/question/'
   function get() {
     
@@ -151,6 +176,20 @@ let no_btn = document.getElementById('delete-btn-no')
             }
         });
     });
+
+    function deletequestion(id){
+      
+      fetch(`${url}${id}/`, {
+          method: 'DELETE',
+          headers: {
+              'Authorization': 'token' + ' ' + token,
+          },
+      }).then(res => {console.log(res)
+          get();
+      }
+      )
+      
+  }
   
   container2.addEventListener('click', (e) => {
     form_grade = document.getElementById('id_grade')
@@ -171,26 +210,12 @@ let no_btn = document.getElementById('delete-btn-no')
     let delbutton = e.target.id == 'delete';
     var editbutton = e.target.id == 'edit';
     edit = editbutton;
-    let id = e.target.parentElement.id;
+    let id = e.target.parentElement.parentElement.id;
+    console.log(e.target.parentElement.parentElement)
     console.log(id)
     if (delbutton) {
       const parent1 = e.target.parentElement;
-      no_btn.addEventListener('click',()=>{
-        get();
-    })
-
-    yes_button.addEventListener('click',()=>{
-        fetch(`${url}${id}/`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': 'token' + ' ' + token,
-            },
-        }).then(res => {console.log(res)
-            get();
-        }
-        )
-        
-    })
+      yes_button.setAttribute( "onClick", `deletequestion(${id})`);
     }
     if (editbutton) {
       document.getElementById('questionForm').style.display='grid'
@@ -198,7 +223,6 @@ let no_btn = document.getElementById('delete-btn-no')
       document.getElementById('--question').style.display='none'
       const parent = e.target.parentElement;
       var subject = parent.querySelector('.subject').id;
-      // var sub = parent.
       console.log(subject)
       var chapter = parent.querySelector('.chapter-name').id;
       var grade = parent.querySelector('.grade').id;

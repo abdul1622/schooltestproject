@@ -195,26 +195,7 @@
         text-align: center;
     }
     
-    .question-paper-form {
-        background-color: #435cf9;
-width: 100%;
-padding: 30px 50px;
-margin-bottom: 15%;
-border-radius: 5px;
- 
-}
 
-.question-paper-subject {
-display: flex;
-flex-direction: column-reverse;
-justify-content: space-around;
-margin: 5%;
-height: auto;
-}
-
-.question-paper-form input{
-width: 100%
-}
     /* changes  */      
                 
                 
@@ -512,7 +493,22 @@ width: 100%
             position: fixed;
         }
 
+        .question-paper-subject {
+        display: flex;
+        justify-content: space-around;
+        margin: 5%;
+        }
 
+        
+        .question-paper-form {
+        background-color: #435cf9;
+        width: 20%;
+        padding: 30px 50px;
+        border-radius: 5px;
+        /* flex-basis: 30%; */
+        }
+        
+        
         #profile-btn:hover {
             color: white;
             background-color: #14279b;
@@ -3144,10 +3140,10 @@ width: 100%
                 position: absolute;
             }
 
-            .grade-list .card {
+    /*        .grade-list .card {
                 height: 8vh;
             }
-
+*/
             #userDetails {
                 transform: rotate(270deg);
                 margin-left: 16vw;
@@ -3211,10 +3207,19 @@ width: 100%
                 position: absolute;
 
             }
-
+            .grade-list .cards {
+                display: grid;
+                width: 90%;
+                padding-left: 5%;
+                margin: 0% 4% 20%;
+                padding-top: 5%;
+                grid-template-columns: auto auto auto;
+                gap: 8%;
+            }
             #grade {
                 width: 75vw;
                 margin-left: 14%;
+                margin-top: 35%;
             }
 
             .subjects-by-grade .cards {
@@ -3343,7 +3348,26 @@ width: 100%
                 font-size: 11px;
                 width: 360px;
             }
-
+            .question-paper-form {
+                background-color: #435cf9;
+        width: 100%;
+        padding: 30px 50px;
+        margin-bottom: 15%;
+        border-radius: 5px;
+         
+        }
+        
+        .question-paper-subject {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-around;
+        margin: 5%;
+        height: auto;
+        }
+        
+        .question-paper-form input{
+        width: 100%
+        }
             .question-list {
                 display: grid;
                 grid-template-columns: auto;
