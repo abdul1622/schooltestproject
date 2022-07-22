@@ -3215,6 +3215,14 @@
                 position: absolute;
 
             }
+            .subjects-by-grade .subject-card {
+                max-height: 92%;
+                padding: 7% 12%;
+                cursor: pointer;
+                /* padding-left: 12%; */
+                font-size: 16px;
+                box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+            }
 
             .grade-list .cards {
                 display: grid;
@@ -3225,11 +3233,26 @@
                 grid-template-columns: auto auto auto;
                 gap: 8%;
             }
+            .grade-list .card {
+                position: relative;
+                height: 100%;
+                padding-top: 30%;
+                cursor: pointer;
+                padding-left: 42%;
+                font-size: 25px;
+                box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+            }
 
             #grade {
-                width: 75vw;
-                margin-left: 14%;
-                margin-top: 35%;
+             
+                    width: 75%;
+                    margin-left: 14%;
+                    margin-top: 35%;
+               
+            }
+            #grade label {
+                width: 51%;
+                text-align: -webkit-match-parent;
             }
 
             .subjects-by-grade .cards {
@@ -3358,7 +3381,8 @@
             }
 
             #questioncreate-btn {
-                margin-left: 30%;
+                margin-left: 26%;
+                width: 48%;
             }
 
             .question-card {
@@ -3467,6 +3491,10 @@
             .text-center {
                 text-align: center!important;
                 margin-top: 5%;
+            }
+            input[type=text] {
+                width: 92%;
+                color: black;
             }
 
         }
