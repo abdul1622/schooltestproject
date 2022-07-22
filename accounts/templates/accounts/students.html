@@ -28,8 +28,8 @@ aria-hidden="true">
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" id="no" data-dismiss="modal">No</button>
-      <span class="create-btn-container"> <button type="button" id='yes'
-          class="btn btn-primary">Yes</button></span>
+      <span class="create-btn-container"> <button  data-dismiss="modal"  type="button" id='yes'
+          class="btn btn-primary" >Yes</button></span>
 
     </div>
   </div>
@@ -114,7 +114,7 @@ aria-hidden="true">
   
 
 
-  </form>
+</form>
 <div class="container2"></div>
 
 <script>
@@ -239,12 +239,22 @@ function back(){
         else {
           window.location.href = `${host}/login`
         }
-  
       })
-      
-      
-  
     }
+
+    function deletestaff(id){
+      url = "https://schooltestproject.herokuapp.com/api/user-details/"
+      fetch(`${url}${id}/`, {
+        method: 'DELETE',
+        headers : {
+          'Content-Type' : 'application/json',
+          'Authorization':'token'+' '+localStorage.getItem('token')
+        },
+      }).then(res => {res.json()
+      userdetails();
+      })
+    }
+
     container2.addEventListener('click', (e) => {
       form_email = document.getElementById('email');
       form_phone = document.getElementById('phone');
@@ -265,19 +275,7 @@ function back(){
       yes = document.getElementById('yes')
       no = document.getElementById('no')
       if (delbutton) {
-          if (yes) {
-            url = "https://schooltestproject.herokuapp.com/api/user-details/"
-            fetch(`${url}${id}/`, {
-              method: 'DELETE',
-              headers : {
-                'Content-Type' : 'application/json',
-                'Authorization':'token'+' '+localStorage.getItem('token')
-              },
-            }).then(res => {res.json()
-            userdetails();
-            })
-          }
-  
+        yes.setAttribute( "onClick", `deletestaff(${id})`);
       }
       if (editbutton) {
         form.style.display = 'block'

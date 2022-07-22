@@ -119,23 +119,27 @@ let no_btn = document.getElementById('delete-btn-no')
       console.log(data.name[0])
       console.log(data.status)
       data.data.forEach((d, index) => {
-   //     <p >Option A : <span class="option_a">${d.answers.option_a}</span></p>
-//<p >Option B : <span class="option_b">${d.answers.option_b}</span></p>
-///<p >Option C : <span class="option_c">${d.answers.option_c}</span></p>
-//<p >Option D : <span class="option_d">${d.answers.option_d}</span></p> 
-//<p >answer : <span class="answer">${d.answers.answer}</span></p> 
+
         name_value = data.name[index]
        // console.log(name_value)
        console.log(`  {{form.as_p}}`)
+       
         if(grade == name_value.grade && subject == name_value.subject){
         content = content + `<div class="question-card" id='${d.id}'>
 <p >Chapter : <span id='${d.chapter}' class="chapter-name">${name_value.chapter}</span></p>
-<p >Question Type : <span class="question_type">${d.question_type}</span></p>
-<p >Cognitive Level : <span class="cognitive_level">${d.cognitive_level}</span></p>
+<p >Question Type : <span class="question_type" id=${d.subject}>${d.question_type}</span></p>
+<p >Cognitive Level : <span class="cognitive_level" id=${d.grade}>${d.cognitive_level}</span></p>
 <p >Difficulty Level : <span class="difficulty_level">${d.difficulty_level}</span></p>
 <p >Question : <span class="question">${d.question}</span></p>
 <div class="d-flex justify-content-around question-edit-btn"><button href=#" id='edit'>Edit</button>&nbsp<button data-toggle="modal" data-target="#delete-box-Modal-question"  href="#" id="delete">Delete</button></div>
-</div>`
+<div style="display: none;"> 
+  <p >Option A : <span class="option_a">${d.answers.option_a}</span></p>
+<p >Option B : <span class="option_b">${d.answers.option_b}</span></p>
+<p >Option C : <span class="option_c">${d.answers.option_c}</span></p>
+<p >Option D : <span class="option_d">${d.answers.option_d}</span></p> 
+<p >answer : <span class="answer">${d.answers.answer}</span></p> </div>
+</div>
+`
       }})
       head.style.display = 'block'
       document.getElementById('grade-head-question').textContent = grade
@@ -221,11 +225,11 @@ let no_btn = document.getElementById('delete-btn-no')
       document.getElementById('questionForm').style.display='grid'
       document.getElementById('question-box').style.display='none'
       document.getElementById('--question').style.display='none'
-      const parent = e.target.parentElement;
-      var subject = parent.querySelector('.subject').id;
+      const parent = e.target.parentElement.parentElement;
+      var subject = parent.querySelector('.question_type').id;
+      var grade = parent.querySelector('.cognitive_level').id
       console.log(subject)
       var chapter = parent.querySelector('.chapter-name').id;
-      var grade = parent.querySelector('.grade').id;
       var question = parent.querySelector('.question').textContent;
       var question_type = parent.querySelector('.question_type').textContent;
       var cognitive_level = parent.querySelector('.cognitive_level').textContent;
