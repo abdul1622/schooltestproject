@@ -6,10 +6,9 @@
 <div class="login-box">
     <h1>Login</h1>
     {%csrf_token%}
-  <p>  <input type="text" name="email" placeholder="Email" autocomplete="off" required="" id="id_email"> </p>
-<p>  <input type="text" name="phone" placeholder="Phone" autocomplete="off" required="" id="id_phone"> </p>
-  <p class="login-btns">  <button class="login-btn" onClick="login()">Login</button>
-    <a class="signInLink" href="/signup">Signup?</a></p>
+    {{form.as_p}}
+    <button class="login-btn" onClick="login()">Login</button><br>
+    <a class="signInLink" href="/signup">Signup?</a>
 </div>
 <script>
 
