@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+    {% block content %}
+    <div class="grade-container">
+       <div class="grade-list">
+
+      </div>
+      <br>
+      <div class="subjects-by-grade">
+
+      </div>
+      <div id="grade">
+
+        {% csrf_token %}
+        {{form.as_p}}
+       
+        <button id="grade-btn"onclick=creategrade()>Create</button>
+       </div>
+       </div>
+<script>
+    var token = localStorage.getItem('token')
+    function creategrade() {
+       var grade = document.getElementById('id_grade').value
+       let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+   
+       fetch('https://schooltestproject.herokuapp.com/api/grades/',
+            {
+           method: 'POST',
+           body: JSON.stringify({ 'grade': grade }
+           ),
+           headers: {
+               'Accept':'application/json',
+               'Content-Type': 'application/json',
+               'Authorization':'token'+' '+token,
+               'X-CSRFToken': csrftoken
+           },
+       })
+
+       .then(function(response) {
+           if (response.ok) {
+               console.log("Sucess response",response)
+               return response.json();
+           } else {
+               throw new Error("Could not reach the API: " + response.statusText);
+           }
+       }).then(function(data) {
+        console.log(data)
+       }).catch(function(error) {
+          console.log(error.message)
+       });
+   return true;
+}
+
+var list = document.querySelector('.grade-list');
+
+function get(){
+  var content = '<div class="cards">'
+  fetch('https://schooltestproject.herokuapp.com/api/grades/',{
+      method : 'GET',
+      headers : {
+        // 'X-CSRFToken': csrftoken,
+        'Authorization':'token'+' '+token 
+      },
+    }).then(res => {
+    return res.json()
+  }).then(data => {
+    // let table2 = '<table>';
+    // table2 += `<thead class="thead"><th>No</th><th>grade</th></thead>`;
+    console.log(data.data)
+    data.data.forEach((d, index) => {
+      content = content + `  <div class="card" onclick=getsubject(${d.grade}) id=${d.id}>
+        <p class="grade">${d.grade}</p>
+ </div>`
+
+
+
+      // table2 = table2 + `<tr id=${d.id}>`;
+      // table2 = table2 + '<td class="grade">' + `${d.grade}` + '</td>';
+      // table2 = table2 + '<td class="code">' + `${d.code}` + '</td>';
+      // table2 = table2 + '<td class="name">' + `${d.name}` + '</td>';
+      //   table2 = table2 + '<td>' + `<a href=# id="edit" >Edit</a>` + '</td>',
+      //   table2 = table2 + '<td>' + `<a href=# id="delete" >delete</a>` + '</td>',
+      //   table2 = table2 + `</tr>`;
+      })
+      // table2 += "</table>";
+      content += '</div>'
+      list.innerHTML = content;
+      // table2 = table2 + `<tr id=${d.id}>`;
+      // table2 = table2 + `<td >` + `${index}` + '</td>';
+      // table2 = table2 + '<td>' + `${d.grade}` + '</td>';
+
+      //   table2 = table2 + `</tr>`;
+
+      // table2 += "</table>";
+      // list.innerHTML = table2;
+
+  })
+  };
+  get();
+
+  var container = document.querySelector('.subjects-by-grade')
+
+  function getsubject(grade_val){
+      console.log(grade_val);
+
+      url2 = new URL('https://schooltestproject.herokuapp.com/api/subject-list/');
+      url2.searchParams.append('grade', grade_val);
+      var content = '<div class="cards">'
+      fetch(url2,{
+        method : 'GET',
+        headers : {
+          'content-Type' : 'application/json',
+          'Authorization':'token'+' '+token,
+        }}).then(res => {
+    return res.json()
+  }).then(data => {
+    // let table2 = '<table>';
+    // table2 += `<thead class="thead">
+    //   <th scope="col">grade</th>
+    //   <th scope="col">subject code</th>
+    //   <th scope="col">subject</th>
+    //   <th scope="col">Edit</th>
+    //   <th scope="col">Delete</th>
+    // </thead>`;
+    data.forEach((d, index) => {
+
+      content = content + `  <div class="card" id=${d.id}>
+        <p> Grade : <span class="grade">${d.grade_name}</span></p>
+        <p> Subject : <span class="name">${d.name}</span></p>
+        <p> Subject-code : <span class="code">${d.code}</span></p>
+        <br>
+        <p> <a style="color:blue;" href=# id="edit" >Edit</a> <a style="color:blue;" href=# id="delete" >delete</a></p>
+ </div>`
+  });
+   container.innerHTML = content;
+   list.innerHTML = ''
+  })}
+</script>
+<!-- 
+        </div>
+        <div>
+
+            <table class="table">
+                <thead class="thead">
+                  <tr>                   
+                    <th scope="col">Grade</th>                
+                  </tr>
+                </thead>
+                {% for l in grade %}
+              
+      
+                <tbody>                   
+                  <tr>                   
+                    <td>{{l.grade}}</td>                                  
+                  </tr>
+              
+                  {% endfor %}
+              
+          </tbody>
+      </table>
+              
+                
+
+
+            
+        </div> -->
+      
+    {% endblock %}
