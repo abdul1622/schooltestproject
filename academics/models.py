@@ -1,114 +1,163 @@
-from ast import mod
+from pydoc import describe
+from unittest import result
 from django.db import DatabaseError, models
-from django.core.validators import MaxValueValidator
+from django.core.validators import MaxValueValidator,MinValueValidator
+from django.contrib.postgres.fields import ArrayField
+import re
+from accounts.models import User
+from django.forms import IntegerField
 # Create your models here.
 
-
-# def create(self, grade, subject, chapter, question, option_a, option_b, option_c, option_d, answer, question_type, cognitive_level, difficulty_level):
-#     question = self.model(grade=grade, subject=subject, chapter=chapter, question=question, option_a=option_a, option_b=option_b, option_c=option_c,
-#                           option_d=option_d, answer=answer, question_type=question_type, cognitive_level=cognitive_level, difficulty_level=difficulty_level)
-#     question.save(using=self._db)
-#     return question                  
-questiontype_choice = {
-
-    ('MCQ', 'MCQ'),
-
-    ('Fill_in_the_blanks', 'Fill_in_the_blanks'),
-
-    ('Match_the_following', 'Match_the_following')
-
-}
-cognitive_level = {
-
-    ('Knowledge', 'Knowledge'),
-
-    ('Comprehension', 'Comprehension'),
-
-    ('Application', 'Application')
-
-}
-difficulty_level = {
-
-    ('Easy', 'Easy'),
-
-    ('Medium', 'Medium'),
-
-    ('Hard', 'Hard')
-
-}
-
-
 class Grade(models.Model):
-    grade = models.IntegerField(
+    grade = models.PositiveIntegerField(
+        null=True,
         validators=[
             MaxValueValidator(12)
         ]
     )
-
     def __str__(self):
         return str(self.grade)
+
 
 
 class Subject(models.Model):
     name = models.CharField(max_length=20)
     code = models.CharField(max_length=15)
-    grade = models.ForeignKey(Grade, on_delete=models.DO_NOTHING, null=True)
+    grade = models.ForeignKey(Grade,on_delete=models.CASCADE,null =True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.grade.grade) + ' ' + self.name
+        return str(self.grade) + ' ' +self.name
+
+    def save(self, *args, **kwargs):
+        name = re.findall(r"[^\W\d_]+|\d+",self.name)
+        self.name = (' '.join(name)).upper()
+        super(Subject, self).save(*args, **kwargs)
+        
 
 
 class Chapter(models.Model):
-    subject = models.ForeignKey(
-        Subject, on_delete=models.DO_NOTHING, null=True)
-    chapter_no = models.IntegerField()
+    subject = models.ForeignKey(Subject,on_delete=models.CASCADE,null =True)
+    chapter_no = models.PositiveIntegerField(      
+        null = True,  
+        validators=[
+            MaxValueValidator(12)
+        ])
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return (str(self.subject))+' '+(self.name)
 
+
+    def save(self, *args, **kwargs):
+        name = re.findall(r"[^\W\d_]+|\d+",self.name)
+        self.name = (' '.join(name)).lower()
+        super(Chapter, self).save(*args, **kwargs)
+
+
+questiontype_choice=(
+('MCQ','MCQ'),
+('Fill_in_the_blanks','Fill_in_the_blanks'),
+('Match_the_following','Match_the_following')
+)
+
+cognitive_level=(
+('Knowledge','Knowledge'),
+('Comprehension','Comprehension'),
+('Application','Application')
+)
+
+difficulty_level=(
+('Easy','Easy'),
+('Medium','Medium'),
+('Hard','Hard')
+)
 
 class Question(models.Model):
-    grade = models.ForeignKey(Grade,on_delete=models.DO_NOTHING,null =True)
-    subject = models.ForeignKey(Subject,on_delete=models.DO_NOTHING,null =True)
-    chapter = models.ForeignKey(Chapter,on_delete=models.DO_NOTHING,null =True)
+    grade = models.ForeignKey(Grade,on_delete=models.CASCADE,null =True)
+    subject = models.ForeignKey(Subject,on_delete=models.CASCADE,null =True)
+    chapter = models.ForeignKey(Chapter,on_delete=models.CASCADE,null =True)
     question = models.CharField(max_length=50)
     question_type = models.CharField(
-        max_length=20,
-        choices=questiontype_choice,
-        default='0'
-
+    max_length=20,
+    choices =questiontype_choice,
+    default=questiontype_choice[0][0]
     )
-    cognitive_level = models.CharField(
-
-        max_length=20,
-
-        choices=cognitive_level,
-
-        default='0')
-    difficulty_level = models.CharField(
-
-        max_length=20,
-
-        choices=difficulty_level,
-
-        default='0')
+    cognitive_level=models.CharField(
+                    max_length=20,
+                    choices =cognitive_level,
+                    default=cognitive_level[0][0])
+    difficulty_level=models.CharField(
+                    max_length=20,
+                    choices =difficulty_level,
+                    default=difficulty_level[0][0])
 
     def __str__(self):
         return self.question
 
 
+answer_choices=(
+    ("option_a","option_a"),
+    ("option_b","option_b"),
+    ("option_c","option_c"),
+    ("option_d","option_d"),
+)
+    
 class Answers(models.Model):
-    question = models.OneToOneField(
-        Question, on_delete=models.CASCADE, null=True)
-    option_a = models.CharField(max_length=50)
-    option_b = models.CharField(max_length=50)
-    option_c = models.CharField(max_length=50)
-    option_d = models.CharField(max_length=50)
-    answer = models.CharField(max_length=50)
+    question=models.OneToOneField(Question,on_delete=models.CASCADE,null =True)
+    option_a=models.CharField(max_length=50,null=True,blank=True)
+    option_b=models.CharField(max_length=50,null=True,blank=True)
+    option_c=models.CharField(max_length=50,null=True,blank=True)
+    option_d=models.CharField(max_length=50,null=True,blank=True)
+
+    answer=models.CharField(
+                    max_length=50,
+                    choices =answer_choices,
+                    default=answer_choices[0][0])
 
     def __str__(self):
-        return self.question
+        return self.answer
+
+
+class Question_Paper(models.Model):
+    grade = models.ForeignKey(Grade,on_delete=models.CASCADE,null =True)
+    subject = models.ForeignKey(Subject,on_delete=models.CASCADE,null =True)
+    file = models.FileField(upload_to='question_files/',null=True,blank=True)
+    created_by = models.CharField(max_length=20)
+    created_at = models.DateTimeField(auto_now_add=True)
+    no_of_questions = ArrayField(
+        models.CharField(max_length=10,blank=True),
+        blank=True,
+        default= list
+    )
+
+    def __str__(self):
+        return (str(self.grade))+' '+(str(self.subject))
+
+
+class Test(models.Model):
+    question_paper = models.ForeignKey(Question_Paper,on_delete=models.DO_NOTHING,null=True)
+    grade = models.ForeignKey(Grade,on_delete=models.DO_NOTHING,null=True)
+    subject = models.ForeignKey(Subject,on_delete=models.DO_NOTHING,null=True)
+    duration = models.PositiveIntegerField()
+    created_staff_id = models.ForeignKey(User,on_delete=models.DO_NOTHING,null=True)
+    marks = models.PositiveIntegerField()
+    remarks = models.CharField(max_length=25)
+    description = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.remarks
+
+class TestResult(models.Model):
+    student_id = models.ForeignKey(User,on_delete=models.DO_NOTHING,null=True)
+    test_id = models.ForeignKey(Test,on_delete=models.DO_NOTHING,null=True)
+    question_paper = models.ForeignKey(Question_Paper,on_delete=models.DO_NOTHING,null=True)
+    result = models.CharField(max_length=50)
+    score = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.result
+        
+        

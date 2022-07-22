@@ -1,50 +1,113 @@
-from dataclasses import fields
-from click import style
 from rest_framework import serializers
-from django.shortcuts import get_list_or_404, redirect
+from django.shortcuts import get_list_or_404
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.core.mail import send_mail
-from .models import OTP, Profile
+from .models import Profile
+from django.conf import settings
+from django.core.mail import send_mail
+
+
 User = get_user_model()
-usertype_choice={
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['first_name','last_name','full_name',"profile_picture","standard",
+                    "section","address"]
+
+
+# class SignupSerializer(serializers.ModelSerializer):
+#     profile = ProfileSerializer()
+
+#     class Meta:
+#         model = User
+#         fields = ['id','email','phone','register_number','date_of_birth','is_active',
+#                     'user_type','is_data_entry','profile']
+
+#     def create(self, validated_data):
+#         profile_data = validated_data.pop('profile')
+#         user = User.objects.create(**validated_data)
+#         profile = Profile.objects.create(user=user, **profile_data)
+#         subject = 'Welcome to our school'
+#         message = f'Hi {profile.full_name}, thank you for joining in our school'
+#         email_from = settings.EMAIL_HOST_USER
+#         recipient_list = [user.email,]
+#         send_mail(subject,message,email_from,recipient_list)
+#         return user
+usertype_choice=(
     ('is_student','is_student'),
     ('is_staff','is_staff'),
     ('is_admin','is_admin'),
-}
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=User
-        fields = ['email','phone','register_number','date_of_birth','user_type']
-class SignupSerializer(serializers.ModelSerializer):
-    Signup=UserSerializer()
-    class Meta:
-        model=Profile
-        fields=['Signup','first_name','last_name','full_name',"standard","section","address"]
-    def create(self,validated_data):
-        user=validated_data.pop('Signup')
-        user= User.objects.create(**user)
-        Profile.objects.create(user=user,**validated_data)
-        return user
+)
+
+
+class SignupSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    phone = serializers.CharField(max_length=10)
+    register_number = serializers.CharField(max_length=15)
+    date_of_birth = serializers.DateField()
+    user_type = serializers.ChoiceField(
+        choices = usertype_choice,
+        default='-------'
+    )
+    first_name = serializers.CharField(max_length=15)
+    last_name = serializers.CharField(max_length=15)
+    full_name =serializers.CharField(max_length=30)
+    profile_picture = serializers.ImageField(required=False, max_length=None, allow_empty_file=True, use_url=True,default='user_profile/profile.png') 
+    standard = serializers.IntegerField()
+    section = serializers.CharField(max_length=2)
+    address = serializers.CharField(max_length=45)
+    is_data_entry = serializers.BooleanField()
+
+    def create(self, validated_data):
+        userdetails = validated_data
+        email = validated_data.pop("email")
+        phone = validated_data.pop("phone")
+        register_number = validated_data.pop("register_number")
+        date_of_birth = validated_data.pop("date_of_birth")
+        user_type = validated_data.pop("user_type")
+        first_name = validated_data.pop("first_name")
+        last_name = validated_data.pop("last_name")        
+        full_name = validated_data.pop("full_name")
+        profile_picture = validated_data.pop("profile_picture")
+        standard = validated_data.pop("standard")
+        section = validated_data.pop("section")
+        address = validated_data.pop("address")
+        is_data_entry = validated_data.pop("is_data_entry")
+
+        user =   User.objects.create(email =email,phone=phone,date_of_birth=date_of_birth,
+        register_number=register_number,user_type = user_type,is_data_entry=is_data_entry)
+        user.save()
+        Profile.objects.create(user=user,first_name=first_name,last_name=last_name,
+        standard=standard,section=section,address=address, full_name=full_name,
+        profile_picture=profile_picture)
+        # user_details = (email,phone,register_number,date_of_birth,user_type,first_name,last_name,full_name,profile_picture,standard,section,address,is_data_entry)
+        subject = 'Welcome to our school'
+        message = f'Hi {full_name}, thank you for joining in our school'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [user.email,]
+        send_mail(subject,message,email_from,recipient_list)
+        return userdetails
+
+
 class SigninSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email','phone']
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = ['first_name','last_name','full_name',"standard","section","address"]
 class UserDetailsSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
     class Meta:
         model = User
-        fields = ['id','email','phone','register_number','date_of_birth','is_active','user_type','created_at','profile']
+        fields = ['id','email','phone','register_number','date_of_birth','is_active',
+                    'user_type','created_at','profile']
         read_only_fields = ['id','created_at','user_type']
     
     def update(self, instance, validated_data):
         profile_data = validated_data.pop('profile')
         profile = instance.profile
         instance.email = validated_data.get('email', instance.email)
+        instance.phone = validated_data.get('phone',instance.phone)
         instance.register_number = validated_data.get('register_number', instance.register_number)
         instance.date_of_birth = validated_data.get('date_of_birth', instance.date_of_birth)
         instance.is_active = validated_data.get('is_active', instance.is_active)
@@ -77,7 +140,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         profile.save()
 
         return instance
-class OtpVerificationserializer(serializers.ModelSerializer):
-    class Meta:
-        model=OTP
-        fields=['otp']
+
+class OtpVerificationserializer(serializers.Serializer):
+    otp=serializers.CharField(max_length=6)
+    

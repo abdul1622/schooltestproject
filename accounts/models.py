@@ -1,12 +1,12 @@
-from ast import Mod
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
 from django.core.validators import MinLengthValidator,MaxValueValidator
-# Create your models here.
+from django.db.models.signals import pre_delete
+from django.dispatch.dispatcher import receiver
 
 class MyUserManager(BaseUserManager):
-   def create_user(self, email,phone,date_of_birth,register_number):
+   def create_user(self, email,phone,date_of_birth,register_number,is_data_entry):
 
        if not email:
            raise ValueError('Users must have an email address')
@@ -21,12 +21,15 @@ class MyUserManager(BaseUserManager):
        user.phone = phone
        user.date_of_birth = date_of_birth
        user.register_number = register_number
+       user.is_data_entry = is_data_entry
        user.save(using=self._db)
        return user
  
    def create_superuser(self,email,phone,user_type,date_of_birth,register_number):
 
-       user = self.create_user( email=email,phone=phone,user_type=user_type,date_of_birth=date_of_birth,register_number=register_number)
+       user = self.create_user( email=email,phone=phone,user_type=user_type,
+       date_of_birth=date_of_birth,register_number=register_number)
+
        if user_type == 'is_admin':
             user.user_type = 'is_admin'
        user.save(using=self._db)
@@ -34,18 +37,20 @@ class MyUserManager(BaseUserManager):
 
    def create_staffuser(self,email,phone,user_type,date_of_birth,register_number):
 
-       user = self.create_user(email=email,phone=phone,user_type=user_type,date_of_birth=date_of_birth,register_number=register_number)
+       user = self.create_user(email=email,phone=phone,user_type=user_type,
+       date_of_birth=date_of_birth,register_number=register_number)
+
        if user_type == 'is_staff':
             user.user_type = 'is_staff'
        user.save(using=self._db)
        return user
 
 
-usertype_choice={
+usertype_choice=(
     ('is_student','is_student'),
     ('is_staff','is_staff'),
-    ('is_admin','is_admin')
-}
+    ('is_admin','is_admin'),
+)
 
 
 
@@ -60,16 +65,19 @@ class User(AbstractBaseUser):
             MinLengthValidator(10)
         ])
     date_of_birth = models.DateField(
-        default= timezone.now
+        default= timezone.now , blank = True , null = True
     )
     user_type = models.CharField(
         max_length=20,
         choices =usertype_choice,
-        default='0'
+        default= None,
+        blank=True,
+        null= True
     )
+    is_data_entry = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)
     objects = MyUserManager()
-    is_data_entry=models.BooleanField(default=False)
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['phone']
 
@@ -86,34 +94,46 @@ class User(AbstractBaseUser):
         # Simplest possible answer: Yes, always
         return True
 
+    @property
+    def is_staff(self):
+        return self.user_type == 'is_staff' or self.user_type == 'is_admin'
 
+    @property
+    def is_admin(self):
+        return self.user_type == 'is_admin'
 
 
 class Profile(models.Model):
+    
     def upload_design_to(self, filename):
         return f'user_profile/{self.user.id}/{filename}'
     user = models.OneToOneField(User,on_delete=models.CASCADE,null =True)
     first_name = models.CharField(max_length=15)
     last_name = models.CharField(max_length=15)
-    full_name = models.CharField(max_length=30)
+    full_name = models.CharField(max_length=30 , blank = True , null =True)
+    profile_picture = models.ImageField(upload_to=upload_design_to,blank=True,null=True,default='user_profile/profile.png')
     standard = models.IntegerField(
         validators=[
             MaxValueValidator(12)
-        ]
+        ] , blank = True , null = True
     )
-    section = models.CharField(max_length=2)
-    address = models.CharField(max_length=45)
-    profile_picture = models.ImageField(upload_to=upload_design_to,blank=False,null=True)
-
+    section = models.CharField(max_length=2,blank = True , null = True)
+    address = models.CharField(max_length=45 , blank = True , null = True)
 
     def __str__(self):
         return str(self.user)
+
+# @receiver(pre_delete, sender=Profile)
+# def mymodel_delete(sender, instance, **kwargs):
+#     instance.profile_picture.delete(False)
+
 class OTP(models.Model):
+
     email = models.EmailField()
     phone = models.CharField(
-        default= 1234567890,
-        max_length= 10,
-        validators=[
-            MinLengthValidator(10)
-        ])
-    otp=models.CharField(max_length=6)
+    default= 1234567890,
+    max_length= 10,
+    validators=[
+    MinLengthValidator(10)
+    ])
+    otp = models.CharField(max_length=6)

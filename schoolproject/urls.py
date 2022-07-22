@@ -15,10 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf.urls.static import static
+from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('accounts.urls')),
-    path('accounts/',include('accounts.frontendurls')),
-    path('academics/',include('academics.urls')),
+    # path('',include('accounts.urls')),
+    path('api/',include('academics.urls')),
+    path('api/',include('accounts.urls')),
+    path('',include('accounts.frontendUrls')),
+    path('',include('academics.FrontendUrl'))
 ]
+
+
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)
+
+
+urlpatterns += staticfiles_urlpatterns()

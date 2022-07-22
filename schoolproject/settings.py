@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+<<<<<<< HEAD
 from dotenv import load_dotenv
 import os
 import dj_database_url
@@ -18,11 +19,30 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+=======
+import os
+from re import template
+from dotenv import load_dotenv, find_dotenv
+import dj_database_url
+# import cloudinary
+# import cloudinary_storage
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# updated settings
+>>>>>>> 61e4d3f985c9c8ac868ca25a1de9e0b31bb93907
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+<<<<<<< HEAD
 SECRET_KEY = 'django-insecure-wv3=h63m#ic9sq_w*gq^q-zr8cy1v++4iux5z+!#rc2o!!xdtt'
+=======
+# SECRET_KEY = 'django-insecure-wv3=h63m#ic9sq_w*gq^q-zr8cy1v++4iux5z+!#rc2o!!xdtt'
+load_dotenv(find_dotenv())
+
+SECRET_KEY = os.environ['SECRET_KEY']
+>>>>>>> 61e4d3f985c9c8ac868ca25a1de9e0b31bb93907
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -43,9 +63,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'cloudinary',
+    # 'cloudinary_storage',
     'accounts',
     'academics',
-
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -58,14 +80,20 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 ROOT_URLCONF = 'schoolproject.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [
+            'templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,49 +109,42 @@ TEMPLATES = [
 WSGI_APPLICATION = 'schoolproject.wsgi.application'
 
 
-# Database={
-# 'https://docs.djangoproject.com/en/3.2/ref/settings/databases'
+# Database
+# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
 # }
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dbkpeg3j8s9tgc',
+        'USER': 'qyirzricdqofxz',
+        'PASSWORD': 'ded3e8beabdce8051efa945df3ad28041d3041e83bfb8207ca1b861e28dfcdb1',
+        'HOST': 'ec2-3-231-82-226.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
-REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer',
-    ]
-}
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'dbkpeg3j8s9tgc',
-#         'USER': 'qyirzricdqofxz',
-#         'PASSWORD': 'ded3e8beabdce8051efa945df3ad28041d3041e83bfb8207ca1b861e28dfcdb1',
-#         'HOST': 'ec2-3-231-82-226.compute-1.amazonaws.com',
-#         'PORT': '5432',
-#     }
-# }
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME':'school',
-#        'USER': 'siva',
-#        'PASSWORD': 'root',
-#        'HOST': '127.0.0.1',
-#        'PORT': '5432',
-#    }
-# }
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
+
 
 REST_FRAMEWORK = {
-'DEFAULT_AUTHENTICATION_CLASSES': (
-    'rest_framework.authentication.SessionAuthentication',
-),
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated",
+                                   'rest_framework.permissions.AllowAny'],
+
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -169,10 +190,21 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #location where django collect all static files
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
-# location where you will store your static files
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'project_name/static')
-]
+
+STATIC_ROOT = 'staticfiles'
+
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+
+STATICFILES_DIR = {
+    os.path.join(BASE_DIR , "public/static")
+}
+
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'your_cloud_name',
+#     'API_KEY': 'your_api_key',
+#     'API_SECRET': 'your_api_secret'
+# }
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
@@ -181,9 +213,12 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-ACCOUNT_SID=os.environ.get('ACCOUNT_SID')
-AUTH_TOKEN=os.environ.get('AUTH_TOKEN')
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-# SECRET_KEY = os.environ.get('SECRET_KEY')
-# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')Build succeeded
+
+EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
+EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_USE_TLS = os.environ['EMAIL_USE_TLS']
+EMAIL_PORT = os.environ['EMAIL_PORT']
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
