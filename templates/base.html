@@ -53,30 +53,41 @@
             font-size: 15px;
             color: black;
         }
-
+        .form-all p{
+            display: flex;
+            padding-left: 22%;
+        }
+        .subject-form-box{
+            width: 30vw;
+        }
         #grade {
             background-color: #b2c8df;
             box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
             width: 23vw;
-            height: 24vh;
-            text-align: center;
+            height: auto;
+            /* text-align: center; */
             padding: 5% auto;
             padding-top: 3%;
             padding-bottom: 3%;
             margin-top: 4%;
             margin-bottom: 4%;
-            margin-left: 38%;
+            margin-left: 29%;
         }
 
         #grade button {
             margin-left: 33%;
         }
+        input#id_chapter_no {
+            width: 65%;
+            height: fit-content;
+        }
 
-
-
+        input#id_grade {
+            width: 66%;
+        }
         input[type=text] {
             padding: 5px;
-            width: 250px;
+            width: 60%;
             margin-bottom: 10px;
             color: black;
             font-size: 15px;
@@ -643,6 +654,11 @@
 
         .profile-label {
             display: inline;
+        }
+        .image img{
+        
+                width: 40%;
+            
         }
 
         .fullname {
@@ -1249,13 +1265,13 @@
         }
 
         #grade label {
-            width: 25%;
+            width: 16%;
             text-align: left;
         }
 
         .form-box input[type=text] {
             padding: 5px;
-            width: 100%;
+            width: 66%;
             margin-bottom: 10px;
             color: black;
             font-size: 15px;
@@ -1358,6 +1374,7 @@
             font-size: 15px;
             /* background-color: #435cf9; */
             color: black;
+            height: auto;
             box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
             padding: 10%;
         }
@@ -1439,7 +1456,16 @@
                 margin-left: 3%;
                 margin-top: 2%;
             }
+            #grade {
+                width: 43vw;}
+                #grade label {
+                    width: 21%;
+                    text-align: left;
+                }
 
+                .form-all p {
+                    padding-left: 10%;
+                }
             #sort {
                 background-color: #f3db92;
                 width: 8%;
@@ -1490,7 +1516,7 @@
 
             .grade-list .card {
 
-                height: 15vh;
+                height: auto;
 
             }
 
@@ -1729,6 +1755,7 @@
                 margin-left: 19vh;
                 margin-top: 1vh;
                 font-size: 15px;
+                height: auto;
                 width: 42vw;
                 padding: 25px;
                 background-color: #5c7aea;
@@ -1910,22 +1937,23 @@
             #profile-box {
                 margin-left: 43vw;
                 width: 26vw;
-                height: 86vh;
+                height: 89%;
                 margin-top: -24vh;
                 /* position: absolute; */
             }
-
+            #grade {
+                width: 47%;
+                margin-left: 27vw;
+            }
             #profile-box input[type='text'] {
                 margin-bottom: 1vh;
 
             }
-
-            #grade {
-                width: 30%;
-                margin-left: 34vw;
-
-            }
-
+            input#id_chapter_no {
+                width: 55%;}
+                .form-all p {
+                    padding-left: 16%;
+                }
             #add {
                 width: 23vh;
                 background-color: #14279b;
@@ -1975,7 +2003,7 @@
                 width: 87%;
                 margin-left: 10vw;
                 z-index: 1;
-                height: 40%;
+                height: 47%;
 
             }
 
@@ -2009,9 +2037,9 @@
             }
 
             #userDetails .back-btn {
-                margin-left: 88%;
+                margin-left: 95%;
                 color: black;
-                margin-top: -2vh;
+                margin-top: 2vh;
                 background-color: transparent;
             }
 
@@ -2120,7 +2148,7 @@
                 color: white;
                 margin-left: -1vw;
                 border-radius: 5px;
-                height: 5vh;
+                height: auto;
 
             }
 
@@ -2339,6 +2367,7 @@
             .chapter-cards {
                 display: grid;
                 width: 33vw;
+                height: auto;
                 padding-left: 0%;
                 margin: 0% 10% 15%;
                 padding-top: 5%;
@@ -2508,9 +2537,8 @@
                 width: 39vw;
                 padding-top: 2vh;
                 padding-left: 3vh;
-                height: 39vh;
+                height: auto;
             }
-
             .box label {
                 font-size: 1.8vw;
             }
@@ -2705,17 +2733,17 @@
             .grade-list {
                 margin-left: -9vw;
             }
-
             #grade {
+                margin-top: 33%;
                 margin-left: 26vw;
-                width: 52vw;
-                height: 17vh;
-            }
+                width: 52vw;}
 
             .grade-container #grade {
-                height: 32vh;
+                height: auto;
             }
-
+            .subject-form-box {
+                width: auto;
+            }
             #grade p {
 
                 margin-top: 1vw;
@@ -2826,7 +2854,7 @@
                 width: 66vw;
                 padding: 22px;
                 border-radius: 5px;
-                height: 43vh;
+                height: auto;
                 box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
             }
 
@@ -2946,8 +2974,9 @@
             }
 
             .chapter-cards .chapter-card {
-                min-height: 33vh;
+                min-height: auto;
                 margin-bottom: -5vh;
+                margin: 10% 65%;
             }
 
             #chapter-btn {
@@ -2971,10 +3000,12 @@
         @media screen and (max-width:600px) {
             .navbar {
                 background-color: #14279B;
-                height: 7vh;
+                height: 10vh;
                 width: 100%;
             }
-
+            .navbar-toggler-icon {
+                background-size: 60% 60%;
+            }
             .navbar-nav {
                 background-color: white;
                 width: 25vw;
@@ -2987,6 +3018,14 @@
                 font-size: 1.7vw;
                 color: black;
             }
+            #add {
+                width: auto;
+                margin-left: -1vh;
+                font-size: 2vw;
+                height: auto;
+                margin-top: 37vh;
+                transform: rotate(270deg);
+            }
 
             .navbar-light .navbar-toggler {
                 color: rgba(0, 0, 0, .5);
@@ -2994,8 +3033,13 @@
                 margin-left: 0vw;
                 background-color: white;
             }
+            .subject-form-box{
+                width: auto;
+            }
 
-
+            .form-all p {
+                padding-left: 10%;
+            }
             #profile-box {
                 display: none;
                 color: black;
@@ -3067,9 +3111,9 @@
 
             #edit {
                 color: white;
-                width: 11vw;
+
                 background-color: #14279b;
-                padding: 7px 15px;
+                padding: 7px 0px;
                 color: white;
                 font-size: 2vw;
                 margin-left: -11vw;
@@ -3079,7 +3123,7 @@
             #delete {
                 width: 11vw;
                 background-color: #14279b;
-                padding: 7px 15px;
+                padding: 5px 10px;
                 color: white;
                 margin-left: 1.1vw;
                 border-radius: 5px;
@@ -3118,6 +3162,7 @@
                 margin-top: 22vh;
                 z-index: 1;
 
+                gap: 4%;
             }
 
             #userDetails input[type='email'] {
@@ -3177,7 +3222,7 @@
             }
 
             .subjects-by-grade .subject-card {
-                max-height: 92%;
+                max-height: auto;
                 padding: 7% 12%;
                 cursor: pointer;
                 /* padding-left: 12%; */
@@ -3202,6 +3247,7 @@
                 cursor: pointer;
                 padding-left: 42%;
                 font-size: 25px;
+                margin: 0% 2% 20%;
                 box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
             }
 
@@ -3213,11 +3259,11 @@
 
             }
 
-            #grade label {
+       /*     #grade label {
                 width: 51%;
                 text-align: -webkit-match-parent;
             }
-
+*/
             .subjects-by-grade .cards {
                 display: grid;
                 grid-template-columns: auto;
@@ -3247,9 +3293,7 @@
             }
 
             #grade button {
-                margin-left: 33%;
-                height: 4vh;
-                width: 48%;
+                margin-left: 44%;
             }
 
             .grade-container h2 {
@@ -3264,17 +3308,8 @@
                 margin-left: -14%;
             }
 
-            #add {
-                width: 10vh;
-                margin-left: -1vh;
-                font-size: 2vw;
-                height: 32px;
-                margin-top: 42vh;
-                transform: rotate(270deg);
-            }
-
             #addstaff {
-                width: 10vh;
+                width: auto;
                 margin-left: 2vh;
                 font-size: 2vw;
                 height: 32px;
@@ -3305,12 +3340,12 @@
                 transform: rotate(270deg);
                 margin-top: 51vh;
                 position: absolute;
-                margin-left: 1vh;
+                margin-left: -5vh;
             }
 
             #chapterlist-btn {
-                width: 39%;
-                height: 3vh;
+              /*  width: 39%;
+                height: 3vh;*/
                 margin-left: 31%;
                 margin-top: -1vh;
                 background-color: #b2c8df;
@@ -3327,7 +3362,7 @@
                 width: 77%;
                 height: 138%;
                 margin-left: 11%;
-                position: fixed;
+                position: absolute;
             }
 
             .question_create .back-btn {
@@ -3349,7 +3384,7 @@
             }
 
             .question-card {
-                margin-left: 7%;
+                margin: 5% 11%;
                 font-size: 14px;
                 width: 63vw;
             }
@@ -3452,14 +3487,20 @@
                 grid-template-columns: auto;
                 gap: 1%;
             }
-
+            #grade label {
+                width: 29%;
+                text-align: left;
+            }
+            input#id_chapter_no {
+                width: 50%;
+            }
             .text-center {
                 text-align: center !important;
                 margin-top: 5%;
             }
 
             input[type=text] {
-                width: 92%;
+                width: 50%;
                 color: black;
             }
 
@@ -3476,12 +3517,30 @@
                 margin-top: 2%;
             }
 
+            .profile-back-btn {
+                margin-left: 96%;
+            }
+            #userDetails2 {
+                margin-left: 17vw;
+                margin-top: -116.5%;
+                width: 11vw;
+            }
+            #userDetails3 {
+                margin-left: 39vw;
+                margin-top: -30.5vh;
+                width: 14vw;
+            }
+
+
+
+
+
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light ">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

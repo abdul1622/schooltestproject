@@ -1,12 +1,5 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-<<<<<<< HEAD
-
-from accounts.models import User
-
-# Register your models here.
-class UserAdmin(UserAdmin):
-=======
 from django.contrib.auth.models import Group
 from rest_framework.authtoken.models import Token
 from accounts.models import User,Profile
@@ -18,7 +11,6 @@ class UserAdmin(UserAdmin):
         if request.user.user_type == 'is_staff':
             return False       
 
->>>>>>> 61e4d3f985c9c8ac868ca25a1de9e0b31bb93907
     list_display = ('register_number','email','phone','user_type')
     filter_horizontal = ()
     ordering = ('register_number',)

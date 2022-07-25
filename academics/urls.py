@@ -1,16 +1,4 @@
 from django.urls import path
-<<<<<<< HEAD
-from .views import *
-urlpatterns=[
-    path('subjects/',SubjectCreate.as_view()),
-    path('grades/',GradeView.as_view()),
-    path('subjects/<int:pk>/',SubjectEditView.as_view()),
-    path('chapters/',ChaptersView.as_view()),
-    path('chapter/<int:pk>/',ChapterEditView.as_view()),
-    path('',ChaptersOfSubjectsView.as_view()),
-    path('question/',QuestionAddView.as_view()),
-    path('questionsap/',QuestionsView.as_view())
-=======
 from .views import ( 
     GradeView, 
     GradeEditView,
@@ -49,5 +37,4 @@ urlpatterns=[
             
   
     path('ajax/load-subject/',load_subject_chapter,name='ajax_load_subjects'),
->>>>>>> 61e4d3f985c9c8ac868ca25a1de9e0b31bb93907
 ]

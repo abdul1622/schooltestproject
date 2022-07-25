@@ -62,6 +62,7 @@
 
 </div>
 <div class="form box">
+    <button onclick=close() class='back-btn'>&#x2715;</button>
     {% csrf_token %}
     {{form2.as_p}}
     <button class="submit-btn" id="chapter-btn">Submit</button>
@@ -86,6 +87,10 @@
     let error_messages = document.querySelector('.error-messages')
     var grade;
     var subject;
+    function close(){
+form.style.display = "none"
+document.querySelector('.box').style.display = "block"
+    }
     function back() {
         document.querySelector('.box').style.display = "block"
         document.querySelector('.form').style.display = "none"
@@ -117,7 +122,7 @@ function get(grade,subject){
             }).then(response => response.json()).then(data => {
                 if (data.status == 'success') {
                     console.log(data);
-                    let table2 = '   <a type="button" class="btn btn-primary" id="back-btn" onclick=back()>Back</a> <table>';
+                    let table2 = '   <a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back()>Back</a> <table>';
                     table2 += `<thead class="thead"><th>Grade</th><th>Subject</th><th>Chapter No</th><th>Chapter</th><th>Description</th><th>Edit</th><th>Delete</th></thead>`;
                     data.data.map(d => {
                         table2 = table2 + `<tr id=${d.id}>`;
