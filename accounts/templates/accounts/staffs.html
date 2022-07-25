@@ -56,7 +56,7 @@ aria-hidden="true">
 </div>
   <button id="addstaff" onclick=addstaff()>Add Staff</button>
 
-  <div id="userDetails">
+  <form id="userDetails">
   {%csrf_token%} 
   <button onclick=back() class='back-btn'>&#x2715; </button>
   <div class='grid-item'> 
@@ -109,7 +109,7 @@ aria-hidden="true">
   </div>
   
   
-</div>
+</form>
   <div class="container2"></div>
   
   <script>
