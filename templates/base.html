@@ -751,41 +751,19 @@
             display: inline;
         }
 
-        .userdataForm {
-            display: flex;
-        }
 
         #userDetails {
-            display: flex;
-            flex-wrap: nowrap;
-            background-color: #b2c8df;
             display: none;
-            width: 56vw;
-            margin-top: -20px;
-            padding: 30px 70px;
-            position: fixed;
-            margin-left: 20vw;
-            height: 36vh;
+            background-color: #b2c8df;
+            margin-left:22%;
+            grid-template-columns: auto auto auto;
+            width: 51%;
+            position: absolute;
+            margin-top: 10vh;
+            z-index: 1;
+            height: auto;
+            padding: 1% 4%;
         }
-
-        #userDetails1 {
-            margin-left: 0vw;
-            width: 11vw;
-            margin-top: 0vh;
-        }
-
-        #userDetails2 {
-            margin-left: 17vw;
-            margin-top: -30.5vh;
-            width: 11vw;
-        }
-
-        #userDetails3 {
-            margin-left: 35vw;
-            margin-top: -30vh;
-            width: 11vw;
-        }
-
         #userdetail-btn {
             width: 14vw;
             height: 39px;
@@ -944,29 +922,29 @@
 
         .subjects-by-grade .cards {
             display: grid;
-    width: 80%;
-    padding-left: 0%;
-    margin: 0% 10% 15%;
-    height: auto;
-    padding-top: 5%;
-    grid-template-columns: auto auto auto;
-    gap: 8%;
-}
+            width: 80%;
+            padding-left: 0%;
+            margin: 0% 10% 15%;
+            height: auto;
+            padding-top: 5%;
+            grid-template-columns: auto auto auto;
+            gap: 8%;
+        }
 
         .grade-container {
             padding-bottom: 4%;
         }
 
         .chapter-cards {
-    display: grid;
-    width: 80%;
-    padding-left: 0%;
-    margin: 0% 1% 15%;
-    height: auto;
-    padding-top: 5%;
-    grid-template-columns: auto auto auto;
-    gap: 8%;
-}
+            display: grid;
+            width: 80%;
+            padding-left: 0%;
+            margin: 0% 1% 15%;
+            height: auto;
+            padding-top: 5%;
+            grid-template-columns: auto auto auto;
+            gap: 8%;
+        }
 
         #back-btn-chapter {
             display: inline;
@@ -1211,33 +1189,10 @@
             font-weight: 800;
         }
 
-        .userdataForm {
-            display: flex;
-        }
 
-        .userDetails {
-            background-color: #343a40;
-            color: white;
-            float: right;
-            margin-right: 50px;
-            width: 20%;
-            margin-top: -5px;
-            padding: 30px 50px;
-            position: fixed;
-            margin-left: 600px;
-        }
 
-        .userDetails1 {
-            background-color: #343a40;
-            color: white;
-            float: right;
-            margin-right: 50px;
-            width: 20%;
-            margin-top: 0px;
-            padding: 30px 50px;
-            position: fixed;
-            margin-left: 800px;
-        }
+
+
 
         .question-paper-card a {
             color: blue;
@@ -1361,13 +1316,15 @@
 
         #userDetails .back-btn {
             margin-left: 50vw;
-
             height: 0;
-            margin-top: -3vh;
             background-color: transparent;
             font-size: 1.5vw;
             outline: none;
             position: absolute;
+            margin-left: 95%;
+            color: black;
+            margin-top: 1vh;
+
         }
 
         .question_create .back-btn {
@@ -1584,31 +1541,7 @@
 
             }
 
-            #userDetails {
-                width: 90vw;
-                margin-left: 3vw;
-                z-index: 1;
-                margin-top: 5vh;
-                height: 46vh;
-            }
 
-            #userDetails1 {
-                margin-left: 0vw;
-                width: 14vw;
-                margin-top: 0vh;
-            }
-
-            #userDetails2 {
-                margin-left: 27vw;
-                margin-top: -41.5vh;
-                width: 11vw;
-            }
-
-            #userDetails3 {
-                margin-left: 53vw;
-                height: 40vh;
-                margin-top: -41.5vh;
-            }
 
             #userdetail-btn {
                 width: 14vw;
@@ -1625,11 +1558,7 @@
                 margin-bottom: 2vh;
             }
 
-            /* #confirmationuser h3 {
-                font-size: 18px;
-                letter-spacing: 0.5px;
-                margin-left: -17px;
-            } */
+
 
             th {
                 padding: 10px;
@@ -1909,43 +1838,6 @@
             #grade button {
                 margin-left: 53%;
             }
-
-            /* #confirmationuser {
-                width: 26vw;
-                font-size: 20px;
-                background-color: #EAE3C8;
-                margin-left: 34vw;
-                margin-top: 10vh;
-                padding-left: 54px;
-                height: 10vh;
-                box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-                padding-top: 13px;
-                z-index: 1px;
-                position: absolute;
-                border-radius: 5px;
-                display: none;
-            }
-
-            #yes {
-
-                width: 22%;
-                height: 19%;
-                margin-left: 31%;
-                margin-top: 0;
-                background-color: #33699f;
-                color: white;
-                border: 1px solid white;
-                margin-left: -1vw;
-                margin-top: 1vh;
-            }
-
-            #no {
-                width: 80px;
-                position: absolute;
-                margin-top: 1vw;
-                margin-left: 9vw;
-            }*/
-
             #action {
                 padding-left: 4vh;
             }
@@ -2045,31 +1937,12 @@
                 text-align: start;
             }
 
+
             #userDetails {
-                width: 68vw;
-                margin-left: 10vw;
-                z-index: 1;
-                height: 52vh;
+            
+                width: 67%;
+            
             }
-
-            #userDetails1 {
-                margin-left: 0vw;
-                width: 14vw;
-                margin-top: -2vh;
-            }
-
-            #userDetails2 {
-                margin-left: 20vw;
-                margin-top: -45.99vh;
-                width: 11vw;
-            }
-
-            #userDetails3 {
-                margin-left: 41vw;
-                margin-top: -46vh;
-                width: 8vw;
-            }
-
             #userdetail-btn {
                 width: 14vw;
                 height: 39px;
@@ -2082,9 +1955,9 @@
             }
 
             #userDetails .back-btn {
-                margin-left: 88%;
-                color: black;
-                margin-top: -2vh;
+                margin-left: 94%;
+              
+                margin-top: 1vh;
                 background-color: transparent;
             }
 
@@ -2171,14 +2044,14 @@
             }
 
             .container2 #edit {
-                color: white;
                 width: 5vw;
                 background-color: #14279b;
                 padding: 5px 15px;
                 color: white;
                 margin-left: -1vw;
                 border-radius: 5px;
-                height: 5vh;
+                height: 1%;
+            
 
             }
 
@@ -2186,7 +2059,7 @@
                 color: white;
                 width: 5vw;
                 background-color: #14279b;
-                padding: 4px 15px;
+                padding: 5px 15px;
                 color: white;
                 margin-left: 1vw;
                 border-radius: 5px;
@@ -2237,9 +2110,11 @@
                 padding: 2% 4%;
                 background-color: #33699f;
             }
-            .form  .back-btn {
+
+            .form .back-btn {
                 margin-left: 103%;
             }
+
             .chapter-table {
                 margin-left: 18%;
                 width: 80%;
@@ -2658,23 +2533,6 @@
                 font-size: 1.9vw;
             }
 
-            #userDetails1 {
-                margin-left: -5vw;
-                width: 11vw;
-                margin-top: 0vh;
-            }
-
-            #userDetails2 {
-                margin-left: 17vw;
-                margin-top: -31.2vh;
-                width: 11vw;
-            }
-
-            #userDetails3 {
-                margin-left: 39vw;
-                margin-top: -31.1vh;
-                width: 14vw;
-            }
 
             .--user {
                 margin-top: 3vh;
@@ -3488,7 +3346,8 @@
             #media-question {
                 transform: rotate(90deg);
             }
-            .form  .back-btn {
+
+            .form .back-btn {
                 margin-left: 93%;
             }
 
