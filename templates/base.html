@@ -508,12 +508,12 @@
 
 
         .question-paper-form {
-            background-color: #435cf9;
-            width: 20%;
-            padding: 30px 50px;
-            border-radius: 5px;
-            /* flex-basis: 30%; */
-        }
+    background-color: #435cf9;
+    /* width: 20%; */
+    padding: 30px 50px;
+    border-radius: 5px;
+    flex-basis: 23%;
+}
 
 
         #profile-btn:hover {
@@ -549,7 +549,12 @@
             color: white;
             background-color: #14279b;
         }
-
+        .questionlist #edit{
+            margin-left: 0vw;
+        }
+        .questionlist #delete{
+            margin-left: 4vw;
+        }
         #chapterlist-btn:hover {
             color: white;
             background-color: #14279b;
@@ -611,7 +616,7 @@
 
         .question-card button {
             color: white;
-            width: 120px;
+            width: auto;
             background-color: #14279b;
             padding: 7px 15px;
             color: white;
@@ -2274,14 +2279,26 @@
                 font-weight: bold;
                 font-size: 1.2vw;
             }
+            .question-list {
+    width: 85%;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 45px;
+    margin-top: 0px;
+    margin-left: 7%;
+}
 
-            .questionlist {
-                display: grid;
-                grid-template-columns: auto auto;
-                gap: 45px;
-                column-gap: 0vh;
-                margin-top: -1170px;
-                margin-left: -116px;
+    .question-list #edit {
+
+    color: white;
+    width: auto;
+    height: auto;
+    background-color: #14279b;
+    padding: 5px 15px;
+    color: white;
+    margin-left: auto;
+    border-radius: 5px;
+
             }
 
             .question-card p:nth-child(7) {
@@ -2827,14 +2844,14 @@
             }
 
             .question-card {
-                margin-left: 30vw;
-                font-size: 15px;
-                width: 66vw;
-                padding: 22px;
-                border-radius: 5px;
-                height: 43vh;
-                box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-            }
+    margin-left: 38vw;
+    font-size: 15px;
+    width: 52vw;
+    padding: 22px;
+    border-radius: 5px;
+    height: auto;
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+}
 
             .question-card p {
                 color: black;
@@ -2977,7 +2994,7 @@
         @media screen and (max-width:600px) {
             .navbar {
                 background-color: #14279B;
-                height: 7vh;
+                height: 10vh;
                 width: 100%;
             }
 
@@ -3336,7 +3353,7 @@
                 width: 77%;
                 height: 138%;
                 margin-left: 11%;
-                position: absolute;
+                position: static;
             }
 
             .question_create .back-btn {
@@ -3410,11 +3427,11 @@
             }
 
             .question-papers-get {
-                width: 68%;
-                margin: 8% 17%;
-                padding: 4%;
-                border-radius: 5px;
-            }
+    width: 86%;
+    margin: 8% 8%;
+    padding: 4%;
+    border-radius: 5px;
+}
 
             .question-papers-card {
                 grid-template-columns: auto;
@@ -3498,7 +3515,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light ">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
