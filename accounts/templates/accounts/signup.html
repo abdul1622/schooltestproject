@@ -113,7 +113,7 @@ aria-hidden="true">
             .then(data => {
                 console.log(data)
                 if (`${data.statusText}` == 'Created') {
-                    window.location.href = 'login'
+                    window.location.href = `${host}/login`
                 }
 
             })
