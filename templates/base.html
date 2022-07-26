@@ -40,6 +40,17 @@
     padding-left: 35%;
     padding-top: 25%;
 } */
+        .gradient-custom {
+            /* fallback for old browsers */
+            background: #f6d365;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+        }
+
         .login {
             background-color: #343a40;
             color: white;
@@ -51,6 +62,19 @@
 
         #login {
             margin-left: 100px;
+        }
+
+        .login-div {}
+
+        .container-1 {
+            width: 34%;
+            margin-top: 5%;
+            margin-left: 15%;
+        }
+
+        .profile-container {
+            display: flex;
+            justify-content: space-around;
         }
 
         .login {
@@ -161,14 +185,17 @@
         }
 
         #profile-edit {
-            color: #14279b;
+            /* color: #14279b;
             background-color: #5c7aea;
             text-decoration: none;
             border: 1px solid #14279b;
             width: 110px;
             margin-bottom: 2%;
             padding: 5px;
-            margin-left: 27%;
+            margin-left: 27%; */
+            position: absolute;
+            bottom: 8%;
+            right: 8%;
         }
 
         #profile-edit:hover {
@@ -195,21 +222,26 @@
         }
 
         #profile-box {
-            background-color: #b2c8df;
+            background-color: #5c7aea;
             display: none;
             color: black;
-            width: 18%;
+            width: 20%;
             box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-            margin-top: -3vh;
+            margin-top: 11vh;
             padding: 30px 43px;
-            position: fixed;
-            margin-left: 818px;
+            /* position: fixed; */
+            /* margin-left: 818px; */
+            margin-bottom: 4%;
             border-radius: 5px;
         }
 
 
         .image {
+<<<<<<< HEAD
             margin-bottom: 30px;
+=======
+            /* margin-bottom: 30px; */
+>>>>>>> 06929a18d0448dcfb9124a0c40d22bcbb297ccd4
             text-align: center;
         }
 
@@ -619,6 +651,22 @@
         .question-btn:hover {
             color: white;
             background-color: #14279b;
+        }
+
+        .profile-head {
+            padding: 8% 12%;
+            text-align: center;
+            background-color: #5c7aea;
+            flex-basis: 20%;
+            line-height: 150%;
+        }
+
+        .profile-content {
+            padding: 5%;
+            flex-basis: 80%;
+            text-align: left;
+            margin-bottom: 5%;
+            color: black;
         }
 
         button {
@@ -2365,19 +2413,17 @@
 
             }
 
-            
+
 
             #profile-box {
-                background-color: #b2c8df;
                 display: none;
                 color: black;
                 width: 46vw;
                 box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-                margin-top: -16.5vh;
+                margin-top: 2.5vh;
                 padding: 30px 50px;
-
                 font-size: 15px;
-                margin-left: 49vw;
+                /* margin-left: 49vw; */
                 border-radius: 5px;
 
             }
@@ -3333,8 +3379,8 @@
             }
 
             #profile-btn {
-                width: 41%;
-                height: 46%;
+                /* width: 41%; */
+                /* height: 46%; */
                 margin-left: 27%;
                 margin-top: 2%;
             }
