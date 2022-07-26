@@ -382,13 +382,17 @@
     .already {
       margin-left: 43vw;
     }
+    .logo-container {
+      display: none;
+   }
 
     @media screen and (min-width:1000px) and (max-width:1024px) {
       .login-box {
-        width: 55vw;
-        margin-left: 28vh;
-      }
-
+   
+        margin-left: -4%;
+        padding: 6%;
+        border-radius: 3%;
+    }
       .navbar-nav {
         margin-left: 3vh;
       }
@@ -417,6 +421,9 @@
       .already {
         margin-left: 35vw;
       }
+      .logo-container {
+        display: none;
+     }
     }
 
     @media screen and (min-width:1366px) and (max-width:1440px) {
@@ -453,20 +460,18 @@
         margin-top: 13vh;
         margin-bottom: 0vh;
       }
+      .logo-container {
+       display: none;
+    }
     }
 
     @media screen and (min-width:700px) and (max-width:780px) {
       .login-box {
-        background-color: #a9c3df;
-        color: black;
-        margin-left: 12vw;
-        width: 74vw;
-        margin-top: 14vw;
         box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-        border-radius: 10px;
-        padding: 50px 50px;
-      }
-
+        padding: 7%;
+        border-radius: 3%;
+        margin-left: -8%;
+    }
       .signInLink {
         text-align: center;
         margin-left: 28%;
@@ -507,6 +512,9 @@
         width: fit-content;
         color: black;
       }
+      .logo-container {
+       display: none;
+    }
 
 
       #getstarted {
@@ -536,10 +544,11 @@
         width: 93%;
         box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
         border-radius: 10px;
-        padding: 2% 5%;
+        padding: 5% 5%;
         margin-top: -93%;
     }
     .logo-container {
+      display: block;
       position: absolute;
       width: 41%;
       height: 20%;
