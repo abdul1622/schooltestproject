@@ -34,6 +34,35 @@
             font-weight: 400;
         }
 
+        /* login */
+        /* .grade-list .card p {
+    padding-left: 35%;
+    padding-top: 25%;
+} */
+        .login {
+            background-color: #343a40;
+            color: white;
+            width: 20%;
+            margin-top: 200px;
+            margin-left: 700px;
+            padding: 30px 50px;
+        }
+
+        #login {
+            margin-left: 100px;
+        }
+
+        .login {
+            margin-left: 670px;
+            color: white;
+            border-radius: 5px;
+            margin-top: 310px;
+            width: 360px;
+            padding: 10px;
+            padding-left: 65px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+
         .navbar-light .navbar-toggler {
             color: rgba(0, 0, 0, .5);
             border-color: rgba(0, 0, 0, .1);
@@ -63,15 +92,13 @@
         #grade {
             background-color: #b2c8df;
             box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-            width: 23vw;
+            width: 24vw;
             height: auto;
-            /* text-align: center; */
-            padding: 5% auto;
-            padding-top: 3%;
-            padding-bottom: 3%;
+            text-align: left;
+            padding: 3% 3%;
             margin-top: 4%;
             margin-bottom: 4%;
-            margin-left: 29%;
+            margin-left: 28%;
         }
 
         #grade button {
@@ -203,18 +230,7 @@
         /* changes  */
 
 
-        .login {
-            background-color: #343a40;
-            color: white;
-            width: 20%;
-            margin-top: 200px;
-            margin-left: 700px;
-            padding: 30px 50px;
-        }
 
-        #login {
-            margin-left: 100px;
-        }
 
         table {
             font-size: 15px;
@@ -333,7 +349,7 @@
             font-size: 18px;
         }
 
-        a:acive {
+        a:active {
             text-decoration: none;
             color: white;
         }
@@ -351,16 +367,7 @@
             font-size: 15px;
         }
 
-        .login {
-            margin-left: 670px;
-            color: white;
-            border-radius: 5px;
-            margin-top: 310px;
-            width: 360px;
-            padding: 10px;
-            padding-left: 65px;
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        }
+
 
         body {
             background-color: #ebebeb;
@@ -484,10 +491,10 @@
 
         .question-paper-form {
             background-color: #435cf9;
-            width: 20%;
+            /* width: 20%; */
             padding: 30px 50px;
             border-radius: 5px;
-            /* flex-basis: 30%; */
+            flex-basis: 23%;
         }
 
 
@@ -523,6 +530,14 @@
         #questionlist-btn:hover {
             color: white;
             background-color: #14279b;
+        }
+
+        .questionlist #edit {
+            margin-left: 0vw;
+        }
+
+        .questionlist #delete {
+            margin-left: 4vw;
         }
 
         #chapterlist-btn:hover {
@@ -586,7 +601,7 @@
 
         .question-card button {
             color: white;
-            width: 120px;
+            width: auto;
             background-color: #14279b;
             padding: 7px 15px;
             color: white;
@@ -695,33 +710,18 @@
             display: inline;
         }
 
+
         #userDetails {
             display: none;
-            grid-template-columns: auto auto auto auto;
             background-color: #b2c8df;
-            width: 64%;
-            margin-top: 2%;
-            padding: 30px 70px;
-            position: fixed;
-            margin-left: 15%;
-            height: 40%;
-
-        }
-
-        #userDetails input[type='email'] {
-            width: 89%;
-            outline: none;
-            border: none;
-            padding: 2%;
-            font-size: 15px;
-        }
-
-        #userDetails input[type='phone'] {
-            width: 89%;
-            outline: none;
-            border: none;
-            padding: 2%;
-            font-size: 15px;
+            margin-left: 22%;
+            grid-template-columns: auto auto auto;
+            width: 51%;
+            position: absolute;
+            margin-top: 10vh;
+            z-index: 1;
+            height: auto;
+            padding: 1% 4%;
         }
 
         #userdetail-btn {
@@ -856,8 +856,6 @@
 
             display: inline;
             color: white;
-
-            padding: 5px;
         }
 
         .subject-title-subjects {
@@ -884,9 +882,9 @@
 
         .subjects-by-grade .cards {
             display: grid;
-            width: 65%;
+            width: 80%;
             padding-left: 0%;
-            margin: 0% 15% 15%;
+            margin: 0% 10% 15%;
             height: auto;
             padding-top: 5%;
             grid-template-columns: auto auto auto;
@@ -899,9 +897,9 @@
 
         .chapter-cards {
             display: grid;
-            width: 65%;
+            width: 80%;
             padding-left: 0%;
-            margin: 0% 10% 15%;
+            margin: 0% 1% 15%;
             height: auto;
             padding-top: 5%;
             grid-template-columns: auto auto auto;
@@ -916,9 +914,7 @@
             margin-left: 0%;
             background-color: #0062cc;
             border-color: #005cbf;
-            width: 86px;
             color: white;
-            padding: 7px 15px;
             border-radius: 5px;
         }
 
@@ -1153,9 +1149,6 @@
             font-weight: 800;
         }
 
-        .userdataForm {
-            display: flex;
-        }
 
 
 
@@ -1283,13 +1276,15 @@
         }
 
         #userDetails .back-btn {
-            margin-left: 95%;
+            margin-left: 50vw;
             height: 0;
-            margin-top: 1%;
             background-color: transparent;
             font-size: 1.5vw;
             outline: none;
             position: absolute;
+            margin-left: 95%;
+            color: black;
+            margin-top: 1vh;
 
         }
 
@@ -1431,6 +1426,11 @@
 
             }
 
+            #userDetails {
+                margin-left: 8%;
+                width: 89%;
+            }
+
             .user {
                 margin-top: -14px;
                 width: 29%;
@@ -1457,21 +1457,8 @@
                 margin-top: 2%;
             }
             #grade {
-                width: 43vw;}
-                #grade label {
-                    width: 21%;
-                    text-align: left;
-                }
-
-                .form-all p {
-                    padding-left: 10%;
-                }
-            #sort {
-                background-color: #f3db92;
-                width: 8%;
-                padding: 5px;
-                padding: 5px;
-                outline: none;
+                width: 44%;
+                margin-left: 26vw;
             }
 
             .subjects-by-grade .cards {
@@ -1535,40 +1522,12 @@
             }
 
             #userDetails .back-btn {
-                margin-left: 91%;
+                margin-left: 78vw;
+                font-size: 2vw;
+
             }
 
-            #userDetails {
-                width: 105%;
-                margin-left: 1%;
-                z-index: 1;
-                margin-top: 5vh;
-                height: 42%;
-            }
 
-            input[type=file] {
-                border: none;
-                margin-left: 1%;
-                margin-top: 1%;
-                position: absolute;
-                height: 26%;
-            }
-
-            #userDetails input[type='email'] {
-                width: 89%;
-                outline: none;
-                border: none;
-                padding: 2%;
-                font-size: 15px;
-            }
-
-            #userDetails input[type='phone'] {
-                width: 89%;
-                outline: none;
-                border: none;
-                padding: 2%;
-                font-size: 15px;
-            }
 
             #userdetail-btn {
                 width: 14vw;
@@ -1580,6 +1539,11 @@
                 color: #14279b;
                 border: 1px solid #14279b;
             }
+
+            #userDetails input {
+                margin-bottom: 2vh;
+            }
+
 
 
             th {
@@ -1862,42 +1826,6 @@
                 margin-left: 53%;
             }
 
-            /* #confirmationuser {
-                width: 26vw;
-                font-size: 20px;
-                background-color: #EAE3C8;
-                margin-left: 34vw;
-                margin-top: 10vh;
-                padding-left: 54px;
-                height: 10vh;
-                box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-                padding-top: 13px;
-                z-index: 1px;
-                position: absolute;
-                border-radius: 5px;
-                display: none;
-            }
-
-            #yes {
-
-                width: 22%;
-                height: 19%;
-                margin-left: 31%;
-                margin-top: 0;
-                background-color: #33699f;
-                color: white;
-                border: 1px solid white;
-                margin-left: -1vw;
-                margin-top: 1vh;
-            }
-
-            #no {
-                width: 80px;
-                position: absolute;
-                margin-top: 1vw;
-                margin-left: 9vw;
-            }*/
-
             #action {
                 padding-left: 4vh;
             }
@@ -1949,11 +1877,12 @@
                 margin-bottom: 1vh;
 
             }
-            input#id_chapter_no {
-                width: 55%;}
-                .form-all p {
-                    padding-left: 16%;
-                }
+
+            #grade {
+                width: 37%;
+                margin-left: 25vw;
+            }
+
             #add {
                 width: 23vh;
                 background-color: #14279b;
@@ -1999,30 +1928,11 @@
                 text-align: start;
             }
 
+
             #userDetails {
-                width: 87%;
-                margin-left: 10vw;
-                z-index: 1;
-                height: 47%;
 
-            }
+                width: 67%;
 
-            #userDetails1 {
-                margin-left: 0vw;
-                width: 14vw;
-                margin-top: -2vh;
-            }
-
-            #userDetails2 {
-                margin-left: 20vw;
-                margin-top: -45.99vh;
-                width: 11vw;
-            }
-
-            #userDetails3 {
-                margin-left: 41vw;
-                margin-top: -46vh;
-                width: 8vw;
             }
 
             #userdetail-btn {
@@ -2037,9 +1947,9 @@
             }
 
             #userDetails .back-btn {
-                margin-left: 95%;
-                color: black;
-                margin-top: 2vh;
+                margin-left: 94%;
+
+                margin-top: 1vh;
                 background-color: transparent;
             }
 
@@ -2058,23 +1968,7 @@
                 margin-bottom: 2vh;
             }
 
-            #userDetails-bt {
-                width: 7vw;
-                height: px;
-                margin-left: 4.97vw;
-                margin-top: 5vh;
-                margin-bottom: 17px;
-                background-color: #b2c8df;
-                color: #14279b;
-                border: 1px solid #14279b;
-            }
 
-            /* #confirmationuser h3 {
-                font-size: 18px;
-                letter-spacing: 0.5px;
-                margin-left: -17px;
-
-            }*/
 
             th {
                 padding: 10px;
@@ -2115,25 +2009,26 @@
             }
 
             .chapter-table #edit {
-                color: white;
-                width: 4vw;
-                background-color: #14279b;
-                padding: 7px 13px;
+                width: 96%;
+                padding: 5px 15px;
                 color: white;
                 margin-left: 0vw;
+                margin-top: -1.7vw;
                 border-radius: 5px;
+                height: auto;
             }
+
 
             .chapter-table #delete {
                 color: white;
                 width: 5vw;
-                background-color: #14279b;
                 padding: 5px 15px;
                 color: white;
                 margin-left: 0vw;
                 border-radius: 5px;
-                margin-top: -3.36vh;
+                margin-top: -2.2vh;
             }
+
 
 
             .subject-card #edit {
@@ -2141,14 +2036,14 @@
             }
 
             .container2 #edit {
-                color: white;
                 width: 5vw;
                 background-color: #14279b;
                 padding: 5px 15px;
                 color: white;
                 margin-left: -1vw;
                 border-radius: 5px;
-                height: auto;
+                height: 1%;
+
 
             }
 
@@ -2156,7 +2051,7 @@
                 color: white;
                 width: 5vw;
                 background-color: #14279b;
-                padding: 4px 15px;
+                padding: 5px 15px;
                 color: white;
                 margin-left: 1vw;
                 border-radius: 5px;
@@ -2208,6 +2103,10 @@
                 background-color: #33699f;
             }
 
+            .form .back-btn {
+                margin-left: 103%;
+            }
+
             .chapter-table {
                 margin-left: 18%;
                 width: 80%;
@@ -2243,13 +2142,26 @@
                 font-size: 1.2vw;
             }
 
-            .questionlist {
+            .question-list {
+                width: 85%;
                 display: grid;
                 grid-template-columns: auto auto;
                 gap: 45px;
-                column-gap: 0vh;
-                margin-top: -1170px;
-                margin-left: -116px;
+                margin-top: 0px;
+                margin-left: 7%;
+            }
+
+            .question-list #edit {
+
+                color: white;
+                width: auto;
+                height: auto;
+                background-color: #14279b;
+                padding: 5px 15px;
+                color: white;
+                margin-left: auto;
+                border-radius: 5px;
+
             }
 
             .question-card p:nth-child(7) {
@@ -2375,34 +2287,6 @@
                 gap: 8%;
             }
 
-            /* #confirmationuser {
-                width: 22%;
-                font-size: 20px;
-                background-color: #EAE3C8;
-                margin-left: 33vw;
-                padding-left: 4vw;
-                height: 12%;
-                box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-                padding-top: 13px;
-                z-index: 1px;
-                margin-top: 12vh;
-                position: absolute;
-                border-radius: 5px;
-            }
-
-            #yes {
-                width: 80px;
-                position: absolute;
-                margin-left: 0vw;
-                margin-top: 1vw;
-            }
-
-            #no {
-                width: 80px;
-                position: absolute;
-                margin-top: 1vw;
-                margin-left: 7vw;
-            }*/
 
             .question-paper-form label {
                 width: 9vw;
@@ -2414,7 +2298,9 @@
             }
 
             .already {
-                margin-left: 43vw;
+
+                margin-left: 45vw;
+
             }
 
             .question_create .back-btn {
@@ -2424,6 +2310,7 @@
                 margin-top: 1vh;
                 background-color: transparent;
             }
+
 
 
             .back-btn {
@@ -2486,20 +2373,21 @@
 
             }
 
-            .chapter-table #edit {
-                color: white;
-                width: 65px;
-                background-color: #14279b;
-                padding: 5px 15px;
-                color: white;
-                margin-left: 0vw;
-                margin-top: -1.7vw;
-                border-radius: 5px;
-                height: 5vh;
-            }
+
         }
 
         @media screen and (min-width:700px) and (max-width:800px) {
+            .signInLink {
+
+                text-align: center;
+
+                margin-left: 30%;
+
+                color: black;
+
+            }
+
+            
 
             #profile-box {
                 background-color: #b2c8df;
@@ -2519,8 +2407,8 @@
             .user {
                 margin-left: 2vw;
                 color: white;
-                width: 40vw;
-                height: 65vh;
+                width: 30%;
+                height: 49%;
                 background-color: #5c7aea;
                 box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
                 margin-top: -5vh;
@@ -2638,7 +2526,6 @@
                 width: 94%;
                 margin-top: 10vh;
                 padding: 3%;
-                height: 31%;
             }
 
             #userdetail-btn {
@@ -2677,27 +2564,11 @@
             }
 
             #userDetails .back-btn {
-                margin-left: 89vw;
-                font-size: 1.9vw;
+                margin-left: 92%;
+                font-size: 2.3vw;
+                margin-top: 1.5%;
             }
 
-            #userDetails1 {
-                margin-left: -5vw;
-                width: 11vw;
-                margin-top: 0vh;
-            }
-
-            #userDetails2 {
-                margin-left: 17vw;
-                margin-top: -31.2vh;
-                width: 11vw;
-            }
-
-            #userDetails3 {
-                margin-left: 39vw;
-                margin-top: -31.1vh;
-                width: 14vw;
-            }
 
             .--user {
                 margin-top: 3vh;
@@ -2716,7 +2587,7 @@
             .navbar-nav {
                 background-color: white;
                 width: 19vw;
-                margin-left: 71vw;
+                margin-left: 0;
                 margin-top: 1vh;
             }
 
@@ -2736,13 +2607,13 @@
             #grade {
                 margin-top: 33%;
                 margin-left: 26vw;
-                width: 52vw;}
+                width: 52vw;
+                margin-top: 30%;
+                /* height: 17vh; */
+            }
 
             .grade-container #grade {
                 height: auto;
-            }
-            .subject-form-box {
-                width: auto;
             }
             #grade p {
 
@@ -2849,9 +2720,9 @@
             }
 
             .question-card {
-                margin-left: 30vw;
+                margin-left: 38vw;
                 font-size: 15px;
-                width: 66vw;
+                width: 52vw;
                 padding: 22px;
                 border-radius: 5px;
                 height: auto;
@@ -2980,8 +2851,8 @@
             }
 
             #chapter-btn {
-                width: 33%;
-                height: 10%;
+                /* width: 33%;
+                height: 10%; */
                 margin-left: 31%;
                 margin-top: 0;
                 background-color: #33699f;
@@ -3003,9 +2874,8 @@
                 height: 10vh;
                 width: 100%;
             }
-            .navbar-toggler-icon {
-                background-size: 60% 60%;
-            }
+
+
             .navbar-nav {
                 background-color: white;
                 width: 25vw;
@@ -3157,35 +3027,19 @@
             #userDetails {
 
                 transform: rotate(270deg);
-                margin-left: -11vw;
-                width: 133%;
-                margin-top: 22vh;
+                margin-left: 3%;
+                grid-template-columns: auto auto auto;
+                width: 100%;
+                margin-top: 82%;
                 z-index: 1;
-
-                gap: 4%;
-            }
-
-            #userDetails input[type='email'] {
-                width: 67%;
-                outline: none;
-                border: none;
-                padding: 2%;
-                font-size: 12px;
-            }
-
-            #userDetails input[type='phone'] {
-                width: 67%;
-                outline: none;
-                border: none;
-                padding: 2%;
-                font-size: 12px;
+                height: auto;
             }
 
             #userdetail-btn {
                 width: 16vw;
                 height: 3vh;
                 font-size: 10px;
-                margin-top: 8vh;
+                margin-top: 2vh;
             }
 
             #userDetails label {
@@ -3202,12 +3056,23 @@
             }
 
             #userDetails .back-btn {
-                margin-left: 92%;
+                margin-left: 91%;
+                margin-top: 5%;
                 font-size: 3.9vw;
-                margin-top: 4%;
             }
 
 
+            #userDetails2 {
+                margin-left: 17vw;
+                margin-top: -119%;
+                width: 11vw;
+            }
+
+            #userDetails3 {
+                margin-left: 39vw;
+                margin-top: -31.1vh;
+                width: 14vw;
+            }
 
 
 
@@ -3252,18 +3117,21 @@
             }
 
             #grade {
-
-                width: 75%;
-                margin-left: 14%;
+                width: 67vw;
+                margin-left: 16%;
                 margin-top: 35%;
-
             }
 
-       /*     #grade label {
-                width: 51%;
-                text-align: -webkit-match-parent;
+            #grade input {
+                padding: 5px;
+                width: 70%;
+                /* margin-left: 0%; */
+                margin-bottom: 10px;
+                color: black;
+                font-size: 15px;
+                border: none;
             }
-*/
+
             .subjects-by-grade .cards {
                 display: grid;
                 grid-template-columns: auto;
@@ -3350,7 +3218,7 @@
                 margin-top: -1vh;
                 background-color: #b2c8df;
                 color: #14279b;
-                padding: 5px 10px;
+                padding: 4px 10px;
                 outline: none;
                 border: 1px solid #14279b;
                 font-size: 12px;
@@ -3362,7 +3230,7 @@
                 width: 77%;
                 height: 138%;
                 margin-left: 11%;
-                position: absolute;
+                position: static;
             }
 
             .question_create .back-btn {
@@ -3436,8 +3304,8 @@
             }
 
             .question-papers-get {
-                width: 68%;
-                margin: 8% 17%;
+                width: 86%;
+                margin: 8% 8%;
                 padding: 4%;
                 border-radius: 5px;
             }
@@ -3487,13 +3355,6 @@
                 grid-template-columns: auto;
                 gap: 1%;
             }
-            #grade label {
-                width: 29%;
-                text-align: left;
-            }
-            input#id_chapter_no {
-                width: 50%;
-            }
             .text-center {
                 text-align: center !important;
                 margin-top: 5%;
@@ -3517,22 +3378,13 @@
                 margin-top: 2%;
             }
 
-            .profile-back-btn {
-                margin-left: 96%;
-            }
-            #userDetails2 {
-                margin-left: 17vw;
-                margin-top: -116.5%;
-                width: 11vw;
-            }
-            #userDetails3 {
-                margin-left: 39vw;
-                margin-top: -30.5vh;
-                width: 14vw;
+            #media-question {
+                transform: rotate(90deg);
             }
 
-
-
+            .form .back-btn {
+                margin-left: 93%;
+            }
 
 
         }

@@ -68,6 +68,16 @@
 
     }
 
+    .signInLink {
+
+      text-align: center;
+
+      margin-left: 30%;
+
+      color: black;
+
+    }
+
     a {
       color: white;
       padding-left: 70px;
@@ -236,15 +246,10 @@
     }
 
     .login-box {
-      background-color: #a9c3df;
-      ;
-      color: black;
-      margin-left: 600px;
-      width: 31%;
-      margin-top: 150px;
+    
+
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-      border-radius: 10px;
-      padding: 50px 50px;
+     
     }
 
     .login-btn {
@@ -262,10 +267,6 @@
       font-weight: bold;
     }
 
-    .login-box a {
-      color: black;
-      margin-left: 138px;
-    }
 
     .response {
       margin-left: 807px;
@@ -381,13 +382,17 @@
     .already {
       margin-left: 43vw;
     }
+    .logo-container {
+      display: none;
+   }
 
     @media screen and (min-width:1000px) and (max-width:1024px) {
       .login-box {
-        width: 55vw;
-        margin-left: 28vh;
-      }
-
+   
+        margin-left: -4%;
+        padding: 6%;
+        border-radius: 3%;
+    }
       .navbar-nav {
         margin-left: 3vh;
       }
@@ -416,6 +421,9 @@
       .already {
         margin-left: 35vw;
       }
+      .logo-container {
+        display: none;
+     }
     }
 
     @media screen and (min-width:1366px) and (max-width:1440px) {
@@ -452,18 +460,29 @@
         margin-top: 13vh;
         margin-bottom: 0vh;
       }
+      .logo-container {
+       display: none;
+    }
     }
 
     @media screen and (min-width:700px) and (max-width:780px) {
       .login-box {
-        background-color: #a9c3df;
-        color: black;
-        margin-left: 12vw;
-        width: 74vw;
-        margin-top: 14vw;
         box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-        border-radius: 10px;
-        padding: 50px 50px;
+        padding: 7%;
+        border-radius: 3%;
+        margin-left: -8%;
+    }
+      .signInLink {
+        text-align: center;
+        margin-left: 28%;
+        color: black;
+      }
+
+      #loginerror {
+        display: none;
+        margin-left: 15%;
+        margin-top: 2%;
+        z-index: 1;
       }
 
       .navbar a {
@@ -493,6 +512,9 @@
         width: fit-content;
         color: black;
       }
+      .logo-container {
+       display: none;
+    }
 
 
       #getstarted {
@@ -519,23 +541,51 @@
 
     @media screen and (max-width:600px) {
       .login-box {
-        background-color: #a9c3df;
-        color: black;
-        margin-left: 12vw;
-        width: 74vw;
-        margin-top: 14vw;
+        width: 93%;
         box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
         border-radius: 10px;
-        padding: 50px 50px;
-      }
-
+        padding: 5% 5%;
+        margin-top: -93%;
+    }
+    .logo-container {
+      display: block;
+      position: absolute;
+      width: 41%;
+      height: 20%;
+      padding: 3% 5%;
+      margin-top: 17%;
+      margin-left: 29%;
+  }
+  .logo-container img {
+    width: 100%;
+    margin-left: -3%;
+}
+      .para {
+        padding: 7%;
+        text-align: justify;
+        color: black;
+    }
+    #loginerror {
+      display: none;
+      margin-left: 20%;
+      margin-top: 56%;
+     
+      width: 61%;
+      padding: 5px;
+      height: 4%;
+      text-align: center;
+      z-index: 2;
+  }
       .navbar-nav {
         margin-left: 6vh;
         background-color: white;
         color: black;
-        width: 23vw;
-        height: 15vh;
-      }
+        width: 30%;
+        height: 9%;
+    }
+    .img-fluid {
+      display: none;
+  }
 
       .navbar a {
         color: rgb(0, 0, 0);
@@ -546,26 +596,20 @@
         font-size: 13px;
       }
 
-      .login-btn {
-       /* width: 24vh;
-        height: 3%;*/
-      }
 
       .login-box h1 {
         margin-left: 0;
       }
 
       #getstarted {
-
-        margin-left: 22vw;
-
-      }
-
-      .signbox {
-        margin-left: 5vw;
-        display: block;
-        width: 86vw;
-      }
+        margin-left: 27%;
+    }
+    .signbox {
+      margin-left: 5%;
+      display: block;
+      padding: 8%;
+      width: 90%;
+  }
 
       .signbox2 {
         margin-left: 0vw;
@@ -581,31 +625,22 @@
         margin-top: 214px;
       }
 
-      already {
+     .already {
         margin-left: 29%;
       }
 
       .login {
         color: #212529;
-        margin-left: -23%;
-      }
+        margin-left: -19%;
+        font-weight: bolder;
+    }
 
-      .login-box a {
-        color: black;
-        margin-left: 8.5%;
-      }
+
       .signInLink {
-
         text-align: center;
-        
-        margin-left: 30%;
-        
+        margin-left: 27%;
         color: black;
-        
         }
-
-
-
 
     }
   </style>

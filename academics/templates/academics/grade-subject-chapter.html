@@ -11,7 +11,7 @@
             <h2 >Grade - <span id="grade-title"></span> </h2>
             <hr>
             <div class="subject-head">
-        <a type="button" class="btn btn-primary" id="back-btn" onclick=get()>Back</a>
+        <a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=get()>Back</a>
         <h3 class="subject-title-subjects"> Subjects </h3>
         </div>
         <div class="cards container-fluid">
@@ -81,7 +81,7 @@
         <h4 >Grade - <span id="grade-title-chapter"></span> </h4>
         <hr>
         <div class="subject-head">
-        <a type="button" class="btn btn-primary" id="back-btn-chapter">Back</a>
+        <a type="button" class="btn btn-sm btn-primary" id="back-btn-chapter">Back</a>
     <h3 class="subject-title-subjects"> Chapters </h3>
     </div>
         <div class="chapter-cards container">
@@ -270,7 +270,7 @@ function deletegrade(id){
                 content = content + `<div class="subject-card"   id=${d.id}>
         <p><label> Subject </label> <span>: <span class="name">${d.name}</span></span></p>
         <p><label> Subject-code </label> <span>: <span class="code">${d.code}</span></span></p>
-        <p> <a type="button" class="btn btn-primary ch-btn" href=# onclick=getchapter(${d.grade_name},"${temp}",${d.id})>Chapters</a></p>
+        <p> <a type="button" class="btn btn-sm btn-primary ch-btn" href=# onclick=getchapter(${d.grade_name},"${temp}",${d.id})>Chapters</a></p>
         <br>
         <p> <a style="color:blue;" href=# id="edit" >Edit</a> <a data-toggle="modal" data-target="#delete-box-Modal" style="color:blue;" href=# id="delete" >delete</a></p>
  </div>`

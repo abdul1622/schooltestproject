@@ -27,7 +27,7 @@ aria-hidden="true">
       </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" id="no" data-dismiss="modal">No</button>
+      <button type="button" class="btn btn-danger" id="no" data-dismiss="modal">No</button>
       <span class="create-btn-container"> <button  data-dismiss="modal"  type="button" id='yes'
           class="btn btn-primary" >Yes</button></span>
 
@@ -288,7 +288,6 @@ function back(){
       }
       if (editbutton) {
         form.style.display = 'grid'
-      
         url = "https://schooltestproject.herokuapp.com/api/user-details/"
         const parent = e.target.parentElement.parentElement;
         console.log(parent)

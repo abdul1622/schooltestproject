@@ -138,11 +138,11 @@ class Question_Paper(models.Model):
 
 
 class Test(models.Model):
-    question_paper = models.ForeignKey(Question_Paper,on_delete=models.DO_NOTHING,null=True)
-    grade = models.ForeignKey(Grade,on_delete=models.DO_NOTHING,null=True)
-    subject = models.ForeignKey(Subject,on_delete=models.DO_NOTHING,null=True)
+    question_paper = models.ForeignKey(Question_Paper,on_delete=models.SET_NULL,null=True)
+    grade = models.ForeignKey(Grade,on_delete=models.SET_NULL,null=True)
+    subject = models.ForeignKey(Subject,on_delete=models.SET_NULL,null=True)
     duration = models.PositiveIntegerField()
-    created_staff_id = models.ForeignKey(User,on_delete=models.DO_NOTHING,null=True)
+    created_staff_id = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     marks = models.PositiveIntegerField()
     remarks = models.CharField(max_length=25)
     description = models.CharField(max_length=50)

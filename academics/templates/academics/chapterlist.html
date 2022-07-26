@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block chapterlist %}
 <div class="form-box">
-    <div class="box"id="mediabox">
+    <div class="box" id="mediabox">
 
         {% csrf_token %}
         {{form.as_p}}
@@ -61,8 +61,13 @@
 <div class="chapter-table">
 
 </div>
+<<<<<<< HEAD
 <div class="form box">
     <button onclick=close() class='back-btn'>&#x2715;</button>
+=======
+<div class="form box" >
+    <button onclick=back() class='back-btn'>&#x2715;</button>
+>>>>>>> dc029c96a895c2a755974c327bb837609fe7dbb9
     {% csrf_token %}
     {{form2.as_p}}
     <button class="submit-btn" id="chapter-btn">Submit</button>
@@ -87,27 +92,30 @@
     let error_messages = document.querySelector('.error-messages')
     var grade;
     var subject;
+<<<<<<< HEAD
     function close(){
 form.style.display = "none"
 document.querySelector('.box').style.display = "block"
     }
+=======
+   
+>>>>>>> dc029c96a895c2a755974c327bb837609fe7dbb9
     function back() {
-        document.querySelector('.box').style.display = "block"
         document.querySelector('.form').style.display = "none"
-        container3.innerHTML = ''
+     
     }
-function get(grade,subject){
-    document.getElementById('id_grade').value = grade;
-    document.getElementById('id_subject').value = subject;
-    getchapter();
-}
+    function get(grade, subject) {
+        document.getElementById('id_grade').value = grade;
+        document.getElementById('id_subject').value = subject;
+        getchapter();
+    }
 
     function getchapter() {
         if (token) {
             let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             var grade = document.getElementById('id_grade').value
             var subject = document.getElementById('id_subject').value
-            console.log(grade,subject)
+            console.log(grade, subject)
             console.log(grade + subject)
             fetch('https://schooltestproject.herokuapp.com/api/chapter-list/', {
                 method: 'POST',
@@ -159,7 +167,7 @@ function get(grade,subject){
 
     // edit chapter
 
-    function deletechapter(id,grade_name,subject_name) {
+    function deletechapter(id, grade_name, subject_name) {
         // subject_name = subject_name.replace('_', ' ')
         fetch(`https://schooltestproject.herokuapp.com/api/chapters/${id}/`, {
             method: 'DELETE',
@@ -168,7 +176,7 @@ function get(grade,subject){
             },
         }).then(() => {
             form.style.display = 'none'
-            get(grade_name,subject_name)
+            get(grade_name, subject_name)
         }
         )
     }
@@ -230,7 +238,7 @@ function get(grade,subject){
                             messages.innerHTML = `${name} is updated succesfully`;
                             error_messages.innerHTML = ''
                             form.style.display = 'none'
-                            get(grade_name,subject_name)
+                            get(grade_name, subject_name)
                         } else {
                             console.log(response);
                         }
@@ -243,7 +251,7 @@ function get(grade,subject){
                             messages.innerHTML = ''
                             form.innerHTML = ``
                             form.style.display = 'none'
-                            get(grade_name,subject_name)
+                            get(grade_name, subject_name)
                         }
                     }
                     )
