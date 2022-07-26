@@ -69,26 +69,11 @@
             margin-left: 86vw;
         }
 
-        .grade-container #edit,
-        #delete {
-            background-color: transparent;
-        }
-
-        .grade-container #delete {
-            background-color: transparent;
-        }
-
         label {
             font-size: 15px;
             color: black;
         }
-        .form-all p{
-            display: flex;
-            padding-left: 22%;
-        }
-        .subject-form-box{
-            width: 30vw;
-        }
+
         #grade {
             background-color: #b2c8df;
             box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
@@ -104,17 +89,20 @@
         #grade button {
             margin-left: 33%;
         }
-        input#id_chapter_no {
-            width: 65%;
-            height: fit-content;
+
+        input {
+            padding: 5px;
+            width: 250px;
+            margin-bottom: 10px;
+            color: black;
+            font-size: 15px;
+            border: none;
+            outline: none;
         }
 
-        input#id_grade {
-            width: 66%;
-        }
         input[type=text] {
             padding: 5px;
-            width: 60%;
+            width: 250px;
             margin-bottom: 10px;
             color: black;
             font-size: 15px;
@@ -349,7 +337,7 @@
             font-size: 18px;
         }
 
-        a:active {
+        a:acive {
             text-decoration: none;
             color: white;
         }
@@ -444,6 +432,29 @@
             position: absolute;
         }
 
+        /*
+        #profile-edit {
+            color: #14279b;
+            background-color: #5c7aea;
+            text-decoration: none;
+            border: 1px solid #14279b;
+            width: 264px;
+            margin: 57px 0;
+            padding: 5px;
+        }
+
+        #profile-edit:hover {
+            color: white;
+            background-color: #14279b;
+        }
+
+        #profile-edit:active {
+            color: white;
+            background-color: #14279b;
+            border: 1px solid #14279b;
+            outline: none;
+        }
+*/
         .chapter_create {
             background-color: #343a40;
             color: white;
@@ -599,14 +610,7 @@
             border: 1px solid #14279b;
         }
 
-        .question-card button {
-            color: white;
-            width: auto;
-            background-color: #14279b;
-            padding: 7px 15px;
-            color: white;
-            border-radius: 5px;
-        }
+
 
         .question-card span {
             color: white;
@@ -670,12 +674,43 @@
         .profile-label {
             display: inline;
         }
-        .image img{
-        
-                width: 40%;
-            
+
+        /*   #confirmationuser {
+            width: 18%;
+            font-size: 20px;
+            background-color: #EAE3C8;
+            margin-left: 538px;
+            padding-left: 54px;
+            height: 12%;
+            box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+            padding-top: 13px;
+            z-index: 1px;
+            position: absolute;
+            border-radius: 5px;
+            display: none;
         }
 
+        #confirmationuser h3 {
+            font-size: 23px;
+            letter-spacing: 0.5px;
+            margin-left: -17px;
+        }
+
+        #yes {
+            width: 80px;
+            position: absolute;
+            margin-left: 19px;
+            margin-top: 23px;
+        }
+
+
+        #no {
+            width: 80px;
+            position: absolute;
+            margin-top: 23px;
+            margin-left: 122px;
+        }
+*/
         .fullname {
             display: inline;
         }
@@ -1225,10 +1260,9 @@
         }
 
         #grades {
-            width: 20%;
-            outline: none;
-            border: none;
-            padding: 0.3vw;
+            margin-left: 2vw;
+            border-radius: 5px;
+            margin-top: 1.3vh;
         }
 
         #sort {
@@ -1258,13 +1292,13 @@
         }
 
         #grade label {
-            width: 16%;
+            width: 25%;
             text-align: left;
         }
 
         .form-box input[type=text] {
             padding: 5px;
-            width: 66%;
+            width: 100%;
             margin-bottom: 10px;
             color: black;
             font-size: 15px;
@@ -1301,22 +1335,17 @@
 
 
         #edit {
-            color: white;
-            width: 65px;
-            background-color: #14279b;
+
             padding: 7px 15px;
-            color: white;
+
             margin-left: -1vw;
             border-radius: 5px;
         }
 
         #delete {
 
-            width: 4vw;
-            background-color: #14279b;
             padding: 7px 15px;
-            color: white;
-            margin-left: 1.1vw;
+            margin-left: 1%;
             border-radius: 5px;
             margin-top: 0vh;
         }
@@ -1369,7 +1398,6 @@
             font-size: 15px;
             /* background-color: #435cf9; */
             color: black;
-            height: auto;
             box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
             padding: 10%;
         }
@@ -1436,26 +1464,6 @@
                 width: 29%;
             }
 
-            #add {
-                width: 12%;
-                background-color: #14279b;
-                padding: 6px 15px;
-                color: white;
-                border-radius: 5px;
-                margin-left: 32%;
-                position: absolute;
-                height: 4.5%;
-                margin-top: 2%;
-            }
-
-            #grades {
-                width: 20%;
-                outline: none;
-                border: none;
-                padding: 0.3vw;
-                margin-left: 3%;
-                margin-top: 2%;
-            }
             #grade {
                 width: 44%;
                 margin-left: 26vw;
@@ -1495,7 +1503,9 @@
                 margin-right: 0;
             }
 
-
+            #sort {
+                width: 9vw;
+            }
 
             .container2 {
                 width: 1vw
@@ -1503,7 +1513,7 @@
 
             .grade-list .card {
 
-                height: auto;
+                height: 15vh;
 
             }
 
@@ -1565,22 +1575,18 @@
             }
 
             #edit {
-                color: white;
-                width: 65px;
-                background-color: #14279b;
+
                 padding: 7px 15px;
-                color: white;
-                margin-left: -2vw;
+
+                margin-left: -6%;
                 border-radius: 5px;
                 position: absolute;
             }
 
             .chapter-table #edit {
-                color: white;
-                width: 65px;
-                background-color: #14279b;
+
                 padding: 7px 15px;
-                color: white;
+
                 margin-left: 0vw;
                 margin-top: -1.7vw;
                 border-radius: 5px;
@@ -1596,11 +1602,9 @@
             }
 
             #delete {
-                color: white;
-                width: 65px;
-                background-color: #14279b;
+
                 padding: 7px 15px;
-                color: white;
+
                 margin-top: 0vh;
                 border-radius: 5px;
                 margin-left: 8vw;
@@ -1618,12 +1622,12 @@
             }
 
             .grade-container #edit {
-                background-color: transparent;
+
                 margin-left: 0;
             }
 
             .grade-container #delete {
-                background-color: transparent;
+
                 margin-left: 5vw;
                 margin-top: 0vh;
                 position: absolute;
@@ -1637,9 +1641,7 @@
             }
 
             .chapter-table #delete {
-                color: white;
                 width: 65px;
-                background-color: #14279b;
                 padding: 7px 15px;
                 color: white;
                 margin-top: -2vh;
@@ -1704,14 +1706,7 @@
             }
 
 
-            .question-list button {
-                color: white;
-                width: 65px;
-                background-color: #14279b;
-                padding: 7px 15px;
-                color: white;
-                border-radius: 5px;
-            }
+
 
 
 
@@ -1719,7 +1714,6 @@
                 margin-left: 19vh;
                 margin-top: 1vh;
                 font-size: 15px;
-                height: auto;
                 width: 42vw;
                 padding: 25px;
                 background-color: #5c7aea;
@@ -1865,14 +1859,11 @@
             #profile-box {
                 margin-left: 43vw;
                 width: 26vw;
-                height: 89%;
+                height: 86vh;
                 margin-top: -24vh;
                 /* position: absolute; */
             }
-            #grade {
-                width: 47%;
-                margin-left: 27vw;
-            }
+
             #profile-box input[type='text'] {
                 margin-bottom: 1vh;
 
@@ -1998,32 +1989,31 @@
             }
 
             #edit {
-                color: white;
-                width: 65px;
-                height: 5.3vh;
-                background-color: #14279b;
+
+
+
                 padding: 5px 15px;
-                color: white;
+
                 margin-left: 20vw;
                 border-radius: 5px;
             }
 
             .chapter-table #edit {
-                width: 96%;
+
                 padding: 5px 15px;
-                color: white;
+
                 margin-left: 0vw;
                 margin-top: -1.7vw;
                 border-radius: 5px;
-                height: auto;
+
             }
 
 
             .chapter-table #delete {
-                color: white;
-                width: 5vw;
+
+
                 padding: 5px 15px;
-                color: white;
+
                 margin-left: 0vw;
                 border-radius: 5px;
                 margin-top: -2.2vh;
@@ -2037,9 +2027,9 @@
 
             .container2 #edit {
                 width: 5vw;
-                background-color: #14279b;
+
                 padding: 5px 15px;
-                color: white;
+
                 margin-left: -1vw;
                 border-radius: 5px;
                 height: 1%;
@@ -2048,11 +2038,11 @@
             }
 
             .container2 #delete {
-                color: white;
+
                 width: 5vw;
-                background-color: #14279b;
+
                 padding: 5px 15px;
-                color: white;
+
                 margin-left: 1vw;
                 border-radius: 5px;
 
@@ -2060,24 +2050,23 @@
 
 
             #delete {
-                color: white;
-                width: 5vw;
-                background-color: #14279b;
+
+
+
                 padding: 5px 15px;
-                color: white;
-                margin-left: 5vw;
+
+                margin-left: 21%;
                 position: absolute;
                 border-radius: 5px;
-                margin-left: 1vw;
+
 
             }
 
             .--user #delete {
-                color: white;
-                width: 5vw;
-                background-color: #14279b;
+
+
                 padding: 4px 14px;
-                color: white;
+
                 margin-left: 1vw;
                 border-radius: 5px;
                 margin-top: 0vh;
@@ -2085,13 +2074,13 @@
             }
 
             .grade-container #edit {
-                background-color: transparent;
+
                 margin-left: 0;
             }
 
 
             .grade-container #delete {
-                background-color: transparent;
+
                 margin-top: -0.7vh;
 
             }
@@ -2114,14 +2103,6 @@
             }
 
 
-            .question-list button {
-                color: white;
-                width: 65px;
-                background-color: #14279b;
-                padding: 7px 15px;
-                color: white;
-                border-radius: 5px;
-            }
 
             .question-card {
                 margin-left: 17vh;
@@ -2153,12 +2134,11 @@
 
             .question-list #edit {
 
-                color: white;
-                width: auto;
-                height: auto;
-                background-color: #14279b;
-                padding: 5px 15px;
-                color: white;
+
+
+
+
+
                 margin-left: auto;
                 border-radius: 5px;
 
@@ -2279,7 +2259,6 @@
             .chapter-cards {
                 display: grid;
                 width: 33vw;
-                height: auto;
                 padding-left: 0%;
                 margin: 0% 10% 15%;
                 padding-top: 5%;
@@ -2387,7 +2366,7 @@
 
             }
 
-            
+
 
             #profile-box {
                 background-color: #b2c8df;
@@ -2425,8 +2404,9 @@
                 width: 39vw;
                 padding-top: 2vh;
                 padding-left: 3vh;
-                height: auto;
+                height: 39vh;
             }
+
             .box label {
                 font-size: 1.8vw;
             }
@@ -2505,14 +2485,14 @@
                 margin-left: -2vw;
                 font-size: 11px;
                 padding: 4px 13px;
-                width: 6vw;
+
             }
 
             #delete {
                 margin-left: 1vw;
                 font-size: 11px;
                 padding: 4px 13px;
-                width: 7vw;
+
             }
 
             td {
@@ -2522,8 +2502,8 @@
             }
 
             #userDetails {
-                margin-left: 2%;
-                width: 94%;
+                margin-left: 16vw;
+                width: 70vw;
                 margin-top: 10vh;
                 padding: 3%;
             }
@@ -2545,22 +2525,6 @@
 
             #userDetails input[type=file] {
                 width: 23vw;
-            }
-
-            #userDetails input[type='email'] {
-                width: 80%;
-                outline: none;
-                border: none;
-                padding: 2%;
-                font-size: 12px;
-            }
-
-            #userDetails input[type='phone'] {
-                width: 80%;
-                outline: none;
-                border: none;
-                padding: 2%;
-                font-size: 12px;
             }
 
             #userDetails .back-btn {
@@ -2604,8 +2568,8 @@
             .grade-list {
                 margin-left: -9vw;
             }
+
             #grade {
-                margin-top: 33%;
                 margin-left: 26vw;
                 width: 52vw;
                 margin-top: 30%;
@@ -2615,6 +2579,7 @@
             .grade-container #grade {
                 height: auto;
             }
+
             #grade p {
 
                 margin-top: 1vw;
@@ -2767,7 +2732,7 @@
             }
 
             .chapter-table #edit {
-                width: 5vw;
+
                 margin-left: 0vw;
                 padding: 4px 1px;
                 font-size: 1vw;
@@ -2782,7 +2747,7 @@
             }
 
             .chapter-table #delete {
-                width: 5vw;
+
                 margin-left: 0vw;
                 padding: 4px 1px;
                 font-size: 1vw;
@@ -2845,9 +2810,8 @@
             }
 
             .chapter-cards .chapter-card {
-                min-height: auto;
+                min-height: 33vh;
                 margin-bottom: -5vh;
-                margin: 10% 65%;
             }
 
             #chapter-btn {
@@ -2888,14 +2852,6 @@
                 font-size: 1.7vw;
                 color: black;
             }
-            #add {
-                width: auto;
-                margin-left: -1vh;
-                font-size: 2vw;
-                height: auto;
-                margin-top: 37vh;
-                transform: rotate(270deg);
-            }
 
             .navbar-light .navbar-toggler {
                 color: rgba(0, 0, 0, .5);
@@ -2903,13 +2859,8 @@
                 margin-left: 0vw;
                 background-color: white;
             }
-            .subject-form-box{
-                width: auto;
-            }
 
-            .form-all p {
-                padding-left: 10%;
-            }
+
             #profile-box {
                 display: none;
                 color: black;
@@ -2939,21 +2890,17 @@
             }
 
             #edit {
-                color: white;
-                width: 11vw;
-                background-color: #14279b;
+
+
                 padding: 7px 15px;
-                color: white;
                 font-size: 2vw;
                 margin-left: -11vw;
                 border-radius: 5px;
             }
 
             #delete {
-                width: 11vw;
-                background-color: #14279b;
+
                 padding: 7px 15px;
-                color: white;
                 margin-left: 1.1vw;
                 border-radius: 5px;
                 margin-top: 0vh;
@@ -2980,21 +2927,21 @@
             }
 
             #edit {
-                color: white;
 
-                background-color: #14279b;
-                padding: 7px 0px;
-                color: white;
+
+
+                padding: 7px 15px;
+
                 font-size: 2vw;
                 margin-left: -11vw;
                 border-radius: 5px;
             }
 
             #delete {
-                width: 11vw;
-                background-color: #14279b;
-                padding: 5px 10px;
-                color: white;
+
+
+                padding: 7px 15px;
+
                 margin-left: 1.1vw;
                 border-radius: 5px;
                 margin-top: 0vh;
@@ -3013,19 +2960,21 @@
 
             #grades {
                 transform: rotate(270deg);
-                margin-left: -8%;
+                margin-left: -10vw;
                 border-radius: 5px;
-                width: 33%;
                 margin-top: 66.3vh;
                 position: absolute;
             }
 
-            /*        .grade-list .card {
-                height: 8vh;
-            }
-*/
-            #userDetails {
 
+            .grade-list .card .delete-grade {
+                background-color: transparent;
+                display: block;
+                color: red;
+                font-size: 10px;
+            }
+
+            #userDetails {
                 transform: rotate(270deg);
                 margin-left: 3%;
                 grid-template-columns: auto auto auto;
@@ -3061,6 +3010,11 @@
                 font-size: 3.9vw;
             }
 
+            #userDetails1 {
+                margin-left: -5vw;
+                width: 2%;
+                margin-top: 0vh;
+            }
 
             #userDetails2 {
                 margin-left: 17vw;
@@ -3074,9 +3028,10 @@
                 width: 14vw;
             }
 
+            input {
 
-
-
+                width: 38vw;
+            }
 
             #sort {
                 transform: rotate(270deg);
@@ -3087,10 +3042,9 @@
             }
 
             .subjects-by-grade .subject-card {
-                max-height: auto;
+                max-height: 92%;
                 padding: 7% 12%;
-                cursor: pointer;
-                /* padding-left: 12%; */
+                cursor: pointer;            
                 font-size: 16px;
                 box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
             }
@@ -3112,7 +3066,6 @@
                 cursor: pointer;
                 padding-left: 42%;
                 font-size: 25px;
-                margin: 0% 2% 20%;
                 box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
             }
 
@@ -3124,8 +3077,7 @@
 
             #grade input {
                 padding: 5px;
-                width: 70%;
-                /* margin-left: 0%; */
+                width: 70%;             
                 margin-bottom: 10px;
                 color: black;
                 font-size: 15px;
@@ -3136,7 +3088,7 @@
                 display: grid;
                 grid-template-columns: auto;
                 gap: 1%;
-                margin-left: 20vw;
+                margin-left: 13%;
             }
 
             .chapterlist h4 {
@@ -3147,7 +3099,7 @@
                 display: grid;
                 grid-template-columns: auto;
                 gap: 1%;
-                margin-left: -19vw;
+                margin: 0% -20%;
             }
 
             .chapter-card #edit {
@@ -3161,7 +3113,9 @@
             }
 
             #grade button {
-                margin-left: 44%;
+                margin-left: 33%;
+                height: 4vh;
+                width: 48%;
             }
 
             .grade-container h2 {
@@ -3176,8 +3130,17 @@
                 margin-left: -14%;
             }
 
+            #add {
+                width: 10vh;
+                margin-left: -1vh;
+                font-size: 2vw;
+                height: 32px;
+                margin-top: 42vh;
+                transform: rotate(270deg);
+            }
+
             #addstaff {
-                width: auto;
+                width: 10vh;
                 margin-left: 2vh;
                 font-size: 2vw;
                 height: 32px;
@@ -3208,12 +3171,12 @@
                 transform: rotate(270deg);
                 margin-top: 51vh;
                 position: absolute;
-                margin-left: -5vh;
+                margin-left: 1vh;
             }
 
             #chapterlist-btn {
-              /*  width: 39%;
-                height: 3vh;*/
+                width: 39%;
+                height: 3vh;
                 margin-left: 31%;
                 margin-top: -1vh;
                 background-color: #b2c8df;
@@ -3252,7 +3215,7 @@
             }
 
             .question-card {
-                margin: 5% 11%;
+                margin-left: 7%;
                 font-size: 14px;
                 width: 63vw;
             }
@@ -3289,16 +3252,16 @@
             }
 
             .question-card #delete {
-                width: 17vw;
+
                 font-size: 11px;
-                background-color: #14279b;
+
                 padding: 5px 6px;
             }
 
             .question-card #edit {
-                width: 17vw;
+
                 font-size: 11px;
-                background-color: #14279b;
+
                 padding: 5px 6px;
                 margin-left: 2%;
             }
@@ -3355,13 +3318,14 @@
                 grid-template-columns: auto;
                 gap: 1%;
             }
+
             .text-center {
                 text-align: center !important;
                 margin-top: 5%;
             }
 
             input[type=text] {
-                width: 50%;
+                width: 92%;
                 color: black;
             }
 
