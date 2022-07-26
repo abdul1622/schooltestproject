@@ -64,8 +64,6 @@
             margin-left: 100px;
         }
 
-
-
         .container-1 {
             width: 34%;
             margin-top: 5%;
@@ -93,10 +91,12 @@
             border-color: rgba(0, 0, 0, .1);
             margin-left: 86vw;
         }
+
         label {
             font-size: 15px;
             color: black;
         }
+
         #grade {
             background-color: #b2c8df;
             box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
@@ -636,7 +636,14 @@
             border: 1px solid #14279b;
         }
 
-       
+        .question-card button {
+            color: white;
+            width: auto;
+            background-color: #14279b;
+            padding: 7px 15px;
+            color: white;
+            border-radius: 5px;
+        }
 
         .question-card span {
             color: white;
@@ -672,20 +679,29 @@
             font-weight: 800;
         }
 
-        .user {
-            width: 17%;
+        .image img {
+
+border-radius: 50%;
+width:
+    100px;
+}       
+.user {
+            width: 65%;
             height: auto;
-            margin-left: 5%;
+            margin-left: 12%;
+            display: flex;
             color: white;
-            background-color: #5c7aea;
             box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
             margin-top: 5%;
             font-size: 18px;
-            padding: 20px;
             border-radius: 5px;
-            position: fixed;
+            position: relative;
         }
 
+
+        .occupation {
+            margin-top: 21%;
+        }
 
         .container3 {
             margin-top: 175px;
@@ -1018,13 +1034,17 @@
 
         .grade-list .card {
             position: relative;
+            text-align: center;
             height: 15vh;
-            padding-top: 30%;
+            padding-top: 25%;
             cursor: pointer;
-            padding-left: 42%;
+            /* padding-left: 42%; */
             font-size: 25px;
-            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+
         }
+
+
 
         .grade-list .cards {
             display: grid;
@@ -1376,17 +1396,17 @@
         }
 
 
-        #edit {          
-                   
+        #edit {
+
             padding: 7px 15px;
-            
+
             margin-left: -1vw;
             border-radius: 5px;
         }
 
         #delete {
-                     
-            padding: 7px 15px;            
+
+            padding: 7px 15px;
             margin-left: 1%;
             border-radius: 5px;
             margin-top: 0vh;
@@ -1485,10 +1505,10 @@
             }
 
             #profile-box {
-                margin-left: 49vw;
+                /* margin-left: 49vw; */
                 width: 35vw;
-                margin-top: -12%;
-                height: 74vh;
+                margin-top: 1%;
+                /* height: 74vh;*/
             }
 
             #profile-box input[type='text'] {
@@ -1502,8 +1522,7 @@
             }
 
             .user {
-                margin-top: -14px;
-                width: 29%;
+                margin: 8% 16%;
             }
 
             #grade {
@@ -1616,19 +1635,19 @@
                 margin-left: 123vh;
             }
 
-            #edit {               
-                          
+            #edit {
+
                 padding: 7px 15px;
-               
+
                 margin-left: -6%;
                 border-radius: 5px;
                 position: absolute;
             }
 
-            .chapter-table #edit {               
-                      
+            .chapter-table #edit {
+
                 padding: 7px 15px;
-               
+
                 margin-left: 0vw;
                 margin-top: -1.7vw;
                 border-radius: 5px;
@@ -1643,10 +1662,10 @@
                 margin-left: 2.5vw;
             }
 
-            #delete {               
-                             
+            #delete {
+
                 padding: 7px 15px;
-                
+
                 margin-top: 0vh;
                 border-radius: 5px;
                 margin-left: 8vw;
@@ -1664,12 +1683,11 @@
             }
 
             .grade-container #edit {
-             
                 margin-left: 0;
             }
 
             .grade-container #delete {
-               
+
                 margin-left: 5vw;
                 margin-top: 0vh;
                 position: absolute;
@@ -1682,8 +1700,8 @@
                 background-color: #33699f;
             }
 
-            .chapter-table #delete {             
-                width: 65px;            
+            .chapter-table #delete {
+                width: 65px;
                 padding: 7px 15px;
                 color: white;
                 margin-top: -2vh;
@@ -1746,12 +1764,6 @@
                 margin-top: 0vh;
 
             }
-
-
-         
-
-
-
             .question-card {
                 margin-left: 19vh;
                 margin-top: 1vh;
@@ -1899,16 +1911,20 @@
             }
 
             #profile-box {
-                margin-left: 43vw;
-                width: 26vw;
-                height: 86vh;
-                margin-top: -24vh;
-                /* position: absolute; */
+                /* margin-left: 43vw; */
+                width: 27vw;
+                /* height: 86vh; */
+                /* margin-top: -24vh; */
+                /* position: absolute;*/
             }
 
             #profile-box input[type='text'] {
                 margin-bottom: 1vh;
 
+            }
+
+            .user {
+                margin-left: 18%;
             }
 
             #grade {
@@ -2031,31 +2047,31 @@
             }
 
             #edit {
-                
-           
-              
+
+
+
                 padding: 5px 15px;
-               
+
                 margin-left: 20vw;
                 border-radius: 5px;
             }
 
             .chapter-table #edit {
-              
+
                 padding: 5px 15px;
-       
+
                 margin-left: 0vw;
                 margin-top: -1.7vw;
                 border-radius: 5px;
-          
+
             }
 
 
             .chapter-table #delete {
-              
-             
+
+
                 padding: 5px 15px;
-               
+
                 margin-left: 0vw;
                 border-radius: 5px;
                 margin-top: -2.2vh;
@@ -2069,9 +2085,9 @@
 
             .container2 #edit {
                 width: 5vw;
-                
+
                 padding: 5px 15px;
-              
+
                 margin-left: -1vw;
                 border-radius: 5px;
                 height: 1%;
@@ -2080,11 +2096,11 @@
             }
 
             .container2 #delete {
-               
+
                 width: 5vw;
-               
+
                 padding: 5px 15px;
-         
+
                 margin-left: 1vw;
                 border-radius: 5px;
 
@@ -2092,23 +2108,23 @@
 
 
             #delete {
-              
-              
-               
+
+
+
                 padding: 5px 15px;
-          
+
                 margin-left: 21%;
                 position: absolute;
                 border-radius: 5px;
-               
+
 
             }
 
             .--user #delete {
-               
-               
+
+
                 padding: 4px 14px;
-             
+
                 margin-left: 1vw;
                 border-radius: 5px;
                 margin-top: 0vh;
@@ -2116,13 +2132,13 @@
             }
 
             .grade-container #edit {
-              
+
                 margin-left: 0;
             }
 
 
             .grade-container #delete {
-             
+
                 margin-top: -0.7vh;
 
             }
@@ -2145,7 +2161,6 @@
             }
 
 
-           
             .question-card {
                 margin-left: 17vh;
                 margin-top: 1vh;
@@ -2176,11 +2191,11 @@
 
             .question-list #edit {
 
-                
-               
-               
-        
-              
+
+
+
+
+
                 margin-left: auto;
                 border-radius: 5px;
 
@@ -2424,17 +2439,7 @@
             }
 
             .user {
-                margin-left: 2vw;
-                color: white;
-                width: 30%;
-                height: 49%;
-                background-color: #5c7aea;
-                box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-                margin-top: -5vh;
-                font-size: 15px;
-                padding: 20px;
-                border-radius: 5px;
-                position: fixed;
+                margin: 8% 17%;
             }
 
 
@@ -2525,14 +2530,14 @@
                 margin-left: -2vw;
                 font-size: 11px;
                 padding: 4px 13px;
-             
+
             }
 
             #delete {
                 margin-left: 1vw;
                 font-size: 11px;
                 padding: 4px 13px;
-               
+
             }
 
             td {
@@ -2772,7 +2777,7 @@
             }
 
             .chapter-table #edit {
-           
+
                 margin-left: 0vw;
                 padding: 4px 1px;
                 font-size: 1vw;
@@ -2787,7 +2792,7 @@
             }
 
             .chapter-table #delete {
-            
+
                 margin-left: 0vw;
                 padding: 4px 1px;
                 font-size: 1vw;
@@ -2904,16 +2909,25 @@
             #profile-box {
                 display: none;
                 color: black;
-                width: 79vw;
-                margin-top: -14.5vh;
-                margin-left: 8vw;
-                position: relative;
+                width: 100%;
+                margin-top: 0;
+                margin-bottom: 0;
+                /* margin-left: 8vw; */
+            }
+
+            .profile-container .container {
+                width: 100%;
+                padding: 0;
             }
 
             .user {
-                margin-left: 5vw;
-                width: 78vw;
-                margin-top: -2vh;
+                width: 100%;
+                display: block;
+                margin: 0;
+            }
+
+            .profile-content {
+                padding-bottom: 26%;
             }
 
             .--user {
@@ -2929,18 +2943,18 @@
                 width: 20vw;
             }
 
-            #edit {           
-    
-               
-                padding: 7px 15px;              
+            #edit {
+
+
+                padding: 7px 15px;
                 font-size: 2vw;
                 margin-left: -11vw;
                 border-radius: 5px;
             }
 
-            #delete {              
-              
-                padding: 7px 15px;             
+            #delete {
+
+                padding: 7px 15px;
                 margin-left: 1.1vw;
                 border-radius: 5px;
                 margin-top: 0vh;
@@ -2967,21 +2981,21 @@
             }
 
             #edit {
-               
-            
-                
+
+
+
                 padding: 7px 15px;
-               
+
                 font-size: 2vw;
                 margin-left: -11vw;
                 border-radius: 5px;
             }
 
             #delete {
-               
-               
+
+
                 padding: 7px 15px;
-          
+
                 margin-left: 1.1vw;
                 border-radius: 5px;
                 margin-top: 0vh;
@@ -3098,12 +3112,12 @@
 
             .grade-list .card {
                 position: relative;
-                height: 100%;
-                padding-top: 30%;
-                cursor: pointer;
-                padding-left: 42%;
-                font-size: 25px;
-                box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+    height: 100%;
+    /* padding-top: 30%; */
+    cursor: pointer;
+    /* padding-left: 42%; */
+    font-size: 25px;
+    box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
             }
 
             #grade {
@@ -3290,16 +3304,16 @@
             }
 
             .question-card #delete {
-                
+
                 font-size: 11px;
-               
+
                 padding: 5px 6px;
             }
 
             .question-card #edit {
-               
+
                 font-size: 11px;
-               
+
                 padding: 5px 6px;
                 margin-left: 2%;
             }
