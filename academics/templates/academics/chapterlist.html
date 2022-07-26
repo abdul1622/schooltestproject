@@ -62,11 +62,6 @@
 
 </div>
 
-<div class="form box">
-    <button onclick=close() class='back-btn'>&#x2715;</button>
-
-<div class="form box" >
-    <button onclick=back() class='back-btn'>&#x2715;</button>
 
 <div class="form box" >
     <button onclick=back() class='back-btn'>&#x2715;</button>
@@ -142,9 +137,9 @@ document.querySelector('.box').style.display = "block"
                             table2 = table2 + `<td class="subject" id=${d.subject_id}>` + `${d.subject}` + '</td>';
                         table2 = table2 + '<td class="chapter_no">' + `${d.chapter_no}` + '</td>';
                         table2 = table2 + '<td class="name">' + `${d.name}` + '</td>';
-                        table2 = table2 + '<td class="description">' + `${d.description}` + '</td>',
-                            table2 = table2 + '<td>' + `<button id="edit" >Edit</button>` + '</td>',
-                            table2 = table2 + '<td>' + `<button data-toggle="modal" data-target="#delete-box-Modal-chapterlist" id="delete" >delete</button>` + '</td>',
+                        table2 = table2 + '<td class="description">' + `${d.description}` + '</td>';
+                        table2 = table2 + '<td>' + `<button class="btn btn-secondary" href=# id="edit" >Edit</button><button class="btn btn-danger" data-toggle="modal" data-target="#delete-user-Modal" id="delete" >Delete</button>` + '</td></tbody>';
+                           
                             table2 = table2 + `</tr>`;
                     })
                     table2 += "</table>";

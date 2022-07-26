@@ -41,8 +41,7 @@
       table2 = table2 + '<td class="chapter_no">' + `${d.chapter_no}` + '</td>';
       table2 = table2 + '<td class="name">' + `${d.name}` + '</td>';
       table2 = table2 + '<td class="description">' + `${d.description}` + '</td>',
-        table2 = table2 + '<td>' + `<a href=# id="edit" >Edit</a>` + '</td>',
-        table2 = table2 + '<td>' + `<a href=# id="delete" >delete</a>` + '</td>',
+      table2 = table2 + '<td>' + `<button data-toggle="modal" data-target="#delete-box-Modal-chapterlist" id="delete" >delete</button>` + '</td>'
         table2 = table2 + `</tr>`;
       })
       table2 += "</table>";
