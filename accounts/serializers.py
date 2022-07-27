@@ -95,7 +95,6 @@ class SigninSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email','phone']
-
 class UserDetailsSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
     class Meta:

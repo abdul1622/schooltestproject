@@ -61,8 +61,11 @@
 <div class="chapter-table">
 
 </div>
+
+
 <div class="form box" >
     <button onclick=back() class='back-btn'>&#x2715;</button>
+
     {% csrf_token %}
     {{form2.as_p}}
     <button class="submit-btn" id="chapter-btn">Submit</button>
@@ -87,7 +90,15 @@
     let error_messages = document.querySelector('.error-messages')
     var grade;
     var subject;
+
+    function close(){
+form.style.display = "none"
+document.querySelector('.box').style.display = "block"
+    }
+
+
    
+
     function back() {
         document.querySelector('.form').style.display = "none"
      
