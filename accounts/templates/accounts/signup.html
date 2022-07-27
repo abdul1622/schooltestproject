@@ -1,0 +1,140 @@
+{% extends 'main.html'%}
+{% block signup %}
+<p id='response'>Invalid Details</p>
+<div class="signbox">
+    <div class="signbox1">
+
+        {%csrf_token%}
+        <label>Email:</label>
+        {{form.email}}
+        <label>Phone:</label>
+        {{form.phone}}
+        <label>Reg.No:</label>
+        {{form.register_number}}
+        <label>DOB:</label>
+        {{form.date_of_birth}}
+        <label>Standard:</label>
+        {{form.standard}}
+        <label>Section:</label>
+        {{form.section}}
+    </div>
+        <div class="signbox2">
+            <label>UserType:</label>
+            {{form.user_type}}
+        <label>FirstName:</label>
+        {{form.first_name}}
+        <label>Lastname:</label>
+        {{form.last_name}}
+        <label>FullName:</label>
+        {{form.full_name}}
+        <label>Address:</label>
+        {{form.address}}
+        <label>DataEntry:</label>
+        {{form.data_entry_user}}
+    </div>
+
+    <button data-toggle="modal" data-target="#messageModal-signup" id="signup-btn" onclick=signup()>Register</button>
+</div>
+<div class="modal fade" id="messageModal-signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="messages container-fluid">
+
+        </div>
+        <div class="error-messages container-fluid">
+    
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+    </div>
+  </div>
+</div>
+</div>
+</body>
+<script>
+    let messages = document.querySelector('.messages')
+    let error_messages = document.querySelector('.error-messages')
+    function signup() {
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        var email = document.getElementById('id_email').value
+        var phone = document.getElementById('id_phone').value
+        var dob = document.getElementById('id_date_of_birth').value
+        var reg = document.getElementById('id_register_number').value
+        var standard = document.getElementById('id_standard').value
+        var section = document.getElementById('id_section').value
+        var type = document.getElementById('id_user_type').value
+        var firstname = document.getElementById('id_first_name').value
+        var lastname = document.getElementById('id_last_name').value
+        var fullname = document.getElementById('id_full_name').value
+        var address = document.getElementById('id_address').value
+        var is_dataentry = document.getElementById('id_data_entry_user').value
+        /* var email = 's@gmail.com'
+         var phone =  9992945428
+         var dob = '2000-02-10'
+         var reg ='s10'
+         var standard = 1
+         var section = 'c'
+         var type = 'is_student'
+         var firstname = 's'
+         var lastname = 'p'
+         var fullname = 'sp'
+         var address ='home'
+         var is_dataentry = 'false'*/
+        d = JSON.stringify({
+            'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
+            'is_data_entry': is_dataentry, 'profile': { 'first_name': firstname, 'last_name': lastname, 'standard': standard, 'section': section, 'full_name': fullname, 'address': address }
+        }
+        )
+        console.log(d)
+        fetch('https://schooltestproject.herokuapp.com/api/signup/',
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
+                    'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standard, 'section': section, 'full_name': fullname, 'address': address
+                }
+                ),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            })
+            .then(data => {
+                console.log(data)
+                if (`${data.statusText}` == 'Created') {
+                    window.location.href = `${host}/login`
+                }
+
+            })
+
+            .catch(console.log(Error))
+            .then(function (response) {
+                if (response.ok) {
+                    console.log("Sucess response", response)
+                    return response.json();
+                } else {
+                    throw new Error("Could not reach the API: " + response.statusText);
+                }
+            }).then(function () {
+            }).catch(function (error) {
+                console.log(error.message)
+            });
+        return true;
+    }
+</script>
+<<<<<<< HEAD
+{% endblock %}
+=======
+{% endblock %}
+>>>>>>> 0fe2960015fa9d5cfa8fd5537a8ba4b0fd09a509
