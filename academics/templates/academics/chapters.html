@@ -41,16 +41,12 @@
       table2 = table2 + '<td class="chapter_no">' + `${d.chapter_no}` + '</td>';
       table2 = table2 + '<td class="name">' + `${d.name}` + '</td>';
       table2 = table2 + '<td class="description">' + `${d.description}` + '</td>',
-<<<<<<< HEAD
-<<<<<<< HEAD
-        table2 = table2 + '<td>' + `<a href=# id="edit" >Edit</a>` + '</td>',
-        table2 = table2 + '<td>' + `<a href=# id="delete" >delete</a>` + '</td>',
-=======
+
+        
+
+
+
       table2 = table2 + '<td>' + `<button data-toggle="modal" data-target="#delete-box-Modal-chapterlist" id="delete" >delete</button>` + '</td>'
->>>>>>> 0fe2960015fa9d5cfa8fd5537a8ba4b0fd09a509
-=======
-      table2 = table2 + '<td>' + `<button data-toggle="modal" data-target="#delete-box-Modal-chapterlist" id="delete" >delete</button>` + '</td>'
->>>>>>> 6750a5be5235507d2d8ee5bbbdb017b6e8feb3d6
         table2 = table2 + `</tr>`;
       })
       table2 += "</table>";
@@ -131,15 +127,9 @@ container2.addEventListener('click',(e) => {
       var description = document.getElementById('id_description').value
       var subject = document.getElementById('id_subject').value
     if(!edit){
-<<<<<<< HEAD
-<<<<<<< HEAD
-        fetch('https://schooltestproject.herokuapp.com/academics/chapters/',
-=======
+
+   
         fetch('https://schooltestproject.herokuapp.com/api/chapters/',
->>>>>>> e4b7ebab94a28c409e764c216e269cce619945c3
-=======
-        fetch('https://schooltestproject.herokuapp.com/api/chapters/',
->>>>>>> 0fe2960015fa9d5cfa8fd5537a8ba4b0fd09a509
         {
           method: 'POST',
           body: JSON.stringify({ 'chapter_no': chapterno, 'name': name, 'description': description, 'subject': subject }
@@ -164,6 +154,7 @@ container2.addEventListener('click',(e) => {
 {% endblock %}
 
 
+<<<<<<< HEAD
 <!--            
 
 {% comment %} {% extends "base.html" %}
@@ -240,3 +231,6 @@ container2.addEventListener('click',(e) => {
      
         
            {% endcomment %} -->
+=======
+
+>>>>>>> cd88ea52a898ece952aaebaa4067e8794ea62d2b
