@@ -50,6 +50,10 @@
             background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
         }
 
+        .back-btn-nav {
+            display: none;
+        }
+
         .login {
             background-color: #343a40;
             color: white;
@@ -2871,29 +2875,62 @@
 
         @media screen and (max-width:600px) {
             .navbar {
-                background-color: #14279B;
+                background-color: transparent;
                 height: 10vh;
                 width: 100%;
+                padding: 0;
+            }
+
+            .back-btn-nav {
+                display: block;
             }
 
             .navbar-nav {
-                background-color: white;
-                width: 25vw;
-                margin-left: -3vw;
-                margin-top: 1vh;
+                background-color: #14279b;
+                width: 32vw;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
+                font-size: 6vw;
+                position: fixed;
+                top: 0;
+            }
+
+            .back-btn-nav button {
+                background-color: transparent;
+                color: white;
+            }
+
+            .back-btn-nav button:focus {
+                outline: none;
+            }
+
+            .back-btn-nav {
+                display: block;
+                background-color: transparent;
+                text-align: right;
+                margin-right: 7%;
             }
 
             .navbar li a {
-                padding: 0.5vh;
-                font-size: 1.7vw;
-                color: black;
+                font-size: 2.7vw;
+                color: white;
+                padding: 15%;
+                margin: 0;
             }
 
             .navbar-light .navbar-toggler {
                 color: rgba(0, 0, 0, .5);
                 border-color: rgba(0, 0, 0, .1);
-                margin-left: 0vw;
+                margin-left: 5vw;
                 background-color: white;
+                padding: 1px 6px;
+            }
+
+            .navbar-light .navbar-toggler-icon {
+                width: 18px;
+                /* padding: 18px; */
             }
 
 
@@ -3144,6 +3181,17 @@
                 grid-template-columns: auto;
                 gap: 1%;
                 margin: 0% -20%;
+            }
+
+            .chapter-cards .chapter-card {
+                min-height: 30vh;
+                height: auto;
+                padding: 15% 10%;
+                cursor: pointer;
+                /* padding-left: 12%; */
+                margin-left: 0;
+                font-size: 16px;
+                box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
             }
 
             .chapter-card #edit {
@@ -3437,7 +3485,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -3445,33 +3493,37 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                    <li class="back-btn-nav">
+                        <button data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                            aria-expanded="false" aria-label="Toggle navigation"> &#x2715; </button>
+                    </li>
                     <li class="nav-item">
                         <a href="/profile">Profile</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="/academics" id="nav-academics">Academics</a>
+                    <li class="nav-item" id="nav-academics">
+                        <a id="nav-academics-link" href="/academics">Academics</a>
                     </li>
-                    <li class="nav-item">
-                        <a id="nav-chapterlist">ChapterList</a>
+                    <li class="nav-item" id="nav-chapterlist">
+                        <a id="nav-chapterlist-link">ChapterList</a>
                     </li>
-                    <li class="nav-item">
-                        <a id="nav-students">Students</a>
+                    <li class="nav-item" id="nav-students">
+                        <a id="nav-students-link">Students</a>
                     </li>
-                    <li class="nav-item">
-                        <a id="nav-staffs">Staff</a>
+                    <li class="nav-item" id="nav-staffs">
+                        <a id="nav-staffs-link">Staff</a>
                     </li>
-                    <li class="nav-item">
-                        <a href='/questions' id="nav-question">Question</a>
+                    <li class="nav-item" id="nav-question">
+                        <a id="nav-question-link" href='/questions'>Question</a>
                     </li>
-                    <li class="nav-item">
-                        <a id="nav-questionpaper">QuestionPaper</a>
+                    <li class="nav-item" id="nav-questionpaper">
+                        <a id="nav-questionpaper-link">QuestionPaper</a>
                     </li>
-                    <li class="nav-item">
-                        <a id="nav-test">Test</a>
+                    <li class="nav-item" id="nav-test">
+                        <a id="nav-test-link">Test</a>
                     </li>
-                    <li class="nav-item">
-                        <a id="nav-questionpaperlist">QuestionPaperlist</a>
+                    <li class="nav-item" id="nav-questionpaperlist">
+                        <a id="nav-questionpaperlist-link">QuestionPaperlist</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" onclick="logout()">Logout</a>
@@ -3497,14 +3549,14 @@
         var questionpaper = document.getElementById('nav-questionpaper')
         var questionpaperlist = document.getElementById('nav-questionpaperlist')
         var test = document.getElementById('nav-test')
-        document.getElementById('nav-academics').href = `${host}/academics`
-        document.getElementById('nav-chapterlist').href = `${host}/chapterlist`
-        document.getElementById('nav-question').href = `${host}/questions`
-        document.getElementById('nav-questionpaper').href = `${host}/question-paper`
-        document.getElementById('nav-students').href = `${host}/students`
-        document.getElementById('nav-staffs').href = `${host}/staffs`
-        document.getElementById('nav-questionpaperlist').href = `${host}/test-create`
-        document.getElementById('nav-test').href = `${host}/test-list`
+        document.getElementById('nav-academics-link').href = `${host}/academics`
+        document.getElementById('nav-chapterlist-link').href = `${host}/chapterlist`
+        document.getElementById('nav-question-link').href = `${host}/questions`
+        document.getElementById('nav-questionpaper-link').href = `${host}/question-paper`
+        document.getElementById('nav-students-link').href = `${host}/students`
+        document.getElementById('nav-staffs-link').href = `${host}/staffs`
+        document.getElementById('nav-questionpaperlist-link').href = `${host}/test-create`
+        document.getElementById('nav-test-link').href = `${host}/test-list`
         function logout() {
             var host = window.location.protocol + "//" + window.location.host;
             let token = localStorage.getItem("token")
