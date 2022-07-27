@@ -100,8 +100,10 @@ document.querySelector('.box').style.display = "block"
    
 
     function back() {
-        document.querySelector('.chapter-table').style.display = "none"
+        document.querySelector('.chapter-table').innerHTML = ''
         document.querySelector('.box').style.display='block'
+        document.getElementById('id_grade').value = '';
+        document.getElementById('id_subject').value ='';
      
     }
     function get(grade, subject) {
