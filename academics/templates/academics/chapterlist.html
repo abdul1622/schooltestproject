@@ -130,7 +130,7 @@ document.querySelector('.box').style.display = "block"
                 if (data.status == 'success') {
                     console.log(data);
                     let table2 = '   <a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back()>Back</a> <table>';
-                    table2 += `<thead class="thead"><th>Grade</th><th>Subject</th><th>Chapter No</th><th>Chapter</th><th>Description</th><th>Edit</th><th>Delete</th></thead>`;
+                    table2 += `<thead class="thead"><th>Grade</th><th>Subject</th><th>Chapter No</th><th>Chapter</th><th>Description</th></thead>`;
                     data.data.map(d => {
                         table2 = table2 + `<tr id=${d.id}>`;
                         table2 = table2 + `<td class="grade">` + `${d.grade}` + `</td>`,
