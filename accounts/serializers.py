@@ -65,6 +65,7 @@ class SignupSerializer(serializers.Serializer):
     profile_picture = serializers.ImageField(required=False, max_length=None, allow_empty_file=True, use_url=True,default='user_profile/profile.png')
     standard = serializers.IntegerField(default= None,allow_null=True,required=False)
     section = serializers.CharField(max_length=2,allow_blank=True, default=None)
+    is_data_entry=serializers.BooleanField()
 
     def validate_standard(self, value):
         if not value:
