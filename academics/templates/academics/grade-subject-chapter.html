@@ -2,9 +2,6 @@
 {% block content %}
 <div class="grade-container container">
 
-    <div id="grade-list" class="grade-list container">
-
-    </div>
 
     <div id="subjects-by-grade" class="subjects-by-grade">
 
@@ -102,7 +99,9 @@
         <button class="submit-btn" id="subject-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
         <button class="submit-btn" id="chapter-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
     </div>
+    <div id="grade-list" class="grade-list container">
 
+    </div>
 
 </div>
 <script>
@@ -270,9 +269,9 @@ function deletegrade(id){
                 content = content + `<div class="subject-card"   id=${d.id}>
         <p><label> Subject </label> <span>: <span class="name">${d.name}</span></span></p>
         <p><label> Subject-code </label> <span>: <span class="code">${d.code}</span></span></p>
-        <p> <a type="button" class="btn btn-sm btn-primary ch-btn" href=# onclick=getchapter(${d.grade_name},"${temp}",${d.id})>Chapters</a></p>
+        <p class="text-center"> <a type="button" class="btn btn-sm btn-primary ch-btn" href=# onclick=getchapter(${d.grade_name},"${temp}",${d.id})>Chapters</a></p>
         <br>
-        <p> <button class="btn btn-sm btn-secondary" href=# id="edit" >Edit</button> <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-box-Modal"  href=# id="delete" >delete</button></p>
+        <p class="text-center"> <button class="btn btn-sm btn-secondary" href=# id="edit" >Edit</button> <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-box-Modal"  href=# id="delete" >delete</button></p>
  </div>`
             });
             container.innerHTML = content;
