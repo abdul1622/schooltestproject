@@ -1,46 +1,62 @@
 {% extends 'main.html' %}
 {% block login %}
 
-<div id = 'loginerror' > Invalid Email or Phone</div >
-    <div class="logo-container">
-        <img src="https://cdn-icons-png.flaticon.com/512/1086/1086721.png">
-    </div>
+<div id='loginerror'> Invalid Email or Phone</div>
+<div class="logo-container">
+    <img src="https://cdn-icons-png.flaticon.com/512/1086/1086721.png">
+</div>
 <section class="log">
-<div class="container py-5 h-100">
-<div class="row d-flex align-items-center justify-content-center h-100">
-<div class="col-md-8 col-lg-7 col-xl-6 fullscreen-logo">
-<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-class="img-fluid" alt="Phone image">
-</div>
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6 fullscreen-logo">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                    class="img-fluid" alt="Phone image">
+            </div>
 
 
-<div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 login-box">
-{%csrf_token%}
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 login-box">
+                {%csrf_token%}
 
 
-<div class="form-outline mb-4">
-<label class="form-label" for="form1Example13">Email address</label>
-<input type="text" name="email" class="form-control" placeholder="Email" autocomplete="off" required="" id="id_email">
-</div>
-<div class="form-outline mb-4">
-<label class="form-label" for="form1Example23">Phone</label>
-<input type="text" name="phone" class="form-control" placeholder="Phone" autocomplete="off" required="" id="id_phone">
-</div>
-<button class="login-btn btn btn-primary btn-lg btn-block" onClick=login()>Sign in</button>
-<hr>
-<p class="text-right"> <a class="btn btn-sm btn-primary signInLink" href="/signup">Signup?</a> </p>
-</div>
-</div>
-</div>
+                <div class="form-outline mb-4">
+                    <div class="login-err-message">
+
+                    </div>
+                    <label class="form-label" for="form1Example13">Email address</label>
+                    <input type="text" name="email" class="form-control" placeholder="Email" autocomplete="off"
+                        required="" id="id_email">
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form1Example23">Phone</label>
+                    <input type="text" name="phone" class="form-control" placeholder="Phone" autocomplete="off"
+                        required="" id="id_phone">
+                </div>
+                <button class="login-btn btn btn-primary btn-lg btn-block" onClick=login()>Sign in</button>
+                <hr>
+                <p class="text-right"> <a class="btn btn-sm btn-primary signInLink" href="/signup">Signup?</a> </p>
+            </div>
+        </div>
+    </div>
 </section>
 
 
 <script>
 
     var host = window.location.protocol + "//" + window.location.host;
+    let messages = documents.querySelector('.login-err-message')
     function login() {
         var email = document.getElementById('id_email').value
+
+        if (!/@gmail\.com$/.test(email)) {
+          messages.innerHTML = 'invalid email'
+            return
+        }
         var phone = document.getElementById('id_phone').value
+        var phoneformat = /^\d{10}$/;
+        if (!phone.match(phoneformat)) {
+            messages.innerHTML = 'invalid phone number'
+            return
+        }
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         fetch('https://schooltestproject.herokuapp.com/api/simple-login/',
             {
@@ -59,8 +75,8 @@ class="img-fluid" alt="Phone image">
                     console.log("email=1", data.data.email)
                     console.log("tokendata=", data.data.token)
                     console.log("dataentry=", data.data.is_data_entry)
-                    localStorage.setItem('user_type',data.data.user_type)                  
-                    localStorage.setItem('data_entry',data.data.is_data_entry)
+                    localStorage.setItem('user_type', data.data.user_type)
+                    localStorage.setItem('data_entry', data.data.is_data_entry)
                     localStorage.setItem("token", data.data.token);
                     window.location.href = `${host}/home`
                 }

@@ -117,7 +117,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id','email','phone','register_number','date_of_birth','is_active',
                     'user_type','created_at','profile']
-        read_only_fields = ['id','created_at','user_type']
+        read_only_fields = ['id','created_at','user_type','is_data_entry']
     
     def update(self, instance, validated_data):
         profile_data = validated_data.pop('profile')
