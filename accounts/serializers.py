@@ -53,6 +53,7 @@ class SignupSerializer(serializers.Serializer):
     date_of_birth = serializers.DateField()
     user_type = serializers.ChoiceField(
     choices = usertype_choice,
+    allow_blank=True,
     default=None
     )
 
@@ -60,10 +61,8 @@ class SignupSerializer(serializers.Serializer):
     last_name = serializers.CharField(max_length=15)
     full_name =serializers.CharField(max_length=30)
     profile_picture = serializers.ImageField(required=False, max_length=None, allow_empty_file=True, use_url=True,default='user_profile/profile.png')
-    standard = serializers.IntegerField(default= None)
-    section = serializers.CharField(max_length=2, default=None)
-    address = serializers.CharField(max_length=45)
-    is_data_entry = serializers.BooleanField()
+    standard = serializers.IntegerField(default= None,allow_null=True,required=False)
+    section = serializers.CharField(max_length=2,allow_blank=True, default=None)
 
     def create(self, validated_data):
         userdetails = validated_data

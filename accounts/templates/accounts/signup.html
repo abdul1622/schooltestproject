@@ -4,35 +4,43 @@
 <div class="signbox">
     <div class="signbox1">
 
-        {%csrf_token%}
+        <input type="hidden" name="csrfmiddlewaretoken" value="a3cCmEUXAWnNpEIH7egd6gKS37Lpb0sOsWq6lZ3gJ2ZGxkw2lXj9ScZLoTAyXVtn">
         <label>Email:</label>
-        {{form.email}}
+        <input type="text" name="email" class="form-control" placeholder="Email" id="id_email">
         <label>Phone:</label>
-        {{form.phone}}
+        <input type="text" name="phone" class="form-control" placeholder="Phone" id="id_phone">
         <label>Reg.No:</label>
-        {{form.register_number}}
+        <input type="text" name="register_number" class="form-control" placeholder="Register Number" id="id_register_number">
         <label>DOB:</label>
-        {{form.date_of_birth}}
+        <input type="text" name="date_of_birth" class="form-control" placeholder="Date of Birth" id="id_date_of_birth">
         <label>Standard:</label>
-        {{form.standard}}
+        <input type="text" name="standard" class="form-control" placeholder="Standard" id="id_standard">
         <label>Section:</label>
-        {{form.section}}
+        <input type="text" name="section" class="form-control" placeholder="Section" id="id_section">
     </div>
-        <div class="signbox2">
-            <label>UserType:</label>
-            {{form.user_type}}
-        <label>FirstName:</label>
-        {{form.first_name}}
-        <label>Lastname:</label>
-        {{form.last_name}}
-        <label>FullName:</label>
-        {{form.full_name}}
-        <label>Address:</label>
-        {{form.address}}
-        <label>DataEntry:</label>
-        {{form.data_entry_user}}
-    </div>
+    <div class="signbox2">
+        <label>UserType:</label>
+        <select name="user_type" id="id_user_type">
+<option value="" selected="">-------</option>
 
+<option value="is_student">is_student</option>
+
+<option value="is_staff">is_staff</option>
+
+<option value="is_admin">is_admin</option>
+
+</select>
+    <label>FirstName:</label>
+    <input type="text" name="first_name" class="form-control" placeholder="First Name" id="id_first_name">
+    <label>Lastname:</label>
+    <input type="text" name="last_name" class="form-control" placeholder="Last Name" id="id_last_name">
+    <label>FullName:</label>
+    <input type="text" name="full_name" class="form-control" placeholder="Fullname" id="id_full_name">
+    <label>Address:</label>
+    <input type="text" name="address" class="form-control" placeholder="Address" id="id_address">
+    <label>DataEntry:</label>
+    <input type="checkbox" name="data_entry_user" id="id_data_entry_user">
+</div>
     <button data-toggle="modal" data-target="#messageModal-signup" id="signup-btn" onclick=signup()>Register</button>
 </div>
 <div class="modal fade" id="messageModal-signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -109,6 +117,14 @@ aria-hidden="true">
                     'X-CSRFToken': csrftoken
                     // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
+            }).then(function (response) {
+                if (response.ok) {
+                    console.log("Sucess response", response)
+                    return response.json();
+                } else {
+                    throw new Error("Could not reach the API: " + response.statusText);
+                }
+                return response.json()
             })
             .then(data => {
                 console.log(data)
@@ -117,19 +133,6 @@ aria-hidden="true">
                 }
 
             })
-
-            .catch(console.log(Error))
-            .then(function (response) {
-                if (response.ok) {
-                    console.log("Sucess response", response)
-                    return response.json();
-                } else {
-                    throw new Error("Could not reach the API: " + response.statusText);
-                }
-            }).then(function () {
-            }).catch(function (error) {
-                console.log(error.message)
-            });
         return true;
     }
 </script>

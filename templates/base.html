@@ -3711,9 +3711,16 @@
         function navbar() {
             var user = localStorage.getItem('user_type');
             var dataentry = localStorage.getItem('is_data_entry');
-            if (dataentry == 'True') {
-                staff.style.display = 'none'
+            console.log(dataentry)
+            if (dataentry == 'True') {               
                 test.style.display = 'none'
+                staff.style.display = 'none'
+                academics.style.display = 'none'
+                student.style.display = 'none'
+                chapter.style.display = 'none'
+                question.style.display = 'none'
+                questionpaper.style.display = 'none'
+                questionpaperlist.style.display = 'none'
             }
             if (user == 'is_student') {
                 staff.style.display = 'none'
