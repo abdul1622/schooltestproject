@@ -14,7 +14,7 @@
         <label>DOB:</label>
         <input type="text" name="date_of_birth" class="form-control" placeholder="Date of Birth" id="id_date_of_birth">
         <label>Standard:</label>
-        <input type="text" name="standard" class="form-control" placeholder="Standard" id="id_standard">
+        <input type="number" name="standard" class="form-control" placeholder="Standard" id="id_standard">
         <label>Section:</label>
         <input type="text" name="section" class="form-control" placeholder="Section" id="id_section">
     </div>
@@ -98,6 +98,10 @@ aria-hidden="true">
          var fullname = 'sp'
          var address ='home'
          var is_dataentry = 'false'*/
+         if(standard==''){
+            standard = null;
+         }
+         console.log(standard)
         d = JSON.stringify({
             'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
             'is_data_entry': is_dataentry, 'profile': { 'first_name': firstname, 'last_name': lastname, 'standard': standard, 'section': section, 'full_name': fullname, 'address': address }

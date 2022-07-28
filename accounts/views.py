@@ -77,6 +77,7 @@ class SimpleLoginView(APIView):
                     "email" : user.email,
                     "phone" : user.phone,
                     "user_type" :user.user_type,
+                    'data_entry':user.is_data_entry,
                     "register_number" : user.register_number
                 }
                 return Response({"status": "success",'data':data}, status=HTTP_200_OK)

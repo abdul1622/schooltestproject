@@ -64,6 +64,15 @@ class SignupSerializer(serializers.Serializer):
     standard = serializers.IntegerField(default= None,allow_null=True,required=False)
     section = serializers.CharField(max_length=2,allow_blank=True, default=None)
 
+    def validate_standard(self, value):
+        if not value:
+            return None
+        try:
+            return int(value)
+        except ValueError:
+            raise serializers.ValidationError('You must supply an integer')
+
+
     def create(self, validated_data):
         userdetails = validated_data
         email = validated_data.pop("email")

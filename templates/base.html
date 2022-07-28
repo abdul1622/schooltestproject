@@ -3711,8 +3711,9 @@
         function navbar() {
             var user = localStorage.getItem('user_type');
             var dataentry = localStorage.getItem('is_data_entry');
+            var a = localStorage.getItem('standard');
             console.log(dataentry)
-            if (dataentry == 'True') {               
+            if (dataentry) {               
                 test.style.display = 'none'
                 staff.style.display = 'none'
                 academics.style.display = 'none'

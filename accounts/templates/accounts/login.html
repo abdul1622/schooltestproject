@@ -59,7 +59,7 @@ class="img-fluid" alt="Phone image">
                     console.log("email=1", data.data.email)
                     console.log("tokendata=", data.data.token)
                     console.log("dataentry=", data.data.is_data_entry)
-                    localStorage.setItem('user_type',data.data.user_type)
+                    localStorage.setItem('user_type',data.data.user_type)                  
                     localStorage.setItem('data_entry',data.data.is_data_entry)
                     localStorage.setItem("token", data.data.token);
                     window.location.href = `${host}/home`
