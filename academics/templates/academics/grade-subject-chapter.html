@@ -88,7 +88,9 @@
         <h4>Are you want to delete?</h4>
         <p class="chapter-btns"> <button id="delete-btn-yes" class="delete-btn-yes btn btn-danger">Yes</button> <button id="delete-btn-no" class="delete-btn-no btn btn-primary">Back</button> </p>
     </div> -->
+    <div id="grade-list" class="grade-list container">
 
+    </div>
     <div id="grade">
 
         {% csrf_token %}
@@ -99,9 +101,7 @@
         <button class="submit-btn" id="subject-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
         <button class="submit-btn" id="chapter-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
     </div>
-    <div id="grade-list" class="grade-list container">
-
-    </div>
+  
 
 </div>
 <script>

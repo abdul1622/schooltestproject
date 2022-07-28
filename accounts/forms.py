@@ -2,6 +2,13 @@ from django import forms
 from django.forms import ModelForm
 from . models import *
 
+usertype_choice=(
+(None,'-------'),
+('is_student','is_student'),
+('is_staff','is_staff'),
+('is_admin','is_admin'),
+
+)
 
 class signup_form(forms.Form):
     email = forms.EmailField(widget=forms.TextInput(

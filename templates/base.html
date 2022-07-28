@@ -664,7 +664,10 @@
             flex-basis: 20%;
             line-height: 150%;
         }
-
+        .box .back-btn {
+            margin-left: 105%;            
+            margin-bottom: 8%;            
+            }
         .profile-content {
             padding: 5%;
             flex-basis: 80%;
@@ -1156,7 +1159,7 @@
         }
 
 
-
+            
         .box {
             margin-left: 35%;
             margin-top: 4%;
@@ -3691,6 +3694,20 @@
         }
         function navbar() {
             var user = localStorage.getItem('user_type');
+            var dataentry = localStorage.getItem('data_entry');
+           
+        
+        
+            if (dataentry) {               
+                test.style.display = 'none'
+                staff.style.display = 'none'
+                academics.style.display = 'none'
+                student.style.display = 'none'
+                chapter.style.display = 'none'
+                question.style.display = 'none'
+                questionpaper.style.display = 'none'
+                questionpaperlist.style.display = 'none'
+            }
             if (user == 'is_student') {
                 staff.style.display = 'none'
                 academics.style.display = 'none'
