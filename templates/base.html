@@ -26,6 +26,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Uchen&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>School</title>
     <style>
@@ -49,7 +50,6 @@
         .back-btn-nav {
             display: none;
         }
-
         .login {
             background-color: #343a40;
             color: white;
@@ -58,19 +58,17 @@
             margin-left: 700px;
             padding: 30px 50px;
         }
-
         #login {
             margin-left: 100px;
         }
-
-
-
+        .profile-container{
+            font-family: 'Uchen', serif;            
+            }
         .container-1 {
             width: 34%;
             margin-top: 5%;
             margin-left: 15%;
         }
-
         .profile-container {
             display: flex;
             justify-content: space-around;
@@ -3710,20 +3708,10 @@
         }
         function navbar() {
             var user = localStorage.getItem('user_type');
-            var dataentry = localStorage.getItem('data_entry');
-           
+            var dataentry = localStorage.getItem('data_entry');         
         
         
-            if (dataentry) {               
-                test.style.display = 'none'
-                staff.style.display = 'none'
-                academics.style.display = 'none'
-                student.style.display = 'none'
-                chapter.style.display = 'none'
-                question.style.display = 'none'
-                questionpaper.style.display = 'none'
-                questionpaperlist.style.display = 'none'
-            }
+          
             if (user == 'is_student') {
                 staff.style.display = 'none'
                 academics.style.display = 'none'
@@ -3733,12 +3721,17 @@
                 questionpaper.style.display = 'none'
                 questionpaperlist.style.display = 'none'
             }
-            else if (user == 'is_staff') {
+            else if (user == 'is_staff' && dataentry ) {
                 staff.style.display = 'none'
                 test.style.display = 'none'
             }
-            else if (user == 'is_admin') {
+            else if (user == 'is_admin' && dataentry){
                 test.style.display = 'none'
+            }
+            if(dataentry){
+                staff.style.display = 'none'
+                test.style.display = 'none'
+               
             }
         } navbar();
     </script>
