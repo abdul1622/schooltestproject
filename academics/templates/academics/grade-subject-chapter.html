@@ -271,7 +271,7 @@ function deletegrade(id){
         <p><label> Subject-code </label> <span>: <span class="code">${d.code}</span></span></p>
         <p class="text-center"> <a type="button" class="btn btn-sm btn-primary ch-btn" href=# onclick=getchapter(${d.grade_name},"${temp}",${d.id})>Chapters</a></p>
         <br>
-        <p class="text-center"> <button class="btn btn-sm btn-secondary" href=# id="edit" >Edit</button> <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-box-Modal"  href=# id="delete" >delete</button></p>
+        <p class="text-center"> <button class="btn btn-sm btn-secondary" href=# id="edit" ><i class="fa fa-edit" style="font-size:20px"></i></button> <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-box-Modal"  href=# id="delete" ><i class="fa fa-trash-o" style="font-size:20px"></i></button></p>
  </div>`
             });
             container.innerHTML = content;
@@ -466,7 +466,7 @@ function deletegrade(id){
         <p><label> Chapter </label> <span>: <span class="name">${d.name}</span></span></p>
         <p><label> Description </label> <span>: <span class="description">${d.description}</span></span></p>
         <br>
-        <p> <button class="btn btn-secondary" href=# id="edit" >Edit</button> <button class="btn btn-danger"  data-toggle="modal" data-target="#delete-box-Modal"  href=# id="delete" >delete</button></p>
+        <p> <button class="btn btn-secondary" href=# id="edit" ><i class="fa fa-edit" style="font-size:20px"></button> <button class="btn btn-danger"  data-toggle="modal" data-target="#delete-box-Modal"  href=# id="delete" ><i class="fa fa-trash-o" style="font-size:20px"></i></button></p>
  </div>`
             });
             container3.innerHTML = content;
