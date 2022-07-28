@@ -43,7 +43,7 @@
 <script>
 
     var host = window.location.protocol + "//" + window.location.host;
-    let messages = documents.querySelector('.login-err-message')
+    let messages = document.querySelector('.login-err-message')
     function login() {
         var email = document.getElementById('id_email').value
 
@@ -74,11 +74,11 @@
                     console.log("data=", data)
                     console.log("email=1", data.data.email)
                     console.log("tokendata=", data.data.token)
-                    console.log("dataentry=", data.data.is_data_entry)
+                    console.log(data.data)
                     localStorage.setItem('user_type', data.data.user_type)
-                    localStorage.setItem('data_entry', data.data.is_data_entry)
+                    localStorage.setItem('data_entry', data.data.data_entry)
                     localStorage.setItem("token", data.data.token);
-                    window.location.href = `${host}/home`
+                   // window.location.href = `${host}/home`
                 }
                 else {
                     document.getElementById('loginerror').style.display = 'block';
