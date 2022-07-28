@@ -8,8 +8,8 @@
 <section class="log">
 <div class="container py-5 h-100">
 <div class="row d-flex align-items-center justify-content-center h-100">
-<div class="col-md-8 col-lg-7 col-xl-6">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToS8oXvYjQzSbg7wW4pCe9Au9BClUg2Z0baQ&usqp=CAU"
+<div class="col-md-8 col-lg-7 col-xl-6 fullscreen-logo">
+<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
 class="img-fluid" alt="Phone image">
 </div>
 
@@ -27,6 +27,7 @@ class="img-fluid" alt="Phone image">
 <input type="text" name="phone" class="form-control" placeholder="Phone" autocomplete="off" required="" id="id_phone">
 </div>
 <button class="login-btn btn btn-primary btn-lg btn-block" onClick=login()>Sign in</button>
+<hr>
 <p class="text-right"> <a class="btn btn-sm btn-primary signInLink" href="/signup">Signup?</a> </p>
 </div>
 </div>
@@ -58,6 +59,7 @@ class="img-fluid" alt="Phone image">
                     console.log("email=1", data.data.email)
                     console.log("tokendata=", data.data.token)
                     localStorage.setItem('user_type',data.data.user_type)
+                    localStorage.setItem('user_type',data.data.is_data_entry)
                     localStorage.setItem("token", data.data.token);
                     window.location.href = `${host}/home`
                 }

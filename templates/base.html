@@ -664,7 +664,10 @@
             flex-basis: 20%;
             line-height: 150%;
         }
-
+        .box .back-btn {
+            margin-left: 105%;            
+            margin-bottom: 8%;            
+            }
         .profile-content {
             padding: 5%;
             flex-basis: 80%;
@@ -3707,6 +3710,11 @@
         }
         function navbar() {
             var user = localStorage.getItem('user_type');
+            var dataentry = localStorage.getItem('is_data_entry');
+            if (dataentry == 'True') {
+                staff.style.display = 'none'
+                test.style.display = 'none'
+            }
             if (user == 'is_student') {
                 staff.style.display = 'none'
                 academics.style.display = 'none'

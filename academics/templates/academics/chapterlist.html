@@ -64,7 +64,10 @@
 
 
 <div class="form box" >
-    <button onclick=back() class='back-btn'>&#x2715;</button>
+
+    <button onclick=closeform() class='back-btn'>&#x2715;</button>
+    
+    
 
     {% csrf_token %}
     {{form2.as_p}}
@@ -91,10 +94,10 @@
     var grade;
     var subject;
 
-    function close(){
-form.style.display = "none"
-document.querySelector('.box').style.display = "block"
-    }
+    function closeform(){
+        document.querySelector('.form').style.display ='none'
+        
+        }
 
 
    

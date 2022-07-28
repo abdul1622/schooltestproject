@@ -36,10 +36,14 @@ class ProfileSerializer(serializers.ModelSerializer):
 #         send_mail(subject,message,email_from,recipient_list)
 #         return user
 usertype_choice=(
-    ('is_student','is_student'),
-    ('is_staff','is_staff'),
-    ('is_admin','is_admin'),
+(None,'-------'),
+('is_student','is_student'),
+('is_staff','is_staff'),
+('is_admin','is_admin'),
+
 )
+
+
 
 
 class SignupSerializer(serializers.Serializer):
@@ -48,15 +52,16 @@ class SignupSerializer(serializers.Serializer):
     register_number = serializers.CharField(max_length=15)
     date_of_birth = serializers.DateField()
     user_type = serializers.ChoiceField(
-        choices = usertype_choice,
-        default='-------'
+    choices = usertype_choice,
+    default=None
     )
+
     first_name = serializers.CharField(max_length=15)
     last_name = serializers.CharField(max_length=15)
     full_name =serializers.CharField(max_length=30)
-    profile_picture = serializers.ImageField(required=False, max_length=None, allow_empty_file=True, use_url=True,default='user_profile/profile.png') 
-    standard = serializers.IntegerField()
-    section = serializers.CharField(max_length=2)
+    profile_picture = serializers.ImageField(required=False, max_length=None, allow_empty_file=True, use_url=True,default='user_profile/profile.png')
+    standard = serializers.IntegerField(default= None)
+    section = serializers.CharField(max_length=2, default=None)
     address = serializers.CharField(max_length=45)
     is_data_entry = serializers.BooleanField()
 
