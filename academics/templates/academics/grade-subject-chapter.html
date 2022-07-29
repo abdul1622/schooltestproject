@@ -8,7 +8,7 @@
         <h2>Grade - <span id="grade-title"></span> </h2>
         <hr>
         <div class="subject-head">
-            <a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=get()><i class='fa fa-angle-left' style='font-size:24px'></i></a>
+        <i id="back-btn"  class='fa fa-angle-left'   onclick=get() style='font-size:24px'></i>
             <h3 class="subject-title-subjects"> Subjects </h3>
         </div>
         <div class="cards container-fluid">
@@ -265,7 +265,7 @@
         <p><label> Subject-code </label> <span>: <span class="code">${d.code}</span></span></p>
         <p class="text-center"> <a type="button" class="btn btn-sm btn-primary ch-btn" href=# onclick=getchapter(${d.grade_name},"${temp}",${d.id})>Chapters</a></p>
         <br>
-        <p class="text-center"> <button class="btn btn-sm btn-secondary" href=# id="edit" >Edit</button> <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-box-Modal"  href=# id="delete" >delete</button></p>
+        <p class="text-center"><i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></p>
  </div>`
             });
             container.innerHTML = content;
@@ -348,7 +348,7 @@
         let yes_button = document.getElementById('delete-btn-yes')
         let no_btn = document.getElementById('delete-btn-no')
         if (delbutton) {
-
+            console.log('RRR')
             yes_button.setAttribute("onClick", `deletesubject(${id})`);
             // const parent1 = e.target.parentElement.parentElement;
             // var name = parent1.querySelector('.name').textContent
@@ -461,7 +461,7 @@
         <p><label> Chapter </label> <span>: <span class="name">${d.name}</span></span></p>
         <p><label> Description </label> <span>: <span class="description">${d.description}</span></span></p>
         <br>
-        <p> <button class="btn btn-secondary" href=# id="edit" >Edit</button> <button class="btn btn-danger"  data-toggle="modal" data-target="#delete-box-Modal"  href=# id="delete" >delete</button></p>
+        <p><i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></p>
  </div>`
             });
             container3.innerHTML = content;

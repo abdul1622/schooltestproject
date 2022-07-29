@@ -34,7 +34,7 @@
         href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Uchen&display=swap"
         rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 
     <title>School</title>
@@ -205,17 +205,9 @@
             right: 8%;
         }
 
-        #profile-edit:hover {
-            color: white;
-            background-color: #14279b;
-        }
 
-        #profile-edit:active {
-            color: white;
-            background-color: #14279b;
-            border: 1px solid #14279b;
-            outline: none;
-        }
+
+
 
         #profile-btn {
             width: 110px;
@@ -619,13 +611,14 @@
         }
 
         #question-box {
-            margin-left: 3vw;
+            margin-left: 4%;
             background-color: #b2c8df;
-            width: 21vw;
-            height: 20vh;
-            padding: 3vh;
+            width: 17%;
+            padding: 1%;
             border-radius: 9px;
         }
+
+
 
         #question-box label {
 
@@ -859,13 +852,28 @@
         .question-card {
             margin-left: 5vw;
             font-size: 15px;
-            width: 77%;
+            width: 88%;
             padding: 20px 9%;
             background-color: #5c7aea;
             border-radius: 5px;
             height: auto;
             /* margin-top: 0vh; */
             box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+        }
+
+        .question-card #edit {
+            padding: 5px 15px;
+            margin-left: -1vw;
+            border-radius: 5px;
+            font-size: 150%;
+            color: #14279B;
+        }
+        .question-card #delete {
+            padding: 5px 15px;
+            margin-left: -1vw;
+            border-radius: 5px;
+            font-size: 150%;
+            color: #900202;
         }
 
         .question-card p:nth-child(7) {
@@ -882,12 +890,10 @@
         }
 
         .question-list {
-            width: 80%;
             display: grid;
-            grid-template-columns: auto auto auto;
-            gap: 2%;
-            margin-top: 5vh;
-            margin-left: 9vw;
+            margin-top: 4vh;
+            margin-left: 8%;
+            grid-template-columns: auto auto auto auto;
         }
 
         .question-card p {
@@ -1054,7 +1060,7 @@
             top: 0;
             right: 0;
             display: none;
-            color: red;
+            color: #900202;
         }
 
         .grade-list .card:hover .delete-grade {
@@ -1206,7 +1212,7 @@
             margin-left: 55%;
             border-radius: 5px;
             margin-top: 1%;
-            font-size: 99%;
+            font-size: 150%;
         }
 
         .chapter-table #edit {
@@ -1407,6 +1413,8 @@
             padding: 5px 15px;
             margin-left: -1vw;
             border-radius: 5px;
+            font-size: 150%;
+            color: #14279B;
         }
 
         #delete {
@@ -1415,13 +1423,19 @@
             margin-left: 1%;
             border-radius: 5px;
             margin-top: 0vh;
+            color:#900202;
+            font-size:150%;
         }
 
         .chapter-card #delete {
             padding: 5px 15px;
-            margin-left: 14%;
+         
+            margin-left: 0%;
+
             border-radius: 5px;
-            margin-top: 0vh;
+          
+            font-size:150%;
+
         }
 
         .chapter-card #edit {
@@ -1683,7 +1697,8 @@
 
                 margin-top: 0vh;
                 border-radius: 5px;
-                /*   margin-left: 8vw;*/
+
+                color: #850b0b;
 
             }
 
@@ -1803,7 +1818,7 @@
                 margin-left: 19vh;
                 margin-top: 1vh;
                 font-size: 15px;
-                width: 42vw;
+                width: 58%;
                 padding: 25px;
                 background-color: #5c7aea;
                 border-radius: 5px;
@@ -1842,6 +1857,7 @@
 
             .question-list .question-card:nth-child(even) {
                 margin-left: 1vh;
+                width: 85%;
             }
 
             #--question {
@@ -1864,7 +1880,7 @@
             }
 
 
-
+            
             .question-list {
                 width: 1000px;
                 display: grid;
@@ -2144,8 +2160,7 @@
 
             #delete {
 
-
-
+                color: #900202 ;
                 padding: 5px 15px;
 
                 margin-left: 21%;
@@ -2199,13 +2214,12 @@
                 margin-left: 17vh;
                 margin-top: 1vh;
                 font-size: 15px;
-                width: 42vw;
+                width: 64%;
                 padding: 25px;
                 background-color: #5c7aea;
                 border-radius: 5px;
                 box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
             }
-
             .question-card p {
                 color: rgba(0, 0, 0, 0.753);
                 width: 199px;
@@ -2214,13 +2228,16 @@
                 font-size: 1.2vw;
             }
 
-            .question-list {
+                   .question-list {
                 width: 85%;
                 display: grid;
                 grid-template-columns: auto auto;
                 gap: 45px;
                 margin-top: 0px;
                 margin-left: 7%;
+            } 
+            .question-list #delete {
+                margin-left: auto;
             }
 
             .question-list #edit {
@@ -2251,6 +2268,7 @@
 
             .question-list .question-card:nth-child(even) {
                 margin-left: 1vh;
+                width: 79%;
             }
 
             #--question {
@@ -2313,7 +2331,7 @@
                 border: none;
             }
 
-            .question-list {
+            /*         .question-list {
                 width: 1000px;
                 display: grid;
                 grid-template-columns: auto auto;
@@ -2321,7 +2339,7 @@
                 margin-top: 0px;
                 margin-left: -74px;
             }
-
+*/
             #questionForm {
                 display: none;
             }
@@ -2550,14 +2568,11 @@
             }
 
             .--staff {
-                margin-left: 9%;
-            }
-
-            table {
+                margin-left: 4%;
                 font-size: 1.2vw;
                 width: 20vw;
                 white-space: nowrap;
-                margin-top: 5vh;
+                margin-top: 8%;
             }
 
             .thead {
@@ -2568,6 +2583,9 @@
 
             th {
                 padding: 0.9vw;
+            }
+            td{
+                padding: 2%;
             }
 
             th:last-child {
@@ -2586,18 +2604,19 @@
 
             #edit {
                 margin-left: -2vw;
-                font-size: 11px;
+                font-size: 150%;
                 padding: 4px 13px;
             }
 
             #delete {
                 margin-left: 1vw;
-                font-size: 11px;
+                font-size: 150%;
                 padding: 4px 13px;
+                color: #900202;
             }
 
             td {
-                padding: 0.5vw;
+                padding: 1.5vw;
                 width: 1vw;
                 font-size: 1.5vw;
             }
@@ -2639,9 +2658,7 @@
                 margin-top: 3vh;
             }
 
-            .--staff {
-                margin-top: 6vh;
-            }
+         
 
             .back-btn-nav {
                 display: block;
@@ -2816,11 +2833,10 @@
                 margin-top: 1vh;
                 background-color: transparent;
             }
-
             .question-card {
-                margin-left: 38vw;
+             
                 font-size: 15px;
-                width: 52vw;
+                width: 85%;
                 padding: 22px;
                 border-radius: 5px;
                 height: auto;
@@ -2838,12 +2854,13 @@
                 display: inline-block;
             }
 
+            
             .question-list {
                 display: grid;
-                grid-template-columns: auto;
+                grid-template-columns: auto auto;
                 gap: 45px;
                 margin-top: 3vh;
-                margin-left: -116px;
+                margin-left: 0%;
             }
 
             #questionForm input[type=text] {
@@ -2900,7 +2917,7 @@
             #--question {
                 display: block;
                 color: #14279b;
-                margin-left: 38vw;
+                margin-left: 46vw;
                 outline: 1px solid;
                 background: transparent;
                 padding: 5px;
@@ -3077,9 +3094,10 @@
             }
 
             .--staff #edit {
-                padding: 7px 15px;
+                padding: 7px 4px;
                 font-size: 80%;
-                margin-left: -16%;
+                display: inline;
+                margin-left: 8%;
                 border-radius: 5px;
             }
 
@@ -3089,10 +3107,11 @@
 
             .--staff #delete {
                 padding: 7px 15px;
-                margin-left: 90%;
+                margin-left: 0%;
                 border-radius: 5px;
-                margin-top: -80%;
+                /* margin-top: -80%; */
                 font-size: 2vw;
+                display: inline;
             }
 
             .thead {
@@ -3108,8 +3127,9 @@
             .--staff {
                 transform: rotate(270deg);
                 font-size: 2.5vw;
-                margin-left: -49%;
-                margin-top: 79%;
+                margin-left: -44%;
+                margin-top: 52%;
+                width: 80%;
             }
 
 
@@ -3133,12 +3153,17 @@
                 position: absolute;
             }
 
+            .--user #edit {
+                font-size: 150%;
+                margin-left: -26%;
+            }
+
             .--user #delete {
-                padding: 7px 15px;
-                margin-left: 49%;
+                padding: 1%;
+                margin-left: 1%;
                 border-radius: 5px;
                 margin-top: -69%;
-                font-size: 90%;
+                font-size: 150%;
             }
 
             #userDetails {
@@ -3315,8 +3340,17 @@
 
 
             .chapter-card #edit {
-                margin-left: 1vw;
-                font-size: 4vw;
+                margin-left: 10%;
+                font-size: 150%;
+
+            }
+
+            .chapter-card #delete {
+                font-size: 150%;
+                margin-top: 0;
+                margin-left: 0%;
+                color: #850b0b;
+
             }
 
             #back-btn-chapter {
@@ -3326,12 +3360,7 @@
                 margin-top: -30%;
             }
 
-            .chapter-card #delete {
-                margin-left: 1vw;
-                font-size: 4vw;
-                margin-top: 0;
 
-            }
 
             #grade button {
                 margin-left: 33%;
@@ -3390,6 +3419,7 @@
                 border-radius: 5px;
                 margin-top: 1%;
                 font-size: 100%;
+                color: #850b0b;
             }
 
             #mediabox {
@@ -3449,9 +3479,11 @@
             #question-box {
                 margin-left: 13%;
                 width: 73%;
+                padding: 3% 4%;
                 height: 0%;
                 margin-top: 12%;
             }
+
 
             #questioncreate-btn {
                 margin-left: 15%;
@@ -3460,8 +3492,9 @@
 
             .question-card {
                 margin-left: 7%;
-                font-size: 14px;
-                width: 63vw;
+                font-size: 93%;
+                width: 75%;
+                margin-bottom: 5%;
             }
 
             .question-paper-form {
@@ -3485,10 +3518,10 @@
                 width: 100%
             }
 
-            .question-list {
-                display: grid;
-                grid-template-columns: auto;
-                gap: 24px;
+            .question-list #delete {
+                padding: 0;
+                margin-left: 0%;
+                font-size: 150%;
             }
 
             .question-card p {
@@ -3496,14 +3529,14 @@
             }
 
             .question-card #delete {
-                margin-top: 0;
-                font-size: 78%;
+                margin-top: -9%;
+                font-size: 150%;
                 padding: 8%;
                 margin-left: 2%;
             }
 
             .question-card #edit {
-                font-size: 11px;
+                font-size: 150%;
                 padding: 2% 24%;
                 margin-left: 2%;
             }
@@ -3514,7 +3547,12 @@
                 padding: 4%;
                 border-radius: 5px;
             }
-
+            .question-list {
+                display: grid;
+                margin-top: 6%;
+                margin-left: 8%;
+                grid-template-columns: auto;
+            }
             .question-papers-card {
                 grid-template-columns: auto;
                 gap: 0%;
@@ -3545,14 +3583,15 @@
 
             .subject-card #edit {
                 margin-left: 1vw;
-                font-size: 4vw;
+                font-size: 150%;
                 margin-top: 0;
             }
 
             .subject-card #delete {
                 margin-left: 1vw;
-                font-size: 4vw;
+                font-size: 150%;
                 margin-top: 0%;
+                color: #850b0b;
             }
 
             .box {
@@ -3755,7 +3794,7 @@
             else if (user == 'is_admin' && dataentry) {
                 test.style.display = 'none'
             }
-            if (dataentry) {
+            if (dataentry && user == '') {
                 staff.style.display = 'none'
                 test.style.display = 'none'
 
