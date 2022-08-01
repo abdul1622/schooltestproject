@@ -220,7 +220,7 @@ class ChapterListView(APIView):
                 data = []
                 grade = Grade.objects.get(grade=grade)
                 subject = Subject.objects.get(name=subject,grade=grade.grade)
-                chapters = Chapter.objects.filter(subject=subject)
+                chapters = (Chapter.objects.filter(subject=subject)).order_by('subject','chapter_no')
                 for object in chapters:
                     data.insert(0,{
                     "id" : object.id,
@@ -248,7 +248,7 @@ class SubjectListView(ListAPIView):
         if grade is not None:
             try:
                 grades = Grade.objects.get(grade=grade)
-                queryset = queryset.filter(grade=grades.id)
+                queryset = (queryset.filter(grade=grades.id).order_by('grade','code','name'))
             except :
                 return Response({'status':'failed'},status=HTTP_206_PARTIAL_CONTENT)
             return queryset
