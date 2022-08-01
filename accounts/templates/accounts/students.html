@@ -242,7 +242,7 @@
                 table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
                 table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
                 table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
-                table2 = table2 + '<td>' + `<a href=# id="edit" >Edit</a><a href=# id="delete" >delete</a>` + '</td></tbody>',
+                table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>`+ '</td></tbody>',
                   table2 = table2 + `</tr>`;
               }
             })
