@@ -15,7 +15,7 @@ class signup_form(forms.Form):
         attrs={"class": "form-control", "placeholder": "Email"}))
     register_number = forms.CharField(widget=forms.TextInput(
         attrs={"class": "form-control", "placeholder": "Register Number"}))
-    date_of_birth = forms.DateField(widget=forms.TextInput(
+    date_of_birth = forms.DateField(widget=forms.DateInput(
         attrs={"class": "form-control", "placeholder": "Date of Birth"}))
     user_type = forms.ChoiceField(choices=usertype_choice)
     phone = forms.CharField(widget=forms.TextInput(

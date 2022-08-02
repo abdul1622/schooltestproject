@@ -197,13 +197,12 @@
         container2.innerHTML = table2;
       })
     } userdetails();
-
+   
     function sort() {
       button = document.getElementById('sort');
       var grade = document.getElementById('grades').value
       console.log(grade)
       console.log('here')
-      button.addEventListener('click', () => {
         if (token) {
           fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
             method: 'GET',
@@ -250,11 +249,13 @@
             container2.innerHTML = table2;
           })
         }
-        else {
-          window.location.href = `${host}/login`
-        }
-      })
-    }
+  }
+  let input=document.getElementById('grades')
+  input.addEventListener('keyup',(e)=>{
+      if(e.keyCode===13){
+          sort();
+      }
+  }) 
 
     function deletestaff(id) {
       url = "https://schooltestproject.herokuapp.com/api/user-details/"
@@ -265,7 +266,7 @@
           'Authorization': 'token' + ' ' + localStorage.getItem('token')
         },
       }).then(res => {
-        res.json()
+       
         userdetails();
       })
     }
@@ -409,6 +410,7 @@
           })
       })
     }
+
   }
   else {
     window.location.href = `${host}/login`

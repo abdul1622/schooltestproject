@@ -140,7 +140,7 @@ aria-hidden="true">
               document.getElementById('std').value=standard
               document.getElementById('sec').value=section
               document.getElementById('address').value=address
-               button.addEventListener('click',()=>{
+              button.addEventListener('click',()=>{
                 fetch(`${url}${id}/`,{
                   method : 'PUT',
                   headers : {

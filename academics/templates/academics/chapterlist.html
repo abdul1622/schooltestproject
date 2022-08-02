@@ -287,6 +287,12 @@
             }).then(response => response.text())
         window.location.href = 'login'
     } 
+    let input=document.getElementById('id_subject')
+    input.addEventListener('keyup',(e) => {
+        if (e.keyCode===13){
+            getchapter();
+        }
+    })
 </script>
 <div class="chapters">
 
