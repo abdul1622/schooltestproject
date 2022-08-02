@@ -304,7 +304,7 @@ class QuestionList(APIView):
             grade = Grade.objects.get(grade=grade)
             subject_obj = Subject.objects.get(id=subject)
             chapters = Chapter.objects.filter(subject=subject)
-            questions = Question.objects.filter(subject=subject,chapter__lt =chapter)
+            questions = Question.objects.filter(subject=subject,chapter__lt =chapter+1)
             total_questions = questions.count()
             print(total_questions)
             questions =(sorted(questions,key=lambda x: random.random()))
