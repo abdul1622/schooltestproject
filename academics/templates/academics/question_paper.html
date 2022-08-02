@@ -23,8 +23,13 @@
     <div class="q-form">
       {% csrf_token %}
     
-      <p><label for="id_grade">Grade:</label> <input type="text" name="grade" maxlength="14" required="" id="id_grade"></p>
-      <p><label for="id_subject">Subject:</label> <input type="text" name="subject" maxlength="20" required="" id="id_subject"></p>
+      <p><label for="id_grade_name">Grade name:</label> <input type="text" name="grade_name" maxlength="14" required="" id="id_grade_name"></p>
+      <p><label for="id_subject">Subject:</label> <select name="subject" required="" id="id_subject">
+        <option value="" selected="">---------</option>
+      </select></p>
+      <p><label for="id_chapter">Chapter:</label> <select name="chapter" required="" id="id_chapter">
+        <option value="" selected="">---------</option>
+      </select></p>
       <p><label for="id_no_of_questions">No of questions:</label> <input type="text" name="no_of_questions" maxlength="20" required="" id="id_no_of_questions"></p>
       <p class="chapter-btns"> <button  id="chapter-btn" class="submit-btn btn btn-primary" onclick=getquestion()>Get</button>
         <button id="save-button" class="submit-btn btn btn-primary" onclick=savequestion()>Save</button></p>
@@ -32,7 +37,7 @@
   </div>
 </div> 
 
-
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- 
 <div id="prev-question-heading" class="prev-question-heading">
   <h2 >Grade - <span id="grade-title-question"> </span></h2>
@@ -59,6 +64,37 @@
   for_answer = '/api/question-paper/'
   url = 'https://schooltestproject.herokuapp.com/api/question-paper-list/'
 
+
+  $("#id_grade_name").change(function () {
+      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+      var gradeId = $(this).val(); 
+
+      $.ajax({                       
+        url: url_for_change,                  
+        data: {
+          'grade': gradeId      
+        },
+        success: function (data) {
+          $("#id_subject").html(data); 
+        }
+      });
+
+    });
+
+    $('#id_subject').change(function(){
+        var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+        var subjectId = $(this).val();
+
+        $.ajax({
+            url : url_for_change,
+            data : {
+                'subject':subjectId
+            },
+            success: function(data){
+                $("#id_chapter").html(data)
+            }
+        });
+    });
 
 // function getsubjectquestions(){
 //   grade = document.getElementById('id_grade').value
@@ -121,9 +157,10 @@
 
 function savequestion(){
              
-  grade = document.getElementById('id_grade').value
+  grade = document.getElementById('id_grade_name').value
   subject = document.getElementById('id_subject').value
   no_of_question= document.getElementById('id_no_of_questions').value
+  chapter = document.getElementById('id_chapter').value
   console.log(grade+subject)
   let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
   url1.searchParams.append('type', 'save');
@@ -131,7 +168,7 @@ function savequestion(){
    console.log(url1)
   fetch(url1,{
       method: 'POST',
-      body: JSON.stringify({ 'grade': grade,'subject':subject,'number_of_questions':no_of_question}
+      body: JSON.stringify({ 'grade_name': grade,'subject':subject,'chapter':chapter,'number_of_questions':no_of_question}
       ),
       headers: {
           'Accept':'application/json',
@@ -169,14 +206,15 @@ function savequestion(){
 }
 
 function getquestion() {
-  grade = document.getElementById('id_grade').value
+  grade = document.getElementById('id_grade_name').value
   subject = document.getElementById('id_subject').value
   no_of_question= document.getElementById('id_no_of_questions').value
-  console.log(grade+subject)
+  chapter = document.getElementById('id_chapter').value
+  console.log(subject)
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-  fetch('https://schooltestproject.herokuapp.com/api/question-paper/',{
+  fetch('http://127.0.0.1:8000/api/question-paper/',{
       method: 'POST',
-      body: JSON.stringify({ 'grade': grade,'subject':subject,'number_of_questions':no_of_question}
+      body: JSON.stringify({ 'grade_name': grade,'subject':subject,'chapter':chapter,'number_of_questions':no_of_question}
       ),
       headers: {
           'Accept':'application/json',
