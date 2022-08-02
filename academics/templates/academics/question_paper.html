@@ -212,7 +212,7 @@ function getquestion() {
   chapter = document.getElementById('id_chapter').value
   console.log(subject)
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-  fetch('https//schooltestproject.herokuapp.com/api/question-paper/',{
+  fetch('https://schooltestproject.herokuapp.com/api/question-paper/',{
       method: 'POST',
       body: JSON.stringify({ 'grade_name': grade,'subject':subject,'chapter':chapter,'number_of_questions':no_of_question}
       ),
