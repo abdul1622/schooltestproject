@@ -261,7 +261,7 @@ class SubjectListView(ListAPIView):
 
 class QuestionCreateView(CreateAPIView):
     serializer_class= QuestionAnswerSerializer
-    queryset = Question.objects.all().order_by('- grade','-subject','-chapter')
+    queryset = Question.objects.all().order_by('-grade','-subject','-chapter')
     permission_classes=[AllowAny]
 
     def get(self, request):
