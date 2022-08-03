@@ -71,14 +71,18 @@
 
     {% csrf_token %}
     {{form2.as_p}}
-    <button class="submit-btn" id="chapter-btn">Submit</button>
+    <button class="submit-btn" data-toggle="modal" data-target="#messageModal-chapterlist" id="chapter-btn">Submit</button>
 </div>
 <div class="messages container-fluid">
 
 </div>
-<div class="error-messages container-fluid">
+<div class="error-message container-fluid">
 
 </div>
+
+
+
+
 
 <script>
     var token = localStorage.getItem("token")
@@ -144,8 +148,8 @@
                         table2 = table2 + '<td class="chapter_no">' + `${d.chapter_no}` + '</td>';
                         table2 = table2 + '<td class="name">' + `${d.name}` + '</td>';
                         table2 = table2 + '<td class="description">' + `${d.description}` + '</td>',
-                            table2 = table2 + '<td>' + `<button class=" btn btn-secondary" id="edit" >Edit</button>` + '</td>',
-                            table2 = table2 + '<td>' + `<button class=" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist" id="delete" >delete</button>` + '</td>',
+                            table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i>` + '</td>',
+                            table2 = table2 + '<td>' + `<i class="fa fa-trash-o" id="delete" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist"></i>` + '</td>',
                             table2 = table2 + `</tr>`;
                     })
                     table2 += "</table>";
@@ -158,9 +162,11 @@
                     document.getElementById('id_name').value = ''
                     document.getElementById('id_description').value = ''
                     edit = null
+                    document.querySelector('.error-message').innerHTML = ''
                 }
                 else {
-                    error_messages.innerHTML = `${data.status}`
+                   // error_messages.innerHTML = `${data.status}`
+                    document.querySelector('.error-message').innerHTML = `<p class='text-center'>${data.status}</p>`
                 }
             })
         } else {
@@ -281,6 +287,12 @@
             }).then(response => response.text())
         window.location.href = 'login'
     } 
+    let input=document.getElementById('id_subject')
+    input.addEventListener('keyup',(e) => {
+        if (e.keyCode===13){
+            getchapter();
+        }
+    })
 </script>
 <div class="chapters">
 

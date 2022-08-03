@@ -5,11 +5,11 @@
 
     <div id="subjects-by-grade" class="subjects-by-grade">
 
-            <h2 >Grade - <span id="grade-title"></span> </h2>
-            <hr>
-            <div class="subject-head">
-        <a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=get()>Back</a>
-        <h3 class="subject-title-subjects"> Subjects </h3>
+        <h2>Grade - <span id="grade-title"></span> </h2>
+        <hr>
+        <div class="subject-head">
+        <i id="back-btn"  class='fa fa-angle-left'   onclick=get() style='font-size:24px'></i>
+            <h3 class="subject-title-subjects"> Subjects </h3>
         </div>
         <div class="cards container-fluid">
         </div>
@@ -17,77 +17,71 @@
 
 
     <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <div class="messages container-fluid">
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="messages container-fluid">
 
+                    </div>
+                    <div class="error-messages container-fluid">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+                </div>
             </div>
-            <div class="error-messages container-fluid">
-        
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="delete-box-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="media-content">
+                <div class="modal-header">
+                    <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="delete-box">
+                        <h4>Are you want to delete?</h4>
+                        <p class="chapter-btns"> </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="delete-btn-yes" data-dismiss="modal" class="delete-btn-yes btn btn-danger">Yes</button>
+                    <button id="delete-btn-no" data-dismiss="modal" class="delete-btn-no btn btn-primary">Back</button>
+                </div>
             </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-
-        </div>
-      </div>
     </div>
-  </div>
 
 
-  <div class="modal fade" id="delete-box-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content" id="media-content">
-      <div class="modal-header">
-        <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="delete-box">
-            <h4>Are you want to delete?</h4>
-            <p class="chapter-btns">  </p>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button id="delete-btn-yes" data-dismiss="modal" class="delete-btn-yes btn btn-danger">Yes</button>
-        <button id="delete-btn-no" data-dismiss="modal" class="delete-btn-no btn btn-primary">Back</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-  <!-- <button type="button" id="messagemodal-btn" class="btn btn-primary" data-toggle="modal" data-target="#delete-box-Modal">
-  </button> -->
 
 
     <div id="chapterlist" class="chapterlist">
-      
-        <!-- <h3 >Grade - <span id="grade-title"></span> </h3> -->
+
+
+        <h4>Grade - <span id="grade-title-chapter"></span> </h4>
         <h2><span id="subject-title"></span> </h2>
-        <h4 >Grade - <span id="grade-title-chapter"></span> </h4>
         <hr>
         <div class="subject-head">
-        <a type="button" class="btn btn-sm btn-primary" id="back-btn-chapter">Back</a>
-    <h3 class="subject-title-subjects"> Chapters </h3>
-    </div>
+            <a type="button" class="btn btn-sm btn-primary" id="back-btn-chapter"><i class='fa fa-angle-left' style='font-size:24px'></i></a>
+            <h3 class="subject-title-subjects"> Chapters </h3>
+        </div>
         <div class="chapter-cards container">
         </div>
     </div>
-    <!-- <div class="delete-box">
-        <h4>Are you want to delete?</h4>
-        <p class="chapter-btns"> <button id="delete-btn-yes" class="delete-btn-yes btn btn-danger">Yes</button> <button id="delete-btn-no" class="delete-btn-no btn btn-primary">Back</button> </p>
-    </div> -->
     <div id="grade-list" class="grade-list container">
 
     </div>
@@ -95,13 +89,13 @@
 
         {% csrf_token %}
         <div class="form-all">
-            
+
         </div>
         <button class="submit-btn" id="grade-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
         <button class="submit-btn" id="subject-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
         <button class="submit-btn" id="chapter-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
     </div>
-  
+
 
 </div>
 <script>
@@ -127,7 +121,7 @@
     var list = document.querySelector('.grade-list');
 
     document.getElementById('back-btn-chapter').addEventListener('click', () => {
-        getsubject(grade_val,grade_id);
+        getsubject(grade_val, grade_id);
         messages.innerHTML = ''
         error_messages.innerHTML = ''
     })
@@ -157,7 +151,6 @@
             container.innerHTML = ''
             document.getElementById('back-btn').style.display = "none"
             document.getElementById('back-btn-chapter').style.display = "none"
-            // document.getElementById('grade').style.height = '16vh';
             document.getElementById('subject-btn').style.display = "none"
             document.getElementById('chapter-btn').style.display = "none"
             document.getElementById('grade-btn').style.display = "block"
@@ -167,34 +160,35 @@
             document.getElementById('subjects-by-grade').style.display = "none"
         })
     };
-    if(token){
-    get();
-    }else{
-        window.location.href=`${host}/login`  
+    if (token) {
+        get();
+    } else {
+        window.location.href = `${host}/login`
     }
     // delete grade 
-function deletegradesetup(id){
-    let url = 'https://schooltestproject.herokuapp.com/api/grades/'
-    let yes_button = document.getElementById('delete-btn-yes')
-    let no_btn = document.getElementById('delete-btn-no')
-    yes_button.setAttribute( "onClick", `deletegrade(${id})` );
-}
-
-function deletegrade(id){
-    let url = 'https://schooltestproject.herokuapp.com/api/grades/'
-    fetch(`${url}${id}/`, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': 'token' + ' ' + token,
-        },
-    }).then(res => {console.log(res)
-       return get();
+    function deletegradesetup(id) {
+        let url = 'https://schooltestproject.herokuapp.com/api/grades/'
+        let yes_button = document.getElementById('delete-btn-yes')
+        let no_btn = document.getElementById('delete-btn-no')
+        yes_button.setAttribute("onClick", `deletegrade(${id})`);
     }
-    )
-}
-    
 
-// create grade 
+    function deletegrade(id) {
+        let url = 'https://schooltestproject.herokuapp.com/api/grades/'
+        fetch(`${url}${id}/`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'token' + ' ' + token,
+            },
+        }).then(res => {
+            console.log(res)
+            return get();
+        }
+        )
+    }
+
+
+    // create grade 
     grade_create.addEventListener('click', () => {
         var grade = document.getElementById('id_grade').value
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -213,15 +207,15 @@ function deletegrade(id){
                 if (response.status == 201) {
                     console.log("Sucess response", response)
                     messages.innerHTML = 'created successfully'
-                    error_messages.innerHTML= ''
+                    error_messages.innerHTML = ''
                     get();
                 }
                 return response.json();
             }).then(function (data) {
                 console.log(data)
-                if (data.status != 'success'){
-                error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-                messages.innerHTML = ''
+                if (data.status != 'success') {
+                    error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+                    messages.innerHTML = ''
                 }
             })
         return true;
@@ -230,7 +224,7 @@ function deletegrade(id){
 
     // getting subjects
 
-    function getsubject(val1,val2) {
+    function getsubject(val1, val2) {
         grade_val = val1
         grade_id = val2
         console.log(grade_val);
@@ -271,11 +265,11 @@ function deletegrade(id){
         <p><label> Subject-code </label> <span>: <span class="code">${d.code}</span></span></p>
         <p class="text-center"> <a type="button" class="btn btn-sm btn-primary ch-btn" href=# onclick=getchapter(${d.grade_name},"${temp}",${d.id})>Chapters</a></p>
         <br>
-        <p class="text-center"> <button class="btn btn-sm btn-secondary" href=# id="edit" >Edit</button> <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-box-Modal"  href=# id="delete" >delete</button></p>
+        <p class="text-center"><i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></p>
  </div>`
             });
             container.innerHTML = content;
-            
+
         })
     }
 
@@ -307,14 +301,14 @@ function deletegrade(id){
                         messages.innerHTML = `${name} is created succesfully`;
                         error_messages.innerHTML = ''
                         // get();
-                        getsubject(grade_val,grade_id);
+                        getsubject(grade_val, grade_id);
                     } else {
                         console.log(response);
                     }
                     return response.json()
                 }).then(data => {
                     console.log(data)
-                    if(data.status!='success'){
+                    if (data.status != 'success') {
                         error_messages.innerHTML = `<li>${(data.data.error)}</li>`
                         messages.innerHTML = ''
                     }
@@ -324,19 +318,20 @@ function deletegrade(id){
 
 
     // edit subjects
-    function deletesubject(id){
+    function deletesubject(id) {
         let url = 'https://schooltestproject.herokuapp.com/api/subjects/'
-                fetch(`${url}${id}/`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': 'token' + ' ' + token,
-                    },
-                }).then(res => {console.log(res)
-                    getsubject(grade_val,grade_id);
-                }
-                )
-    
-            }
+        fetch(`${url}${id}/`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'token' + ' ' + token,
+            },
+        }).then(res => {
+            console.log(res)
+            getsubject(grade_val, grade_id);
+        }
+        )
+
+    }
 
     container2.addEventListener('click', (e) => {
         //   form_grade = document.getElementById('id_grade')
@@ -353,8 +348,8 @@ function deletegrade(id){
         let yes_button = document.getElementById('delete-btn-yes')
         let no_btn = document.getElementById('delete-btn-no')
         if (delbutton) {
-
-            yes_button.setAttribute( "onClick", `deletesubject(${id})`);
+            console.log('RRR')
+            yes_button.setAttribute("onClick", `deletesubject(${id})`);
             // const parent1 = e.target.parentElement.parentElement;
             // var name = parent1.querySelector('.name').textContent
             // no_btn.addEventListener('click',()=>{
@@ -363,7 +358,7 @@ function deletegrade(id){
 
         }
         console.log(editbutton, 'dfg')
-      
+
         if (editbutton) {
             window.location.href = '#grade';
             const parent = e.target.parentElement.parentElement;
@@ -391,25 +386,25 @@ function deletegrade(id){
                             'name': form_name.value,
                         })
                     }).then(function (response) {
-                    if (response.status == 200) {
-                        console.log("Sucess response", response)
-                        messages.innerHTML = `${name} is updated succesfully`;
-                        error_messages.innerHTML = ''
-                        // get();
-                        getsubject(grade_val,grade_id);
-                    } else {
-                        console.log(response);
-                    }
-                    return response.json()
+                        if (response.status == 200) {
+                            console.log("Sucess response", response)
+                            messages.innerHTML = `${name} is updated succesfully`;
+                            error_messages.innerHTML = ''
+                            // get();
+                            getsubject(grade_val, grade_id);
+                        } else {
+                            console.log(response);
+                        }
+                        return response.json()
                     }).then(data => {
-                    console.log(data)
-                    if(data.status!='success'){
-                        error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-                        messages.innerHTML=''
-                    }
-                    edit =false
-                    return
-                })
+                        console.log(data)
+                        if (data.status != 'success') {
+                            error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+                            messages.innerHTML = ''
+                        }
+                        edit = false
+                        return
+                    })
 
                 }
             })
@@ -418,7 +413,7 @@ function deletegrade(id){
 
     // get chapter
 
-    function getchapter(val1, val2,val3) {
+    function getchapter(val1, val2, val3) {
         grade_val = val1
         val2 = val2.replace('_', ' ')
         subject_val = val2
@@ -466,13 +461,11 @@ function deletegrade(id){
         <p><label> Chapter </label> <span>: <span class="name">${d.name}</span></span></p>
         <p><label> Description </label> <span>: <span class="description">${d.description}</span></span></p>
         <br>
-
-        <p> <button class="btn btn-secondary" href=# id="edit" >Edit</a> <button data-toggle="modal" data-target="#delete-box-Modal" class="btn btn-danger " href=# id="delete" >delete</a></p>
-
-   </div>`
+        <p><i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></p>
+ </div>`
             });
             container3.innerHTML = content;
-          
+
 
             console.log(document.querySelector('.submit-btn').id)
         })
@@ -480,17 +473,17 @@ function deletegrade(id){
 
     // chapter edit
 
-    function deletechapter(id)
- {
-                fetch(`https://schooltestproject.herokuapp.com/api/chapters/${id}/`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': 'token' + ' ' + token
-                    },
-                }).then(() =>{
-            getchapter(grade_val,subject_val,subject_id);  }
-                )
-            }
+    function deletechapter(id) {
+        fetch(`https://schooltestproject.herokuapp.com/api/chapters/${id}/`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'token' + ' ' + token
+            },
+        }).then(() => {
+            getchapter(grade_val, subject_val, subject_id);
+        }
+        )
+    }
 
     container3.addEventListener('click', (e) => {
         //   form_subject = document.getElementById('id_subject')
@@ -513,8 +506,8 @@ function deletegrade(id){
             // no_btn.addEventListener('click',()=>{
             //     getchapter(grade_val,subject_val,subject_id);
             // })
-            
-            yes_button.setAttribute( "onClick", `deletechapter(${id})`);
+
+            yes_button.setAttribute("onClick", `deletechapter(${id})`);
 
         }
 
@@ -546,26 +539,26 @@ function deletegrade(id){
                             'name': form_name.value,
                             'description': form_description.value,
                         })
-                    }).then(function (response){
+                    }).then(function (response) {
                         if (response.status == 200) {
-                        console.log("Sucess response", response)
-                        messages.innerHTML = `${name} is updated succesfully`;
-                        error_messages.innerHTML = ''
-                        getchapter(grade_val,subject_val,subject_id);
-                    } else {
-                        console.log(response);
-                    }
-                    return response.json()
-                    
+                            console.log("Sucess response", response)
+                            messages.innerHTML = `${name} is updated succesfully`;
+                            error_messages.innerHTML = ''
+                            getchapter(grade_val, subject_val, subject_id);
+                        } else {
+                            console.log(response);
+                        }
+                        return response.json()
+
                     }).then(data => {
-                    console.log(data)
-                    if(data.status!='success'){
-                        error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-                        messages.innerHTML = ''
+                        console.log(data)
+                        if (data.status != 'success') {
+                            error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+                            messages.innerHTML = ''
+                        }
+                        edit = false
+                        return
                     }
-                    edit =false
-                    return
-                }
                     )
 
                 }
@@ -597,14 +590,14 @@ function deletegrade(id){
                         console.log("Sucess response", response)
                         messages.innerHTML = `${name} is created succesfully`;
                         error_messages.innerHTML = ''
-                        getchapter(grade_val,subject_val,subject_id);
+                        getchapter(grade_val, subject_val, subject_id);
                     } else {
                         console.log(response);
                     }
                     return response.json()
                 }).then(data => {
                     console.log(data)
-                    if(data.status!='success'){
+                    if (data.status != 'success') {
                         error_messages.innerHTML = `<li>${(data.data.error)}</li>`
                         messages.innerHTML = ''
                     }

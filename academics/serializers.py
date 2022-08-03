@@ -148,10 +148,14 @@ class QuestionAnswerSerializer(serializers.ModelSerializer):
         answers.save()
         return instance
 
-class QuestionGetSerializer(serializers.Serializer):
-    grade = serializers.IntegerField()
-    subject = serializers.CharField()
+class QuestionGetSerializer(serializers.ModelSerializer):
+
+    grade_name = serializers.IntegerField()
+    # subject_name = serializers.CharField()
     number_of_questions = serializers.IntegerField()
+    class Meta:
+        model = Question
+        fields = ['grade_name','subject','chapter','number_of_questions']
 
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:

@@ -220,7 +220,7 @@ class ChapterListView(APIView):
                 data = []
                 grade = Grade.objects.get(grade=grade)
                 subject = Subject.objects.get(name=subject,grade=grade.grade)
-                chapters = Chapter.objects.filter(subject=subject)
+                chapters = (Chapter.objects.filter(subject=subject)).order_by('-subject','-chapter_no')
                 for object in chapters:
                     data.insert(0,{
                     "id" : object.id,
@@ -248,7 +248,7 @@ class SubjectListView(ListAPIView):
         if grade is not None:
             try:
                 grades = Grade.objects.get(grade=grade)
-                queryset = queryset.filter(grade=grades.id)
+                queryset = (queryset.filter(grade=grades.id).order_by('grade','-code','-name'))
             except :
                 return Response({'status':'failed'},status=HTTP_206_PARTIAL_CONTENT)
             return queryset
@@ -261,7 +261,7 @@ class SubjectListView(ListAPIView):
 
 class QuestionCreateView(CreateAPIView):
     serializer_class= QuestionAnswerSerializer
-    queryset = Question.objects.all().order_by('grade','subject','chapter')
+    queryset = Question.objects.all().order_by('-grade','-subject','-chapter')
     permission_classes=[AllowAny]
 
     def get(self, request):
@@ -296,17 +296,18 @@ class QuestionList(APIView):
 
     def post(self,request):
         type = str(self.request.query_params.get('type'))
-        grade = request.data.get('grade')
-        subject=(request.data.get('subject')).upper()
+        grade = request.data.get('grade_name')
+        subject=(request.data.get('subject'))
+        chapter= int(request.data.get('chapter'))
         number_of_questions = int(request.data.get('number_of_questions'))
         try:
             grade = Grade.objects.get(grade=grade)
-            subject = Subject.objects.get(name=subject,grade=grade.id)
-            questions = Question.objects.filter(grade=grade.id,subject=subject.id)
-
+            subject_obj = Subject.objects.get(id=subject)
+            chapters = Chapter.objects.filter(subject=subject)
+            questions = Question.objects.filter(subject=subject,chapter__lt =chapter+1)
             total_questions = questions.count()
+            print(total_questions)
             questions =(sorted(questions,key=lambda x: random.random()))
-
             if number_of_questions <= total_questions:
                 questions = questions[:number_of_questions]
             else:
@@ -318,8 +319,8 @@ class QuestionList(APIView):
             for question in questions:
                 ans = getattr(question.answers,str(question.answers))
                 answers.append(ans)
-            context = {'data':serializer.data,'grade':grade.grade,'subject':subject.name,'register_number':user.register_number}
-            context1 = {'data':serializer.data,'grade':grade.grade,'subject':subject.name,'register_number':user.register_number,'answers':answers}
+            context = {'data':serializer.data,'grade':grade.grade,'subject':subject_obj.name,'register_number':user.register_number}
+            context1 = {'data':serializer.data,'grade':grade.grade,'subject':subject_obj.name,'register_number':user.register_number,'answers':answers}
             answer_file,status =  render_to_pdf2('academics/answer_file.html','answer_files',None,context1)
             if type == 'save':
                 created_by = self.request.user.email
@@ -330,19 +331,23 @@ class QuestionList(APIView):
                 if not status:
                     return Response({"status": "failure","data":"given details are incorrect"},status=HTTP_206_PARTIAL_CONTENT) 
                 serializer = QuestionPaperSerializer(question_paper)
-                return Response({'status':'success','data':serializer.data,'answer-file-path':'/media/answer_files/{answer_file}.pdf','subject_id':subject.id,'grade_id':grade.id},status=HTTP_200_OK)
+                return Response({'status':'success','data':serializer.data,'answer-file-path':'/media/answer_files/{answer_file}.pdf','subject_id':subject_obj.id,'grade_id':grade.id},status=HTTP_200_OK)
 
             filename,status = render_to_pdf2('academics/question.html','question_paper',None,context)
             if not status:
                 return Response({"status": "failure","data":"given details are incorrect"},status=HTTP_206_PARTIAL_CONTENT) 
-            return Response({'status':'success','question_path':f'/media/question_paper/{filename}.pdf','answer_path':f'/media/answer_files/{answer_file}.pdf','subject_id':subject.id,'grade_id':grade.id})
+            return Response({'status':'success','question_path':f'/media/question_paper/{filename}.pdf','answer_path':f'/media/answer_files/{answer_file}.pdf','subject_id':subject_obj.id,'grade_id':grade.id})
         except:
             return Response({"status": "failure","data":"given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
+
+
+
+
 
 class QuestionPaperList(ListAPIView):
     serializer_class= QuestionPaperSerializer
     permission_classes=[AllowAny]
-    queryset = Question_Paper.objects.all().order_by('grade','subject')
+    queryset = Question_Paper.objects.all().order_by('-grade','-subject')
 
     def get(self, request):
         questions = Question_Paper.objects.all()
@@ -407,7 +412,7 @@ def load_subject_chapter(request):
     grade_id = request.GET.get('grade',None)
     subject_id = request.GET.get('subject',None)
     if grade_id:
-        subject = Subject.objects.filter(grade=grade_id).order_by('name')
+        subject = Subject.objects.filter(grade=grade_id).order_by('-name')
         return render(request, 'academics/dropdown_list_options.html', {'items': subject})
     chapter = Chapter.objects.filter(subject=subject_id)
     return render(request, 'academics/dropdown_list_options.html', {'items': chapter})
@@ -436,11 +441,11 @@ def load_subject_chapter(request):
 class TestCreateView(CreateAPIView):
 
     serializer_class= TestSerializer
-    queryset= Test.objects.all().order_by('grade','subject')
+    queryset= Test.objects.all().order_by('-grade','-subject')
     permission_classes=[AllowAny]
 
     def get(self, request, format=None):
-        queryset= Test.objects.all().order_by('grade','subject')
+        queryset= Test.objects.all().order_by('-grade','-subject')
         serializer = TestSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -455,7 +460,7 @@ class TestCreateView(CreateAPIView):
 class TestEditView(RetrieveUpdateDestroyAPIView):
     serializer_class = TestSerializer
     permission_classes = [AllowAny]
-    queryset = Test.objects.all().order_by('grade','subject')
+    queryset = Test.objects.all().order_by('-grade','-subject')
 
     def retrieve(self, request,pk):
         try:

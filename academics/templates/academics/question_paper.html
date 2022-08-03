@@ -23,8 +23,13 @@
     <div class="q-form">
       {% csrf_token %}
     
-      <p><label for="id_grade">Grade:</label> <input type="text" name="grade" maxlength="14" required="" id="id_grade"></p>
-      <p><label for="id_subject">Subject:</label> <input type="text" name="subject" maxlength="20" required="" id="id_subject"></p>
+      <p><label for="id_grade_name">Grade name:</label> <input type="text" name="grade_name" maxlength="14" required="" id="id_grade_name"></p>
+      <p><label for="id_subject">Subject:</label> <select name="subject" required="" id="id_subject">
+        <option value="" selected="">---------</option>
+      </select></p>
+      <p><label for="id_chapter">Chapter:</label> <select name="chapter" required="" id="id_chapter">
+        <option value="" selected="">---------</option>
+      </select></p>
       <p><label for="id_no_of_questions">No of questions:</label> <input type="text" name="no_of_questions" maxlength="20" required="" id="id_no_of_questions"></p>
       <p class="chapter-btns"> <button  id="chapter-btn" class="submit-btn btn btn-primary" onclick=getquestion()>Get</button>
         <button id="save-button" class="submit-btn btn btn-primary" onclick=savequestion()>Save</button></p>
@@ -32,7 +37,7 @@
   </div>
 </div> 
 
-
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- 
 <div id="prev-question-heading" class="prev-question-heading">
   <h2 >Grade - <span id="grade-title-question"> </span></h2>
@@ -59,6 +64,37 @@
   for_answer = '/api/question-paper/'
   url = 'https://schooltestproject.herokuapp.com/api/question-paper-list/'
 
+
+  $("#id_grade_name").change(function () {
+      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+      var gradeId = $(this).val(); 
+
+      $.ajax({                       
+        url: url_for_change,                  
+        data: {
+          'grade': gradeId      
+        },
+        success: function (data) {
+          $("#id_subject").html(data); 
+        }
+      });
+
+    });
+
+    $('#id_subject').change(function(){
+        var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+        var subjectId = $(this).val();
+
+        $.ajax({
+            url : url_for_change,
+            data : {
+                'subject':subjectId
+            },
+            success: function(data){
+                $("#id_chapter").html(data)
+            }
+        });
+    });
 
 // function getsubjectquestions(){
 //   grade = document.getElementById('id_grade').value
@@ -121,9 +157,10 @@
 
 function savequestion(){
              
-  grade = document.getElementById('id_grade').value
+  grade = document.getElementById('id_grade_name').value
   subject = document.getElementById('id_subject').value
   no_of_question= document.getElementById('id_no_of_questions').value
+  chapter = document.getElementById('id_chapter').value
   console.log(grade+subject)
   let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
   url1.searchParams.append('type', 'save');
@@ -131,7 +168,7 @@ function savequestion(){
    console.log(url1)
   fetch(url1,{
       method: 'POST',
-      body: JSON.stringify({ 'grade': grade,'subject':subject,'number_of_questions':no_of_question}
+      body: JSON.stringify({ 'grade_name': grade,'subject':subject,'chapter':chapter,'number_of_questions':no_of_question}
       ),
       headers: {
           'Accept':'application/json',
@@ -169,14 +206,15 @@ function savequestion(){
 }
 
 function getquestion() {
-  grade = document.getElementById('id_grade').value
+  grade = document.getElementById('id_grade_name').value
   subject = document.getElementById('id_subject').value
   no_of_question= document.getElementById('id_no_of_questions').value
-  console.log(grade+subject)
+  chapter = document.getElementById('id_chapter').value
+  console.log(subject)
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
   fetch('https://schooltestproject.herokuapp.com/api/question-paper/',{
       method: 'POST',
-      body: JSON.stringify({ 'grade': grade,'subject':subject,'number_of_questions':no_of_question}
+      body: JSON.stringify({ 'grade_name': grade,'subject':subject,'chapter':chapter,'number_of_questions':no_of_question}
       ),
       headers: {
           'Accept':'application/json',
@@ -200,6 +238,7 @@ function getquestion() {
 
 
      }else{
+      let questionPath = document.querySelector('.question-paper')
        if (data.data){
          questionPath.innerHTML = data.data
        }else{
@@ -221,83 +260,6 @@ function downloadfile(uri) {
   document.body.removeChild(link);
   delete link;
 }
-
-
-// function getquestionanswerpaper(id){
-//   let url2 = new URL(`https://schooltestproject.herokuapp.com/api/question-paper/${id}/`)
-//   url2.searchParams.append('type', 'file');
-//   let uri = `${window.location.protocol}//${window.location.host}`
-//   fetch(url2,{ 
-//         method : 'GET',
-//         headers : {
-//           'content-Type' : 'application/json',
-//           'Authorization':'token'+' '+token,
-//           // 'X-CSRFToken': csrftoken
-//         }}).then(res =>  res.json()).then(data => {
-
-//           let path = `
-//        <p> Grade : ${data.data.grade_name} </p>
-//        <p> Subject : ${data.data.subject_name} </p>
-//        <p> Created_by : ${data.data.created_by} </p>
-//        <p> Number_of_questions : ${data.data.no_of_questions} </p>
-//        <p> Created Time : ${data.data.created_at} </p>
-//        question paper pdf file -  <p><a onclick=downloadfile('${uri}${data.data.file}')>download</a></p>
-//        answer sheet -   <p><a onclick=downloadfile('${uri}${data.path}')">download</a></p>
-//        `;
-       
-//       let questionPath = document.querySelector('.question-paper')
-//       questionPath.innerHTML = path;
-//         })
-
-// }
-
-// https://schooltestproject.herokuapp.com/academics/question-paper/1/
-
-
-//   function get() {
-//     fetch(url,{ 
-//         method : 'GET',
-//         headers : {
-//           'content-Type' : 'application/json',
-//           'Authorization':'token'+' '+token,
-//           // 'X-CSRFToken': csrftoken
-//         }}).then(res =>  res.json()).then(data => {
-//       console.log(data)
-//       let content = '';
-//       subject = subject.toUpperCase();
-//       console
-//       data.data.forEach((d, index) => {
-//  total_question = d.no_of_questions.length;
-//  console.log(d.no_of_questions.length)
-// //         <p >Grade : <span class="grade">${d.grade_name}</span></p>
-
-// // <p >Subject : <span class="subject">${d.subject_name}</span></p>
-
-//         if(grade_id == d.grade && subject_id == d.subject){
-
-//           content = content + `<div class="question-paper-card" id='${d.id}'>
-
-// <p>File: <a href='${blank_url}${d.file}'  class="file">${d.file}</a></p>
-
-// <p >created_by : <span class="created_by">${d.created_by}</span></p>
-
-// <p >created_at : <span class="created_at">${d.created_at}</span></p>
-
-// <p > No of questions : ${total_question} </p>
-
-// </div>
-// `
-// // <button id="get-answer" onclick=getanswers() >Get Answer file</button> 
-// // <p> <a href='' class='ans-file'>download</a></p> 
-// total_questions = 0;
-//         }
-
-
-//       })
-//       container2.innerHTML = content;
-
-//     })
-//   };
   }else{
     window.location.href=`${host}/login`  
   }

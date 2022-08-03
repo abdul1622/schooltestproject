@@ -1,126 +1,131 @@
 {% extends 'base.html'%}
 {% block userd %}
-<!-- <div id='confirmationuser'>
 
-  <h3>Are you sure to delete?</h3>
-
-  <button id='yes'>Yes</button>
-
-  <button id='no'>No </button>
-
-</div> -->
 <div class="modal fade" id="delete-user-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
 
-      <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div id='confirmationuser'>
-
-        <h3>Are you sure to delete?</h3>
-      
+        <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-danger" id="no" data-dismiss="modal">No</button>
-      <span class="create-btn-container"> <button  data-dismiss="modal"  type="button" id='yes'
-          class="btn btn-primary" >Yes</button></span>
+      <div class="modal-body">
+        <div id='confirmationuser'>
 
+          <h3>Are you sure to delete?</h3>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="no" data-dismiss="modal">No</button>
+        <span class="create-btn-container"> <button data-dismiss="modal" type="button" id='yes'
+            class="btn btn-primary">Yes</button></span>
+
+      </div>
     </div>
   </div>
 </div>
-</div>
 
 <div class="modal fade" id="messageModal-student" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
         <div class="messages container-fluid">
 
         </div>
         <div class="error-messages container-fluid">
-    
+
         </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
 
+      </div>
     </div>
   </div>
-</div>
 </div>
 
 
 <button id="add" onclick=adduser()>Add Student</button>
 <div>
-<input type="number" id="grades" placeholder="grade" min="0" max="12">
-<button id="sort" onclick=sort()>search</button></div>
+  <input type="number" id="grades" placeholder="grade" min="0" max="12">
+  <button id="sort" onclick=sort()>search</button>
 </div>
-<form id="userDetails" >
+</div>
+<form id="userDetails">
   {%csrf_token%}
 
   <button onclick=back() class='back-btn'>&#x2715;</button>
- 
-  <div class='grid-item'> 
-  <label for="email">Email:</label><br>
-  <input type="email" id='email' placeholder="Email"></div>
 
-  <div class='grid-item'> 
-  <label for="phone">Phone:</label><br>
-  <input type="phone" id="phone" placeholder="Phone"></div>
+  <div class='grid-item'>
+    <label for="email">Email:</label><br>
+    <input type="email" id='email' placeholder="Email">
+  </div>
 
-  <div class='grid-item'> 
-  <label for="reg">Reg:</label><br>
-  <input type="text" id="reg" placeholder="Reg"></div>
+  <div class='grid-item'>
+    <label for="phone">Phone:</label><br>
+    <input type="phone" id="phone" placeholder="Phone">
+  </div>
 
-  <div class='grid-item'> 
-  <label for="dob">DOB:</label><br>
-  <input type="text" id="dob" placeholder="DOB"></div>
+  <div class='grid-item'>
+    <label for="reg">Reg:</label><br>
+    <input type="text" id="reg" placeholder="Reg">
+  </div>
 
-  <div class='grid-item'> 
-  <label for="std">Standard:</label><br>
-  <input type="text" id="std" placeholder="Standard"></div>
+  <div class='grid-item'>
+    <label for="dob">DOB:</label><br>
+    <input type="date" id="dob" placeholder="DOB">
+  </div>
 
-  <div class='grid-item'> 
-  <label for="sec">Section:</label><br>
-  <input type="text" id="sec" placeholder="Section"></div>
- 
-  <div class='grid-item'> 
-  <label for="fname">Firstname:</label><br>
-  <input type="text" id="fname" placeholder="First Name"></div>
-  
-  <div class='grid-item'> 
-  <label for="lname">Last Name:</label><br>
-  <input type="text" id="lname" placeholder="Last Name"></div>
-  
-  <div class='grid-item'> 
-  <label for="ffname">Full Name:</label><br>
-  <input type="text" id="ffname" placeholder="Full Name"></div>
-  
-  <div class='grid-item'> 
-  <label for="address">Address:</label><br>
-  <input type="text" id="address" placeholder="Address"></div>
-  
-  <div class='grid-item'> 
-  <label for="file">Profile picture:</label><br>
-  <input type="file" id="file"></div>
+  <div class='grid-item'>
+    <label for="std">Standard:</label><br>
+    <input type="text" id="std" placeholder="Standard">
+  </div>
 
-  <div class='grid-item'> 
-  <button data-toggle="modal" data-target="#messageModal-student" id="userdetail-btn">submit</button></div>
-  
-</div>
+  <div class='grid-item'>
+    <label for="sec">Section:</label><br>
+    <input type="text" id="sec" placeholder="Section">
+  </div>
+
+  <div class='grid-item'>
+    <label for="fname">Firstname:</label><br>
+    <input type="text" id="fname" placeholder="First Name">
+  </div>
+
+  <div class='grid-item'>
+    <label for="lname">Last Name:</label><br>
+    <input type="text" id="lname" placeholder="Last Name">
+  </div>
+
+  <div class='grid-item'>
+    <label for="ffname">Full Name:</label><br>
+    <input type="text" id="ffname" placeholder="Full Name">
+  </div>
+
+  <div class='grid-item'>
+    <label for="address">Address:</label><br>
+    <input type="text" id="address" placeholder="Address">
+  </div>
+
+  <div class='grid-item'>
+    <label for="file">Profile picture:</label><br>
+    <input type="file" id="file">
+  </div>
+
+  <div class='grid-item'>
+    <button data-toggle="modal" data-target="#messageModal-student" id="userdetail-btn">submit</button>
+  </div>
+
+  </div>
 
 
 </form>
@@ -137,15 +142,15 @@ aria-hidden="true">
   const container2 = document.querySelector('.container2');
   if (token) {
 
-function back(){
-  form.style.display = "none"
-  add.style.display='block'
- 
-}
+    function back() {
+      form.style.display = "none"
+      add.style.display = 'block'
+
+    }
 
     function userdetails() {
-  
-  
+
+
       fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
         method: 'GET',
         headers: new Headers({
@@ -155,7 +160,8 @@ function back(){
         })
       }).then(res => {
         return res.json()
-      }).then(data => {console.log(data)
+      }).then(data => {
+        console.log(data)
         let table2 = `<table class='--user'>`;
         table2 += `<thead class="thead">
             <th >Email</th>
@@ -183,28 +189,27 @@ function back(){
             table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
             table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
             table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
-            table2 = table2 + '<td>' + `<button class="btn btn-secondary" href=# id="edit" >Edit</button><button class="btn btn-danger" data-toggle="modal" data-target="#delete-user-Modal" id="delete" >Delete</button>` + '</td></tbody>',
+            table2 = table2 + '<td>' + ` <i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
               table2 = table2 + `</tr>`;
           }
         })
         table2 += "</table>";
         container2.innerHTML = table2;
       })
-    }userdetails();
+    } userdetails();
    
-    function sort(){
+    function sort() {
       button = document.getElementById('sort');
-      var grade=document.getElementById('grades').value
+      var grade = document.getElementById('grades').value
       console.log(grade)
       console.log('here')
-      button.addEventListener('click',() => {
         if (token) {
           fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
             method: 'GET',
             headers: new Headers({
               'Authorization': 'token' + ' ' + token,
               'Content-Type': 'application/json',
-    
+
             })
           }).then(res => {
             return res.json()
@@ -224,43 +229,45 @@ function back(){
                 <th scope="col">Action</th>
               </thead>`;
             data.forEach((d, index) => {
-              if ((`${d.profile.standard}` == grade) && (`${d.user_type}`=='is_student')) {
-                  table2 = table2 + `<tbody><tr id=${d.id}>`;
-                  table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
-                  table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
-                  table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
-                  table2 = table2 + '<td class="userfullname">' + `${d.profile?.full_name}` + '</td>';
-                  table2 = table2 + '<td class="userfirstname">' + `${d.profile?.first_name}` + '</td>';
-                  table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
-                  table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
-              
-                  table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
-                  table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
-                  table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
-                  table2 = table2 + '<td>' + `<a href=# id="edit" >Edit</a><a href=# id="delete" >delete</a>` + '</td></tbody>',
-                    table2 = table2 + `</tr>`;
+              if ((`${d.profile.standard}` == grade) && (`${d.user_type}` == 'is_student')) {
+                table2 = table2 + `<tbody><tr id=${d.id}>`;
+                table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
+                table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
+                table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
+                table2 = table2 + '<td class="userfullname">' + `${d.profile?.full_name}` + '</td>';
+                table2 = table2 + '<td class="userfirstname">' + `${d.profile?.first_name}` + '</td>';
+                table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
+                table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
+                table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
+                table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
+                table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
+                table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>`+ '</td></tbody>',
+                  table2 = table2 + `</tr>`;
               }
             })
             table2 += "</table>";
             container2.innerHTML = table2;
           })
         }
-        else {
-          window.location.href = `${host}/login`
-        }
-      })
-    }
+  }
+  let input=document.getElementById('grades')
+  input.addEventListener('keyup',(e)=>{
+      if(e.keyCode===13){
+          sort();
+      }
+  }) 
 
-    function deletestaff(id){
+    function deletestaff(id) {
       url = "https://schooltestproject.herokuapp.com/api/user-details/"
       fetch(`${url}${id}/`, {
         method: 'DELETE',
-        headers : {
-          'Content-Type' : 'application/json',
-          'Authorization':'token'+' '+localStorage.getItem('token')
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'token' + ' ' + localStorage.getItem('token')
         },
-      }).then(res => {res.json()
-      userdetails();
+      }).then(res => {
+       
+        userdetails();
       })
     }
 
@@ -284,7 +291,7 @@ function back(){
       yes = document.getElementById('yes')
       no = document.getElementById('no')
       if (delbutton) {
-        yes.setAttribute( "onClick", `deletestaff(${id})`);
+        yes.setAttribute("onClick", `deletestaff(${id})`);
       }
       if (editbutton) {
         form.style.display = 'grid'
@@ -326,40 +333,40 @@ function back(){
             )
           }).then(response => {
             if (response.status == 200) {
-                console.log("Sucess response", response)
-                messages.innerHTML = 'updated successfully'
-                error_messages.innerHTML= ''
-                userdetails
+              console.log("Sucess response", response)
+              messages.innerHTML = 'updated successfully'
+              error_messages.innerHTML = ''
+              userdetails
             }
             return response.json();
-        }).then(function (data) {
+          }).then(function (data) {
             console.log(data)
-            if (data.status != 'success'){
-            error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-            messages.innerHTML = ''
+            if (data.status != 'success') {
+              error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+              messages.innerHTML = ''
             }
-        })
+          })
         })
       }
     })
     function adduser() {
       form.style.display = 'grid'
       document.getElementById('userDetails').reset();
-     /* var email = 's10@gmail.com'
-      var phone = 9992945420
-      var dob = '2000-02-10'
-      var reg = 's11'
-      var standard = 1
-      var section = 'c'
-      var type = 'is_student'
-      var firstname = 's'
-      var lastname = 'p'
-      var fullname = 'sp'
-      var address = 'home'*/
+      /* var email = 's10@gmail.com'
+       var phone = 9992945420
+       var dob = '2000-02-10'
+       var reg = 's11'
+       var standard = 1
+       var section = 'c'
+       var type = 'is_student'
+       var firstname = 's'
+       var lastname = 'p'
+       var fullname = 'sp'
+       var address = 'home'*/
       var is_dataentry = 'false'
-     
-      button.addEventListener('click', () =>{
-        
+
+      button.addEventListener('click', () => {
+
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         var email = document.getElementById('email').value
         var phone = document.getElementById('phone').value
@@ -374,36 +381,39 @@ function back(){
         var address = document.getElementById('address').value
         var is_dataentry = 'false'
         fetch('https://schooltestproject.herokuapp.com/api/signup/',
-             {
+          {
             method: 'POST',
-            body: JSON.stringify({ 'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type, 
-            'is_data_entry': is_dataentry,'first_name':firstname,'last_name':lastname,'standard':standard,'section':section,'full_name':fullname,'address':address}
+            body: JSON.stringify({
+              'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
+              'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standard, 'section': section, 'full_name': fullname, 'address': address
+            }
             ),
             headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+              'Content-Type': 'application/json',
+              'X-CSRFToken': csrftoken
+              // 'Content-Type': 'application/x-www-form-urlencoded',
             }
-        }).then(response => {
-          if (response.status == 201) {
+          }).then(response => {
+            if (response.status == 201) {
               console.log("Sucess response", response)
               messages.innerHTML = 'created successfully'
-              error_messages.innerHTML= ''
+              error_messages.innerHTML = ''
 
-          }
-          return response.json();
-      }).then(function (data) {
-          console.log(data)
-          if (data.status != 'success'){
-          error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-          messages.innerHTML = ''
-          }
+            }
+            return response.json();
+          }).then(function (data) {
+            console.log(data)
+            if (data.status != 'success') {
+              error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+              messages.innerHTML = ''
+            }
+          })
       })
-        })
-      }
-  } 
-    else {
-      window.location.href = `${host}/login`
     }
+
+  }
+  else {
+    window.location.href = `${host}/login`
+  }
 </script>
 {% endblock %}

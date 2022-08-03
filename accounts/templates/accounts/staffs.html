@@ -73,7 +73,7 @@ aria-hidden="true">
   
     <div class='grid-item'> 
     <label for="dob">DOB:</label><br>
-    <input type="text" id="dob" placeholder="DOB"></div>
+    <input type="date" id="dob" placeholder="DOB"></div>
   
     <div class='grid-item'> 
     <label for="std">Standard:</label><br>
@@ -162,7 +162,7 @@ aria-hidden="true">
                 table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
                 table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
                 table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
-                table2 = table2 + '<td>' + `<button class="btn btn-secondary" href=# id="edit" >Edit</button><button class="btn btn-danger" id="delete" data-toggle="modal" data-target="#delete-staff-Modal" >delete</button>` + '</td></tbody>',
+                table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i class="fa fa-trash-o" id="delete" data-toggle="modal" data-target="#delete-staff-Modal"  ></i>` + '</td></tbody>',
                 table2 = table2 + `</tr>`;
           }})
                 table2 += "</table>";
