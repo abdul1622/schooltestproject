@@ -106,7 +106,7 @@
 
 <p> No of questions : ${(d.no_of_questions).length} </p>
 
-<button type="button" onclick=test_create(${d.id}) class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+<button type="button" onclick=test_create(${d.id}) class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
   Create-Test
 </button>
 </div>
@@ -157,7 +157,7 @@
     let create_btn_container = document.querySelector('.create-btn-container')
     modal_body.innerHTML = `          {% csrf_token %}
           {{ test_form.as_p }}`
-    create_btn_container.innerHTML = `<button type="button" id="test-create-btn" onclick=create(${id}) class="btn btn-primary">Create</button>`
+    create_btn_container.innerHTML = `<button type="button" id="test-create-btn" onclick=create(${id}) class="btn btn-primary ">Create</button>`
     document.getElementById('test-create-btn').style.display = 'block'
   }
 
