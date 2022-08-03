@@ -155,9 +155,13 @@
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         }
 
-        a:hover {
-            color: white;
+        .nav-item :hover {
+            color: rgb(0, 0, 0);
             text-decoration: none;
+        }
+
+        .nav-item {
+            padding: 1%;
         }
 
         .chapterlist-box {
@@ -273,13 +277,15 @@
             height: 6vh;
         }
 
-        .navbar a:hover {
+        .navbar .nav-item a:hover {
             background-color: white;
             color: black;
         }
 
         .navbar li a {
             padding: 1.8vh;
+            margin-left: 2%;
+
         }
 
         .download {
@@ -1957,6 +1963,10 @@
                 width: 100vw;
                 height: 8vh;
             }
+            .navbar li a {
+                padding: 2.8vh;
+                margin-left: 2%;
+            }
 
             .subjects-by-grade .cards {
                 margin: 0% 10% 15%;
@@ -2362,16 +2372,12 @@
                 justify-content: space-around;
                 margin: 7%;
             }
-
-            .chapter-cards {
-                display: grid;
-                width: 33vw;
-                padding-left: 0%;
-                margin: 0% 10% 15%;
-                padding-top: 5%;
-                grid-template-columns: auto auto auto;
-                gap: 8%;
+            .navbar .nav-item a:hover {
+                background-color: white;
+                color: black;
             }
+
+            
 
 
             .question-paper-form label {
@@ -2471,6 +2477,10 @@
 
                 color: black;
 
+            }
+            .navbar .nav-item a:hover {
+                background-color: #14279b;;
+                color:white;
             }
 
             #action {
@@ -2702,10 +2712,10 @@
 
             .navbar li a {
                 font-size: 2.7vw;
-                color: white;
                 padding: 15%;
                 margin: 0;
             }
+           
 
             .navbar {
                 background-color: transparent;
@@ -3032,15 +3042,7 @@
                 top: 0;
             }
 
-            .navbar li:hover {
-                background-color: white;
-                color: black;
-            }
 
-            .navbar a:hover {
-                background-color: transparent;
-                color: #000000;
-            }
 
             .back-btn-nav button {
                 background-color: transparent;
