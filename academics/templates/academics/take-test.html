@@ -63,21 +63,23 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                 answer scripts to be collected.</li>
             <li> Do not continue to write after the examination has ended </li>
         </ol>
-        <p class="text-end"> <button onclick=take() class="btn btn-primary btn-sm">Take Test</button> </p>
+        <p class="text-end"> <button id="start-test-btn" class="btn btn-primary btn-sm">Take Test</button> </p>
+    </div>
+    <div class="question-container">
+
     </div>
 
-    <p>sdfsand</p>
 </div>
     <script>
         var url = window.location.href;
         var text = url.split('/')
         var token = localStorage.getItem("token")
         var id = text.at(-2)
-        var subject,grade;
-        var question_list=new Array();
-        console.log(text.at(-2));
-        console.log(url)
-        function take(){
+        let subject;
+        let grade;
+        let question_list=[];
+        let answer_details = []
+        document.getElementById('start-test-btn').addEventListener('click',()=>{
             document.querySelector('.instructions').innerHTML = ''
             fetch(`http://schooltestproject.herokuapp.com/api/question-paper/${id}/`, {
                 method: 'GET',
@@ -90,15 +92,42 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             }).then(data => {
                 console.log(data)
                 if(data.status=='success'){
-                    grade = data.data.grade_name;
+                    grade=data.data.grade_name
                     subject = data.data.subject_name
+                    for(let i = 0; i < data.data.no_of_questions.length; i++){
+                        answer_details.push(null)
+                    }
+                    console.log(answer_details)
                     for(let i = 0; i < data.data.no_of_questions.length; i++){
                      question_list.push(data.data.no_of_questions[i])   
                       }
-                     
+                                  fetch(`http://schooltestproject.herokuapp.com/api/question-paper/${id}/`, {
+                method: 'GET',
+                headers: {
+                    'content-Type': 'application/json',
+                    'Authorization': 'token' + ' ' + token,
                 }
+            }).then(res => {
+                return res.json()
+            }).then(data => {
+                    
+                      fetch(`http://schooltestproject.herokuapp.com/api/question/${question_list[0]}/`, {
+                        method: 'GET',
+                        headers: {
+                            'content-Type': 'application/json',
+                            'Authorization': 'token' + ' ' + token,
+                        }
+                    }).then(res => {
+                        return res.json()
+                    }).then(data => {
+                    document.querySelector('question-container').innerHTML = `<div> 
+                        <h1>
+                        `
+                        })
+         })
         })
-         }
+         console.log(question_list[0], grade)
+
        
       
            
