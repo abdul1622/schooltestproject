@@ -324,7 +324,7 @@ class QuestionList(APIView):
             answer_file,status =  render_to_pdf2('academics/answer_file.html','answer_files',None,context1)
             if type == 'save':
                 created_by = self.request.user.email
-                question_paper = Question_Paper.objects.create(grade=grade,subject=subject,created_by=created_by)
+                question_paper = Question_Paper.objects.create(grade=grade,subject=subject_obj,created_by=created_by)
                 for question in questions:
                     question_paper.no_of_questions.append(question.id)
                 question_paper,status = render_to_pdf2('academics/question.html','question_files',question_paper,context)

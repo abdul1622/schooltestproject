@@ -101,38 +101,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     for(let i = 0; i < data.data.no_of_questions.length; i++){
                      question_list.push(data.data.no_of_questions[i])   
                       }
-                                  fetch(`http://schooltestproject.herokuapp.com/api/question-paper/${id}/`, {
-                method: 'GET',
-                headers: {
-                    'content-Type': 'application/json',
-                    'Authorization': 'token' + ' ' + token,
-                }
-            }).then(res => {
-                return res.json()
-            }).then(data => {
-                    
-                      fetch(`http://schooltestproject.herokuapp.com/api/question/${question_list[0]}/`, {
-                        method: 'GET',
-                        headers: {
-                            'content-Type': 'application/json',
-                            'Authorization': 'token' + ' ' + token,
-                        }
-                    }).then(res => {
-                        return res.json()
-                    }).then(data => {
-                    document.querySelector('question-container').innerHTML = `<div> 
-                        <h1>
-                        `
-                        })
-         })
-        })
-         console.log(question_list[0], grade)
-
-       
-      
-           
-   
-  
+                    }
+        )}
       
     </script>
 </body>
