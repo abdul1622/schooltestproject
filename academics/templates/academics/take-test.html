@@ -16,7 +16,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
     <style>
-        .test-container{
+        .test-container {
             box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px, rgb(10 37 64 / 35%) 0px -2px 6px 0px inset;
             padding: 1% 3%;
             margin: 7% 12%;
@@ -30,46 +30,72 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             text-align: center;
             margin: 3% auto;
         }
+
+        input.fib {
+            margin-left: 0.5%;
+            border: none;
+            border-bottom: 1px gray dashed;
+            outline: none;
+        }
+
+        input.fib:focus {
+            border: none;
+            outline: none;
+            border-bottom: 1px gray dashed;
+        }
+
+        .hr1 {
+            margin-left: -3.4%;
+            width: 107%;
+
+        }
+
+        .hr2 {
+            margin-left: -6%;
+            width: 109%;
+        }
     </style>
 </head>
 
 <body>
     <div class="test-container">
-    <div class="instructions">
-        <h3>INSTRUCTIONS TO THE STUDENTS DURING THE EXAM</h3>
-        <ol>
-            <li>College uniform and ID card is a must during examination time.</li>
-            <li> Arrive at the examination venue at least 15 minutes before the commencement of examination.</li>
-            <li>Students are required to bring their own writing and mathematical instruments. No borrowing
-                lending or exchange of any material is allowed during the exam.</li>
-            <li>Only essential writing materials are allowed on the student’s desk. All bags and books should be left
-                at the front of the respective classroom.</li>
-            <li>Examination will be conducted during the allocated time shown in the examination timetable.</li>
-            <li> Any unauthorised materials or devices found in your possession will be confiscated and you will be
-                liable to disciplinary action.</li>
-            <li>Students who are late will not be given extra time.</li>
-            <li> Students are to follow all instructions given by the invigilator.</li>
-            <li> Check the course title to ensure you have the correct examination question paper.</li>
-            <li>Students are not allowed to write anything on the question paper except their name and roll no.</li>
-            <li> Student should write their answers in black or blue ink. Make sure you bring some spare pens with
-                you.</li>
-            <li> Leave the examination hall quickly and quietly after the exam. Remember to take all your belongings
-                with you.</li>
-            <li> You are not allowed to leave the examination hall temporarily or otherwise for any reason what so
-                ever until the examination time is over.</li>
-            <li> Raise your hand if you wish to communicate with the invigilator. You are not allowed to
-                communicate by word or mouth.</li>
-            <li> All candidates must remain seated throughout this period for invigilators to properly account for all
-                answer scripts to be collected.</li>
-            <li> Do not continue to write after the examination has ended </li>
-        </ol>
-        <p class="text-end"> <button id="start-test-btn" class="btn btn-primary btn-sm">Take Test</button> </p>
-    </div>
-    <div class="question-container">
+        <div class="instructions">
+            <h3>INSTRUCTIONS TO THE STUDENTS DURING THE EXAM</h3>
+            <ol>
+                <li>College uniform and ID card is a must during examination time.</li>
+                <li> Arrive at the examination venue at least 15 minutes before the commencement of examination.</li>
+                <li>Students are required to bring their own writing and mathematical instruments. No borrowing
+                    lending or exchange of any material is allowed during the exam.</li>
+                <li>Only essential writing materials are allowed on the student’s desk. All bags and books should be
+                    left
+                    at the front of the respective classroom.</li>
+                <li>Examination will be conducted during the allocated time shown in the examination timetable.</li>
+                <li> Any unauthorised materials or devices found in your possession will be confiscated and you will be
+                    liable to disciplinary action.</li>
+                <li>Students who are late will not be given extra time.</li>
+                <li> Students are to follow all instructions given by the invigilator.</li>
+                <li> Check the course title to ensure you have the correct examination question paper.</li>
+                <li>Students are not allowed to write anything on the question paper except their name and roll no.</li>
+                <li> Student should write their answers in black or blue ink. Make sure you bring some spare pens with
+                    you.</li>
+                <li> Leave the examination hall quickly and quietly after the exam. Remember to take all your belongings
+                    with you.</li>
+                <li> You are not allowed to leave the examination hall temporarily or otherwise for any reason what so
+                    ever until the examination time is over.</li>
+                <li> Raise your hand if you wish to communicate with the invigilator. You are not allowed to
+                    communicate by word or mouth.</li>
+                <li> All candidates must remain seated throughout this period for invigilators to properly account for
+                    all
+                    answer scripts to be collected.</li>
+                <li> Do not continue to write after the examination has ended </li>
+            </ol>
+            <p class="text-end"> <button id="start-test-btn" class="btn btn-primary btn-sm">Take Test</button> </p>
+        </div>
+        <div class="question-container">
 
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </div>
-
-</div>
     <script>
         var url = window.location.href;
         var text = url.split('/')
@@ -77,9 +103,13 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         var id = text.at(-2)
         let subject;
         let grade;
-        let question_list=[];
+        let question_no = 0;
+        let question_list = [];
         let answer_details = []
-        document.getElementById('start-test-btn').addEventListener('click',()=>{
+
+        // 
+
+        document.getElementById('start-test-btn').addEventListener('click', () => {
             document.querySelector('.instructions').innerHTML = ''
             fetch(`http://schooltestproject.herokuapp.com/api/question-paper/${id}/`, {
                 method: 'GET',
@@ -91,19 +121,192 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                 return res.json()
             }).then(data => {
                 console.log(data)
-                if(data.status=='success'){
-                    grade=data.data.grade_name
+                if (data.status == 'success') {
+                    grade = data.data.grade_name
                     subject = data.data.subject_name
-                    for(let i = 0; i < data.data.no_of_questions.length; i++){
+                    for (let i = 0; i < data.data.no_of_questions.length; i++) {
                         answer_details.push(null)
                     }
                     console.log(answer_details)
-                    for(let i = 0; i < data.data.no_of_questions.length; i++){
-                     question_list.push(data.data.no_of_questions[i])   
-                      }
+                    for (let i = 0; i < data.data.no_of_questions.length; i++) {
+                        question_list.push(data.data.no_of_questions[i])
                     }
-        )}
-      
+                    fetch(`http://schooltestproject.herokuapp.com/api/question-paper/${id}/`, {
+                        method: 'GET',
+                        headers: {
+                            'content-Type': 'application/json',
+                            'Authorization': 'token' + ' ' + token,
+                        }
+                    }).then(res => {
+                        return res.json()
+                    }).then(data => {
+                        if (data.status == 'success') {
+                            data.data.no_of_questions.forEach((d, index) => {
+                                fetch(`http://schooltestproject.herokuapp.com/api/question/${d}/`, {
+                                    method: 'GET',
+                                    headers: {
+                                        'content-Type': 'application/json',
+                                        'Authorization': 'token' + ' ' + token,
+                                    }
+                                }).then(res => {
+                                    return res.json()
+                                }).then(data => {
+                                    answer_details[question_no] = {
+                                        'id': data.data.id,
+                                        'question': data.data.question,
+                                        'question_type': data.data.question_type,
+                                        'realanswer': data.data.answers.answer,
+                                        'option_a': data.data.answers.option_a,
+                                        'option_b': data.data.answers.option_b,
+                                        'option_c': data.data.answers.option_c,
+                                        'option_d': data.data.answers.option_d,
+                                        'answer': null,
+                                    }
+                                    // console.log(answer_details)
+                                    question_no += 1
+                                    let question_details = answer_details[0]
+                                    if (question_no == 1) {
+                                        let question_content;
+                                        if (question_details.question_type == 'MCQ') {
+                                            question_content = `<div> 
+                       <hr class="hr1"> <p> ${question_no}). ${data.data.question}</p> 
+                        <ol type="a">
+                            <li><input type="radio" class='option_a_${question_details.id}' id="option_a_${question_details.id}" name="answer_${question_details.id}" value='option_a'> ${question_details.option_a}</li>
+                            <li><input type="radio" class='option_b_${question_details.id}' id="option_b_${question_details.id}" name="answer_${question_details.id}" value='option_b'> ${question_details.option_b}</li>
+                            <li><input type="radio" class='option_c_${question_details.id}' id="option_c_${question_details.id}" name="answer_${question_details.id}" value='option_c'> ${question_details.option_c}</li>
+                            <li><input type="radio" class='option_d_${question_details.id}' id="option_d_${question_details.id}" name="answer_${question_details.id}" value='option_d'> ${question_details.option_d}</li>
+                        <hr class="hr2"><ol>
+                            </div>
+                        
+                        <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(1,'next')> Next </button> </p>
+                        `
+                                            // console.log()
+                                            // console.log(document.querySelector(`input[name="answer_${data.data.id}"]`));
+                                            document.querySelector('.question-container').innerHTML = question_content
+                                        }
+                                        else {
+                                            question_content = `<div>   <p> ${question_no}). ${data.data.question} <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}"> <p> </div>`
+                                        }
+                                    }
+                                })
+                            });
+                        }
+                    })
+                    console.log(answer_details)
+                }
+            })
+        })
+
+        // prev next
+
+        function next(n, action) {
+
+
+            let action_number;
+            if (action == 'next') {
+                action_number = n - 1;
+            } else {
+                action_number = n + 1;
+            }
+
+
+
+            console.log(answer_details[n - 1])
+            console.log(answer_details[n])
+            console.log(answer_details[n + 1])
+
+            let question_details = answer_details[n]
+            // saving answer
+
+            get_ans_id = answer_details[action_number].id
+            var get_ans_fib = document.getElementsByName(`answer_${get_ans_id}`);
+            // answer_details[n].answer = get_ans_fib.value
+            var get_ans = document.getElementsByName(`answer_${get_ans_id}`);
+            console.log(get_ans)
+            let fib_answer = document.querySelector(`.fib_${get_ans_id}`)
+            if (fib_answer) {
+                console.log(fib_answer.value)
+                answer_details[action_number].answer = fib_answer.value
+            }
+
+            let question_content = '';
+            for (i = 0; i < get_ans.length; i++) {
+                if (get_ans[i].checked) {
+                    answer_details[action_number].answer = get_ans[i].value;
+                }
+            }
+
+
+
+            // display
+
+            //fill 
+            if (question_details.question_type != 'MCQ' && question_details.answer) {
+                console.log(`.fib_${question_details.id}`)
+                // document.querySelector(`.fib_${question_details.id}`).value = question_details.answer 
+            }
+
+
+            let options = ['option_a', 'option_b', 'option_c', 'option_d']
+
+            if (question_details.question_type == 'MCQ') {
+                question_content += `<div><p> ${n + 1}). ${question_details.question}</p> 
+                        <ol type="a">`
+                for (i = 0; i < options.length; i++) {
+                    console.log(question_details['option_a'])
+                    if (question_details.answer == options[i]) {
+                        question_content += `<li><input checked type="radio" id="${options[i]}_${question_details.id}" name="answer_${question_details.id}" value='${options[i]}'> ${question_details[options[i]]}</li>`
+                    } else {
+                        question_content += `<li><input type="radio" id="${options[i]}_${question_details.id}" name="answer_${question_details.id}" value='${options[i]}'> ${question_details[options[i]]}</li>`
+                    }
+                }
+                question_content += `<ol>
+                            </div>
+                        `
+            } else {
+                if (question_details.answer) {
+                    question_content = `<div>   <p> ${n + 1}). ${question_details.question}<span class=''> <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}" value='${question_details.answer}'> </span></p> </div>`
+                } else {
+                    question_content = `<div>   <p> ${n + 1}). ${question_details.question}<span class=''> <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}"> </span></p> </div>`
+                }
+            }
+
+
+
+
+            if (n == (answer_details.length) - 1) {
+                question_content += ` <p class='d-flex justify-content-between mb-3'> <button  class="btn btn-primary btn-sm" onclick=next(${n - 1},'prev')> Prev </button> <button  class="btn btn-success btn-sm">submit</button> </p> `
+            }
+            else if (n == 0) {
+                question_content += ` <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(${n + 1},'next')> Next </button> </p> `
+            } else {
+                question_content += ` <p class='d-flex justify-content-between mb-3'> <button class="btn btn-primary btn-sm" onclick=next(${n - 1},'prev')> Prev </button> <button class="btn btn-primary btn-sm" onclick=next(${n + 1},'next')> Next </button> </p> `
+            }
+
+
+
+
+            document.querySelector('.question-container').innerHTML = question_content
+
+            // get input as checked
+            var choosed_id = question_details.id
+            // if(question_details.answer){
+            //           var choosed = document.querySelector(`.${question_details.answer}_${choosed_id}`);
+            //           console.log(choosed)
+            //           console.log(`${question_details.answer}_${choosed_id}`)
+            //           choosed.checked = true;
+
+
+            // }
+
+        }
+    // <p class='text-end'> <button onclick=next(${n+1})> Next </button> </p>
+
+
+
+
+
+
     </script>
 </body>
 
