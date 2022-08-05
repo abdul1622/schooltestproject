@@ -36,7 +36,7 @@ urlpatterns=[
     path('question-paper/<int:pk>/',QuestionPaperView.as_view()),
          path('test/',TestCreateView.as_view()),
     path('test/<int:pk>/',TestEditView.as_view()),
-    path('test-history/',TestCreateView.as_view()),
+    path('test-history/',TestResultCreateView.as_view()),
   path('test-history/<int:pk>/',TestResultEditView.as_view()),
     path('ajax/load-subject/',load_subject_chapter,name='ajax_load_subjects'),
 ]
