@@ -196,6 +196,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         <div class="answer-data"></div>
     </div>
     <script>
+        var host = window.location.protocol + "//" + window.location.host;
         var url = window.location.href;
         var text = url.split('/')
         var token = localStorage.getItem("token")
@@ -213,6 +214,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         let total_marks;
         let duration;
         function test_details() {
+            console.log(parseInt(1.0345983745))
             fetch(`https://schooltestproject.herokuapp.com/api/test/${id}/`, {
                 method: 'GET',
                 headers: {
@@ -457,7 +459,10 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                 }
 
             }
-            let score = (correct_answer / (answer_details.length)) * 100
+            let score =(correct_answer / (answer_details.length))*100
+            console.log(score)
+            score = parseInt(score)
+            console.log(score)
             let result;
             if (score < 35) {
                 result = 'fail'
@@ -485,14 +490,18 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     return response.json()
                 }).then(data => {
                     console.log(data)
-                    document.querySelector('.question-container').innerHTML = `<p class='text-success text-center '>Test submitted successfully</p>`
+                    document.querySelector('.question-container').innerHTML = `<p class='text-success text-center '>Test submitted successfully<button class='btn btn-primary btn-sm ' onclick=redirect()>close</button></p>`
                     document.querySelector('.question-direction').innerHTML = ''
+                    
                     if (data.status != 'success') {
                         console.log(data)
                        
                     }
                 })
-
+              
+        }
+        function redirect(){
+            window.location.href = `${host}/home`
         }
 
     </script>
