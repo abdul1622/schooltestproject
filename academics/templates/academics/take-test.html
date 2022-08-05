@@ -185,7 +185,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     }
                     if (data.status == 'success') {
                         data.data.no_of_questions.forEach((d, index) => {
-                            fetch(`http://schooltestproject.herokuapp.com/api/question/${d}/`, {
+                            fetch(`https://schooltestproject.herokuapp.com/api/question/${d}/`, {
                                 method: 'GET',
                                 headers: {
                                     'content-Type': 'application/json',
