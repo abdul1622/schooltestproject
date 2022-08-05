@@ -196,5 +196,4 @@ class TestSerializer(serializers.ModelSerializer):
 class TestResultSerializer(serializers.ModelSerializer):
     class Meta:
         model = TestResult
-        fields = 'all'
-        
+        fields = '__all__'
