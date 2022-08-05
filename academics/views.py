@@ -7,6 +7,7 @@ from rest_framework.generics import (
     RetrieveUpdateDestroyAPIView,
     ListCreateAPIView,
     ListAPIView,
+    RetrieveDestroyAPIView,
     )
 from accounts.permission import IsAdminUser, IsStaffUser
 from rest_framework.permissions import IsAuthenticated,AllowAny
@@ -35,6 +36,7 @@ from .serializers import (
     Question_answer_serializer,
     questionanswerserializer,
     TestSerializer,
+    TestResultSerializer,
     )
 from .models import Question, Subject,Grade,Chapter,Question_Paper,Answers
 from accounts.models import User
@@ -466,7 +468,7 @@ class TestEditView(RetrieveUpdateDestroyAPIView):
         try:
             queryset = Test.objects.get(pk=pk)
         except:
-            return Response({'status':'failure',"data": "Subject doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({'status':'failure',"data": "Test doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
         serializer = TestSerializer(queryset)
         return Response(serializer.data,status=HTTP_200_OK)
     
@@ -477,4 +479,44 @@ class TestEditView(RetrieveUpdateDestroyAPIView):
             serializer.save()
             return Response({"status": "success",'data':serializer.data},status=HTTP_200_OK)
         return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
+
+class TestResultCreateView(CreateAPIView):
+
+    serializer_class= TestResultSerializer
+    queryset= TestResult.objects.all()
+    permission_classes=[AllowAny]
+
+    def get(self, request, format=None):
+        queryset= TestResult.objects.all()
+        serializer = TestResultSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def create(self, request):
+        serializer = TestResultSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": "success",'data':serializer.data},status=HTTP_201_CREATED)   
+        return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
+        
+        
+class TestResultEditView(RetrieveDestroyAPIView):
+    serializer_class = TestResultSerializer
+    permission_classes = [AllowAny]
+    queryset = TestResult.objects.all()
+
+    def retrieve(self, request,pk):
+        try:
+            queryset = TestResult.objects.get(pk=pk)
+        except:
+            return Response({'status':'failure',"data": "Test result doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
+        serializer = TestResultSerializer(queryset)
+        return Response(serializer.data,status=HTTP_200_OK)
+    
+    # def update(self,request,pk):
+    #     test = TestResult.objects.get(pk=pk)
+    #     serializer = TestResultSerializer(test,data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response({"status": "success",'data':serializer.data},status=HTTP_200_OK)
+    #     return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
  

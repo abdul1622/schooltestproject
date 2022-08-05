@@ -4,6 +4,8 @@ from django.db import DatabaseError, models
 from django.core.validators import MaxValueValidator,MinValueValidator
 from django.contrib.postgres.fields import ArrayField
 import re
+
+
 from accounts.models import User
 from django.forms import IntegerField
 # Create your models here.
@@ -156,7 +158,9 @@ class TestResult(models.Model):
     question_paper = models.ForeignKey(Question_Paper,on_delete=models.DO_NOTHING,null=True)
     result = models.CharField(max_length=50)
     score = models.PositiveIntegerField()
-
+    correct_answer = models.IntegerField(null=True)
+    wrong_answer = models.IntegerField(null=True)
+    unanswered_questions = models.IntegerField(null=True)
     def __str__(self):
         return self.result
         

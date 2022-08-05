@@ -1,7 +1,9 @@
+from dataclasses import field
 from operator import sub
+from pyexpat import model
 from rest_framework import serializers
 import re
-from .models import Grade, Question_Paper,Subject,Chapter,Answers,Question,Test
+from .models import Grade, Question_Paper,Subject,Chapter,Answers,Question,Test,TestResult
 
 
 class GradeSerializer(serializers.ModelSerializer):
@@ -191,3 +193,8 @@ class TestSerializer(serializers.ModelSerializer):
         model = Test
         fields = ['id','grade','grade_name','subject','subject_name','question_paper','created_staff_id','duration','marks','remarks','description']
     
+class TestResultSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TestResult
+        fields = 'all'
+        
