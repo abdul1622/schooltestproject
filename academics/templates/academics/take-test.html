@@ -78,13 +78,13 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         }
 
         .answer-data {
-            padding: 2%;
-            background-color: grey;
+            /* padding: 2%; */
+            /* background-color: grey; */
         }
-
+/* 
         .question-container {
             min-height: 43vh;
-        }
+        } */
     </style>
 </head>
 
@@ -142,11 +142,37 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         let question_list = [];
         let answer_details = []
 
+        let question_paper_id;
+        let grade_name;
+        let subject_name;
+        let remarks;
+        let total_marks;
+        let duration;
         // 
+        function test_details() {
 
+            fetch(`https://schooltestproject.herokuapp.com/api/test/${id}/`, {
+                method: 'GET',
+                headers: {
+                    'content-Type': 'application/json',
+                    'Authorization': 'token' + ' ' + token,
+                }
+            }).then(res => {
+                return res.json()
+            }).then(data => {
+                console.log(data)
+                question_paper_id = data.question_paper
+                grade_name = data.grade_name;
+                subject_name = data.subject_name;
+                remarks = data.remarks;
+                total_marks = data.marks;
+                duration = data.duration;
+            })
+        }
+        test_details();
         document.getElementById('start-test-btn').addEventListener('click', () => {
             document.querySelector('.instructions').innerHTML = ''
-            fetch(`http://schooltestproject.herokuapp.com/api/question-paper/${id}/`, {
+            fetch(`http://schooltestproject.herokuapp.com/api/question-paper/${question_paper_id}/`, {
                 method: 'GET',
                 headers: {
                     'content-Type': 'application/json',
@@ -166,46 +192,41 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     for (let i = 0; i < data.data.no_of_questions.length; i++) {
                         question_list.push(data.data.no_of_questions[i])
                     }
-                    fetch(`http://schooltestproject.herokuapp.com/api/question-paper/${id}/`, {
-                        method: 'GET',
-                        headers: {
-                            'content-Type': 'application/json',
-                            'Authorization': 'token' + ' ' + token,
-                        }
-                    }).then(res => {
-                        return res.json()
-                    }).then(data => {
-                        if (data.status == 'success') {
-                            data.data.no_of_questions.forEach((d, index) => {
-                                fetch(`http://schooltestproject.herokuapp.com/api/question/${d}/`, {
-                                    method: 'GET',
-                                    headers: {
-                                        'content-Type': 'application/json',
-                                        'Authorization': 'token' + ' ' + token,
-                                    }
-                                }).then(res => {
-                                    return res.json()
-                                }).then(data => {
-                                    answer_details[question_no] = {
-                                        'id': data.data.id,
-                                        'question': data.data.question,
-                                        'question_type': data.data.question_type,
-                                        'realanswer': data.data.answers.answer,
-                                        'option_a': data.data.answers.option_a,
-                                        'option_b': data.data.answers.option_b,
-                                        'option_c': data.data.answers.option_c,
-                                        'option_d': data.data.answers.option_d,
-                                        'answer': null,
-                                        'seen': false,
-                                    }
-                                    // console.log(answer_details)
-                                    question_no += 1
-                                    let question_details = answer_details[0]
-                                    answer_details[0].seen = true;
-                                    if (question_no == 1) {
-                                        let question_content;
-                                        if (question_details.question_type == 'MCQ') {
-                                            question_content = `<div> 
+                    if (data.status == 'success') {
+                        data.data.no_of_questions.forEach((d, index) => {
+                            fetch(`http://schooltestproject.herokuapp.com/api/question/${d}/`, {
+                                method: 'GET',
+                                headers: {
+                                    'content-Type': 'application/json',
+                                    'Authorization': 'token' + ' ' + token,
+                                }
+                            }).then(res => {
+                                return res.json()
+                            }).then(data => {
+                                answer_details[question_no] = {
+                                    'id': data.data.id,
+                                    'question': data.data.question,
+                                    'question_type': data.data.question_type,
+                                    'correct_answer': data.data.answers.answer,
+                                    'option_a': data.data.answers.option_a,
+                                    'option_b': data.data.answers.option_b,
+                                    'option_c': data.data.answers.option_c,
+                                    'option_d': data.data.answers.option_d,
+                                    'answer': null,
+                                    'seen': false,
+                                }
+                                if (data.data.question_type != 'MCQ') {
+                                    answer_details[question_no].correct_answer = answer_details[question_no][(answer_details[question_no].correct_answer)]
+                                    console.log(answer_details[question_no].correct_answer, answer_details[question_no][(answer_details[question_no].correct_answer)])
+                                }
+                                // console.log(answer_details)
+                                question_no += 1
+                                let question_details = answer_details[0]
+                                answer_details[0].seen = true;
+                                if (question_no == 1) {
+                                    let question_content;
+                                    if (question_details.question_type == 'MCQ') {
+                                        question_content = `<div> 
                        <hr class="hr1"> <p> ${question_no}). ${data.data.question}</p> 
                         <ol type="a">
                             <li><input type="radio" class='option_a_${question_details.id}' id="option_a_${question_details.id}" name="answer_${question_details.id}" value='option_a'> ${question_details.option_a}</li>
@@ -217,20 +238,19 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                         
                         <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(0,1)> Next </button> </p>
                         `
-                                            // console.log()
-                                            // console.log(document.querySelector(`input[name="answer_${data.data.id}"]`));
-                                            document.querySelector('.question-container').innerHTML = question_content
-                                        }
-                                        else {
-                                            question_content = `<div>   <p> ${question_no}). ${data.data.question} <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}"> <p>
+                                        // console.log()
+                                        // console.log(document.querySelector(`input[name="answer_${data.data.id}"]`));
+                                        document.querySelector('.question-container').innerHTML = question_content
+                                    }
+                                    else {
+                                        question_content = `<div>   <p> ${question_no}). ${data.data.question} <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}"> <p>
                                                 <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(0,1)> Next </button> </p>
                                                 </div>`
-                                        }
                                     }
-                                })
-                            });
-                        }
-                    })
+                                }
+                            })
+                        });
+                    }
                     console.log(answer_details)
                     first_question(0);
                 }
@@ -315,7 +335,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
 
 
             if (n == (answer_details.length) - 1) {
-                question_content += ` <p class='d-flex justify-content-between mb-3'> <button  class="btn btn-primary btn-sm" onclick=next(${n},${n - 1})> Prev </button> <button  class="btn btn-success btn-sm">submit</button> </p> `
+                question_content += ` <p class='d-flex justify-content-between mb-3'> <button  class="btn btn-primary btn-sm" onclick=next(${n},${n - 1})> Prev </button> <button  class="btn btn-success btn-sm" id='submit '>submit</button> </p> `
             }
             else if (n == 0) {
                 question_content += ` <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(${n},${n + 1})> Next </button> </p> `
