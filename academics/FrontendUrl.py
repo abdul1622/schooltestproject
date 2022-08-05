@@ -15,7 +15,6 @@ urlpatterns=[
     path('question-paper',question_paperview,name='question_paperview'),
     path('question-create',questioncreate),
     path('test-create',test_create),
-    path('test-list',test_list)
-
-
+    path('test-list',test_list),
+    path('take-test/<int:pk>/',take_test),
 ]

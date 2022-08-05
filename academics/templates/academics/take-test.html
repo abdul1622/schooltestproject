@@ -1,0 +1,111 @@
+<!-- var url = 'http://www.site.com/234234234';
+var id = url.substring(url.lastIndexOf('/') + 1); -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXAMINATION</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+    <style>
+        .test-container{
+            box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px, rgb(10 37 64 / 35%) 0px -2px 6px 0px inset;
+            padding: 1% 3%;
+            margin: 7% 12%;
+        }
+
+        .instructions li {
+            line-height: 200%;
+        }
+
+        .instructions h3 {
+            text-align: center;
+            margin: 3% auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-container">
+    <div class="instructions">
+        <h3>INSTRUCTIONS TO THE STUDENTS DURING THE EXAM</h3>
+        <ol>
+            <li>College uniform and ID card is a must during examination time.</li>
+            <li> Arrive at the examination venue at least 15 minutes before the commencement of examination.</li>
+            <li>Students are required to bring their own writing and mathematical instruments. No borrowing
+                lending or exchange of any material is allowed during the exam.</li>
+            <li>Only essential writing materials are allowed on the student’s desk. All bags and books should be left
+                at the front of the respective classroom.</li>
+            <li>Examination will be conducted during the allocated time shown in the examination timetable.</li>
+            <li> Any unauthorised materials or devices found in your possession will be confiscated and you will be
+                liable to disciplinary action.</li>
+            <li>Students who are late will not be given extra time.</li>
+            <li> Students are to follow all instructions given by the invigilator.</li>
+            <li> Check the course title to ensure you have the correct examination question paper.</li>
+            <li>Students are not allowed to write anything on the question paper except their name and roll no.</li>
+            <li> Student should write their answers in black or blue ink. Make sure you bring some spare pens with
+                you.</li>
+            <li> Leave the examination hall quickly and quietly after the exam. Remember to take all your belongings
+                with you.</li>
+            <li> You are not allowed to leave the examination hall temporarily or otherwise for any reason what so
+                ever until the examination time is over.</li>
+            <li> Raise your hand if you wish to communicate with the invigilator. You are not allowed to
+                communicate by word or mouth.</li>
+            <li> All candidates must remain seated throughout this period for invigilators to properly account for all
+                answer scripts to be collected.</li>
+            <li> Do not continue to write after the examination has ended </li>
+        </ol>
+        <p class="text-end"> <button onclick=take() class="btn btn-primary btn-sm">Take Test</button> </p>
+    </div>
+
+    <p>sdfsand</p>
+</div>
+    <script>
+        var url = window.location.href;
+        var text = url.split('/')
+        var token = localStorage.getItem("token")
+        var id = text.at(-2)
+        var subject,grade;
+        var question_list=new Array();
+        console.log(text.at(-2));
+        console.log(url)
+        function take(){
+            document.querySelector('.instructions').innerHTML = ''
+            fetch(`http://schooltestproject.herokuapp.com/api/question-paper/${id}/`, {
+                method: 'GET',
+                headers: {
+                    'content-Type': 'application/json',
+                    'Authorization': 'token' + ' ' + token,
+                }
+            }).then(res => {
+                return res.json()
+            }).then(data => {
+                console.log(data)
+                if(data.status=='success'){
+                    grade = data.data.grade_name;
+                    subject = data.data.subject_name
+                    for(let i = 0; i < data.data.no_of_questions.length; i++){
+                     question_list.push(data.data.no_of_questions[i])   
+                      }
+                     
+                }
+        })
+         }
+       
+      
+           
+   
+  
+      
+    </script>
+</body>
+
+</html>
