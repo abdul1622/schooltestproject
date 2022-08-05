@@ -126,6 +126,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         var url = window.location.href;
         var text = url.split('/')
         var token = localStorage.getItem("token")
+        var student_id = localStorage.getItem("id")
         var id = text.at(-2)
         let subject;
         let grade;
@@ -387,7 +388,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             document.querySelector('.question-path').innerHTML = content
             document.querySelector('.answer-data').innerHTML = `<p> Unvisited visited questions - ${unvisited}</p>
             <p> Answered questions - ${answered} </p>
-            <p> Unanswered questions - ${unanswered} </p> 
+            <p> Unanswered questions - ${unanswered -1 } </p> 
             `
         }
         function submit() {
@@ -404,10 +405,50 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     unanswered += 1
                 }
 
+
+/*
+                student_id = models.ForeignKey(User,on_delete=models.DO_NOTHING,null=True)
+                test_id = models.ForeignKey(Test,on_delete=models.DO_NOTHING,null=True)
+                question_paper = models.ForeignKey(Question_Paper,on_delete=models.DO_NOTHING,null=True)
+                result = models.CharField(max_length=50)
+                score = models.PositiveIntegerField()
+                correct_answer = models.IntegerField(null=True)
+                wrong_answer = models.IntegerField(null=True)
+                unanswered_questions
+*/
             }
             let score = (correct_answer/(answer_details.length))* 100
+            let result;
+            if(score < 35){
+                result = 'fail'
+            }else{
+                result = 'pass'
+            }
             console.log('c',correct_answer,'u',unanswered,'w',wrong_answer,score)
-            
+            fetch('https://schooltestproject.herokuapp.com/api/test-history/',
+            {
+                method: 'POST',
+                body: JSON.stringify({ 'student_id': student_id, 'test_id': id, 'question_paper': question_paper_id,'result':result,'score':score,'correct_answer':correct_answer,'wrong_answer':wrong_answer,'unanswered_questions':unanswered }
+                ),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'token' + ' ' + token,
+                },
+            }).then(function (response) {
+                if (response.status == 201) {
+                    console.log("Sucess response", response)
+                    // get();
+                } else {
+                    console.log(response);
+                }
+                return response.json()
+            }).then(data => {
+                console.log(data)
+                if (data.status != 'success') {
+                console.log(data)
+                }
+            })
         }
 
     </script>
