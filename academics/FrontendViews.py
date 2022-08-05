@@ -66,7 +66,8 @@ def test_create(request):
 
 def test_list(request):
     return render(request,'academics/student-test-list-page.html')
-    
+def testhistory(request):
+    return render(request,'academics/test-history.html')   
 def take_test(request,pk):
     return render(request,'academics/take-test.html')
 

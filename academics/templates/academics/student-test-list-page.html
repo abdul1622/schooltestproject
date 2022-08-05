@@ -19,11 +19,32 @@
     let messages = document.querySelector('.messages')
     let error_messages = document.querySelector('.error-messages')
     let head = document.querySelector('.header')
+    let history=[]
     head.style.display = 'none'
     let set_id = false
     url = 'https://schooltestproject.herokuapp.com/api/test/'
     var container = document.querySelector('.test-list')
 
+  fetch('https://schooltestproject.herokuapp.com/api/test-history/',
+            {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'token' + ' ' + token,
+                },
+            }).then(function (response) {
+                return response.json()
+            }).then(data => {
+                console.log(data)
+                console.log(data.length)
+                for (i = 0; i < data.length; i++) {
+                  history.push(data[i])
+                }
+
+                if (data.status != 'success') {
+                console.log(data)
+                }
+            })
+            console.log(history)
 function get_user_standard() {
         fetch('https://schooltestproject.herokuapp.com/api/profile/', {
       method: 'GET',
@@ -67,6 +88,13 @@ function get_test(standard){
     }).then(data => {
         data.forEach((d, index) => {
         if(d.grade_name = standard){
+          let flag=true
+          for (i = 0; i < history.length; i++) {
+           if ( history[i].test_id == d.id ){
+            flag=false
+           }
+          }
+          if (flag==true){
             content = content + `<div class="questions-paper-card" id='${d.id}'>
 <p> Subject : <span class="subject"> ${d.subject_name}<span></p>
 <p > Remarks : <span class="remarks">${d.remarks}</span></p>
@@ -78,7 +106,8 @@ function get_test(standard){
 <p> Description : ${d.description} </p>
 <p class='text-right'><button class='btn btn-primary btn-sm' onclick=take(${d.id})>take test</button></p> 
 </div>
-`}
+`}}
+
     })
     container.innerHTML = content;
     })

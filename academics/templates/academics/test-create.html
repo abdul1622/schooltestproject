@@ -58,6 +58,7 @@
 
 </div>
 <script>
+  var userId=localStorage.getItem('id')
   var token = localStorage.getItem('token')
   let head = document.querySelector('.header')
   // let test_messages = document.querySelector('.test-messages')
@@ -176,7 +177,7 @@
       fetch('https://schooltestproject.herokuapp.com/api/test/',
         {
           method: 'POST',
-          body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_id, 'created_staff_id': user_id, 'marks': form_marks, 'duration': form_duration, 'remarks': form_remarks, 'description': form_description }
+          body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_id, 'created_staff_id': userId, 'marks': form_marks, 'duration': form_duration, 'remarks': form_remarks, 'description': form_description }
           ),
           headers: {
             'Accept': 'application/json',
