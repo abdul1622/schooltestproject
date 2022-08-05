@@ -76,15 +76,6 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             flex-direction: row-reverse;
             justify-content: space-around;
         }
-
-        .answer-data {
-            /* padding: 2%; */
-            /* background-color: grey; */
-        }
-/* 
-        .question-container {
-            min-height: 43vh;
-        } */
     </style>
 </head>
 
@@ -172,7 +163,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         test_details();
         document.getElementById('start-test-btn').addEventListener('click', () => {
             document.querySelector('.instructions').innerHTML = ''
-            fetch(`http://schooltestproject.herokuapp.com/api/question-paper/${question_paper_id}/`, {
+            fetch(`https://schooltestproject.herokuapp.com/api/question-paper/${question_paper_id}/`, {
                 method: 'GET',
                 headers: {
                     'content-Type': 'application/json',
@@ -335,7 +326,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
 
 
             if (n == (answer_details.length) - 1) {
-                question_content += ` <p class='d-flex justify-content-between mb-3'> <button  class="btn btn-primary btn-sm" onclick=next(${n},${n - 1})> Prev </button> <button  class="btn btn-success btn-sm" id='submit '>submit</button> </p> `
+                question_content += ` <p class='d-flex justify-content-between mb-3'> <button  class="btn btn-primary btn-sm" onclick=next(${n},${n - 1})> Prev </button> <button  class="btn btn-success btn-sm" id='submit' onclick=submit()>submit</button> </p> `
             }
             else if (n == 0) {
                 question_content += ` <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(${n},${n + 1})> Next </button> </p> `
@@ -406,6 +397,10 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             <p> Answered questions - ${answered} </p>
             <p> Unanswered questions - ${unanswered} </p> 
             `
+        }
+        function submit() {
+            console.log('hi')
+
         }
 
     </script>
