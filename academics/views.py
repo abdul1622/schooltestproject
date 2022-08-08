@@ -469,6 +469,7 @@ class TestCreateView(CreateAPIView):
     def create(self, request):
         serializer = TestSerializer(data=request.data)
         if serializer.is_valid():
+
             serializer.save()
             return Response({"status": "success",'data':serializer.data},status=HTTP_201_CREATED)   
         return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)

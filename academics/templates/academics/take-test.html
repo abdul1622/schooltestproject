@@ -284,19 +284,21 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                                 return res.json()
                             }).then(data => {
                                 console.log(data)
+                                data.forEach((d, index) => {
+                                question_no = index
                                 answer_details[question_no] = {
-                                    'id': data.data.id,
-                                    'question': data.data.question,
-                                    'question_type': data.data.question_type,
-                                    'correct_answer': data.data.answers.answer,
-                                    'option_a': data.data.answers.option_a,
-                                    'option_b': data.data.answers.option_b,
-                                    'option_c': data.data.answers.option_c,
-                                    'option_d': data.data.answers.option_d,
+                                    'id': d.id,
+                                    'question': d.question,
+                                    'question_type': d.question_type,
+                                    'correct_answer': d.answers.answer,
+                                    'option_a': d.answers.option_a,
+                                    'option_b': d.answers.option_b,
+                                    'option_c': d.answers.option_c,
+                                    'option_d': d.answers.option_d,
                                     'answer': null,
                                     'seen': false,
                                 }
-                                if (data.data.question_type != 'MCQ') {
+                                if (d.question_type != 'MCQ') {
                                     answer_details[question_no].correct_answer = answer_details[question_no][(answer_details[question_no].correct_answer)]
                                     console.log(answer_details[question_no].correct_answer, answer_details[question_no][(answer_details[question_no].correct_answer)])
                                 }
@@ -308,7 +310,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                                     let question_content;
                                     if (question_details.question_type == 'MCQ') {
                                         question_content = `<div> 
-                       <hr class="hr1"> <p> ${question_no}). ${data.data.question}</p> 
+                       <hr class="hr1"> <p> ${question_no}). ${d.question}</p> 
                         <ol type="a">
                             <li><input type="radio" class='option_a_${question_details.id}' id="option_a_${question_details.id}" name="answer_${question_details.id}" value='option_a'> ${question_details.option_a}</li>
                             <li><input type="radio" class='option_b_${question_details.id}' id="option_b_${question_details.id}" name="answer_${question_details.id}" value='option_b'> ${question_details.option_b}</li>
@@ -324,14 +326,15 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                                         document.querySelector('.question-container').innerHTML = question_content
                                     }
                                     else {
-                                        question_content = `<div>   <p> ${question_no}). ${data.data.question} <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}"> <p>
+                                        question_content = `<div>   <p> ${question_no}). ${d.question} <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}"> <p>
                                                 <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(0,1)> Next </button> </p>
                                                 </div>`
                                     }
                                 }
                             })
-                        });
-                    }
+
+                    })
+                }
                     first_question(0);
                 }
             })
