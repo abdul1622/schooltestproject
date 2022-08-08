@@ -187,7 +187,7 @@ function savequestion(){
        <p> Created_by : ${data.data.created_by} </p>
        <p> Number_of_questions : ${data.data.no_of_questions} </p>
        <p> Created Time : ${data.data.created_at} </p>
-       question paper pdf file -  <p> Question-paper pdf file  <a onclick=downloadfile('https://schooltestproject.herokuapp.com${data.data.file}'')> -  download </a> </p>`
+ <p> Question-paper pdf file  <a onclick=downloadfile('https://schooltestproject.herokuapp.com${data.data.file}')> -  download </a> </p>`
        
       let questionPath = document.querySelector('.question-paper')
       questionPath.innerHTML = path;
