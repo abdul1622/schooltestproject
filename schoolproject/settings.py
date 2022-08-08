@@ -108,10 +108,10 @@ WSGI_APPLICATION = 'schoolproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dbkpeg3j8s9tgc',
-        'USER': 'qyirzricdqofxz',
-        'PASSWORD': 'ded3e8beabdce8051efa945df3ad28041d3041e83bfb8207ca1b861e28dfcdb1',
-        'HOST': 'ec2-3-231-82-226.compute-1.amazonaws.com',
+        'NAME': 'dfscanbrn4mhff',
+        'USER': 'xyycorvkjwigci',
+        'PASSWORD': '78e866985669c53760f79ed09e90aa5174c0969773265c8702c7170c5459467c',
+        'HOST': 'ec2-34-203-182-65.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }

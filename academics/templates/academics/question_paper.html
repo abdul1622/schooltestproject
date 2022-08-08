@@ -22,8 +22,8 @@
 
     <div class="q-form">
       {% csrf_token %}
-    
-      <p><label for="id_grade">Grade name:</label> <select name="grade"  required="" id="id_grade"></p>
+      
+      <p><label for="id_subject">Grade:</label>{{form.grade}} </p>
       <p><label for="id_subject">Subject:</label> <select name="subject" required="" id="id_subject">
         <option value="" selected="">---------</option>
       </select></p>
@@ -65,7 +65,7 @@
   url = 'https://schooltestproject.herokuapp.com/api/question-paper-list/'
 
 
-  $("#id_grade_name").change(function () {
+  $("#id_grade").change(function () {
       var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
       var gradeId = $(this).val(); 
 
