@@ -104,7 +104,7 @@ class QuestionAnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ['id','grade','subject','chapter','question',
-                    'question_type','cognitive_level','difficulty_level','answers']
+                    'question_type','cognitive_level','difficulty_level','mark','duration','answers']
 
     def create(self, validated_data):
         answers_data = validated_data.pop('answers')

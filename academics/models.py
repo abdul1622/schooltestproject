@@ -92,8 +92,8 @@ class Question(models.Model):
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE,null =True)
     chapter = models.ForeignKey(Chapter,on_delete=models.CASCADE,null =True)
     question = models.CharField(max_length=50)
-    duration=models.PositiveIntegerField(default=0)
-    mark=models.PositiveIntegerField(default=0)
+    duration=models.PositiveIntegerField(default=30)
+    mark=models.PositiveIntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     question_type = models.CharField(
     max_length=20,
@@ -195,4 +195,5 @@ class TestResult(models.Model):
     def __str__(self):
         return self.result
         
+
 

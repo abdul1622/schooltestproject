@@ -271,8 +271,10 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                         question_list.push(data.data.no_of_questions[i])
                     }
                     if (data.status == 'success') {
-                        data.data.no_of_questions.forEach((d, index) => {
-                            fetch(`https://schooltestproject.herokuapp.com/api/question/${d}/`, {
+                     //   data.data.no_of_questions.forEach((d, index) => {
+                        url2 = new URL(`https://schooltestproject.herokuapp.com/api/test-questions/`);
+                        url2.searchParams.append('question_paper', question_paper_id);
+                            fetch(url2, {
                                 method: 'GET',
                                 headers: {
                                     'content-Type': 'application/json',
@@ -281,6 +283,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                             }).then(res => {
                                 return res.json()
                             }).then(data => {
+                                console.log(data)
                                 answer_details[question_no] = {
                                     'id': data.data.id,
                                     'question': data.data.question,

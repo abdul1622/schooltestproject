@@ -440,6 +440,21 @@ def load_subject_chapter(request):
 #     return render(request,'academics/question_paper.html')
 
 
+class QuestionFromQuestionPaper(APIView):
+    serializer_class= QuestionAnswerSerializer
+    queryset= Question.objects.all().order_by('grade','subject','chapter')
+    permission_classes=[AllowAny]
+
+    def get(self, request, format=None):
+        question_paper_id = (self.request.query_params.get('question_paper'))
+        question_paper = Question_Paper.objects.get(id=question_paper_id)
+        question_list = question_paper.no_of_questions
+        data = []
+        for i in question_list:
+            queryset = Question.objects.get(id=int(i))
+            data.append((QuestionAnswerSerializer(queryset)).data)
+        return Response(data)
+
 class TestCreateView(CreateAPIView):
 
     serializer_class= TestSerializer
@@ -519,4 +534,3 @@ class TestResultEditView(RetrieveDestroyAPIView):
     #         serializer.save()
     #         return Response({"status": "success",'data':serializer.data},status=HTTP_200_OK)
     #     return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
- 
