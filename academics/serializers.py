@@ -187,29 +187,9 @@ class TestSerializer(serializers.ModelSerializer):
     def get_subject_name(self, chapter):
       subject = Subject.objects.get(id=(chapter.subject.id))
       return subject.name
-
-    def create(self,validated_data):
-        data = validated_data.copy()
-        question_paper = data['question_paper']
-        print(question_paper.id)
-        marks = 0
-        duration = 0
-        print(marks,duration)
-        question_paper = Question_Paper.objects.get(id=int(question_paper.id))
-        print(question_paper.no_of_questions)
-        for i in question_paper.no_of_questions:
-            question = Question.objects.get(id=int(i))
-            print(question,question.mark)
-            marks += int(question.mark)
-            duration += int(question.duration)
-        data['marks'] = marks
-        data['duration'] = duration
-        return super(TestSerializer, self).create(**data)
-
     class Meta:
         model = Test
         fields = ['id','grade','grade_name','subject','subject_name','question_paper','created_staff_id','duration','marks','remarks','description']
-        # read_only_fields = ['id','marks','duration']
     
 class TestResultSerializer(serializers.ModelSerializer):
     class Meta:

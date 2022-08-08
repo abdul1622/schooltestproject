@@ -169,15 +169,33 @@
   function create(question_id) {
     var grade = document.getElementById('id_grade').value
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    let form_duration = document.getElementById('id_duration').value
-    let form_marks = document.getElementById('id_marks').value
+   // let form_duration = document.getElementById('id_duration').value
+ //   let form_marks = document.getElementById('id_marks').value
     let form_remarks = document.getElementById('id_remarks').value
     let form_description = document.getElementById('id_description').value
-
+    let marks = 0;
+    let duration =0;
+    url2 = new URL(`https://schooltestproject.herokuapp.com/api/test-questions/`);
+    url2.searchParams.append('question_paper', question_id);
+        fetch(url2, {
+            method: 'GET',
+            headers: {
+                'content-Type': 'application/json',
+                'Authorization': 'token' + ' ' + token,
+            }
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+         console.log(data)
+         data.forEach((d, index) => {
+          marks += d.mark
+          duration += d.duration
+        })
+        })
       fetch('https://schooltestproject.herokuapp.com/api/test/',
         {
           method: 'POST',
-          body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_id, 'created_staff_id': userId, 'marks': form_marks, 'duration': form_duration, 'remarks': form_remarks, 'description': form_description }
+          body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_id, 'created_staff_id': userId, 'marks': marks, 'duration': duration, 'remarks': form_remarks, 'description': form_description }
           ),
           headers: {
             'Accept': 'application/json',
