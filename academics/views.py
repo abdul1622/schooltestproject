@@ -221,7 +221,7 @@ class ChapterListView(APIView):
             if subject:
                 data = []
                 grade = Grade.objects.get(grade=grade)
-                subject = Subject.objects.get(name=subject,grade=grade.grade)
+                subject = Subject.objects.get(name=subject,grade=grade.id)
                 chapters = (Chapter.objects.filter(subject=subject)).order_by('-subject','-chapter_no')
                 for object in chapters:
                     data.insert(0,{
