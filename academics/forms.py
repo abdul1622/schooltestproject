@@ -71,11 +71,11 @@ class subjectlist_form(forms.Form):
 
 
 class questionlist_form(forms.ModelForm):
-    grade_name = forms.CharField(max_length=14)
+    # grade_name = forms.CharField(max_length=14)
     no_of_questions = forms.CharField(max_length=20)
     class Meta:
         model = Question
-        fields = ['grade_name', 'subject', 'chapter', 'no_of_questions']
+        fields = ['grade', 'subject', 'chapter', 'no_of_questions']
 class question_form(forms.ModelForm):
     class Meta:
         model = Question

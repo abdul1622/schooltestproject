@@ -199,3 +199,8 @@ class Instruction(models.Model):
     def __str__(self):
         return str(self.instruction)
 
+
+def load(request):
+    q = Question_Paper.objects.all()
+    for i in q:
+        print(i)
