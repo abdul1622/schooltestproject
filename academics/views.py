@@ -559,12 +559,12 @@ class TestResultEditView(RetrieveDestroyAPIView):
 class instructView(ListCreateAPIView):
 
     serializer_class = instructionSerializer
-    queryset = Instruct.objects.all()
+    # queryset = Instruct.objects.all()
     permission_classes = [AllowAny]
 
     def list(self,request):
-        queryset = Instruct.objects.all()
-        serializer = instructionSerializer(queryset)
+        # queryset = Instruct.objects.all()
+        # serializer = instructionSerializer(queryset)
         return Response({"status": "success",'data':serializer.data})
 
     def create(self,request):

@@ -1,5 +1,4 @@
 from datetime import datetime
-from pydoc import describe
 from time import timezone
 from unittest import result
 from django.conf import settings
@@ -153,7 +152,7 @@ class Question_Paper(models.Model):
         blank=True,
         default= list
     )
-
+    test_id = models.IntegerField(default=0)
     def __str__(self):
         return (str(self.grade))+' '+(str(self.subject))
     # def save(self, *args, **kwargs):
@@ -195,7 +194,7 @@ class TestResult(models.Model):
     def __str__(self):
         return self.result
         
-class Instruct(models.Model):
+class Instruction(models.Model):
     instruction = models.TextField()
     def __str__(self):
         return str(self.instruction)

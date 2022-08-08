@@ -78,7 +78,7 @@
   function get() {
     var grade = document.getElementById('id_grade').value
     var subject = (document.getElementById('id_subject').value).toUpperCase()
-    url2 = new URL('https://schooltestproject.herokuapp.com/api/subject-list/');
+    url2 = new URL('https://schooltestproject.herokuapp.com/api/question-paper-list/');
     url2.searchParams.append('grade', grade);
     url2.searchParams.append('subject',subject)
     console.log(grade, subject)
