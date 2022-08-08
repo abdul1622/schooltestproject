@@ -353,7 +353,19 @@ class QuestionPaperList(ListAPIView):
     queryset = Question_Paper.objects.all().order_by('grade','subject')
 
     def get(self, request):
-        questions = Question_Paper.objects.all()
+
+        grade = (self.request.query_params.get('grade'))
+        subject = (str(self.request.query_params.get('subject'))).upper()
+        if grade:
+            grade = Grade.objects.get(grade=grade)
+            try:
+                subject = Subject.objects.get(grade=grade.id,name=subject)
+                questions = Question_Paper.objects.filter(grade=grade.id,subject=subject.id)
+            except:
+                questions = Question_Paper.objects.filter(grade=grade.id)
+        else:
+            questions = Question_Paper.objects.all()
+
         serializer =QuestionPaperSerializer(questions,many=True)
         return Response({'status':'success',"data":serializer.data},status=HTTP_200_OK)
 
@@ -504,6 +516,13 @@ class TestResultCreateView(CreateAPIView):
 
     def get(self, request, format=None):
         queryset= TestResult.objects.all()
+        grade = (self.request.query_params.get('grade'))
+        # subject = (self.request.query_params.get)
+        if grade:
+            try:
+                queryset = TestResult.objects.filter(grade=grade)
+            except:
+                queryset= TestResult.objects.all()
         serializer = TestResultSerializer(queryset, many=True)
         return Response(serializer.data)
 

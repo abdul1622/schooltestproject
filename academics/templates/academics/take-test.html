@@ -524,7 +524,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             fetch('https://schooltestproject.herokuapp.com/api/test-history/',
                 {
                     method: 'POST',
-                    body: JSON.stringify({ 'student_id': student_id, 'test_id': id, 'question_paper': question_paper_id, 'result': result, 'score': score, 'correct_answer': correct_answer, 'wrong_answer': wrong_answer, 'unanswered_questions': unanswered }
+                    body: JSON.stringify({'grade':grade,'subject':subject, 'student_id': student_id, 'test_id': id, 'question_paper': question_paper_id, 'result': result, 'score': score, 'correct_answer': correct_answer, 'wrong_answer': wrong_answer, 'unanswered_questions': unanswered }
                     ),
                     headers: {
                         'Accept': 'application/json',

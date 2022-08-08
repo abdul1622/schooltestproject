@@ -66,6 +66,7 @@
   head.style.display = 'none'
   let modal_body = document.querySelector('.modal-body')
   url = 'https://schooltestproject.herokuapp.com/api/question-paper-list/'
+
   let error = true
   let set_id = false
   var user_id;
@@ -77,8 +78,11 @@
   function get() {
     var grade = document.getElementById('id_grade').value
     var subject = (document.getElementById('id_subject').value).toUpperCase()
+    url2 = new URL('https://schooltestproject.herokuapp.com/api/subject-list/');
+    url2.searchParams.append('grade', grade);
+    url2.searchParams.append('subject',subject)
     console.log(grade, subject)
-    fetch(url, {
+    fetch(url2, {
       method: 'GET',
       headers: {
         'content-Type': 'application/json',
@@ -90,7 +94,7 @@
       let content = '';
       if (data.status == 'success') {
         data.data.forEach((d, index) => {
-          if (d.grade_name == grade && d.subject_name == subject) {
+
             error = false
             if (!set_id) {
               grade_id = d.grade
@@ -112,7 +116,6 @@
 </button>
 </div>
 `
-          }
 
         })
         container.innerHTML = content;
