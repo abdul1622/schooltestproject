@@ -47,7 +47,7 @@ from .utils import render_to_pdf, render_to_pdf2
 
 class GradeView(ListCreateAPIView):
     serializer_class = GradeSerializer
-    queryset = Grade.objects.all().order_by('grade')
+    queryset = Grade.objects.all().order_by('-grade')
     permission_classes = [AllowAny]
 
     def list(self,request):

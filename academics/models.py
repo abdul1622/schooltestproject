@@ -1,3 +1,4 @@
+from datetime import datetime
 from pydoc import describe
 from unittest import result
 from django.db import DatabaseError, models
@@ -20,7 +21,8 @@ class Grade(models.Model):
     def __str__(self):
         return str(self.grade)
 
-
+    class Meta:
+        ordering = ('-grade',)
 
 class Subject(models.Model):
     name = models.CharField(max_length=20)
@@ -33,10 +35,12 @@ class Subject(models.Model):
 
     def save(self, *args, **kwargs):
         name = re.findall(r"[^\W\d_]+|\d+",self.name)
-        self.created_at = (self.created_at).strftime('%Y-%m-%d %H:%M:%S')  
+        self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')  
         self.name = (' '.join(name)).upper()
         super(Subject, self).save(*args, **kwargs)
-        
+
+    class Meta:
+        ordering = ('-grade','name',)       
 
 
 class Chapter(models.Model):
@@ -55,11 +59,13 @@ class Chapter(models.Model):
 
 
     def save(self, *args, **kwargs):
-        self.created_at = (self.created_at).strftime('%Y-%m-%d %H:%M:%S')  
+        self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')  
         name = re.findall(r"[^\W\d_]+|\d+",self.name)
         self.name = (' '.join(name)).lower()
         super(Chapter, self).save(*args, **kwargs)
 
+    class Meta:
+        ordering = ('-subject','-chapter_no',)   
 
 questiontype_choice=(
 ('MCQ','MCQ'),
@@ -84,6 +90,7 @@ class Question(models.Model):
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE,null =True)
     chapter = models.ForeignKey(Chapter,on_delete=models.CASCADE,null =True)
     question = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
     question_type = models.CharField(
     max_length=20,
     choices =questiontype_choice,
@@ -102,7 +109,10 @@ class Question(models.Model):
         return self.question
 
     def save(self, *args, **kwargs):
-        self.created_at = (self.created_at).strftime('%Y-%m-%d %H:%M:%S')  
+        self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')  
+
+    class Meta:
+        ordering = ('-grade','-subject','-chapter','question_type','-created_at')   
 
 answer_choices=(
     ("option_a","option_a"),
@@ -142,7 +152,10 @@ class Question_Paper(models.Model):
     def __str__(self):
         return (str(self.grade))+' '+(str(self.subject))
     def save(self, *args, **kwargs):
-        self.created_at = (self.created_at).strftime('%Y-%m-%d %H:%M:%S')  
+        self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')  
+    
+    class Meta:
+        ordering = ('-grade','-subject','created_at',)
 
 class Test(models.Model):
     question_paper = models.ForeignKey(Question_Paper,on_delete=models.SET_NULL,null=True)
@@ -157,8 +170,11 @@ class Test(models.Model):
     def __str__(self):
         return self.remarks
 
-def save(self, *args, **kwargs):
-    self.created_at = (self.created_at).strftime('%Y-%m-%d %H:%M:%S')   
+    def save(self, *args, **kwargs):
+        self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')  
+    
+    class Meta:
+        ordering = ('-grade','-subject','created_staff_id','-question_paper')
 
 class TestResult(models.Model):
     student_id = models.ForeignKey(User,on_delete=models.DO_NOTHING,null=True)
