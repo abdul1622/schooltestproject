@@ -191,10 +191,11 @@ class TestSerializer(serializers.ModelSerializer):
     def create(self,validated_data):
         data = validated_data.copy()
         question_paper = data['question_paper']
+        print(question_paper.id)
         marks = 0
         duration = 0
         print(marks,duration)
-        question_paper = Question_Paper.objects.get(id=int(question_paper))
+        question_paper = Question_Paper.objects.get(id=int(question_paper.id))
         print(question_paper.no_of_questions)
         for i in question_paper.no_of_questions:
             question = Question.objects.get(id=int(i))
