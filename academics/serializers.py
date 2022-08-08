@@ -3,7 +3,7 @@ from operator import sub
 from pyexpat import model
 from rest_framework import serializers
 import re
-from .models import Grade, Question_Paper,Subject,Chapter,Answers,Question,Test,TestResult
+from .models import Grade, Question_Paper,Subject,Chapter,Answers,Question,Test,TestResult,InstructionForTest
 
 
 class GradeSerializer(serializers.ModelSerializer):
@@ -196,8 +196,8 @@ class TestResultSerializer(serializers.ModelSerializer):
         model = TestResult
         fields = '__all__'
 
-class instructionSerializer(serializers.ModelSerializer):
+class TestInstruction(serializers.ModelSerializer):
     class Meta:
-        # model = Instruct
+        model = InstructionForTest
         fields = '__all__'
 
