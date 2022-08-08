@@ -22,7 +22,7 @@ class Grade(models.Model):
         return str(self.grade)
 
     class Meta:
-        ordering = ('-grade',)
+        ordering = ('grade',)
 
 class Subject(models.Model):
     name = models.CharField(max_length=20)
