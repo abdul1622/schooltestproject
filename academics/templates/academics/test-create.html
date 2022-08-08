@@ -191,34 +191,39 @@
           marks += d.mark
           duration += d.duration
         })
+        console.log(marks,duration)
+        }).then(() =>{
+          console.log(marks,duration)
+          fetch('https://schooltestproject.herokuapp.com/api/test/',
+          {
+            method: 'POST',
+            body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_id, 'created_staff_id': userId, 'marks': marks, 'duration': duration, 'remarks': form_remarks, 'description': form_description }
+            ),
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': 'token' + ' ' + token,
+              'X-CSRFToken': csrftoken
+            },
+          }).then(response => {
+            if (response.status == 201) {
+              console.log("Sucess response", response);
+              // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
+              // test_errors.innerHTML = ''
+              modal_body.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
+              document.getElementById('test-create-btn').style.display = 'none'
+            }
+            return response.json();
+          }).then(function (data) {
+            console.log(data)
+            if (data.status != 'success') {
+              test_errors.innerHTML = `<li class='test-warning'>${(data.data.error)}</li>`;
+              test_messages.innerHTML = '';
+            }
+          })
         })
-      fetch('https://schooltestproject.herokuapp.com/api/test/',
-        {
-          method: 'POST',
-          body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_id, 'created_staff_id': userId, 'marks': marks, 'duration': duration, 'remarks': form_remarks, 'description': form_description }
-          ),
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'token' + ' ' + token,
-            'X-CSRFToken': csrftoken
-          },
-        }).then(response => {
-          if (response.status == 201) {
-            console.log("Sucess response", response);
-            // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
-            // test_errors.innerHTML = ''
-            modal_body.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
-            document.getElementById('test-create-btn').style.display = 'none'
-          }
-          return response.json();
-        }).then(function (data) {
-          console.log(data)
-          if (data.status != 'success') {
-            test_errors.innerHTML = `<li class='test-warning'>${(data.data.error)}</li>`;
-            test_messages.innerHTML = '';
-          }
-        })
+
+    /**/
     
   }
   let input=document.getElementById('id_subject')

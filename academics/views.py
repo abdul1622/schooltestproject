@@ -37,6 +37,7 @@ from .serializers import (
     questionanswerserializer,
     TestSerializer,
     TestResultSerializer,
+    instructionSerializer
     )
 from .models import Question, Subject,Grade,Chapter,Question_Paper,Answers
 from accounts.models import User
@@ -534,3 +535,22 @@ class TestResultEditView(RetrieveDestroyAPIView):
     #         serializer.save()
     #         return Response({"status": "success",'data':serializer.data},status=HTTP_200_OK)
     #     return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
+
+
+class instructView(ListCreateAPIView):
+
+    serializer_class = instructionSerializer
+    queryset = Instruct.objects.all()
+    permission_classes = [AllowAny]
+
+    def list(self,request):
+        queryset = Instruct.objects.all()
+        serializer = instructionSerializer(queryset)
+        return Response({"status": "success",'data':serializer.data})
+
+    def create(self,request):
+        serializer = instructionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": "success",'data':serializer.data},status=HTTP_201_CREATED)
+        return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)

@@ -195,5 +195,8 @@ class TestResult(models.Model):
     def __str__(self):
         return self.result
         
-
+class Instruct(models.Model):
+    instruction = models.TextField()
+    def __str__(self):
+        return str(self.instruction)
 

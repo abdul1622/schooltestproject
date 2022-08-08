@@ -95,3 +95,9 @@ class TestForm(forms.ModelForm):
     class Meta:
         model = Test
         fields = [ 'remarks', 'description']
+ 
+
+class instruction_form(forms.Form):
+    instruction = forms.EmailField(widget=forms.Textarea(
+
+    attrs={"class": "form-control", "placeholder": "Instructions"}))
