@@ -208,7 +208,7 @@ class TestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Test
         fields = ['id','grade','grade_name','subject','subject_name','question_paper','created_staff_id','duration','marks','remarks','description']
-        read_only_fields = ['id','marks','duration']
+        # read_only_fields = ['id','marks','duration']
     
 class TestResultSerializer(serializers.ModelSerializer):
     class Meta:
