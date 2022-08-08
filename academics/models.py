@@ -33,6 +33,7 @@ class Subject(models.Model):
 
     def save(self, *args, **kwargs):
         name = re.findall(r"[^\W\d_]+|\d+",self.name)
+        self.created_at = (self.created_at).strftime('%Y-%m-%d %H:%M:%S')  
         self.name = (' '.join(name)).upper()
         super(Subject, self).save(*args, **kwargs)
         
@@ -54,6 +55,7 @@ class Chapter(models.Model):
 
 
     def save(self, *args, **kwargs):
+        self.created_at = (self.created_at).strftime('%Y-%m-%d %H:%M:%S')  
         name = re.findall(r"[^\W\d_]+|\d+",self.name)
         self.name = (' '.join(name)).lower()
         super(Chapter, self).save(*args, **kwargs)
@@ -99,6 +101,8 @@ class Question(models.Model):
     def __str__(self):
         return self.question
 
+    def save(self, *args, **kwargs):
+        self.created_at = (self.created_at).strftime('%Y-%m-%d %H:%M:%S')  
 
 answer_choices=(
     ("option_a","option_a"),
@@ -137,7 +141,8 @@ class Question_Paper(models.Model):
 
     def __str__(self):
         return (str(self.grade))+' '+(str(self.subject))
-
+    def save(self, *args, **kwargs):
+        self.created_at = (self.created_at).strftime('%Y-%m-%d %H:%M:%S')  
 
 class Test(models.Model):
     question_paper = models.ForeignKey(Question_Paper,on_delete=models.SET_NULL,null=True)
@@ -152,6 +157,9 @@ class Test(models.Model):
     def __str__(self):
         return self.remarks
 
+def save(self, *args, **kwargs):
+    self.created_at = (self.created_at).strftime('%Y-%m-%d %H:%M:%S')   
+
 class TestResult(models.Model):
     student_id = models.ForeignKey(User,on_delete=models.DO_NOTHING,null=True)
     test_id = models.ForeignKey(Test,on_delete=models.DO_NOTHING,null=True)
@@ -164,4 +172,4 @@ class TestResult(models.Model):
     def __str__(self):
         return self.result
         
-        
+

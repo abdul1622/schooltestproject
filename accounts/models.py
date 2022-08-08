@@ -102,6 +102,8 @@ class User(AbstractBaseUser):
     def is_admin(self):
         return self.user_type == 'is_admin'
 
+    def save(self, *args, **kwargs):
+        self.created_at = (self.created_at).strftime('%Y-%m-%d %H:%M:%S')  
 
 class Profile(models.Model):
     
