@@ -20,7 +20,8 @@ from .views import (
     TestResultCreateView,
     TestResultEditView,
     TestInstructionView,
-    load
+    load,
+    EditTestInstructionView
 )
 
 urlpatterns=[
@@ -44,6 +45,6 @@ urlpatterns=[
     path('ajax/load-subject/',load_subject_chapter,name='ajax_load_subjects'),
     path('test-questions/',QuestionFromQuestionPaper.as_view()),
     path('instructions/',TestInstructionView.as_view()),
-     path('instructions/<int:pk>/',TestInstructionView.as_view()),
+     path('instructions/<int:pk>/',EditTestInstructionView.as_view()),
     path('a/',load)
 ]

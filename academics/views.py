@@ -569,7 +569,7 @@ class TestResultEditView(RetrieveDestroyAPIView):
 
 
 
-class TestInstructionView(RetrieveDestroyAPIView):
+class TestInstructionView(ListCreateAPIView):
 
     serializer_class = TestInstruction
     queryset = InstructionForTest.objects.all()
@@ -586,4 +586,11 @@ class TestInstructionView(RetrieveDestroyAPIView):
             serializer.save()
             return Response({"status": "success",'data':serializer.data},status=HTTP_201_CREATED)
         return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
-
+class EditTestInstructionView(RetrieveDestroyAPIView):
+    def retrieve(self, request,pk):
+        try:
+            queryset = TestResult.objects.get(pk=pk)
+        except:
+            return Response({'status':'failure',"data": "Test result doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
+        serializer = TestResultSerializer(queryset)
+        return Response(serializer.data,status=HTTP_200_OK)
