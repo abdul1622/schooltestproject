@@ -12,7 +12,7 @@ class UserAdmin(UserAdmin):
             return False       
         if request.user.user_type == 'is_admin':
             return True 
-            
+
     list_display = ('register_number','email','phone','user_type')
     filter_horizontal = ()
     ordering = ('register_number',)
@@ -25,7 +25,7 @@ class UserAdmin(UserAdmin):
     add_fieldsets = (
        (None, {
            'classes': ('wide',),
-           'fields': ('register_number','email','phone','is_active','user_type'),
+           'fields': ('register_number','email','phone','user_type'),
        }),
    )
 
