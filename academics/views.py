@@ -589,8 +589,8 @@ class TestInstructionView(ListCreateAPIView):
 class EditTestInstructionView(RetrieveDestroyAPIView):
     def retrieve(self, request,pk):
         try:
-            queryset = TestResult.objects.get(pk=pk)
+            queryset = InstructionForTest.objects.get(pk=pk)
         except:
-            return Response({'status':'failure',"data": "Test result doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
-        serializer = TestResultSerializer(queryset)
+            return Response({'status':'failure',"data": "Instruction doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
+        serializer = TestInstruction(queryset)
         return Response(serializer.data,status=HTTP_200_OK)
