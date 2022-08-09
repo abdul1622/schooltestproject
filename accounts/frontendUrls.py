@@ -6,7 +6,7 @@ from .frontendviews import *
 
 
 urlpatterns=[
-    # path('',l,name='land'),
+    path('',land,name='land'),
     path('home/',home,name='home'),
     path('signup/',SignupView,name='signup'),
     path('login/',simple,name='simple'),
