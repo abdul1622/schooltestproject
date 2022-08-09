@@ -482,7 +482,11 @@ class TestCreateView(CreateAPIView):
     def create(self, request):
         serializer = TestSerializer(data=request.data)
         if serializer.is_valid():
+            question_paper = request.data['question_paper']
             serializer.save()
+            Test_obj = Test.objects.get(question_papar=question_paper)
+            question_paper = Question_Paper.objects.get(id=question_paper)
+            question_paper.test_id = Test_obj.test_id
             return Response({"status": "success",'data':serializer.data},status=HTTP_201_CREATED)   
         return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
         

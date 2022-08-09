@@ -157,7 +157,7 @@
 
 function savequestion(){
              
-  grade = document.getElementById('id_grade_name').value
+  grade = document.getElementById('id_grade').value
   subject = document.getElementById('id_subject').value
   no_of_question= document.getElementById('id_no_of_questions').value
   chapter = document.getElementById('id_chapter').value
@@ -187,7 +187,7 @@ function savequestion(){
        <p> Created_by : ${data.data.created_by} </p>
        <p> Question_numbers : ${data.data.no_of_questions} </p>
        <p> Number of questions : ${(data.data.no_of_questions).length}
-       <p> Created Time : ${data.data.created_at} </p>
+       <p> Created Time : ${(data.data.created_at.slice(0, 10))} ${(data.data.created_at.slice(11,19)) } </p>
  <p> Question-paper pdf file  <a onclick=downloadfile('https://schooltestproject.herokuapp.com${data.data.file}')> -  download </a> </p>`
        
       let questionPath = document.querySelector('.question-paper')
@@ -207,7 +207,7 @@ function savequestion(){
 }
 
 function getquestion() {
-  grade = document.getElementById('id_grade_name').value
+  grade = document.getElementById('id_grade').value
   subject = document.getElementById('id_subject').value
   no_of_question= document.getElementById('id_no_of_questions').value
   chapter = document.getElementById('id_chapter').value

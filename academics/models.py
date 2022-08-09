@@ -1,11 +1,13 @@
 from datetime import datetime
 from time import timezone
 from unittest import result
+from venv import create
 from django.conf import settings
 from django.db import DatabaseError, models
 from django.core.validators import MaxValueValidator,MinValueValidator
 from django.contrib.postgres.fields import ArrayField
 import re
+import uuid
 
 
 from accounts.models import User
@@ -147,6 +149,7 @@ class Question_Paper(models.Model):
     file = models.FileField(upload_to='question_files/',null=True,blank=True)
     created_by = models.CharField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
+    test_id = models.CharField(max_length=25,null=True,blank=True)
     no_of_questions = ArrayField(
         models.CharField(max_length=10,blank=True),
         blank=True,
@@ -170,12 +173,13 @@ class Test(models.Model):
     marks = models.PositiveIntegerField()
     remarks = models.CharField(max_length=25)
     description = models.CharField(max_length=50)
-
+    test_id = models.CharField(max_length=25,null=True,blank=True)
     def __str__(self):
         return self.remarks
 
-    # def save(self, *args, **kwargs):
-    #     self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')  
+    def save(self, *args, **kwargs):
+        self.test_id =  uuid.uuid4() 
+        super(Test, self).save(*args, **kwargs)
     
     class Meta:
         ordering = ('grade','subject','created_staff_id','question_paper')
@@ -190,6 +194,7 @@ class TestResult(models.Model):
     score = models.PositiveIntegerField()
     correct_answer = models.IntegerField(null=True)
     wrong_answer = models.IntegerField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     unanswered_questions = models.IntegerField(null=True)
     def __str__(self):
         return self.result
