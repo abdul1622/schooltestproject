@@ -577,7 +577,7 @@ class TestInstructionView(ListCreateAPIView):
 
     def list(self,request):
         queryset = InstructionForTest.objects.all()
-        serializer = TestInstruction(queryset)
+        serializer = TestInstruction(queryset,many=True)
         return Response({"status": "success",'data':serializer.data})
 
     def create(self,request):

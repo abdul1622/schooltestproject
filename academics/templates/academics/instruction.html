@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+    {% block content %}
+           {% csrf_token %}
+        {{form.as_p}}
+          
+        <button id="grade-btn"onclick=createinstruction()>Create</button>
+       <div class="instructions"></div>
+<script>
+    var token = localStorage.getItem('token')
+    var host = window.location.protocol + "//" + window.location.host;
+    function createinstruction() {
+       var instruction = document.getElementById('id_instruction').value
+       console.log(instruction)
+       let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+       fetch(`https://schooltestproject.herokuapp.com/api/instructions/`,
+            {
+           method: 'POST',
+           body: JSON.stringify({ 'note': instruction }),
+           headers: {
+               'Accept':'application/json',
+               'Content-Type': 'application/json',
+               'Authorization':'token'+' '+token,
+               'X-CSRFToken': csrftoken
+           },
+       })
+       .then(function(response) {
+        console.log(response)
+       })
+      }
+var list = document.querySelector('.instructions');
+function get(){
+  var content = ''
+  fetch( `https://schooltestproject.herokuapp.com/api/instructions/`,{
+      method : 'GET',
+      headers : {
+        'Authorization':'token'+' '+token 
+      },
+    }).then(res => { 
+      return res.json()})
+    .then(data => {
+    console.log(data)
+    data.forEach((d, index) => {
+      content += `<div class="cards">
+        <p class="grade">${d.note}</p>   
+       </div>`
+      })
+  })
+  list.innerHTML = content;
+  }
+  get();
+</script>
+{% endblock %}

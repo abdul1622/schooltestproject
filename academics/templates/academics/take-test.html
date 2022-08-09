@@ -15,6 +15,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
+
     <style>
         .test-container {
             box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px, rgb(10 37 64 / 35%) 0px -2px 6px 0px inset;
@@ -172,6 +173,30 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
 </head>
 
 <body>
+    
+    <div class="modal fade" id="take-test-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="media-content">
+                <div class="modal-header">
+                    <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="delete-box">
+                        <h4>Are you want to Submit a test?</h4>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="delete-btn-yes" data-bs-dismiss="modal" onclick=submit() class="delete-btn-yes btn btn-danger">Yes</button>
+                    <button id="delete-btn-no" data-bs-dismiss="modal" class="delete-btn-no btn btn-primary">Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <h1 class="test-title"></h1>
     <h2 class="counter"></h2>
     <div class="test-container">
@@ -235,6 +260,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         let remarks;
         let total_marks;
         let duration;
+        let pass_percentage;
         let counter_container = document.querySelector('.counter')   
         function test_details() {
             console.log(parseInt(1.0345983745))
@@ -255,6 +281,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                 remarks = data.remarks;
                 total_marks = data.marks;
                 duration = data.duration;
+                pass_percentage = data.pass_percentage;
             })
         }
         test_details();
@@ -432,14 +459,14 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
 
 
             if (n == (answer_details.length) - 1) {
-                question_content += ` <p class='d-flex justify-content-between mb-3'> <button  class="btn btn-primary btn-sm" onclick=next(${n},${n - 1})> Prev </button> <button  class="btn btn-success btn-sm" id='submit' onclick=submit()>submit</button> </p> `
+                question_content += ` <p class='d-flex justify-content-between mb-3'> <button  class="btn btn-primary btn-sm" onclick=next(${n},${n - 1})> Prev </button> <button  class="btn btn-success btn-sm" id='submit' data-bs-toggle="modal" data-bs-target="#take-test-Modal" >submit</button> </p> `
             }
             else if (n == 0) {
                 question_content += ` <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(${n},${n + 1})> Next </button> </p> `
             } else {
                 question_content += ` <p class='d-flex justify-content-between mb-3'> <button class="btn btn-primary btn-sm" onclick=next(${n},${n - 1})> Prev </button> <button class="btn btn-primary btn-sm" onclick=next(${n},${n + 1})> Next </button> </p> `
             }
-
+//c16e6e2b-5b79-4a
 
 
 
@@ -498,10 +525,30 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         }
         function submit() {
             console.log(answer_details)
+            answer_details.length-1
+            get_ans_id = answer_details[(answer_details.length)-1].id
+
+            var get_ans_fib = document.getElementsByName(`answer_${get_ans_id}`);
+            // answer_details[n].answer = get_ans_fib.value
+            var get_ans = document.getElementsByName(`answer_${get_ans_id}`);
+            let fib_answer = document.querySelector(`.fib_${get_ans_id}`)
+            if (fib_answer) {
+                console.log(fib_answer.value)
+                answer_details[(answer_details.length)-1].answer = fib_answer.value
+            }
+
+            let question_content = '';
+            for (i = 0; i < get_ans.length; i++) {
+                if (get_ans[i].checked) {
+                    answer_details[(answer_details.length)-1].answer = get_ans[i].value;
+                }
+            }
+
             let wrong_answer = 0;
             let correct_answer = 0;
             let unanswered = 0;
             let marks = 0
+            console.log('total-mark',total_marks)
             for (i = 0; i < answer_details.length; i++) {
                 if (answer_details[i].answer == answer_details[i].correct_answer) {
                     correct_answer += 1;
@@ -513,12 +560,13 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                 }
 
             }
+            console.log('your marks',marks)
             var score =(marks/total_marks)*100
             console.log(score)
             score = parseInt(score)
             console.log(score)
             var result;
-            if (score < 35) {
+            if (score < pass_percentage) {
                 result = 'fail'
             } else {
                 result = 'pass'
