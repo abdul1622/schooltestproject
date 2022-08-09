@@ -175,7 +175,7 @@ class QuestionPaperSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question_Paper
         fields = ['id','grade','grade_name','subject','subject_name','file','no_of_questions','test_id','created_by','created_at']
-        read_only_fields = ('test_id')
+        read_only_fields = ('test_id',)
 
 class TestSerializer(serializers.ModelSerializer):
     grade_name = serializers.SerializerMethodField('get_grade_name')
@@ -190,7 +190,7 @@ class TestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Test
         fields = ['id','grade','grade_name','subject','subject_name','question_paper','created_staff_id','duration','marks','remarks','description','test_id']
-        read_only_fields = ('test_id')
+        read_only_fields = ('test_id',)
 
 class TestResultSerializer(serializers.ModelSerializer):
     class Meta:

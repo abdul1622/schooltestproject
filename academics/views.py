@@ -325,6 +325,7 @@ class QuestionList(APIView):
             context = {'data':serializer.data,'grade':grade.grade,'subject':subject_obj.name,'register_number':user.register_number}
             context1 = {'data':serializer.data,'grade':grade.grade,'subject':subject_obj.name,'register_number':user.register_number,'answers':answers}
             answer_file,status =  render_to_pdf2('academics/answer_file.html','answer_files',None,context1)
+            
             if type == 'save':
                 created_by = self.request.user.email
                 question_paper = Question_Paper.objects.create(grade=grade,subject=subject_obj,created_by=created_by)
@@ -342,9 +343,6 @@ class QuestionList(APIView):
             return Response({'status':'success','question_path':f'/media/question_paper/{filename}.pdf','answer_path':f'/media/answer_files/{answer_file}.pdf','subject_id':subject_obj.id,'grade_id':grade.id})
         except:
             return Response({"status": "failure","data":"given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
-
-
-
 
 
 class QuestionPaperList(ListAPIView):
