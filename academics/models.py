@@ -155,7 +155,7 @@ class Question_Paper(models.Model):
         blank=True,
         default= list
     )
-    test_id = models.IntegerField(default=0)
+ 
     def __str__(self):
         return (str(self.grade))+' '+(str(self.subject))
     # def save(self, *args, **kwargs):
@@ -178,7 +178,7 @@ class Test(models.Model):
         return self.remarks
 
     def save(self, *args, **kwargs):
-        self.test_id =  uuid.uuid4() 
+        self.test_id =  (str(uuid.uuid4()))[:16] 
         super(Test, self).save(*args, **kwargs)
     
     class Meta:

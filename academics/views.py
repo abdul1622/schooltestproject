@@ -475,8 +475,17 @@ class TestCreateView(CreateAPIView):
     permission_classes=[AllowAny]
 
     def get(self, request, format=None):
-        queryset= Test.objects.all().order_by('grade','subject')
-        serializer = TestSerializer(queryset, many=True)
+        grade = (self.request.query_params.get('grade'))
+        test_id = (self.request.query_params.get('test_id'))
+        if grade:
+            queryset = Test.objects.filter(grade=grade)
+            serializer = TestSerializer(queryset, many=True)
+        elif test_id:
+            queryset = Test.objects.get(test_id=test_id)
+            serializer = TestSerializer(queryset)
+        else:
+            queryset= Test.objects.all().order_by('grade','subject')
+            serializer = TestSerializer(queryset, many=True)
         return Response(serializer.data)
 
     def create(self, request):
@@ -484,9 +493,10 @@ class TestCreateView(CreateAPIView):
         if serializer.is_valid():
             question_paper = request.data['question_paper']
             serializer.save()
-            Test_obj = Test.objects.get(question_papar=question_paper)
+            Test_obj = Test.objects.get(question_paper=question_paper)
             question_paper = Question_Paper.objects.get(id=question_paper)
             question_paper.test_id = Test_obj.test_id
+            question_paper.save()
             return Response({"status": "success",'data':serializer.data},status=HTTP_201_CREATED)   
         return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
         
