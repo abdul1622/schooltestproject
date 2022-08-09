@@ -1,12 +1,14 @@
 
 from django.urls import path
-from.frontendViews import *
+
+from accounts.views import SignupView
+from .frontendviews import *
 
 
 urlpatterns=[
-    path('',land,name='land'),
+    # path('',l,name='land'),
     path('home/',home,name='home'),
-    path('signup/',signup,name='signup'),
+    path('signup/',SignupView,name='signup'),
     path('login/',simple,name='simple'),
     path('profile/',profile,name='profile'),
      path('students/',students,name='userdetails'),

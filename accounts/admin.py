@@ -32,6 +32,8 @@ class ProfileAdmin(admin.ModelAdmin):
         if request.user.user_type == 'is_staff':
             return False
 
+        if request.user.user_type == 'is_admin':
+            return True
         
 class TokenAdmin(admin.ModelAdmin):
     def has_module_permission(self, request,obj=None):
