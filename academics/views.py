@@ -569,7 +569,7 @@ class TestResultEditView(RetrieveDestroyAPIView):
 
 
 
-class TestInstructionView(ListCreateAPIView):
+class TestInstructionView(RetrieveDestroyAPIView):
 
     serializer_class = TestInstruction
     queryset = InstructionForTest.objects.all()

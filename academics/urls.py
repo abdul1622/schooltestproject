@@ -40,9 +40,10 @@ urlpatterns=[
          path('test/',TestCreateView.as_view()),
     path('test/<int:pk>/',TestEditView.as_view()),
     path('test-history/',TestResultCreateView.as_view()),
-  path('test-history/<int:pk>/',TestResultEditView.as_view()),
+    path('test-history/<int:pk>/',TestResultEditView.as_view()),
     path('ajax/load-subject/',load_subject_chapter,name='ajax_load_subjects'),
     path('test-questions/',QuestionFromQuestionPaper.as_view()),
     path('instructions/',TestInstructionView.as_view()),
+     path('instructions/<int:pk>/',TestInstructionView.as_view()),
     path('a/',load)
 ]
