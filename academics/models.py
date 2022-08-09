@@ -1,4 +1,6 @@
+from operator import mod
 from pydoc import describe
+from shutil import register_unpack_format
 from unittest import result
 from django.db import DatabaseError, models
 from django.core.validators import MaxValueValidator,MinValueValidator
@@ -32,6 +34,7 @@ class Subject(models.Model):
     def save(self, *args, **kwargs):
         name = re.findall(r"[^\W\d_]+|\d+",self.name)
         self.name = (' '.join(name)).upper()
+      
         super(Subject, self).save(*args, **kwargs)
         
 
@@ -159,5 +162,7 @@ class TestResult(models.Model):
 
     def __str__(self):
         return self.result
-        
-        
+class Instruction(models.Model):
+    instruction=models.CharField(max_length=2000)
+    def __str__(self):
+        return self.instruction

@@ -70,4 +70,7 @@ def test_list(request):
 def take_test(request,pk):
     return render(request,'academics/take-test.html')
 
+def instruct(request):
+    form = instruction_form()
+    return render(request,'academics/instruction.html',{'form':form})
     

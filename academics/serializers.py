@@ -1,7 +1,8 @@
+from dis import Instruction
 from operator import sub
 from rest_framework import serializers
 import re
-from .models import Grade, Question_Paper,Subject,Chapter,Answers,Question,Test
+from .models import Grade, Question_Paper,Subject,Chapter,Answers,Question,Test,Instruction
 
 
 class GradeSerializer(serializers.ModelSerializer):
@@ -67,9 +68,9 @@ class ChapterSerializer(serializers.ModelSerializer):
             queryset = queryset.exclude(id=id)
 
         if queryset.filter(name = data['name'],subject=data['subject']).exists():
-            raise serializers.ValidationError({'error':'chapter name altready exists'})
+            raise serializers.ValidationError({'error':'chapter name already exists'})
         if queryset.filter(subject=data['subject'],chapter_no=data['chapter_no']).exists():
-            raise serializers.ValidationError({'error':'cahpter no altready exists'})
+            raise serializers.ValidationError({'error':'chapter no altready exists'})
 
         return data 
 
@@ -191,3 +192,7 @@ class TestSerializer(serializers.ModelSerializer):
         model = Test
         fields = ['id','grade','grade_name','subject','subject_name','question_paper','created_staff_id','duration','marks','remarks','description']
     
+class InstructionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Instruction
+        fields = '__all__'

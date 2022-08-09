@@ -95,3 +95,10 @@ class TestForm(forms.ModelForm):
     class Meta:
         model = Test
         fields = ['duration', 'marks', 'remarks', 'description']
+
+
+class instruction_form(forms.ModelForm):        
+    class Meta:
+       
+        fields=['instruction']
+

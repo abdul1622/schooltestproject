@@ -33,10 +33,11 @@ from .serializers import (
     QuestionSerializer,
     QuestionPaperSerializer,
     Question_answer_serializer,
+    InstructionSerializer,
     questionanswerserializer,
     TestSerializer,
     )
-from .models import Question, Subject,Grade,Chapter,Question_Paper,Answers
+from .models import Question, Subject,Grade,Chapter,Question_Paper,Answers,Instruction
 from accounts.models import User
 from .utils import render_to_pdf, render_to_pdf2
 
@@ -324,7 +325,7 @@ class QuestionList(APIView):
             answer_file,status =  render_to_pdf2('academics/answer_file.html','answer_files',None,context1)
             if type == 'save':
                 created_by = self.request.user.email
-                question_paper = Question_Paper.objects.create(grade=grade,subject=subject,created_by=created_by)
+                question_paper = Question_Paper.objects.create(grade=grade,subject=subject_obj,created_by=created_by)
                 for question in questions:
                     question_paper.no_of_questions.append(question.id)
                 question_paper,status = render_to_pdf2('academics/question.html','question_files',question_paper,context)
@@ -478,3 +479,18 @@ class TestEditView(RetrieveUpdateDestroyAPIView):
             return Response({"status": "success",'data':serializer.data},status=HTTP_200_OK)
         return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
  
+class instructView(ListCreateAPIView):
+    serializer_class = InstructionSerializer
+    queryset =   Instruction.objects.all()
+    permission_classes = [AllowAny]
+    def list(self,request):
+        queryset = Instruction.objects.all()
+        serializer = InstructionSerializer(queryset)
+        return Response({"status": "success",'data':serializer.data})
+
+    def create(self,request):
+        serializer =  InstructionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": "success",'data':serializer.data},status=HTTP_201_CREATED)
+        return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)

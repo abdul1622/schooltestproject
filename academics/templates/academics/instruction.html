@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+    {% block content %}
+           {% csrf_token %}
+        {{form.as_p}}
+          
+        <button id="grade-btn"onclick=createinstruction()>Create</button>
+       
+<script>
+    var token = localStorage.getItem('token')
+    function createinstruction() {
+       var instruction = document.getElementById('id_instruction').value
+       let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+   
+       fetch('https://schooltestproject.herokuapp.com/api/instruction/',
+            {
+           method: 'POST',
+           body: JSON.stringify({ 'instruction': instruction }
+           ),
+           headers: {
+               'Accept':'application/json',
+               'Content-Type': 'application/json',
+               'Authorization':'token'+' '+token,
+               'X-CSRFToken': csrftoken
+           },
+       })
+
+       .then(function(response) {
+           if (response.ok) {
+               console.log("Sucess response",response)
+               return response.json();
+           } else {
+               throw new Error("Could not reach the API: " + response.statusText);
+           }
+       }).then(function(data) {
+        console.log(data)
+       }).catch(function(error) {
+          console.log(error.message)
+       });
+   return true;
+}
+var list = document.querySelector('.grade-list');
+
+function get(){
+  var content = '<div class="cards">'
+  fetch('https://schooltestproject.herokuapp.com/api/instruction/',{
+      method : 'GET',
+      headers : {
+      
+        'Authorization':'token'+' '+token 
+      },
+    }).then(res => {
+    return res.json()
+  }).then(data => {
+
+    console.log(data.data)
+    data.data.forEach((d, index) => {
+      content = content + `  
+        <p class="grade">${d.instruction}</p>`
+
+
+
+      
+      })
+    
+      content += '</div>'
+      list.innerHTML = content;
+     
+
+  })
+  };
+  get();
+</script>
+{% endblock %}

@@ -17,4 +17,5 @@ urlpatterns=[
     path('test-create',test_create),
     path('test-list',test_list),
     path('take-test/<int:pk>/',take_test),
+    path('instruction/',instruct),
 ]
