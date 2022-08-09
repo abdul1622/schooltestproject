@@ -1,9 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
+<input type="text" placeholder="test_id" name="" id="Test_id">
+<button class="btn btn-sm btn-primary" onclick=getrequiredtest()>
+Get Test
+</button>
+
 <div class="header">
     <h2 class="text-center">Grade - <span id="grade-head"></span></h2>
     <hr>
   </div>
+<div class="single-test"></div>
 <div class="test-list">
 
 </div>
@@ -20,6 +26,7 @@
     let error_messages = document.querySelector('.error-messages')
     let head = document.querySelector('.header')
     let history=[]
+    let single_test = document.querySelector('.single-test')
     head.style.display = 'none'
     let set_id = false
     url = 'https://schooltestproject.herokuapp.com/api/test/'
@@ -77,7 +84,7 @@ function get_test(standard){
         head.style.display = 'block';
         document.getElementById('grade-head').textContent = `${standard}`
         let content = '';
-        url2 = new URL('https://schooltestproject.herokuapp.com/api/subject-list/');
+        url2 = new URL('https://schooltestproject.herokuapp.com/api/test/');
         url2.searchParams.append('grade', standard);
         fetch(url2, {
       method: 'GET',
@@ -105,14 +112,9 @@ function get_test(standard){
 
 <p> Duration : ${d.duration} </p>
 
-<p> Description : ${d.description} </p>`
-if(d.test_id){
-  content += `Test ID - ${d.test_id}`
-}else{
-content +=
-`<p class='text-right'><button class='btn btn-primary btn-sm' onclick=take(${d.id})>take test</button></p> 
+<p> Description : ${d.description} </p>
+<p class='text-right'><button class='btn btn-primary btn-sm' onclick=take(${d.id})>take test</button></p> 
 </div>`
-}
 }
 //}
 
@@ -127,5 +129,22 @@ function take(id){
   window.location.href = window.location.protocol + "//" + window.location.host + '/take-test/' + + id +'/';
 }
 
+function getrequiredtest(){
+  test_id = document.getElementById('Test_id').value
+  console.log(test_id)
+  url2 = new URL('https://schooltestproject.herokuapp.com/api/test/');
+  url2.searchParams.append('test_id', test_id);
+  fetch(url2, {
+    method: 'GET',
+    headers: {
+      'content-Type': 'application/json',
+      'Authorization': 'token' + ' ' + token,
+    }
+  }).then(res => {
+    return res.json()
+  }).then(data => {
+    console.log(data.data)
+})
+}
 </script>
 {% endblock %}

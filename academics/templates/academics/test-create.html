@@ -109,13 +109,15 @@
 
 <p >created_at : <span class="created_at">${d.created_at.slice(0, 10)}</span></p>
 
-<p> No of questions : ${(d.no_of_questions).length} </p>
-
-<button type="button" onclick=test_create(${d.id}) class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+<p> No of questions : ${(d.no_of_questions).length} </p>`
+if(d.test_id){
+  content += `Test ID : ${d.test_id}`
+}else{
+content += `<button type="button" onclick=test_create(${d.id}) class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
   Create-Test
-</button>
-</div>
-`
+</button>`
+}
+content += `</div>`
 
         })
         container.innerHTML = content;
