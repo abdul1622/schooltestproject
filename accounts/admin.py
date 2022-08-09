@@ -10,7 +10,9 @@ class UserAdmin(UserAdmin):
     def has_module_permission(self, request,obj=None):
         if request.user.user_type == 'is_staff':
             return False       
-
+        if request.user.user_type == 'is_admin':
+            return True 
+            
     list_display = ('register_number','email','phone','user_type')
     filter_horizontal = ()
     ordering = ('register_number',)
