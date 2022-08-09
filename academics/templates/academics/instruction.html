@@ -59,8 +59,8 @@ function get(){
       'Authorization': 'token' + ' ' + token,
       },
     }).then(res => { 
-      console.log(res.json())
-      return res.json()})
+      get();
+    })
     
   }
 </script>
