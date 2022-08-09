@@ -308,6 +308,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                                     'option_d': d.answers.option_d,
                                     'answer': null,
                                     'seen': false,
+                                    'mark' :d.mark,
                                 }
                                 if (d.question_type != 'MCQ') {
                                     answer_details[question_no].correct_answer = answer_details[question_no][(answer_details[question_no].correct_answer)]
@@ -500,9 +501,11 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             let wrong_answer = 0;
             let correct_answer = 0;
             let unanswered = 0;
+            let marks = 0
             for (i = 0; i < answer_details.length; i++) {
                 if (answer_details[i].answer == answer_details[i].correct_answer) {
                     correct_answer += 1;
+                    marks += answer_details[i].mark
                 } else if (answer_details[i].answer) {
                     wrong_answer += 1
                 } else {
@@ -510,11 +513,11 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                 }
 
             }
-            let score =(correct_answer / (answer_details.length))*100
+            var score =(marks/total_marks)*100
             console.log(score)
             score = parseInt(score)
             console.log(score)
-            let result;
+            var result;
             if (score < 35) {
                 result = 'fail'
             } else {
@@ -541,7 +544,11 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     return response.json()
                 }).then(data => {
                     console.log(data)
-                    document.querySelector('.question-container').innerHTML = `<p class='text-success text-center '>Test submitted successfully<button class='btn btn-primary btn-sm ' onclick=redirect()>close</button></p>`
+                    document.querySelector('.question-container').innerHTML = `<p class='text-success text-center '>Test submitted successfully<button class='btn btn-primary btn-sm ' onclick=redirect()>close</button></p>
+                    <p> Result : ${result} </p>
+                    <p> Score : ${score} </p>
+                    
+                    `
                     document.querySelector('.question-direction').innerHTML = ''
                     
                     if (data.status != 'success') {

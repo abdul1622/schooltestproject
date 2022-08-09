@@ -94,7 +94,7 @@ class answer_form(forms.ModelForm):
 class TestForm(forms.ModelForm):
     class Meta:
         model = Test
-        fields = [ 'remarks', 'description']
+        fields = [ 'remarks', 'description','pass_percentage']
  
 
 class instruction_form(forms.Form):

@@ -178,6 +178,7 @@ content += `</div>`
  //   let form_marks = document.getElementById('id_marks').value
     let form_remarks = document.getElementById('id_remarks').value
     let form_description = document.getElementById('id_description').value
+    let form_percentage = document.getElementById('id_pass_percentage').value
     let marks = 0;
     let duration =0;
     url2 = new URL(`https://schooltestproject.herokuapp.com/api/test-questions/`);
@@ -202,7 +203,7 @@ content += `</div>`
           fetch('https://schooltestproject.herokuapp.com/api/test/',
           {
             method: 'POST',
-            body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_id, 'created_staff_id': userId, 'marks': marks, 'duration': duration, 'remarks': form_remarks, 'description': form_description }
+            body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_id, 'created_staff_id': userId, 'marks': marks, 'duration': duration, 'remarks': form_remarks,'pass_percentage':form_percentage, 'description': form_description }
             ),
             headers: {
               'Accept': 'application/json',

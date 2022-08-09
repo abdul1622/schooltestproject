@@ -174,6 +174,7 @@ class Test(models.Model):
     remarks = models.CharField(max_length=25)
     description = models.CharField(max_length=50)
     test_id = models.CharField(max_length=25,null=True,blank=True)
+    pass_percentage = models.PositiveIntegerField(default=35)
     def __str__(self):
         return self.remarks
 

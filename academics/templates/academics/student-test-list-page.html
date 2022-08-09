@@ -143,7 +143,20 @@ function getrequiredtest(){
   }).then(res => {
     return res.json()
   }).then(data => {
-    console.log(data.data)
+    console.log(data)
+    let  content2 = `<div class="single-test-div" id='${data.id}'>
+  
+      <p> Subject : <span class="subject"> ${data.subject_name}<span></p>
+      <p > Remarks : <span class="remarks">${data.remarks}</span></p>
+      
+      <p > Marks : <span class="marks">${data.marks}</span></p>
+      
+      <p> Duration : ${data.duration} </p>
+      
+      <p> Description : ${data.description} </p>
+      <p class='text-right'><button class='btn btn-primary btn-sm' onclick=take(${data.id})>take test</button></p> 
+     </div>`
+      single_test.innerHTML = content2
 })
 }
 </script>
