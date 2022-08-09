@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-    {% block content %}
+    {% block content %}<div class="instructionForm">
            {% csrf_token %}
         {{form.as_p}}
           
-        <button id="grade-btn" class=''onclick=createinstruction()>Create</button>
+        <button id="instruction-btn" class=''onclick=createinstruction()>Create</button></div>
        <ol class="instructions"></ol>
 <script>
     var token = localStorage.getItem('token')
