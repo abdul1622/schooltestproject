@@ -3,8 +3,8 @@
            {% csrf_token %}
         {{form.as_p}}
           
-        <button id="grade-btn"onclick=createinstruction()>Create</button>
-       <div class="instructions"></div>
+        <button id="grade-btn" class=''onclick=createinstruction()>Create</button>
+       <ol class="instructions"></ol>
 <script>
     var token = localStorage.getItem('token')
     var host = window.location.protocol + "//" + window.location.host;
@@ -42,8 +42,8 @@ function get(){
     data.data.forEach((d, index) => {
       console.log(d.note)
       content += `<div class="cards">
-        <p class="grade">${d.note}</p> 
-        <button onclick=deleteInstruction(${d.id})>Delete</button>  
+        <li class="grade">${d.note} <button class="btn btn-danger btn-sm"  onclick=deleteInstruction(${d.id})>Delete</button>  </li> 
+       
        </div>`
       })
       list.innerHTML = content;
