@@ -48,6 +48,7 @@ def questionview(request):
     answerform = Answerform()
     form=chapterlist_form()
     return render(request,'academics/questionandanswers.html',{'form':form,'answerform':answerform,'questionform':questionform})
+    
 def question_paperview(request):
     form=questionlist_form()
     list_form = chapterlist_form()
@@ -66,7 +67,8 @@ def test_create(request):
 
 def test_list(request):
     return render(request,'academics/student-test-list-page.html')
-    
+def testhistory(request):
+    return render(request,'academics/test-history.html')   
 def take_test(request,pk):
     return render(request,'academics/take-test.html')
 

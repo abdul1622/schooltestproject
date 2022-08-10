@@ -40,7 +40,7 @@
     <title>School</title>
     <style>
         body {
-            font-family: 'Oswald', sans-serif;  
+            font-family: 'Oswald', sans-serif;
             font-weight: 400;
         }
 
@@ -271,6 +271,7 @@
         .navbar li a {
             padding: 1.8vh;
             margin-left: 2%;
+            white-space: nowrap;
         }
 
         .download {
@@ -1469,6 +1470,24 @@
             white-space: nowrap;
         }
 
+        .history {
+            margin-top: 10%;
+            display: grid;
+            width: 35%;
+            margin: 7% 18%;
+            grid-template-columns: auto auto auto;
+            gap: 3%;
+
+        }
+
+        .history>div {
+            background-color: #f3db92;
+            padding: 7%;
+            height: auto;
+            width: auto;
+        }
+
+
         @media screen and (min-width:1024px) and (max-width:1200px) {
             .navbar {
                 width: 100%;
@@ -1518,10 +1537,11 @@
                 margin-left: 1.5vw;
             }
 
-            .chapter-cards {          
+            .chapter-cards {
                 width: 100%;
             }
-            .question-paper-card{
+
+            .question-paper-card {
                 margin: 0% -7% 15%;
             }
 
@@ -1629,17 +1649,20 @@
                 border-radius: 5px;
                 color: #850b0b;
             }
+
             .--staff {
                 background-color: cornsilk;
                 margin-left: 4%;
                 margin-top: 8%;
             }
+
             .--user {
                 font-size: 15px;
                 margin-left: 6%;
                 margin-top: 2%;
                 background-color: rgb(255 248 220 / 94%);
             }
+
             #add {
                 width: 11%;
                 background-color: #14279b;
@@ -1847,7 +1870,8 @@
                 margin-top: 28px;
                 padding: 12px;
             }
-            .questions-paper-card{
+
+            .questions-paper-card {
                 width: 102%;
             }
 
@@ -2015,8 +2039,9 @@
                 font-size: 15px;
                 width: 97%;
                 margin-left: 2%;
-            
+
             }
+
             .--user {
                 font-size: 15px;
                 margin-left: 4%;
@@ -2024,8 +2049,8 @@
                 width: 93%;
                 background-color: rgb(255 248 220 / 94%);
             }
-            
-            
+
+
 
             #userDetails Label {
                 display: none;
@@ -2086,6 +2111,7 @@
             .subject-card #edit {
                 margin-left: 1vw;
             }
+
             .questions-paper-card {
                 font-size: 15px;
                 background-color: #fff8dcb0;
@@ -2094,7 +2120,7 @@
                 box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
                 padding: 10%;
             }
-            
+
             .container2 #edit {
                 width: 5vw;
                 padding: 5px 15px;
@@ -2920,6 +2946,14 @@
                 padding: 2% 3%;
                 background-color: #364de4;
             }
+
+            .test-list {
+                width: 95%;
+                grid-template-columns: auto auto;
+                gap: 1%;
+            }
+
+           
         }
 
         @media screen and (max-width:600px) {
@@ -3575,6 +3609,31 @@
                 margin-left: -75%;
                 margin-top: -31%;
             }
+
+            .history {
+                margin-top: 10%;
+                display: grid;
+                width: 53%;
+                margin: 7% 24%;
+                padding: 0%;
+                grid-template-columns: auto;
+                gap: 3%;
+            }
+
+            .test-history {
+                margin-left: 1%;
+                font-family: 'Cinzel', serif;
+                margin-top: 0%;
+            }
+
+            .questions-paper-card {
+                font-size: 15px;
+                background-color: #fff8dcb0;
+                color: black;
+                width: 100%;
+                box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+                padding: 10%;
+            }
         }
     </style>
 </head>
@@ -3616,6 +3675,9 @@
                     </li>
                     <li class="nav-item" id="nav-test">
                         <a id="nav-test-link">Test</a>
+                    <li class="nav-item" id="nav-testhistory">
+                        <a id="nav-testhistory-link">Test History</a>
+                    </li>
                     </li>
                     <li class="nav-item" id="nav-questionpaperlist">
                         <a id="nav-questionpaperlist-link">QuestionPaperlist</a>
@@ -3635,6 +3697,7 @@
     {% block userd %}{% endblock %}
     {% block question %}{% endblock %}
     {% block chapterlist %}{% endblock %}
+    {% block history %}{% endblock %}
     <script>
         var host = window.location.protocol + "//" + window.location.host;
         var staff = document.getElementById('nav-staffs')
@@ -3645,6 +3708,7 @@
         var questionpaper = document.getElementById('nav-questionpaper')
         var questionpaperlist = document.getElementById('nav-questionpaperlist')
         var test = document.getElementById('nav-test')
+        var testhistory = document.getElementById('nav-testhistory')
         document.getElementById('nav-academics-link').href = `${host}/academics`
         document.getElementById('nav-chapterlist-link').href = `${host}/chapterlist`
         document.getElementById('nav-question-link').href = `${host}/questions`
@@ -3653,6 +3717,7 @@
         document.getElementById('nav-staffs-link').href = `${host}/staffs`
         document.getElementById('nav-questionpaperlist-link').href = `${host}/test-create`
         document.getElementById('nav-test-link').href = `${host}/test-list`
+        document.getElementById('nav-testhistory-link').href = `${host}/test-history`
         function logout() {
             var host = window.location.protocol + "//" + window.location.host;
             let token = localStorage.getItem("token")
@@ -3688,13 +3753,17 @@
             else if (user == 'is_staff' && dataentry) {
                 staff.style.display = 'none'
                 test.style.display = 'none'
+                testhistory.style.display = 'none'
             }
             else if (user == 'is_admin' && dataentry) {
                 test.style.display = 'none'
+                testhistory.style.display = 'none'
             }
             if (dataentry && user == '') {
                 staff.style.display = 'none'
                 test.style.display = 'none'
+                testhistory.style.display = 'none'
+
 
             }
         } navbar();

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block history %}
+<h1 class="test-history">Test History</h1>
+<div class="history"></div>
+<script>
+   var  student_id=localStorage.getItem('id')
+   var token=localStorage.getItem('token')
+    fetch('https://schooltestproject.herokuapp.com/api/test-history/',
+    {
+        method: 'GET',
+        
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'token' + ' ' + token,
+        },
+    }).then(function (response) {
+        return response.json()
+    }).then(data => {
+        let content=''
+        data.forEach((d, index) =>{
+        if ( student_id==d.student_id){
+            content += `<div><p> Correct Answer : ${d.correct_answer}</p>
+                <p>Wrong Answers : ${d.wrong_answer}</p>
+                <p>Un Answered : ${d.unanswered_questions}</p>
+                <p>Result : ${d.result}</p>
+                <p>Score : ${d.score} %</p>
+            </div>  `
+        }
+     
+    })
+    document.querySelector('.history').innerHTML=content
+        if (data.status != 'success') {
+        console.log(data)
+        }
+    })
+</script>
+{% endblock %}

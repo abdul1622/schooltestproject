@@ -58,6 +58,7 @@
 
 </div>
 <script>
+  var userId=localStorage.getItem('id')
   var token = localStorage.getItem('token')
   let head = document.querySelector('.header')
   // let test_messages = document.querySelector('.test-messages')
@@ -65,6 +66,7 @@
   head.style.display = 'none'
   let modal_body = document.querySelector('.modal-body')
   url = 'https://schooltestproject.herokuapp.com/api/question-paper-list/'
+
   let error = true
   let set_id = false
   var user_id;
@@ -76,8 +78,11 @@
   function get() {
     var grade = document.getElementById('id_grade').value
     var subject = (document.getElementById('id_subject').value).toUpperCase()
+    url2 = new URL('https://schooltestproject.herokuapp.com/api/question-paper-list/');
+    url2.searchParams.append('grade', grade);
+    url2.searchParams.append('subject',subject)
     console.log(grade, subject)
-    fetch(url, {
+    fetch(url2, {
       method: 'GET',
       headers: {
         'content-Type': 'application/json',
@@ -89,7 +94,7 @@
       let content = '';
       if (data.status == 'success') {
         data.data.forEach((d, index) => {
-          if (d.grade_name == grade && d.subject_name == subject) {
+
             error = false
             if (!set_id) {
               grade_id = d.grade
@@ -111,7 +116,6 @@
 </button>
 </div>
 `
-          }
 
         })
         container.innerHTML = content;
@@ -168,38 +172,61 @@
   function create(question_id) {
     var grade = document.getElementById('id_grade').value
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    let form_duration = document.getElementById('id_duration').value
-    let form_marks = document.getElementById('id_marks').value
+   // let form_duration = document.getElementById('id_duration').value
+ //   let form_marks = document.getElementById('id_marks').value
     let form_remarks = document.getElementById('id_remarks').value
     let form_description = document.getElementById('id_description').value
-
-      fetch('https://schooltestproject.herokuapp.com/api/test/',
-        {
-          method: 'POST',
-          body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_id, 'created_staff_id': user_id, 'marks': form_marks, 'duration': form_duration, 'remarks': form_remarks, 'description': form_description }
-          ),
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'token' + ' ' + token,
-            'X-CSRFToken': csrftoken
-          },
-        }).then(response => {
-          if (response.status == 201) {
-            console.log("Sucess response", response);
-            // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
-            // test_errors.innerHTML = ''
-            modal_body.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
-            document.getElementById('test-create-btn').style.display = 'none'
-          }
-          return response.json();
-        }).then(function (data) {
-          console.log(data)
-          if (data.status != 'success') {
-            test_errors.innerHTML = `<li class='test-warning'>${(data.data.error)}</li>`;
-            test_messages.innerHTML = '';
-          }
+    let marks = 0;
+    let duration =0;
+    url2 = new URL(`https://schooltestproject.herokuapp.com/api/test-questions/`);
+    url2.searchParams.append('question_paper', question_id);
+        fetch(url2, {
+            method: 'GET',
+            headers: {
+                'content-Type': 'application/json',
+                'Authorization': 'token' + ' ' + token,
+            }
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+         console.log(data)
+         data.forEach((d, index) => {
+          marks += d.mark
+          duration += d.duration
         })
+        console.log(marks,duration)
+        }).then(() =>{
+          console.log(marks,duration)
+          fetch('https://schooltestproject.herokuapp.com/api/test/',
+          {
+            method: 'POST',
+            body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_id, 'created_staff_id': userId, 'marks': marks, 'duration': duration, 'remarks': form_remarks, 'description': form_description }
+            ),
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': 'token' + ' ' + token,
+              'X-CSRFToken': csrftoken
+            },
+          }).then(response => {
+            if (response.status == 201) {
+              console.log("Sucess response", response);
+              // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
+              // test_errors.innerHTML = ''
+              modal_body.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
+              document.getElementById('test-create-btn').style.display = 'none'
+            }
+            return response.json();
+          }).then(function (data) {
+            console.log(data)
+            if (data.status != 'success') {
+              test_errors.innerHTML = `<li class='test-warning'>${(data.data.error)}</li>`;
+              test_messages.innerHTML = '';
+            }
+          })
+        })
+
+    /**/
     
   }
   let input=document.getElementById('id_subject')

@@ -108,14 +108,23 @@ WSGI_APPLICATION = 'schoolproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dfscanbrn4mhff',
-        'USER': 'xyycorvkjwigci',
-        'PASSWORD': '78e866985669c53760f79ed09e90aa5174c0969773265c8702c7170c5459467c',
-        'HOST': 'ec2-34-203-182-65.compute-1.amazonaws.com',
+        'NAME': 'school',
+        'USER': 'santhiya',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'db.sqlite3',
+#         'USER': '',
+#         'PASSWORD': 'USER PASSWORD',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
@@ -168,8 +177,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 

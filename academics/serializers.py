@@ -1,16 +1,15 @@
-from dis import Instruction
+from dataclasses import field
 from operator import sub
+from pyexpat import model
 from rest_framework import serializers
 import re
-from .models import Grade, Question_Paper,Subject,Chapter,Answers,Question,Test,Instruction
+from .models import Grade, Question_Paper,Subject,Chapter,Answers,Question,Test,TestResult,InstructionForTest
 
 
 class GradeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Grade
         fields = '__all__'
-
-
     def validate(self, data):
         if Grade.objects.filter(grade=data['grade']).exists():
             raise serializers.ValidationError({'error':'grade altready exists'})
@@ -70,7 +69,7 @@ class ChapterSerializer(serializers.ModelSerializer):
         if queryset.filter(name = data['name'],subject=data['subject']).exists():
             raise serializers.ValidationError({'error':'chapter name already exists'})
         if queryset.filter(subject=data['subject'],chapter_no=data['chapter_no']).exists():
-            raise serializers.ValidationError({'error':'chapter no altready exists'})
+            raise serializers.ValidationError({'error':'chapter no already exists'})
 
         return data 
 
@@ -105,7 +104,7 @@ class QuestionAnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ['id','grade','subject','chapter','question',
-                    'question_type','cognitive_level','difficulty_level','answers']
+                    'question_type','cognitive_level','difficulty_level','mark','duration','answers']
 
     def create(self, validated_data):
         answers_data = validated_data.pop('answers')
@@ -192,7 +191,13 @@ class TestSerializer(serializers.ModelSerializer):
         model = Test
         fields = ['id','grade','grade_name','subject','subject_name','question_paper','created_staff_id','duration','marks','remarks','description']
     
-class InstructionSerializer(serializers.ModelSerializer):
+class TestResultSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Instruction
+        model = TestResult
         fields = '__all__'
+
+class TestInstruction(serializers.ModelSerializer):
+    class Meta:
+        model = InstructionForTest
+        fields = '__all__'
+

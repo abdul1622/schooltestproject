@@ -1,11 +1,13 @@
-from operator import mod
-from pydoc import describe
-from shutil import register_unpack_format
+from datetime import datetime
+from time import timezone
 from unittest import result
+from django.conf import settings
 from django.db import DatabaseError, models
 from django.core.validators import MaxValueValidator,MinValueValidator
 from django.contrib.postgres.fields import ArrayField
 import re
+
+
 from accounts.models import User
 from django.forms import IntegerField
 # Create your models here.
@@ -20,7 +22,8 @@ class Grade(models.Model):
     def __str__(self):
         return str(self.grade)
 
-
+    class Meta:
+        ordering = ('grade',)
 
 class Subject(models.Model):
     name = models.CharField(max_length=20)
@@ -33,10 +36,13 @@ class Subject(models.Model):
 
     def save(self, *args, **kwargs):
         name = re.findall(r"[^\W\d_]+|\d+",self.name)
+        # self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M')  
         self.name = (' '.join(name)).upper()
       
         super(Subject, self).save(*args, **kwargs)
-        
+
+    class Meta:
+        ordering = ('grade','name',)       
 
 
 class Chapter(models.Model):
@@ -55,10 +61,13 @@ class Chapter(models.Model):
 
 
     def save(self, *args, **kwargs):
+        # self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')  
         name = re.findall(r"[^\W\d_]+|\d+",self.name)
         self.name = (' '.join(name)).lower()
         super(Chapter, self).save(*args, **kwargs)
 
+    class Meta:
+        ordering = ('subject','chapter_no',)   
 
 questiontype_choice=(
 ('MCQ','MCQ'),
@@ -83,6 +92,9 @@ class Question(models.Model):
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE,null =True)
     chapter = models.ForeignKey(Chapter,on_delete=models.CASCADE,null =True)
     question = models.CharField(max_length=50)
+    duration=models.PositiveIntegerField(default=30)
+    mark=models.PositiveIntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
     question_type = models.CharField(
     max_length=20,
     choices =questiontype_choice,
@@ -100,6 +112,12 @@ class Question(models.Model):
     def __str__(self):
         return self.question
 
+    # def cdate(self):
+        # self.created_at =(self.created_at) .strftime('%Y-%m-%d %H:%M:%S')
+        # self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')  
+
+    class Meta:
+        ordering = ('grade','subject','chapter','question_type','-created_at')   
 
 answer_choices=(
     ("option_a","option_a"),
@@ -135,10 +153,14 @@ class Question_Paper(models.Model):
         blank=True,
         default= list
     )
-
+    test_id = models.IntegerField(default=0)
     def __str__(self):
         return (str(self.grade))+' '+(str(self.subject))
-
+    # def save(self, *args, **kwargs):
+    #     self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')  
+    
+    class Meta:
+        ordering = ('grade','subject','-created_at',)
 
 class Test(models.Model):
     question_paper = models.ForeignKey(Question_Paper,on_delete=models.SET_NULL,null=True)
@@ -153,16 +175,40 @@ class Test(models.Model):
     def __str__(self):
         return self.remarks
 
+    # def save(self, *args, **kwargs):
+    #     self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')  
+    
+    class Meta:
+        ordering = ('grade','subject','created_staff_id','question_paper')
+
 class TestResult(models.Model):
     student_id = models.ForeignKey(User,on_delete=models.DO_NOTHING,null=True)
+    grade=models.ForeignKey(Grade,on_delete=models.SET_NULL,null=True)
+    subject=models.ForeignKey(Subject,on_delete=models.SET_NULL,null=True)
     test_id = models.ForeignKey(Test,on_delete=models.DO_NOTHING,null=True)
     question_paper = models.ForeignKey(Question_Paper,on_delete=models.DO_NOTHING,null=True)
     result = models.CharField(max_length=50)
     score = models.PositiveIntegerField()
-
+    correct_answer = models.IntegerField(null=True)
+    wrong_answer = models.IntegerField(null=True)
+    unanswered_questions = models.IntegerField(null=True)
     def __str__(self):
         return self.result
-class Instruction(models.Model):
-    instruction=models.CharField(max_length=2000)
+        
+# class Instruction(models.Model):
+#     instruction_text = models.CharField(max_length=60)
+#     def __str__(self):
+#         return str(self.instruction_text)
+
+class InstructionForTest(models.Model):
+    note = models.TextField(null=True,blank=True)
+
     def __str__(self):
-        return self.instruction
+        return self.note
+
+
+
+def load(request):
+    q = Question_Paper.objects.all()
+    for i in q:
+        print(i)

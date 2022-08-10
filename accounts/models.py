@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
 from django.core.validators import MinLengthValidator,MaxValueValidator
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
+from datetime import datetime
 
 class MyUserManager(BaseUserManager):
    def create_user(self, email,phone,date_of_birth,register_number,is_data_entry):
@@ -102,6 +103,8 @@ class User(AbstractBaseUser):
     def is_admin(self):
         return self.user_type == 'is_admin'
 
+    # def save(self, *args, **kwargs):
+    #     self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')   
 
 class Profile(models.Model):
     

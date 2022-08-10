@@ -7,6 +7,7 @@ from rest_framework.generics import (
     RetrieveUpdateDestroyAPIView,
     ListCreateAPIView,
     ListAPIView,
+    RetrieveDestroyAPIView,
     )
 from accounts.permission import IsAdminUser, IsStaffUser
 from rest_framework.permissions import IsAuthenticated,AllowAny
@@ -33,12 +34,12 @@ from .serializers import (
     QuestionSerializer,
     QuestionPaperSerializer,
     Question_answer_serializer,
-    InstructionSerializer,
     questionanswerserializer,
     TestSerializer,
+    TestResultSerializer,
+    TestInstruction
     )
-from .models import Question, Subject,Grade,Chapter,Question_Paper,Answers,Instruction
-from accounts.models import User
+from .models import Question, Subject,Grade,Chapter,Question_Paper,Answers
 from .utils import render_to_pdf, render_to_pdf2
 
 # Create your views here.
@@ -177,7 +178,7 @@ class ChapterEditView(RetrieveUpdateDestroyAPIView):
         return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
         
 
-# class ChapterListView(APIView):
+ # class ChapterListView(APIView):
 #     serializer_class=ChapterViewSerializer
 #     permission_classes=[AllowAny]
 
@@ -187,7 +188,7 @@ class ChapterEditView(RetrieveUpdateDestroyAPIView):
 #         try:
 #             if subject:
 #                 data = []
-#                 grade = Grade.objects.get(grade=grade)
+#                grade = Grade.objects.get(grade=grade)
 #                 subject = Subject.objects.get(name=subject,grade=grade.grade)
 #                 chapters = Chapter.objects.filter(subject=subject)
 #                 for object in chapters:
@@ -220,8 +221,8 @@ class ChapterListView(APIView):
             if subject:
                 data = []
                 grade = Grade.objects.get(grade=grade)
-                subject = Subject.objects.get(name=subject,grade=grade.grade)
-                chapters = (Chapter.objects.filter(subject=subject)).order_by('-subject','-chapter_no')
+                subject = Subject.objects.get(name=subject,grade=grade.id)
+                chapters = (Chapter.objects.filter(subject=subject)).order_by('subject','chapter_no')
                 for object in chapters:
                     data.insert(0,{
                     "id" : object.id,
@@ -249,7 +250,7 @@ class SubjectListView(ListAPIView):
         if grade is not None:
             try:
                 grades = Grade.objects.get(grade=grade)
-                queryset = (queryset.filter(grade=grades.id).order_by('grade','-code','-name'))
+                queryset = (queryset.filter(grade=grades.id).order_by('grade','code','name'))
             except :
                 return Response({'status':'failed'},status=HTTP_206_PARTIAL_CONTENT)
             return queryset
@@ -262,7 +263,7 @@ class SubjectListView(ListAPIView):
 
 class QuestionCreateView(CreateAPIView):
     serializer_class= QuestionAnswerSerializer
-    queryset = Question.objects.all().order_by('-grade','-subject','-chapter')
+    queryset = Question.objects.all().order_by('grade','subject','chapter')
     permission_classes=[AllowAny]
 
     def get(self, request):
@@ -348,10 +349,22 @@ class QuestionList(APIView):
 class QuestionPaperList(ListAPIView):
     serializer_class= QuestionPaperSerializer
     permission_classes=[AllowAny]
-    queryset = Question_Paper.objects.all().order_by('-grade','-subject')
+    queryset = Question_Paper.objects.all().order_by('grade','subject')
 
     def get(self, request):
-        questions = Question_Paper.objects.all()
+
+        grade = (self.request.query_params.get('grade'))
+        subject = (str(self.request.query_params.get('subject'))).upper()
+        if grade:
+            grade = Grade.objects.get(grade=grade)
+            try:
+                subject = Subject.objects.get(grade=grade.id,name=subject)
+                questions = Question_Paper.objects.filter(grade=grade.id,subject=subject.id)
+            except:
+                questions = Question_Paper.objects.filter(grade=grade.id)
+        else:
+            questions = Question_Paper.objects.all()
+
         serializer =QuestionPaperSerializer(questions,many=True)
         return Response({'status':'success',"data":serializer.data},status=HTTP_200_OK)
 
@@ -413,7 +426,7 @@ def load_subject_chapter(request):
     grade_id = request.GET.get('grade',None)
     subject_id = request.GET.get('subject',None)
     if grade_id:
-        subject = Subject.objects.filter(grade=grade_id).order_by('-name')
+        subject = Subject.objects.filter(grade=grade_id).order_by('name')
         return render(request, 'academics/dropdown_list_options.html', {'items': subject})
     chapter = Chapter.objects.filter(subject=subject_id)
     return render(request, 'academics/dropdown_list_options.html', {'items': chapter})
@@ -439,14 +452,29 @@ def load_subject_chapter(request):
 #     return render(request,'academics/question_paper.html')
 
 
-class TestCreateView(CreateAPIView):
-
-    serializer_class= TestSerializer
-    queryset= Test.objects.all().order_by('-grade','-subject')
+class QuestionFromQuestionPaper(APIView):
+    serializer_class= QuestionAnswerSerializer
+    queryset= Question.objects.all().order_by('grade','subject','chapter')
     permission_classes=[AllowAny]
 
     def get(self, request, format=None):
-        queryset= Test.objects.all().order_by('-grade','-subject')
+        question_paper_id = (self.request.query_params.get('question_paper'))
+        question_paper = Question_Paper.objects.get(id=question_paper_id)
+        question_list = question_paper.no_of_questions
+        data = []
+        for i in question_list:
+            queryset = Question.objects.get(id=int(i))
+            data.append((QuestionAnswerSerializer(queryset)).data)
+        return Response(data)
+
+class TestCreateView(CreateAPIView):
+
+    serializer_class= TestSerializer
+    queryset= Test.objects.all().order_by('grade','subject')
+    permission_classes=[AllowAny]
+
+    def get(self, request, format=None):
+        queryset= Test.objects.all().order_by('grade','subject')
         serializer = TestSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -461,13 +489,13 @@ class TestCreateView(CreateAPIView):
 class TestEditView(RetrieveUpdateDestroyAPIView):
     serializer_class = TestSerializer
     permission_classes = [AllowAny]
-    queryset = Test.objects.all().order_by('-grade','-subject')
+    queryset = Test.objects.all().order_by('grade','subject')
 
     def retrieve(self, request,pk):
         try:
             queryset = Test.objects.get(pk=pk)
         except:
-            return Response({'status':'failure',"data": "Subject doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({'status':'failure',"data": "Test doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
         serializer = TestSerializer(queryset)
         return Response(serializer.data,status=HTTP_200_OK)
     
@@ -478,19 +506,69 @@ class TestEditView(RetrieveUpdateDestroyAPIView):
             serializer.save()
             return Response({"status": "success",'data':serializer.data},status=HTTP_200_OK)
         return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
- 
-class instructView(ListCreateAPIView):
-    serializer_class = InstructionSerializer
-    queryset =   Instruction.objects.all()
+
+class TestResultCreateView(CreateAPIView):
+
+    serializer_class= TestResultSerializer
+    queryset= TestResult.objects.all()
+    permission_classes=[AllowAny]
+
+    def get(self, request, format=None):
+        queryset= TestResult.objects.all()
+        grade = (self.request.query_params.get('grade'))
+        # subject = (self.request.query_params.get)
+        if grade:
+            try:
+                queryset = TestResult.objects.filter(grade=grade)
+            except:
+                queryset= TestResult.objects.all()
+        serializer = TestResultSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def create(self, request):
+        serializer = TestResultSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": "success",'data':serializer.data},status=HTTP_201_CREATED)   
+        return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
+        
+        
+class TestResultEditView(RetrieveDestroyAPIView):
+    serializer_class = TestResultSerializer
+    permission_classes = [AllowAny]
+    queryset = TestResult.objects.all()
+
+    def retrieve(self, request,pk):
+        try:
+            queryset = TestResult.objects.get(pk=pk)
+        except:
+            return Response({'status':'failure',"data": "Test result doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
+        serializer = TestResultSerializer(queryset)
+        return Response(serializer.data,status=HTTP_200_OK)
+    
+    # def update(self,request,pk):
+    #     test = TestResult.objects.get(pk=pk)
+    #     serializer = TestResultSerializer(test,data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response({"status": "success",'data':serializer.data},status=HTTP_200_OK)
+    #     return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
+
+
+
+class TestInstructionView(ListCreateAPIView):
+    serializer_class = TestInstruction
+    queryset = InstructionForTest.objects.all()
     permission_classes = [AllowAny]
     def list(self,request):
-        queryset = Instruction.objects.all()
-        serializer = InstructionSerializer(queryset)
+        queryset = InstructionForTest.objects.all()
+        serializer = TestInstruction(queryset,many=True)
         return Response({"status": "success",'data':serializer.data})
 
     def create(self,request):
-        serializer =  InstructionSerializer(data=request.data)
+        serializer = TestInstruction(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({"status": "success",'data':serializer.data},status=HTTP_201_CREATED)
         return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
+
