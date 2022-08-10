@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Grade,Subject,Chapter
+from .models import Grade,Subject,Chapter,Question,Question_Paper,Test,TestResult
 
 # Register your models here.
 
@@ -26,3 +26,7 @@ class GradeAdmin(admin.ModelAdmin):
 admin.site.register(Grade,GradeAdmin)
 admin.site.register(Subject,SubjectAdmin)
 admin.site.register(Chapter)
+admin.site.register(Question)
+admin.site.register(Question_Paper)
+admin.site.register(Test)
+admin.site.register(TestResult)
