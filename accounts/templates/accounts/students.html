@@ -1,0 +1,419 @@
+{% extends 'base.html'%}
+{% block userd %}
+
+<div class="modal fade" id="delete-user-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id='confirmationuser'>
+
+          <h3>Are you sure to delete?</h3>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="no" data-dismiss="modal">No</button>
+        <span class="create-btn-container"> <button data-dismiss="modal" type="button" id='yes'
+            class="btn btn-primary">Yes</button></span>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="messageModal-student" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="messages container-fluid">
+
+        </div>
+        <div class="error-messages container-fluid">
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<button id="add" onclick=adduser()>Add Student</button>
+<div>
+  <input type="number" id="grades" placeholder="grade" min="0" max="12">
+  <button id="sort" onclick=sort()>search</button>
+</div>
+</div>
+<form id="userDetails">
+  {%csrf_token%}
+
+  <button onclick=back() class='back-btn'>&#x2715;</button>
+
+  <div class='grid-item'>
+    <label for="email">Email:</label><br>
+    <input type="email" id='email' placeholder="Email">
+  </div>
+
+  <div class='grid-item'>
+    <label for="phone">Phone:</label><br>
+    <input type="phone" id="phone" placeholder="Phone">
+  </div>
+
+  <div class='grid-item'>
+    <label for="reg">Reg:</label><br>
+    <input type="text" id="reg" placeholder="Reg">
+  </div>
+
+  <div class='grid-item'>
+    <label for="dob">DOB:</label><br>
+    <input type="date" id="dob" placeholder="DOB">
+  </div>
+
+  <div class='grid-item'>
+    <label for="std">Standard:</label><br>
+    <input type="text" id="std" placeholder="Standard">
+  </div>
+
+  <div class='grid-item'>
+    <label for="sec">Section:</label><br>
+    <input type="text" id="sec" placeholder="Section">
+  </div>
+
+  <div class='grid-item'>
+    <label for="fname">Firstname:</label><br>
+    <input type="text" id="fname" placeholder="First Name">
+  </div>
+
+  <div class='grid-item'>
+    <label for="lname">Last Name:</label><br>
+    <input type="text" id="lname" placeholder="Last Name">
+  </div>
+
+  <div class='grid-item'>
+    <label for="ffname">Full Name:</label><br>
+    <input type="text" id="ffname" placeholder="Full Name">
+  </div>
+
+  <div class='grid-item'>
+    <label for="address">Address:</label><br>
+    <input type="text" id="address" placeholder="Address">
+  </div>
+
+  <div class='grid-item'>
+    <label for="file">Profile picture:</label><br>
+    <input type="file" id="file">
+  </div>
+
+  <div class='grid-item'>
+    <button data-toggle="modal" data-target="#messageModal-student" id="userdetail-btn">submit</button>
+  </div>
+
+  </div>
+
+
+</form>
+<div class="container2"></div>
+
+<script>
+  let messages = document.querySelector('.messages')
+  let error_messages = document.querySelector('.error-messages')
+  let token = localStorage.getItem("token")
+  button = document.getElementById('userdetail-btn');
+  var host = window.location.protocol + "//" + window.location.host;
+  let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  let form = document.getElementById('userDetails')
+  const container2 = document.querySelector('.container2');
+  if (token) {
+
+    function back() {
+      form.style.display = "none"
+      add.style.display = 'block'
+
+    }
+
+    function userdetails() {
+
+
+      fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
+        method: 'GET',
+        headers: new Headers({
+          'Authorization': 'token' + ' ' + token,
+          'Content-Type': 'application/json',
+
+        })
+      }).then(res => {
+        return res.json()
+      }).then(data => {
+        console.log(data)
+        let table2 = `<table class='--user'>`;
+        table2 += `<thead class="thead">
+            <th >Email</th>
+            <th >Phone</th>
+            <th>RegNo</th>
+            <th>FullName</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Date Of Birth</th>
+            <th>Address</th>
+            <th>Standard</th>
+            <th>Section</th>
+            <th id="action" >Action</th>
+          </thead>`;
+        data.forEach((d, index) => {
+          if (`${d.user_type}` == 'is_student') {
+            table2 = table2 + `<tbody><tr id=${d.id}>`;
+            table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
+            table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
+            table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
+            table2 = table2 + '<td class="userfullname">' + `${d.profile?.full_name}` + '</td>';
+            table2 = table2 + '<td class="userfirstname">' + `${d.profile?.first_name}` + '</td>';
+            table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
+            table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
+            table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
+            table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
+            table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
+            table2 = table2 + '<td>' + ` <i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
+              table2 = table2 + `</tr>`;
+          }
+        })
+        table2 += "</table>";
+        container2.innerHTML = table2;
+      })
+    } userdetails();
+   
+    function sort() {
+      button = document.getElementById('sort');
+      var grade = document.getElementById('grades').value
+      console.log(grade)
+      console.log('here')
+        if (token) {
+          fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
+            method: 'GET',
+            headers: new Headers({
+              'Authorization': 'token' + ' ' + token,
+              'Content-Type': 'application/json',
+
+            })
+          }).then(res => {
+            return res.json()
+          }).then(data => {
+            let table2 = `<table class='--user'>`;
+            table2 += `<thead class="thead">
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">RegNo</th>
+                <th scope="col">FullName</th>
+                <th scope="col">FirstName</th>
+                <th scope="col">LastName</th>
+                <th scope="col">Date Of Birth</th>  
+                <th scope="col">Address</th>
+                <th scope="col">Standard</th>
+                <th scope="col">Section</th>
+                <th scope="col">Action</th>
+              </thead>`;
+            data.forEach((d, index) => {
+              if ((`${d.profile.standard}` == grade) && (`${d.user_type}` == 'is_student')) {
+                table2 = table2 + `<tbody><tr id=${d.id}>`;
+                table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
+                table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
+                table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
+                table2 = table2 + '<td class="userfullname">' + `${d.profile?.full_name}` + '</td>';
+                table2 = table2 + '<td class="userfirstname">' + `${d.profile?.first_name}` + '</td>';
+                table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
+                table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
+                table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
+                table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
+                table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
+                table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>`+ '</td></tbody>',
+                  table2 = table2 + `</tr>`;
+              }
+            })
+            table2 += "</table>";
+            container2.innerHTML = table2;
+          })
+        }
+  }
+  let input=document.getElementById('grades')
+  input.addEventListener('keyup',(e)=>{
+      if(e.keyCode===13){
+          sort();
+      }
+  }) 
+
+    function deletestaff(id) {
+      url = "https://schooltestproject.herokuapp.com/api/user-details/"
+      fetch(`${url}${id}/`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'token' + ' ' + localStorage.getItem('token')
+        },
+      }).then(res => {
+       
+        userdetails();
+      })
+    }
+
+    container2.addEventListener('click', (e) => {
+      form_email = document.getElementById('email');
+      form_phone = document.getElementById('phone');
+      form_reg = document.getElementById('reg');
+      form_dob = document.getElementById('dob');
+      form_fname = document.getElementById('fname');
+      form_lname = document.getElementById('lname');
+      form_fullname = document.getElementById('ffname');
+      form_std = document.getElementById('std');
+      form_sec = document.getElementById('sec');
+      form_ad = document.getElementById('address');
+      button = document.getElementById('userdetail-btn');
+      e.preventDefault();
+      let delbutton = e.target.id == 'delete';
+      let editbutton = e.target.id == 'edit';
+      let id = e.target.parentElement.parentElement.id
+      console.log(id)
+      yes = document.getElementById('yes')
+      no = document.getElementById('no')
+      if (delbutton) {
+        yes.setAttribute("onClick", `deletestaff(${id})`);
+      }
+      if (editbutton) {
+        form.style.display = 'grid'
+        url = "https://schooltestproject.herokuapp.com/api/user-details/"
+        const parent = e.target.parentElement.parentElement;
+        console.log(parent)
+        let email = parent.querySelector(".useremail").textContent;
+        let phone = parent.querySelector('.userphone').textContent;
+        let reg = parent.querySelector('.userreg').textContent;
+        let dob = parent.querySelector('.userDOB').textContent;
+        let fullname = parent.querySelector('.userfullname').textContent;
+        let lastname = parent.querySelector('.userlastname').textContent;
+        let firstname = parent.querySelector('.userfirstname').textContent;
+        let standard = parent.querySelector('.userstandard').textContent;
+        let section = parent.querySelector('.usersection').textContent;
+        let address = parent.querySelector('.useraddress').textContent;
+        document.getElementById('email').value = email
+        document.getElementById('phone').value = phone
+        document.getElementById('reg').value = reg
+        document.getElementById('dob').value = dob
+        document.getElementById('ffname').value = fullname
+        document.getElementById('lname').value = lastname
+        document.getElementById('fname').value = firstname
+        document.getElementById('std').value = standard
+        document.getElementById('sec').value = section
+        document.getElementById('address').value = address
+        button.addEventListener('click', () => {
+          fetch(`${url}${id}/`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'token' + ' ' + localStorage.getItem('token'),
+              'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify({
+              'email': form_email.value, 'phone': form_phone.value, 'date_of_birth': form_dob.value, 'register_number': form_reg.value,
+              'profile': { 'first_name': form_fname.value, 'last_name': form_lname.value, 'standard': form_std.value, 'section': form_sec.value, 'full_name': form_fullname.value, 'address': form_ad.value }
+            }
+            )
+          }).then(response => {
+            if (response.status == 200) {
+              console.log("Sucess response", response)
+              messages.innerHTML = 'updated successfully'
+              error_messages.innerHTML = ''
+              userdetails
+            }
+            return response.json();
+          }).then(function (data) {
+            console.log(data)
+            if (data.status != 'success') {
+              error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+              messages.innerHTML = ''
+            }
+          })
+        })
+      }
+    })
+    function adduser() {
+      form.style.display = 'grid'
+      document.getElementById('userDetails').reset();
+      /* var email = 's10@gmail.com'
+       var phone = 9992945420
+       var dob = '2000-02-10'
+       var reg = 's11'
+       var standard = 1
+       var section = 'c'
+       var type = 'is_student'
+       var firstname = 's'
+       var lastname = 'p'
+       var fullname = 'sp'
+       var address = 'home'*/
+      var is_dataentry = 'false'
+
+      button.addEventListener('click', () => {
+
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        var email = document.getElementById('email').value
+        var phone = document.getElementById('phone').value
+        var dob = document.getElementById('dob').value
+        var reg = document.getElementById('reg').value
+        var standard = document.getElementById('std').value
+        var section = document.getElementById('sec').value
+        var type = 'is_student'
+        var firstname = document.getElementById('fname').value
+        var lastname = document.getElementById('lname').value
+        var fullname = document.getElementById('ffname').value
+        var address = document.getElementById('address').value
+        var is_dataentry = 'false'
+        fetch('https://schooltestproject.herokuapp.com/api/signup/',
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
+              'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standard, 'section': section, 'full_name': fullname, 'address': address
+            }
+            ),
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': csrftoken
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            }
+          }).then(response => {
+            if (response.status == 201) {
+              console.log("Sucess response", response)
+              messages.innerHTML = 'created successfully'
+              error_messages.innerHTML = ''
+
+            }
+            return response.json();
+          }).then(function (data) {
+            console.log(data)
+            if (data.status != 'success') {
+              error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+              messages.innerHTML = ''
+            }
+          })
+      })
+    }
+
+  }
+  else {
+    window.location.href = `${host}/login`
+  }
+</script>
+{% endblock %}

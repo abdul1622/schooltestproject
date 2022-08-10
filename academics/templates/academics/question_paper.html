@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div id="message">
+
+</div>
+<div class="error-messages container-fluid">
+
+</div>
+<div class="question-paper-list">
+</div>
+
+
+<div class="question-paper-subject" >
+  <div class="question-paper">
+      <p> here get your question-paper pdf link </p>
+  </div>
+
+
+  <div class="question-paper-form">
+
+    <div class="q-form">
+      {% csrf_token %}
+      
+      <p><label for="id_subject">Grade:</label>{{form.grade}} </p>
+      <p><label for="id_subject">Subject:</label> <select name="subject" required="" id="id_subject">
+        <option value="" selected="">---------</option>
+      </select></p>
+      <p><label for="id_chapter">Chapter:</label> <select name="chapter" required="" id="id_chapter">
+        <option value="" selected="">---------</option>
+      </select></p>
+      <p><label for="id_no_of_questions">No of questions:</label> <input type="text" name="no_of_questions" maxlength="20" required="" id="id_no_of_questions"></p>
+      <p class="chapter-btns"> <button  id="chapter-btn" class="submit-btn btn btn-primary" onclick=getquestion()>Get</button>
+        <button id="save-button" class="submit-btn btn btn-primary" onclick=savequestion()>Save</button></p>
+    </div>
+  </div>
+</div> 
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- 
+<div id="prev-question-heading" class="prev-question-heading">
+  <h2 >Grade - <span id="grade-title-question"> </span></h2>
+  <hr>
+  <h3 id="subject-title-question"> </h3>
+</div>
+<div class="prev-question-papers">
+
+</div> -->
+   
+   
+<script>
+
+  var messages = document.getElementById('message')
+  var token = localStorage.getItem('token')
+  let error_messages = document.querySelector('.error-messages')
+  // var grade;
+  // var grade_id;
+  // var subject;
+  // var subject_id;
+
+  if (token){
+  blank_url = 'https://schooltestproject.herokuapp.com'
+  for_answer = '/api/question-paper/'
+  url = 'https://schooltestproject.herokuapp.com/api/question-paper-list/'
+
+
+  $("#id_grade").change(function () {
+      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+      var gradeId = $(this).val(); 
+
+      $.ajax({                       
+        url: url_for_change,                  
+        data: {
+          'grade': gradeId      
+        },
+        success: function (data) {
+          $("#id_subject").html(data); 
+        }
+      });
+
+    });
+
+    $('#id_subject').change(function(){
+        var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+        var subjectId = $(this).val();
+
+        $.ajax({
+            url : url_for_change,
+            data : {
+                'subject':subjectId
+            },
+            success: function(data){
+                $("#id_chapter").html(data)
+            }
+        });
+    });
+
+// function getsubjectquestions(){
+//   grade = document.getElementById('id_grade').value
+//   subject = document.getElementById('id_subject').value
+//   subject = subject.toUpperCase()
+
+//   fetch(url,{ 
+//         method : 'GET',
+//         headers : {
+//           'content-Type' : 'application/json',
+//           'Authorization':'token'+' '+token,
+//           // 'X-CSRFToken': csrftoken
+//         }}).then(res =>  res.json()).then(data => {
+//       console.log(data)
+//       if(data.status=='success'){
+//       let content = '';
+//       subject = subject.toUpperCase();
+//       console
+//       data.data.forEach((d, index) => {
+//        total_question = d.no_of_questions.length;
+//        console.log(d.no_of_questions.length)
+// //         <p >Grade : <span class="grade">${d.grade_name}</span></p>
+
+// // <p >Subject : <span class="subject">${d.subject_name}</span></p>
+//         date = d.created_at.slice(0,10)
+//         if(grade == d.grade_name && subject == d.subject_name){
+
+//           content = content + `<div class="question-paper-card" id='${d.id}'>
+
+
+// <p >created_by : <span class="created_by">${d.created_by}</span></p>
+
+// <p >created_at : <span class="created_at">${date}</span></p>
+
+// <p > No of questions : ${total_question} </p>
+// <button id="get-question-button" class="submit-btn btn btn-primary" onclick=getquestionanswerpaper(${d.id})>Get Question-papers</button>
+
+// </div>
+// `
+// // <button id="get-answer" onclick=getanswers() >Get Answer file</button> 
+// // <p> <a href='' class='ans-file'>download</a></p> 
+// total_questions = 0;
+//         }
+
+
+//       })
+//       container2.innerHTML = content;
+//       document.getElementById('prev-question-heading').style.display = "block"
+//       document.getElementById('grade-title-question').textContent = `${grade}`
+//       document.getElementById('subject-title-question').textContent= `${subject}`
+//     }    else{
+      
+//     }}
+
+//     )
+
+
+// }
+
+
+function savequestion(){
+             
+  grade = document.getElementById('id_grade').value
+  subject = document.getElementById('id_subject').value
+  no_of_question= document.getElementById('id_no_of_questions').value
+  chapter = document.getElementById('id_chapter').value
+  console.log(grade+subject)
+  let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
+  url1.searchParams.append('type', 'save');
+  let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+   console.log(url1)
+  fetch(url1,{
+      method: 'POST',
+      body: JSON.stringify({ 'grade_name': grade,'subject':subject,'chapter':chapter,'number_of_questions':no_of_question}
+      ),
+      headers: {
+          'Accept':'application/json',
+          'Content-Type': 'application/json',
+          'Authorization':'token'+' '+token,
+          'X-CSRFToken': csrftoken
+  },
+  }).then(response=> response.json()).then(data=>{
+      console.log(data)
+      if(data.status == 'success'){
+  grade_id = data.grade_id
+  subject_id = data.subject_id
+      let path = `
+       <p> Grade : ${data.data.grade_name} </p>
+       <p> Subject : ${data.data.subject_name} </p>
+       <p> Created_by : ${data.data.created_by} </p>
+       <p> Question_numbers : ${data.data.no_of_questions} </p>
+       <p> Number of questions : ${(data.data.no_of_questions).length}
+       <p> Created Time : ${(data.data.created_at.slice(0, 10))} ${(data.data.created_at.slice(11,19)) } </p>
+ <p> Question-paper pdf file  <a onclick=downloadfile('https://schooltestproject.herokuapp.com${data.data.file}')> -  download </a> </p>`
+       
+      let questionPath = document.querySelector('.question-paper')
+      questionPath.innerHTML = path;
+  // getquestionanswerpaper(data.data.id);
+     }else{
+       console.log(data.data)
+       let questionPath = document.querySelector('.question-paper')
+       if (data.data){
+         questionPath.innerHTML = data.data
+       }else{
+         questionPath.innerHTML = data.detail
+       }
+       
+     }
+  })
+}
+
+function getquestion() {
+  grade = document.getElementById('id_grade').value
+  subject = document.getElementById('id_subject').value
+  no_of_question= document.getElementById('id_no_of_questions').value
+  chapter = document.getElementById('id_chapter').value
+  console.log(subject)
+  let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  fetch('https://schooltestproject.herokuapp.com/api/question-paper/',{
+      method: 'POST',
+      body: JSON.stringify({ 'grade_name': grade,'subject':subject,'chapter':chapter,'number_of_questions':no_of_question}
+      ),
+      headers: {
+          'Accept':'application/json',
+          'Content-Type': 'application/json',
+          'Authorization':'token'+' '+token,
+          'X-CSRFToken': csrftoken
+  },
+  }).then(response=> response.json()).then(data=>{
+      console.log(data)
+      if(data.status == 'success'){
+
+      grade_id = data.grade_id
+      subject_id = data.subject_id
+      console.log(data.question_path)
+      let uri = `https://schooltestproject.herokuapp.com`
+      let path = `
+<p> Question-paper pdf file  <a onclick=downloadfile('${uri}${data.question_path}')> -  download </a> </p>
+          `;
+      let questionPath = document.querySelector('.question-paper')
+      questionPath.innerHTML = path;
+
+
+     }else{
+      let questionPath = document.querySelector('.question-paper')
+       if (data.data){
+         questionPath.innerHTML = data.data
+       }else{
+         questionPath.innerHTML = data.detail
+       }
+     }
+
+      
+  })
+}
+ 
+function downloadfile(uri) {
+  var link = document.createElement("a");
+  link.download = 'answer';
+  link.href = uri;
+  console.log(link)
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  delete link;
+}
+  }else{
+    window.location.href=`${host}/login`  
+  }
+ 
+ </script>
+  {% endblock %}
