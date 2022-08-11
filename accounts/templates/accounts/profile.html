@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% block profile %}
+<div class="profile-container">
+<div class="container">
+</div>
+<div id='profile-box'>
+  
+  {%csrf_token%}
+  <button onclick=back() class='delete-grade profile-back-btn'>&#x2715; </button>
+<p> <label >Standard:</label><br><input type="text" id="std" placeholder="Standard"> </p>
+<p></p><label >Section:</label><br><input type="text" id="sec" placeholder="Section"> </p>
+<p></p><label >Firstname:</label><br><input type="text" id="fname" placeholder="First Name"> </p>
+<p></p><label >Lastname:</label><br><input type="text" id="lname" placeholder="Last Name"> </p>
+<p></p><label >Fullname:</label><br><input type="text" id="ffname"placeholder="Full Name"> </p>
+<p></p><label >Address:</label><br><input type="text" id="address"placeholder="Address"> </p>
+<p></p><button data-toggle="modal" data-target="#messageModal-profile" id='profile-btn'>update</button></p>
+
+</div>
+</div>
+<div class="modal fade" id="messageModal-profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="messages container-fluid">
+
+        </div>
+        <div class="error-messages container-fluid">
+    
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+    </div>
+  </div>
+</div>
+</div>
+<script>
+  var host = window.location.protocol + "//" + window.location.host;
+  let container = document.querySelector('.container');
+  let messages = document.querySelector('.messages')
+  let error_messages = document.querySelector('.error-messages')
+  let form=document.getElementById('profile-box')
+  let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  function back(){
+    form.style.display='none'
+    container.style.display = 'block'
+  }
+  function profile() {
+        let token = localStorage.getItem('token')
+        console.log(token)
+        if (token){
+          fetch('https://schooltestproject.herokuapp.com/api/profile/', {
+            method: 'GET',
+            headers: new Headers({
+              'Authorization': 'token' + ' ' + token,
+              'Content-Type': 'application/x-www-form-urlencoded',
+             
+            })
+          })
+            .then(response => response.json())
+            .then(data => {
+              console.log("data=", data.data.email)
+              console.log("data=", data)
+    
+              let htmlSegment = `<div class="user" id='${data.data.id}'>
+                <div class="profile-head">
+                <div class='image'> <img src='https://schooltestproject.herokuapp.com${data.data.profile?.profile_picture}'></div>  
+                <p class="fullname">${data.data.profile?.full_name}</p><br>`
+
+                  if(data.data.user_type=='is_admin'){
+                    htmlSegment += `<p class ='occupation'> Admin </p>`
+                  }
+                  else if(data.data.user_type=='is_staff'){
+                    htmlSegment += `<p class ='occupation'> Staff </p>`
+                  }
+                  else if(data.data.user_type=='is_student'){
+                    htmlSegment += `<p class ='occupation'> Student </p>`
+                  }
+                 else{
+                    htmlSegment += `<p class ='occupation'> Data entry operator </p>`
+                  }
+        htmlSegment +=
+               ` </div>
+                <div class="profile-content">
+                <p><label class=profile-label>First Name:</label><span  class="firstname">${data.data.profile?.first_name}</span></p>
+                <p><label class=profile-label>Last Name:</label><span class="lastname">${data.data.profile?.last_name}</span></p>
+                <p> <label class=profile-label>Standard:</label><span  class="std">${data.data.profile?.standard}</span></p>
+                <p>     <label class=profile-label>Section:</label><span class="sec">${data.data.profile?.section}</span></p>
+                <p>  <label class=profile-label>Address: </label><span class="address">${data.data.profile?.address}</span></p>
+  
+                     <i id='profile-edit' class="fa fa-edit"></i>
+                     </div>`;
+              container.innerHTML = htmlSegment;
+            }
+            )
+        }
+        else{
+          window.location.href=`${host}/login`  
+        }
+       
+        }profile();
+ 
+            container.addEventListener('click',(e)=>{
+            fname= document.getElementById('fname');
+            lname= document.getElementById('lname');
+            ffname= document.getElementById('ffname');
+            std= document.getElementById('std');
+            sec= document.getElementById('sec');
+            ad=document.getElementById('address');
+            button= document.getElementById('profile-btn')
+            e.preventDefault();
+            let editbutton = e.target.id == 'profile-edit';
+            let id = e.target.parentElement.parentElement.id;
+            console.log(id)
+            if (editbutton) 
+            {
+              form.style.display='block'
+              container.style.display = 'none'
+              console.log('hi')
+              url="https://schooltestproject.herokuapp.com/api/student-profile/"
+              const parent = e.target.parentElement;
+              console.log(parent)
+              let fullname = parent.parentElement.querySelector('.fullname').textContent;
+              let lastname= parent.querySelector('.lastname').textContent;
+              let firstname= parent.querySelector('.firstname').textContent;
+              let standard= parent.querySelector('.std').textContent;
+              let section= parent.querySelector('.sec').textContent;
+              let address= parent.querySelector('.address').textContent;
+              document.getElementById('ffname').value=fullname
+              document.getElementById('lname').value=lastname
+              document.getElementById('fname').value=firstname
+              document.getElementById('std').value=standard
+              document.getElementById('sec').value=section
+              document.getElementById('address').value=address
+              button.addEventListener('click',()=>{
+                fetch(`${url}${id}/`,{
+                  method : 'PUT',
+                  headers : {
+                    'Content-Type' : 'application/json',
+                    'Authorization':'token'+" " +localStorage.getItem('token'),
+                    'X-CSRFToken': csrftoken
+                  },
+                  body:JSON.stringify(
+                  {'first_name':fname.value,'last_name':lname.value,'standard':std.value,'section':sec.value,'full_name':ffname.value,'address':ad.value}
+                  )
+              }).then(response => {
+                if (response.status == 200) {
+                    console.log("Sucess response", response)
+                    messages.innerHTML = 'updated successfully'
+                    error_messages.innerHTML= ''
+                  profile();
+                }
+              form.style.display='none'
+              container.style.display = 'block'
+                return response.json();
+            }).then(function (data) {
+                console.log(data)
+                if (data.status != 'success'){
+                error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+                messages.innerHTML = ''
+                }
+            })            })
+           
+          }
+        
+         
+          }
+         
+        );
+      
+      
+</script>
+
+{% endblock %}
+
+

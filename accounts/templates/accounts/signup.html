@@ -1,0 +1,162 @@
+{% extends 'main.html'%}
+{% block signup %}
+<p id='response'>Invalid Details</p>
+<div class="signbox">
+    <div class="signbox1">
+
+        <input type="hidden" name="csrfmiddlewaretoken" value="a3cCmEUXAWnNpEIH7egd6gKS37Lpb0sOsWq6lZ3gJ2ZGxkw2lXj9ScZLoTAyXVtn">
+        <label>Email:</label>
+        <input type="text" name="email" class="form-control" placeholder="Email" id="id_email">
+        <label>Phone:</label>
+        <input type="text" name="phone" class="form-control" placeholder="Phone" id="id_phone">
+        <label>Reg.No:</label>
+        <input type="text" name="register_number" class="form-control" placeholder="Register Number" id="id_register_number">
+        <label>DOB:</label>
+        <input type="date" name="date_of_birth" class="form-control" placeholder="Date of Birth" id="id_date_of_birth">
+        <label>Standard:</label>
+        <input type="number" name="standard" class="form-control" placeholder="Standard" id="id_standard">
+        <label>Section:</label>
+        <input type="text" name="section" class="form-control" placeholder="Section" id="id_section">
+    </div>
+    <div class="signbox2">
+        <label>UserType:</label>
+        <select name="user_type" id="id_user_type">
+<option value="" selected="">-------</option>
+
+<option value="is_student">is_student</option>
+
+<option value="is_staff">is_staff</option>
+
+<option value="is_admin">is_admin</option>
+
+</select>
+    <label>FirstName:</label>
+    <input type="text" name="first_name" class="form-control" placeholder="First Name" id="id_first_name">
+    <label>Lastname:</label>
+    <input type="text" name="last_name" class="form-control" placeholder="Last Name" id="id_last_name">
+    <label>FullName:</label>
+    <input type="text" name="full_name" class="form-control" placeholder="Fullname" id="id_full_name">
+    <label>Address:</label>
+    <input type="text" name="address" class="form-control" placeholder="Address" id="id_address">
+    <label>DataEntry:</label>
+    <input type="checkbox" name="data_entry_user" id="id_data_entry_user">
+</div>
+    <button data-toggle="modal" data-target="#messageModal-signup" id="signup-btn" onclick=signup()>Register</button>
+</div>
+<div class="modal fade" id="messageModal-signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="messages container-fluid">
+
+        </div>
+        <div class="error-messages container-fluid">
+    
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+    </div>
+  </div>
+</div>
+</div>
+<footer style="background-color: whitesmoke;" class=" text-center text-white ">
+    <div class="container p-4 pb-0">
+      <section class="mb-4">
+        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-facebook"></i></a>
+        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-twitter"></i></a>
+        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-google"></i></a>
+        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-instagram"></i></a>
+        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-linkedin"></i></a>
+        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-github"></i></a>
+      </section>
+
+      <p> © 2020 Copyright:www.school.com</p>
+    </div>
+    </footer>
+<script>
+    let messages = document.querySelector('.messages')
+    let error_messages = document.querySelector('.error-messages')
+    function signup() {
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        var email = document.getElementById('id_email').value
+        var phone = document.getElementById('id_phone').value
+        var dob = document.getElementById('id_date_of_birth').value
+        var reg = document.getElementById('id_register_number').value
+        var standard = document.getElementById('id_standard').value
+        var section = document.getElementById('id_section').value
+        var type = document.getElementById('id_user_type').value
+        var firstname = document.getElementById('id_first_name').value
+        var lastname = document.getElementById('id_last_name').value
+        var fullname = document.getElementById('id_full_name').value
+        var address = document.getElementById('id_address').value
+        var is_dataentry = document.getElementById('id_data_entry_user').value
+         /*var email = 's@gmail.com'
+         var phone =  9992945428
+         var dob = '2000-02-10'
+         var reg ='s10'
+         var standard = 1
+         var section = 'c'
+         var type = 'is_student'
+         var firstname = 's'
+         var lastname = 'p'
+         var fullname = 'sp'
+         var address ='home'
+         var is_dataentry = 'false'*/
+         if(standard==''){
+            standard = null;
+         }
+         console.log(standard)
+        d = JSON.stringify({
+            'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
+            'is_data_entry': is_dataentry, 'profile': { 'first_name': firstname, 'last_name': lastname, 'standard': standard, 'section': section, 'full_name': fullname, 'address': address }
+        }
+        )
+        console.log(d)
+        fetch('https://schooltestproject.herokuapp.com/api/signup/',
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
+                    'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standard, 'section': section, 'full_name': fullname, 'address': address
+                }
+                ),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            }).then(function (response) {
+                if (response.ok) {
+                    console.log("Sucess response", response)
+                    return response.json();
+                } else {
+                    throw new Error("Could not reach the API: " + response.statusText);
+                }
+                return response.json()
+            })
+            .then(data => {
+                console.log(Response)
+                if (`${data.status}` == 'Registered succesfull') {
+                    window.location.href = `${host}/login`
+                }
+
+            })
+        return true;
+    }
+    let input=document.getElementById('id_address')
+    input.addEventListener('keyup',(e)=>{
+        if (e.keyCode===13){
+            signup();
+        }
+    })
+</script>
+{% endblock %}

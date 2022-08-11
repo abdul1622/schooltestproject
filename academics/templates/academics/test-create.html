@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="test-create-container">
+  <div class="question-papers-get">
+    <div class="container">
+      {% csrf_token %}
+
+      <p class="row"><label class="col-3" for="id_grade">Grade:</label><input class="col-7 form-control" type="text"
+          name="grade" maxlength="14" required="" id="id_grade"></p>
+      <p class="row"><label class="col-3" for="id_subject">Subject:</label><input type="text" class="col-7 form-control"
+          name="subject" maxlength="20" required="" id="id_subject"></p>
+
+      <p class="text-center"> <button id="get-question-papers" onclick=get()>Get</button> </p>
+    </div>
+  </div>
+  <div class="header">
+    <h2 class="text-center">Grade - <span id="grade-head"></span></h2>
+    <hr>
+    <h3 class="text-center">Subject - <span id="subject-head"></span></h3>
+  </div>
+  <div class="question-papers-card"></div>
+  <div class="messages container-fluid">
+
+  </div>
+  <div class="error-messages container-fluid">
+
+  </div>
+
+
+  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <!-- Modal -->
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content test-model ">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Create Test</h4>
+          <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {% csrf_token %}
+          {{ test_form.as_p }}
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <span class="create-btn-container"> <button type="button" id="test-create-btn"
+              class="btn btn-primary">Create</button></span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script>
+  var userId=localStorage.getItem('id')
+  var token = localStorage.getItem('token')
+  let head = document.querySelector('.header')
+  // let test_messages = document.querySelector('.test-messages')
+  // let test_errors = document.querySelector('.test-error-messages')
+  head.style.display = 'none'
+  let modal_body = document.querySelector('.modal-body')
+  url = 'https://schooltestproject.herokuapp.com/api/question-paper-list/'
+
+  let error = true
+  let set_id = false
+  var user_id;
+  var user_type;
+  let messages = document.querySelector('.messages')
+  let error_messages = document.querySelector('.error-messages')
+  let container = document.querySelector('.question-papers-card')
+  //get - question paper
+  function get() {
+    var grade = document.getElementById('id_grade').value
+    var subject = (document.getElementById('id_subject').value).toUpperCase()
+    url2 = new URL('https://schooltestproject.herokuapp.com/api/question-paper-list/');
+    url2.searchParams.append('grade', grade);
+    url2.searchParams.append('subject',subject)
+    console.log(grade, subject)
+    fetch(url2, {
+      method: 'GET',
+      headers: {
+        'content-Type': 'application/json',
+        'Authorization': 'token' + ' ' + token,
+        // 'X-CSRFToken': csrftoken
+      }
+    }).then(res => res.json()).then(data => {
+      console.log(data)
+      let content = '';
+      if (data.status == 'success') {
+        data.data.forEach((d, index) => {
+
+            error = false
+            if (!set_id) {
+              grade_id = d.grade
+              subject_id = d.subject
+              console.log(subject_id, grade_id)
+              set_id = true
+            }
+            content = content + `<div class="questions-paper-card" id='${d.id}'>
+
+
+<p >created_by : <span class="created_by">${d.created_by}</span></p>
+
+<p >created_at : <span class="created_at">${d.created_at.slice(0, 10)}</span></p>
+
+<p> No of questions : ${(d.no_of_questions).length} </p>`
+if(d.test_id){
+  content += `Test ID : ${d.test_id}`
+}else{
+content += `<button type="button" onclick=test_create(${d.id}) class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+  Create-Test
+</button>`
+}
+content += `</div>`
+
+        })
+        container.innerHTML = content;
+
+      }
+      else {
+        error_messages.innerHTML = 'invalid input'
+      }
+      if (error) {
+        error_messages.innerHTML = 'invalid input'
+      } else {
+        document.getElementById('grade-head').textContent = `${grade}`
+        document.getElementById('subject-head').textContent = `${subject}`
+        head.style.display = 'block'
+      }
+    })
+  }
+  //     $('#myModal').on('shown.bs.modal', function () {
+  //   $('#myInput').trigger('focus')
+  // })
+
+  // getting user-details
+  function get_user_id() {
+    fetch('https://schooltestproject.herokuapp.com/api/profile/', {
+      method: 'GET',
+      headers: {
+        'content-Type': 'application/json',
+        'Authorization': 'token' + ' ' + token,
+      }
+    }).then(res => {
+      return res.json()
+    }).then(data => {
+      user_id = data.data.id
+      user_type = data.data.user_type
+      console.log(user_id)
+    })
+    return user_id,user_type
+  };
+
+
+
+  function test_create(id) {
+    let create_btn_container = document.querySelector('.create-btn-container')
+    modal_body.innerHTML = `          {% csrf_token %}
+          {{ test_form.as_p }}`
+    create_btn_container.innerHTML = `<button type="button" id="test-create-btn" onclick=create(${id}) class="btn btn-primary ">Create</button>`
+    document.getElementById('test-create-btn').style.display = 'block'
+  }
+
+
+
+
+  user_id,user_type = get_user_id();
+  function create(question_id) {
+    var grade = document.getElementById('id_grade').value
+    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+   // let form_duration = document.getElementById('id_duration').value
+ //   let form_marks = document.getElementById('id_marks').value
+    let form_remarks = document.getElementById('id_remarks').value
+    let form_description = document.getElementById('id_description').value
+    let form_percentage = document.getElementById('id_pass_percentage').value
+    let marks = 0;
+    let duration =0;
+    url2 = new URL(`https://schooltestproject.herokuapp.com/api/test-questions/`);
+    url2.searchParams.append('question_paper', question_id);
+        fetch(url2, {
+            method: 'GET',
+            headers: {
+                'content-Type': 'application/json',
+                'Authorization': 'token' + ' ' + token,
+            }
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+         console.log(data)
+         data.forEach((d, index) => {
+          marks += d.mark
+          duration += d.duration
+        })
+        console.log(marks,duration)
+        }).then(() =>{
+          console.log(marks,duration)
+          fetch('https://schooltestproject.herokuapp.com/api/test/',
+          {
+            method: 'POST',
+            body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_id, 'created_staff_id': userId, 'marks': marks, 'duration': duration, 'remarks': form_remarks,'pass_percentage':form_percentage, 'description': form_description }
+            ),
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': 'token' + ' ' + token,
+              'X-CSRFToken': csrftoken
+            },
+          }).then(response => {
+            if (response.status == 201) {
+              console.log("Sucess response", response);
+              // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
+              // test_errors.innerHTML = ''
+              modal_body.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
+              document.getElementById('test-create-btn').style.display = 'none'
+            }
+            return response.json();
+          }).then(function (data) {
+            console.log(data)
+            if (data.status != 'success') {
+              test_errors.innerHTML = `<li class='test-warning'>${(data.data.error)}</li>`;
+              test_messages.innerHTML = '';
+            }
+          })
+        })
+
+    /**/
+    
+  }
+  let input=document.getElementById('id_subject')
+    input.addEventListener('keyup',(e) => {
+        if (e.keyCode===13){
+            get();
+        }
+    })
+
+</script>
+{% endblock %}
