@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 {% block contents %}
 <div class ="body">
-    <div id="getstarted"><a class="getstarted" href="signup/" >GetStarted</a></div>
+    <div id="getstarted"><a class="getstarted" id="signup" href="" >GetStarted</a></div>
     <p class="para">Examination Process is Important BUT Preparing Question Paper is Challenging. 
         A simplified and easy to use solution to create question papers. With SetNow 
         question Paper Generator entire tedious task of manual question paper creation
@@ -32,6 +32,9 @@
       <p> © 2020 Copyright:www.school.com</p>
     </div>
     </footer>
-
+<script>
+  var host = window.location.protocol + "//" + window.location.host;
+  document.getElementById('signup').href = `${host}/signup`
+</script>
      
 {% endblock %}

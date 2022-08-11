@@ -114,13 +114,6 @@ aria-hidden="true">
          if(standard==''){
             standard = null;
          }
-         console.log(standard)
-        d = JSON.stringify({
-            'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
-            'is_data_entry': is_dataentry, 'profile': { 'first_name': firstname, 'last_name': lastname, 'standard': standard, 'section': section, 'full_name': fullname, 'address': address }
-        }
-        )
-        console.log(d)
         fetch('https://schooltestproject.herokuapp.com/api/signup/',
             {
                 method: 'POST',
