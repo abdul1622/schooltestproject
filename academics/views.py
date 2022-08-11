@@ -324,6 +324,7 @@ class QuestionList(APIView):
             context = {'data':serializer.data,'grade':grade.grade,'subject':subject_obj.name,'register_number':user.register_number}
             context1 = {'data':serializer.data,'grade':grade.grade,'subject':subject_obj.name,'register_number':user.register_number,'answers':answers}
             answer_file,status =  render_to_pdf2('academics/answer_file.html','answer_files',None,context1)
+            
             if type == 'save':
                 created_by = self.request.user.email
                 question_paper = Question_Paper.objects.create(grade=grade,subject=subject_obj,created_by=created_by)
@@ -341,9 +342,6 @@ class QuestionList(APIView):
             return Response({'status':'success','question_path':f'/media/question_paper/{filename}.pdf','answer_path':f'/media/answer_files/{answer_file}.pdf','subject_id':subject_obj.id,'grade_id':grade.id})
         except:
             return Response({"status": "failure","data":"given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
-
-
-
 
 
 class QuestionPaperList(ListAPIView):
@@ -474,14 +472,28 @@ class TestCreateView(CreateAPIView):
     permission_classes=[AllowAny]
 
     def get(self, request, format=None):
-        queryset= Test.objects.all().order_by('grade','subject')
-        serializer = TestSerializer(queryset, many=True)
+        grade = (self.request.query_params.get('grade'))
+        test_id = (self.request.query_params.get('test_id'))
+        if grade:
+            queryset = Test.objects.filter(grade=grade)
+            serializer = TestSerializer(queryset, many=True)
+        elif test_id:
+            queryset = Test.objects.get(test_id=test_id)
+            serializer = TestSerializer(queryset)
+        else:
+            queryset= Test.objects.all().order_by('grade','subject')
+            serializer = TestSerializer(queryset, many=True)
         return Response(serializer.data)
 
     def create(self, request):
         serializer = TestSerializer(data=request.data)
         if serializer.is_valid():
+            question_paper = request.data['question_paper']
             serializer.save()
+            Test_obj = Test.objects.get(question_paper=question_paper)
+            question_paper = Question_Paper.objects.get(id=question_paper)
+            question_paper.test_id = Test_obj.test_id
+            question_paper.save()
             return Response({"status": "success",'data':serializer.data},status=HTTP_201_CREATED)   
         return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
         
@@ -572,3 +584,14 @@ class TestInstructionView(ListCreateAPIView):
             return Response({"status": "success",'data':serializer.data},status=HTTP_201_CREATED)
         return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
 
+class EditTestInstructionView(RetrieveDestroyAPIView):
+    serializer_class = TestInstruction
+    queryset = InstructionForTest.objects.all()
+    permission_classes = [AllowAny]
+    def retrieve(self, request,pk):
+        try:
+            queryset = InstructionForTest.objects.get(id=pk)
+        except:
+            return Response({'status':'failure',"data": "Instruction doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
+        serializer = TestInstruction(queryset)
+        return Response(serializer.data,status=HTTP_200_OK)

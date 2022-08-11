@@ -44,6 +44,20 @@
             font-weight: 400;
         }
 
+        .single-test-div {
+            padding: 8% 8% 2%;
+        }
+
+        .single-test {
+            width: 25%;
+            margin: 2% 37%;
+            background-color: #fff8dcb0;
+        }
+
+        #Test_id {
+            padding: 7px 10px;
+            margin: 1% 1% 1% 10%;
+        }
 
         .gradient-custom {
             /* fallback for old browsers */
@@ -1486,8 +1500,27 @@
             height: auto;
             width: auto;
         }
-
-
+.instructions{
+    margin-left: 1%;
+    margin-top: 2%;
+}
+.cards{
+    margin-bottom: 2%;
+}
+.instructionForm {
+    width: 35%;
+    margin: 6% 3%;
+}
+#instruction-btn{
+    margin-left: 88%;
+    width: 12%;
+    color: #14279B;
+    outline: none;
+    background-color: #b2c8df;
+    border: 1px solid #14279B;
+    border-radius: 5px;
+    
+}
         @media screen and (min-width:1024px) and (max-width:1200px) {
             .navbar {
                 width: 100%;
@@ -1907,6 +1940,10 @@
                 margin: 2% 30%;
                 padding: 1%;
                 background-color: #364de4;
+            }
+            .counter{
+                width: 11%;
+                margin:0% 73%;
             }
         }
 
@@ -2397,6 +2434,9 @@
                 margin: 2% 35%;
                 padding: 1%;
                 background-color: #364de4;
+            }
+            .counter{
+                width: 11%;
             }
         }
 
@@ -2952,8 +2992,14 @@
                 grid-template-columns: auto auto;
                 gap: 1%;
             }
+            .counter{
+                width: 18%;
+            }
 
-           
+            #instruction-btn {
+                margin-left: 77%;
+                width: 22%;
+            }
         }
 
         @media screen and (max-width:600px) {
@@ -3563,8 +3609,9 @@
                 font-family: 'cinzel';
             }
 
+
             input[type=text] {
-                width: 92%;
+                width: 40%;
                 color: black;
             }
 
@@ -3634,6 +3681,23 @@
                 box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
                 padding: 10%;
             }
+
+
+            #Test_id {
+                margin: 1% 1% 1% 21%;
+
+            }
+            .counter{
+            width: 31%;
+            margin: 1% 63%;
+            }
+            #instruction-btn {
+                margin-left: 200%;
+                width: 40%;
+            }
+            .instructionForm textarea{
+                width:270%;
+            }
         }
     </style>
 </head>
@@ -3682,6 +3746,9 @@
                     <li class="nav-item" id="nav-questionpaperlist">
                         <a id="nav-questionpaperlist-link">QuestionPaperlist</a>
                     </li>
+                    <li class="nav-item" id="nav-instruction">
+                        <a id="nav-instruction-link">Instruction</a>
+                    </li>
                     <li class="nav-item">
                         <a href="#" onclick="logout()">Logout</a>
                     </li>
@@ -3707,6 +3774,7 @@
         var question = document.getElementById('nav-question')
         var questionpaper = document.getElementById('nav-questionpaper')
         var questionpaperlist = document.getElementById('nav-questionpaperlist')
+        var instruction = document.getElementById('nav-instruction')
         var test = document.getElementById('nav-test')
         var testhistory = document.getElementById('nav-testhistory')
         document.getElementById('nav-academics-link').href = `${host}/academics`
@@ -3718,6 +3786,7 @@
         document.getElementById('nav-questionpaperlist-link').href = `${host}/test-create`
         document.getElementById('nav-test-link').href = `${host}/test-list`
         document.getElementById('nav-testhistory-link').href = `${host}/test-history`
+        document.getElementById('nav-instruction-link').href = `${host}/instructions`
         function logout() {
             var host = window.location.protocol + "//" + window.location.host;
             let token = localStorage.getItem("token")
@@ -3749,6 +3818,7 @@
                 question.style.display = 'none'
                 questionpaper.style.display = 'none'
                 questionpaperlist.style.display = 'none'
+                instruction.style.display = 'none'
             }
             else if (user == 'is_staff' && dataentry) {
                 staff.style.display = 'none'

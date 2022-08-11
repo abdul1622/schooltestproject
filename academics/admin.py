@@ -7,11 +7,17 @@ class SubjectAdmin(admin.ModelAdmin):
     def has_module_permission(self, request,obj=None):
         if request.user.user_type == 'is_staff':
             return False
-        
+
+        if request.user.user_type == 'is_admin':
+            return True
+
 class GradeAdmin(admin.ModelAdmin):
     def has_module_permission(self, request,obj=None):
         if request.user.user_type == 'is_staff':
             return False
+
+        if request.user.user_type == 'is_admin':
+            return True
 
 admin.site.register(Grade,GradeAdmin)
 admin.site.register(Subject,SubjectAdmin)

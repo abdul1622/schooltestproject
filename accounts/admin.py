@@ -10,6 +10,8 @@ class UserAdmin(UserAdmin):
     def has_module_permission(self, request,obj=None):
         if request.user.user_type == 'is_staff':
             return False       
+        if request.user.user_type == 'is_admin':
+            return True 
 
         if request.user.user_type == 'is_admin':
             return True
@@ -26,7 +28,7 @@ class UserAdmin(UserAdmin):
     add_fieldsets = (
        (None, {
            'classes': ('wide',),
-           'fields': ('register_number','email','phone','is_active','user_type'),
+           'fields': ('register_number','email','phone','user_type'),
        }),
    )
 

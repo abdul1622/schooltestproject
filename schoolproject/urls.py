@@ -26,7 +26,8 @@ urlpatterns = [
     path('api/',include('academics.urls')),
     path('api/',include('accounts.urls')),
     path('',include('accounts.frontendUrls')),
-    path('',include('academics.FrontendUrl'))
+    path('',include('academics.FrontendUrl')),
+    path('baton/', include('baton.urls'))
 ]
 
 
