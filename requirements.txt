@@ -55,7 +55,6 @@ pandas-datareader==0.10.0
 pathtools==0.1.2
 Pillow==9.1.1
 pisa==3.0.33
-pkg_resources==0.0.0
 protobuf==4.21.5
 psycopg==3.0.14
 psycopg2-binary==2.9.3
