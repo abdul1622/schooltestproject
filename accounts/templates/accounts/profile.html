@@ -76,29 +76,61 @@ aria-hidden="true">
                 <p class="fullname">${data.data.profile?.full_name}</p><br>`
 
                   if(data.data.user_type=='is_admin'){
-                    htmlSegment += `<p class ='occupation'> Admin </p>`
+                    htmlSegment += `<p class ='occupation'> Admin </p>
+                     </div>
+                    <div class="profile-content">
+                      <p ><label class=profile-label>First Name:</label><span  class="firstname">${data.data.profile?.first_name}</span></p>
+                      <p><label class=profile-label>Last Name:</label><span class="lastname">${data.data.profile?.last_name}</span></p>
+                      <p style='display:none;'> <label class=profile-label>Standard:</label><span  class="std">${data.data.profile?.standard}</span></p>
+                      <p style='display:none;'>     <label class=profile-label>Section:</label><span class="sec">${data.data.profile?.section}</span></p>
+                      <p>  <label class=profile-label>Address: </label><span class="address">${data.data.profile?.address}</span></p>
+      
+                         <i id='profile-edit' class="fa fa-edit"></i>
+                         </div>`;
+                  container.innerHTML = htmlSegment;
                   }
                   else if(data.data.user_type=='is_staff'){
-                    htmlSegment += `<p class ='occupation'> Staff </p>`
+                    htmlSegment += `<p class ='occupation'> Staff </p>
+                     </div>
+                    <div class="profile-content">
+                    <p><label class=profile-label>First Name:</label><span  class="firstname">${data.data.profile?.first_name}</span></p>
+                    <p><label class=profile-label>Last Name:</label><span class="lastname">${data.data.profile?.last_name}</span></p>
+                    <p style='display:none;'> <label class=profile-label>Standard:</label><span  class="std">${data.data.profile?.standard}</span></p>
+                    <p style='display:none;'>     <label class=profile-label>Section:</label><span class="sec">${data.data.profile?.section}</span></p>
+                    <p>  <label class=profile-label>Address: </label><span class="address">${data.data.profile?.address}</span></p>
+      
+                         <i id='profile-edit' class="fa fa-edit"></i>
+                         </div>`;
+                  container.innerHTML = htmlSegment;
                   }
                   else if(data.data.user_type=='is_student'){
-                    htmlSegment += `<p class ='occupation'> Student </p>`
+                    htmlSegment += `<p class ='occupation'> Student</p>
+                     </div>
+                    <div class="profile-content">
+                    <p><label class=profile-label>First Name:</label><span  class="firstname">${data.data.profile?.first_name}</span></p>
+                    <p><label class=profile-label>Last Name:</label><span class="lastname">${data.data.profile?.last_name}</span></p>
+                    <p> <label class=profile-label>Standard:</label><span  class="std">${data.data.profile?.standard}</span></p>
+                    <p>     <label class=profile-label>Section:</label><span class="sec">${data.data.profile?.section}</span></p>
+                    <p>  <label class=profile-label>Address: </label><span class="address">${data.data.profile?.address}</span></p>
+      
+                         <i id='profile-edit' class="fa fa-edit"></i>
+                         </div>`;
+                         container.innerHTML = htmlSegment;
                   }
                  else{
-                    htmlSegment += `<p class ='occupation'> Data entry operator </p>`
+                    htmlSegment += `<p class ='occupation'> Data entry operator </p>
+                     </div>
+                    <div class="profile-content">
+                    <p><label class=profile-label>First Name:</label><span  class="firstname">${data.data.profile?.first_name}</span></p>
+                    <p><label class=profile-label>Last Name:</label><span class="lastname">${data.data.profile?.last_name}</span></p>
+                    <p> <label class=profile-label>Standard:</label><span  class="std">${data.data.profile?.standard}</span></p>
+                    <p>     <label class=profile-label>Section:</label><span class="sec">${data.data.profile?.section}</span></p>
+                    <p>  <label class=profile-label>Address: </label><span class="address">${data.data.profile?.address}</span></p>
+      
+                         <i id='profile-edit' class="fa fa-edit"></i>
+                         </div>`;
+                  container.innerHTML = htmlSegment;
                   }
-        htmlSegment +=
-               ` </div>
-                <div class="profile-content">
-                <p><label class=profile-label>First Name:</label><span  class="firstname">${data.data.profile?.first_name}</span></p>
-                <p><label class=profile-label>Last Name:</label><span class="lastname">${data.data.profile?.last_name}</span></p>
-                <p> <label class=profile-label>Standard:</label><span  class="std">${data.data.profile?.standard}</span></p>
-                <p>     <label class=profile-label>Section:</label><span class="sec">${data.data.profile?.section}</span></p>
-                <p>  <label class=profile-label>Address: </label><span class="address">${data.data.profile?.address}</span></p>
-  
-                     <i id='profile-edit' class="fa fa-edit"></i>
-                     </div>`;
-              container.innerHTML = htmlSegment;
             }
             )
         }
