@@ -20,14 +20,18 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+   
+    path('jet/', include('jet.urls', 'jet')),
+    path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     # path('',include('accounts.urls')),
     path('api/',include('academics.urls')),
     path('api/',include('accounts.urls')),
     path('',include('accounts.frontendUrls')),
     path('',include('academics.FrontendUrl')),
-    path('baton/', include('baton.urls'))
+
 ]
 
 

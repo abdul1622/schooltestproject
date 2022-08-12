@@ -56,6 +56,20 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             border-bottom: 1px gray dashed;
         }
 
+<<<<<<< HEAD
+=======
+        .hr1 {
+            margin-left: -3.4%;
+            width: 107%;
+
+        }
+
+        .hr2 {
+            margin-left: -6%;
+            width: 109%;
+        }
+
+>>>>>>> 4ad6839c544afc4af7a731747eee3399514d895a
         .question-path {
             display: grid;
             grid-template-columns: auto auto auto auto;
@@ -341,7 +355,10 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                                 answer_details[0].seen = true;
                                 if (question_no == 1) {
                                     let question_content;
+<<<<<<< HEAD
                                     question_content = `<p> ${remarks}</p><p> ${subject_name}</p>  `
+=======
+>>>>>>> 4ad6839c544afc4af7a731747eee3399514d895a
                                     if (question_details.question_type == 'MCQ') {
                                         question_content = `<div> 
                        <hr class="hr1"> <p> ${question_no}). ${d.question}</p> 
@@ -350,7 +367,11 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                             <li><input type="radio" class='option_b_${question_details.id}' id="option_b_${question_details.id}" name="answer_${question_details.id}" value='option_b'> ${question_details.option_b}</li>
                             <li><input type="radio" class='option_c_${question_details.id}' id="option_c_${question_details.id}" name="answer_${question_details.id}" value='option_c'> ${question_details.option_c}</li>
                             <li><input type="radio" class='option_d_${question_details.id}' id="option_d_${question_details.id}" name="answer_${question_details.id}" value='option_d'> ${question_details.option_d}</li>
+<<<<<<< HEAD
                         <ol>
+=======
+                        <hr class="hr2"><ol>
+>>>>>>> 4ad6839c544afc4af7a731747eee3399514d895a
                             </div>
                         
                         <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(0,1)> Next </button> </p>
@@ -429,7 +450,11 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             let options = ['option_a', 'option_b', 'option_c', 'option_d']
 
             if (question_details.question_type == 'MCQ') {
+<<<<<<< HEAD
                 question_content += `<div><p>${n + 1}). ${question_details.question}</p> 
+=======
+                question_content += `<div><p> ${n + 1}). ${question_details.question}</p> 
+>>>>>>> 4ad6839c544afc4af7a731747eee3399514d895a
                         <ol type="a">`
                 for (i = 0; i < options.length; i++) {
                     console.log(question_details['option_a'])
@@ -440,7 +465,11 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     }
                 }
                 question_content += `<ol>
+<<<<<<< HEAD
                     </div>
+=======
+                            </div>
+>>>>>>> 4ad6839c544afc4af7a731747eee3399514d895a
                         `
             } else {
                 if (question_details.answer) {

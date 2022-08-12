@@ -37,9 +37,10 @@ from .serializers import (
     questionanswerserializer,
     TestSerializer,
     TestResultSerializer,
-    TestInstruction
+    TestInstruction,
     )
 from .models import Question, Subject,Grade,Chapter,Question_Paper,Answers
+from accounts.models import User
 from .utils import render_to_pdf, render_to_pdf2
 
 # Create your views here.
@@ -569,9 +570,11 @@ class TestResultEditView(RetrieveDestroyAPIView):
 
 
 class TestInstructionView(ListCreateAPIView):
+
     serializer_class = TestInstruction
     queryset = InstructionForTest.objects.all()
     permission_classes = [AllowAny]
+
     def list(self,request):
         queryset = InstructionForTest.objects.all()
         serializer = TestInstruction(queryset,many=True)
@@ -583,7 +586,6 @@ class TestInstructionView(ListCreateAPIView):
             serializer.save()
             return Response({"status": "success",'data':serializer.data},status=HTTP_201_CREATED)
         return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
-
 class EditTestInstructionView(RetrieveDestroyAPIView):
     serializer_class = TestInstruction
     queryset = InstructionForTest.objects.all()

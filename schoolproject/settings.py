@@ -37,10 +37,12 @@ DEBUG = True
 
 
 ALLOWED_HOSTS = ['*']
-
+# ACCOUNT_EMAIL_VERIFICATION = 'none'
 # Application definition
 
 INSTALLED_APPS = [
+    'jet.dashboard',
+    'jet',
     'rest_framework',
     'rest_framework.authtoken',
     'django.contrib.admin',
@@ -54,65 +56,42 @@ INSTALLED_APPS = [
     'accounts',
     'academics',
     'corsheaders',
-      'baton',  
-  
-    'baton.autodiscover'
 ]
-BATON = {
-    'SITE_HEADER': 'Baton',
-    'SITE_TITLE': 'Baton',
-    'INDEX_TITLE': 'Site administration',
-    'SUPPORT_HREF': 'https://github.com/otto-torino/django-baton/issues',
-    'COPYRIGHT': 'copyright © 2017 <a href="https://www.otto.to.it">Otto srl</a>', # noqa
-    'POWERED_BY': '<a href="https://www.otto.to.it">Otto srl</a>',
-    'CONFIRM_UNSAVED_CHANGES': True,
-    'SHOW_MULTIPART_UPLOADING': True,
-    'ENABLE_IMAGES_PREVIEW': True,
-    'CHANGELIST_FILTERS_IN_MODAL': True,
-    'CHANGELIST_FILTERS_ALWAYS_OPEN': False,
-    'CHANGELIST_FILTERS_FORM': True,
-    'COLLAPSABLE_USER_AREA': False,
-    'MENU_ALWAYS_COLLAPSED': False,
-    'MENU_TITLE': 'Menu',
-    'MESSAGES_TOASTS': False,
-    'GRAVATAR_DEFAULT_IMG': 'retro',
-    'LOGIN_SPLASH': '/static/core/img/login-splash.png',
-    'SEARCH_FIELD': {
-        'label': 'Search contents...',
-        'url': '/search/',
+JET_THEMES = [
+    {
+        'theme': 'default', # theme folder name
+        'color': '#47bac1', # color of the theme's button in user menu
+        'title': 'Default' # theme title
     },
-    'MENU': (
-        { 'type': 'title', 'label': 'main', 'apps': ('auth', ) },
-        {
-            'type': 'app',
-            'name': 'auth',
-            'label': 'Authentication',
-            'icon': 'fa fa-lock',
-            'default_open': True,
-            'models': (
-                {
-                    'name': 'user',
-                    'label': 'Users'
-                },
-                {
-                    'name': 'group',
-                    'label': 'Groups'
-                },
-            )
-        },
-        { 'type': 'title', 'label': 'Contents', 'apps': ('flatpages', ) },
-        { 'type': 'model', 'label': 'Pages', 'name': 'flatpage', 'app': 'flatpages' },
-        { 'type': 'free', 'label': 'Custom Link', 'url': 'http://www.google.it', 'perms': ('flatpages.add_flatpage', 'auth.change_user') },
-        { 'type': 'free', 'label': 'My parent voice', 'children': [
-            { 'type': 'model', 'label': 'A Model', 'name': 'mymodelname', 'app': 'myapp', 'icon': 'fa fa-gavel' },
-            { 'type': 'free', 'label': 'Another custom link', 'url': 'http://www.google.it' },
-        ] },
-    ),
-    'ANALYTICS': {
-        'CREDENTIALS': os.path.join(BASE_DIR, 'credentials.json'),
-        'VIEW_ID': '12345678',
-    }
-}
+    {
+        'theme': 'green',
+        'color': '#44b78b',
+        'title': 'Green'
+    },
+    {
+        'theme': 'light-green',
+        'color': '#2faa60',
+        'title': 'Light Green'
+    },
+    {
+        'theme': 'light-violet',
+        'color': '#a464c4',
+        'title': 'Light Violet'
+    },
+    {
+        'theme': 'light-blue',
+        'color': 'blue',
+        'title': 'Light Blue'
+    },
+    {
+        'theme': 'light-gray',
+        'color': '#222',
+        'title': 'Light Gray'
+    },
+   
+ 
+]
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -165,10 +144,10 @@ WSGI_APPLICATION = 'schoolproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'school',
-        'USER': 'santhiya',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
+        'NAME': 'daaio5irlq32i8',
+        'USER': 'npcvekopocdjwf',
+        'PASSWORD': 'be529dea4fbea05b7fad3e2ee989276e359c748f5563af04fb6effcf6b981d0f',
+        'HOST': 'ec2-3-213-228-206.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -230,14 +209,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-#location where django collect all static files
+# location where django collect all static files
 
 STATIC_ROOT = 'staticfiles'
 
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIR = {
-    os.path.join(BASE_DIR , "public/static")
+    os.path.join(BASE_DIR, "public/static")
 }
 
 # CLOUDINARY_STORAGE = {
@@ -247,7 +226,7 @@ STATICFILES_DIR = {
 # }
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Default primary key field type
