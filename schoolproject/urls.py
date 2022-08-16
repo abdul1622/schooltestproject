@@ -18,11 +18,12 @@ from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
+#rom jet.dashboard.dashboard_modules import google_analytics_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('baton/', include('baton.urls')),
+    #path('jet/', include('jet.urls', 'jet')),
+    #path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     # path('',include('accounts.urls')),
     path('api/',include('academics.urls')),
     path('api/',include('accounts.urls')),

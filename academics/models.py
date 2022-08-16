@@ -43,7 +43,7 @@ class Subject(models.Model):
         super(Subject, self).save(*args, **kwargs)
 
     class Meta:
-        ordering = ('grade','name',)       
+        ordering = ('grade','code','name',)       
 
 
 class Chapter(models.Model):

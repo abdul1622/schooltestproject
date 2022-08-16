@@ -1,0 +1,39 @@
+
+<!-- <h1 id="logout-massege"></h1> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function logout() {
+            var host = window.location.protocol + "//" + window.location.host;
+            let token = localStorage.getItem("token")
+            console.log(token)
+            fetch('https://schooltestproject.herokuapp.com/api/logout/',
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'token' + ' ' + token
+                        // 'Content-Type': 'application/x-www-form-urlencoded', 
+                    }
+                }).then(response => response.text())
+            localStorage.removeItem('token')
+            localStorage.removeItem('email')
+            window.location.href = `/admin/logout`
+            // document.getElementById('logout-massege').innerHTML = 'logout succesfully'
+        }
+        
+        logout();
+        
+        </script>
+</body>
+</html>
+
+

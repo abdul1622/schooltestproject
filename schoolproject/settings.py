@@ -19,7 +19,7 @@ import dj_database_url
 # import cloudinary_storage
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+JET_MODULE_GOOGLE_ANALYTICS_CLIENT_SECRETS_FILE = os.path.join(BASE_DIR, 'client_secrets.json')
 # updated settings
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -43,6 +43,8 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'adminlte3',
     'adminlte3_theme',
+   # 'jet.dashboard',
+    #'jet',
     'rest_framework',
     'rest_framework.authtoken',
     'django.contrib.admin',
@@ -55,7 +57,7 @@ INSTALLED_APPS = [
     # 'cloudinary_storage',
     'accounts',
     'academics',
-    'corsheaders'
+    'corsheaders',
 ]
 
 MIDDLEWARE = [

@@ -20,4 +20,8 @@ def students(request):
     return render(request,'accounts/students.html')
 def staff(request):
     return render(request,'accounts/staffs.html')
-   
+def index(request):
+    return render(request,'index.html')
+
+def logout(request):
+    return render(request,'accounts/logout.html')

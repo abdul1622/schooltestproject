@@ -12,5 +12,7 @@ urlpatterns=[
     path('login/',simple,name='simple'),
     path('profile/',profile,name='profile'),
      path('students/',students,name='userdetails'),
-     path('staffs/',staff,name='staff')
+     path('staffs/',staff,name='staff'),
+     path('logout/',logout),
+     path('index',index)
 ]
