@@ -6,4 +6,5 @@ db.sqlite3
 *myenv
 myenv
 todo.txt
-online_test_application/staticfiles
+*staticfiles
+staticfiles
