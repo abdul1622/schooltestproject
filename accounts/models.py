@@ -30,7 +30,6 @@ class MyUserManager(BaseUserManager):
 
        user = self.create_user( email=email,phone=phone,user_type=user_type,
        date_of_birth=date_of_birth,register_number=register_number)
-
        if user_type == 'is_admin':
             user.user_type = 'is_admin'
        user.save(using=self._db)
@@ -105,7 +104,6 @@ class User(AbstractBaseUser):
 
     # def save(self, *args, **kwargs):
     #     self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')   
-
 class Profile(models.Model):
     
     def upload_design_to(self, filename):

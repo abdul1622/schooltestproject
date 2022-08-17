@@ -74,8 +74,9 @@ aria-hidden="true">
 
 <div id="question-box">
   {% csrf_token %}  
-  <p><label for="id_grade">Grade:</label> <input type="text" name="grade" maxlength="14" required id="id_grade_name"></p>
+  <p><label for="id_grade">Grade:</label> <input type="text" name="grade" maxlength="14" required id="id_grade_name"></p> 
 <p><label for="id_subject">Subject:</label> <input type="text" name="subject" maxlength="20" required id="id_subject_name"></p>
+
   <button id="questioncreate-btn" onclick=get()>Get Question</button>
 </div> 
 

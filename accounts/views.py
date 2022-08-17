@@ -39,14 +39,12 @@ User = get_user_model()
 class SignupView(CreateAPIView):
     serializer_class=SignupSerializer
     permission_classes = [AllowAny]
-
     def post(self, request):
         serializer = SignupSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({"status": "Registered succesfull"},status=HTTP_201_CREATED)
-        return Response({"status": "failure", "data": serializer.errors},status=HTTP_204_NO_CONTENT)
-
+        return Response({"status": "failure", "data": serializer.errors,},status=HTTP_204_NO_CONTENT)
 
 class LogoutView(APIView):
     permission_classes=[AllowAny]
