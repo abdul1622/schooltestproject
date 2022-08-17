@@ -130,7 +130,7 @@ aria-hidden="true">
             }).then(function (response) {
                 if (response.ok) {
                     console.log("Sucess response", response)
-                    return response.json();
+                    return response.json()
                 } else {
                     throw new Error("Could not reach the API: " + response.statusText);
                 }
