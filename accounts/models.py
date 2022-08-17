@@ -17,7 +17,6 @@ class MyUserManager(BaseUserManager):
            except:
                 raise ValueError('Mobile number only number')
            raise ValueError('Users must have Mobile number')
-
        user = self.model(email=self.normalize_email(email))
        user.phone = phone
        user.date_of_birth = date_of_birth
