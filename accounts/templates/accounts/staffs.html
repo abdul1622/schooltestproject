@@ -318,8 +318,8 @@ function back(){
                   console.log("Sucess response", response)
                   messages.innerHTML = 'updated successfully'
                   error_messages.innerHTML= ''
-  
               }
+              messages.innerHTML=`${data.data.error[0]}`
               return response.json();
           }).then(function (data) {
               console.log(data)

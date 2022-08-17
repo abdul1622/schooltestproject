@@ -336,8 +336,8 @@
               console.log("Sucess response", response)
               messages.innerHTML = 'updated successfully'
               error_messages.innerHTML = ''
-              userdetails
             }
+            messages.innerHTML=`${data.data.error[0]}`
             return response.json();
           }).then(function (data) {
             console.log(data)
