@@ -3802,7 +3802,6 @@
     {% block index %}{% endblock %}
 
     <script>
-        var token=localStorage.getItem('token')
         var host = window.location.protocol + "//" + window.location.host;
         var staff = document.getElementById('nav-staffs')
         var academics = document.getElementById('nav-academics')
@@ -3826,13 +3825,12 @@
         document.getElementById('nav-instruction-link').href = `${host}/instructions`
         function logout() {
             var host = window.location.protocol + "//" + window.location.host;
-            console.log(token)
             fetch('https://schooltestproject.herokuapp.com/api/logout/',
                 {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'token' + ' ' + token
+                        'Authorization': 'token' + ' ' + localStorage.getItem('token')
                         // 'Content-Type': 'application/x-www-form-urlencoded', 
                     }
                 }).then(response => response.text())
