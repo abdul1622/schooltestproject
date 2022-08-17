@@ -230,7 +230,7 @@ function back(){
         }).then(function (data) {
             console.log(data)
             if (data.status != 'success'){
-            error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+            error_messages.innerHTML = `<li>${data.data.error[0]}</li>`
             messages.innerHTML = ''
             }
         })
