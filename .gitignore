@@ -6,4 +6,4 @@ db.sqlite3
 *myenv
 myenv
 todo.txt
-staticfiles
+staticfiles/
