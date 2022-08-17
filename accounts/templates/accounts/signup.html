@@ -1,7 +1,8 @@
 {% extends 'main.html'%}
 {% block signup %}
-<p id='response'>Invalid Details</p>
+<p id='response'></p>
 <div class="signbox">
+    
     {%csrf_token%}
     <div class="signbox1">
 
@@ -138,11 +139,12 @@ aria-hidden="true">
                 return response.json()
             })
             .then(data => {
-                console.log(Response)
+                console.log(data.data.error[0])
                 if (`${data.status}` == 'Registered succesfull') {
                     window.location.href = `${host}/login`
                 }
-
+                document.getElementById('response').innerHTML=`${data.data.error[0]}`
+                document.getElementById('response').style.display='block'
             })
         return true;
     }

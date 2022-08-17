@@ -112,11 +112,11 @@ class SignupSerializer(serializers.Serializer):
             id=self.instance.id
             queryset=queryset.exclude(id=id)
         if queryset.filter(email=data['email']).exists() :
-              raise serializers.ValidationError({'error':'email exists'})
+              raise serializers.ValidationError({'error':'email already exists'})
         elif queryset.filter(phone=data['phone']).exists() :
-             raise serializers.ValidationError({'error':'phone exists'})
+             raise serializers.ValidationError({'error':'phone already exists'})
         elif queryset.filter(register_number=data['register_number']).exists() :
-            raise serializers.ValidationError({'error':'registernumber exists'})
+            raise serializers.ValidationError({'error':'register number already exists'})
         return data
 class SigninSerializer(serializers.ModelSerializer):
     class Meta:
