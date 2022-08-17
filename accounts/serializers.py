@@ -165,7 +165,6 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             profile.address
         )        
         profile.save()
-
         return instance
 
 class OtpVerificationserializer(serializers.Serializer):
