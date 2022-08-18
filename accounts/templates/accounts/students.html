@@ -61,7 +61,7 @@
   <button id="sort" onclick=sort()>search</button>
 </div>
 </div>
-<form id="userDetails">
+<div id="userDetails">
   {%csrf_token%}
 
   <button onclick=back() class='back-btn'>&#x2715;</button>
@@ -128,7 +128,7 @@
   </div>
 
 
-</form>
+</div>
 <div class="container2"></div>
 
 <script>
@@ -351,7 +351,7 @@
     })
     function adduser() {
       form.style.display = 'grid'
-      document.getElementById('userDetails').reset();
+      //document.getElementById('userDetails').reset();
       /* var email = 's10@gmail.com'
        var phone = 9992945420
        var dob = '2000-02-10'
