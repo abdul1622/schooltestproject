@@ -129,7 +129,6 @@
     window.location.href = window.location.href;
    
   }
-  let edit = null
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
   let token = localStorage.getItem("token")
@@ -223,7 +222,7 @@
       var fullname = 'sp'
       var address = 'home'*/
       var is_dataentry = 'false'
-      if (!edit){
+      
       button.addEventListener('click', () => {
         form.style.display = "none"
         add.style.display = 'block'
@@ -268,7 +267,7 @@
             }
           })
       })
-    }}
+    }
 
     function deletestudent(id) {
       url = "https://schooltestproject.herokuapp.com/api/user-details/"
@@ -307,7 +306,6 @@
       }
 
       if (editbutton) {
-        edit=true
         form.style.display = 'grid'
         form.style.marginTop = '10vh';
         url = "https://schooltestproject.herokuapp.com/api/user-details/"
@@ -339,7 +337,6 @@
         }
         )
         console.log(d)
-        if (edit) {
         button.addEventListener('click', () => {
           fetch(`${url}${id}/`, {
             method: 'PATCH',
@@ -367,7 +364,6 @@
           })
         })
       }
-    }
     })
   }
   else {
