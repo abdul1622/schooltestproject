@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="message-close-btn" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
 
                 </div>
@@ -187,6 +187,11 @@
         )
     }
 
+
+    document.getElementById('message-close-btn').addEventListener('click',()=> {
+        messages.innerHTML = ''
+        error_messages.innerHTML = ''
+    })
 
     // create grade 
     grade_create.addEventListener('click', () => {

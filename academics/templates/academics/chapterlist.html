@@ -5,6 +5,10 @@
 
         {% csrf_token %}
         {{form.as_p}}
+        <label for=""> Subject: </label>
+        <select name="subject" required="" id="id_subject">
+            <option value="" selected="">---------</option>
+          </select>
         <button id="chapterlist-btn" onclick=getchapter()>Getchapters</button>
     </div>
 </div>
@@ -26,7 +30,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="message-close-btn" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
 
             </div>
@@ -82,7 +86,7 @@
 
 
 
-
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <script>
     var token = localStorage.getItem("token")
@@ -97,13 +101,30 @@
     let error_messages = document.querySelector('.error-messages')
     var grade;
     var subject;
-
+    let subject_name;
     function closeform(){
         document.querySelector('.form').style.display ='none'
         
         }
-
-
+        $("#id_grade").change(function () {
+            var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+            var gradeId = $(this).val(); 
+      
+            $.ajax({                       
+              url: url_for_change,                  
+              data: {
+                'grade': gradeId      
+              },
+              success: function (data) {
+                $("#id_subject").html(data); 
+              }
+            });
+      
+          });
+ document.getElementById('message-close-btn').addEventListener('click',()=>{
+    messages.innerHTML = '';
+    error_messages.innerHTML = '';
+ })
    
 
     function back() {
@@ -116,6 +137,7 @@
     function get(grade, subject) {
         document.getElementById('id_grade').value = grade;
         document.getElementById('id_subject').value = subject;
+        console.log(grade,subject)
         getchapter();
     }
 
@@ -126,49 +148,68 @@
             var subject = document.getElementById('id_subject').value
             console.log(grade, subject)
             console.log(grade + subject)
-            fetch('https://schooltestproject.herokuapp.com/api/chapter-list/', {
-                method: 'POST',
-                body: JSON.stringify({ 'grade': grade, 'subject': subject }
-                ),
+            let url2 = `https://schooltestproject.herokuapp.com/api/subjects/${subject}/`
+            fetch(url2, {
+                method: 'GET',
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
+                    'content-Type': 'application/json',
                     'Authorization': 'token' + ' ' + token,
-                    'X-CSRFToken': csrftoken
                 }
-            }).then(response => response.json()).then(data => {
-                if (data.status == 'success') {
-                    console.log(data);
-                    let table2 = '   <a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back() >Back</a> <table>';
-                    table2 += `<thead class="thead"><th>Grade</th><th>Subject</th><th>Chapter No</th><th>Chapter</th><th>Description</th><th>Action</th></thead>`;
-                    data.data.map(d => {
-                        table2 = table2 + `<tr id=${d.id}>`;
-                        table2 = table2 + `<td class="grade">` + `${d.grade}` + `</td>`,
-                            table2 = table2 + `<td class="subject" id=${d.subject_id}>` + `${d.subject}` + '</td>';
-                        table2 = table2 + '<td class="chapter_no">' + `${d.chapter_no}` + '</td>';
-                        table2 = table2 + '<td class="name">' + `${d.name}` + '</td>';
-                        table2 = table2 + '<td class="description">' + `${d.description}` + '</td>',
-                            table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i>` + '</td>',
-                            table2 = table2 + '<td>' + `<i class="fa fa-trash-o" id="delete" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist"></i>` + '</td>',
-                            table2 = table2 + `</tr>`;
-                    })
-                    table2 += "</table>";
+            }).then(res => {
+                return res.json()
+            }).then(data => {
+                console.log(data.name)
+                subject_name = data.name
+            }).then(()=>{
+                fetch('https://schooltestproject.herokuapp.com/api/chapter-list/', {
+                    method: 'POST',
+                    body: JSON.stringify({ 'grade': grade, 'subject': subject_name }
+                    ),
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': 'token' + ' ' + token,
+                        'X-CSRFToken': csrftoken
+                    }
+                }).then(response => response.json()).then(data => {
+                    if (data.status == 'success') {
+                        console.log(data);
+                        let table2 = '   <a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back() >Back</a> <table>';
+                        table2 += `<thead class="thead"><th>Grade</th><th>Subject</th><th>Chapter No</th><th>Chapter</th><th>Description</th><th>Action</th></thead>`;
+                        data.data.map(d => {
+                            table2 = table2 + `<tr id=${d.id}>`;
+                            table2 = table2 + `<td class="grade">` + `${d.grade}` + `</td>`,
+                                table2 = table2 + `<td class="subject" id=${d.subject_id}>` + `${d.subject}` + '</td>';
+                            table2 = table2 + '<td class="chapter_no">' + `${d.chapter_no}` + '</td>';
+                            table2 = table2 + '<td class="name">' + `${d.name}` + '</td>';
+                            table2 = table2 + '<td class="description">' + `${d.description}` + '</td>',
+                                table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i>` + '</td>',
+                                table2 = table2 + '<td>' + `<i class="fa fa-trash-o" id="delete" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist"></i>` + '</td>',
+                                table2 = table2 + `</tr>`;
+                        })
+                        table2 += "</table>";
+    
+                        // console.log(path)
+                        let container = document.querySelector('.chapter-table');
+                        container.innerHTML = table2;
+                        document.querySelector('.box').style.display = "none"
+                        document.getElementById('id_chapter_no').value = ''
+                        document.getElementById('id_name').value = ''
+                        document.getElementById('id_description').value = ''
+                        edit = null
+                        document.querySelector('.error-message').innerHTML = ''
+                    }
+                    else {
+                       // error_messages.innerHTML = `${data.status}`
+                        document.querySelector('.error-message').innerHTML = `<p class='text-center'>${data.status}</p>`
+                    }
+                })
 
-                    // console.log(path)
-                    let container = document.querySelector('.chapter-table');
-                    container.innerHTML = table2;
-                    document.querySelector('.box').style.display = "none"
-                    document.getElementById('id_chapter_no').value = ''
-                    document.getElementById('id_name').value = ''
-                    document.getElementById('id_description').value = ''
-                    edit = null
-                    document.querySelector('.error-message').innerHTML = ''
-                }
-                else {
-                   // error_messages.innerHTML = `${data.status}`
-                    document.querySelector('.error-message').innerHTML = `<p class='text-center'>${data.status}</p>`
-                }
+                
             })
+
+
+
         } else {
             window.location.href = `${host}/login`
         }
@@ -209,15 +250,19 @@
         console.log(e.target.parentElement.parentElement)
         let yes_button = document.getElementById('delete-btn-yes')
         let no_btn = document.getElementById('delete-btn-no')
+
+        const parent = e.target.parentElement.parentElement;
+        var subject = parent.querySelector('.subject').id;
+
         if (delbutton) {
-            yes_button.setAttribute("onClick", `deletechapter(${id},${grade_name},'${subject_name}')`)
+            yes_button.setAttribute("onClick", `deletechapter(${id},${grade_name},'${subject}')`)
         }
 
         if (editbutton) {
             window.location.href = '#grade';
             form.style.display = 'block'
-            const parent = e.target.parentElement.parentElement;
-            var subject = parent.querySelector('.subject').id;
+        //    const parent = e.target.parentElement.parentElement;
+         //   var subject = parent.querySelector('.subject').id;
             console.log(subject)
             var chapter_no = parent.querySelector('.chapter_no').textContent;
             var name = parent.querySelector('.name').textContent;
@@ -249,7 +294,7 @@
                             messages.innerHTML = `${name} is updated succesfully`;
                             error_messages.innerHTML = ''
                             form.style.display = 'none'
-                            get(grade_name, subject_name)
+                            get(grade_name, subject)
                         } else {
                             console.log(response);
                         }
@@ -262,7 +307,7 @@
                             messages.innerHTML = ''
                             form.innerHTML = ``
                             form.style.display = 'none'
-                            get(grade_name, subject_name)
+                            get(grade_name, subject)
                         }
                     }
                     )

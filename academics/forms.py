@@ -1,3 +1,4 @@
+from pyexpat import model
 from django import forms
 from.models import *
 
@@ -81,6 +82,10 @@ class question_form(forms.ModelForm):
         model = Question
         fields = '__all__'
 
+class form_for_chapterlist(forms.ModelForm):
+    class Meta:
+        model = Subject
+        fields = ['grade',]
 
 class answer_form(forms.ModelForm):
     ans = question_form

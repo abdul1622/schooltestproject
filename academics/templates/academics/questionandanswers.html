@@ -4,8 +4,12 @@
 <form id="questionForm" class="question_create">
   <button onclick=back() class='back-btn'>&#x2715; </button>
 <div class='grid-item'> {{questionform.grade.label_tag}} <br>{{questionform.grade}}</div>
-<div class='grid-item'> {{questionform.subject.label_tag}} <br> {{questionform.subject}}</div>
-<div class='grid-item'> {{questionform.chapter.label_tag}} <br> {{questionform.chapter}}</div>
+<div class="grid-item"> <label for="id_subject">Subject:</label> <br> <select name="subject" required="" id="id_subject">
+  <option value="" selected="">---------</option>
+</select></div>
+<div class="grid-item"> <label for="id_chapter">Chapter:</label> <br> <select name="chapter" required="" id="id_chapter">
+  <option value="" selected="">---------</option>
+</select></div>
 <div class='grid-item'> {{questionform.question.label_tag}}  <br>{{questionform.question}}</div>
 <div class='grid-item'> {{questionform.question_type.label_tag}}  <br>{{questionform.question_type}}</div>
 <div class='grid-item'> {{questionform.cognitive_level.label_tag}}  <br>{{questionform.cognitive_level}}</div>
@@ -64,7 +68,7 @@ aria-hidden="true">
         </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="button" id="message-close-btn" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
 
     </div>
@@ -74,8 +78,11 @@ aria-hidden="true">
 
 <div id="question-box">
   {% csrf_token %}  
-  <p><label for="id_grade">Grade:</label> <input type="text" name="grade" maxlength="14" required id="id_grade_name"></p> 
-<p><label for="id_subject">Subject:</label> <input type="text" name="subject" maxlength="20" required id="id_subject_name"></p>
+  {{form.as_p}}
+  <label for=""> Subject: </label>
+  <select name="subject" required="" id="id_subject_2">
+      <option value="" selected="">---------</option>
+    </select>
 
   <button id="questioncreate-btn" onclick=get()>Get Question</button>
 </div> 
@@ -104,12 +111,34 @@ let yes_button = document.getElementById('delete-btn-yes')
 let no_btn = document.getElementById('delete-btn-no')
   var host = window.location.protocol + "//" + window.location.host;
   var token = localStorage.getItem('token')
+
+  document.getElementById('message-close-btn').addEventListener('click',()=>{
+    messages.innerHTML = '';
+    error_messages.innerHTML = '';
+  })
+
+  $("#get_grade").change(function () {
+    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+    var gradeId = $(this).val(); 
+
+    $.ajax({                       
+      url: url_for_change,                  
+      data: {
+        'grade': gradeId      
+      },
+      success: function (data) {
+        $("#id_subject_2").html(data); 
+      }
+    });
+
+  });
+
   if (token){
   const container2 = document.querySelector('.question-list');
   url = 'https://schooltestproject.herokuapp.com/api/question/'
   function get() {
-    var grade=document.getElementById('id_grade_name').value;
-    var subject=(document.getElementById('id_subject_name').value).toUpperCase()
+    var grade=document.getElementById('get_grade').value;
+    var subject=document.getElementById('id_subject_2').value
     console.log(grade,subject)
     fetch(url).then(res => {
       return res.json()
@@ -123,7 +152,7 @@ let no_btn = document.getElementById('delete-btn-no')
       name_value = data.name[index]
       // console.log(name_value)
       console.log(` {{form.as_p}}`)
-      if(grade == name_value.grade && subject == name_value.subject){
+      if(grade == name_value.grade && subject == d.subject){
       content = content + `<div class="question-card" id='${d.id}'>
       <p >Chapter : <span id='${d.chapter}' class="chapter-name">${name_value.chapter}</span></p>
       <p >Question Type : <span class="question_type" id=${d.subject}>${d.question_type}</span></p>

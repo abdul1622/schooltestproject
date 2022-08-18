@@ -304,8 +304,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                 console.log(data)
 
                 if (data.status == 'success') {
-                    grade = data.data.grade_name
-                    subject = data.data.subject_name
+                    grade = data.data.grade
+                    subject = data.data.subject
                     for (let i = 0; i < data.data.no_of_questions.length; i++) {
                         answer_details.push(null)
                     }
@@ -373,7 +373,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                                         question_content = `<div>   <p> ${question_no}). ${d.question} <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}"> <p>
                                                 <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(0,1)> Next </button> </p>
                                                 </div>`
-                                    }
+                                                document.querySelector('.question-container').innerHTML = question_content
+                                            }
                                 }
                             })
 
