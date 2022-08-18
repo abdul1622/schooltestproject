@@ -344,6 +344,7 @@
           }).then(response => {
             console.log(response)
             if (response.status==200) {
+              error_messages.innerHTML = ''
               messages.innerHTML = 'updated successfully'
             }
           })
@@ -352,6 +353,7 @@
     })
     function adduser() {
       form.style.display = 'grid'
+      
       //document.getElementById('userDetails').reset();
       /* var email = 's10@gmail.com'
        var phone = 9992945420
@@ -366,6 +368,8 @@
        var address = 'home'*/
       var is_dataentry = 'false'
       button.addEventListener('click', () => {
+        form.style.display = "none"
+        add.style.display = 'block'
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         var email = document.getElementById('email').value
         var phone = document.getElementById('phone').value
@@ -395,9 +399,9 @@
           }).then(response => {
             if (response.status == 201 ) {
               console.log("Sucess response", response)
-              messages.innerHTML = 'created successfully'
               error_messages.innerHTML = ''
-
+              messages.innerHTML = 'created successfully'
+            
             }
             return response.json();
           }).then(function (data) {

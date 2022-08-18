@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" onclick="reload()" data-dismiss="modal">Close</button>
 
 
       </div>
@@ -125,6 +125,9 @@
 <div class="container2"></div>
 
 <script>
+  function reload(){
+    windows.location.reload()
+  }
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
   let token = localStorage.getItem("token")
@@ -218,6 +221,8 @@
       var address = 'home'*/
       var is_dataentry = 'false'
       button.addEventListener('click', () => {
+        form.style.display = "none"
+        add.style.display = 'block'
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         var email = document.getElementById('email').value
         var phone = document.getElementById('phone').value
@@ -249,9 +254,9 @@
               console.log("Sucess response", response)
               messages.innerHTML = 'created successfully'
               error_messages.innerHTML = ''
-
-            }
+            
             return response.json();
+            }
           }).then(function (data) {
             console.log(data)
             console.log(error_messages)
