@@ -342,18 +342,9 @@
             }
             )
           }).then(response => {
-            if (response.status == 200) {
-              console.log("Sucess response", response)
+            console.log(response)
+            if (response.status==200) {
               messages.innerHTML = 'updated successfully'
-              error_messages.innerHTML = ''
-            }
-            messages.innerHTML=`${data.data.error[0]}`
-            return response.json();
-          }).then(function (data) {
-            console.log(data)
-            if (data.status != 'success') {
-              error_messages.innerHTML = `<li>${(data.data.error[0])}</li>`
-              messages.innerHTML = ''
             }
           })
         })
@@ -412,8 +403,9 @@
           }).then(function (data) {
             if (data.status != 'success') {
               console.log(data)
-              error_messages.innerHTML = `<li>${(data.data.error)}</li>`
               messages.innerHTML = ''
+              error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+             
             }
           })
       })

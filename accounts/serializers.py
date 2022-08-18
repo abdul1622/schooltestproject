@@ -166,7 +166,6 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         )        
         profile.save()
         return instance
-
 class OtpVerificationserializer(serializers.Serializer):
     otp=serializers.CharField(max_length=6)
     
