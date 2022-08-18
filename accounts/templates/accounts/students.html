@@ -145,6 +145,16 @@
     function back() {
       form.style.display = "none"
       add.style.display = 'block'
+      document.getElementById('email').value = ''
+      document.getElementById('phone').value = ''
+      document.getElementById('reg').value = ''
+      document.getElementById('dob').value = ''
+      document.getElementById('ffname').value = ''
+      document.getElementById('lname').value = ''
+      document.getElementById('fname').value = ''
+      document.getElementById('std').value = ''
+      document.getElementById('sec').value = ''
+      document.getElementById('address').value = ''
 
     }
 
@@ -364,9 +374,7 @@
        var fullname = 'sp'
        var address = 'home'*/
       var is_dataentry = 'false'
-
       button.addEventListener('click', () => {
-
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         var email = document.getElementById('email').value
         var phone = document.getElementById('phone').value
@@ -402,8 +410,8 @@
             }
             return response.json();
           }).then(function (data) {
-            console.log(data)
             if (data.status != 'success') {
+              console.log(data)
               error_messages.innerHTML = `<li>${(data.data.error)}</li>`
               messages.innerHTML = ''
             }
