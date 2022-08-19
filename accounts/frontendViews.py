@@ -7,7 +7,7 @@ def land(request):
     return render(request,'accounts/content.html')
 
 def home(request):
-    return render(request,'base.html')
+    return render(request,'index.html')
 def signup(request): 
     form=signup_form(data=request.POST)    
     return render(request,'accounts/signup.html',{'form':form})  

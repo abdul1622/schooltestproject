@@ -2,7 +2,7 @@
 from django.urls import path
 
 from accounts.views import SignupView
-from .frontendviews import *
+from .frontendViews import *
 
 
 urlpatterns=[

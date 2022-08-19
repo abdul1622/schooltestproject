@@ -23,15 +23,12 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             margin: 3% 12%;
         }
 
-        .counter {
-            font-size: 2rem;
-            /* display: inline; */
+        #counter {
+            font-size: 2rem;          
             border-radius: 6%;
             padding: 1% 0% 1% 1%;
             width: 9%;
-            margin: 1% 80%;
-            /* width: 10%; */
-            background-color: #d5d5d5;
+            margin: 1% 80%;          
         }
 
         .instructions li {
@@ -56,8 +53,6 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             border-bottom: 1px gray dashed;
         }
 
-<<<<<<< HEAD
-=======
         .hr1 {
             margin-left: -3.4%;
             width: 107%;
@@ -69,7 +64,6 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             width: 109%;
         }
 
->>>>>>> 4ad6839c544afc4af7a731747eee3399514d895a
         .question-path {
             display: grid;
             grid-template-columns: auto auto auto auto;
@@ -164,6 +158,23 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             .answer-data p {
                 width: 105%;
             }
+            #counter{
+                font-size: 1rem;
+                width:18%;
+                margin:3% 77%;
+                padding: 0;
+            }
+            .close{
+                margin-left: 93%;
+                border: none;
+            }
+            .delete-box{
+                margin-left: 6%;
+            }
+            .sm-close{
+                position: absolute;
+                margin: -12% 55%;
+            }
 
         }
 
@@ -209,7 +220,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
 
 
     <h1 class="test-title"></h1>
-    <h2 class="counter"></h2>
+    <h2 id="counter"></h2>
     <div class="test-container">
 
         <div class="instructions">
@@ -244,7 +255,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         let total_marks;
         let duration;
         let pass_percentage;
-        let counter_container = document.querySelector('.counter');
+        let counter_container = document.querySelector('#counter');
         var list = document.querySelector('.instruction');
         function get() {
             var content = ''
@@ -355,10 +366,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                                 answer_details[0].seen = true;
                                 if (question_no == 1) {
                                     let question_content;
-<<<<<<< HEAD
                                     question_content = `<p> ${remarks}</p><p> ${subject_name}</p>  `
-=======
->>>>>>> 4ad6839c544afc4af7a731747eee3399514d895a
                                     if (question_details.question_type == 'MCQ') {
                                         question_content = `<div> 
                        <hr class="hr1"> <p> ${question_no}). ${d.question}</p> 
@@ -367,11 +375,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                             <li><input type="radio" class='option_b_${question_details.id}' id="option_b_${question_details.id}" name="answer_${question_details.id}" value='option_b'> ${question_details.option_b}</li>
                             <li><input type="radio" class='option_c_${question_details.id}' id="option_c_${question_details.id}" name="answer_${question_details.id}" value='option_c'> ${question_details.option_c}</li>
                             <li><input type="radio" class='option_d_${question_details.id}' id="option_d_${question_details.id}" name="answer_${question_details.id}" value='option_d'> ${question_details.option_d}</li>
-<<<<<<< HEAD
                         <ol>
-=======
-                        <hr class="hr2"><ol>
->>>>>>> 4ad6839c544afc4af7a731747eee3399514d895a
                             </div>
                         
                         <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(0,1)> Next </button> </p>
@@ -450,11 +454,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             let options = ['option_a', 'option_b', 'option_c', 'option_d']
 
             if (question_details.question_type == 'MCQ') {
-<<<<<<< HEAD
                 question_content += `<div><p>${n + 1}). ${question_details.question}</p> 
-=======
-                question_content += `<div><p> ${n + 1}). ${question_details.question}</p> 
->>>>>>> 4ad6839c544afc4af7a731747eee3399514d895a
                         <ol type="a">`
                 for (i = 0; i < options.length; i++) {
                     console.log(question_details['option_a'])
@@ -465,11 +465,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     }
                 }
                 question_content += `<ol>
-<<<<<<< HEAD
                     </div>
-=======
-                            </div>
->>>>>>> 4ad6839c544afc4af7a731747eee3399514d895a
                         `
             } else {
                 if (question_details.answer) {
@@ -616,9 +612,12 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     return response.json()
                 }).then(data => {
                     console.log(data)
-                    document.querySelector('.question-container').innerHTML = `<p class='text-success text-center '>Test submitted successfully<button class='btn btn-primary btn-sm ' onclick=redirect()>close</button></p>
+                    document.getElementById('counter').style.display = "none"
+                    document.querySelector('.question-container').innerHTML = `<p class='text-success text-center >'Test submitted successfully</p>
+                 
                     <p> Result : ${result} </p>
                     <p> Score : ${score} </p>
+                    <button class='btn btn-primary btn-sm  sm-close' onclick=redirect()>close</button>
                     
                     `
                     document.querySelector('.question-direction').innerHTML = ''
@@ -631,7 +630,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
 
         }
         function redirect() {
-            window.location.href = `${host}/home`
+            window.location.href = `${host}/test-history`
         }
 
     </script>

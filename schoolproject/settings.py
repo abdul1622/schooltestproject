@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from ossaudiodev import SNDCTL_SYNTH_CONTROL
 from pathlib import Path
 import os
 from re import template
@@ -57,6 +58,10 @@ INSTALLED_APPS = [
     'academics',
     'corsheaders',
 ]
+
+
+
+JET_MODULE_GOOGLE_ANALYTICS_CLIENT_SECRETS_FILE = os.path.join(BASE_DIR, 'client_secrets.json')
 JET_THEMES = [
     {
         'theme': 'default', # theme folder name

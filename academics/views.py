@@ -521,7 +521,6 @@ class TestEditView(RetrieveUpdateDestroyAPIView):
         return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
 
 class TestResultCreateView(CreateAPIView):
-
     serializer_class= TestResultSerializer
     queryset= TestResult.objects.all()
     permission_classes=[AllowAny]
@@ -570,7 +569,6 @@ class TestResultEditView(RetrieveDestroyAPIView):
 
 
 class TestInstructionView(ListCreateAPIView):
-
     serializer_class = TestInstruction
     queryset = InstructionForTest.objects.all()
     permission_classes = [AllowAny]
@@ -586,6 +584,7 @@ class TestInstructionView(ListCreateAPIView):
             serializer.save()
             return Response({"status": "success",'data':serializer.data},status=HTTP_201_CREATED)
         return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
+
 class EditTestInstructionView(RetrieveDestroyAPIView):
     serializer_class = TestInstruction
     queryset = InstructionForTest.objects.all()
