@@ -192,7 +192,6 @@
       window.location.href = window.location.href;
       form.style.display = "none"
       add.style.display = 'block'
-      edit=null
       document.getElementById('email').value = ''
       document.getElementById('phone').value = ''
       document.getElementById('reg').value = ''
@@ -224,7 +223,8 @@
       var is_dataentry = 'false'
       
       button.addEventListener('click', () => {
-        form.style.display = "none"
+        window.location.href = window.location.href;
+        form.style.display = 'none'
         add.style.display = 'block'
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         var email = document.getElementById('email').value
@@ -304,10 +304,9 @@
         yes = document.getElementById('yes')
         yes.setAttribute("onClick", `deletestudent(${id})`);
       }
-
       if (editbutton) {
         form.style.display = 'grid'
-        form.style.marginTop = '10vh';
+        form.style.marginTop = '10vh'
         url = "https://schooltestproject.herokuapp.com/api/user-details/"
         const parent = e.target.parentElement.parentElement;
         console.log(parent)
@@ -338,6 +337,7 @@
         )
         console.log(d)
         button.addEventListener('click', () => {
+           form.style.display = 'none'
           fetch(`${url}${id}/`, {
             method: 'PATCH',
             headers: {

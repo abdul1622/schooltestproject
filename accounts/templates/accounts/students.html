@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick=reload()>Close</button>
 
 
       </div>
@@ -132,6 +132,9 @@
 <div class="container2"></div>
 
 <script>
+  function reload(){
+    window.location.href = window.location.href;
+  }
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
   let token = localStorage.getItem("token")
@@ -328,6 +331,7 @@
         document.getElementById('sec').value = section
         document.getElementById('address').value = address
         button.addEventListener('click', () => {
+          form.style.display = 'none'
           fetch(`${url}${id}/`, {
             method: 'PATCH',
             headers: {
