@@ -207,7 +207,42 @@
       })
     } userdetails();
 
+    function print(data){
+      console.log('hi')
+      let table2 = `<table class='--user'>`;
+        table2 += `<thead class="thead">
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+              <th scope="col">RegNo</th>
+              <th scope="col">FullName</th>
+              <th scope="col">FirstName</th>
+              <th scope="col">LastName</th>
+              <th scope="col">Date Of Birth</th>  
+              <th scope="col">Address</th>
+              <th scope="col">Standard</th>
+              <th scope="col">Section</th>
+              <th scope="col">Action</th>
+            </thead>`;
+            data.forEach((d, index) => {
+            table2 = table2 + `<tbody><tr id=${d.id}>`;
+              table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
+              table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
+              table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
+              table2 = table2 + '<td class="userfullname">' + `${d.profile?.full_name}` + '</td>';
+              table2 = table2 + '<td class="userfirstname">' + `${d.profile?.first_name}` + '</td>';
+              table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
+              table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
+              table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
+              table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
+              table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
+              table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
+              table2 = table2 + `</tr>`;
+            })
+            table2 += "</table>";
+            container2.innerHTML = table2;
+    }
     function sort() {
+      data_filter=[]
       button = document.getElementById('sort');
       var val = document.getElementById('student-filter').value
       const email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -225,109 +260,34 @@
         }).then(res => {
           return res.json()
         }).then(data => {
-          let table2 = `<table class='--user'>`;
-          table2 += `<thead class="thead">
-                <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-                <th scope="col">RegNo</th>
-                <th scope="col">FullName</th>
-                <th scope="col">FirstName</th>
-                <th scope="col">LastName</th>
-                <th scope="col">Date Of Birth</th>  
-                <th scope="col">Address</th>
-                <th scope="col">Standard</th>
-                <th scope="col">Section</th>
-                <th scope="col">Action</th>
-              </thead>`;
-          if (Email) {
-            console.log('email')
-            data.forEach((d, index) => {
-             
-              if ((`${d.email}` == val) && (`${d.user_type}` == 'is_student')) {
-                table2 = table2 + `<tbody><tr id=${d.id}>`;
-                table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
-                table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
-                table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
-                table2 = table2 + '<td class="userfullname">' + `${d.profile?.full_name}` + '</td>';
-                table2 = table2 + '<td class="userfirstname">' + `${d.profile?.first_name}` + '</td>';
-                table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
-                table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
-                table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
-                table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
-                table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
-                table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
-                table2 = table2 + `</tr>`;
+          data.forEach((d, index) => {
+            if (Email){
+              if ((`${d.email}` == val)&&(`${d.user_type}` == 'is_student')){
+              data_filter.push(d)
               }
-            })
-          }
-          if (Phone) {
-            data.forEach((d, index) => {
-              console.log('email')
-              if ((`${d.phone}` == val) && (`${d.user_type}` == 'is_student')) {
-                table2 = table2 + `<tbody><tr id=${d.id}>`;
-                table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
-                table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
-                table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
-                table2 = table2 + '<td class="userfullname">' + `${d.profile?.full_name}` + '</td>';
-                table2 = table2 + '<td class="userfirstname">' + `${d.profile?.first_name}` + '</td>';
-                table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
-                table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
-                table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
-                table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
-                table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
-                table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
-                  table2 = table2 + `</tr>`;
+            }
+           else if (Phone){
+              if ((`${d.phone}` == val )&& (`${d.user_type}` == 'is_student')){
+              data_filter.push(d)
               }
-      
-            })
-          }
-          if (grade && grade <=12) {
-            console.log(grade)
-            data.forEach((d, index) => {
-              console.log('grade')
-              if ((`${d.profile.standard}` == grade) && (`${d.user_type}` == 'is_student')) {
-                
-                table2 = table2 + `<tbody><tr id=${d.id}>`;
-                table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
-                table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
-                table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
-                table2 = table2 + '<td class="userfullname">' + `${d.profile?.full_name}` + '</td>';
-                table2 = table2 + '<td class="userfirstname">' + `${d.profile?.first_name}` + '</td>';
-                table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
-                table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
-                table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
-                table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
-                table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
-                table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
-                table2 = table2 + `</tr>`;
+            }
+            else if (grade && grade <=12) {
+              if ((`${d.profile.standard}` == grade) && (`${d.user_type}` == 'is_student')){
+              data_filter.push(d)
               }
-            })
-          } 
-          if (val) {
-            console.log(grade)
-            data.forEach((d, index) => {
-              console.log('grade')
+            }
+           else if (val){
               if ((`${d.register_number}` == val) && (`${d.user_type}` == 'is_student')) {
-                
-                table2 = table2 + `<tbody><tr id=${d.id}>`;
-                table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
-                table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
-                table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
-                table2 = table2 + '<td class="userfullname">' + `${d.profile?.full_name}` + '</td>';
-                table2 = table2 + '<td class="userfirstname">' + `${d.profile?.first_name}` + '</td>';
-                table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
-                table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
-                table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
-                table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
-                table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
-                table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
-                table2 = table2 + `</tr>`;
+                data_filter.push(d)
               }
-            })
-          } table2 += "</table>";
-            container2.innerHTML = table2
+            }
+          })
+          console.log(data_filter)
+          print(data_filter);
+          while(data_filter.length > 0) {
+            data_filter.pop();
+        }
         })
-      
       }
         let input = document.getElementById('student-filter')
         input.addEventListener('keyup', (e) => {
