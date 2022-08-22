@@ -60,7 +60,7 @@
 
 
   <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-  <script src="js/bootstrap.js"></script>
+  <!-- <script src="js/bootstrap.js"></script> -->
 </div>
 
 <script>
@@ -145,22 +145,22 @@ content += `</div>`
   //   $('#myInput').trigger('focus')
   // })
 
-
   $("#get_grade").change(function () {
-    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
-    var gradeId = $(this).val(); 
+      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+      var gradeId = $(this).val(); 
 
-    $.ajax({                       
-      url: url_for_change,                  
-      data: {
-        'grade': gradeId      
-      },
-      success: function (data) {
-        $("#id_subject_2").html(data); 
-      }
+      $.ajax({                       
+        url: url_for_change,                  
+        data: {
+          'grade': gradeId      
+        },
+        success: function (data) {
+          $("#id_subject_2").html(data); 
+        }
+      });
+
     });
 
-  });
 
 
   // getting user-details
