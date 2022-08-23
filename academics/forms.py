@@ -78,12 +78,7 @@ class questionlist_form(forms.ModelForm):
         model = Question
         fields = ['grade', 'subject', 'chapter', 'no_of_questions']
 
-class questionCustomForm(forms.Form):
-    FromChapter = forms.ChoiceField()
-    toChapter = forms.ChoiceField()
-    AllChapter = forms.BooleanField()
-    Timing = forms.CharField()
-    Overallmarks = forms.CharField()
+
        
 class question_form(forms.ModelForm):
     class Meta:
@@ -114,3 +109,19 @@ class instruction_form(forms.Form):
     instruction = forms.EmailField(widget=forms.Textarea(
 
     attrs={"class": "form-control", "placeholder": "Instructions"}))
+
+class questionCustomForm(forms.Form):
+    FromChapter = forms.ChoiceField()
+    toChapter = forms.ChoiceField()
+    AllChapter = forms.BooleanField()
+    Timing = forms.CharField()
+    Overallmarks = forms.CharField()
+
+class customizeForm(forms.Form):
+    Chapter = forms.ChoiceField()
+    cognitive_level = forms.ChoiceField()
+    no_cognitive_level=forms.IntegerField()
+    difficulty_level= forms.ChoiceField()
+    no_difficulty_level=forms.IntegerField()
+   
+   

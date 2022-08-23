@@ -37,11 +37,18 @@
     </div>
   </div>
 </div> 
+
+
 <div id="customize">
 {{custom_form.as_p}}
-  <button id="customize-btn" class="submit-btn btn btn-primary" onclick=>Customize</button></p>
+  <button id="customize-btn" class="submit-btn btn btn-primary" onclick=customize()>Customize</button></p>
   <button id="next-btn" class="submit-btn btn btn-primary" onclick=>Next</button></p>
 </div>
+
+<div id="customize-form">
+  {{form1.as_p}}   
+    <button id="next-btn" class="submit-btn btn btn-primary" onclick=>Next</button></p>
+  </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- 
@@ -161,9 +168,15 @@
 // }
 
 function getnext(){
-  console.log(document.getElementsByClassName("q-form"))
+
   document.getElementById("q-form").style.display ="none";
   document.getElementById("customize").style.display = "block";
+}
+function customize(){
+  document.getElementById("customize").style.display = "none";
+  document.getElementById("customize-form").style.display = "block";
+
+}
 }
 
 function savequestion(){

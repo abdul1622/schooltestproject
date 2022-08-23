@@ -155,7 +155,8 @@ class Question_Paper(models.Model):
         blank=True,
         default= list
     )
- 
+    timing = models.IntegerField(default=0)
+    overall_marks = models.IntegerField(default=0)
     def __str__(self):
         return (str(self.grade))+' '+(str(self.subject))
     # def save(self, *args, **kwargs):
