@@ -95,6 +95,7 @@ class Question(models.Model):
     question = models.CharField(max_length=50)
     duration=models.PositiveIntegerField(default=30)
     mark=models.PositiveIntegerField(default=1)
+    chapter_no = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     question_type = models.CharField(
     max_length=20,
