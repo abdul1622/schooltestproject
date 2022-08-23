@@ -396,7 +396,7 @@
                     }).then(function (response) {
                         if (response.status == 200) {
                             console.log("Sucess response", response)
-                            messages.innerHTML = `${name} is updated succesfully`;
+                            messages.innerHTML = 'Updated succesfully';
                             error_messages.innerHTML = ''
                             // get();
                             getsubject(grade_val, grade_id);
@@ -550,7 +550,7 @@
                     }).then(function (response) {
                         if (response.status == 200) {
                             console.log("Sucess response", response)
-                            messages.innerHTML = `${name} is updated succesfully`;
+                            messages.innerHTML ='Updated succesfully';
                             error_messages.innerHTML = ''
                             getchapter(grade_val, subject_val, subject_id);
                         } else {
@@ -614,8 +614,4 @@
     })
 
 </script>
-
-
-
-
 {% endblock %}
