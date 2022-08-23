@@ -4,11 +4,16 @@
   <div class="question-papers-get">
     <div class="container">
       {% csrf_token %}
-
+      {{form.as_p}}
+      <label for=""> Subject: </label>
+      <select name="subject" required="" id="id_subject_2">
+          <option value="" selected="">---------</option>
+        </select>
+<!-- 
       <p class="row"><label class="col-3" for="id_grade">Grade:</label><input class="col-7 form-control" type="text"
           name="grade" maxlength="14" required="" id="id_grade"></p>
       <p class="row"><label class="col-3" for="id_subject">Subject:</label><input type="text" class="col-7 form-control"
-          name="subject" maxlength="20" required="" id="id_subject"></p>
+          name="subject" maxlength="20" required="" id="id_subject"></p> -->
 
       <p class="text-center"> <button id="get-question-papers" onclick=get()>Get</button> </p>
     </div>
@@ -25,7 +30,6 @@
   <div class="error-messages container-fluid">
 
   </div>
-
 
   <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
   <script src="js/bootstrap.js"></script>
@@ -76,8 +80,8 @@
   let container = document.querySelector('.question-papers-card')
   //get - question paper
   function get() {
-    var grade = document.getElementById('id_grade').value
-    var subject = (document.getElementById('id_subject').value).toUpperCase()
+    var grade = document.getElementById('get_grade').value
+    var subject = (document.getElementById('id_subject_2').value).toUpperCase()
     url2 = new URL('https://schooltestproject.herokuapp.com/api/question-paper-list/');
     url2.searchParams.append('grade', grade);
     url2.searchParams.append('subject',subject)
@@ -138,6 +142,24 @@ content += `</div>`
   //     $('#myModal').on('shown.bs.modal', function () {
   //   $('#myInput').trigger('focus')
   // })
+
+
+  $("#get_grade").change(function () {
+    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+    var gradeId = $(this).val(); 
+
+    $.ajax({                       
+      url: url_for_change,                  
+      data: {
+        'grade': gradeId      
+      },
+      success: function (data) {
+        $("#id_subject_2").html(data); 
+      }
+    });
+
+  });
+
 
   // getting user-details
   function get_user_id() {

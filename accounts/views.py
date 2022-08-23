@@ -12,7 +12,7 @@ from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.status import (
     HTTP_200_OK,HTTP_404_NOT_FOUND,HTTP_401_UNAUTHORIZED,HTTP_204_NO_CONTENT,
-    HTTP_400_BAD_REQUEST,HTTP_201_CREATED,HTTP_203_NON_AUTHORITATIVE_INFORMATION
+    HTTP_400_BAD_REQUEST,HTTP_201_CREATED,HTTP_203_NON_AUTHORITATIVE_INFORMATION,HTTP_206_PARTIAL_CONTENT
 )
 from django.shortcuts import get_object_or_404
 from rest_framework.authtoken.models import Token
@@ -39,14 +39,12 @@ User = get_user_model()
 class SignupView(CreateAPIView):
     serializer_class=SignupSerializer
     permission_classes = [AllowAny]
-
     def post(self, request):
         serializer = SignupSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({"status": "Registered succesfull"},status=HTTP_201_CREATED)
-        return Response({"status": "failure", "data": serializer.errors},status=HTTP_204_NO_CONTENT)
-
+        return Response({"status": "failure", "data": serializer.errors,},status=HTTP_206_PARTIAL_CONTENT)
 
 class LogoutView(APIView):
     permission_classes=[AllowAny]

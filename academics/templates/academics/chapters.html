@@ -41,11 +41,6 @@
       table2 = table2 + '<td class="chapter_no">' + `${d.chapter_no}` + '</td>';
       table2 = table2 + '<td class="name">' + `${d.name}` + '</td>';
       table2 = table2 + '<td class="description">' + `${d.description}` + '</td>',
-
-        
-
-
-
       table2 = table2 + '<td>' + `<button data-toggle="modal" data-target="#delete-box-Modal-chapterlist" id="delete" >delete</button>` + '</td>'
         table2 = table2 + `</tr>`;
       })
@@ -127,8 +122,6 @@ container2.addEventListener('click',(e) => {
       var description = document.getElementById('id_description').value
       var subject = document.getElementById('id_subject').value
     if(!edit){
-
-   
         fetch('https://schooltestproject.herokuapp.com/api/chapters/',
         {
           method: 'POST',
@@ -154,6 +147,7 @@ container2.addEventListener('click',(e) => {
 {% endblock %}
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <!--            
@@ -232,4 +226,6 @@ container2.addEventListener('click',(e) => {
      
         
            {% endcomment %} -->
+=======
+>>>>>>> 320b7a730f766c9f2477ec2a20e9f4ac2a5277d0
 

@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick=reload()>Close</button>
 
 
       </div>
@@ -61,7 +61,7 @@
   <button id="sort" onclick=sort()>search</button>
 </div>
 </div>
-<form id="userDetails">
+<div id="userDetails">
   {%csrf_token%}
 
   <button onclick=back() class='back-btn'>&#x2715;</button>
@@ -128,10 +128,13 @@
   </div>
 
 
-</form>
+</div>
 <div class="container2"></div>
 
 <script>
+  function reload(){
+    window.location.href = window.location.href;
+  }
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
   let token = localStorage.getItem("token")
@@ -145,9 +148,18 @@
     function back() {
       form.style.display = "none"
       add.style.display = 'block'
-
+      window.location.href = window.location.href;
+      document.getElementById('email').value = ''
+      document.getElementById('phone').value = ''
+      document.getElementById('reg').value = ''
+      document.getElementById('dob').value = ''
+      document.getElementById('ffname').value = ''
+      document.getElementById('lname').value = ''
+      document.getElementById('fname').value = ''
+      document.getElementById('std').value = ''
+      document.getElementById('sec').value = ''
+      document.getElementById('address').value = ''
     }
-
     function userdetails() {
 
 
@@ -319,6 +331,7 @@
         document.getElementById('sec').value = section
         document.getElementById('address').value = address
         button.addEventListener('click', () => {
+          form.style.display = 'none'
           fetch(`${url}${id}/`, {
             method: 'PATCH',
             headers: {
@@ -332,18 +345,10 @@
             }
             )
           }).then(response => {
-            if (response.status == 200) {
-              console.log("Sucess response", response)
-              messages.innerHTML = 'updated successfully'
+            console.log(response)
+            if (response.status==200) {
               error_messages.innerHTML = ''
-              userdetails
-            }
-            return response.json();
-          }).then(function (data) {
-            console.log(data)
-            if (data.status != 'success') {
-              error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-              messages.innerHTML = ''
+              messages.innerHTML = 'updated successfully'
             }
           })
         })
@@ -351,7 +356,8 @@
     })
     function adduser() {
       form.style.display = 'grid'
-      document.getElementById('userDetails').reset();
+      
+      //document.getElementById('userDetails').reset();
       /* var email = 's10@gmail.com'
        var phone = 9992945420
        var dob = '2000-02-10'
@@ -364,9 +370,9 @@
        var fullname = 'sp'
        var address = 'home'*/
       var is_dataentry = 'false'
-
       button.addEventListener('click', () => {
-
+        form.style.display = "none"
+        add.style.display = 'block'
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         var email = document.getElementById('email').value
         var phone = document.getElementById('phone').value
@@ -394,18 +400,19 @@
               // 'Content-Type': 'application/x-www-form-urlencoded',
             }
           }).then(response => {
-            if (response.status == 201) {
+            if (response.status == 201 ) {
               console.log("Sucess response", response)
-              messages.innerHTML = 'created successfully'
               error_messages.innerHTML = ''
-
+              messages.innerHTML = 'created successfully'
+            
             }
             return response.json();
           }).then(function (data) {
-            console.log(data)
             if (data.status != 'success') {
-              error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+              console.log(data)
               messages.innerHTML = ''
+              error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+             
             }
           })
       })

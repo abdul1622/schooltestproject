@@ -12,13 +12,13 @@
 </div>
 
 
-<div class="question-paper-subject" >
+<!-- <div class="question-paper-subject" >
   <div class="question-paper">
       <p> here get your question-paper pdf link </p>
-  </div>
+  </div> -->
 
 
-  <div class="question-paper-form">
+  <div class="question-paper-form"  id="q-form">
 
     <div class="q-form">
       {% csrf_token %}
@@ -32,10 +32,16 @@
       </select></p>
       <p><label for="id_no_of_questions">No of questions:</label> <input type="text" name="no_of_questions" maxlength="20" required="" id="id_no_of_questions"></p>
       <p class="chapter-btns"> <button  id="chapter-btn" class="submit-btn btn btn-primary" onclick=getquestion()>Get</button>
-        <button id="save-button" class="submit-btn btn btn-primary" onclick=savequestion()>Save</button></p>
+      <button  id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Next</button>
+        <!-- <button id="save-button" class="submit-btn btn btn-primary" onclick=savequestion()>Save</button></p> -->
     </div>
   </div>
 </div> 
+<div id="customize">
+{{custom_form.as_p}}
+  <button id="customize-btn" class="submit-btn btn btn-primary" onclick=>Customize</button></p>
+  <button id="next-btn" class="submit-btn btn btn-primary" onclick=>Next</button></p>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- 
@@ -154,6 +160,11 @@
 
 // }
 
+function getnext(){
+  console.log(document.getElementsByClassName("q-form"))
+  document.getElementById("q-form").style.display ="none";
+  document.getElementById("customize").style.display = "block";
+}
 
 function savequestion(){
              

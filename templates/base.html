@@ -138,13 +138,13 @@
         #grade {
             background-color: #b2c8df;
             box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-            width: 24vw;
+            width: 20vw;
             height: auto;
             text-align: left;
             padding: 3% 3%;
             margin-top: 4%;
             margin-bottom: 4%;
-            margin-left: 28%;
+            margin-left: 38%;
         }
 
         #grade button {
@@ -297,6 +297,9 @@
             padding: 1.8vh;
             margin-left: 2%;
             white-space: nowrap;
+            
+
+           
         }
 
         .download {
@@ -472,9 +475,12 @@
             border: none;
             outline: none;
             display: grid;
-            border-radius: 5px;
+           
         }
-
+        button#get-question-papers {
+            margin-top: 8%;
+            margin-left: -6%;
+        }
         input[type=file] {
             border: none;
             margin-left: -4px;
@@ -538,7 +544,11 @@
             padding: 30px 50px;
             border-radius: 5px;
             flex-basis: 23%;
-        }
+            width: 19%;
+    margin: 7% 40%;
+}
+
+        
 
 
         #profile-btn:hover {
@@ -546,18 +556,7 @@
             background-color: #14279b;
         }
 
-        #chapterlist-btn {
-            width: 150px;
-            height: 39px;
-            margin-left: 50px;
-            margin-top: 20px;
-            background-color: #b2c8df;
-            color: #14279b;
-            padding: 5px 10px;
-            outline: none;
-            border: 1px solid #14279b;
-        }
-
+       
         #questionlist-btn {
             width: 150px;
             height: 39px;
@@ -618,11 +617,16 @@
         }
 
         #question-box {
-            margin-left: 4%;
+            margin-left: 38%;
+            margin-top: 4%;
             background-color: #b2c8df;
             width: 17%;
             padding: 1%;
             border-radius: 9px;
+        }
+        button#questioncreate-btn {
+            margin-left: 30%;
+            margin-top: 5%;
         }
 
         #question-box label {
@@ -1066,9 +1070,9 @@
         }
 
         #chapterlist-btn {
-            width: 50%;
-            height: px;
-            margin-left: 26%;
+            width: 41%;
+            height: 32px;
+            margin-left: 28%;            
             margin-top: 20px;
             background-color: #b2c8df;
             color: #14279b;
@@ -1153,7 +1157,7 @@
         .box {
             margin-left: 35%;
             margin-top: 4%;
-            width: 24%;
+            width: 20%;
             min-width: 200px;
             padding: 2% 3%;
             border-radius: 5px;
@@ -1174,8 +1178,7 @@
         }
 
         .chapter-table table {
-            width: 75%;
-            background-color: #fff5cce8;
+            width: 75%;          
         }
 
         .chapter-table .btn {
@@ -1218,7 +1221,7 @@
         }
 
         #subject-btn {
-            width: 22%;
+            width: 25%;
             height: 19%;
             margin-left: 31%;
             margin-top: 0;
@@ -1446,7 +1449,7 @@
         }
 
         .question-papers-get .container {
-            width: 100%;
+            width: 86%;
             padding-top: 2%;
             padding-bottom: 2%;
             padding-right: var(--bs-gutter-x, 0.75rem);
@@ -1531,6 +1534,26 @@
     border-radius: 5px;
     
 }
+
+element.style {
+    display: block;
+}
+
+input#id_AllChapter {
+    height: 2.2vh;
+    position: absolute;
+    margin: 0.1% -6%;
+
+}
+#customize #next-btn {
+    margin-left: 90%;
+    margin-top: -38%;
+    font-size: 12px;
+}
+#customize #customize-btn {
+    margin-left: -12%;
+    font-size: 12px;
+}
         @media screen and (min-width:1024px) and (max-width:1200px) {
             .navbar {
                 width: 100%;
@@ -1539,10 +1562,11 @@
 
             .navbar li a {
                 padding: 0.8vh;
+                
             }
 
             .navbar-nav {
-                margin-left: 0%;
+                margin-left: -3%;
             }
 
             #profile-box {
@@ -1889,11 +1913,7 @@
                 display: none;
             }
 
-            .question-paper-form {
-                background-color: #435cf9;
-                width: 34vw;
-                padding: 30px 50px
-            }
+           
 
             .question-paper-card {
                 margin-left: 0vw;
@@ -1946,6 +1966,28 @@
                 width: 11%;
                 margin:0% 73%;
             }
+            #customize {
+                background-color: #435cf9;
+                display: none;
+                width: 36%;
+                margin: 5% 30%;
+                padding: 30px 58px;
+                border-radius: 5px;
+                height: 65vh;
+            }
+            .question-paper-form {
+                background-color: #435cf9;
+                width: 34vw;
+                padding: 30px 50px;
+                margin: 10% 32%;
+
+            }
+            input#id_AllChapter {
+                height: 2.2vh;
+                position: absolute;
+                margin: 0.5% -11%;
+            }
+            
         }
 
         @media screen and (min-width:1360px) and (max-width:1450px) {
@@ -2312,12 +2354,7 @@
                 display: none;
             }
 
-            .question-paper-form {
-                background-color: #435cf9;
-                width: 34vw;
-                padding: 30px 2%;
-            }
-
+            
             .question-paper-card {
                 margin-left: 0vw;
                 font-size: 15px;
@@ -2412,6 +2449,27 @@
             }
             .counter{
                 width: 11%;
+            }
+            .question-paper-form {
+                background-color: #435cf9;
+                width: 24vw;
+                padding: 30px 3%;
+                margin: 7% 38%;
+            }
+            #customize {
+                display: none;
+                background-color: #435cf9;
+                width: 25%;
+                padding: 30px 46px;
+                border-radius: 5px;
+                height: 74vh;
+                margin: 3% 39%;
+              
+            }
+            input#id_AllChapter {
+                height: 3vh;
+                position: absolute;
+                margin: 0.4% -8.2%;
             }
         }
 
@@ -2908,9 +2966,7 @@
                 display: none;
             }
 
-            .question-paper-form {
-                width: 45vw;
-            }
+            
 
             .chaplist-box {
                 margin-left: 28vw;
@@ -2968,6 +3024,27 @@
             #instruction-btn {
                 margin-left: 77%;
                 width: 22%;
+            }
+            #customize {
+                background-color: #435cf9;
+                display: none;
+                width: 47%;
+                margin: 5% 26%;
+                padding: 30px 58px;
+                border-radius: 5px;
+                height: 58vh;
+            }
+            .question-paper-form {
+                
+                    width: 45vw;
+                    padding: 30px 50px;
+                    margin: 7% 28%;
+                
+            }
+            input#id_AllChapter {
+                height: 2.2vh;
+                position: absolute;
+                margin: 0.5% -14%;
             }
         }
 
@@ -3139,25 +3216,10 @@
                 height: auto;
             }
 
-            #userdetail-btn {
-                width: 16vw;
-                height: 3vh;
-                font-size: 10px;
-                margin-top: 2vh;
-            }
-
+           
             #userDetails label {
                 font-size: 10px;
-            }
-
-            #userDetails input {
-                font-size: 10px;
-                width: 18vw;
-            }
-
-            #userDetails input[type=file] {
-                width: 23vw;
-            }
+            }   
 
             #userDetails .back-btn {
                 margin-left: 93%;
@@ -3323,12 +3385,7 @@
                 font-family: 'cinzel';
             }
 
-            .modal-content {
-                width: 50%;       
-                margin-top: 16%;
-                margin-left: 7%;
-            }
-
+          
             #add {
                 width: 20%;
                 margin-left: -1%;
@@ -3359,8 +3416,8 @@
             }
 
             .chapter-table #delete {
-                padding: 3px 9px;
-                margin-left: 1%;
+                padding: 4px 6px;
+                margin-left: 0%;
                 border-radius: 5px;
                 margin-top: 1%;
                 font-size: 155%;
@@ -3391,7 +3448,7 @@
                 width: 45%;
                 height: 2%;
                 margin-left: 27%;
-                margin-top: 1%;
+                margin-top: 5%;
                 background-color: #b2c8df;
                 color: #14279b;
                 padding: 2%;
@@ -3417,15 +3474,15 @@
 
             #question-box {
                 margin-left: 13%;
-                width: 73%;
+                width: 70%;
                 padding: 3% 4%;
                 height: 0%;
                 margin-top: 12%;
             }
 
             #questioncreate-btn {
-                margin-left: 15%;
-                width: 62%;
+                margin-left: 24%;
+                width: 47%;
             }
 
             .question-card {
@@ -3441,6 +3498,7 @@
                 padding: 30px 50px;
                 margin-bottom: 15%;
                 border-radius: 5px;
+                margin-left: 0%;
             }
 
             .question-paper-subject {
@@ -3531,11 +3589,7 @@
 
             }
 
-            #media-content {
-                transform: rotate(0deg);
-                margin-left: 6%;
-                margin-top: 10%;
-            }
+          
 
             .test-list {
                 width: 59%;
@@ -3667,6 +3721,89 @@
                 margin-left: 11%;     
                 font-size: 14px;
             }
+            .container2 {
+                width: 82vw;
+                overflow: scroll;
+                margin-left: 3%;
+                min-height: 70vh;
+                }
+                .chapter-table {
+                    margin-left: 11%;
+                    margin-top: 5%;
+                    width: 80vw;
+                    min-height: 70vh;
+                    overflow: scroll;
+                }
+                .question-paper-form input {
+                    width: 90%;
+                }
+                .modal-content {
+                    width: 100%;
+                    margin-top: 16%;
+                    margin-left: 0%;
+                }
+                .box label{
+                    margin-left: 5%;
+                }
+                .box select{
+                    margin-left: 5%;
+                }
+                #userDetails input {
+                    font-size: 10px;
+                    width: 27vw;
+                }
+                #userdetail-btn {
+                    width: 21vw;
+                    height: 3vh;
+                    font-size: 10px;
+                    margin-top: 2vh;
+                    margin-left: 11%;
+                }
+                input[type=file] {
+                    width: 30vw;
+                }
+                #question-box label{
+                    margin-left: 5%;
+                }
+                #question-box select{
+                    margin-left: 5%;
+                }
+                .question_create label{
+                    margin-left: 5%;
+                }
+                .question_create select{
+                    margin-left: 5%;
+                }
+                .question_create input{
+                    margin-left: 5%;
+                }
+                #customize{
+                    display: none;
+                    background-color: #435cf9;
+                    width: 100%;
+                    padding: 30px 80px;
+                    margin-bottom: 15%;
+                    border-radius: 5px;
+                    margin-left: 0%;
+                }
+                input#id_AllChapter {
+                    height: 2.2vh;
+                    position: absolute;
+                    margin: 0.1% -6%;
+                
+                }
+                #customize #next-btn {
+                    margin-left: 90%;
+                    margin-top: -38%;
+                    font-size: 12px;
+                }
+                #customize #customize-btn {
+                    margin-left: -15%;
+                    font-size: 12px;
+                }
+                #customize select {
+                    width: 98%;
+                }
           
             }
 
@@ -3741,9 +3878,11 @@
         {% block profile %}{% endblock %}
         {% block chapter %}{% endblock %}
         {% block userd %}{% endblock %}
+        {% block users %}{% endblock %}
         {% block question %}{% endblock %}
         {% block chapterlist %}{% endblock %}
         {% block history %}{% endblock %}
+        {% block index %}{% endblock %}
         <script>
         var host = window.location.protocol + "//" + window.location.host;
         var staff = document.getElementById('nav-staffs')
@@ -3768,14 +3907,12 @@
         document.getElementById('nav-instruction-link').href = `${host}/instructions`
         function logout() {
             var host = window.location.protocol + "//" + window.location.host;
-            let token = localStorage.getItem("token")
-            console.log(token)
             fetch('https://schooltestproject.herokuapp.com/api/logout/',
                 {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'token' + ' ' + token
+                        'Authorization': 'token' + ' ' + localStorage.getItem('token')
                         // 'Content-Type': 'application/x-www-form-urlencoded', 
                     }
                 }).then(response => response.text())
@@ -3817,6 +3954,8 @@
             }
         } navbar();
     </script>
-    </body>
+
+
+</body>
 
 </html>

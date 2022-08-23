@@ -1,3 +1,4 @@
+from pyexpat import model
 from django import forms
 from.models import *
 
@@ -76,11 +77,23 @@ class questionlist_form(forms.ModelForm):
     class Meta:
         model = Question
         fields = ['grade', 'subject', 'chapter', 'no_of_questions']
+
+class questionCustomForm(forms.Form):
+    FromChapter = forms.ChoiceField()
+    toChapter = forms.ChoiceField()
+    AllChapter = forms.BooleanField()
+    Timing = forms.CharField()
+    Overallmarks = forms.CharField()
+       
 class question_form(forms.ModelForm):
     class Meta:
         model = Question
         fields = '__all__'
 
+class form_for_chapterlist(forms.ModelForm):
+    class Meta:
+        model = Subject
+        fields = ['grade',]
 
 class answer_form(forms.ModelForm):
     ans = question_form

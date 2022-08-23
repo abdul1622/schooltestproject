@@ -43,7 +43,7 @@ class Subject(models.Model):
         super(Subject, self).save(*args, **kwargs)
 
     class Meta:
-        ordering = ('grade','name',)       
+        ordering = ('grade','code','name',)       
 
 
 class Chapter(models.Model):
@@ -199,11 +199,6 @@ class TestResult(models.Model):
     unanswered_questions = models.IntegerField(null=True)
     def __str__(self):
         return self.result
-        
-# class Instruction(models.Model):
-#     instruction_text = models.CharField(max_length=60)
-#     def __str__(self):
-#         return str(self.instruction_text)
 
 class InstructionForTest(models.Model):
     note = models.TextField(null=True,blank=True)

@@ -1,3 +1,4 @@
+from curses.ascii import isalpha
 from dataclasses import field
 from operator import sub
 from pyexpat import model
@@ -29,12 +30,21 @@ class SubjectSerializer(serializers.ModelSerializer):
     def validate(self,data):
         name = data['name']
         name = re.findall(r"[^\W\d_]+|\d+",name)
+        if data['code'][:3].isalpha():
+            code = re.match(r"([a-z]+)([0-9]+)", data['code'], re.I)
+            if code:
+                items = code.groups()
+                code = items[1]
+        else:
+            code = data['code']    
+        # code = code[1]
         data['name'] = (' '.join(name)).upper()
-        code = data['code']
-        if  not (data['name'])[:3] in data['code']:
-            code = (data['name'])[:3] + data['code']
-            data['code'] = code
-            print(data['code'],data['name'])
+        data['code'] = (data['name'][:3])+ code
+        # code = data['code']
+        # if  not (data['name'])[:3] in data['code']:
+        #     code = (data['name'])[:3] + data['code']
+        #     data['code'] = code
+        #     print(data['code'],data['name'])
         queryset = Subject.objects.all()
         if self.instance:
             id = self.instance.id

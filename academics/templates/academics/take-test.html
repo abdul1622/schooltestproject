@@ -318,8 +318,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                 console.log(data)
 
                 if (data.status == 'success') {
-                    grade = data.data.grade_name
-                    subject = data.data.subject_name
+                    grade = data.data.grade
+                    subject = data.data.subject
                     for (let i = 0; i < data.data.no_of_questions.length; i++) {
                         answer_details.push(null)
                     }
@@ -366,7 +366,6 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                                 answer_details[0].seen = true;
                                 if (question_no == 1) {
                                     let question_content;
-                                    question_content = `<p> ${remarks}</p><p> ${subject_name}</p>  `
                                     if (question_details.question_type == 'MCQ') {
                                         question_content = `<div> 
                        <hr class="hr1"> <p> ${question_no}). ${d.question}</p> 
@@ -375,7 +374,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                             <li><input type="radio" class='option_b_${question_details.id}' id="option_b_${question_details.id}" name="answer_${question_details.id}" value='option_b'> ${question_details.option_b}</li>
                             <li><input type="radio" class='option_c_${question_details.id}' id="option_c_${question_details.id}" name="answer_${question_details.id}" value='option_c'> ${question_details.option_c}</li>
                             <li><input type="radio" class='option_d_${question_details.id}' id="option_d_${question_details.id}" name="answer_${question_details.id}" value='option_d'> ${question_details.option_d}</li>
-                        <ol>
+                        <hr class="hr2"><ol>
                             </div>
                         
                         <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(0,1)> Next </button> </p>
@@ -388,7 +387,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                                         question_content = `<div>   <p> ${question_no}). ${d.question} <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}"> <p>
                                                 <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(0,1)> Next </button> </p>
                                                 </div>`
-                                    }
+                                                document.querySelector('.question-container').innerHTML = question_content
+                                            }
                                 }
                             })
 
@@ -454,7 +454,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             let options = ['option_a', 'option_b', 'option_c', 'option_d']
 
             if (question_details.question_type == 'MCQ') {
-                question_content += `<div><p>${n + 1}). ${question_details.question}</p> 
+                question_content += `<div><p> ${n + 1}). ${question_details.question}</p> 
                         <ol type="a">`
                 for (i = 0; i < options.length; i++) {
                     console.log(question_details['option_a'])
@@ -465,7 +465,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     }
                 }
                 question_content += `<ol>
-                    </div>
+                            </div>
                         `
             } else {
                 if (question_details.answer) {
@@ -612,12 +612,9 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     return response.json()
                 }).then(data => {
                     console.log(data)
-                    document.getElementById('counter').style.display = "none"
-                    document.querySelector('.question-container').innerHTML = `<p class='text-success text-center >'Test submitted successfully</p>
-                 
+                    document.querySelector('.question-container').innerHTML = `<p class='text-success text-center '>Test submitted successfully<button class='btn btn-primary btn-sm ' onclick=redirect()>close</button></p>
                     <p> Result : ${result} </p>
                     <p> Score : ${score} </p>
-                    <button class='btn btn-primary btn-sm  sm-close' onclick=redirect()>close</button>
                     
                     `
                     document.querySelector('.question-direction').innerHTML = ''

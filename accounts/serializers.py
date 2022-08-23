@@ -4,6 +4,8 @@ from django.shortcuts import get_list_or_404
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.core.mail import send_mail
+
+from academics.forms import question_form
 from .models import Profile
 from django.conf import settings
 from django.core.mail import send_mail
@@ -91,7 +93,6 @@ class SignupSerializer(serializers.Serializer):
         section = validated_data.pop("section")
         address = validated_data.pop("address")
         is_data_entry = validated_data.pop("is_data_entry")
-
         user =   User.objects.create(email =email,phone=phone,date_of_birth=date_of_birth,
         register_number=register_number,user_type = user_type,is_data_entry=is_data_entry)
         user.save()
@@ -105,8 +106,18 @@ class SignupSerializer(serializers.Serializer):
         recipient_list = [user.email,]
         send_mail(subject,message,email_from,recipient_list)
         return userdetails
-
-
+    def validate(self,data):
+        queryset=User.objects.all()
+        if self.instance:
+            id=self.instance.id
+            queryset=queryset.exclude(id=id)
+        if queryset.filter(email=data['email']).exists() :
+              raise serializers.ValidationError({'error':'email already exists'})
+        elif queryset.filter(phone=data['phone']).exists() :
+             raise serializers.ValidationError({'error':'phone already exists'})
+        elif queryset.filter(register_number=data['register_number']).exists() :
+            raise serializers.ValidationError({'error':'register number already exists'})
+        return data
 class SigninSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -154,9 +165,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             profile.address
         )        
         profile.save()
-
         return instance
-
 class OtpVerificationserializer(serializers.Serializer):
     otp=serializers.CharField(max_length=6)
     

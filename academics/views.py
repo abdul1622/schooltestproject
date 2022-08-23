@@ -225,7 +225,7 @@ class ChapterListView(APIView):
                 subject = Subject.objects.get(name=subject,grade=grade.id)
                 chapters = (Chapter.objects.filter(subject=subject)).order_by('subject','chapter_no')
                 for object in chapters:
-                    data.insert(0,{
+                    data.append({
                     "id" : object.id,
                     "subject" : subject.name,
                     "subject_id" : subject.id,
@@ -251,7 +251,7 @@ class SubjectListView(ListAPIView):
         if grade is not None:
             try:
                 grades = Grade.objects.get(grade=grade)
-                queryset = (queryset.filter(grade=grades.id).order_by('grade','code','name'))
+                queryset = (queryset.filter(grade=grades.id).order_by('code'))
             except :
                 return Response({'status':'failed'},status=HTTP_206_PARTIAL_CONTENT)
             return queryset
@@ -584,7 +584,6 @@ class TestInstructionView(ListCreateAPIView):
             serializer.save()
             return Response({"status": "success",'data':serializer.data},status=HTTP_201_CREATED)
         return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
-
 class EditTestInstructionView(RetrieveDestroyAPIView):
     serializer_class = TestInstruction
     queryset = InstructionForTest.objects.all()

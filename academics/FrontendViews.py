@@ -27,12 +27,13 @@ def questioncreationview(request):
 
  
 def chapterlistview(request):
-    form=chapterlist_form()
+    form= form_for_chapterlist()
     form2 = Chapterform()
     return render(request,'academics/chapterlist.html',{'form':form,'form2':form2})
 
 def questionlistview(request):  
     form=questionlist_form()
+
     return render(request,'academics/questionlist.html',{'form':form})
 
 def chaptercrud(request):  
@@ -44,16 +45,16 @@ def subjectcrud(request):
     return render(request,'academics/subjectcreate.html',{'form':form})
 
 def questionview(request):
+    form = form_for_chapterlist(auto_id='get_%s')
     questionform = Questionform()
     answerform = Answerform()
-    
-    return render(request,'academics/questionandanswers.html',{'answerform':answerform,'questionform':questionform})
+    return render(request,'academics/questionandanswers.html',{'form':form,'answerform':answerform,'questionform':questionform})
     
 def question_paperview(request):
     form=questionlist_form()
     list_form = chapterlist_form()
-    return render(request,'academics/question_paper.html',{'form':form,'list_form':list_form})
- 
+    custom_form=questionCustomForm()
+    return render(request,'academics/question_paper.html',{'form':form,'list_form':list_form,'custom_form':custom_form})
 
 def questioncreate(request):
     questionform = Questionform()
@@ -61,16 +62,14 @@ def questioncreate(request):
     return render(request,'academics/question-by-grade.html',{'answerform':answerform,'questionform':questionform})
 
 def test_create(request):
-    form = chapterlist_form()
-    test_form = TestForm
+    form = form_for_chapterlist(auto_id='get_%s')
+    test_form = TestForm()
     return render(request,'academics/test-create.html',{'form':form,'test_form':test_form})
 
 def test_list(request):
     return render(request,'academics/student-test-list-page.html')
-
 def testhistory(request):
     return render(request,'academics/test-history.html')   
-    
 def take_test(request,pk):
     return render(request,'academics/take-test.html')
 

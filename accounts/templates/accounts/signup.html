@@ -1,7 +1,9 @@
 {% extends 'main.html'%}
 {% block signup %}
-<p id='response'>Invalid Details</p>
+<p id='response'></p>
 <div class="signbox">
+    
+    {%csrf_token%}
     <div class="signbox1">
 
         <input type="hidden" name="csrfmiddlewaretoken" value="a3cCmEUXAWnNpEIH7egd6gKS37Lpb0sOsWq6lZ3gJ2ZGxkw2lXj9ScZLoTAyXVtn">
@@ -114,13 +116,6 @@ aria-hidden="true">
          if(standard==''){
             standard = null;
          }
-         console.log(standard)
-        d = JSON.stringify({
-            'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
-            'is_data_entry': is_dataentry, 'profile': { 'first_name': firstname, 'last_name': lastname, 'standard': standard, 'section': section, 'full_name': fullname, 'address': address }
-        }
-        )
-        console.log(d)
         fetch('https://schooltestproject.herokuapp.com/api/signup/',
             {
                 method: 'POST',
@@ -137,18 +132,19 @@ aria-hidden="true">
             }).then(function (response) {
                 if (response.ok) {
                     console.log("Sucess response", response)
-                    return response.json();
+                    return response.json()
                 } else {
                     throw new Error("Could not reach the API: " + response.statusText);
                 }
                 return response.json()
             })
             .then(data => {
-                console.log(Response)
+                console.log(data.data.error[0])
                 if (`${data.status}` == 'Registered succesfull') {
                     window.location.href = `${host}/login`
                 }
-
+                document.getElementById('response').innerHTML=`${data.data.error[0]}`
+                document.getElementById('response').style.display='block'
             })
         return true;
     }
