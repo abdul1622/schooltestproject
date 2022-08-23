@@ -54,8 +54,11 @@
     </div>
   </div>
 </div>
-<button id="addstaff" onclick=addstaff()>Add Staff</button>
-
+<div class='sort-input'>
+  <input type="text" id="student-filter" placeholder="grade" min="0" max="12">
+  <button id="sort" onclick=sort()>search</button>
+  <button id="addstaff" onclick=addstaff()>Add Staff</button>
+</div>
 <div id="userDetails">
   {%csrf_token%}
   <button onclick=back() class='back-btn'>&#x2715; </button>
@@ -125,9 +128,9 @@
 <div class="container2"></div>
 
 <script>
-  function reload(){
+  function reload() {
     window.location.href = window.location.href;
-   
+
   }
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
@@ -221,7 +224,7 @@
       var fullname = 'sp'
       var address = 'home'*/
       var is_dataentry = 'false'
-      
+
       button.addEventListener('click', () => {
         window.location.href = window.location.href;
         form.style.display = 'none'
@@ -256,7 +259,7 @@
             if (response.status == 201) {
               console.log("Sucess response", response)
               messages.innerHTML = 'created successfully'
-              error_messages.innerHTML = '' 
+              error_messages.innerHTML = ''
             }
             return response.json();
           }).then(function (data) {
@@ -268,7 +271,94 @@
           })
       })
     }
-
+    function print(data){
+      console.log('hi')
+      let table2 = `<table class='--staff'>`;
+        table2 += `<thead class="thead">
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+              <th scope="col">RegNo</th>
+              <th scope="col">FullName</th>
+              <th scope="col">FirstName</th>
+              <th scope="col">LastName</th>
+              <th scope="col">Date Of Birth</th>  
+              <th scope="col">Address</th>
+              <th scope="col">Standard</th>
+              <th scope="col">Section</th>
+              <th scope="col">Action</th>
+            </thead>`;
+            data.forEach((d, index) => {
+            table2 = table2 + `<tbody><tr id=${d.id}>`;
+              table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
+              table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
+              table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
+              table2 = table2 + '<td class="userfullname">' + `${d.profile?.full_name}` + '</td>';
+              table2 = table2 + '<td class="userfirstname">' + `${d.profile?.first_name}` + '</td>';
+              table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
+              table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
+              table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
+              table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
+              table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
+              table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
+              table2 = table2 + `</tr>`;
+            })
+            table2 += "</table>";
+            container2.innerHTML = table2;
+    }
+    function sort() {
+      data_filter = []
+      button = document.getElementById('sort');
+      var val = document.getElementById('student-filter').value
+      const email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      var Email = email.test(val)
+      const phone = /^[6-9]\d{9}$/
+      var Phone = phone.test(val)
+      console.log(Email)
+      var grade = parseInt(val)
+      fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
+        method: 'GET',
+        headers: new Headers({
+          'Authorization': 'token' + ' ' + token,
+          'Content-Type': 'application/json',
+        })
+      }).then(res => {
+        return res.json()
+      }).then(data => {
+        data.forEach((d, index) => {
+          if (Email) {
+            if ((`${d.email}` == val) && (`${d.user_type}` == 'is_staff')) {
+              data_filter.push(d)
+            }
+          }
+          else if (Phone) {
+            if ((`${d.phone}` == val) && (`${d.user_type}` == 'is_staff')) {
+              data_filter.push(d)
+            }
+          }
+          else if (grade && grade <= 12) {
+            if ((`${d.profile.standard}` == grade) && (`${d.user_type}` == 'is_staff')) {
+              data_filter.push(d)
+            }
+          }
+          else if (val) {
+            if ((`${d.register_number}` == val) && (`${d.user_type}` == 'is_staff')) {
+              data_filter.push(d)
+            }
+          }
+        })
+        console.log(data_filter)
+        print(data_filter);
+        while (data_filter.length > 0) {
+          data_filter.pop();
+        }
+      })
+    }
+    let input = document.getElementById('student-filter')
+    input.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13) {
+        sort();
+      }
+    })
     function deletestudent(id) {
       url = "https://schooltestproject.herokuapp.com/api/user-details/"
       fetch(`${url}${id}/`, {
@@ -337,7 +427,7 @@
         )
         console.log(d)
         button.addEventListener('click', () => {
-           form.style.display = 'none'
+          form.style.display = 'none'
           fetch(`${url}${id}/`, {
             method: 'PATCH',
             headers: {
@@ -360,12 +450,13 @@
             else {
               error_messages.innerHTML = `<li>${(data.data.error)}</li>`
               messages.innerHTML = ''
-            }userdetails();
+            } userdetails();
           })
         })
       }
     })
   }
+
   else {
     window.location.href = `${host}/login`
   }

@@ -31,8 +31,6 @@
 
   </div>
 
-  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-  <script src="js/bootstrap.js"></script>
   <!-- Modal -->
 
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -60,7 +58,11 @@
     </div>
   </div>
 
+
+
+  <!-- <script src="js/bootstrap.js"></script> -->
 </div>
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script>
   var userId=localStorage.getItem('id')
   var token = localStorage.getItem('token')
@@ -143,22 +145,22 @@ content += `</div>`
   //   $('#myInput').trigger('focus')
   // })
 
-
   $("#get_grade").change(function () {
-    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
-    var gradeId = $(this).val(); 
+      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+      var gradeId = $(this).val(); 
 
-    $.ajax({                       
-      url: url_for_change,                  
-      data: {
-        'grade': gradeId      
-      },
-      success: function (data) {
-        $("#id_subject_2").html(data); 
-      }
+      $.ajax({                       
+        url: url_for_change,                  
+        data: {
+          'grade': gradeId      
+        },
+        success: function (data) {
+          $("#id_subject_2").html(data); 
+        }
+      });
+
     });
 
-  });
 
 
   // getting user-details
@@ -254,11 +256,11 @@ content += `</div>`
     /**/
     
   }
-  let input=document.getElementById('id_subject')
-    input.addEventListener('keyup',(e) => {
-        if (e.keyCode===13){
+  let input=document.getElementById('id_subject_2')
+    input.addEventListener('click',(e) => {
+       
             get();
-        }
+        
     })
 
 </script>
