@@ -172,7 +172,7 @@ function getquestion() {
       console.log(data.question_path)
       let uri = `https://schooltestproject.herokuapp.com`
       let path = `
-<p> Question-paper pdf file  <a onclick=downloadfile('${uri}${data.question_path}')> -  download </a> </p>
+<p> Question-paper pdf file  <a onclick=downloadfile('${uri}${d.file}')> -  download </a> </p>
           `;
       let questionPath = document.querySelector('.question-paper')
       questionPath.innerHTML = path;
@@ -190,7 +190,6 @@ function getquestion() {
       
   })
 }
- 
 function downloadfile(uri) {
   var link = document.createElement("a");
   link.download = 'answer';

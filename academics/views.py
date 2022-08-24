@@ -1,6 +1,8 @@
 from ast import List
 from operator import truediv
 from os import stat
+import json
+from itertools import chain
 from rest_framework.generics import (
     CreateAPIView,
     RetrieveAPIView,
@@ -299,16 +301,58 @@ class QuestionList(APIView):
 
     def post(self,request):
         type = str(self.request.query_params.get('type'))
-        grade = request.data.get('grade_name')
+        grade = request.data.get('grade')
         subject=(request.data.get('subject'))
-        chapter= int(request.data.get('chapter'))
+        from_chapter= int(request.data.get('from_chapter'))
+        to_chapter = int(request.data.get('to_chapter'))
+        all_chapters = request.data.get('all_chapters')
         number_of_questions = int(request.data.get('number_of_questions'))
+        customize = request.data.get('customize')
         try:
             grade = Grade.objects.get(grade=grade)
             subject_obj = Subject.objects.get(id=subject)
-            chapters = Chapter.objects.filter(subject=subject)
-            questions = Question.objects.filter(subject=subject,chapter__lt =chapter+1)
-            total_questions = questions.count()
+            questions=[]
+            # customize
+            if customize != 'null':
+                print('hi')
+                customize = json.loads(customize)
+                for i in customize:
+                    chapter = Chapter.objects.get(id=i['id'])
+                    for j in i['cognitive_level']:
+                        try:
+                            cognitive = j.capitalize()
+                            newlist = Question.objects.filter(chapter=chapter.id,cognitive_level=cognitive)
+                            newlist =(sorted(newlist,key=lambda x: random.random()))
+                            num = int(i['cognitive_level'][j])
+                            if len(newlist) >= num:
+                                newlist = newlist[:num]
+                                questions.append(newlist)
+                            else:
+                                return Response({'status':'failure','data':('Required questions not available in {} level in chapter {} ').format(cognitive,chapter)},status=HTTP_206_PARTIAL_CONTENT)
+                        except:
+                            return Response({"status": "failure","data":"given details are incorrect"},status=HTTP_206_PARTIAL_CONTENT)
+                questions = [item for sublist in questions for item in sublist]
+            # without customize
+            else:
+    
+                if all_chapters:
+                    questions = Question.objects.filter(subject=subject_obj)
+                else:
+                    print('hi')
+                    if from_chapter and to_chapter:
+                        from_chapter = Chapter.objects.get(id=from_chapter)
+                        to_chapter = Chapter.objects.get(id=to_chapter)
+                        print(subject_obj,from_chapter,to_chapter)
+                        questions = Question.objects.filter(subject=subject_obj,chapter_no__gte=from_chapter.chapter_no,chapter_no__lte=to_chapter.chapter_no)
+                        print(questions)
+                    elif from_chapter and not to_chapter:
+                        from_chapter = Chapter.objects.get(id=from_chapter)
+                        questions = Question.objects.filter(subject=subject_obj,chapter_no__gte=from_chapter.chapter_no)
+                    elif to_chapter and not from_chapter:
+                        to_chapter = Chapter.objects.get(id=to_chapter)
+                        questions = Question.objects.filter(subject=subject_obj,chapter_no__lte=to_chapter.chapter_no)
+            print(questions)
+            total_questions = len(questions)
             print(total_questions)
             questions =(sorted(questions,key=lambda x: random.random()))
             if number_of_questions <= total_questions:
@@ -318,6 +362,7 @@ class QuestionList(APIView):
             user = self.request.user
             serializer = QuestionSerializer(questions,many=True)
             type = type.lower()
+            # answers 
             answers = []
             for question in questions:
                 ans = getattr(question.answers,str(question.answers))
@@ -325,7 +370,7 @@ class QuestionList(APIView):
             context = {'data':serializer.data,'grade':grade.grade,'subject':subject_obj.name,'register_number':user.register_number}
             context1 = {'data':serializer.data,'grade':grade.grade,'subject':subject_obj.name,'register_number':user.register_number,'answers':answers}
             answer_file,status =  render_to_pdf2('academics/answer_file.html','answer_files',None,context1)
-            
+            # save question_paper in data_base
             if type == 'save':
                 created_by = self.request.user.email
                 question_paper = Question_Paper.objects.create(grade=grade,subject=subject_obj,created_by=created_by)
@@ -597,3 +642,11 @@ class EditTestInstructionView(RetrieveDestroyAPIView):
             return Response({'status':'failure',"data": "Instruction doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
         serializer = TestInstruction(queryset)
         return Response(serializer.data,status=HTTP_200_OK)
+def update(request):
+    data=Question.objects.all()
+    for i in data:
+        chapter=Chapter.objects.get(id=i.chapter_id)
+        print(chapter)
+        i.chapter_no=chapter.chapter_no
+        i.save()
+    

@@ -75,5 +75,5 @@ def take_test(request,pk):
 def instruct(request):
     form = instruction_form()
     return render(request,'academics/instruction.html',{'form':form})
-
-    
+def questionbank(request):
+    return render(request,'academics/question-bank.html')
