@@ -49,10 +49,14 @@ def questionview(request):
     answerform = Answerform()
     return render(request,'academics/questionandanswers.html',{'form':form,'answerform':answerform,'questionform':questionform})
     
+    
+
 def question_paperview(request):
     form=questionlist_form()
     list_form = chapterlist_form()
-    return render(request,'academics/question_paper.html',{'form':form,'list_form':list_form})
+    custom_form=questionCustomForm()
+    form1=customizeForm()
+    return render(request,'academics/question_paper_customize.html',{'form':form,'list_form':list_form,'custom_form':custom_form,'form1':form1})
 
 
 def questioncreate(request):

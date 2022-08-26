@@ -106,3 +106,15 @@ class instruction_form(forms.Form):
     instruction = forms.EmailField(widget=forms.Textarea(
 
     attrs={"class": "form-control", "placeholder": "Instructions"}))
+class questionCustomForm(forms.Form):
+    from_chapter = forms.ChoiceField()
+    to_chapter = forms.ChoiceField()
+    allChapter = forms.BooleanField()
+    timing = forms.TimeField(widget=forms.TextInput(attrs={'type':'time'})) 
+    overallmarks = forms.IntegerField(min_value=0) 
+class customizeForm(forms.Form):
+    Chapter = forms.ChoiceField()
+    cognitive_level = forms.ChoiceField()
+    no_cognitive_level=forms.IntegerField(label='')
+    difficulty_level= forms.ChoiceField()
+    no_difficulty_level=forms.IntegerField(label='')

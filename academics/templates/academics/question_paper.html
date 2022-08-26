@@ -12,13 +12,13 @@
 </div>
 
 
-<div class="question-paper-subject" >
+<!-- <div class="question-paper-subject" >
   <div class="question-paper">
       <p> here get your question-paper pdf link </p>
-  </div>
+  </div> -->
 
 
-  <div class="question-paper-form">
+  <div class="question-paper-form"  id="q-form">
 
     <div class="q-form">
       {% csrf_token %}
@@ -27,17 +27,46 @@
       <p><label for="id_subject">Subject:</label> <select name="subject" required="" id="id_subject">
         <option value="" selected="">---------</option>
       </select></p>
-      <p><label for="id_chapter">Chapter:</label> <select name="chapter" required="" id="id_chapter">
-        <option value="" selected="">---------</option>
-      </select></p>
       <p><label for="id_no_of_questions">No of questions:</label> <input type="text" name="no_of_questions" maxlength="20" required="" id="id_no_of_questions"></p>
-      <p class="chapter-btns"> <button  id="chapter-btn" class="submit-btn btn btn-primary" onclick=getquestion()>Get</button>
-        <button id="save-button" class="submit-btn btn btn-primary" onclick=savequestion()>Save</button></p>
+      <p class="chapter-btns">
+         <!-- <button  id="chapter-btn" class="submit-btn btn btn-primary" onclick=getquestion()>Get</button> -->
+      <button  id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Next</button>
+        <!-- <button id="save-button" class="submit-btn btn btn-primary" onclick=savequestion()>Save</button></p> -->
     </div>
   </div>
 </div> 
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<div id="customize">
+<p><label for="from_chapter">From Chapter:</label> <select name="chapter" required="" id="from_chapter">
+  <option value="" selected="">---------</option>
+</select></p> 
+<p><label for="to_chapter">To Chapter:</label> <select name="chapter" required="" id="to_chapter">
+  <option value="" selected="">---------</option>
+</select></p>
+{{custom_form.as_p}}
+  <button id="customize-btn" class="submit-btn btn btn-primary" onclick=customize()>Customize</button></p>
+  <button id="next-btn" class="submit-btn btn btn-primary" onclick=>Next</button></p>
+</div>
+
+<div id="customize-form">
+  {{form1.as_p}}     
+    <button id="next-btn" class="submit-btn btn btn-primary" onclick=getpreview()>Next</button></p>
+  </div>
+
+
+  <div id="preview-form">
+     <p>Grade:</p>
+     <p>Subject:</p>
+     <p>Chapters:</p>
+     <p>No of questions:</p>
+     <p>Remarks/Descrption:</p>
+     <button id="back-btn" class="submit-btn btn btn-primary" onclick=customize()>Back</button></p>   
+      <button id="createtest-btn" class="submit-btn btn btn-primary" onclick=savequestion()>Creat Test</button></p>
+    </div>
+  
+
+
 <!-- 
 <div id="prev-question-heading" class="prev-question-heading">
   <h2 >Grade - <span id="grade-title-question"> </span></h2>
@@ -91,10 +120,92 @@
                 'subject':subjectId
             },
             success: function(data){
-                $("#id_chapter").html(data)
+                $("#id_chapter").html(data),
+                $("#to_chapter").html(data),
+                $("#from_chapter").html(data)
             }
         });
     });
+
+// function getsubjectquestions(){
+//   grade = document.getElementById('id_grade').value
+//   subject = document.getElementById('id_subject').value
+//   subject = subject.toUpperCase()
+
+//   fetch(url,{ 
+//         method : 'GET',
+//         headers : {
+//           'content-Type' : 'application/json',
+//           'Authorization':'token'+' '+token,
+//           // 'X-CSRFToken': csrftoken
+//         }}).then(res =>  res.json()).then(data => {
+//       console.log(data)
+//       if(data.status=='success'){
+//       let content = '';
+//       subject = subject.toUpperCase();
+//       console
+//       data.data.forEach((d, index) => {
+//        total_question = d.no_of_questions.length;
+//        console.log(d.no_of_questions.length)
+// //         <p >Grade : <span class="grade">${d.grade_name}</span></p>
+
+// // <p >Subject : <span class="subject">${d.subject_name}</span></p>
+//         date = d.created_at.slice(0,10)
+//         if(grade == d.grade_name && subject == d.subject_name){
+
+//           content = content + `<div class="question-paper-card" id='${d.id}'>
+
+
+// <p >created_by : <span class="created_by">${d.created_by}</span></p>
+
+// <p >created_at : <span class="created_at">${date}</span></p>
+
+// <p > No of questions : ${total_question} </p>
+// <button id="get-question-button" class="submit-btn btn btn-primary" onclick=getquestionanswerpaper(${d.id})>Get Question-papers</button>
+
+// </div>
+// `
+// // <button id="get-answer" onclick=getanswers() >Get Answer file</button> 
+// // <p> <a href='' class='ans-file'>download</a></p> 
+// total_questions = 0;
+//         }
+
+
+//       })
+//       container2.innerHTML = content;
+//       document.getElementById('prev-question-heading').style.display = "block"
+//       document.getElementById('grade-title-question').textContent = `${grade}`
+//       document.getElementById('subject-title-question').textContent= `${subject}`
+//     }    else{
+      
+//     }}
+
+//     )
+
+
+// }
+
+function getnext(){
+
+  document.getElementById("q-form").style.display ="none";
+  document.getElementById("customize").style.display = "block";
+}
+
+function customize(){
+  document.getElementById("customize").style.display = "none";
+  document.getElementById("customize-form").style.display = "block";
+  document.getElementById("preview-form").style.display = "none";
+}
+
+function getpreview(){
+  document.getElementById("customize-form").style.display = "none";
+  document.getElementById("preview-form").style.display = "block";  
+}           
+  
+
+
+
+
 function savequestion(){
              
   grade = document.getElementById('id_grade').value
@@ -172,7 +283,7 @@ function getquestion() {
       console.log(data.question_path)
       let uri = `https://schooltestproject.herokuapp.com`
       let path = `
-<p> Question-paper pdf file  <a onclick=downloadfile('${uri}${d.file}')> -  download </a> </p>
+<p> Question-paper pdf file  <a onclick=downloadfile('${uri}${data.question_path}')> -  download </a> </p>
           `;
       let questionPath = document.querySelector('.question-paper')
       questionPath.innerHTML = path;
@@ -190,6 +301,7 @@ function getquestion() {
       
   })
 }
+ 
 function downloadfile(uri) {
   var link = document.createElement("a");
   link.download = 'answer';
