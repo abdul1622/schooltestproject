@@ -303,8 +303,12 @@ class QuestionList(APIView):
         type = str(self.request.query_params.get('type'))
         grade = request.data.get('grade')
         subject=(request.data.get('subject'))
-        from_chapter= int(request.data.get('from_chapter'))
-        to_chapter = int(request.data.get('to_chapter'))
+        if request.data.get('from_chapter') and request.data.get('from_chapter') == 0:
+            from_chapter= int(request.data.get('from_chapter'))
+        
+        if request.data.get('to_chapter') and request.data.get('to_chapter') == 0:
+            to_chapter = int(request.data.get('to_chapter'))
+        
         all_chapters = request.data.get('all_chapters')
         timing = int(request.data.get('timing'))
         overall_marks = int(request.data.get('overall_marks'))
