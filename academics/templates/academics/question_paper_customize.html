@@ -45,7 +45,7 @@
         <p> <label for="remarks">REMARKS</label>{{test_form.remarks}}</p>
         <p> <label for="remarks">DESCRIPTION</label>{{test_form.description}}</p>
         <p> <label for="remarks">PASS PERCENTAGE</label>{{test_form.pass_percentage}}</p>
-        
+
         <p class="chapter-btns">
             <span class="back-btn-review"></span>
             <button id="next-btn" class="submit-btn btn btn-primary" onclick=submit()>Create test</button>
@@ -79,10 +79,10 @@
     var messages = document.getElementById('message')
     var token = localStorage.getItem('token')
     let error_messages = document.querySelector('.error-messages')
-    let grade, subject, subject_name, no_of_questions,overall_mark;
-    let timing=null, chapters, from_chapter, to_chapter, from_chapter_id = null, to_chapter_id = null;
-    let all_chapter, result = null, questions_total = 0,customize = false;
-    let question_paper_id,userId,user_type
+    let grade, subject, subject_name, no_of_questions, overall_mark;
+    let timing = null, chapters, from_chapter, to_chapter, from_chapter_id = null, to_chapter_id = null;
+    let all_chapter, result = null, questions_total = 0, customize = false;
+    let question_paper_id, userId, user_type
     let customize_details = document.querySelector('.customize-details')
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     document.getElementById('q-form-2').style.display = 'none';
@@ -106,20 +106,20 @@
 
 
     function get_chapter(type) {
-        if(timing == null){
-        timing =parseInt(document.getElementById('id_timing').value)
-        // console.log(document.getElementById('id_timing').value)
-        // timing = timing.split(':')
-        // console.log(timing)
-        // timing = ((parseInt(timing[0]) * 3600) + (parseInt(timing[1]) * 60))
+        if (timing == null) {
+            timing = parseInt(document.getElementById('id_timing').value)
+            // console.log(document.getElementById('id_timing').value)
+            // timing = timing.split(':')
+            // console.log(timing)
+            // timing = ((parseInt(timing[0]) * 3600) + (parseInt(timing[1]) * 60))
         }
         console.log(timing)
         from_chapter_id = parseInt(document.getElementById('id_from_chapter').value);
         to_chapter_id = parseInt(document.getElementById('id_to_chapter').value);
-     //   if(from_chapter_id)
+        //   if(from_chapter_id)
         all_chapter = document.getElementById('id_allChapter').checked;
         console.log(from_chapter_id, to_chapter_id)
-        
+
         url3 = ('https://schooltestproject.herokuapp.com/api/chapter-list/');
         fetch(url3, {
             method: 'POST',
@@ -169,7 +169,7 @@
                 document.getElementById('subject_value').innerHTML = subject_name
                 document.getElementById('No_of_questions').innerHTML = no_of_questions
                 // document.getElementById('grade_value').innerHTML =
-                    document.getElementById('grade_value').innerHTML = grade
+                document.getElementById('grade_value').innerHTML = grade
                 let content = ''
                 console.log(chapters)
                 for (i = 0; i < chapters.length; i++) {
@@ -185,10 +185,10 @@
                 document.getElementById('q-form-2').style.display = 'none';
                 document.getElementById('q-form-3').style.display = 'block';
                 document.getElementById('q-form-4').style.display = 'none';
-                if(!customize){
-                document.querySelector('.back-btn-review').innerHTML = '`<button id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Back</button>`'
-                }else{
-                    document.querySelector('.back-btn-review').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=next(${null},${result.length-1})>Back</button>`
+                if (!customize) {
+                    document.querySelector('.back-btn-review').innerHTML = '`<button id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Back</button>`'
+                } else {
+                    document.querySelector('.back-btn-review').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=next(${null},${result.length - 1})>Back</button>`
                 }
             }
             else if (type == 'customize') {
@@ -219,55 +219,55 @@
 
 
     }
-    function next(current_index,index) {
+    function next(current_index, index) {
         // id = parseInt(id)
         document.querySelector('.custom-error').innerHTML = ''
-        if(current_index!=null){
+        if (current_index != null) {
             var knowledge = parseInt(document.getElementById('id_knowledge').value)
             var comprehension = parseInt(document.getElementById('id_comprehension').value)
-            var application = parseInt(document.getElementById('id_application').value)    
-        questions_total = 0
-        console.log(current_index)
-        customize = true
-       
-        for(i=0;i<result.length;i++){
-            if(i != current_index){
-            questions_total += result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
+            var application = parseInt(document.getElementById('id_application').value)
+            questions_total = 0
+            console.log(current_index)
+            customize = true
+
+            for (i = 0; i < result.length; i++) {
+                if (i != current_index) {
+                    questions_total += result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
+                }
+            }
+
+            if ((questions_total + knowledge + comprehension + application) <= no_of_questions) {
+                result[current_index]['cognitive_level']['knowledge'] = parseInt(document.getElementById('id_knowledge').value)
+                result[current_index]['cognitive_level']['comprehension'] = parseInt(document.getElementById('id_comprehension').value)
+                result[current_index]['cognitive_level']['application'] = parseInt(document.getElementById('id_application').value)
+            } else {
+                document.getElementById('id_knowledge').value = 0;
+                document.getElementById('id_comprehension').value = 0;
+                document.getElementById('id_application').value = 0;
+                document.querySelector('.custom-error').innerHTML = `<li> questions added is more than required no of questions</li>`
             }
         }
-
-        if((questions_total + knowledge+comprehension+application) <= no_of_questions){
-        result[current_index]['cognitive_level']['knowledge'] = parseInt(document.getElementById('id_knowledge').value)
-        result[current_index]['cognitive_level']['comprehension'] = parseInt(document.getElementById('id_comprehension').value)
-        result[current_index]['cognitive_level']['application'] = parseInt(document.getElementById('id_application').value)
-        }else{
-        document.getElementById('id_knowledge').value = 0;
-        document.getElementById('id_comprehension').value = 0;
-        document.getElementById('id_application').value = 0;
-        document.querySelector('.custom-error').innerHTML = `<li> questions added is more than required no of questions</li>`
-    }
-    }
-        else{
+        else {
             document.getElementById('q-form-3').style.display = 'none';
             document.getElementById('q-form-4').style.display = 'block';
-        }    
-    let content3 = ''
-        for(i=0;i<result.length;i++){
+        }
+        let content3 = ''
+        for (i = 0; i < result.length; i++) {
             let n = result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
-            if(n){
-                content3 += `<div> <p> CHAPTER ${i+1} : ${(chapters[i]['name']).toUpperCase()} </p>
+            if (n) {
+                content3 += `<div> <p> CHAPTER ${i + 1} : ${(chapters[i]['name']).toUpperCase()} </p>
                     <p> NO OF QUESTIONS : ${n} </p> </div>
                     `
             }
         }
-        if(index == null){
+        if (index == null) {
 
-            if((questions_total+knowledge+application+comprehension) != no_of_questions){
+            if ((questions_total + knowledge + application + comprehension) != no_of_questions) {
                 document.querySelector('.custom-error').innerHTML = `<li> questions added is less than required no of questions</li>`
                 return
             }
-            else{
-               return get_chapter('review')
+            else {
+                return get_chapter('review')
             }
         }
 
@@ -281,24 +281,18 @@
             document.getElementById('id_comprehension').value = result[index]['cognitive_level']['comprehension'];
             document.getElementById('id_application').value = result[index]['cognitive_level']['application'];
         } else {
+            document.getElementById('id_knowledge').value = result[index]['cognitive_level']['knowledge'];
+            document.getElementById('id_comprehension').value = result[index]['cognitive_level']['comprehension'];
+            document.getElementById('id_application').value = result[index]['cognitive_level']['application'];
             document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=next(${index},${null})>Review</button>`
             document.querySelector('.back-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=next(${index},${index - 1})>Back</button>`
         }
-        if(index==0){
+        if (index == 0) {
             document.querySelector('.back-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Back</button>`
         }
-
         console.log(questions_total)
         console.log(result)
     }
-    
-
-
-    // function customize() {
-    //     get_chapter(r);
-    //     console.log(chapters)
-    // }
-
     function review() {
         document.getElementById('q-form-1').style.display = 'none';
         document.getElementById('q-form-2').style.display = 'none';
@@ -306,26 +300,22 @@
         console.log(document.getElementById('id_timing').value)
         get_chapter(r);
     }
-
-
     function get_user_id() {
         fetch('https://schooltestproject.herokuapp.com/api/profile/', {
-          method: 'GET',
-          headers: {
-            'content-Type': 'application/json',
-            'Authorization': 'token' + ' ' + token,
-          }
+            method: 'GET',
+            headers: {
+                'content-Type': 'application/json',
+                'Authorization': 'token' + ' ' + token,
+            }
         }).then(res => {
-          return res.json()
+            return res.json()
         }).then(data => {
-          user_id = data.data.id
-          user_type = data.data.user_type
-          console.log(user_id)
+            user_id = data.data.id
+            user_type = data.data.user_type
+            console.log(user_id)
         })
-        return user_id,user_type
-      };
-    
-
+        return user_id, user_type
+    };
 
     $("#id_grade").change(function () {
         var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
@@ -360,111 +350,76 @@
         });
     });
     function submit() {
-        if(customize){
-        questions_total = 0
-        for(i=0;i<result.length;i++){
-            questions_total += result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
+        if (customize) {
+            questions_total = 0
+            for (i = 0; i < result.length; i++) {
+                questions_total += result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
+            }
         }
-    }
-        if(questions_total != no_of_questions){
+        if (questions_total != no_of_questions) {
             result = 'null';
-        }else{
+        } else {
             console.log(result)
             result = JSON.stringify(result)
             console.log(result)
         }
         let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
-      url1.searchParams.append('type', 'save');
-      overall_mark=parseInt(document.getElementById('id_overallmarks').value)
+        url1.searchParams.append('type', 'save');
+        overall_mark = parseInt(document.getElementById('id_overallmarks').value)
         fetch(url1,
-        {
-            method: 'POST',
-            body: JSON.stringify({ 'grade': grade, 'subject': subject, 'number_of_questions': no_of_questions, 'from_chapter': null, 
-                    'to_chapter': null, 'all_chapters': all_chapter, 'timing': timing,'overall_marks': overall_mark,'customize':result}
-            ),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'token' + ' ' + token,
-                'X-CSRFToken': csrftoken
-            },
-        }).then(function (response) {
-            return response.json()
-        }).then(data => {
-            console.log(data)
-            if (data.status != 'success') {
-               error_messages = data.data.error
-            }
-            else{
-             question_paper_id = data.data.id
-             userId = localStorage.getItem('id')
-                let form_remarks = document.getElementById('id_remarks').value
-    let form_description = document.getElementById('id_description').value
-    let form_percentage = document.getElementById('id_pass_percentage').value
-             fetch('https://schooltestproject.herokuapp.com/api/test/',
-             {
-               method: 'POST',
-               body: JSON.stringify({ 'grade': grade, 'subject': subject, 'question_paper': question_paper_id, 'created_staff_id': userId, 'marks': overall_mark, 'duration': timing, 'remarks': form_remarks,'pass_percentage':form_percentage, 'description': form_description }
-               ),
-               headers: {
-                 'Accept': 'application/json',
-                 'Content-Type': 'application/json',
-                 'Authorization': 'token' + ' ' + token,
-                 'X-CSRFToken': csrftoken
-               },
-             }).then(response => {
-               if (response.status == 201) {
-                 console.log("Sucess response", response);
-                 // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
-                 // test_errors.innerHTML = ''
-                 messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
-                 location.reload();
-               }
-               return response.json();
-             }).then(function (data) {
-               console.log(data)
-               if (data.status != 'success') {
-                 error_messages.innerHTML = `<li class='test-warning'>${(data.data.error)}</li>`;
-                 messages.innerHTML = '';
-               }
-             })
-            }
-        })
-
-
-     //   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-      //  overall_mark=parseInt(document.getElementById('id_overallmarks').value)
-      //  let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
-      //  url1.searchParams.append('type', 'save');
-      //  console.log(timing)
-      //  fetch(url1, {
-      //      method: 'POST',
-        //    body: JSON.stringify({
-       //         'grade': grade, 'subject': subject, 'number_of_questions': no_of_questions, 'from_chapter': null, 
-       //         'to_chapter': null, 'all_chapters': all_chapter, 'timing': timing, 'overall_marks': overall_mark,'customize':result
-       //     }),
-        //    headers: {
-         //       'content-Type': 'application/json',
-          //      'Authorization': 'token' + ' ' + token,
-           //     'Accept': 'application/json',
-            //    'X-CSRFToken': csrftoken
-            //}
- //       }).then(res => { console.log(res) }).then(data => {
-  //          console.log(data)
-    //        if(data.status == 'success'){
-      //             let question_paper_id = data.data.id
-        //    }
-        //}).then(()=>{
-//    user_id,user_type = get_user_id();
-  //  let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-  //  let form_remarks = document.getElementById('id_remarks').value
-   // let form_description = document.getElementById('id_description').value
-   // let form_percentage = document.getElementById('id_pass_percentage').value
-
-    /**/
-    
-  //}
-//)
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    'grade': grade, 'subject': subject, 'number_of_questions': no_of_questions, 'from_chapter': null,
+                    'to_chapter': null, 'all_chapters': all_chapter, 'timing': timing, 'overall_marks': overall_mark, 'customize': result
+                }
+                ),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'token' + ' ' + token,
+                    'X-CSRFToken': csrftoken
+                },
+            }).then(function (response) {
+                return response.json()
+            }).then(data => {
+                console.log(data)
+                if (data.status != 'success') {
+                    error_messages = data.data.error
+                }
+                else {
+                    question_paper_id = data.data.id
+                    userId = localStorage.getItem('id')
+                    let form_remarks = document.getElementById('id_remarks').value
+                    let form_description = document.getElementById('id_description').value
+                    let form_percentage = document.getElementById('id_pass_percentage').value
+                    fetch('https://schooltestproject.herokuapp.com/api/test/',
+                        {
+                            method: 'POST',
+                            body: JSON.stringify({ 'grade': grade, 'subject': subject, 'question_paper': question_paper_id, 'created_staff_id': userId, 'marks': overall_mark, 'duration': timing, 'remarks': form_remarks, 'pass_percentage': form_percentage, 'description': form_description }
+                            ),
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                                'Authorization': 'token' + ' ' + token,
+                                'X-CSRFToken': csrftoken
+                            },
+                        }).then(response => {
+                            if (response.status == 201) {
+                                console.log("Sucess response", response);
+                                messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
+                                location.reload();
+                            }
+                            return response.json();
+                        }).then(function (data) {
+                            console.log(data)
+                            if (data.status != 'success') {
+                                error_messages.innerHTML = `<li class='test-warning'>${(data.data.error)}</li>`;
+                                messages.innerHTML = '';
+                            }
+                        })
+                }
+            })
     }
 
 
