@@ -6,11 +6,6 @@
 <div class="error-messages container-fluid">
 
 </div>
-
-<div class="details">
-
-</div>
-
 <div class="question-paper-form" id="q-form">
 
     <div class="q-form" id="q-form-1">
@@ -33,6 +28,7 @@
         </select></p> 
         <p><label for="to_chapter">To Chapter:</label> <select name="chapter" required="" id="to_chapter">
         </select></p> -->
+
         {{custom_form.as_p}}
         <p class="chapter-btns">
             <button id="customize-btn" class="submit-btn btn btn-primary"
@@ -41,29 +37,40 @@
         </p>
     </div>
     <div class="q-form-3" id="q-form-3">
+        {% csrf_token %}
         <p> <label for="grade">GRADE</label> <span id="grade_value"></span> </p>
         <p> <label for="subject">SUBJECT</label> <span id="subject_value"></span> </p>
         <p> <label for="chapter">CHAPTER</label> <span id="chapter_value"></span> </p>
         <p> <label for="no_of_questions">NO_OF_QUESTIONS</label> <span id="No_of_questions"></span> </p>
-        <p> <label for="remarks">REMARKS/DESCRIPTIONS</label> <span id="remarks"></span> </p>
+        <p> <label for="remarks">REMARKS</label>{{test_form.remarks}}</p>
+        <p> <label for="remarks">DESCRIPTION</label>{{test_form.description}}</p>
+        <p> <label for="remarks">PASS PERCENTAGE</label>{{test_form.pass_percentage}}</p>
+        
         <p class="chapter-btns">
-            <button id="customize-btn" class="submit-btn btn btn-primary" onclick=back()>Back</button>
+            <span class="back-btn-review"></span>
             <button id="next-btn" class="submit-btn btn btn-primary" onclick=submit()>Create test</button>
         </p>
     </div>
     <div class="q-form-4" id="q-form-4">
         <p id="chapter-name"></p>
         <p>Cognitive Level </p>
-        <p class="knowledge"><label for=""> Knowledge </label> <input class="cognitive" min="0" type="number" name="" id="knowledge">
+        <p class="knowledge"><label for=""> Knowledge </label> <input min="0" type="number" name="" id="id_knowledge">
         </p>
-        <p class="knowledge"><label for=""> Application </label> <input class="cognitive" min="0" type="number" name=""
-                id="application"></p>
-        <p class="knowledge"><label for=""> Comprehension </label> <input class="cognitive" min="0" type="number" name=""
-                id="comprehension"></p>
+        <p class="knowledge"><label for=""> Application </label> <input min="0" type="number" name=""
+                id="id_application"></p>
+        <p class="knowledge"><label for=""> Comprehension </label> <input min="0" type="number" name=""
+                id="id_comprehension"></p>
         <p class="chapter-btns">
-           <span class="back-btn"></span>
+            <span class="back-btn"></span>
             <span class="next-btn"></span>
         </p>
+
+        <div class="customize-details">
+
+        </div>
+        <div class="custom-error">
+
+        </div>
     </div>
 </div>
 
@@ -73,57 +80,45 @@
     var token = localStorage.getItem('token')
     let error_messages = document.querySelector('.error-messages')
     let grade, subject, subject_name, no_of_questions,overall_mark;
-    let timing, chapters, from_chapter, to_chapter, from_chapter_id, to_chapter_id;
-    let all_chapter, result, questions_total = 0,with_customize=false;
-    let total_question_chapter = []
+    let timing=null, chapters, from_chapter, to_chapter, from_chapter_id = null, to_chapter_id = null;
+    let all_chapter, result = null, questions_total = 0,customize = false;
+    let customize_details = document.querySelector('.customize-details')
+    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     document.getElementById('q-form-2').style.display = 'none';
     document.getElementById('q-form-3').style.display = 'none';
     document.getElementById('q-form-4').style.display = 'none';
     function getsubjectname(sel) {
-        subject_name = sel.options[sel.selectedIndex].text
+        subject_name = sel.options[sel.selectedIndex].text;
         console.log(subject_name);
     }
 
-    //function check(input){
-       // questions_total += parseInt(input.value)
-   //     console.log(input)
-    //   index = input.parentElement.id;
-   //    console.log(input.parentElement)
-     //  result[index]['cognitive_level'][`${input.id}`] = parseInt(this.value)
-     //  questions_total = calculate();
-     //  if(questions_total>no_of_questions){
-     //   document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" disabled>Next</button>`
-    //   }
-//
-   // }
 
     function getnext() {
         document.getElementById('q-form-1').style.display = 'none';
         document.getElementById('q-form-2').style.display = 'block';
-        document.getElementById('q-form-3').style.display = 'none';
         document.getElementById('q-form-4').style.display = 'none';
-        grade = document.getElementById('id_grade').value;
-        subject = document.getElementById('id_subject').value;
-        no_of_questions = document.getElementById('id_no_of_questions').value;
+        document.getElementById('q-form-3').style.display = 'none';
+        grade = parseInt(document.getElementById('id_grade').value);
+        subject = parseInt(document.getElementById('id_subject').value);
+        no_of_questions = parseInt(document.getElementById('id_no_of_questions').value);
     }
-
- function back(){
-    if(customize){
-        get_chapter('customize');
-    }else{
-        getnext();
-    }
- }
 
 
     function get_chapter(type) {
-        timing = document.getElementById('id_timing').value
+        if(timing == null){
+        timing = document.getElementById('timing_2').value
+        console.log(document.getElementById('timing_2').value)
         timing = timing.split(':')
+        console.log(timing)
         timing = ((parseInt(timing[0]) * 3600) + (parseInt(timing[1]) * 60))
-        from_chapter_id = document.getElementById('id_from_chapter').value;
-        to_chapter_id = document.getElementById('id_to_chapter').value;
+        }
+        console.log(timing)
+        from_chapter_id = parseInt(document.getElementById('id_from_chapter').value);
+        to_chapter_id = parseInt(document.getElementById('id_to_chapter').value);
+     //   if(from_chapter_id)
         all_chapter = document.getElementById('id_allChapter').checked;
         console.log(from_chapter_id, to_chapter_id)
+        
         url3 = ('https://schooltestproject.herokuapp.com/api/chapter-list/');
         fetch(url3, {
             method: 'POST',
@@ -172,7 +167,7 @@
                 document.getElementById('grade_value').innerHTML = grade
                 document.getElementById('subject_value').innerHTML = subject_name
                 document.getElementById('No_of_questions').innerHTML = no_of_questions
-                document.getElementById('grade_value').innerHTML =
+                // document.getElementById('grade_value').innerHTML =
                     document.getElementById('grade_value').innerHTML = grade
                 let content = ''
                 console.log(chapters)
@@ -189,18 +184,21 @@
                 document.getElementById('q-form-2').style.display = 'none';
                 document.getElementById('q-form-3').style.display = 'block';
                 document.getElementById('q-form-4').style.display = 'none';
-
+                if(!customize){
+                document.querySelector('.back-btn-review').innerHTML = '`<button id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Back</button>`'
+                }else{
+                    document.querySelector('.back-btn-review').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=next(${null},${result.length-1})>Back</button>`
+                }
             }
             else if (type == 'customize') {
-                with_customize = true
                 document.getElementById('q-form-1').style.display = 'none';
                 document.getElementById('q-form-2').style.display = 'none';
                 document.getElementById('q-form-3').style.display = 'none';
                 document.getElementById('q-form-4').style.display = 'block';
                 document.getElementById('chapter-name').innerHTML = `${chapters[0]['name']}`
                 document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=next(0,1)>Next</button>`
+                document.querySelector('.back-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Back</button>`
                 result = []
-                document.getElementById('knowledge').parentElement.id = 0
                 for (i = 0; i < chapters.length; i++) {
                     result.push({
                         'id': `${chapters[i]['id']}`,
@@ -221,77 +219,84 @@
 
     }
     function next(current_index,index) {
-        questions_total = 0;
+        // id = parseInt(id)
+        document.querySelector('.custom-error').innerHTML = ''
+        if(current_index!=null){
+            var knowledge = parseInt(document.getElementById('id_knowledge').value)
+            var comprehension = parseInt(document.getElementById('id_comprehension').value)
+            var application = parseInt(document.getElementById('id_application').value)    
+        questions_total = 0
+        console.log(current_index)
+        customize = true
+       
         for(i=0;i<result.length;i++){
-            questions_total += result[i]['cognitive_level']['knowledge']
-            questions_total += result[i]['cognitive_level']['application']
-            questions_total += result[i]['cognitive_level']['comprehension']
+            if(i != current_index){
+            questions_total += result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
+            }
         }
-        if(questions_total >= no_of_questions){
-            error_messages.innerHTML = 'given number of question exceeded '
-        }
+
+        if((questions_total + knowledge+comprehension+application) <= no_of_questions){
+        result[current_index]['cognitive_level']['knowledge'] = parseInt(document.getElementById('id_knowledge').value)
+        result[current_index]['cognitive_level']['comprehension'] = parseInt(document.getElementById('id_comprehension').value)
+        result[current_index]['cognitive_level']['application'] = parseInt(document.getElementById('id_application').value)
+        }else{
+        document.getElementById('id_knowledge').value = 0;
+        document.getElementById('id_comprehension').value = 0;
+        document.getElementById('id_application').value = 0;
+        document.querySelector('.custom-error').innerHTML = `<li> questions added is more than required no of questions</li>`
+    }
+    }
         else{
+            document.getElementById('q-form-3').style.display = 'none';
+            document.getElementById('q-form-4').style.display = 'block';
+        }    
+    let content3 = ''
+        for(i=0;i<result.length;i++){
+            let n = result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
+            if(n){
+                content3 += `<div> <p> CHAPTER ${i+1} : ${(chapters[i]['name']).toUpperCase()} </p>
+                    <p> NO OF QUESTIONS : ${n} </p> </div>
+                    `
+            }
+        }
+        if(index == null){
 
-        let knowledge = parseInt(document.getElementById('knowledge').value)
-        let comprehension = parseInt(document.getElementById('comprehension').value)
-        let application = parseInt(document.getElementById('application').value)
-            console.log(questions_total+knowledge+application+comprehension)
-        if((questions_total+knowledge+application+comprehension) < no_of_questions){
-            console.log(document.getElementById('knowledge').parentElement)
-            document.getElementById('knowledge').parentElement.id = index
-            document.getElementById('chapter-name').innerHTML = `${chapters[index]['name']}`
-            result[current_index]['cognitive_level']['knowledge'] = knowledge
-            result[current_index]['cognitive_level']['comprehension'] = comprehension
-            result[current_index]['cognitive_level']['application'] = application
-
-
-            if (index < (chapters.length - 1)) {
-                document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=next(${index},${index + 1})>Next</button>`
-                document.getElementById('knowledge').value = result[index]['cognitive_level']['knowledge'];
-                document.getElementById('comprehension').value = result[index]['cognitive_level']['comprehension'];
-                document.getElementById('application').value = result[index]['cognitive_level']['application'];
-                console.log(result[index]['knowledge'])
-            } else {
-    
-                document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick="get_chapter('review')">Review</button>`
-                
-            } 
-            if(index==0){
-                document.querySelector('.back-btn').innerHTML = ` <button id="customize-btn" class="submit-btn btn btn-primary" onclick=getnext()>Back</button>`
+            if((questions_total+knowledge+application+comprehension) != no_of_questions){
+                document.querySelector('.custom-error').innerHTML = `<li> questions added is less than required no of questions</li>`
+                return
             }
             else{
-                document.querySelector('.back-btn').innerHTML = ` <button id="customize-btn" class="submit-btn btn btn-primary" onclick=next(${index},${index-1})>Back</button>`
+               return get_chapter('review')
             }
-        }else{
-            error_messages.innerHTML = 'given number of question exceeded '
         }
-        // id = parseInt(id)
-    
 
-        //questions_total += parseInt(document.getElementById('knowledge').value) + parseInt(document.getElementById('comprehension').value) + parseInt(document.getElementById('application').value)
-        
-    }    
-
-
-        
-   //     let content2 = '';
-    //    for(i=0;i<chapters.length;i++){
-    //    content2 += `<p> chapter : ${chapters[i]['name']}</p>
-    //    <p> no_of_questions : ${}    
-   // `
- //    }
-    //    document.querySelector('.details') = content2
+        customize_details.innerHTML = content3
+        // questions_total += parseInt(document.getElementById('id_knowledge').value) + parseInt(document.getElementById('id_comprehension').value) + parseInt(document.getElementById('id_application').value)
+        document.getElementById('chapter-name').innerHTML = `${chapters[index]['name']}`
+        if (index < (chapters.length - 1)) {
+            document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=next(${index},${index + 1})>Next</button>`
+            document.querySelector('.back-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=next(${index},${index - 1})>Back</button>`
+            document.getElementById('id_knowledge').value = result[index]['cognitive_level']['knowledge'];
+            document.getElementById('id_comprehension').value = result[index]['cognitive_level']['comprehension'];
+            document.getElementById('id_application').value = result[index]['cognitive_level']['application'];
+        } else {
+            document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=next(${index},${null})>Review</button>`
+            document.querySelector('.back-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=next(${index},${index - 1})>Back</button>`
+        }
+        if(index==0){
+            document.querySelector('.back-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Back</button>`
+        }
 
         console.log(questions_total)
         console.log(result)
+    }
     
-    }
 
 
-    function customize() {
-        get_chapter(r);
-        console.log(chapters)
-    }
+    // function customize() {
+    //     get_chapter(r);
+    //     console.log(chapters)
+    // }
 
     function review() {
         document.getElementById('q-form-1').style.display = 'none';
@@ -300,6 +305,25 @@
         console.log(document.getElementById('id_timing').value)
         get_chapter(r);
     }
+
+
+    function get_user_id() {
+        fetch('https://schooltestproject.herokuapp.com/api/profile/', {
+          method: 'GET',
+          headers: {
+            'content-Type': 'application/json',
+            'Authorization': 'token' + ' ' + token,
+          }
+        }).then(res => {
+          return res.json()
+        }).then(data => {
+          user_id = data.data.id
+          user_type = data.data.user_type
+          console.log(user_id)
+        })
+        return user_id,user_type
+      };
+    
 
 
     $("#id_grade").change(function () {
@@ -335,24 +359,89 @@
         });
     });
     function submit() {
-        overall_mark=document.getElementById('id_overallmarks').value
-        url3 = ('https://schooltestproject.herokuapp.com/api/question-paper/');
-        
-        fetch(url3, {
+        if(customize){
+        questions_total = 0
+        for(i=0;i<result.length;i++){
+            questions_total += result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
+        }
+    }
+        if(questions_total != no_of_questions){
+            result = null;
+        }else{
+            console.log(result)
+            result = JSON.stringify(result)
+            console.log(result)
+        }
+        let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
+      url1.searchParams.append('type', 'save');
+        fetch(url1,
+        {
             method: 'POST',
-            body: JSON.stringify({
-                'grade': grade, 'subject': subject, 'number_of_questions': no_of_questions, 'from_chapter': from_chapter_id, 
-                'to_chapter': to_chapter_id, 'all_chapter': all_chapter, 'timing': timing, 'overall_marks': overall_mark,"customize":'null'
-            }
+            body: JSON.stringify({ 'grade': grade, 'subject': subject, 'number_of_questions': no_of_questions, 'from_chapter': null, 
+                    'to_chapter': null, 'all_chapters': all_chapter, 'timing': timing, 'overall_marks': overall_mark,'customize':result}
             ),
             headers: {
-                'content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
                 'Authorization': 'token' + ' ' + token,
+                'X-CSRFToken': csrftoken
+            },
+        }).then(function (response) {
+            if (response.status == 201) {
+                console.log("Sucess response", response)
+                messages.innerHTML = `${name} is created succesfully`;
+                error_messages.innerHTML = ''
+                location.reload();
+            } else {
+                console.log(response);
             }
-        }).then(res => { console.log(res) }).then(data => {
+            return response.json()
+        }).then(data => {
             console.log(data)
+            if (data.status != 'success') {
+                error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+                messages.innerHTML = ''
+            }
         })
+
+
+     //   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      //  overall_mark=parseInt(document.getElementById('id_overallmarks').value)
+      //  let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
+      //  url1.searchParams.append('type', 'save');
+      //  console.log(timing)
+      //  fetch(url1, {
+      //      method: 'POST',
+        //    body: JSON.stringify({
+       //         'grade': grade, 'subject': subject, 'number_of_questions': no_of_questions, 'from_chapter': null, 
+       //         'to_chapter': null, 'all_chapters': all_chapter, 'timing': timing, 'overall_marks': overall_mark,'customize':result
+       //     }),
+        //    headers: {
+         //       'content-Type': 'application/json',
+          //      'Authorization': 'token' + ' ' + token,
+           //     'Accept': 'application/json',
+            //    'X-CSRFToken': csrftoken
+            //}
+ //       }).then(res => { console.log(res) }).then(data => {
+  //          console.log(data)
+    //        if(data.status == 'success'){
+      //             let question_paper_id = data.data.id
+        //    }
+        //}).then(()=>{
+//    user_id,user_type = get_user_id();
+  //  let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  //  let form_remarks = document.getElementById('id_remarks').value
+   // let form_description = document.getElementById('id_description').value
+   // let form_percentage = document.getElementById('id_pass_percentage').value
+
+    /**/
+    
+  //}
+//)
     }
+
+
+
 
 
 </script>

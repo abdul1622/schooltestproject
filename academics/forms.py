@@ -112,7 +112,8 @@ class questionCustomForm(forms.Form):
     from_chapter = forms.ChoiceField()
     to_chapter = forms.ChoiceField()
     allChapter = forms.BooleanField()
-    timing = forms.TimeField(widget=forms.TextInput(attrs={'type':'time','id':'timing_2','placeholder': 'hours:minutes'})) 
+    timing = forms.IntegerField(min_value=0,widget=forms.NumberInput(
+    attrs={"class": "form-control", "placeholder": "duration in seconds"}))
     overallmarks = forms.IntegerField(min_value=0) 
 class customizeForm(forms.Form):
     Chapter = forms.ChoiceField()

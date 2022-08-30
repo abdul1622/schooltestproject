@@ -303,17 +303,17 @@ class QuestionList(APIView):
         type = str(self.request.query_params.get('type'))
         grade = request.data.get('grade')
         subject=(request.data.get('subject'))
-        if request.data.get('from_chapter') and request.data.get('from_chapter') == 0:
-            from_chapter= int(request.data.get('from_chapter'))
-        
-        if request.data.get('to_chapter') and request.data.get('to_chapter') == 0:
-            to_chapter = int(request.data.get('to_chapter'))
-        
+        from_chapter=(request.data.get('from_chapter'))
+        to_chapter = (request.data.get('to_chapter'))
         all_chapters = request.data.get('all_chapters')
         timing = int(request.data.get('timing'))
         overall_marks = int(request.data.get('overall_marks'))
         number_of_questions = int(request.data.get('number_of_questions'))
         customize = request.data.get('customize')
+        if from_chapter != '' and from_chapter is not None:
+            from_chapter = int(from_chapter)
+        if to_chapter != '' and to_chapter is not None:
+            to_chapter = int(to_chapter)
         try:
             grade = Grade.objects.get(grade=grade)
             subject_obj = Subject.objects.get(id=subject)
@@ -355,6 +355,8 @@ class QuestionList(APIView):
                     elif to_chapter and not from_chapter:
                         to_chapter = Chapter.objects.get(id=to_chapter)
                         questions = Question.objects.filter(subject=subject_obj,chapter_no__lte=to_chapter.chapter_no)
+                    else:
+                        questions =  Question.objects.filter(subject=subject_obj)
             print(questions)
             total_questions = len(questions)
             print(total_questions)
