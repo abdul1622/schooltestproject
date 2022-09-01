@@ -148,10 +148,7 @@ let no_btn = document.getElementById('delete-btn-no')
       console.log(data.name[0])
       console.log(data.status)
       data.data.forEach((d, index) => {
-      
       name_value = data.name[index]
-      // console.log(name_value)
-      console.log(` {{form.as_p}}`)
       if(grade == name_value.grade && subject == d.subject){
       content = content + `<div class="question-card" id='${d.id}'>
       <p >Chapter : <span id='${d.chapter}' class="chapter-name">${name_value.chapter}</span></p>
@@ -255,7 +252,6 @@ let no_btn = document.getElementById('delete-btn-no')
       document.getElementById('question-box').style.display='none'
       document.getElementById('--question').style.display='none'
       const parent = e.target.parentElement.parentElement;
-      console.log(parent)
       var subject = parent.querySelector('.question_type').id;
       var grade = parent.querySelector('.cognitive_level').id
       console.log(subject)
@@ -282,8 +278,6 @@ let no_btn = document.getElementById('delete-btn-no')
       form_option_d.value = option_d
       form_answer.value = answer
       id = parent.id
-      console.log(id)
-      console.log(form_subject)
       let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
       question_btn.addEventListener('click', () => {
         if(edit){

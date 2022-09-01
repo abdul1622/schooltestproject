@@ -1,3 +1,5 @@
+from email.policy import default
+from logging import PlaceHolder
 from pyexpat import model
 from django import forms
 from.models import *
@@ -109,19 +111,16 @@ class instruction_form(forms.Form):
     instruction = forms.EmailField(widget=forms.Textarea(
 
     attrs={"class": "form-control", "placeholder": "Instructions"}))
-
 class questionCustomForm(forms.Form):
-    FromChapter = forms.ChoiceField()
-    toChapter = forms.ChoiceField()
-    AllChapter = forms.BooleanField()
-    Timing = forms.CharField()
-    Overallmarks = forms.CharField()
-
+    from_chapter = forms.ChoiceField()
+    to_chapter = forms.ChoiceField()
+    allChapter = forms.BooleanField()
+    timing = forms.IntegerField(min_value=0,widget=forms.NumberInput(
+    attrs={"class": "form-control", "placeholder": "duration in seconds"}))
+    overallmarks = forms.IntegerField(min_value=0) 
 class customizeForm(forms.Form):
     Chapter = forms.ChoiceField()
     cognitive_level = forms.ChoiceField()
-    no_cognitive_level=forms.IntegerField()
+    no_cognitive_level=forms.IntegerField(label='')
     difficulty_level= forms.ChoiceField()
-    no_difficulty_level=forms.IntegerField()
-   
-   
+    no_difficulty_level=forms.IntegerField(label='')

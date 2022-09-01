@@ -20,8 +20,8 @@ from .views import (
     TestResultCreateView,
     TestResultEditView,
     TestInstructionView,
-    load,
-    EditTestInstructionView
+    EditTestInstructionView,
+    update
 )
 
 urlpatterns=[
@@ -46,5 +46,5 @@ urlpatterns=[
     path('test-questions/',QuestionFromQuestionPaper.as_view()),
     path('instructions/',TestInstructionView.as_view()),
      path('instructions/<int:pk>/',EditTestInstructionView.as_view()),
-    path('a/',load)
+    path('a/',update)
 ]

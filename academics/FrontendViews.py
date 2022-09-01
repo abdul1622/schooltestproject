@@ -50,12 +50,16 @@ def questionview(request):
     answerform = Answerform()
     return render(request,'academics/questionandanswers.html',{'form':form,'answerform':answerform,'questionform':questionform})
     
+    
+
 def question_paperview(request):
     form=questionlist_form()
+    test_form = TestForm()
     list_form = chapterlist_form()
     custom_form=questionCustomForm()
     form1=customizeForm()
-    return render(request,'academics/question_paper.html',{'form':form,'list_form':list_form,'custom_form':custom_form,'form1':form1})
+    return render(request,'academics/question_paper_customize.html',{'form':form,'list_form':list_form,'custom_form':custom_form,'form1':form1,'test_form':test_form})
+
 
 def questioncreate(request):
     questionform = Questionform()
@@ -77,4 +81,5 @@ def take_test(request,pk):
 def instruct(request):
     form = instruction_form()
     return render(request,'academics/instruction.html',{'form':form})
-    
+def questionbank(request):
+    return render(request,'academics/question-bank.html')
