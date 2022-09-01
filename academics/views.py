@@ -396,16 +396,15 @@ class QuestionList(APIView):
                     grade=grade, subject=subject_obj, created_by=created_by, timing=timing, overall_marks=overall_marks)
                 for question in questions:
                     question_paper.no_of_questions.append(question.id)
-                question_paper, status = render_to_pdf2(
-                    'academics/question.html', 'question_files', question_paper, context)
-                # add question in question bank model
+                question_paper,status = render_to_pdf2(
+                    'academics/question.html', 'question_files',question_paper,context)
+                print(status)
                 if not status:
                     return Response({"status": "failure", "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
                 serializer = QuestionPaperSerializer(question_paper)
                 return Response({'status': 'success', 'data': serializer.data, 'answer-file-path': f'/media/answer_files/{answer_file}.pdf', 'subject_id': subject_obj.id, 'grade_id': grade.id}, status=HTTP_200_OK)
-            filename, status = render_to_pdf2(
+            filename,question,status= render_to_pdf2(
                 'academics/question.html', 'question_paper', None, context)
-            #Questionbank.objects.create(grade=grade, subject=subject_obj)
             if not status:
                 return Response({"status": "failure", "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
             return Response({'status': 'success', 'question_path': f'/media/question_paper/{filename}.pdf', 'answer_path': f'/media/answer_files/{answer_file}.pdf', 'subject_id': subject_obj.id, 'grade_id': grade.id})
