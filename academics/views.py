@@ -41,7 +41,7 @@ from .serializers import (
     TestResultSerializer,
     TestInstruction,
     )
-from .models import Question, Subject,Grade,Chapter,Question_Paper,Answers
+from .models import Question, Subject,Grade,Chapter,Question_Paper,Answers,Questionbank
 from accounts.models import User
 from .utils import render_to_pdf, render_to_pdf2
 
@@ -376,6 +376,7 @@ class QuestionList(APIView):
             context = {'data':serializer.data,'grade':grade.grade,'subject':subject_obj.name,'register_number':user.register_number}
             context1 = {'data':serializer.data,'grade':grade.grade,'subject':subject_obj.name,'register_number':user.register_number,'answers':answers}
             answer_file,status =  render_to_pdf2('academics/answer_file.html','answer_files',None,context1)
+            
             # save question_paper in data_base
             if type == 'save':
                 created_by = self.request.user.email
@@ -383,6 +384,8 @@ class QuestionList(APIView):
                 for question in questions:
                     question_paper.no_of_questions.append(question.id)
                 question_paper,status = render_to_pdf2('academics/question.html','question_files',question_paper,context)
+                #add question in question bank model
+                Questionbank.objects.create(grade=grade,subject=subject_obj,question_file=question_paper,answer_file=answer_file)
                 if not status:
                     return Response({"status": "failure","data":"given details are incorrect"},status=HTTP_206_PARTIAL_CONTENT) 
                 serializer = QuestionPaperSerializer(question_paper)

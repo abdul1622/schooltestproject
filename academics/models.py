@@ -214,8 +214,10 @@ class InstructionForTest(models.Model):
         return str(self.note[:10])
 
 
-
-def load(request):
-    q = Question_Paper.objects.all()
-    for i in q:
-        print(i)
+class Questionbank(models.Model):
+      question_file = models.FileField(upload_to='question_files/',null=True,blank=True)
+      answer_file=models.FileField(upload_to='answer_files/',null=True,blank=True)
+      grade = models.ForeignKey(Grade,on_delete=models.SET_NULL,null=True)
+      subject = models.ForeignKey(Subject,on_delete=models.SET_NULL,null=True)
+      def __str__(self):
+        return str(self.question_file)
