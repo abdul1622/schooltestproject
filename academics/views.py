@@ -385,7 +385,7 @@ class QuestionList(APIView):
                     question_paper.no_of_questions.append(question.id)
                 question_paper,status = render_to_pdf2('academics/question.html','question_files',question_paper,context)
                 #add question in question bank model
-                Questionbank.objects.create(grade=grade,subject=subject_obj,question_file=question_paper,answer_file=answer_file)
+               # Questionbank.objects.create(grade=grade,subject=subject_obj,question_file=question_paper,answer_file=answer_file)
                 if not status:
                     return Response({"status": "failure","data":"given details are incorrect"},status=HTTP_206_PARTIAL_CONTENT) 
                 serializer = QuestionPaperSerializer(question_paper)
