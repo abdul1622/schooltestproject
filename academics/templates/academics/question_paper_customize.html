@@ -110,7 +110,8 @@
 
 <script>
 
-    var messages = document.getElementById('message')
+    // var messages = document.getElementById('message')
+    var messages = document.querySelector('.messages')
     var token = localStorage.getItem('token')
     let error_messages = document.querySelector('.error-messages')
     let grade, subject, subject_name, no_of_questions,overall_mark;
@@ -129,6 +130,7 @@
     }
 
     function getnext() {
+        customize = false
         document.getElementById('q-form-1').style.display = 'none';
         document.getElementById('q-form-2').style.display = 'block';
         document.getElementById('q-form-4').style.display = 'none';
@@ -139,6 +141,7 @@
     }
 
     function getcustomize(){
+
         let chapter_id = parseInt(document.getElementById('id_chapter_get').value)
         let current_index = null
         if(result.length){
@@ -164,6 +167,7 @@
     }
 
     function add(){
+        customize = true
        let chapter_id = parseInt(document.getElementById('id_chapter_get').value)
        var knowledge = parseInt(document.getElementById('id_knowledge').value)
         var comprehension = parseInt(document.getElementById('id_comprehension').value)
@@ -194,26 +198,31 @@
                 'application':application
             }})
         }
+
+            document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=get_chapter('review')>Review</button>`
+
         // document.getElementById('id_knowledge').value = 0
         // document.getElementById('id_comprehension').value = 0
         // document.getElementById('id_application').value = 0
 
-        if((questions_total+knowledge+application+comprehension) == no_of_questions){
-            document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=get_chapter('review')>Review</button>`
-        }else{
-            document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=get_chapter('review') disabled>Review</button>`
-        }
+        // if((questions_total+knowledge+application+comprehension) == no_of_questions){
+        //     document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=get_chapter('review')>Review</button>`
+        // }else{
+        //     document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=get_chapter('review') disabled>Review</button>`
+        // }
 let content3 = ''
 
+questions_total = 0;
         for(i=0;i<result.length;i++){
             let n = result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
             if(n){
+                questions_total += n
                 content3 += `<div> <p> CHAPTER ${i+1} : ${(chapters[i]['name']).toUpperCase()} </p>
                     <p> NO OF QUESTIONS : ${n} </p> </div>
                     `
             }
         }
-    content3 += `<p> Total No of questions : ${no_of_questions}`
+    content3 += `<p> Total No of questions : ${questions_total}`
         customize_details.innerHTML = content3 
     }
 
@@ -315,6 +324,7 @@ let content3 = ''
                 }
             }
             else if (type == 'customize') {
+                customize = true
                 document.getElementById('q-form-1').style.display = 'none';
                 document.getElementById('q-form-2').style.display = 'none';
                 document.getElementById('q-form-3').style.display = 'none';
@@ -332,20 +342,8 @@ let content3 = ''
             }
         });
         document.querySelector('.more-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=add()>Add More</button>`
-                // document.getElementById('chapter-name').innerHTML = `${chapters[0]['name']}`
                 document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary"  disabled>Review</button>`
                 document.querySelector('.back-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Back</button>`
-                // for (i = 0; i < chapters.length; i++) {
-                //     result.push({
-                //         'id': `${chapters[i]['id']}`,
-                //         'cognitive_level': {
-                //             'knowledge': 0,
-                //             'comprehension': 0,
-                //             'application': 0
-                //         }
-                //     }
-                //     )
-                // }
                 console.log(result)
             }
 
@@ -506,19 +504,24 @@ let content3 = ''
         });
     });
     function submit() {
-        if(customize){
         questions_total = 0
+        console.log(questions_total)
+        console.log(customize)
+        if(customize){
         for(i=0;i<result.length;i++){
             questions_total += result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
         }
+        no_of_questions = questions_total
     }
-        if(questions_total != no_of_questions){
+        if(questions_total){
             result = 'null';
         }else{
             console.log(result)
             result = JSON.stringify(result)
             from_chapter_id = null
             to_chapter_id = null
+            no_of_questions = questions_total
+            console.log(no_of_questions)
             console.log(result)
         }
       let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
@@ -583,45 +586,42 @@ let content3 = ''
                 error_messages.innerHTML = ''
                 document.getElementById('q-form-4').style.display = 'none';
                }
-             })
+    })
             }
         })
 
 
-     //   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-      //  overall_mark=parseInt(document.getElementById('id_overallmarks').value)
-      //  let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
-      //  url1.searchParams.append('type', 'save');
-      //  console.log(timing)
-      //  fetch(url1, {
-      //      method: 'POST',
-        //    body: JSON.stringify({
-       //         'grade': grade, 'subject': subject, 'number_of_questions': no_of_questions, 'from_chapter': null, 
-       //         'to_chapter': null, 'all_chapters': all_chapter, 'timing': timing, 'overall_marks': overall_mark,'customize':result
-       //     }),
-        //    headers: {
-         //       'content-Type': 'application/json',
-          //      'Authorization': 'token' + ' ' + token,
-           //     'Accept': 'application/json',
-            //    'X-CSRFToken': csrftoken
-            //}
- //       }).then(res => { console.log(res) }).then(data => {
-  //          console.log(data)
-    //        if(data.status == 'success'){
-      //             let question_paper_id = data.data.id
-        //    }
-        //}).then(()=>{
+//        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+//        overall_mark=parseInt(document.getElementById('id_overallmarks').value)
+//        let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
+//        url1.searchParams.append('type', 'save');
+//        console.log(timing)
+//        fetch(url1, {
+//            method: 'POST',
+//            body: JSON.stringify({
+//                'grade': grade, 'subject': subject, 'number_of_questions': no_of_questions, 'from_chapter': null, 
+//                'to_chapter': null, 'all_chapters': all_chapter, 'timing': timing, 'overall_marks': overall_mark,'customize':result
+//            }),
+//            headers: {
+//                'content-Type': 'application/json',
+//                'Authorization': 'token' + ' ' + token,
+//                'Accept': 'application/json',
+//                'X-CSRFToken': csrftoken
+//             }
+//        }).then(res => { console.log(res) }).then(data => {
+//            console.log(data)
+//            if(data.status == 'success'){
+//                   let question_paper_id = data.data.id
+//            }
+//         }).then(()=>{
 //    user_id,user_type = get_user_id();
-  //  let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-  //  let form_remarks = document.getElementById('id_remarks').value
-   // let form_description = document.getElementById('id_description').value
-   // let form_percentage = document.getElementById('id_pass_percentage').value
+//    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+//    let form_remarks = document.getElementById('id_remarks').value
+//    let form_description = document.getElementById('id_description').value
+//    let form_percentage = document.getElementById('id_pass_percentage').value
 
-    /**/
     
-  //}
-//)
-    }
+  }
 
     function customize_question_paper(){
         document.getElementById('q-form-1').style.display = 'none';
