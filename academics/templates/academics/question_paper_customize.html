@@ -135,6 +135,7 @@
         document.getElementById('q-form-2').style.display = 'block';
         document.getElementById('q-form-4').style.display = 'none';
         document.getElementById('q-form-3').style.display = 'none';
+        result = []
         grade = parseInt(document.getElementById('id_grade').value);
         subject = parseInt(document.getElementById('id_subject').value);
         no_of_questions = parseInt(document.getElementById('id_no_of_questions').value);
@@ -513,7 +514,7 @@ questions_total = 0;
         }
         no_of_questions = questions_total
     }
-        if(questions_total){
+        if(!questions_total){
             result = 'null';
         }else{
             console.log(result)
@@ -544,7 +545,8 @@ questions_total = 0;
         }).then(data => {
             console.log(data)
             if (data.status != 'success') {
-               error_messages = data.data.error
+                error_messages.innerHTML = `<li class='test-warning'>${(data.data)}</li>`;
+                messages.innerHTML = '';
             }
             else{
              question_paper_id = data.data.id
@@ -576,7 +578,7 @@ questions_total = 0;
 
                document.querySelector('.q-form-5').style.display = 'block'
                if (data.status != 'success') {
-                 error_messages.innerHTML = `<li class='test-warning'>${(data.data.error)}</li>`;
+                 error_messages.innerHTML = `<li class='test-warning'>${(data.data)}</li>`;
                  messages.innerHTML = '';
                }
                else{
