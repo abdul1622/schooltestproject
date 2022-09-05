@@ -59,6 +59,14 @@ def question_paperview(request):
     form1=customizeForm()
     return render(request,'academics/question_paper_customize.html',{'form':form,'list_form':list_form,'custom_form':custom_form,'form1':form1,'test_form':test_form})
 
+def question_papercreateview(request):
+    form=questionlist_form()
+    test_form = TestForm()
+    list_form = chapterlist_form()
+    custom_form=questionCustomForm()
+    form1=customizeForm()
+    return render(request,'academics/question_paper_custom.html',{'form':form,'list_form':list_form,'custom_form':custom_form,'form1':form1,'test_form':test_form})
+
 
 def questioncreate(request):
     questionform = Questionform()

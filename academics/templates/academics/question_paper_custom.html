@@ -1,0 +1,236 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="question-paper-form" id="q-form">
+
+    <div class="q-form" id="q-form-1">
+        {% csrf_token %}
+
+        <p><label  for="id_grade" >Grade:</label>{{form.grade}} </p>
+        <!-- <p><label for="id_grade">Grade:</label><select name="grade" onchange=getgradename(this) required="" id="id_grade">
+            <option value="" selected="">---------</option>
+          </select> </p> -->
+        <p><label for="id_subject">Subject:</label> <select name="subject" onchange=getsubjectname(this) required=""
+                id="id_subject">
+                <option value="" selected="">---------</option>
+            </select></p>
+        <p><label for="id_no_of_questions">No of questions:</label> <input type="text" name="no_of_questions"
+                maxlength="20" required="" id="id_no_of_questions"></p>
+        <p class="chapter-btns">
+            <button id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Next</button>
+
+            <div class="error-form-1"></div>
+    </div>
+
+    <div class="q-form-2" id="q-form-2">
+        {{custom_form.as_p}}
+        <div class="error-form-2"></div>
+        <p class="chapter-btns">
+            <button id="customize-btn" class="submit-btn btn btn-primary"
+                onclick="get_chapter('customize')">Customize</button>
+            <button id="next-btn" class="submit-btn btn btn-primary" onclick=without_customize()>Next</button>
+        </p>
+    </div>
+    <div class="q-form-3" id="q-form-3">
+        {% csrf_token %}
+        <p> <label for="grade">GRADE</label> <span id="grade_value"></span> </p>
+        <p> <label for="subject">SUBJECT</label> <span id="subject_value"></span> </p>
+        <p> <label for="chapter">CHAPTER</label> <span id="chapter_value"></span> </p>
+        <p> <label for="no_of_questions">NO_OF_QUESTIONS</label> <span id="No_of_questions"></span> </p>
+        <p> <label for="remarks">REMARKS</label>{{test_form.remarks}}</p>
+        <p> <label for="remarks">DESCRIPTION</label>{{test_form.description}}</p>
+        <p> <label for="remarks">PASS PERCENTAGE</label>{{test_form.pass_percentage}}</p>
+            <span class="back-btn-review"></span>
+            <button id="next-btn" class="submit-btn btn btn-primary" onclick=submit()>Create test</button>
+        </p>
+    </div>
+
+    <div class="q-form-4" id="q-form-4" style="display: block;">
+        <p><label for="id_chapter_get">Chapters :</label> <select name="chapters" onchange=getcustomize() required="" id="id_chapter_get">
+            <option value="" selected="">---------</option>
+            </select>
+        </p>
+      <p class="knowledge"><label for="">Knowledge</label> <input min="0" type="number" name="" id="id_knowledge"></p></p>
+        <p class="knowledge"><label for=""> Comprehension </label> <input min="0" type="number" name="" id="id_comprehension"></p>
+        <p class="knowledge"><label for=""> Application </label> <input min="0" type="number" name="" id="id_application">
+        <span class="more-btn"> </span>
+        <p class="chapter-btns">
+            <span class="back-btn"><button id="next-btn" class="submit-btn btn btn-primary" onclick="getnext()">Back</button></span>
+            <span class="next-btn"><button id="next-btn" class="submit-btn btn btn-primary" onclick="next()">Next</button></span>
+        </p>
+        <div class="customize-details">
+
+        </div>
+        <div class="custom-error">
+
+        </div>
+    </div>
+    <div class="q-form-5">
+        <div class="messages"></div>
+        <div class="error-messages"></div>
+    </div>
+
+</div>
+
+<script>
+var messages = document.querySelector('.messages')
+    var token = localStorage.getItem('token')
+    let error_messages = document.querySelector('.error-messages')
+    let grade_id, subject_id,grade, subject_name, no_of_questions,overall_mark;
+    let timing=null, chapters, from_chapter, to_chapter, from_chapter_id = null, to_chapter_id = null;
+    let all_chapter, result = [], questions_total = 0,customize = false;
+    let question_paper_id,userId,user_type,chapters_list=[];
+    let customize_details = document.querySelector('.customize-details')
+    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    document.getElementById('q-form-2').style.display = 'none';
+    document.getElementById('q-form-3').style.display = 'none';
+    document.getElementById('q-form-4').style.display = 'none';
+
+    // document.getElementById('id_grade').setAttribute("onchange", getgradename());
+
+
+    $("#id_grade").change(function () {
+        var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+        grade_id = $(this).val();
+        // grade_name = $(this).options[this.selectedIndex].text
+        getgradename(this)
+
+        $.ajax({
+            url: url_for_change,
+            data: {
+                'grade': grade_id
+            },
+            success: function (data) {
+                $("#id_subject").html(data);
+            }
+        });
+
+    });
+
+    $('#id_subject').change(function () {
+        var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+        subject_id = $(this).val();
+
+        $.ajax({
+            url: url_for_change,
+            data: {
+                'subject': subject_id
+            },
+            success: function (data) {
+                $("#id_chapter").html(data),
+                    $("#id_to_chapter").html(data),
+                    $("#id_from_chapter").html(data)
+                    $('#id_chapter_get').html(data)
+            }
+        });
+    });
+
+
+    function getsubjectname(sel) {
+        subject_name = sel.options[sel.selectedIndex].text;
+        console.log(subject_name);
+    }
+
+    function getgradename(sel) {
+        grade = sel.options[sel.selectedIndex].text;
+        console.log(grade);
+    }
+
+    function getnext() {
+        no_of_questions = parseInt(document.getElementById('id_no_of_questions').value);
+        if(isNaN(grade_id) || isNaN(subject_id)){
+            if(!isNaN(grade_id)){
+                document.querySelector('.error-form-1').innerHTML = "<li class='test-warning'>subject is a required field </li>"
+            }
+            else if(!isNaN(subject_id)){
+                document.querySelector('.error-form-1').innerHTML = "<li class='test-warning'>grade is a required field</li>"
+            }        
+            else{
+                document.querySelector('.error-form-1').innerHTML = "<li class='test-warning'>grade and subject are required field</li>"
+            }
+            return
+        }
+
+        url3 = ('https://schooltestproject.herokuapp.com/api/chapter-list/');
+        fetch(url3, {
+            method: 'POST',
+            body: JSON.stringify({ 'grade': grade, 'subject': subject_name }
+            ),
+            headers: {
+                'content-Type': 'application/json',
+                'Authorization': 'token' + ' ' + token,
+            }
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            chapters_list = data.data
+        })
+
+        customize = false
+        document.getElementById('q-form-1').style.display = 'none';
+        document.getElementById('q-form-2').style.display = 'block';
+        document.getElementById('q-form-4').style.display = 'none';
+        document.getElementById('q-form-3').style.display = 'none';
+        result = []
+    }
+
+    function get_customize(){
+
+    }
+    function without_customize(){
+        chapters = chapters_list
+            if (!all_chapter) {
+                console.log('hi')
+                for (i = 0; i < chapters.length; i++) {
+                    if (!from_chapter_id && chapters[i]['chapter_no'] == 1) {
+                        from_chapter = chapters[i]
+                    }
+                    else if (!to_chapter_id && chapters[i]['chapter_no'] == chapters.length) {
+                        to_chapter = chapters[i]
+                    }
+                    if (from_chapter_id && chapters[i]['id'] == from_chapter_id) {
+                        from_chapter = chapters[i]
+                    }
+                    else if (to_chapter_id && chapters[i]['id'] == to_chapter_id) {
+                        to_chapter = chapters[i]
+                    }
+                }
+                new_list = []
+
+                /*for(i = 0; i <chapters.length; i++) {
+                    chapter_no = chapters[i]['chapter_no'] 
+                    if(chapters[i]['chapter_no'] >= from_chapter['chapter_no'] && chapters[i]['chapter_no'] <= to_chapter['chapter_no']){
+                        new_list()
+                    }
+                }*/
+                val = from_chapter['chapter_no'] - 1
+                for (i = val; i <= to_chapter['chapter_no'] - 1; i++) {
+                    new_list.push(chapters[i])
+                }
+                chapters = new_list
+                console.log(chapters)
+                document.getElementById('grade_value').innerHTML = grade
+                document.getElementById('subject_value').innerHTML = subject_name
+                document.getElementById('No_of_questions').innerHTML = no_of_questions
+                // document.getElementById('grade_value').innerHTML =
+                    document.getElementById('grade_value').innerHTML = grade
+                let content = ''
+                console.log(chapters)
+            }
+        review();
+    }
+
+    function review(){
+        document.getElementById('q-form-1').style.display = 'none';
+        document.getElementById('q-form-2').style.display = 'none';
+        document.getElementById('q-form-3').style.display = 'block';
+        document.getElementById('q-form-4').style.display = 'none';
+                // for (i = 0; i < chapters.length; i++) {
+                //     console.log(chapters[i]['name'])
+                //     content += `<li>${chapters[i]['name']}</li>`
+                // }
+                // document.getElementById('chapter_value').innerHTML = content
+    }
+
+</script>
+{% endblock %}

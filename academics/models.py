@@ -118,7 +118,7 @@ class Question(models.Model):
         # self.created_at =(self.created_at) .strftime('%Y-%m-%d %H:%M:%S')
         # self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')  
     def save(self, *args, **kwargs):  
-        chapter_id = self.chapter
+        chapter_id = self.chapter.id
         chapter = Chapter.objects.get(id=chapter_id)
         self.chapter_no = chapter.chapter_no
         super(Question, self).save(*args, **kwargs)

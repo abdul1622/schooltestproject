@@ -7,9 +7,9 @@
       {{form.as_p}}
       <label for=""> Subject: </label>
       <select name="subject" required="" id="id_subject_2">
-          <option value="" selected="">---------</option>
-        </select>
-<!-- 
+        <option value="" selected="">---------</option>
+      </select>
+      <!-- 
       <p class="row"><label class="col-3" for="id_grade">Grade:</label><input class="col-7 form-control" type="text"
           name="grade" maxlength="14" required="" id="id_grade"></p>
       <p class="row"><label class="col-3" for="id_subject">Subject:</label><input type="text" class="col-7 form-control"
@@ -43,7 +43,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body modal-body-1">
           {% csrf_token %}
           {{ test_form.as_p }}
 
@@ -58,19 +58,44 @@
     </div>
   </div>
 
+  <div class="modal fade" id="editquestion-paper" tabindex="-1" role="dialog" aria-labelledby="editquestion-paperLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content test-model ">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Question Paper</h4>
+          <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body modal-body-2">
+          {% csrf_token %}
+          <p><label for="id_timing">Timing:</label> <input type="number" name="timing"
+              placeholder="duration in seconds" min="0" required="" id="id_timing"></p>
+          <p><label for="id_overallmarks">Overallmarks:</label> <input type="number" name="overallmarks" min="0"
+              required="" id="id_overallmarks"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <span class="question-edit-btn-container"> </span>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
 
   <!-- <script src="js/bootstrap.js"></script> -->
 </div>
 <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script>
-  var userId=localStorage.getItem('id')
+  var userId = localStorage.getItem('id')
   var token = localStorage.getItem('token')
   let head = document.querySelector('.header')
   // let test_messages = document.querySelector('.test-messages')
   // let test_errors = document.querySelector('.test-error-messages')
   head.style.display = 'none'
-  let modal_body = document.querySelector('.modal-body')
+  let modal_body = document.querySelector('.modal-body-1')
   url = 'https://schooltestproject.herokuapp.com/api/question-paper-list/'
 
   let error = true
@@ -84,9 +109,9 @@
   function get() {
     var grade = document.getElementById('get_grade').value
     var subject = (document.getElementById('id_subject_2').value).toUpperCase()
-    url2 = new URL('https://schooltestproject.herokuapp.com/api/question-paper-list/');
+    url2 = new URL('http://127.0.0.1:8000/api/question-paper-list/');
     url2.searchParams.append('grade', grade);
-    url2.searchParams.append('subject',subject)
+    url2.searchParams.append('subject', subject)
     console.log(grade, subject)
     fetch(url2, {
       method: 'GET',
@@ -101,14 +126,14 @@
       if (data.status == 'success') {
         data.data.forEach((d, index) => {
 
-            error = false
-            if (!set_id) {
-              grade_id = d.grade
-              subject_id = d.subject
-              console.log(subject_id, grade_id)
-              set_id = true
-            }
-            content = content + `<div class="questions-paper-card" id='${d.id}'>
+          error = false
+          if (!set_id) {
+            grade_id = d.grade
+            subject_id = d.subject
+            console.log(subject_id, grade_id)
+            set_id = true
+          }
+          content = content + `<div class="questions-paper-card" id='${d.id}'>
 
 
 <p >created_by : <span class="created_by">${d.created_by}</span></p>
@@ -116,14 +141,17 @@
 <p >created_at : <span class="created_at">${d.created_at.slice(0, 10)}</span></p>
 
 <p> No of questions : ${(d.no_of_questions).length} </p>`
-if(d.test_id){
-  content += `Test ID : ${d.test_id}`
-}else{
-content += `<button type="button" onclick=test_create(${d.id}) class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+          if (d.test_id) {
+            content += `Test ID : ${d.test_id}
+            
+            <button onclick=edit_question_paper(${d.id},${d.timing},${d.overall_marks}) class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editquestion-paper">Edit</button>
+            `
+          } else {
+            content += `<button type="button" onclick=test_create(${d.id}) class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
   Create-Test
-</button>`
-}
-content += `</div>`
+</button> <button onclick=edit_question_paper(${d.id},${d.timing},${d.overall_marks}) class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editquestion-paper">Edit</button>`
+          }
+          content += `</div>`
 
         })
         container.innerHTML = content;
@@ -146,20 +174,20 @@ content += `</div>`
   // })
 
   $("#get_grade").change(function () {
-      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
-      var gradeId = $(this).val(); 
+    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+    var gradeId = $(this).val();
 
-      $.ajax({                       
-        url: url_for_change,                  
-        data: {
-          'grade': gradeId      
-        },
-        success: function (data) {
-          $("#id_subject_2").html(data); 
-        }
-      });
-
+    $.ajax({
+      url: url_for_change,
+      data: {
+        'grade': gradeId
+      },
+      success: function (data) {
+        $("#id_subject_2").html(data);
+      }
     });
+
+  });
 
 
 
@@ -178,7 +206,7 @@ content += `</div>`
       user_type = data.data.user_type
       console.log(user_id)
     })
-    return user_id,user_type
+    return user_id, user_type
   };
 
 
@@ -194,74 +222,122 @@ content += `</div>`
 
 
 
-  user_id,user_type = get_user_id();
+  user_id, user_type = get_user_id();
   function create(question_id) {
     var grade = document.getElementById('id_grade').value
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-   // let form_duration = document.getElementById('id_duration').value
- //   let form_marks = document.getElementById('id_marks').value
+    // let form_duration = document.getElementById('id_duration').value
+    //   let form_marks = document.getElementById('id_marks').value
     let form_remarks = document.getElementById('id_remarks').value
     let form_description = document.getElementById('id_description').value
     let form_percentage = document.getElementById('id_pass_percentage').value
     let marks = 0;
-    let duration =0;
+    let duration = 0;
     url2 = new URL(`https://schooltestproject.herokuapp.com/api/test-questions/`);
     url2.searchParams.append('question_paper', question_id);
-        fetch(url2, {
-            method: 'GET',
-            headers: {
-                'content-Type': 'application/json',
-                'Authorization': 'token' + ' ' + token,
-            }
-        }).then(res => {
-            return res.json()
-        }).then(data => {
-         console.log(data)
-         data.forEach((d, index) => {
-          marks += d.mark
-          duration += d.duration
+    fetch(url2, {
+      method: 'GET',
+      headers: {
+        'content-Type': 'application/json',
+        'Authorization': 'token' + ' ' + token,
+      }
+    }).then(res => {
+      return res.json()
+    }).then(data => {
+      console.log(data)
+      data.forEach((d, index) => {
+        marks += d.mark
+        duration += d.duration
+      })
+      console.log(marks, duration)
+    }).then(() => {
+      console.log(marks, duration)
+      fetch('https://schooltestproject.herokuapp.com/api/test/',
+        {
+          method: 'POST',
+          body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_id, 'created_staff_id': userId, 'marks': marks, 'duration': duration, 'remarks': form_remarks, 'pass_percentage': form_percentage, 'description': form_description }
+          ),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'token' + ' ' + token,
+            'X-CSRFToken': csrftoken
+          },
+        }).then(response => {
+          if (response.status == 201) {
+            console.log("Sucess response", response);
+            // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
+            // test_errors.innerHTML = ''
+            modal_body.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
+            document.getElementById('test-create-btn').style.display = 'none'
+          }
+          return response.json();
+        }).then(function (data) {
+          console.log(data)
+          if (data.status != 'success') {
+            test_errors.innerHTML = `<li class='test-warning'>${(data.data.error)}</li>`;
+            test_messages.innerHTML = '';
+          }
         })
-        console.log(marks,duration)
-        }).then(() =>{
-          console.log(marks,duration)
-          fetch('https://schooltestproject.herokuapp.com/api/test/',
-          {
-            method: 'POST',
-            body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_id, 'created_staff_id': userId, 'marks': marks, 'duration': duration, 'remarks': form_remarks,'pass_percentage':form_percentage, 'description': form_description }
-            ),
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'Authorization': 'token' + ' ' + token,
-              'X-CSRFToken': csrftoken
-            },
-          }).then(response => {
-            if (response.status == 201) {
-              console.log("Sucess response", response);
-              // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
-              // test_errors.innerHTML = ''
-              modal_body.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
-              document.getElementById('test-create-btn').style.display = 'none'
-            }
-            return response.json();
-          }).then(function (data) {
-            console.log(data)
-            if (data.status != 'success') {
-              test_errors.innerHTML = `<li class='test-warning'>${(data.data.error)}</li>`;
-              test_messages.innerHTML = '';
-            }
-          })
-        })
+    })
 
     /**/
-    
+
   }
-  let input=document.getElementById('id_subject_2')
-    input.addEventListener('click',(e) => {
-       
-            get();
-        
-    })
+  let input = document.getElementById('id_subject_2')
+  input.addEventListener('click', (e) => {
+
+    get();
+
+  })
+
+  function edit_question_paper(id, timing, overall_marks) {
+    document.querySelector('.modal-body-2').innerHTML = `<p><label for="id_timing">Timing:</label> <input type="number" name="timing"           placeholder="duration in seconds" min="0" required="" id="id_timing"></p>
+          <p><label for="id_overallmarks">Overallmarks:</label> <input type="number" name="overallmarks" min="0"
+              required="" id="id_overallmarks"></p>`
+    document.getElementById('id_timing').value = timing
+    document.getElementById('id_overallmarks').value = overall_marks
+    document.querySelector('.question-edit-btn-container').innerHTML = `<button type="button" id="questionpaper-edit-btn"
+              class="btn btn-primary" onclick=question_paper_update(${id})>Update</button>`
+  }
+
+
+  function question_paper_update(id) {
+    let timing = document.getElementById('id_timing').value
+    let overall_marks = document.getElementById('id_overallmarks').value
+    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    let modal2 =   document.querySelector('.modal-body-2')
+    fetch(`http://127.0.0.1:8000/api/question-paper/${id}/`,
+      {
+        method: 'PATCH',
+        body: JSON.stringify({ 'timing': timing, 'overall_marks': overall_marks }
+        ),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'token' + ' ' + token,
+          'X-CSRFToken': csrftoken
+        },
+      }).then(response => {
+        if (response.status == 200) {
+          console.log("Sucess response", response);
+          // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
+          // test_errors.innerHTML = ''
+        modal2.innerHTML = `<p class="text-success">  updated successfully</p>`;
+          document.getElementById('questionpaper-edit-btn').style.display = 'none'
+        }
+        return response.json();
+      }).then(function (data) {
+        console.log(data)
+        if (data.status != 'success') {
+          modal2.innerHTML = `<li class='test-warning'>${(data.data.error)}</li>`;
+          // test_messages.innerHTML = '';
+        }
+        get()
+      }
+
+      )
+  }
 
 </script>
 {% endblock %}

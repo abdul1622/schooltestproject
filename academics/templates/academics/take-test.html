@@ -362,8 +362,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                             <li><input type="radio" class='option_d_${question_details.id}' id="option_d_${question_details.id}" name="answer_${question_details.id}" value='option_d'> ${question_details.option_d}</li>
                         <hr class="hr2"><ol>
                             </div>
-                        
-                        <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(0,1)> Next </button> </p>
+
+                        <p class='text-end'><button class="btn btn-primary btn-sm" onclick=clear_answer(0)>Clear </button> <button class="btn btn-primary btn-sm" onclick=next(0,1)> Next </button> </p>
                         `
                                         // console.log()
                                         // console.log(document.querySelector(`input[name="answer_${data.data.id}"]`));
@@ -371,7 +371,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                                     }
                                     else {
                                         question_content = `<div>   <p> ${question_no}). ${d.question} <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}"> <p>
-                                                <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(0,1)> Next </button> </p>
+                                                <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=clear_answer(0)>Clear </button>  <button class="btn btn-primary btn-sm" onclick=next(0,1)> Next </button> </p>
                                                 </div>`
                                                 document.querySelector('.question-container').innerHTML = question_content
                                             }
@@ -384,7 +384,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     d = duration
 
                     function counter() {
-                        console.log(d)
+                        // console.log(d)
                         let h = Math.floor(d / 3600)
                         let m = Math.floor((d - (Math.floor(d / 3600))) / 60)
                         let s = d - (h * 3600) - (m * 60)
@@ -462,15 +462,15 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             }
 
 
-
+            question_content += ``
 
             if (n == (answer_details.length) - 1) {
-                question_content += ` <p class='d-flex justify-content-between mb-3'> <button  class="btn btn-primary btn-sm" onclick=next(${n},${n - 1})> Prev </button> <button  class="btn btn-success btn-sm" id='submit' data-bs-toggle="modal" data-bs-target="#take-test-Modal" >submit</button> </p> `
+                question_content += ` <p class='d-flex justify-content-between mb-3'> <span><button  class="btn btn-primary btn-sm" onclick=next(${n},${n - 1})> Prev </button><button class="btn btn-primary btn-sm" onclick=clear_answer(${n})>Clear </button> </span> <button  class="btn btn-success btn-sm" id='submit' data-bs-toggle="modal" data-bs-target="#take-test-Modal" >submit</button> </p> `
             }
             else if (n == 0) {
-                question_content += ` <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(${n},${n + 1})> Next </button> </p> `
+                question_content += ` <p class='text-end'><button class="btn btn-primary btn-sm" onclick=clear_answer(${n})>Clear </button>  <button class="btn btn-primary btn-sm" onclick=next(${n},${n + 1})> Next </button> </p> `
             } else {
-                question_content += ` <p class='d-flex justify-content-between mb-3'> <button class="btn btn-primary btn-sm" onclick=next(${n},${n - 1})> Prev </button> <button class="btn btn-primary btn-sm" onclick=next(${n},${n + 1})> Next </button> </p> `
+                question_content += ` <p class='d-flex justify-content-between mb-3'> <span> <button class="btn btn-primary btn-sm" onclick=next(${n},${n - 1})> Prev </button> <button class="btn btn-primary btn-sm" onclick=clear_answer(${n})>Clear </button></span> <button class="btn btn-primary btn-sm" onclick=next(${n},${n + 1})> Next </button> </p> `
             }
             //c16e6e2b-5b79-4a
 
@@ -610,6 +610,48 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
 
                     }
                 })
+
+        }
+        function clear_answer(index){
+            let question_details = answer_details[index]
+            console.log(index)
+            get_ans_id = answer_details[index].id
+            var get_ans_fib = document.getElementsByName(`answer_${get_ans_id}`);
+            var get_ans = document.getElementsByName(`answer_${get_ans_id}`);
+            if (question_details.question_type == 'MCQ') {
+                for (i = 0; i < get_ans.length; i++) {
+                if (get_ans[i].checked) {
+                    answer_details[index].answer = null;
+                    get_ans[i].checked = false;
+                }
+            
+            }
+        }            
+        else{
+        document.querySelector(`.fib_${question_details.id}`).value = ''
+            }
+
+
+            //     question_content += `<div><p> ${n + 1}). ${question_details.question}</p> 
+            //             <ol type="a">`
+            //     for (i = 0; i < options.length; i++) {
+            //         console.log(question_details['option_a'])
+            //         if (question_details.answer == options[i]) {
+            //             question_content += `<li><input checked type="radio" id="${options[i]}_${question_details.id}" name="answer_${question_details.id}" value='${options[i]}'> ${question_details[options[i]]}</li>`
+            //         } else {
+            //             question_content += `<li><input type="radio" id="${options[i]}_${question_details.id}" name="answer_${question_details.id}" value='${options[i]}'> ${question_details[options[i]]}</li>`
+            //         }
+            //     }
+            //     question_content += `<ol>
+            //                 </div>
+            //             `
+            // } else {
+            //     if (question_details.answer) {
+            //         question_content = `<div>   <p> ${n + 1}). ${question_details.question}<span class=''> <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}" value='${question_details.answer}'> </span></p> </div>`
+            //     } else {
+            //         question_content = `<div>   <p> ${n + 1}). ${question_details.question}<span class=''> <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}"> </span></p> </div>`
+            //     }
+            // }
 
         }
         function redirect() {
