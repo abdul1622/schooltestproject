@@ -94,7 +94,6 @@ aria-hidden="true">
 </div>
 <div class="question-list">
 </div>
-
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
   let head = document.querySelector('.header')
@@ -305,9 +304,10 @@ let no_btn = document.getElementById('delete-btn-no')
               'answer': form_answer.value
             }
           })
-        }).then(res => res.json()).then(() =>
-          location.reload()
-        )
+        }).then(res => res.json())
+        //.then(() =>
+        //  location.reload()
+//)
       }
       })
     }
@@ -372,7 +372,7 @@ let no_btn = document.getElementById('delete-btn-no')
           document.getElementById('id_option_c').value = ''
           document.getElementById('id_option_d').value = ''
           document.getElementById('id_answer').value = ''
-          get();
+         // get();
           return response.json();
         } else {
           console.log(response);
@@ -386,10 +386,10 @@ let no_btn = document.getElementById('delete-btn-no')
     document.getElementById('question-box').style.display='none'
     document.getElementById('--question').style.display='none'
   }
-  let input=document.getElementById('id_subject_2')
-  input.addEventListener("click", function() {
-    get();
-});
+  //let input=document.getElementById('id_subject_2')
+ // input.addEventListener("click", function() {
+   // get();
+//});
 }
  
   else{
