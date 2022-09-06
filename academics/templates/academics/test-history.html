@@ -5,6 +5,7 @@
 <script>
    var  student_id=localStorage.getItem('id')
    var token=localStorage.getItem('token')
+   let content = ''
     fetch('https://schooltestproject.herokuapp.com/api/test-history/',
     {
         method: 'GET',
@@ -17,22 +18,52 @@
     }).then(function (response) {
         return response.json()
     }).then(data => {
-        let content=''
+
         data.forEach((d, index) =>{
-        if ( student_id==d.student_id){
-            content += `<div><p> Correct Answer : ${d.correct_answer}</p>
-                <p>Wrong Answers : ${d.wrong_answer}</p>
-                <p>Un Answered : ${d.unanswered_questions}</p>
-                <p>Result : ${d.result}</p>
-                <p>Score : ${d.score} %</p>
-            </div>  `
+            if ( student_id==d.student_id){
+               
+            let test_id = d.test_id
+            fetch(`http://schooltestproject.herokuapp.com/api/test/${test_id}/`,
+            {
+              method: 'GET',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'token' + ' ' + token,
+              },
+            }).then(response => {
+              if (response.status == 200) {
+                console.log("Sucess response", response);
+                // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
+                // test_errors.innerHTML = ''
+
+              }
+              return response.json();
+            }).then(function (test_data) {
+              console.log(test_data)
+              console.log(d)
+              if(d.result != 'fail'){
+                content += `<div style="background-color:green;">`
+              }else{
+              content += '<div>'
+              }
+              content += `<p class="text-center">${test_data.remarks}</p>`
+              content += `<p> Correct Answer : ${d.correct_answer}</p>
+              <p>Wrong Answers : ${d.wrong_answer}</p>
+              <p>Un Answered : ${d.unanswered_questions}</p>
+              <p>Result : ${d.result}</p>
+              <p>Score : ${d.score} %</p>
+              <p>Date : ${d.created_at.slice(0, 10)} </p>
+              <p>Time : ${d.created_at.slice(11,16)} </p>
+          </div>  `
+          
+        }).then(()=>{
+            document.querySelector('.history').innerHTML=content
+        })
+
         }
-     
+        
     })
-    document.querySelector('.history').innerHTML=content
-        if (data.status != 'success') {
-        console.log(data)
-        }
-    })
+})
 </script>
 {% endblock %}
