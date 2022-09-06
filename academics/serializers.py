@@ -92,10 +92,6 @@ class Question_answer_serializer(serializers.Serializer):
     grade = serializers.StringRelatedField(many=True,source ="Grade")
     # subject = serializers.StringRelatedField(many=True,'')
 
-class AnswerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Answers
-        fields = ['option_a','option_b','option_c','option_d','answer']
 
 class questionanswerserializer(serializers.ModelSerializer):
     subject = serializers.SlugRelatedField(slug_field='name', queryset=Subject.objects.all())
@@ -109,13 +105,16 @@ class questionanswerserializer(serializers.ModelSerializer):
         model = Question
         fields = ['id','grade','subject','chapter']
 
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answers
+        fields = ['option_a','option_b','option_c','option_d','answer']
 class QuestionAnswerSerializer(serializers.ModelSerializer):
     answers = AnswerSerializer()
     class Meta:
         model = Question
         fields = ['id','grade','subject','chapter','question',
                     'question_type','cognitive_level','difficulty_level','mark','duration','answers']
-
     def create(self, validated_data):
         answers_data = validated_data.pop('answers')
         question = Question.objects.create(**validated_data)

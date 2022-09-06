@@ -114,7 +114,7 @@
     var messages = document.querySelector('.messages')
     var token = localStorage.getItem('token')
     let error_messages = document.querySelector('.error-messages')
-    let grade, subject, subject_name, no_of_questions,overall_mark;
+    let grade, subject, subject_name, no_of_questions,overall_mark = null;
     let timing=null, chapters, from_chapter, to_chapter, from_chapter_id = null, to_chapter_id = null;
     let all_chapter, result = [], questions_total = 0,customize = false;
     let question_paper_id,userId,user_type,chapters_list=[];
@@ -230,23 +230,7 @@ questions_total = 0;
 
 
     function get_chapter(type) {
-        overall_mark = parseInt(document.getElementById('id_overallmarks').value)
-        timing = parseInt(document.getElementById('id_timing').value)
-        console.log(timing,overall_mark)
-        if(isNaN(overall_mark) || isNaN(timing)){
-            if(!isNaN(timing)){
-                document.querySelector('.error-form-2').innerHTML = 'overall marks is a required field'
-            }
-            else if(!isNaN(overall_mark)){
-                document.querySelector('.error-form-2').innerHTML = 'timing is a required field'
-            }        
-            else{
-                document.querySelector('.error-form-2').innerHTML = 'overall marks and timing are required field'
-            }
-            return
-        }
         document.querySelector('.error-form-2').innerHTML = ''
-        console.log(timing)
         from_chapter_id = parseInt(document.getElementById('id_from_chapter').value);
         to_chapter_id = parseInt(document.getElementById('id_to_chapter').value);
      //   if(from_chapter_id)
@@ -532,7 +516,7 @@ questions_total = 0;
         {
             method: 'POST',
             body: JSON.stringify({ 'grade': grade, 'subject': subject, 'number_of_questions': no_of_questions, 'from_chapter':from_chapter_id, 
-                    'to_chapter': to_chapter_id, 'all_chapters': all_chapter, 'timing': timing,'overall_marks': overall_mark,'customize':result}
+                    'to_chapter': to_chapter_id, 'all_chapters': all_chapter, 'timing': timing,'overall_marks':overall_mark,'customize':result}
             ),
             headers: {
                 'Accept': 'application/json',
@@ -550,6 +534,8 @@ questions_total = 0;
             }
             else{
              question_paper_id = data.data.id
+             timing = data.data.timing
+             overall_marks = data.data.overall_mark
              userId = localStorage.getItem('id')
                 let form_remarks = document.getElementById('id_remarks').value
     let form_description = document.getElementById('id_description').value
