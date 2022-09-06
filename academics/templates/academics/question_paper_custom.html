@@ -196,6 +196,7 @@
             return res.json()
         }).then(data => {
             chapters_list = data.data
+            console.log(chapters_list)
         })
 
         customize = false
@@ -296,6 +297,7 @@
 
     function add() {
         customize = true
+        chapters = chapters_list
         let chapter_id = parseInt(document.getElementById('id_chapter_get').value)
         var knowledge = parseInt(document.getElementById('id_knowledge').value)
         var comprehension = parseInt(document.getElementById('id_comprehension').value)
@@ -347,15 +349,22 @@
             let n = result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
             if (n) {
                 questions_total += n
-                content3 += `<div> <p> CHAPTER ${i + 1} : ${(chapters_list[i]['name']).toUpperCase()} </p>
-                    <p> NO OF QUESTIONS : ${n} </p> </div>
-                    `
+
+                for (j = 0; j < chapters.length; j++) {
+                    if (chapters[j]['id'] == result[i]['id']) {
+                        content3 += `<div> <p> CHAPTER ${i + 1} : ${(chapters_list[i]['name']).toUpperCase()} </p>
+                            <p> NO OF QUESTIONS : ${n} </p> </div>
+                            `
+                        break
+                    }
+                
             }
         }
         content3 += `<p> Total No of questions : ${questions_total}`
         customize_details.innerHTML = content3
         }
     }
+}
 
     function with_customize() {
         content = ''
@@ -367,7 +376,6 @@
             }
             no_of_questions = questions_total
         for (i = 0; i < result.length; i++) {
-            console.log(chapters[i]['id'])
             for (j = 0; j < chapters.length; j++) {
                 if (chapters[j]['id'] == result[i]['id']) {
                     content += `<li>${chapters[j]['name']}</li>`
@@ -397,7 +405,7 @@
             console.log(no_of_questions)
             console.log(result)
         }
-        let url1 = new URL('http://127.0.0.1:8000/api/question-paper/')
+        let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
         url1.searchParams.append('type', 'save');
         fetch(url1,
             {
