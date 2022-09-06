@@ -436,17 +436,17 @@ class QuestionPaperList(ListAPIView):
         return Response({'status': 'success', "data": serializer.data}, status=HTTP_200_OK)
 
 
-class QuestionPaperView(RetrieveAPIView):
-    serializer_class = QuestionPaperSerializer
-    permission_classes = [AllowAny]
-    queryset = Question_Paper.objects.all()
+class QuestionPaperView(RetrieveUpdateDestroyAPIView):
+    serializer_class= QuestionPaperSerializer
+    permission_classes=[AllowAny]
+    queryset=Question_Paper.objects.all()
 
-    def retrieve(self, request, pk):
+    def retrieve(self,request,pk):
         try:
             question_paper = Question_Paper.objects.get(pk=pk)
             serializer = QuestionPaperSerializer(question_paper)
             type = (self.request.query_params.get('type'))
-            if type != None and (type).lower() == 'file':
+            if type!=None and (type).lower() == 'file':
                 answers_list = []
                 questions = question_paper.no_of_questions
                 for question in questions:
@@ -454,19 +454,25 @@ class QuestionPaperView(RetrieveAPIView):
                     answers = Answers.objects.get(question=question_from_model)
                     answer = answers.answer
                     if answers.question.question_type == 'Fill_in_the_blanks':
-                        answer = getattr(answers, str(answer))
+                        answer = getattr(answers,str(answer))
                     answers_list.append(answer)
                 user = self.request.user
-                context = {'answers': answers_list, 'grade': question_paper.grade.grade,
-                           'subject': question_paper.subject.name, 'register_number': user.register_number}
-                filename, status = render_to_pdf2(
-                    'academics/answer_file.html', 'answer_files', None, context)
+                context = {'answers':answers_list,'grade':question_paper.grade.grade,'subject':question_paper.subject.name,'register_number':user.register_number}
+                filename,status = render_to_pdf2('academics/answer_file.html','answer_files',None,context)
                 if not status:
-                    return Response({'status': 'given details incorrect'}, status=HTTP_200_OK)
-                return Response({'path': f'/media/answer_files/{filename}.pdf', 'data': serializer.data}, status=HTTP_200_OK)
-            return Response({'status': 'success', 'data': serializer.data}, status=HTTP_200_OK)
+                    return Response({'status':'given details incorrect'},status=HTTP_200_OK) 
+                return Response({'path':f'/media/answer_files/{filename}.pdf','data': serializer.data},status=HTTP_200_OK)
+            return Response({'status':'success','data':serializer.data},status=HTTP_200_OK)
         except:
-            return Response({"status": "failure", "data": "Question-paper doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status": "failure","data":"Question-paper doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
+
+    def patch(self,request,pk):
+        question_paper = Question_Paper.objects.get(pk=pk)
+        serializer = QuestionPaperSerializer(question_paper,data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": "success",'data':serializer.data},status=HTTP_200_OK)
+        return Response({"status": "failure", "data": serializer.errors},status=HTTP_206_PARTIAL_CONTENT)
 
 
 # def frquestion(request):

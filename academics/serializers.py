@@ -187,7 +187,7 @@ class QuestionPaperSerializer(serializers.ModelSerializer):
       return subject.name
     class Meta:
         model = Question_Paper
-        fields = ['id','grade','grade_name','subject','subject_name','file','no_of_questions','test_id','created_by','created_at']
+        fields = ['id','grade','grade_name','subject','subject_name','file','no_of_questions','test_id','overall_marks','timing','created_by','created_at']
         read_only_fields = ('test_id',)
 
 class TestSerializer(serializers.ModelSerializer):
