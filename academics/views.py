@@ -545,7 +545,6 @@ class QuestionFromQuestionPaper(APIView):
 
 
 class TestCreateView(CreateAPIView):
-
     serializer_class = TestSerializer
     queryset = Test.objects.all().order_by('grade', 'subject')
     permission_classes = [AllowAny]
@@ -608,9 +607,16 @@ class TestResultCreateView(CreateAPIView):
     def get(self, request, format=None):
         queryset = TestResult.objects.all()
         grade = (self.request.query_params.get('grade'))
-        # subject = (self.request.query_params.get)
-        if grade:
-            try:
+        student = self.request.query_params.get('student_id')
+        if grade: 
+            if student:
+                try:
+                    grade = Grade.objects.get(grade=grade)
+                    queryset = TestResult.objects.filter(grade=grade,student_id=student)
+                except:
+                    queryset = TestResult.objects.all()
+            try: 
+                grade = Grade.objects.get(grade=grade)   
                 queryset = TestResult.objects.filter(grade=grade)
             except:
                 queryset = TestResult.objects.all()

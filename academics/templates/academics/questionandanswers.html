@@ -94,6 +94,10 @@ aria-hidden="true">
 </div>
 <div class="question-list">
 </div>
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7a86b06237c3e4defc44778b364358a82fa6c68c
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
   let head = document.querySelector('.header')
@@ -304,10 +308,9 @@ let no_btn = document.getElementById('delete-btn-no')
               'answer': form_answer.value
             }
           })
-        }).then(res => res.json())
-        //.then(() =>
-        //  location.reload()
-//)
+        }).then(res => res.json()).then(() =>
+          location.reload()
+        )
       }
       })
     }

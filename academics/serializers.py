@@ -157,8 +157,8 @@ class QuestionAnswerSerializer(serializers.ModelSerializer):
         answers.save()
         return instance
 
-class QuestionGetSerializer(serializers.ModelSerializer):
 
+class QuestionGetSerializer(serializers.ModelSerializer):
     # subject_name = serializers.CharField()
     number_of_questions = serializers.IntegerField()
     from_chapter = serializers.PrimaryKeyRelatedField(queryset=Chapter.objects.all(),default=None)
@@ -205,9 +205,13 @@ class TestSerializer(serializers.ModelSerializer):
         read_only_fields = ('test_id',)
 
 class TestResultSerializer(serializers.ModelSerializer):
+    subject_name = serializers.SerializerMethodField('get_subject_name')
+    def get_subject_name(self, subject):
+        # print(subject.subject.name)
+        return subject.subject.name
     class Meta:
         model = TestResult
-        fields = '__all__'
+        fields = ['id','grade','subject','subject_name','student_id','test_id','question_paper','result','score','correct_answer','unanswered_questions']
 
 class TestInstruction(serializers.ModelSerializer):
     class Meta:

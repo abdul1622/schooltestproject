@@ -14,7 +14,6 @@ from accounts.models import User
 from django.forms import IntegerField
 # Create your models here.
 
-
 class Grade(models.Model):
     grade = models.PositiveIntegerField(
         null=True,
@@ -22,7 +21,6 @@ class Grade(models.Model):
             MaxValueValidator(12)
         ]
     )
-
     def __str__(self):
         return str(self.grade)
 

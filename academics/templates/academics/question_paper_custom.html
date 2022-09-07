@@ -460,6 +460,7 @@
                             console.log(data)
 
                             document.getElementById('q-form-5').style.display = 'block'
+                            document.getElementById('q-form-3').style.display = 'none'
                             if (data.status != 'success') {
                                 error_messages.innerHTML = `<li class='test-warning'>${(data.data)}</li>`;
                                 messages.innerHTML = '';

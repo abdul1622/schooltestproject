@@ -95,8 +95,14 @@ function get_test(standard){
     }).then(res => {
       return res.json()
     }).then(data => {
+
+
+      let temp = (data[0].subject)
+      content += `<fieldset>
+  <legend> ${data[0].subject_name} </legend>`
         data.forEach((d, index) => {
     //    if(d.grade_name = standard){
+      
           let flag=true
           for (i = 0; i < history.length; i++) {
            if ( history[i].test_id == d.id ){
@@ -104,7 +110,15 @@ function get_test(standard){
            }
           }
           if (flag==true){
-            content = content + `<div class="questions-paper-card" id='${d.id}'>
+
+        if(temp != d.subject){
+         content += `</fieldset>`
+         temp = d.subject
+         content += `<fieldset>
+  <legend> ${d.subject_name} </legend>`
+        }
+        content += `<div class="questions-paper-card" id='${d.id}'>` 
+            content = content + `
 <p> Subject : <span class="subject"> ${d.subject_name}<span></p>
 <p > Remarks : <span class="remarks">${d.remarks}</span></p>
 
@@ -119,6 +133,7 @@ function get_test(standard){
 //}
 
     })
+    content += `</fieldset>`
     container.innerHTML = content;
     })
 }

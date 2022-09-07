@@ -5,8 +5,12 @@
 <script>
    var  student_id=localStorage.getItem('id')
    var token=localStorage.getItem('token')
+   var standard = localStorage.getItem('standard')
    let content = ''
-    fetch('https://schooltestproject.herokuapp.com/api/test-history/',
+   url = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
+    url.searchParams.append('grade', standard);
+    url.searchParams.append('studentid',student_id)
+    fetch(url,
     {
         method: 'GET',
         
@@ -18,10 +22,7 @@
     }).then(function (response) {
         return response.json()
     }).then(data => {
-
         data.forEach((d, index) =>{
-            if ( student_id==d.student_id){
-               
             let test_id = d.test_id
             fetch(`http://schooltestproject.herokuapp.com/api/test/${test_id}/`,
             {
@@ -61,7 +62,6 @@
             document.querySelector('.history').innerHTML=content
         })
 
-        }
         
     })
 })
