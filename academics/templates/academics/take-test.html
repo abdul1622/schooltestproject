@@ -227,6 +227,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         var url = window.location.href;
         var text = url.split('/')
         var token = localStorage.getItem("token")
+        var user_type = localStorage.getItem("user_type")
         var student_id = localStorage.getItem("id")
         var id = text.at(-2)
         let subject;
@@ -260,15 +261,12 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                         content += `<li>${d.note}</li>`
                     })
                     list.innerHTML = content;
-                 
-
                 })
                
 
         }
         get();
         function test_details() {
-            console.log(parseInt(1.0345983745))
             fetch(`https://schooltestproject.herokuapp.com/api/test/${id}/`, {
                 method: 'GET',
                 headers: {
@@ -668,7 +666,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         function redirect() {
             window.location.href = `${host}/home`
         }
-
+    }
     </script>
 </body>
 
