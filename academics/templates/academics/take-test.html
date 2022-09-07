@@ -370,7 +370,6 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                                     else {
                                         question_content = `<div>   <p> ${question_no}). ${d.question} <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}"> <p>
 
-                                                <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(0,1)> Next </button> </p>
                                                 <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=clear_answer(0)>Clear </button>  <button class="btn btn-primary btn-sm" onclick=next(0,1)> Next </button> </p>
                                                 </div>`
                                                 document.querySelector('.question-container').innerHTML = question_content
@@ -460,17 +459,6 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     question_content = `<div>   <p> ${n + 1}). ${question_details.question}<span class=''> <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}"> </span></p> </div>`
                 }
             }
-
-
-
-            if (n == (answer_details.length) - 1) {
-                question_content += ` <p class='d-flex justify-content-between mb-3'> <button  class="btn btn-primary btn-sm" onclick=next(${n},${n - 1})> Prev </button> <button  class="btn btn-success btn-sm" id='submit' data-bs-toggle="modal" data-bs-target="#take-test-Modal" >submit</button> </p> `
-            }
-            else if (n == 0) {
-                question_content += ` <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=next(${n},${n + 1})> Next </button> </p> `
-            } else {
-                question_content += ` <p class='d-flex justify-content-between mb-3'> <button class="btn btn-primary btn-sm" onclick=next(${n},${n - 1})> Prev </button> <button class="btn btn-primary btn-sm" onclick=next(${n},${n + 1})> Next </button> </p> `
-            question_content += ``
 
             if (n == (answer_details.length) - 1) {
                 question_content += ` <p class='d-flex justify-content-between mb-3'> <span><button  class="btn btn-primary btn-sm" onclick=next(${n},${n - 1})> Prev </button><button class="btn btn-primary btn-sm" onclick=clear_answer(${n})>Clear </button> </span> <button  class="btn btn-success btn-sm" id='submit' data-bs-toggle="modal" data-bs-target="#take-test-Modal" >submit</button> </p> `
@@ -664,9 +652,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
 
             }
         function redirect() {
-            window.location.href = `${host}/home`
+            window.location.href = `${host}/test-history`
         }
-    }
     </script>
 </body>
 
