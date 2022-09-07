@@ -307,7 +307,7 @@
     let overall_marks = document.getElementById('id_overallmarks').value
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     let modal2 =   document.querySelector('.modal-body-2')
-    fetch(`http://schooltestproject.herokuapp.com/api/question-paper/${id}/`,
+    fetch(`https://schooltestproject.herokuapp.com/api/question-paper/${id}/`,
       {
         method: 'PATCH',
         body: JSON.stringify({ 'timing': timing, 'overall_marks': overall_marks }
