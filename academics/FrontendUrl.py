@@ -19,6 +19,5 @@ urlpatterns=[
     path('take-test/<int:pk>/',take_test),
     path('test-history',testhistory),
     path('instructions',instruct),
-    path('questionbank',questionbank),
-    path('question-paper-create',question_papercreateview)
+    path('questionbank',questionbank)
 ]

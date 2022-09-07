@@ -2,10 +2,10 @@
 {% block content %}
 <!-- <div id="message">
 
-</div>-->
-<!-- <div class="error-messages container-fluid">
+</div>
+<div class="error-messages container-fluid">
 
-</div>  -->
+</div> -->
 <div class="question-paper-form" id="q-form">
 
     <div class="q-form" id="q-form-1">
@@ -49,8 +49,6 @@
             <span class="back-btn-review"></span>
             <button id="next-btn" class="submit-btn btn btn-primary" onclick=submit()>Create test</button>
         </p>
-
-
     </div>
 
 
@@ -100,14 +98,11 @@
         <div class="custom-error">
 
         </div>
-        <div class="messages"></div>
     </div>
 
-    <div class="q-form-5" id="q-form-5">
+    <div class="q-form-5">
         <div class="messages"></div>
-        <div class="error-messages">
-
-        </div>
+        <div class="error-messages"></div>
     </div>
 
 
@@ -118,8 +113,8 @@
     // var messages = document.getElementById('message')
     var messages = document.querySelector('.messages')
     var token = localStorage.getItem('token')
-    var error_messages = document.querySelector('.error-messages')
-    let grade, subject, subject_name, no_of_questions,overall_mark;
+    let error_messages = document.querySelector('.error-messages')
+    let grade, subject, subject_name, no_of_questions,overall_mark = null;
     let timing=null, chapters, from_chapter, to_chapter, from_chapter_id = null, to_chapter_id = null;
     let all_chapter, result = [], questions_total = 0,customize = false;
     let question_paper_id,userId,user_type,chapters_list=[];
@@ -140,6 +135,7 @@
         document.getElementById('q-form-2').style.display = 'block';
         document.getElementById('q-form-4').style.display = 'none';
         document.getElementById('q-form-3').style.display = 'none';
+        result = []
         grade = parseInt(document.getElementById('id_grade').value);
         subject = parseInt(document.getElementById('id_subject').value);
         no_of_questions = parseInt(document.getElementById('id_no_of_questions').value);
@@ -234,32 +230,7 @@ questions_total = 0;
 
 
     function get_chapter(type) {
-        overall_mark = document.getElementById('id_overallmarks').value
-        timing = document.getElementById('id_timing').value
-        console.log(timing,overall_mark)
-        messages.innerHTML = ''
-            error_messages.innerHTML = ''
-
-        if (timing){
-            timing = parseInt(timing)
-        }
-        if(overall_mark){
-            overall_mark = parseInt(overall_mark)
-        }
-        // if(isNaN(overall_mark) || isNaN(timing)){
-        //     if(!isNaN(timing)){
-        //         document.querySelector('.error-form-2').innerHTML = 'overall marks is a required field'
-        //     }
-        //     else if(!isNaN(overall_mark)){
-        //         document.querySelector('.error-form-2').innerHTML = 'timing is a required field'
-        //     }        
-        //     else{
-        //         document.querySelector('.error-form-2').innerHTML = 'overall marks and timing are required field'
-        //     }
-        //     return
-        // }
         document.querySelector('.error-form-2').innerHTML = ''
-        console.log(timing)
         from_chapter_id = parseInt(document.getElementById('id_from_chapter').value);
         to_chapter_id = parseInt(document.getElementById('id_to_chapter').value);
      //   if(from_chapter_id)
@@ -325,7 +296,6 @@ questions_total = 0;
                 document.getElementById('chapter_value').innerHTML = content
 
             }
-
 
             if (type == 'review') {
                 document.getElementById('q-form-1').style.display = 'none';
@@ -539,14 +509,14 @@ questions_total = 0;
             console.log(no_of_questions)
             console.log(result)
         }
-      let url1 = new URL('http://127.0.0.1:8000/api/question-paper/')
+      let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
       url1.searchParams.append('type', 'save');
       overall_mark=parseInt(document.getElementById('id_overallmarks').value)
         fetch(url1,
         {
             method: 'POST',
             body: JSON.stringify({ 'grade': grade, 'subject': subject, 'number_of_questions': no_of_questions, 'from_chapter':from_chapter_id, 
-                    'to_chapter': to_chapter_id, 'all_chapters': all_chapter, 'timing':timing,'overall_marks': overall_mark,'customize':result}
+                    'to_chapter': to_chapter_id, 'all_chapters': all_chapter, 'timing': timing,'overall_marks':overall_mark,'customize':result}
             ),
             headers: {
                 'Accept': 'application/json',
@@ -559,11 +529,13 @@ questions_total = 0;
         }).then(data => {
             console.log(data)
             if (data.status != 'success') {
-                document.getElementById('q-form-5').style.display = 'block'
-               error_messages.innerHTML =  `<li class='test-warning'>${(data.data)}</li>`;
+                error_messages.innerHTML = `<li class='test-warning'>${(data.data)}</li>`;
+                messages.innerHTML = '';
             }
             else{
              question_paper_id = data.data.id
+             timing = data.data.timing
+             overall_marks = data.data.overall_mark
              userId = localStorage.getItem('id')
                 let form_remarks = document.getElementById('id_remarks').value
     let form_description = document.getElementById('id_description').value
@@ -590,7 +562,7 @@ questions_total = 0;
              }).then(function (data) {
                console.log(data)
 
-               document.getElementById('q-form-5').style.display = 'block'
+               document.querySelector('.q-form-5').style.display = 'block'
                if (data.status != 'success') {
                  error_messages.innerHTML = `<li class='test-warning'>${(data.data)}</li>`;
                  messages.innerHTML = '';

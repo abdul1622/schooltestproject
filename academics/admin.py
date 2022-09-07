@@ -12,14 +12,12 @@ class SubjectAdmin(admin.ModelAdmin):
 
         elif request.user.user_type == 'is_admin':
             return True
-
 class GradeAdmin(admin.ModelAdmin):
     def has_module_permission(self, request,obj=None):
         if request.user.is_anonymous:
             return True
         elif request.user.user_type == 'is_staff':
             return False
-
         elif request.user.user_type == 'is_admin':
             return True
 

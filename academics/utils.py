@@ -27,6 +27,7 @@ def render_to_pdf(template_src,folder_name,params:dict):
     return filename,True
 
 def render_to_pdf2(template_src,folder_name,question_paper,params:dict):
+    # print(questionb)
     template = get_template(template_src)
     folder_name = folder_name
     html = template.render(params)
@@ -55,8 +56,10 @@ def render_to_pdf2(template_src,folder_name,question_paper,params:dict):
         return filename,True  
 
     if pdf.err:
+        print('error')
         return '',False
-
-    question_paper.file = SimpleUploadedFile(filename+'.pdf',result.getvalue(),content_type='application/pdf')   
+    questionfile= SimpleUploadedFile(filename+'.pdf',result.getvalue(),content_type='application/pdf')   
+    print(questionfile)
+    question_paper.file = questionfile
     question_paper.save()
     return question_paper,True
