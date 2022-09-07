@@ -24,7 +24,7 @@
     }).then(data => {
         data.forEach((d, index) =>{
             let test_id = d.test_id
-            fetch(`http://schooltestproject.herokuapp.com/api/test/${test_id}/`,
+            fetch(`https://schooltestproject.herokuapp.com/api/test/${test_id}/`,
             {
               method: 'GET',
               headers: {
