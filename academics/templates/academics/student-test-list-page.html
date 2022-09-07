@@ -25,14 +25,19 @@ Get Test
     let messages = document.querySelector('.messages')
     let error_messages = document.querySelector('.error-messages')
     let head = document.querySelector('.header')
+    var standard = localStorage.getItem('standard')
     let history=[]
+    var  student_id=localStorage.getItem('id')
     let single_test = document.querySelector('.single-test')
     head.style.display = 'none'
     let set_id = false
     url = 'https://schooltestproject.herokuapp.com/api/test/'
     var container = document.querySelector('.test-list')
 
-  fetch('https://schooltestproject.herokuapp.com/api/test-history/',
+    url1 = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
+    url1.searchParams.append('grade', standard);
+    url1.searchParams.append('studentid',student_id)
+    fetch(url1,
             {
                 method: 'GET',
                 headers: {
@@ -52,33 +57,33 @@ Get Test
                 }
             })
             console.log(history)
-function get_user_standard() {
-        fetch('https://schooltestproject.herokuapp.com/api/profile/', {
-      method: 'GET',
-      headers: {
-        'content-Type': 'application/json',
-        'Authorization': 'token' + ' ' + token,
-      }
-    }).then(res => {
-      return res.json()
-    }).then(data => {
-      let user_type = data.data.user_type
-      let standard = data.data.profile.standard
-      console.log(standard)
-      console.log(user_type,standard)
-      if(user_type != 'is_student'){
-        messages.innerHTML = `<p class='test-warning'>sorry you don't have a access do this page</p>`
+// function get_user_standard() {
+//         fetch('https://schooltestproject.herokuapp.com/api/profile/', {
+//       method: 'GET',
+//       headers: {
+//         'content-Type': 'application/json',
+//         'Authorization': 'token' + ' ' + token,
+//       }
+//     }).then(res => {
+//       return res.json()
+//     }).then(data => {
+//       let user_type = data.data.user_type
+//       let standard = data.data.profile.standard
+//       console.log(standard)
+//       console.log(user_type,standard)
+//       if(user_type != 'is_student'){
+//         messages.innerHTML = `<p class='test-warning'>sorry you don't have a access do this page</p>`
         
         
-        return
-      }
-    //   return standard
-    get_test(standard);
-    })
+//         return
+//       }
+//     //   return standard
+//     get_test(standard);
+//     })
     
-    }
+//     }
 
-    get_user_standard();
+    // get_user_standard();
 function get_test(standard){
     if(standard){
         head.style.display = 'block';
@@ -138,6 +143,8 @@ function get_test(standard){
     })
 }
 }
+
+get_test(standard)
 
 function take(id){
   console.log('sjfd')

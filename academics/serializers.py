@@ -211,7 +211,7 @@ class TestResultSerializer(serializers.ModelSerializer):
         return subject.subject.name
     class Meta:
         model = TestResult
-        fields = ['id','grade','subject','subject_name','student_id','test_id','question_paper','created_at','result','score','correct_answer','unanswered_questions']
+        fields = ['id','grade','subject','subject_name','student_id','test_id','question_paper','result','score','correct_answer','created_at','unanswered_questions','wrong_answer']
 
 class TestInstruction(serializers.ModelSerializer):
     class Meta:

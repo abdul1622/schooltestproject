@@ -245,6 +245,9 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         let counter_container = document.querySelector('.counter');
         var list = document.querySelector('.instruction');
         function get() {
+            if(user_type !='is_student'){
+                return
+            }
             var content = ''
             fetch('https://schooltestproject.herokuapp.com/api/instructions/', {
                 method: 'GET',
@@ -267,6 +270,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         }
         get();
         function test_details() {
+
             fetch(`https://schooltestproject.herokuapp.com/api/test/${id}/`, {
                 method: 'GET',
                 headers: {
