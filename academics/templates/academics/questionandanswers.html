@@ -265,9 +265,35 @@ let no_btn = document.getElementById('delete-btn-no')
       var option_c = parent.querySelector('.option_c').textContent;
       var option_d = parent.querySelector('.option_d').textContent;
       var answer = parent.querySelector('.answer').textContent;
+      form_grade.value = 0
       form_grade.value = grade
-      form_subject.value = subject
-      form_chapter.value = chapter
+
+      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+
+      $.ajax({                       
+        url: url_for_change,                  
+        data: {
+          'grade': grade     
+        },
+        success: function (data) {
+          $("#id_subject").html(data); 
+        }
+      }).then(() =>{
+        form_subject.value = subject
+        $.ajax({
+            url : url_for_change,
+            data : {
+                'subject':subject
+            },
+            success: function(data){
+                $("#id_chapter").html(data)
+            }
+        }).then(()=>{
+          form_chapter.value = chapter
+        });
+      });
+
+
       form_question.value = question
       form_question_type.value = question_type
       form_cognitive_level.value = cognitive_level

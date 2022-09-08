@@ -167,6 +167,7 @@ function getrequiredtest(){
     return res.json()
   }).then(data => {
     console.log(data)
+    // if()
     let  content2 = `<div class="single-test-div" id='${data.id}'>
   
       <p> Subject : <span class="subject"> ${data.subject_name}<span></p>
