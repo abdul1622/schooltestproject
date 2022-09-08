@@ -152,9 +152,9 @@ class UserDetailsView(ListAPIView):
         if user.user_type == 'is_student':
             queryset = User.objects.get(id = user.id)
         elif user.user_type == 'is_staff':
-            queryset = User.objects.filter(user_type = 'is_student')
+            queryset = User.objects.filter(user_type = 'is_student').order_by('standard')
         elif user.user_type == 'is_admin':
-            queryset = User.objects.all()
+            queryset = User.objects.all().order_by('standard')
         return queryset
 
     def list(self, request):

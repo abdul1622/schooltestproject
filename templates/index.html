@@ -3,9 +3,9 @@
 <div class="counts">
 </div>
 <script>
+    let students = []
+    let staffs = []
 function userdetails() {
-    var students = 0
-    var staff = 0
 
     fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
         method: 'GET',
@@ -19,19 +19,21 @@ function userdetails() {
         console.log(data)
         data.forEach((d, index) => {
             if (`${d.user_type}` == 'is_student') {
-                students += 1
+                students.push(d)
             }
             else if (`${d.user_type}` == 'is_staff') {
-                staff += 1
+                staffs.push(d)
             }
-            if (localStorage.getItem('user_type')=='is_admin'){
+            if (localStorage.getItem('user_type')=='is_admin' && data[data.length-1] == d){
             var content = ''
-            content += `<h3>No.of.students : <span class='count'>${staff}</span></h3>
-            <h3>No.of.staffs : <span class='count'>${staff}</span></h3>`
+            content += `<h3>No.of.students : <span class='count'>${students.length}</span></h3>
+            <h3>No.of.staffs : <span class='count'>${staffs.length}</span></h3>`
             document.querySelector('.counts').innerHTML = content
             }
         })
     })
-} userdetails()
+} 
+userdetails()
+console.log(staffs,students)
 </script>
 {% endblock %}
