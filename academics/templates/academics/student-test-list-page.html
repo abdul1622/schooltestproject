@@ -168,12 +168,14 @@ function getrequiredtest(){
   }).then(data => {
     console.log(data)
     console.log(data.grade_name)
-    if(standard != data.grade_name){
+
+    if(data.status != 'failure'){
+
+      if(standard != data.grade_name){
       single_test.innerHTML = `<p class="text-center text-danger">your not allowed to take this test</p>`
       return
     }
 
-    if(data.status != 'failure'){
     let  content2 = `<div class="single-test-div" id='${data.id}'>
   
       <p> Subject : <span class="subject"> ${data.subject_name}<span></p>
