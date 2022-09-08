@@ -54,7 +54,7 @@
     }
 
     .single-test {
-        width: 25%;
+        /* width: 25%; */
         margin: 2% 37%;
         background-color: #fff8dcb0;
     }
@@ -1462,14 +1462,14 @@ margin: 7% 40%;
     }
 
     .questions-paper-card {
-        font-size: 15px;
-        background-color: #fff8dcb0;
-        color: black;
-        width: 69%;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-        padding: 10%;
-        margin-bottom: 6%;
-    }
+    font-size: 15px;
+    background-color: #fff8dcb0;
+    color: black;
+    /* width: 69%; */
+    box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+    padding: 10%;
+    margin: 6%;
+}
 
     .question-papers-get input {
         display: block;
@@ -1508,13 +1508,17 @@ margin: 7% 40%;
         white-space: nowrap;
     }
 
-    .history{
+    .history fieldset{
     margin-top: 10%;
     display: grid;
     width: 65%;
     margin: 4% 18%;
     grid-template-columns: auto auto auto auto;
-    gap: 3%;
+}
+.history fieldset div {
+    background-color: darkgray;
+    padding: 10%;
+    margin: 2%;
 }
 
     .history>div {
@@ -1984,9 +1988,9 @@ margin: -2.6% 11%;
             padding: 12px;
         }
 
-        .questions-paper-card {
+        /* .questions-paper-card {
             width: 102%;
-        }
+        } */
 
         .chapter-cards {
             display: grid;
@@ -2067,6 +2071,9 @@ width: 5%;
 position: absolute;
 margin: -4.8% 25%;
 padding: 6px;
+}
+.history fieldset {
+    grid-template-columns: auto auto auto;
 }
         
     }
@@ -3118,6 +3125,9 @@ padding: 6px;
             grid-template-columns: auto auto;
             gap: 1%;
         }
+        .history fieldset {
+            grid-template-columns: auto auto;
+        }
         .counter{
             width: 18%;
         }
@@ -3164,6 +3174,9 @@ padding: 6px;
             position: absolute;
             margin: -6.6% 34%;
             padding: 6px;
+        }
+        .test-list fieldset{
+            grid-template-columns: auto auto;
         }
     }
 
@@ -3704,13 +3717,15 @@ padding: 6px;
 
         }
 
-      
+        .single-test {
+    margin: 2% 12%;
+        }
 
-        .test-list {
-            width: 59%;
-            margin: 2% 20%;
+        .test-list fieldset{
+            /* width: 59%; */
+            /* margin: 2% 20%; */
             grid-template-columns: auto;
-            gap: 1%;
+            /* gap: 1%; */
         }
 
         .text-center {
@@ -3769,16 +3784,20 @@ padding: 6px;
             margin-top: -31%;
         }
 
-        .history {
-            margin-top: 10%;
-            display: grid;
-            width: 53%;
-            margin: 7% 24%;
-            padding: 0%;
-            grid-template-columns: auto;
-            gap: 3%;
-        }
+        .history fieldset {
+    margin-top: 10%;
+    display: grid;
 
+    margin: 8% 17%;
+    padding: 0%;
+    grid-template-columns: auto;
+
+}
+.history fieldset div {
+    background-color: darkgray;
+    padding: 10%;
+    margin: 7% 2%;
+}
         .test-history {
             margin-left: 1%;
             font-family: 'Cinzel', serif;
