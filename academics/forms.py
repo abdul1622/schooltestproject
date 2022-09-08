@@ -108,7 +108,7 @@ class TestForm(forms.ModelForm):
  
 
 class instruction_form(forms.Form):
-    instruction = forms.EmailField(widget=forms.Textarea(
+    instruction = forms.CharField(widget=forms.Textarea(
 
     attrs={"class": "form-control", "placeholder": "Instructions"}))
 class questionCustomForm(forms.Form):
