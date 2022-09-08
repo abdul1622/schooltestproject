@@ -620,6 +620,7 @@ class TestResultCreateView(CreateAPIView):
                 queryset = TestResult.objects.filter(grade=grade)
             except:
                 queryset = TestResult.objects.all()
+        queryset = queryset.order_by('grade', 'subject')
         serializer = TestResultSerializer(queryset, many=True)
         return Response(serializer.data)
 
