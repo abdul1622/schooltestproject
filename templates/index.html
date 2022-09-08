@@ -5,6 +5,7 @@
 <script>
     let students = []
     let staffs = []
+    let token = localStorage.getItem('token')
 function userdetails() {
 
     fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
@@ -29,11 +30,33 @@ function userdetails() {
             content += `<h3>No.of.students : <span class='count'>${students.length}</span></h3>
             <h3>No.of.staffs : <span class='count'>${staffs.length}</span></h3>`
             document.querySelector('.counts').innerHTML = content
+            // get_result();
             }
         })
     })
 } 
 userdetails()
 console.log(staffs,students)
+
+// function get_result(){
+// url = new URL('http://127.0.0.1:8000/api/test-history/');
+//     fetch(url,
+//     {
+//         method: 'GET',
+//         headers: {
+//             'Accept': 'application/json',
+//             'Content-Type': 'application/json',
+//             'Authorization': 'token' + ' ' + token,
+//         },
+//     }).then(function (response) {
+//         return response.json()
+//     }).then(data => {
+//         data.forEach((d, index) =>{
+//             console.log(data)
+//     })
+// })
+// }
+
+
 </script>
 {% endblock %}
