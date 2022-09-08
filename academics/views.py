@@ -553,10 +553,16 @@ class TestCreateView(CreateAPIView):
         grade = (self.request.query_params.get('grade'))
         test_id = (self.request.query_params.get('test_id'))
         if grade:
-            queryset = Test.objects.filter(grade=grade)
+            try:
+                queryset = Test.objects.filter(grade=grade)
+            except:
+                   queryset = Test.objects.all
             serializer = TestSerializer(queryset, many=True)
         elif test_id:
-            queryset = Test.objects.get(test_id=test_id)
+            try:
+                queryset = Test.objects.get(test_id=test_id)
+            except:
+                queryset = Test.objects.all
             serializer = TestSerializer(queryset)
         else:
             queryset = Test.objects.all().order_by('grade', 'subject')

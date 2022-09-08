@@ -154,6 +154,7 @@ function take(id){
 function getrequiredtest(){
   test_id = document.getElementById('Test_id').value
   console.log(test_id)
+  if(test_id){
   url2 = new URL('https://schooltestproject.herokuapp.com/api/test/');
   url2.searchParams.append('test_id', test_id);
   fetch(url2, {
@@ -180,6 +181,9 @@ function getrequiredtest(){
      </div>`
       single_test.innerHTML = content2
 })
+  }else{
+    single_test.innerHTML = `<p class="text-center text-danger">give a valid test_id</p>`
+  }
 }
 </script>
 {% endblock %}
