@@ -167,7 +167,13 @@ function getrequiredtest(){
     return res.json()
   }).then(data => {
     console.log(data)
-    // if()
+    console.log(data.grade_name)
+    if(standard != data.grade_name){
+      single_test.innerHTML = `<p class="text-center text-danger">your not allowed to take this test</p>`
+      return
+    }
+
+    if(data.status != 'failure'){
     let  content2 = `<div class="single-test-div" id='${data.id}'>
   
       <p> Subject : <span class="subject"> ${data.subject_name}<span></p>
@@ -181,9 +187,12 @@ function getrequiredtest(){
       <p class='text-right'><button class='btn btn-primary btn-sm' onclick=take(${data.id})>take test</button></p> 
      </div>`
       single_test.innerHTML = content2
+    }else{
+      single_test.innerHTML = `<p class="text-center text-danger">${data.data}</p>`
+    }
 })
   }else{
-    single_test.innerHTML = `<p class="text-center text-danger">give a valid test_id</p>`
+    single_test.innerHTML = `<p class="text-center text-danger">Test id is required</p>`
   }
 }
 </script>

@@ -193,12 +193,13 @@ class TestSerializer(serializers.ModelSerializer):
     grade_name = serializers.SerializerMethodField('get_grade_name')
     subject_name = serializers.SerializerMethodField('get_subject_name')
     def get_grade_name(self, subject):
-      grade = Grade.objects.get(id=(subject.grade.id))
-      return grade.grade
+        print(subject)
+        grade = Grade.objects.get(id=(subject.grade.id))
+        return grade.grade
 
     def get_subject_name(self, chapter):
-      subject = Subject.objects.get(id=(chapter.subject.id))
-      return subject.name
+        subject = Subject.objects.get(id=(chapter.subject.id))
+        return subject.name
     class Meta:
         model = Test
         fields = ['id','grade','grade_name','subject','subject_name','question_paper','created_staff_id','duration','marks','pass_percentage','remarks','description','test_id']
