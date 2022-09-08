@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block index %}
+<div class="counts">
+</div>
+<script>
+    let students = []
+    let staffs = []
+    let token = localStorage.getItem('token')
+function userdetails() {
+
+    fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
+        method: 'GET',
+        headers: new Headers({
+            'Authorization': 'token' + ' ' +localStorage.getItem('token'),
+            'Content-Type': 'application/json',
+        })
+    }).then(res => {
+        return res.json()
+    }).then(data => {
+        console.log(data)
+        data.forEach((d, index) => {
+            if (`${d.user_type}` == 'is_student') {
+                students.push(d)
+            }
+            else if (`${d.user_type}` == 'is_staff') {
+                staffs.push(d)
+            }
+            if (localStorage.getItem('user_type')=='is_admin' && data[data.length-1] == d){
+            var content = ''
+            content += `<h3>No.of.students : <span class='count'>${students.length}</span></h3>
+            <h3>No.of.staffs : <span class='count'>${staffs.length}</span></h3>`
+            document.querySelector('.counts').innerHTML = content
+            // get_result();
+            }
+        })
+    })
+} 
+userdetails()
+console.log(staffs,students)
+
+// function get_result(){
+// url = new URL('http://127.0.0.1:8000/api/test-history/');
+//     fetch(url,
+//     {
+//         method: 'GET',
+//         headers: {
+//             'Accept': 'application/json',
+//             'Content-Type': 'application/json',
+//             'Authorization': 'token' + ' ' + token,
+//         },
+//     }).then(function (response) {
+//         return response.json()
+//     }).then(data => {
+//         data.forEach((d, index) =>{
+//             console.log(data)
+//     })
+// })
+// }
+
+
+</script>
+{% endblock %}
