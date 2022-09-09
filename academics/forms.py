@@ -79,6 +79,9 @@ class questionlist_form(forms.ModelForm):
     class Meta:
         model = Question
         fields = ['grade', 'subject', 'chapter', 'no_of_questions']
+
+
+       
 class question_form(forms.ModelForm):
     class Meta:
         model = Question
@@ -105,7 +108,7 @@ class TestForm(forms.ModelForm):
  
 
 class instruction_form(forms.Form):
-    instruction = forms.EmailField(widget=forms.Textarea(
+    instruction = forms.CharField(widget=forms.Textarea(
 
     attrs={"class": "form-control", "placeholder": "Instructions"}))
 class questionCustomForm(forms.Form):

@@ -23,15 +23,12 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             margin: 3% 12%;
         }
 
-        .counter {
-            font-size: 2rem;
-            /* display: inline; */
+        #counter {
+            font-size: 2rem;          
             border-radius: 6%;
-            padding: 1% 0% 1% 1%;
+          
             width: 9%;
-            margin: 1% 80%;
-            /* width: 10%; */
-            background-color: #d5d5d5;
+            margin: 1% 80%;          
         }
 
         .instructions li {
@@ -161,6 +158,23 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             .answer-data p {
                 width: 105%;
             }
+            #counter{
+                font-size: 1rem;
+                width:18%;
+                margin:3% 77%;
+                padding: 0;
+            }
+            .close{
+                margin-left: 93%;
+                border: none;
+            }
+            .delete-box{
+                margin-left: 6%;
+            }
+            .sm-close{
+                position: absolute;
+                margin: -12% 55%;
+            }
 
         }
 
@@ -206,11 +220,12 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
 
 
     <h1 class="test-title"></h1>
-    <h2 class="counter"></h2>
+    <h2 id="counter"></h2>
     <div class="test-container">
 
         <div class="instructions">
             <ol class="instruction"></ol>
+           
             <p class="text-end"> <button id="start-test-btn" class="btn btn-primary btn-sm">Take Test</button> </p>
         </div>
         <div class="question-container">
@@ -242,7 +257,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         let total_marks;
         let duration;
         let pass_percentage;
-        let counter_container = document.querySelector('.counter');
+        let counter_container = document.querySelector('#counter');
         var list = document.querySelector('.instruction');
         function get() {
             if(user_type !='is_student'){
