@@ -556,8 +556,12 @@ class TestCreateView(CreateAPIView):
             queryset = Test.objects.filter(grade=grade)
             serializer = TestSerializer(queryset, many=True)
         elif test_id:
-            queryset = Test.objects.get(test_id=test_id)
-            serializer = TestSerializer(queryset)
+            try:
+                queryset = Test.objects.get(test_id=test_id)
+                serializer = TestSerializer(queryset)
+            except:
+                return Response({"status": "failure", "data":"please give a valid test id"}, status=HTTP_206_PARTIAL_CONTENT)
+         
         else:
             queryset = Test.objects.all().order_by('grade', 'subject')
             serializer = TestSerializer(queryset, many=True)
@@ -620,6 +624,7 @@ class TestResultCreateView(CreateAPIView):
                 queryset = TestResult.objects.filter(grade=grade)
             except:
                 queryset = TestResult.objects.all()
+        queryset = queryset.order_by('grade', 'subject')
         serializer = TestResultSerializer(queryset, many=True)
         return Response(serializer.data)
 
