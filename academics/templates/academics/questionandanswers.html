@@ -149,14 +149,13 @@
       fetch(`https://schooltestproject.herokuapp.com/api/grades/${grade}/`, {
         method: 'GET',
         headers: {
-          'content-Type': 'application/json',
-          'Authorization': 'token' + ' ' + token,
+            'content-Type': 'application/json',
+            'Authorization': 'token' + ' ' + token,
         }
-      }).then(res => {
+    }).then(res => {
         return res.json()
-      }).then(data => {
-        checkgrade = data.grade
-      })
+    }).then(data => {
+       checkgrade=data.grade })
       fetch(url).then(res => {
         return res.json()
       }).then(data => {
