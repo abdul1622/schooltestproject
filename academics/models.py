@@ -202,7 +202,8 @@ class Test(models.Model):
         return self.remarks
 
     def save(self, *args, **kwargs):
-        self.test_id = (str(uuid.uuid4()))[:16]
+        if not self.test_id:
+            self.test_id = (str(uuid.uuid4()))[:16]
         question_paper = self.question_paper
         if not self.duration:
             self.duration = question_paper.timing
