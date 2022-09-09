@@ -2,10 +2,46 @@
 {% block index %}
 <div class="counts">
 </div>
+<div class="form">
+    <label for="standard">Grade </label>
+    <select name="standard" id="id_standard">
+        <option value="">-------</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+
+    </select>
+    <label for="section">section </label>
+    <select name="section" id="id_section" >
+        <option value="">------</option>
+    </select>
+    <button onclick=userdetails_for_std()>Get</button>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <div class="student_list">
+
+    </div>
+</div>
 <script>
     let students = []
     let staffs = []
+    let standard,section;
     let token = localStorage.getItem('token')
+
+// function getsection(){
+//    let standard = document.getElementById('id_standard')
+
+// }
+
+
 function userdetails() {
 
     fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
@@ -31,7 +67,7 @@ function userdetails() {
             content += `<h3>No.of.students : <span class='count'>${students.length}</span></h3>
             <h3>No.of.staffs : <span class='count'>${staffs.length}</span></h3>`
             document.querySelector('.counts').innerHTML = content
-            get_result();
+            // get_result();
             }
         })
     })
@@ -39,10 +75,10 @@ function userdetails() {
 userdetails()
 console.log(staffs,students)
 
-function get_result(){
-    for(i=0;i<students.length;i++){
+function get_result(list){
+    for(i=0;i<list.length;i++){
              
-             students[i]['result'] = []
+             list[i]['result'] = []
      }
 url = new URL('http://127.0.0.1:8000/api/test-history/');
 
@@ -59,17 +95,115 @@ url = new URL('http://127.0.0.1:8000/api/test-history/');
         return response.json()
     }).then(data => {
         console.log(data)
+        i = 0
         data.forEach((d, index) =>{
+            i+= 1
             console.log(d.subject)
-            for(i=0;i<students.length;i++){
-                if(students[i]['id'] == d.student_id){
-                    students[i]['result'].push({'subject' : d.subject,'score':d.score,'res':d.result})
+            for(i=0;i<list.length;i++){
+                if(list[i]['id'] == d.student_id){
+                    list[i]['result'].push({'subject' : d.subject,'score':d.score,'res':d.result})
                 }
             }
+            if(i == (data.length-1)){
+                return list  
+            }
     })
+  
 })
 }
 
+$("#id_standard").change(function () {
+        var url_for_change = 'http://127.0.0.1:8000/api/loadsection/';
+     standard = $(this).val();
+
+        $.ajax({
+            url: url_for_change,
+            data: {
+                'standard': standard
+            },
+            success: function (data) {
+                $("#id_section").html(data);
+            }
+        });
+
+    });
+
+    function userdetails_for_std() {
+
+url_for_std = new URL('http://127.0.0.1:8000/api/user-details/')
+url_for_std.searchParams.append('standard', standard);
+// url_for_std.searchParams.append('user_type','is_student')
+
+fetch(url_for_std, {
+    method: 'GET',
+    headers: new Headers({
+        'Authorization': 'token' + ' ' +token,
+        'Content-Type': 'application/json',
+    })
+}).then(res => {
+    return res.json()
+}).then(data => {
+    console.log(data)
+    let content = '<table>'
+    list = data
+
+    for(i=0;i<list.length;i++){
+            // if(list[i]['profile']['section']) 
+             list[i]['result'] = []
+     }
+
+    url = new URL('http://127.0.0.1:8000/api/test-history/');
+     url.searchParams.append('grade',standard)
+
+    fetch(url,
+    {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'token' + ' ' + token,
+        },
+    }).then(function (response) {
+        return response.json()
+    }).then(data => {
+        console.log(data)
+        i = 0
+        data.forEach((d, index) =>{
+            i+= 1
+            console.log(d.subject)
+            for(i=0;i<list.length;i++){
+                if(list[i]['id'] == d.student_id){
+                    list[i]['result'].push({'subject' : d.subject,'score':d.score,'res':d.result})
+                }
+            }
+    })
+    console.log(list)
+  
+}).then(()=>{
+    list.forEach((d, index) => {
+        let result = d.result
+        d.overallscore = 0
+        let score = 0
+        console.log(i,'hi')
+        if(result.length){
+            
+            for(i=0;i<result.length;i++){
+            score += parseInt(result[i]['score'])
+            }
+            if(score){
+            score = parseInt(score/(result.length))
+            d.overallscore = score
+                }   
+             }
+    })
+    console.log(list)
+
+}).then(()=>{
+})
+
+
+})
+} 
 
 
 
