@@ -92,10 +92,6 @@ class Question_answer_serializer(serializers.Serializer):
     grade = serializers.StringRelatedField(many=True,source ="Grade")
     # subject = serializers.StringRelatedField(many=True,'')
 
-class AnswerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Answers
-        fields = ['option_a','option_b','option_c','option_d','answer']
 
 class questionanswerserializer(serializers.ModelSerializer):
     subject = serializers.SlugRelatedField(slug_field='name', queryset=Subject.objects.all())
@@ -109,13 +105,16 @@ class questionanswerserializer(serializers.ModelSerializer):
         model = Question
         fields = ['id','grade','subject','chapter']
 
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answers
+        fields = ['option_a','option_b','option_c','option_d','answer']
 class QuestionAnswerSerializer(serializers.ModelSerializer):
     answers = AnswerSerializer()
     class Meta:
         model = Question
         fields = ['id','grade','subject','chapter','question',
                     'question_type','cognitive_level','difficulty_level','mark','duration','answers']
-
     def create(self, validated_data):
         answers_data = validated_data.pop('answers')
         question = Question.objects.create(**validated_data)
@@ -158,8 +157,8 @@ class QuestionAnswerSerializer(serializers.ModelSerializer):
         answers.save()
         return instance
 
-class QuestionGetSerializer(serializers.ModelSerializer):
 
+class QuestionGetSerializer(serializers.ModelSerializer):
     # subject_name = serializers.CharField()
     number_of_questions = serializers.IntegerField()
     from_chapter = serializers.PrimaryKeyRelatedField(queryset=Chapter.objects.all(),default=None)
@@ -187,28 +186,33 @@ class QuestionPaperSerializer(serializers.ModelSerializer):
       return subject.name
     class Meta:
         model = Question_Paper
-        fields = ['id','grade','grade_name','subject','subject_name','file','no_of_questions','test_id','created_by','created_at']
+        fields = ['id','grade','grade_name','subject','subject_name','file','no_of_questions','test_id','overall_marks','timing','created_by','created_at']
         read_only_fields = ('test_id',)
 
 class TestSerializer(serializers.ModelSerializer):
     grade_name = serializers.SerializerMethodField('get_grade_name')
     subject_name = serializers.SerializerMethodField('get_subject_name')
     def get_grade_name(self, subject):
-      grade = Grade.objects.get(id=(subject.grade.id))
-      return grade.grade
+        print(subject)
+        grade = Grade.objects.get(id=(subject.grade.id))
+        return grade.grade
 
     def get_subject_name(self, chapter):
-      subject = Subject.objects.get(id=(chapter.subject.id))
-      return subject.name
+        subject = Subject.objects.get(id=(chapter.subject.id))
+        return subject.name
     class Meta:
         model = Test
         fields = ['id','grade','grade_name','subject','subject_name','question_paper','created_staff_id','duration','marks','pass_percentage','remarks','description','test_id']
         read_only_fields = ('test_id',)
 
 class TestResultSerializer(serializers.ModelSerializer):
+    subject_name = serializers.SerializerMethodField('get_subject_name')
+    def get_subject_name(self, subject):
+        # print(subject.subject.name)
+        return subject.subject.name
     class Meta:
         model = TestResult
-        fields = '__all__'
+        fields = ['id','grade','subject','subject_name','student_id','test_id','question_paper','result','score','correct_answer','created_at','unanswered_questions','wrong_answer']
 
 class TestInstruction(serializers.ModelSerializer):
     class Meta:

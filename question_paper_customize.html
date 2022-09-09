@@ -82,6 +82,7 @@
     let grade, subject, subject_name, no_of_questions,overall_mark;
     let timing=null, chapters, from_chapter, to_chapter, from_chapter_id = null, to_chapter_id = null;
     let all_chapter, result = null, questions_total = 0,customize = false;
+    let question_paper_id,userId,user_type
     let customize_details = document.querySelector('.customize-details')
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     document.getElementById('q-form-2').style.display = 'none';
@@ -106,11 +107,11 @@
 
     function get_chapter(type) {
         if(timing == null){
-        timing = document.getElementById('timing_2').value
-        console.log(document.getElementById('timing_2').value)
-        timing = timing.split(':')
-        console.log(timing)
-        timing = ((parseInt(timing[0]) * 3600) + (parseInt(timing[1]) * 60))
+        timing =parseInt(document.getElementById('id_timing').value)
+        // console.log(document.getElementById('id_timing').value)
+        // timing = timing.split(':')
+        // console.log(timing)
+        // timing = ((parseInt(timing[0]) * 3600) + (parseInt(timing[1]) * 60))
         }
         console.log(timing)
         from_chapter_id = parseInt(document.getElementById('id_from_chapter').value);
@@ -261,8 +262,12 @@
         }
         if(index == null){
 
-            if((questions_total+knowledge+application+comprehension) != no_of_questions){
+            if((questions_total+knowledge+application+comprehension) < no_of_questions){
                 document.querySelector('.custom-error').innerHTML = `<li> questions added is less than required no of questions</li>`
+                return
+            } 
+            else if((questions_total+knowledge+application+comprehension) > no_of_questions){
+                document.querySelector('.custom-error').innerHTML = `<li> questions added is more than required no of questions</li>`
                 return
             }
             else{
@@ -280,6 +285,9 @@
             document.getElementById('id_comprehension').value = result[index]['cognitive_level']['comprehension'];
             document.getElementById('id_application').value = result[index]['cognitive_level']['application'];
         } else {
+            document.getElementById('id_knowledge').value = result[index]['cognitive_level']['knowledge'];
+            document.getElementById('id_comprehension').value = result[index]['cognitive_level']['comprehension'];
+            document.getElementById('id_application').value = result[index]['cognitive_level']['application'];
             document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=next(${index},${null})>Review</button>`
             document.querySelector('.back-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=next(${index},${index - 1})>Back</button>`
         }
@@ -366,7 +374,7 @@
         }
     }
         if(questions_total != no_of_questions){
-            result = null;
+            result = 'null';
         }else{
             console.log(result)
             result = JSON.stringify(result)
@@ -374,11 +382,12 @@
         }
         let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
       url1.searchParams.append('type', 'save');
+      overall_mark=parseInt(document.getElementById('id_overallmarks').value)
         fetch(url1,
         {
             method: 'POST',
             body: JSON.stringify({ 'grade': grade, 'subject': subject, 'number_of_questions': no_of_questions, 'from_chapter': null, 
-                    'to_chapter': null, 'all_chapters': all_chapter, 'timing': timing, 'overall_marks': overall_mark,'customize':result}
+                    'to_chapter': null, 'all_chapters': all_chapter, 'timing': timing,'overall_marks': overall_mark,'customize':result}
             ),
             headers: {
                 'Accept': 'application/json',
@@ -387,57 +396,53 @@
                 'X-CSRFToken': csrftoken
             },
         }).then(function (response) {
-            if (response.status == 201) {
-                console.log("Sucess response", response)
-                messages.innerHTML = `${name} is created succesfully`;
-                error_messages.innerHTML = ''
-                location.reload();
-            } else {
-                console.log(response);
-            }
             return response.json()
         }).then(data => {
             console.log(data)
             if (data.status != 'success') {
-                error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-                messages.innerHTML = ''
+               error_messages = data.data.error
+            }
+            else{
+             question_paper_id = data.data.id
+             userId = localStorage.getItem('id')
+                let form_remarks = document.getElementById('id_remarks').value
+    let form_description = document.getElementById('id_description').value
+    let form_percentage = document.getElementById('id_pass_percentage').value
+             fetch('https://schooltestproject.herokuapp.com/api/test/',
+             {
+               method: 'POST',
+               body: JSON.stringify({ 'grade': grade, 'subject': subject, 'question_paper': question_paper_id, 'created_staff_id': userId, 'marks': overall_mark, 'duration': timing, 'remarks': form_remarks,'pass_percentage':form_percentage, 'description': form_description }
+               ),
+               headers: {
+                 'Accept': 'application/json',
+                 'Content-Type': 'application/json',
+                 'Authorization': 'token' + ' ' + token,
+                 'X-CSRFToken': csrftoken
+               },
+             }).then(response => {
+               if (response.status == 201) {
+                 console.log("Sucess response", response);
+                 // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
+                 // test_errors.innerHTML = ''
+              
+               }
+               return response.json();
+             }).then(function (data) {
+               console.log(data)
+               if (data.status != 'success') {
+                 error_messages.innerHTML = `<li class='test-warning'>${(data.data.error)}</li>`;
+                 messages.innerHTML = '';
+               }
+               else{
+                messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>
+                <p class="text-success">Test ID :  ${data.data.test_id}</p>
+                `;
+                document.querySelector('.back-btn').innerHTML = '';
+                document.querySelector('.next-btn').innerHTML = '';
+               }
+             })
             }
         })
-
-
-     //   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-      //  overall_mark=parseInt(document.getElementById('id_overallmarks').value)
-      //  let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
-      //  url1.searchParams.append('type', 'save');
-      //  console.log(timing)
-      //  fetch(url1, {
-      //      method: 'POST',
-        //    body: JSON.stringify({
-       //         'grade': grade, 'subject': subject, 'number_of_questions': no_of_questions, 'from_chapter': null, 
-       //         'to_chapter': null, 'all_chapters': all_chapter, 'timing': timing, 'overall_marks': overall_mark,'customize':result
-       //     }),
-        //    headers: {
-         //       'content-Type': 'application/json',
-          //      'Authorization': 'token' + ' ' + token,
-           //     'Accept': 'application/json',
-            //    'X-CSRFToken': csrftoken
-            //}
- //       }).then(res => { console.log(res) }).then(data => {
-  //          console.log(data)
-    //        if(data.status == 'success'){
-      //             let question_paper_id = data.data.id
-        //    }
-        //}).then(()=>{
-//    user_id,user_type = get_user_id();
-  //  let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-  //  let form_remarks = document.getElementById('id_remarks').value
-   // let form_description = document.getElementById('id_description').value
-   // let form_percentage = document.getElementById('id_pass_percentage').value
-
-    /**/
-    
-  //}
-//)
     }
 
 
