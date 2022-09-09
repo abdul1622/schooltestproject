@@ -147,14 +147,29 @@ class UserDetailsView(ListAPIView):
     serializer_class=UserDetailsSerializer
     permission_classes=[AllowAny]
 
+
     def get_queryset(self):
+        grade = self.request.query_params.get('grade')
+        user_type =(self.request.query_params.get('user_type'))
         user = self.request.user
+        queryset = []
+        queryset_all = User.objects.all()
         if user.user_type == 'is_student':
             queryset = User.objects.get(id = user.id)
         elif user.user_type == 'is_staff':
-            queryset = User.objects.filter(user_type = 'is_student')
+            queryset= User.objects.filter(user_type = 'is_student')
         elif user.user_type == 'is_admin':
-            queryset = User.objects.all()
+            queryset= User.objects.all()
+        if grade and user.user_type != 'is_student':
+            grade = int(grade)
+            if user_type:
+                queryset_all =queryset.filter(user_type = user_type)
+            queryset= []
+            for i in queryset_all:
+                print(i.profile.standard)
+                if i.profile.standard == grade:
+                   queryset.append(i)
+            print(queryset)
         return queryset
 
     def list(self, request):
