@@ -172,9 +172,14 @@ class Question_Paper(models.Model):
 
     def __str__(self):
         return (str(self.grade))+' '+(str(self.subject))
-    # def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs):
     #     self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
-
+        if self.test_id:
+            test = Test.objects.get(test_id=self.test_id)
+            test.marks = self.overall_marks
+            test.duration = self.timing
+            test.save()
+            super(Question_Paper, self).save(*args, **kwargs)
     class Meta:
         ordering = ('grade', 'subject', '-created_at',)
 
@@ -197,7 +202,8 @@ class Test(models.Model):
         return self.remarks
 
     def save(self, *args, **kwargs):
-        self.test_id = (str(uuid.uuid4()))[:16]
+        if not self.test_id:
+            self.test_id = (str(uuid.uuid4()))[:16]
         question_paper = self.question_paper
         if not self.duration:
             self.duration = question_paper.timing
