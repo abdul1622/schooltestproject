@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <button id="--question" onclick=show()>Add Question</button>
-<form id="questionForm" class="question_create">
+<form id="questionForm" class="question_create" method="get">
   <button onclick=back() class='back-btn'>&#x2715; </button>
   <div class='grid-item'> {{questionform.grade.label_tag}} <br>{{questionform.grade}}</div>
   <div class="grid-item"> <label for="id_subject">Subject:</label> <br> <select name="subject" required=""

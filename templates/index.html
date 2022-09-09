@@ -20,7 +20,6 @@ function userdetails() {
         console.log(data)
         data.forEach((d, index) => {
             if (`${d.user_type}` == 'is_student') {
-                // d.push({'result':[]})
                 students.push(d)
             }
             else if (`${d.user_type}` == 'is_staff') {
@@ -38,37 +37,6 @@ function userdetails() {
 } 
 userdetails()
 console.log(staffs,students)
-
-function get_result(){
-    for(i=0;i<students.length;i++){
-             
-             students[i]['result'] = []
-     }
-url = new URL('http://127.0.0.1:8000/api/test-history/');
-
-
-    fetch(url,
-    {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'token' + ' ' + token,
-        },
-    }).then(function (response) {
-        return response.json()
-    }).then(data => {
-        console.log(data)
-        data.forEach((d, index) =>{
-            console.log(d.subject)
-            for(i=0;i<students.length;i++){
-                if(students[i]['id'] == d.student_id){
-                    students[i]['result'].push({'subject' : d.subject,'score':d.score,'res':d.result})
-                }
-            }
-    })
-})
-}
 
 
 
