@@ -20,25 +20,18 @@ function userdetails() {
         console.log(data)
         data.forEach((d, index) => {
             if (`${d.user_type}` == 'is_student') {
-<<<<<<< HEAD
-=======
                 // d.push({'result':[]})
->>>>>>> 683fe8c51362a2faf18b66579549035cb4e55035
                 students.push(d)
             }
             else if (`${d.user_type}` == 'is_staff') {
                 staffs.push(d)
             }
-            if (localStorage.getItem('user_type')=='is_admin' && data[data.length-1] == d){
+            if (localStorage.getItem('user_type')=='is_admin'){
             var content = ''
             content += `<h3>No.of.students : <span class='count'>${students.length}</span></h3>
             <h3>No.of.staffs : <span class='count'>${staffs.length}</span></h3>`
             document.querySelector('.counts').innerHTML = content
-<<<<<<< HEAD
-            // get_result();
-=======
             get_result();
->>>>>>> 683fe8c51362a2faf18b66579549035cb4e55035
             }
         })
     })
@@ -46,26 +39,6 @@ function userdetails() {
 userdetails()
 console.log(staffs,students)
 
-<<<<<<< HEAD
-// function get_result(){
-// url = new URL('http://127.0.0.1:8000/api/test-history/');
-//     fetch(url,
-//     {
-//         method: 'GET',
-//         headers: {
-//             'Accept': 'application/json',
-//             'Content-Type': 'application/json',
-//             'Authorization': 'token' + ' ' + token,
-//         },
-//     }).then(function (response) {
-//         return response.json()
-//     }).then(data => {
-//         data.forEach((d, index) =>{
-//             console.log(data)
-//     })
-// })
-// }
-=======
 function get_result(){
     for(i=0;i<students.length;i++){
              
@@ -96,7 +69,6 @@ url = new URL('http://127.0.0.1:8000/api/test-history/');
     })
 })
 }
->>>>>>> 683fe8c51362a2faf18b66579549035cb4e55035
 
 
 </script>
