@@ -109,6 +109,7 @@
     var token = localStorage.getItem('token')
     var form_all = document.querySelector('.form-all')
     let edit = null
+    let chapter_list = []
     const subject_create = document.getElementById('subject-btn')
     const grade_create = document.getElementById('grade-btn')
     // const subject_create = document.getElementById('subject-btn')
@@ -462,6 +463,8 @@
             container3.innerHTML = ''
             subject_id = data.data[0].subject_id
             console.log(data.data[0].subject_id)
+            chapter_list = data.data
+            console.log(chapter_list)
             data.data.forEach((d, index) => {
                 // <p><label> Subject </label> <span>: <span id="${d.subject_id}" class="subject">${d.subject}</span></span></p>
                 content = content + `<div class="chapter-card" id=${d.id}>
