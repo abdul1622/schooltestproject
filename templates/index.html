@@ -149,12 +149,11 @@ fetch(url_for_std, {
     list = data
 
     for(i=0;i<list.length;i++){
-            // if(list[i]['profile']['section']) 
-            // if((list[i].profile.section).toUpperCase() != section){
-            //     list.splice(i, 1);
-            //     i -= 1
-            // }
-            // else{
+            if((list[i].profile.section).toUpperCase() != section){
+                list.splice(i, 1);
+                i -= 1
+            }
+            else{
             if(list[i].user_type != 'is_student'){
                 staff_list.push(list[i])
                 list.splice(i, 1);
@@ -162,7 +161,7 @@ fetch(url_for_std, {
             }else{
                   list[i]['result'] = []
             }
-        // }
+        }
      }
 
     url = new URL('http://127.0.0.1:8000/api/test-history/');
