@@ -405,7 +405,7 @@
             console.log(no_of_questions)
             console.log(result)
         }
-        let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
+        let url1 = new URL('http://127.0.0.1:8000/api/question-paper/')
         url1.searchParams.append('type', 'save');
         fetch(url1,
             {
@@ -425,6 +425,7 @@
                 return response.json()
             }).then(data => {
                 console.log(data)
+                console.log(data.status)
                 if (data.status != 'success') {
                     document.getElementById('q-form-5').style.display = 'block'
                     error_messages.innerHTML = `<li class='test-warning'>${(data.data)}</li>`;
