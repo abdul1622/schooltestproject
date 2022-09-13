@@ -399,6 +399,7 @@ class QuestionList(APIView):
                     overall_marks = cal_overall_marks
                 created_by = self.request.user.email
                 question_paper = Question_Paper.objects.create(grade=grade,subject=subject_obj,created_by=created_by,timing=timing,overall_marks=overall_marks)
+                print(question_paper)
                 for question in questions:
                     question_paper.no_of_questions.append(question.id)
                 question_paper,status = render_to_pdf2('academics/question.html','question_files',question_paper,context)
@@ -406,7 +407,6 @@ class QuestionList(APIView):
                     return Response({"status": "failure","data":"given details are incorrect"},status=HTTP_206_PARTIAL_CONTENT) 
                 serializer = QuestionPaperSerializer(question_paper)
                 return Response({'status':'success','data':serializer.data,'answer-file-path':'/media/answer_files/{answer_file}.pdf','subject_id':subject_obj.id,'grade_id':grade.id},status=HTTP_200_OK)
-
             filename,status = render_to_pdf2('academics/question.html','question_paper',None,context)
             if not status:
                 return Response({"status": "failure","data":"given details are incorrect"},status=HTTP_206_PARTIAL_CONTENT) 
@@ -619,6 +619,7 @@ class TestResultCreateView(CreateAPIView):
                     queryset = TestResult.objects.filter(grade=grade,student_id=student)
                 except:
                     queryset = TestResult.objects.all()
+        else:
             try: 
                 grade = Grade.objects.get(grade=grade)   
                 queryset = TestResult.objects.filter(grade=grade)
