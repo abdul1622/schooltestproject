@@ -27,6 +27,7 @@
     }).then(data => {
       data.forEach((d, index) => {
         let test_id = d.test_id
+      
 
         result.push({ index: { 'subject': d.subject, 'result': d.result, 'correct': d.correct_answer, 'wrong': d.wrong_answer, 'unanswered': d.unanswered_questions, 'create': d.created_at }, 'remarks': null })
         fetch(`https://schooltestproject.herokuapp.com/api/test/${test_id}/`,
