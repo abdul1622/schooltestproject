@@ -123,7 +123,7 @@
     var host = window.location.protocol + "//" + window.location.host;
     var container3 = document.querySelector('.chapter-cards')
     var list = document.querySelector('.grade-list');
-
+    document.getElementById('nav-academics').style.opacity = '0.5';
     document.getElementById('back-btn-chapter').addEventListener('click', () => {
         getsubject(grade_val, grade_id);
         messages.innerHTML = ''

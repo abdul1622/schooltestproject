@@ -9,6 +9,7 @@
   let temp;
   let content = ''
   let result = []
+  document.getElementById('nav-testhistory').style.opacity = '0.5';
   url = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
   url.searchParams.append('grade', standard);
   url.searchParams.append('student_id', student_id)

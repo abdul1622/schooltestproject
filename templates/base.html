@@ -4150,7 +4150,7 @@ li.pass::marker {
                         <button data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
                             aria-expanded="false" aria-label="Toggle navigation"> &#x2715; </button>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="nav-profile">
                         <a href="/profile">Profile</a>
                     </li>
 
@@ -4191,7 +4191,6 @@ li.pass::marker {
             </div>
         </div>
     </nav>
-    <h1 class="page-title"></h1>
     {% include 'accounts/home.html' %}
     {% block subject %}{% endblock %}
     {% block content %}{% endblock %}
