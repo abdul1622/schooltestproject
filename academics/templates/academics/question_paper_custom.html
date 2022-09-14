@@ -25,6 +25,7 @@
         {{custom_form.as_p}}
         <div class="error-form-2"></div>
         <p class="chapter-btns">
+            <button id="back-btn" class="btn btn-primary" onclick=get()>Back</button>
             <button id="customize-btn" class="submit-btn btn btn-primary" onclick=get_customize()>Customize</button>
             <button id="next-btn" class="submit-btn btn btn-primary" onclick=without_customize()>Next</button>
         </p>
@@ -94,6 +95,12 @@
     document.getElementById('nav-questionpaper').style.opacity = '0.5';
     // document.getElementById('id_grade').setAttribute("onchange", getgradename());
 
+ function get(){
+    document.getElementById('q-form-1').style.display = 'block';
+    document.getElementById('q-form-2').style.display = 'none';
+    document.getElementById('q-form-3').style.display = 'none';
+    document.getElementById('q-form-4').style.display = 'none';
+ }
 
     $("#id_grade").change(function () {
         var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
@@ -173,13 +180,13 @@
         no_of_questions = parseInt(document.getElementById('id_no_of_questions').value);
         if (isNaN(grade_id) || isNaN(subject_id)) {
             if (!isNaN(grade_id)) {
-                document.querySelector('.error-form-1').innerHTML = "<li class='test-warning'>subject is a required field </li>"
+                document.querySelector('.error-form-1').innerHTML = "<li style='color:white'>subject is a required field </li>"
             }
             else if (!isNaN(subject_id)) {
-                document.querySelector('.error-form-1').innerHTML = "<li class='test-warning'>grade is a required field</li>"
+                document.querySelector('.error-form-1').innerHTML = "<li style='color:white;'>grade is a required field</li>"
             }
             else {
-                document.querySelector('.error-form-1').innerHTML = "<li class='test-warning'>grade and subject are required field</li>"
+                document.querySelector('.error-form-1').innerHTML = "<li style='color:white;'>grade and subject are required field</li>"
             }
             return
         }
@@ -200,9 +207,10 @@
             da = data
             console.log(data['data'].length)
             if(no_of_questions > data['data'].length){
-                document.querySelector('.error-form-1').innerHTML = `<li class='test-warning'>given number of questions is higher than the actual number of question ${data['data'].length}</li>`
+                document.querySelector('.error-form-1').innerHTML = `<li style='color:white;'>given number of questions is higher than the actual number of question</li><li style='color:white;'> number of question available is ${data['data'].length}</li>`
                 return
             }
+
             customize = false
         document.getElementById('q-form-1').style.display = 'none';
         document.getElementById('q-form-2').style.display = 'block';
@@ -212,6 +220,7 @@
 
         })
         }else{
+
             customize = false
         document.getElementById('q-form-1').style.display = 'none';
         document.getElementById('q-form-2').style.display = 'block';
@@ -219,6 +228,7 @@
         document.getElementById('q-form-4').style.display = 'none';
         result = []
         }
+        document.querySelector('.error-form-1').innerHTML = '';
         url3 = ('https://schooltestproject.herokuapp.com/api/chapter-list/');
         fetch(url3, {
             method: 'POST',
@@ -269,7 +279,13 @@
 
     //    if(from_chapter_id)
         all_chapter = document.getElementById('id_allChapter').checked;
+        if(!all_chapter && !from_chapter_id && !to_chapter_id){
+            document.querySelector('.error-form-2').innerHTML = `<li style='color:white;'>fill any one of the above field</li>`;
+            return 
+        }
+        document.querySelector('.error-form-2').innerHTML = ''
         if (!all_chapter) {
+
             console.log('hi')
             for (i = 0; i < chapters.length; i++) {
                 if (!from_chapter_id && chapters[i]['chapter_no'] == 1) {

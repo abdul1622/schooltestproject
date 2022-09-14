@@ -690,7 +690,6 @@ class TestResultEditView(RetrieveDestroyAPIView):
 
 
 class TestInstructionView(ListCreateAPIView):
-
     serializer_class = TestInstruction
     queryset = InstructionForTest.objects.all()
     permission_classes = [AllowAny]
