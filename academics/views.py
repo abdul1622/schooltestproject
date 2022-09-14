@@ -609,17 +609,21 @@ class TestResultCreateView(CreateAPIView):
     permission_classes = [AllowAny]
 
     def get(self, request, format=None):
-        queryset = TestResult.objects.all()
-        grade = (self.request.query_params.get('grade'))
+        # queryset = TestResult.objects.all()
+        grade = self.request.query_params.get('grade')
+        print(grade)
         student = self.request.query_params.get('student_id')
+        print(student)
         if grade: 
             if student:
-                try:
-                    grade = Grade.objects.get(grade=grade)
-                    queryset = TestResult.objects.filter(grade=grade,student_id=student)
-                except:
-                    queryset = TestResult.objects.all()
+                print('hi')
+            # try:
+                grade = Grade.objects.get(grade=int(grade))
+                queryset = TestResult.objects.filter(grade=grade,student_id=student)
+            # except:
+            #     queryset = TestResult.objects.all()
         else:
+            print('hi')
             try: 
                 grade = Grade.objects.get(grade=grade)   
                 queryset = TestResult.objects.filter(grade=grade)

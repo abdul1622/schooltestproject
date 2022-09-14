@@ -11,7 +11,7 @@
    let result = []
    url = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
     url.searchParams.append('grade', standard);
-    url.searchParams.append('studentid',student_id)
+    url.searchParams.append('student_id',student_id)
     fetch(url,
     {
         method: 'GET',
