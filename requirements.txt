@@ -1,15 +1,10 @@
 arabic-reshaper==2.1.3
-<<<<<<< HEAD
-asgiref==3.5.2
-asn1crypto==1.5.1
-=======
 argh==0.26.2
 asgiref==3.4.1
 asn1crypto==1.5.1
 autopep8==1.6.0
 bt==0.2.9
 cachetools==5.2.0
->>>>>>> 320b7a730f766c9f2477ec2a20e9f4ac2a5277d0
 certifi==2022.5.18.1
 cffi==1.15.0
 charset-normalizer==2.0.12
