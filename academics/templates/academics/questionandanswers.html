@@ -114,11 +114,12 @@
     document.getElementById('--question').style.display = 'block'
     document.getElementById('questionForm').reset();
   }
+
   let yes_button = document.getElementById('delete-btn-yes')
   let no_btn = document.getElementById('delete-btn-no')
   var host = window.location.protocol + "//" + window.location.host;
   var token = localStorage.getItem('token')
-
+  document.getElementById('nav-question').style.opacity = '0.5';
   document.getElementById('message-close-btn').addEventListener('click', () => {
     messages.innerHTML = '';
     error_messages.innerHTML = '';
