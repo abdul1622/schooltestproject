@@ -1,94 +1,100 @@
-
 {% extends 'base.html' %}
 {% block history %}
 <h1 class="test-history">Test History</h1>
+<hr>
+<div class="colorbox">
+  <div class="colorbox1"> <p>pass</p></div>
+  <div class="colorbox2"><p>fail</p></div>
+  </div>
 <div class="history"></div>
 <script>
-   var  student_id=localStorage.getItem('id')
-   var token=localStorage.getItem('token')
-   var standard = localStorage.getItem('standard')
-   let temp;
-   let content = ''
-   let result = []
-   url = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
-    url.searchParams.append('grade', standard);
-    url.searchParams.append('student_id',student_id)
-    fetch(url,
+  var student_id = localStorage.getItem('id')
+  var token = localStorage.getItem('token')
+  var standard = localStorage.getItem('standard')
+  let temp;
+  let content = ''
+  let result = []
+  url = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
+  url.searchParams.append('grade', standard);
+  url.searchParams.append('student_id', student_id)
+  fetch(url,
     {
-        method: 'GET',
-        
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'token' + ' ' + token,
-        },
+      method: 'GET',
+
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'token' + ' ' + token,
+      },
     }).then(function (response) {
-        return response.json()
+      return response.json()
     }).then(data => {
-        data.forEach((d, index) =>{
-          let test_id = d.test_id
+      data.forEach((d, index) => {
+        let test_id = d.test_id
 
-            result.push({index:{'subject':d.subject,'result':d.result,'correct':d.correct_answer,'wrong':d.wrong_answer,'unanswered':d.unanswered_questions,'create':d.created_at}})
-            fetch(`https://schooltestproject.herokuapp.com/api/test/${test_id}/`,
-            {
-              method: 'GET',
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'token' + ' ' + token,
-              },
-            }).then(response => {
-              if (response.status == 200) {
-                console.log("Sucess response", response);
-                // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
-                // test_errors.innerHTML = ''
+        result.push({ index: { 'subject': d.subject, 'result': d.result, 'correct': d.correct_answer, 'wrong': d.wrong_answer, 'unanswered': d.unanswered_questions, 'create': d.created_at } })
+        fetch(`https://schooltestproject.herokuapp.com/api/test/${test_id}/`,
+          {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': 'token' + ' ' + token,
+            },
+          }).then(response => {
+            if (response.status == 200) {
+              console.log("Sucess response", response);
+              // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
+              // test_errors.innerHTML = ''
 
-              }
-              return response.json();
-            }).then(function (test_data) {
-              console.log(test_data)
-              console.log(d)
-              if(!temp){
-            temp = data[0].subject
-      console.log(temp)
-      content += `<fieldset>
+            }
+            return response.json();
+          }).then(function (test_data) {
+            console.log(test_data)
+            console.log(d)
+            if (!temp) {
+              temp = data[0].subject
+              console.log(temp)
+              content += `<fieldset>
               <legend> ${data[0].subject_name} </legend>`
-          }
+            }
 
-          if(temp!=d.subject){
-            content += `</fieldset>
+            if (temp != d.subject) {
+              content += `</fieldset>
             <fieldset>
               <legend> ${d.subject_name} </legend>`
-            temp = d.subject
-              }
-              if(d.result != 'fail'){
-                content += `<div style="background-color:green;">`
-              }else{
+              temp = d.subject
+            }
+            if (d.result != 'fail') {
+              content += `<div style="background-color:#adeead;">`
+            } else {
               content += '<div>'
-              }
-              result[index]['remarks'] = test_data.remarks
-              content += `<p class="text-center">${test_data.remarks}</p>`
-              content += `<p> Correct Answer : ${d.correct_answer}</p>
+            }
+            result[index]['remarks'] = test_data.remarks
+            content += `<p class="text-center">${test_data.remarks}</p>`
+            content += `<p> Correct Answer : ${d.correct_answer}</p>
               <p>Wrong Answers : ${d.wrong_answer}</p>
               <p>Un Answered : ${d.unanswered_questions}</p>
               <p>Result : ${d.result}</p>
               <p>Score : ${d.score} %</p>
               <p>Date : ${d.created_at.slice(0, 10)} </p>
-              <p>Time : ${d.created_at.slice(11,16)} </p>
-          </div>  `
-          // console.log(result)
-          if(result[result.length-1].remarks){
-            content += `</fieldset>`
-      // content += `<p class='inst'> <span class='pass'>.</span> pass <span class='fail'>.</span>fail</p>`
-          
-            document.querySelector('.history').innerHTML=content
-          }
-        }).then(()=>{
-            // document.querySelector('.history').innerHTML=content
-        })
+              <p>Time : ${d.created_at.slice(11, 16)} </p>
 
-        
+          </div>  `
+            // console.log(result)
+            if (result[result.length - 1].remarks) {
+              content += `</fieldset>
+            `
+              // content += `<p class='inst'> <span class='pass'>.</span> pass <span class='fail'>.</span>fail</p>`
+
+              document.querySelector('.history').innerHTML = content
+            }
+          }).then(() => {
+            // document.querySelector('.history').innerHTML=content
+          })
+
+
+      })
     })
-})
 </script>
 {% endblock %}
