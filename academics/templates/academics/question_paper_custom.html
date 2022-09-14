@@ -267,7 +267,7 @@
         from_chapter_id = document.getElementById('id_from_chapter').value
         to_chapter_id = document.getElementById('id_to_chapter').value
 
-    //    if(from_chapter_id)
+        //    if(from_chapter_id)
         all_chapter = document.getElementById('id_allChapter').checked;
         if (!all_chapter) {
             console.log('hi')
@@ -303,7 +303,7 @@
             }
             chapters = new_list
         }
-            
+
         console.log(chapters)
         document.getElementById('grade_value').innerHTML = grade
         document.getElementById('subject_value').innerHTML = subject_name
@@ -380,27 +380,27 @@
         let content3 = ''
 
         questions_total = 0;
-        if(result.length){
-        for (i = 0; i < result.length; i++) {
-            let n = result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
-            if (n) {
-                questions_total += n
+        if (result.length) {
+            for (i = 0; i < result.length; i++) {
+                let n = result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
+                if (n) {
+                    questions_total += n
 
                 for (j = 0; j < chapters.length; j++) {
                     if (chapters[j]['id'] == result[i]['id']) {
                         content3 += `<div> <p> CHAPTER ${i + 1} : ${(chapters_list[j]['name']).toUpperCase()} </p>
                             <p> NO OF QUESTIONS : ${n} </p> </div>
                             `
-                        break
+                            break
+                        }
+
                     }
-                
+                }
+                content3 += `<p> Total No of questions : ${questions_total}`
+                customize_details.innerHTML = content3
             }
         }
-        content3 += `<p> Total No of questions : ${questions_total}`
-        customize_details.innerHTML = content3
-        }
     }
-}
 
     function with_customize() {
         content = ''
@@ -411,14 +411,14 @@
                 questions_total += result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
             }
             no_of_questions = questions_total
-        for (i = 0; i < result.length; i++) {
-            for (j = 0; j < chapters.length; j++) {
-                if (chapters[j]['id'] == result[i]['id']) {
-                    content += `<li>${chapters[j]['name']}</li>`
-                    break
+            for (i = 0; i < result.length; i++) {
+                for (j = 0; j < chapters.length; j++) {
+                    if (chapters[j]['id'] == result[i]['id']) {
+                        content += `<li>${chapters[j]['name']}</li>`
+                        break
+                    }
                 }
             }
-        }
         }
         document.getElementById('grade_value').innerHTML = grade
         document.getElementById('subject_value').innerHTML = subject_name
@@ -504,16 +504,16 @@
                                 messages.innerHTML = '';
                             }
                             else {
-                                messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>
-                <p class="text-success">Test ID :  ${data.data.test_id}</p>
+                                messages.innerHTML = `<p class="success"> ${form_remarks} test created successfully</p>
+                <p class="success">Test ID :  ${data.data.test_id}</p>
                 `;
                                 error_messages.innerHTML = ''
                                 document.getElementById('q-form-4').style.display = 'none';
                             }
                         })
                 }
-            
+
             })
-        }
+    }
 </script>
 {% endblock %}

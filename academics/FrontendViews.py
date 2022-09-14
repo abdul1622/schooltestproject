@@ -33,6 +33,7 @@ def chapterlistview(request):
 
 def questionlistview(request):  
     form=questionlist_form()
+
     return render(request,'academics/questionlist.html',{'form':form})
 
 def chaptercrud(request):  

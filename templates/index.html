@@ -62,7 +62,7 @@ function userdetails() {
             else if (`${d.user_type}` == 'is_staff') {
                 staffs.push(d)
             }
-            if (localStorage.getItem('user_type')=='is_admin' && data[data.length-1] == d){
+            if (localStorage.getItem('user_type')=='is_admin'){
             var content = ''
             content += `<h3>No.of.students : <span class='count'>${students.length}</span></h3>
             <h3>No.of.staffs : <span class='count'>${staffs.length}</span></h3>`

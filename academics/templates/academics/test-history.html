@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block history %}
 <h1 class="test-history">Test History</h1>
+<hr>
+<div class="colorbox">
+  <div class="colorbox1"> <p>pass</p></div>
+  <div class="colorbox2"><p>fail</p></div>
+  </div>
 <div class="history"></div>
 <script>
   var student_id = localStorage.getItem('id')
@@ -62,7 +67,7 @@
               temp = d.subject
             }
             if (d.result != 'fail') {
-              content += `<div style="background-color:green;">`
+              content += `<div style="background-color:#adeead;">`
             } else {
               content += '<div>'
             }
@@ -101,6 +106,7 @@
 
       })
     })
+
 
 </script>
 {% endblock %}
