@@ -84,9 +84,10 @@
     let timing = null, chapters, from_chapter, to_chapter, from_chapter_id = null, to_chapter_id = null;
     let all_chapter, result = [], questions_total = 0, customize = false;
     let question_paper_id, userId, user_type, chapters_list = [];
-    var content = '';
+    var content = '';da=null
     let customize_details = document.querySelector('.customize-details')
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    let chapter_name_list = []
     document.getElementById('q-form-2').style.display = 'none';
     document.getElementById('q-form-3').style.display = 'none';
     document.getElementById('q-form-4').style.display = 'none';
@@ -182,7 +183,42 @@
             }
             return
         }
+        if(!isNaN(no_of_questions)){
+            url = new URL('https://schooltestproject.herokuapp.com/api/question/');
+  url.searchParams.append('grade',grade_id);
+  url.searchParams.append('subject',subject_id)
+  fetch(url, {
+    method: 'GET',
+            headers: {
+                'content-Type': 'application/json',
+                'Authorization': 'token' + ' ' + token,
+            }
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            console.log(data)
+            da = data
+            console.log(data['data'].length)
+            if(no_of_questions > data['data'].length){
+                document.querySelector('.error-form-1').innerHTML = `<li class='test-warning'>given number of questions is higher than the actual number of question ${data['data'].length}</li>`
+                return
+            }
+            customize = false
+        document.getElementById('q-form-1').style.display = 'none';
+        document.getElementById('q-form-2').style.display = 'block';
+        document.getElementById('q-form-3').style.display = 'none';
+        document.getElementById('q-form-4').style.display = 'none';
+        result = []
 
+        })
+        }else{
+            customize = false
+        document.getElementById('q-form-1').style.display = 'none';
+        document.getElementById('q-form-2').style.display = 'block';
+        document.getElementById('q-form-3').style.display = 'none';
+        document.getElementById('q-form-4').style.display = 'none';
+        result = []
+        }
         url3 = ('https://schooltestproject.herokuapp.com/api/chapter-list/');
         fetch(url3, {
             method: 'POST',
@@ -198,13 +234,6 @@
             chapters_list = data.data
             console.log(chapters_list)
         })
-
-        customize = false
-        document.getElementById('q-form-1').style.display = 'none';
-        document.getElementById('q-form-2').style.display = 'block';
-        document.getElementById('q-form-3').style.display = 'none';
-        document.getElementById('q-form-4').style.display = 'none';
-        result = []
     }
 
     function get_customize() {
@@ -214,6 +243,7 @@
         document.getElementById('q-form-3').style.display = 'none';
         document.getElementById('q-form-4').style.display = 'block';
         // document.getElementById('q-form-5').style.display = 'block';
+        console.log('back',subject_id)
         var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
 
         $.ajax({
@@ -226,7 +256,7 @@
             }
         });
         document.querySelector('.more-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=add()>Add More</button>`
-        document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary"  disabled>Review</button>`
+        document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary">Review</button>`
         document.querySelector('.back-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Back</button>`
         console.log(result)
     }
@@ -285,6 +315,7 @@
         }
         document.getElementById('chapter_value').innerHTML = content
         console.log(chapters)
+        document.querySelector('.back-btn-review').innerHTML = `<button class="btn btn-primary" onclick=getnext()>Back</button>`
         review();
     }
 
@@ -298,10 +329,15 @@
     function add() {
         customize = true
         chapters = chapters_list
-        let chapter_id = parseInt(document.getElementById('id_chapter_get').value)
-        var knowledge = parseInt(document.getElementById('id_knowledge').value)
-        var comprehension = parseInt(document.getElementById('id_comprehension').value)
-        var application = parseInt(document.getElementById('id_application').value)
+
+        let chapter_id = null
+        let knowledge = 0
+        let comprehension = 0
+        let application = 0
+        chapter_id = parseInt(document.getElementById('id_chapter_get').value)
+        knowledge = parseInt(document.getElementById('id_knowledge').value)
+         comprehension = parseInt(document.getElementById('id_comprehension').value)
+         application = parseInt(document.getElementById('id_application').value)
         let current_index = null
         questions_total = 0
         let no_of_ques_chapter = 0
@@ -352,7 +388,7 @@
 
                 for (j = 0; j < chapters.length; j++) {
                     if (chapters[j]['id'] == result[i]['id']) {
-                        content3 += `<div> <p> CHAPTER ${i + 1} : ${(chapters_list[i]['name']).toUpperCase()} </p>
+                        content3 += `<div> <p> CHAPTER ${i + 1} : ${(chapters_list[j]['name']).toUpperCase()} </p>
                             <p> NO OF QUESTIONS : ${n} </p> </div>
                             `
                         break
@@ -388,6 +424,7 @@
         document.getElementById('subject_value').innerHTML = subject_name
         document.getElementById('No_of_questions').innerHTML = questions_total
         document.getElementById('chapter_value').innerHTML = content
+        document.querySelector('.back-btn-review').innerHTML = `<button class="btn btn-primary" onclick=get_customize()>Back</button>`
         review();
     }
 

@@ -1,8 +1,10 @@
 from ast import List
+from base64 import standard_b64decode
 from operator import truediv
 from os import stat
 import json
 from itertools import chain
+from re import sub
 from rest_framework.generics import (
     CreateAPIView,
     RetrieveAPIView,
@@ -54,7 +56,13 @@ class GradeView(ListCreateAPIView):
     permission_classes = [AllowAny]
 
     def list(self, request):
+        user = self.request.user
         queryset = self.get_queryset()
+        if user.user_type == 'is_staff':
+            grade = user.profile.standard
+            queryset = queryset.filter(grade=grade)
+        elif user.user_type == 'is_student':
+            return Response({"status": "failure", 'data': 'Your not have access to view this page'})
         serializer = GradeSerializer(queryset, many=True)
         return Response({"status": "success", 'data': serializer.data})
 
@@ -271,7 +279,13 @@ class QuestionCreateView(CreateAPIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
-        questions = Question.objects.all()
+        grade = self.request.query_params.get('grade')
+        subject = self.request.query_params.get('subject')
+        if grade and subject:
+            try:
+                questions = Question.objects.filter(grade_id=grade,subject_id=subject)
+            except:
+                questions = Question.objects.all()
         serializer_name = questionanswerserializer(questions, many=True)
         serializer = QuestionAnswerSerializer(questions, many=True)
         return Response({"status": "success", 'name': serializer_name.data, 'data': serializer.data})
@@ -343,7 +357,7 @@ class QuestionList(APIView):
                                 newlist = newlist[:num]
                                 questions.append(newlist)
                             else:
-                                return Response({'status':'failure','data':('Required questions not available in {} level in chapter {} ').format(cognitive,chapter)},status=HTTP_206_PARTIAL_CONTENT)
+                                return Response({'status':'failure','data':('Required questions not available in {} level in chapter {}. Available number of questions is {}').format(cognitive,chapter,len(newlist))},status=HTTP_206_PARTIAL_CONTENT)
                         except:
                             return Response({"status": "failure","data":"given details are incorrect"},status=HTTP_206_PARTIAL_CONTENT)
                 questions = [item for sublist in questions for item in sublist]
@@ -373,7 +387,7 @@ class QuestionList(APIView):
             if number_of_questions <= total_questions:
                 questions = questions[:number_of_questions]
             else:
-                return Response({'status':'failure','data':'given number questions is higher then the actual number of questions '},status=HTTP_206_PARTIAL_CONTENT)
+                return Response({'status':'failure','data':f'given number questions is higher then the actual number of questions${total_questions}'},status=HTTP_206_PARTIAL_CONTENT)
             user = self.request.user
             serializer = QuestionSerializer(questions,many=True)
             type = type.lower()
@@ -609,21 +623,17 @@ class TestResultCreateView(CreateAPIView):
     permission_classes = [AllowAny]
 
     def get(self, request, format=None):
-        # queryset = TestResult.objects.all()
-        grade = self.request.query_params.get('grade')
-        print(grade)
+        queryset = TestResult.objects.all()
+        grade = (self.request.query_params.get('grade'))
         student = self.request.query_params.get('student_id')
-        print(student)
         if grade: 
             if student:
-                print('hi')
-            # try:
-                grade = Grade.objects.get(grade=int(grade))
-                queryset = TestResult.objects.filter(grade=grade,student_id=student)
-            # except:
-            #     queryset = TestResult.objects.all()
+                try:
+                    grade = Grade.objects.get(grade=grade)
+                    queryset = TestResult.objects.filter(grade=grade,student_id=student)
+                except:
+                    queryset = TestResult.objects.all()
         else:
-            print('hi')
             try: 
                 grade = Grade.objects.get(grade=grade)   
                 queryset = TestResult.objects.filter(grade=grade)
