@@ -4,7 +4,11 @@
     <div class="box" id="mediabox">
 
         {% csrf_token %}
-        {{form.as_p}}
+        <!-- {{form.as_p}} -->
+        <label for=""> Grade: </label>
+        <select name="grade" required="" id="id_grade">
+            <option value="" selected="">---------</option>
+          </select>
         <label for=""> Subject: </label>
         <select name="subject" required="" id="id_subject">
             <option value="" selected="">---------</option>
@@ -102,6 +106,18 @@
     var grade;
     var subject;
     let subject_name;
+    document.getElementById('nav-chapterlist').style.opacity = '0.5';
+    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
+    
+            $.ajax({                       
+              url: url_for_change,                  
+              success: function (data) {
+                $("#id_grade").html(data); 
+              }
+            });
+      
+
+
     function closeform(){
         document.querySelector('.form').style.display ='none'
         

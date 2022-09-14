@@ -158,7 +158,9 @@ class UserDetailsView(ListAPIView):
         if user.user_type == 'is_student':
             queryset = User.objects.get(id = user.id)
         elif user.user_type == 'is_staff':
-            queryset= User.objects.filter(user_type = 'is_student')
+            standard_staff = user.profile.standard
+            section_staff = user.profile.section
+            queryset= User.objects.filter(user_type = 'is_student',profile__standard=standard_staff,profile__section=section_staff)
         elif user.user_type == 'is_admin':
             queryset= User.objects.all()
         if standard and user.user_type != 'is_student':

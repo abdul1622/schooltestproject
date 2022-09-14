@@ -4182,7 +4182,7 @@ li.pass::marker {
                         <button data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
                             aria-expanded="false" aria-label="Toggle navigation"> &#x2715; </button>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="nav-profile">
                         <a href="/profile">Profile</a>
                     </li>
 
@@ -4292,6 +4292,7 @@ li.pass::marker {
             }
             else if (user == 'is_staff' && dataentry) {
                 staff.style.display = 'none'
+                questionpaper.style.display = 'none'
                 test.style.display = 'none'
                 testhistory.style.display = 'none'
             }

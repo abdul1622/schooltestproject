@@ -1,8 +1,10 @@
 from ast import List
+from base64 import standard_b64decode
 from operator import truediv
 from os import stat
 import json
 from itertools import chain
+from re import sub
 from rest_framework.generics import (
     CreateAPIView,
     RetrieveAPIView,
@@ -54,7 +56,13 @@ class GradeView(ListCreateAPIView):
     permission_classes = [AllowAny]
 
     def list(self, request):
+        user = self.request.user
         queryset = self.get_queryset()
+        if user.user_type == 'is_staff':
+            grade = user.profile.standard
+            queryset = queryset.filter(grade=grade)
+        elif user.user_type == 'is_student':
+            return Response({"status": "failure", 'data': 'Your not have access to view this page'})
         serializer = GradeSerializer(queryset, many=True)
         return Response({"status": "success", 'data': serializer.data})
 
@@ -271,7 +279,14 @@ class QuestionCreateView(CreateAPIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
+        grade = self.request.query_params.get('grade')
+        subject = self.request.query_params.get('subject')
         questions = Question.objects.all()
+        if grade and subject:
+            try:
+                questions = Question.objects.filter(grade_id=int(grade),subject_id=int(subject))
+            except:
+                questions = Question.objects.all()
         serializer_name = questionanswerserializer(questions, many=True)
         serializer = QuestionAnswerSerializer(questions, many=True)
         return Response({"status": "success", 'name': serializer_name.data, 'data': serializer.data})
@@ -300,7 +315,7 @@ class QuestionEditView(RetrieveUpdateDestroyAPIView):
 
 class QuestionList(APIView):
     serializer_class = QuestionGetSerializer
-    permission_classes=[IsAdminUser]
+    permission_classes=[AllowAny]
 
     def post(self,request):
         type = str(self.request.query_params.get('type'))
@@ -343,7 +358,7 @@ class QuestionList(APIView):
                                 newlist = newlist[:num]
                                 questions.append(newlist)
                             else:
-                                return Response({'status':'failure','data':('Required questions not available in {} level in chapter {} ').format(cognitive,chapter)},status=HTTP_206_PARTIAL_CONTENT)
+                                return Response({'status':'failure','data':('Required questions not available in {} level in chapter {}. Available number of questions is {}').format(cognitive,chapter,len(newlist))},status=HTTP_206_PARTIAL_CONTENT)
                         except:
                             return Response({"status": "failure","data":"given details are incorrect"},status=HTTP_206_PARTIAL_CONTENT)
                 questions = [item for sublist in questions for item in sublist]
@@ -373,7 +388,7 @@ class QuestionList(APIView):
             if number_of_questions <= total_questions:
                 questions = questions[:number_of_questions]
             else:
-                return Response({'status':'failure','data':'given number questions is higher then the actual number of questions '},status=HTTP_206_PARTIAL_CONTENT)
+                return Response({'status':'failure','data':f'given number questions is higher then the actual number of questions${total_questions}'},status=HTTP_206_PARTIAL_CONTENT)
             user = self.request.user
             serializer = QuestionSerializer(questions,many=True)
             type = type.lower()
@@ -506,6 +521,21 @@ def load_subject_chapter(request):
         return render(request, 'academics/dropdown_list_options.html', {'items': subject})
     chapter = Chapter.objects.filter(subject=subject_id)
     return render(request, 'academics/dropdown_list_options.html', {'items': chapter})
+
+
+
+def load_grade(request):
+    user = request.user
+    print(user)
+    if user.user_type == 'is_admin':
+        grades = Grade.objects.all()
+    elif user.user_type == 'is_staff':
+        standard = user.profile.standard
+        grades = Grade.objects.filter(grade=standard)
+    else:
+        return None
+    return render(request, 'academics/dropdown_grade.html', {'items':grades})
+
 
 # def chapterlistview(request):
 

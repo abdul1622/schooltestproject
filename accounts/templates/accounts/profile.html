@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block profile %}
+
 <div class="profile-container">
 <div class="container">
 </div>
@@ -47,8 +48,10 @@ aria-hidden="true">
   let container = document.querySelector('.container');
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
+
   let form=document.getElementById('profile-box')
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  document.getElementById('nav-profile').style.opacity = '0.5';
   function back(){
     form.style.display='none'
     container.style.display = 'block'

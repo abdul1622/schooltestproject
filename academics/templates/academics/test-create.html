@@ -106,6 +106,7 @@
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
   let container = document.querySelector('.question-papers-card')
+  document.getElementById('nav-questionpaperlist').style.opacity = '0.5';
   //get - question paper
   function get() {
     var grade = document.getElementById('get_grade').value
@@ -238,6 +239,7 @@
     let form_percentage = document.getElementById('id_pass_percentage').value
     let marks = 0;
     let duration = 0;
+    document.getElementById('nav-questionpaperlist').style.opacity = '0.5';
     url2 = new URL(`https://schooltestproject.herokuapp.com/api/test-questions/`);
     url2.searchParams.append('question_paper', question_id);
     fetch(url2, {
