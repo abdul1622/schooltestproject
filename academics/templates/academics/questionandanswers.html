@@ -3,7 +3,10 @@
 <button id="--question" onclick=show()>Add Question</button>
 <form id="questionForm" class="question_create">
   <button onclick=back() class='back-btn'>&#x2715; </button>
-  <div class='grid-item'> {{questionform.grade.label_tag}} <br>{{questionform.grade}}</div>
+  <div class='grid-item'>        <label for=""> Grade: </label>
+    <select name="grade" required="" id="id_grade">
+        <option value="" selected="">---------</option>
+      </select></div>
   <div class="grid-item"> <label for="id_subject">Subject:</label> <br> <select name="subject" required=""
       id="id_subject">
       <option value="" selected="">---------</option>
@@ -120,6 +123,16 @@
     messages.innerHTML = '';
     error_messages.innerHTML = '';
   })
+
+  var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
+    
+    $.ajax({                       
+      url: url_for_change,                  
+      success: function (data) {
+        $("#id_grade").html(data); 
+      }
+    });
+
 
   $("#get_grade").change(function () {
     var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';

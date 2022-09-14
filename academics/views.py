@@ -281,9 +281,10 @@ class QuestionCreateView(CreateAPIView):
     def get(self, request):
         grade = self.request.query_params.get('grade')
         subject = self.request.query_params.get('subject')
+        questions = Question.objects.all()
         if grade and subject:
             try:
-                questions = Question.objects.filter(grade_id=grade,subject_id=subject)
+                questions = Question.objects.filter(grade_id=int(grade),subject_id=int(subject))
             except:
                 questions = Question.objects.all()
         serializer_name = questionanswerserializer(questions, many=True)
@@ -314,7 +315,7 @@ class QuestionEditView(RetrieveUpdateDestroyAPIView):
 
 class QuestionList(APIView):
     serializer_class = QuestionGetSerializer
-    permission_classes=[IsAdminUser]
+    permission_classes=[AllowAny]
 
     def post(self,request):
         type = str(self.request.query_params.get('type'))
@@ -520,6 +521,21 @@ def load_subject_chapter(request):
         return render(request, 'academics/dropdown_list_options.html', {'items': subject})
     chapter = Chapter.objects.filter(subject=subject_id)
     return render(request, 'academics/dropdown_list_options.html', {'items': chapter})
+
+
+
+def load_grade(request):
+    user = request.user
+    print(user)
+    if user.user_type == 'is_admin':
+        grades = Grade.objects.all()
+    elif user.user_type == 'is_staff':
+        standard = user.profile.standard
+        grades = Grade.objects.filter(grade=standard)
+    else:
+        return None
+    return render(request, 'academics/dropdown_grade.html', {'items':grades})
+
 
 # def chapterlistview(request):
 

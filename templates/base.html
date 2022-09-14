@@ -4191,6 +4191,7 @@ li.pass::marker {
             </div>
         </div>
     </nav>
+    <h1 class="page-title"></h1>
     {% include 'accounts/home.html' %}
     {% block subject %}{% endblock %}
     {% block content %}{% endblock %}
@@ -4260,6 +4261,7 @@ li.pass::marker {
             }
             else if (user == 'is_staff' && dataentry) {
                 staff.style.display = 'none'
+                questionpaper.style.display = 'none'
                 test.style.display = 'none'
                 testhistory.style.display = 'none'
             }
