@@ -453,7 +453,15 @@ questions_total = 0;
         })
         return user_id,user_type
       };
+      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
     
+    $.ajax({                       
+      url: url_for_change,                  
+      success: function (data) {
+        $("#get_grade").html(data); 
+      }
+    });
+
 
 
     $("#id_grade").change(function () {

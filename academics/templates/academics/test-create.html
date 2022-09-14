@@ -4,7 +4,9 @@
   <div class="question-papers-get">
     <div class="container">
       {% csrf_token %}
-      {{form.as_p}}
+      <p><label for="get_grade">Grade:</label> <select name="grade" onchange=getgradename(this) required="" id="get_grade">
+        <option value="" selected="">---------</option>
+      </select></p>
       <label for=""> Subject: </label>
       <select name="subject" required="" onchange=getsubjectname(this) id="id_subject_2">
         <option value="" selected="">---------</option>
@@ -83,13 +85,14 @@
       </div>
     </div>
   </div>
-
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
   <!-- <script src="js/bootstrap.js"></script> -->
 </div>
 <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script>
   var userId = localStorage.getItem('id')
+  var grade_name;
   var token = localStorage.getItem('token')
   let head = document.querySelector('.header')
   // let test_messages = document.querySelector('.test-messages')
@@ -108,11 +111,20 @@
   let container = document.querySelector('.question-papers-card')
   document.getElementById('nav-questionpaperlist').style.opacity = '0.5';
   //get - question paper
+  var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
+    
+    $.ajax({                       
+      url: url_for_change,                  
+      success: function (data) {
+        $("#get_grade").html(data); 
+      }
+    });
+
   function get() {
     var grade = document.getElementById('get_grade').value
     var subject = document.getElementById('id_subject_2').value
     url2 = new URL('https://schooltestproject.herokuapp.com/api/question-paper-list/');
-    url2.searchParams.append('grade', grade);
+    url2.searchParams.append('grade', grade_name);
     url2.searchParams.append('subject', subject_name)
     console.log(grade, subject)
   if(!grade || !subject_name){
@@ -169,7 +181,7 @@
       if (error) {
         error_messages.innerHTML = 'invalid input'
       } else {
-        document.getElementById('grade-head').textContent = `${grade}`
+        document.getElementById('grade-head').textContent = `${grade_name}`
         document.getElementById('subject-head').textContent = `${subject_name}`
         head.style.display = 'block'
       }
@@ -300,6 +312,9 @@
   function getsubjectname(element){
     subject_name = element.options[element.selectedIndex].text;
     get();
+  }
+  function getgradename(element){
+    grade_name = element.options[element.selectedIndex].text;
   }
 
   function edit_question_paper(id, timing, overall_marks) {
