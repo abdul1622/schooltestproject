@@ -179,7 +179,7 @@ class Question_Paper(models.Model):
             test.marks = self.overall_marks
             test.duration = self.timing
             test.save()
-            super(Question_Paper, self).save(*args, **kwargs)
+        super(Question_Paper, self).save(*args, **kwargs)
     class Meta:
         ordering = ('grade', 'subject', '-created_at',)
 

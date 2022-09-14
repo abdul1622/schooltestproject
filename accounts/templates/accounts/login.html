@@ -105,7 +105,12 @@
       if(d.data.profile.standard){
         localStorage.setItem("standard", d.data.profile.standard);
       }
+      let user_type = localStorage.getItem('user_type')
+      if(user_type == 'is_admin'){
       window.location.href = `${host}/index`
+      }else{
+        window.location.href = `${host}/profile`
+      }
     //   return standard
     })
                 }

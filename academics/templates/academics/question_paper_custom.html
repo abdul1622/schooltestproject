@@ -425,6 +425,7 @@
                 return response.json()
             }).then(data => {
                 console.log(data)
+                console.log(data.status)
                 if (data.status != 'success') {
                     document.getElementById('q-form-5').style.display = 'block'
                     error_messages.innerHTML = `<li class='test-warning'>${(data.data)}</li>`;

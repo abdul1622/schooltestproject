@@ -1,3 +1,4 @@
+import profile
 from django.shortcuts import render
 from rest_framework.response import Response
 from django.contrib.auth import login,logout,authenticate
@@ -147,14 +148,25 @@ class UserDetailsView(ListAPIView):
     serializer_class=UserDetailsSerializer
     permission_classes=[AllowAny]
 
+
     def get_queryset(self):
+        standard = self.request.query_params.get('standard')
+        user_type =(self.request.query_params.get('user_type'))
         user = self.request.user
+        queryset = []
+        queryset_all = User.objects.all()
         if user.user_type == 'is_student':
             queryset = User.objects.get(id = user.id)
         elif user.user_type == 'is_staff':
-            queryset = User.objects.filter(user_type = 'is_student')
+            queryset= User.objects.filter(user_type = 'is_student')
         elif user.user_type == 'is_admin':
-            queryset = User.objects.all()
+            queryset= User.objects.all()
+        if standard and user.user_type != 'is_student':
+            standard = int(standard)
+            queryset = queryset.filter(profile__standard=standard)
+            if user_type:
+                queryset =queryset.filter(user_type = user_type)
+            print(queryset)
         return queryset
 
     def list(self, request):
@@ -198,3 +210,15 @@ class ProfileView(APIView):
         user = self.request.user 
         serializer = UserDetailsSerializer(user)
         return Response({"status" : "success","data" :serializer.data},status=HTTP_200_OK)
+
+
+def load_section(request):
+    standard = request.GET.get('standard', None)
+    data = []
+    student_list = User.objects.filter(user_type='is_student',profile__standard=standard)
+    for i in student_list:
+        section = (i.profile.section).upper()
+        if section not in data:
+            data.append(section)
+    print(data)
+    return render(request,'accounts/sectiondropdown.html', {'items': data})
