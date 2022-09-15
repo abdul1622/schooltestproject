@@ -73,12 +73,6 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             gap: 5%;
             height: auto;
         }
-
-        .question-path div {
-            height: 98%;
-            width: 57%;
-        }
-
         .question-direction {
             display: flex;
             flex-direction: row-reverse;
@@ -107,8 +101,9 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         }
 
         .question-path div {
-            height: 98%;
-            width: 57%;
+            height: 16%;
+            width: 64%;
+            padding: 16%;
         }
 
         .question-direction {
@@ -139,6 +134,71 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         #submit {
             display: none;
         }
+
+        .answer {
+
+            width: 20px;
+
+            height: 20px;
+
+            background-color: #5BB318;
+
+            border: 1px solid rgba(0, 0, 0, .2);
+
+            margin-bottom: 7%;
+
+
+
+        }
+
+        .answer p {
+
+            margin: 0% 167%;
+
+        }
+
+        .un-answer {
+
+            width: 20px;
+
+            height: 20px;
+
+            background-color: #FF7878;
+
+            border: 1px solid rgba(0, 0, 0, .2);
+
+
+
+            margin-bottom: 7%;
+
+        }
+
+        .un-answer p {
+
+            margin: 0% 167%;
+
+        }
+
+        .un-visited {
+
+            width: 20px;
+
+            height: 20px;
+
+            background-color: #CFD2CF;
+
+            border: 1px solid rgba(0, 0, 0, .2);
+
+        }
+
+        .un-visited p {
+
+            margin: 0% 167%;
+
+        }
+
+
+
 
         @media screen and (max-width:600px) {
             .instructions {
@@ -521,6 +581,12 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             document.querySelector('.answer-data').innerHTML = `<p> Unvisited questions - ${answer_details.length - 1}</p>
             <p> Answered questions - 0 </p>
             <p> Unanswered questions - 0</p> 
+            <div class="color-description"> 
+            <div class="answer"><p>Answered</p></div>
+            <div class="un-answer"><p>UnAnswered</p></div>
+            <div class="un-visited"><p>UnVisited</p></div></div>
+
+
             `
         }
         function path(current) {
@@ -653,6 +719,28 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             else {
                 document.querySelector(`.fib_${question_details.id}`).value = ''
             }
+
+
+            //     question_content += `<div><p> ${n + 1}). ${question_details.question}</p> 
+            //             <ol type="a">`
+            //     for (i = 0; i < options.length; i++) {
+            //         console.log(question_details['option_a'])
+            //         if (question_details.answer == options[i]) {
+            //             question_content += `<li><input checked type="radio" id="${options[i]}_${question_details.id}" name="answer_${question_details.id}" value='${options[i]}'> ${question_details[options[i]]}</li>`
+            //         } else {
+            //             question_content += `<li><input type="radio" id="${options[i]}_${question_details.id}" name="answer_${question_details.id}" value='${options[i]}'> ${question_details[options[i]]}</li>`
+            //         }
+            //     }
+            //     question_content += `<ol>
+            //                 </div>
+            //             `
+            // } else {
+            //     if (question_details.answer) {
+            //         question_content = `<div>   <p> ${n + 1}). ${question_details.question}<span class=''> <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}" value='${question_details.answer}'> </span></p> </div>`
+            //     } else {
+            //         question_content = `<div>   <p> ${n + 1}). ${question_details.question}<span class=''> <input type="text" name="answer_${question_details.id}" id="" class="fib fib_${question_details.id}"> </span></p> </div>`
+            //     }
+            // }
 
         }
         function redirect() {
