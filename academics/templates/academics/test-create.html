@@ -4,9 +4,10 @@
   <div class="question-papers-get">
     <div class="container">
       {% csrf_token %}
-      <p><label for="get_grade">Grade:</label> <select name="grade" onchange=getgradename(this) required="" id="get_grade">
+      <!-- <p><label for="get_grade">Grade:</label> <select name="grade" onchange=getgradename(this) required="" id="get_grade">
         <option value="" selected="">---------</option>
-      </select></p>
+      </select></p> -->
+      {{form.as_p}}
       <label for=""> Subject: </label>
       <select name="subject" required="" onchange=getsubjectname(this) id="id_subject_2">
         <option value="" selected="">---------</option>
@@ -111,14 +112,14 @@
   let container = document.querySelector('.question-papers-card')
   document.getElementById('nav-questionpaperlist').style.opacity = '0.5';
   //get - question paper
-  var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
+  // var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
     
-    $.ajax({                       
-      url: url_for_change,                  
-      success: function (data) {
-        $("#get_grade").html(data); 
-      }
-    });
+  //   $.ajax({                       
+  //     url: url_for_change,                  
+  //     success: function (data) {
+  //       $("#get_grade").html(data); 
+  //     }
+  //   });
 
   function get() {
     var grade = document.getElementById('get_grade').value
@@ -190,6 +191,15 @@
   //     $('#myModal').on('shown.bs.modal', function () {
   //   $('#myInput').trigger('focus')
   // })
+
+  document.getElementById('get_grade').addEventListener('change',()=>{
+    // console.log(element,document.getElementById('get_grade').text)
+    let e = document.getElementById('get_grade')
+    grade_name = e.options[e.selectedIndex].text;
+    // grade_name = document.getElementById('get_grade').text
+    console.log(grade_name)
+    // grade_name = element.options[element.selectedIndex].text;
+  })
 
   $("#get_grade").change(function () {
     var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';

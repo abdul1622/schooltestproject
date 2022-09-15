@@ -4,15 +4,15 @@
     <div class="box" id="mediabox">
 
         {% csrf_token %}
-        <!-- {{form.as_p}} -->
-        <label for=""> Grade: </label>
+        {{form.as_p}}
+      <!--   <label for=""> Grade: </label>
         <select name="grade" required="" id="id_grade">
             <option value="" selected="">---------</option>
-          </select>
+          </select>-->
         <label for=""> Subject: </label>
         <select name="subject" required="" id="id_subject">
             <option value="" selected="">---------</option>
-          </select>
+          </select> 
         <button id="chapterlist-btn" onclick=getchapter()>Getchapters</button>
     </div>
 </div>
@@ -107,14 +107,16 @@
     var subject;
     let subject_name;
     document.getElementById('nav-chapterlist').style.opacity = '0.5';
-    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
+    // var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
     
-            $.ajax({                       
-              url: url_for_change,                  
-              success: function (data) {
-                $("#id_grade").html(data); 
-              }
-            });
+    //         $.ajax({                       
+    //           url: url_for_change, 
+    //           type: 'GET',
+    //           headers: {"Authorization":token},    
+    //           success: function (data) {
+    //             $("#id_grade").html(data); 
+    //           }
+    //         });
       
 
 

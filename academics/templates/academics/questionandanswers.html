@@ -3,10 +3,14 @@
 <button id="--question" onclick=show()>Add Question</button>
 <form id="questionForm" class="question_create" method="get">
   <button onclick=back() class='back-btn'>&#x2715; </button>
-  <div class='grid-item'>        <label for=""> Grade: </label>
-    <select name="grade" required="" id="id_grade">
+  <div class='grid-item'>      
+      <label for=""> Grade: </label>
+    <!-- <select name="grade" required="" id="id_grade"> 
         <option value="" selected="">---------</option>
-      </select></div>
+      </select> -->
+      {{questionform.grade}}
+ 
+    </div>
   <div class="grid-item"> <label for="id_subject">Subject:</label> <br> <select name="subject" required=""
       id="id_subject">
       <option value="" selected="">---------</option>
@@ -85,7 +89,7 @@
 
 <div id="question-box">
   {% csrf_token %}
-  {{form.as_p}}
+  {{ form.as_p }}
   <label for=""> Subject: </label>
   <select name="subject" required="" id="id_subject_2">
     <option value="" selected="">---------</option>
@@ -125,13 +129,13 @@
     error_messages.innerHTML = '';
   })
 
-  var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
-    $.ajax({                       
-      url: url_for_change,                  
-      success: function (data) {
-        $("#id_grade").html(data); 
-      }
-    });
+  // var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
+  //   $.ajax({                       
+  //     url: url_for_change,                  
+  //     success: function (data) {
+  //       $("#id_grade").html(data); 
+  //     }
+  //   });
 
   $("#get_grade").change(function () {
     var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';

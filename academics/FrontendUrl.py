@@ -3,8 +3,6 @@ from.FrontendViews import *
 
 
 urlpatterns=[
-   
-    
     path('academics/',gradeview,name='gradeview'),
     path('chapterlist',chapterlistview,name='chapterlistview'),
     path('subject',subjectcrud,name='subjectcrud'),
