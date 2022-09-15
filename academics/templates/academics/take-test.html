@@ -76,12 +76,6 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             gap: 5%;
             height: auto;
         }
-
-        .question-path div {
-            height: 98%;
-            width: 57%;
-        }
-
         .question-direction {
             display: flex;
             flex-direction: row-reverse;
@@ -110,8 +104,9 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         }
 
         .question-path div {
-            height: 98%;
-            width: 57%;
+            height: 16%;
+            width: 64%;
+            padding: 16%;
         }
 
         .question-direction {
@@ -139,6 +134,71 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             border-radius: 5px;
         }
 
+        .answer {
+
+            width: 20px;
+
+            height: 20px;
+
+            background-color: #5BB318;
+
+            border: 1px solid rgba(0, 0, 0, .2);
+
+            margin-bottom: 7%;
+
+
+
+        }
+
+        .answer p {
+
+            margin: 0% 167%;
+
+        }
+
+        .un-answer {
+
+            width: 20px;
+
+            height: 20px;
+
+            background-color: #FF7878;
+
+            border: 1px solid rgba(0, 0, 0, .2);
+
+
+
+            margin-bottom: 7%;
+
+        }
+
+        .un-answer p {
+
+            margin: 0% 167%;
+
+        }
+
+        .un-visited {
+
+            width: 20px;
+
+            height: 20px;
+
+            background-color: #CFD2CF;
+
+            border: 1px solid rgba(0, 0, 0, .2);
+
+        }
+
+        .un-visited p {
+
+            margin: 0% 167%;
+
+        }
+
+
+
+
         @media screen and (max-width:600px) {
             .instructions {
                 text-align: justify;
@@ -160,6 +220,10 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
 
             .answer-data p {
                 width: 105%;
+            }
+
+            .color-description {
+                margin: 6% 0%;
             }
 
         }
@@ -245,7 +309,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         let counter_container = document.querySelector('.counter');
         var list = document.querySelector('.instruction');
         function get() {
-            if(user_type !='is_student'){
+            if (user_type != 'is_student') {
                 return
             }
             var content = ''
@@ -265,7 +329,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     })
                     list.innerHTML = content;
                 })
-               
+
 
         }
         get();
@@ -376,8 +440,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
 
                                                 <p class='text-end'> <button class="btn btn-primary btn-sm" onclick=clear_answer(0)>Clear </button>  <button class="btn btn-primary btn-sm" onclick=next(0,1)> Next </button> </p>
                                                 </div>`
-                                                document.querySelector('.question-container').innerHTML = question_content
-                                            }
+                                        document.querySelector('.question-container').innerHTML = question_content
+                                    }
                                 }
                             })
 
@@ -501,6 +565,12 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             document.querySelector('.answer-data').innerHTML = `<p> Unvisited questions - ${answer_details.length - 1}</p>
             <p> Answered questions - 0 </p>
             <p> Unanswered questions - 0</p> 
+            <div class="color-description"> 
+            <div class="answer"><p>Answered</p></div>
+            <div class="un-answer"><p>UnAnswered</p></div>
+            <div class="un-visited"><p>UnVisited</p></div></div>
+
+
             `
         }
         function path(current) {
@@ -613,7 +683,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
 
         }
 
-        function clear_answer(index){
+        function clear_answer(index) {
             let question_details = answer_details[index]
             console.log(index)
             get_ans_id = answer_details[index].id
@@ -621,15 +691,15 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             var get_ans = document.getElementsByName(`answer_${get_ans_id}`);
             if (question_details.question_type == 'MCQ') {
                 for (i = 0; i < get_ans.length; i++) {
-                if (get_ans[i].checked) {
-                    answer_details[index].answer = null;
-                    get_ans[i].checked = false;
+                    if (get_ans[i].checked) {
+                        answer_details[index].answer = null;
+                        get_ans[i].checked = false;
+                    }
+
                 }
-            
             }
-        }            
-        else{
-        document.querySelector(`.fib_${question_details.id}`).value = ''
+            else {
+                document.querySelector(`.fib_${question_details.id}`).value = ''
             }
 
 
@@ -654,7 +724,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             //     }
             // }
 
-            }
+        }
         function redirect() {
             window.location.href = `${host}/test-history`
         }
