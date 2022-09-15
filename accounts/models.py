@@ -5,6 +5,7 @@ from django.core.validators import MinLengthValidator,MaxValueValidator
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 from datetime import datetime
+from django.contrib.postgres.fields import ArrayField
 
 class MyUserManager(BaseUserManager):
    def create_user(self, email,phone,date_of_birth,register_number,is_data_entry):

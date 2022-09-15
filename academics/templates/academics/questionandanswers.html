@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 <button id="--question" onclick=show()>Add Question</button>
-<form id="questionForm" class="question_create">
+<form id="questionForm" class="question_create" method="get">
   <button onclick=back() class='back-btn'>&#x2715; </button>
   <div class='grid-item'>        <label for=""> Grade: </label>
-    <select name="grade" required="" id="get_grade">
+    <select name="grade" required="" id="id_grade">
         <option value="" selected="">---------</option>
       </select></div>
   <div class="grid-item"> <label for="id_subject">Subject:</label> <br> <select name="subject" required=""
@@ -126,14 +126,12 @@
   })
 
   var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
-    
     $.ajax({                       
       url: url_for_change,                  
       success: function (data) {
         $("#id_grade").html(data); 
       }
     });
-
 
   $("#get_grade").change(function () {
     var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
@@ -153,14 +151,15 @@
 
   if (token) {
     const container2 = document.querySelector('.question-list');
-    url = 'https://schooltestproject.herokuapp.com/api/question/'
+    url='https://schooltestproject.herokuapp.com/api/question/'
     function get() {
-      var grade = document.getElementById('get_grade').value;
-      var subject = document.getElementById('id_subject_2').value
-      let checkgrade
-      console.log(grade, subject)
-
-      fetch(`https://schooltestproject.herokuapp.com/api/grades/${grade}/`, {
+      let grade=document.getElementById('get_grade').value
+      let subject=document.getElementById('id_subject_2').value
+      console.log(grade,subject)
+      let url1 = new URL('https://schooltestproject.herokuapp.com/api/question/')
+      url1.searchParams.append('grade', grade);
+      url1.searchParams.append('subject',subject)
+      fetch(url1, {
         method: 'GET',
         headers: {
             'content-Type': 'application/json',
@@ -169,17 +168,12 @@
     }).then(res => {
         return res.json()
     }).then(data => {
-       checkgrade=data.grade })
-      fetch(url).then(res => {
-        return res.json()
-      }).then(data => {
-        console.log(data)
-        let content = '';
+      console.log(data)
+      let content = '';
         console.log(data.name[0])
         console.log(data.status)
         data.data.forEach((d, index) => {
           name_value = data.name[index]
-          if (checkgrade == name_value.grade && subject == d.subject) {
             content = content + `<div class="question-card" id='${d.id}'>
       <p >Chapter : <span id='${d.chapter}' class="chapter-name">${name_value.chapter}</span></p>
       <p >Question Type : <span class="question_type" id=${d.subject}>${d.question_type}</span></p>
@@ -195,11 +189,11 @@
       <p >answer : <span class="answer">${d.answers.answer}</span></p> </div>
       </div>
       `
-          }
+          
         })
         head.style.display = 'block'
-        document.getElementById('grade-head-question').textContent = checkgrade
-        document.getElementById('subject-head-question').textContent = subject
+        document.getElementById('grade-head-question').textContent = grade
+        document.getElementById('subject-head-question').textContent = data.name[0]['subject']
         container2.innerHTML = content;
         edit = false
       })
@@ -301,7 +295,6 @@
         var answer = parent.querySelector('.answer').textContent;
         form_grade.value = grade
         var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
-
         $.ajax({
           url: url_for_change,
           data: {
@@ -453,7 +446,6 @@
       get();
     });
   }
-
   else {
     window.location.href = `${host}/login`
   }
