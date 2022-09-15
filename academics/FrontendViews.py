@@ -83,3 +83,6 @@ def instruct(request):
     return render(request,'academics/instruction.html',{'form':form})
 def questionbank(request):
     return render(request,'academics/question-bank.html')
+
+def student_test_history(request):
+    return render(request,'academics/student-test-history-details.html')

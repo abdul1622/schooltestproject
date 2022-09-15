@@ -536,6 +536,12 @@ def load_grade(request):
         return None
     return render(request, 'academics/dropdown_grade.html', {'items':grades})
 
+def load_test(request):
+    # grade_id = request.GET.get('grade', None)
+    subject_id = request.GET.get('subject', None)
+    if subject_id:
+        test = Test.objects.filter(subject_id= subject_id)
+    return render(request, 'academics/test_dropdown.html', {'items':test})
 
 # def chapterlistview(request):
 
@@ -642,6 +648,7 @@ class TestResultCreateView(CreateAPIView):
         queryset = TestResult.objects.all()
         grade = (self.request.query_params.get('grade'))
         student = self.request.query_params.get('student_id')
+        test_id = self.request.query_params.get('test_id')
         if grade: 
             if student:
                 try:
@@ -649,6 +656,8 @@ class TestResultCreateView(CreateAPIView):
                     queryset = TestResult.objects.filter(grade=grade,student_id=student)
                 except:
                     queryset = TestResult.objects.all()
+        elif test_id:
+            queryset = TestResult.objects.filter(test_id=test_id)
         else:
             try: 
                 grade = Grade.objects.get(grade=grade)   

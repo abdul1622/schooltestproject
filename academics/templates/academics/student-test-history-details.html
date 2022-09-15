@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="history-container-form">
+    <label for=""> Grade: </label>
+    <select name="grade" required="" id="id_grade">
+        <option value="" selected="">---------</option>
+      </select>
+    <label for=""> Subject: </label>
+    <select name="subject" required="" id="id_subject">
+        <option value="" selected="">---------</option>
+      </select>
+      <label for=""> Test: </label>
+      <select name="test" required="" id="id_test">
+          <option value="" selected="">---------</option>
+        </select>
+        <button onclick=get()>get</button>
+</div>
+<div class="history-container">
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+       var token = localStorage.getItem("token")
+       var subjectId,gradeId,testId,content='',data2;
+       let container = document.querySelector('.history-container')
+    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
+    
+    $.ajax({                       
+      url: url_for_change,                  
+      success: function (data) {
+        $("#id_grade").html(data); 
+      }
+    });
+       
+       $("#id_grade").change(function () {
+      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+      gradeId = $(this).val();
+
+      $.ajax({
+        url: url_for_change,
+        data: {
+          'grade': gradeId
+        },
+        success: function (data) {
+          $("#id_subject").html(data);
+        }
+      });
+
+    });
+
+
+
+    $("#id_subject").change(function () {
+      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-test/';
+      subjectId = $(this).val();
+
+      $.ajax({
+        url: url_for_change,
+        data: {
+          'subject': subjectId
+        },
+        success: function (data) {
+          $("#id_test").html(data);
+        }
+      });
+
+    });
+
+
+function get(){
+    testId = document.getElementById('id_test').value
+    url = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
+  url.searchParams.append('test_id',testId)
+  container.innerHTML = ''
+  content = ''
+  fetch(url, {
+    method: 'GET',
+            headers: {
+                'content-Type': 'application/json',
+                'Authorization': 'token' + ' ' + token,
+            }
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            console.log(data)
+            data2 = data
+            let i = 0;
+    if(data.length){
+            content += '<table>'
+            content += '<tr><th>Sl.no</th><th>Name</th><th>Register_number</th><th>Result</th><th>Score</th><th>Correct answer</th><th>Wrong answer</th><th>Unanswered questions</th></tr>'
+                data.forEach((d, index) => {
+                    i += 1
+                content += `<tr><td>${i}</td><td>${d.student_name}</td><td>${d.register_number}</td><td>${d.result}</td><td>${d.score}</td><td>${d.correct_answer}</td><td>${d.wrong_answer}</td><td>${d.unanswered_questions
+}</td></tr>`
+        })
+        container.innerHTML = content
+    }
+    else{
+    container.innerHTML = `<li>Till now no one attended this test</li>`
+    }
+    })
+}
+</script>
+{% endblock %}
