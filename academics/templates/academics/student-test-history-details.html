@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="history-container-form">
-    <label for=""> Grade: </label>
+    <!-- <label for=""> Grade: </label>
     <select name="grade" required="" id="id_grade">
         <option value="" selected="">---------</option>
-      </select>
+      </select> -->
+      {{form.as_p}}
     <label for=""> Subject: </label>
     <select name="subject" required="" id="id_subject">
         <option value="" selected="">---------</option>
@@ -25,14 +26,14 @@
        let container = document.querySelector('.history-container')
        document.getElementById('nav-studenttesthistory').style.opacity = '0.5';
        
-    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
+    // var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
     
-    $.ajax({                       
-      url: url_for_change,                  
-      success: function (data) {
-        $("#id_grade").html(data); 
-      }
-    });
+    // $.ajax({                       
+    //   url: url_for_change,                  
+    //   success: function (data) {
+    //     $("#id_grade").html(data); 
+    //   }
+    // });
        
        $("#id_grade").change(function () {
       var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
