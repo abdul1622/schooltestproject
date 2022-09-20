@@ -521,6 +521,7 @@ class QuestionList(APIView):
                 if not status:
                     return Response({"status": "failure","data":"given details are incorrect"},status=HTTP_206_PARTIAL_CONTENT) 
                 serializer = QuestionPaperSerializer(question_paper)
+                questions = QuestionSerializer(questions)
                 return Response({'status':'success','data':serializer.data,'question':questions,'answer-file-path':'/media/answer_files/{answer_file}.pdf','subject_id':subject_obj.id,'grade_id':grade.id},status=HTTP_200_OK)
             filename,status = render_to_pdf2('academics/question.html','question_paper',None,context)
             if not status:
