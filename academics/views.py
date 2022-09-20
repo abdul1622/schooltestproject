@@ -494,8 +494,10 @@ class QuestionList(APIView):
             type = type.lower()
             # answers 
             answers = []
+            question_list = []
             for question in questions:
                 ans = getattr(question.answers,str(question.answers))
+                question_list.append(question.question)
                 answers.append(ans)
             context = {'data':serializer.data,'grade':grade.grade,'subject':subject_obj.name,'register_number':user.register_number}
             context1 = {'data':serializer.data,'grade':grade.grade,'subject':subject_obj.name,'register_number':user.register_number,'answers':answers}
@@ -521,8 +523,7 @@ class QuestionList(APIView):
                 if not status:
                     return Response({"status": "failure","data":"given details are incorrect"},status=HTTP_206_PARTIAL_CONTENT) 
                 serializer = QuestionPaperSerializer(question_paper)
-                questions = QuestionSerializer(questions)
-                return Response({'status':'success','data':serializer.data,'question':questions,'answer-file-path':'/media/answer_files/{answer_file}.pdf','subject_id':subject_obj.id,'grade_id':grade.id},status=HTTP_200_OK)
+                return Response({'status':'success','data':serializer.data,'questions':question_list,'answer-file-path':'/media/answer_files/{answer_file}.pdf','subject_id':subject_obj.id,'grade_id':grade.id},status=HTTP_200_OK)
             filename,status = render_to_pdf2('academics/question.html','question_paper',None,context)
             if not status:
                 return Response({"status": "failure","data":"given details are incorrect"},status=HTTP_206_PARTIAL_CONTENT) 
