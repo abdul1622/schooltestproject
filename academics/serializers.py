@@ -171,7 +171,7 @@ class QuestionGetSerializer2(serializers.ModelSerializer):
 
 class QuestionGetSerializer(serializers.ModelSerializer):
     # subject_name = serializers.CharField()
-    number_of_questions = serializers.IntegerField()
+    # number_of_questions = serializers.IntegerField()
     # from_chapter = serializers.PrimaryKeyRelatedField(queryset=Chapter.objects.all(),default=None)
     # to_chapter = serializers.PrimaryKeyRelatedField(queryset=Chapter.objects.all(),default=None)
     # all_chapters = serializers.BooleanField(required=False)
