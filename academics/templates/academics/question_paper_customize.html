@@ -94,6 +94,7 @@
     var content = '';da=null
     let customize_details = document.querySelector('.customize-details')
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    let question_details_list = []
     let question_content = '';
     let chapter_name_list = []
     let question_id_list = [],question_list = []
@@ -523,7 +524,7 @@ function submit_woc(){
             {
                 method: 'POST',
                 body: JSON.stringify({
-                    'grade': grade, 'subject': subject_id, 'timing': timing, 'overall_marks': overall_marks, 'customize': null
+                    'grade': grade_id, 'subject': subject_id, 'timing': timing, 'overall_marks': overall_marks, 'customize': null
                     ,'list_of_questions':question_list,
                 }
                 ),
@@ -553,7 +554,7 @@ function submit_woc(){
                     fetch('https://schooltestproject.herokuapp.com/api/test/',
                         {
                             method: 'POST',
-                            body: JSON.stringify({ 'grade': grade, 'subject': subject_id, 'question_paper': question_paper_id, 'created_staff_id': userId, 'marks': overall_marks, 'duration': timing, 'remarks': form_remarks, 'pass_percentage': form_percentage, 'description': form_description }
+                            body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_paper_id, 'created_staff_id': userId, 'marks': overall_marks, 'duration': timing, 'remarks': form_remarks, 'pass_percentage': form_percentage, 'description': form_description }
                             ),
                             headers: {
                                 'Accept': 'application/json',
@@ -580,6 +581,11 @@ function submit_woc(){
                             else {
                                 messages.innerHTML = `<p class="success"> ${form_remarks} test created successfully</p>
                 <p class="success">Test ID :  ${data.data.test_id}</p>
+                <p> Grade : ${grade}</p>
+                <p> subject : ${subject_name}</p>
+                <div> <h1> list of questions </h1>
+                    
+                    </div>
                 `;
                                 error_messages.innerHTML = ''
                                 document.getElementById('q-form-4').style.display = 'none';
@@ -643,6 +649,7 @@ function submit_woc(){
                     question_paper_id = data.data.id
                     timing = data.data.timing
                     overall_marks = data.data.overall_marks
+
                     userId = localStorage.getItem('id')
                     let form_remarks = document.getElementById('id_remarks').value
                     let form_description = document.getElementById('id_description').value
@@ -678,6 +685,7 @@ function submit_woc(){
                             else {
                                 messages.innerHTML = `<p class="success"> ${form_remarks} test created successfully</p>
                 <p class="success">Test ID :  ${data.data.test_id}</p>
+
                 `;
                                 error_messages.innerHTML = ''
                                 document.getElementById('q-form-4').style.display = 'none';
