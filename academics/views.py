@@ -445,13 +445,9 @@ class QuestionList(APIView):
         type = str(self.request.query_params.get('type'))
         grade = request.data.get('grade')
         subject=(request.data.get('subject'))
-        from_chapter=(request.data.get('from_chapter'))
-        to_chapter = (request.data.get('to_chapter'))
-        all_chapters = request.data.get('all_chapters')
         timing = request.data.get('timing')
         overall_marks = request.data.get('overall_marks')
         list_of_questions = request.data.get('list_of_questions')
-        number_of_questions = int(request.data.get('number_of_questions'))
         print(timing,overall_marks)
         customize = request.data.get('customize')
         # list_of_questions = [126,168,132,24,62]
