@@ -77,13 +77,11 @@ def testhistory(request):
     return render(request,'academics/test-history.html')   
 def take_test(request,pk):
     return render(request,'academics/take-test.html')
-
 def instruct(request):
     form = instruction_form()
     return render(request,'academics/instruction.html',{'form':form})
 def questionbank(request):
     return render(request,'academics/question-bank.html')
-
 def student_test_history(request):
     form = form_for_chapterlist()
     return render(request,'academics/student-test-history-details.html',{'form':form})

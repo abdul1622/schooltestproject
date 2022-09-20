@@ -237,4 +237,3 @@ class TestInstruction(serializers.ModelSerializer):
     class Meta:
         model = InstructionForTest
         fields = '__all__'
-
