@@ -429,11 +429,15 @@ function getnext() {
         }).then(data => {
             console.log(data,'question-list')
             question_content = ''
+            question_id_list = []
             let i = 0
             question_content +=`<div class='question-list-container'>
                 <p>` 
-                    if(no_of_questions){
+                    console.log(data.data.length,'len')
+                    if(no_of_questions < data.data.length){
                  question_content +=   `<span>no of questions : ${no_of_questions} </span> <button onclick="get_random()" class="btn btn-primary btn-sm">select random questions</button>`
+                    }else{
+                        question_content +=   `<span>no of questions : ${no_of_questions} </span> <button onclick="get_random()" class="btn btn-primary btn-sm" disabled>select random questions</button>`
                     }
 
                 
@@ -462,12 +466,16 @@ function getnext() {
 
 
     function get_random(){
+        for(i=0;i<question_id_list.length;i++){
+        document.getElementById(`question_${question_id_list[i]}`).checked= false
+    }
         let ran_numbers= []
         ran_numbers  = (question_id_list.sort(() => Math.random() - 0.5)).slice(0, no_of_questions);
         console.log(ran_numbers)
     for(i=0;i<ran_numbers.length;i++){
         document.getElementById(`question_${ran_numbers[i]}`).checked= true
     }
+
     }
 
     function review_woc(){
