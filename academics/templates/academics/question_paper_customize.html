@@ -393,8 +393,6 @@ function getnext() {
         chapters = chapters_list
         from_chapter_no = parseInt(document.getElementById('id_from_chapter').value)
         to_chapter_no = parseInt(document.getElementById('id_to_chapter').value)
-
-        //    if(from_chapter_id)
         all_chapter = document.getElementById('id_allChapter').checked;
         if(!all_chapter && !from_chapter_no && !to_chapter_no){
             document.querySelector('.error-form-2').innerHTML = `<li style='color:white;'>fill any one of the above field</li>`;
@@ -404,7 +402,7 @@ function getnext() {
             new_list = []
 
         if(all_chapter){
-            print(chapters)
+            // print(chapters)
             from_chapter_no = chapters[0]['chapter_no']
             to_chapter_no = chapters[chapters.length-1]['chapter_no']
          console.log(from_chapter_no,to_chapter_no,'c')
@@ -435,7 +433,7 @@ function getnext() {
             question_content +=`<div class='question-list-container'>
                 <p>` 
                     if(no_of_questions){
-                 question_content +=   `<span>no of questions : ${no_of_questions} </span> <button onclick=get_random()>get_random</button>`
+                 question_content +=   `<span>no of questions : ${no_of_questions} </span> <button onclick="get_random()" class="btn btn-primary btn-sm">select random questions</button>`
                     }
 
                 
@@ -446,8 +444,10 @@ function getnext() {
 `
             })
             question_content += `
-            <button onclick=getnext()>Back</button>
-            <button onclick=review_woc() >Next</button>
+            <p class='quespaper-btns'>
+            <button class='btn btn-sm btn-primary' onclick=getnext()>Back</button>
+            <button class='btn btn-sm btn-primary' onclick=review_woc() >Next</button>
+            </p>
             </div>`
             document.getElementById('q-form').style.display = 'none'
             document.querySelector('.q-form-6').innerHTML = question_content
