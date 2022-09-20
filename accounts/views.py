@@ -101,8 +101,7 @@ class LoginView(APIView):
                 conn.request("GET", "https://2factor.in/API/R1/?module=SMS_OTP&apikey=77d6322c-e7b5-11ec-9c12-0200cd936042/&to="+
                 phone+"&otpvalue="+str(otp)+"&templatename=Login")
                 return Response({"status":"otp generated successfully"})
-        return Response({"status": "failed"}, status=HTTP_203_NON_AUTHORITATIVE_INFORMATION)
-
+            return Response({"status": "failed"}, status=HTTP_203_NON_AUTHORITATIVE_INFORMATION)
 
 class LoginVerifyView(APIView):
 

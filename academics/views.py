@@ -783,5 +783,33 @@ def update(request):
 #             return Response({'status': 'failure', "data": "Answer doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
 #         serializer = AnswerSerializer(queryset)
 #         return Response(serializer.data, status=HTTP_200_OK)
+def load_subject_chapter(request):
+    grade_id = request.GET.get('grade', None)
+    subject_id = request.GET.get('subject', None)
+    if grade_id:
+        subject = Subject.objects.filter(grade=grade_id).order_by('name')
+        return render(request, 'academics/dropdown_list_options.html', {'items': subject})
+    chapter = Chapter.objects.filter(subject=subject_id)
+    return render(request, 'academics/dropdown_list_options.html', {'items': chapter})
 
-
+def load_grade(request):
+    user = request.user
+    print(user)
+    if user.user_type == 'is_admin':
+        grades = Grade.objects.all()
+    elif user.user_type == 'is_staff':
+        standard = user.profile.standard
+        grades = Grade.objects.filter(grade=standard)
+    else:
+        return None
+    return render(request, 'academics/dropdown_grade.html', {'items':grades})
+def load_test(request):
+    # grade_id = request.GET.get('grade', None)
+    subject_id = request.GET.get('subject', None)
+    if subject_id:
+        test = Test.objects.filter(subject_id= subject_id)
+    return render(request, 'academics/test_dropdown.html', {'items':test})
+def load_chapter_no(request):
+    subject_id = request.GET.get('subject', None)
+    chapter = Chapter.objects.filter(subject=subject_id)
+    return render(request, 'academics/dropdown_chapter_no.html', {'items': chapter})
