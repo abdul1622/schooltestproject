@@ -23,7 +23,7 @@ def profile(request):
     print(request.user,'hi')
     return render(request,'accounts/profile.html')
 def students(request):
-    if request.user.user_type=='is_admin':
+    if request.user.user_type=='is_admin' or request.user.user_type=='is_staff':
         return render(request,'accounts/students.html')
     return render(request,'404.html')
 def staff(request):
