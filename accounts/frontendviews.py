@@ -37,13 +37,13 @@ def students(request):
 
 def staff(request):
     if request.user !=	'AnonymousUser':
-        if request.user.user_type=='is_admin':
+        if request.user.user_type=='is_admin' :
             return render(request,'accounts/staffs.html')
         return render(request,'404.html')
     return redirect('/login/')
 
 def index(request):
     return render(request,'index.html')
-    
+
 def unknown(request):
     return render(request,'404.html')

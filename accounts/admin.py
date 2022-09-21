@@ -65,8 +65,6 @@ class GroupAdmin(admin.ModelAdmin):
         elif request.user.user_type == 'is_admin':
             return True
 
-
-
 admin.site.register(User,UserAdmin)
 admin.site.register(Profile,ProfileAdmin)
 admin.site.site_header = "School Administration"
