@@ -496,6 +496,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                             d -= 1
                             counter_container.innerHTML = `${h}:${m}:${s}`
                         }
+
                     }
 
                     //65
@@ -692,6 +693,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     <p> Your Answer : ${answer_details[i][`${answer_details[i].answer}`]}</p>
                 </div>`
             }
+            counter_container.innerHTML = ''
             document.querySelector('.testreview').innerHTML = overallreview
             console.log('c', correct_answer, 'u', unanswered, 'w', wrong_answer, score)
             fetch('https://schooltestproject.herokuapp.com/api/test-history/',

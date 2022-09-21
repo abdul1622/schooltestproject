@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="history-container-form">
+<div class="history-container-form" id="history-container-form">
     <!-- <label for=""> Grade: </label>
     <select name="grade" required="" id="id_grade">
         <option value="" selected="">---------</option>
@@ -14,7 +14,7 @@
       <select name="test" required="" id="id_test">
           <option value="" selected="">---------</option>
         </select>
-        <button onclick=get()>get</button>
+        <button class="btn btn-sm btn-primary" onclick=get()>Get</button>
 </div>
 <div class="history-container">
 
@@ -89,19 +89,30 @@ function get(){
             data2 = data
             let i = 0;
     if(data.length){
-            content += '<table>'
+            content += `<div class='history-container-div'>
+            <button onclick=back() class='btn btn-sm btn-primary'>Back</button>
+            
+            <table>`
             content += '<tr><th>Sl.no</th><th>Name</th><th>Register_number</th><th>Result</th><th>Score</th><th>Correct answer</th><th>Wrong answer</th><th>Unanswered questions</th></tr>'
                 data.forEach((d, index) => {
                     i += 1
                 content += `<tr><td>${i}</td><td>${d.student_name}</td><td>${d.register_number}</td><td>${d.result}</td><td>${d.score}</td><td>${d.correct_answer}</td><td>${d.wrong_answer}</td><td>${d.unanswered_questions
 }</td></tr>`
         })
+      content += `</table></div>`
         container.innerHTML = content
+        document.getElementById('history-container-form').style.display = 'none'
     }
     else{
     container.innerHTML = `<li>Till now no one attended this test</li>`
     }
     })
 }
+
+function back(){
+  document.getElementById('history-container-form').style.display = 'block'
+  container.innerHTML = ''
+}
+
 </script>
 {% endblock %}
