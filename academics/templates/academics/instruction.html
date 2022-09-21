@@ -32,6 +32,7 @@
     var token = localStorage.getItem('token')
     var host = window.location.protocol + "//" + window.location.host;
     document.getElementById('nav-instruction').style.opacity = '0.5';
+    if (token){
     function createinstruction() {
        var instruction = document.getElementById('id_instruction').value
        console.log(instruction)
@@ -99,5 +100,9 @@ let yes_button = document.getElementById('delete-btn-yes')
       yes_button.setAttribute("onClick", `deleteInstruction(${id})`);
     }
  })
+}
+else{
+  window.location.href = `${host}/404`
+}
 </script>
 {% endblock %}

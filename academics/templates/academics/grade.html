@@ -18,6 +18,7 @@
        </div>
 <script>
     var token = localStorage.getItem('token')
+    if (token){
     function creategrade() {
        var grade = document.getElementById('id_grade').value
        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -57,42 +58,21 @@ function get(){
   fetch('https://schooltestproject.herokuapp.com/api/grades/',{
       method : 'GET',
       headers : {
-        // 'X-CSRFToken': csrftoken,
         'Authorization':'token'+' '+token 
       },
     }).then(res => {
     return res.json()
   }).then(data => {
-    // let table2 = '<table>';
-    // table2 += `<thead class="thead"><th>No</th><th>grade</th></thead>`;
     console.log(data.data)
     data.data.forEach((d, index) => {
       content = content + `  <div class="card" onclick=getsubject(${d.grade}) id=${d.id}>
         <p class="grade">${d.grade}</p>
  </div>`
 
-
-
-      // table2 = table2 + `<tr id=${d.id}>`;
-      // table2 = table2 + '<td class="grade">' + `${d.grade}` + '</td>';
-      // table2 = table2 + '<td class="code">' + `${d.code}` + '</td>';
-      // table2 = table2 + '<td class="name">' + `${d.name}` + '</td>';
-      //   table2 = table2 + '<td>' + `<a href=# id="edit" >Edit</a>` + '</td>',
-      //   table2 = table2 + '<td>' + `<a href=# id="delete" >delete</a>` + '</td>',
-      //   table2 = table2 + `</tr>`;
       })
-      // table2 += "</table>";
       content += '</div>'
       list.innerHTML = content;
-      // table2 = table2 + `<tr id=${d.id}>`;
-      // table2 = table2 + `<td >` + `${index}` + '</td>';
-      // table2 = table2 + '<td>' + `${d.grade}` + '</td>';
-
-      //   table2 = table2 + `</tr>`;
-
-      // table2 += "</table>";
-      // list.innerHTML = table2;
-
+     
   })
   };
   get();
@@ -113,14 +93,7 @@ function get(){
         }}).then(res => {
     return res.json()
   }).then(data => {
-    // let table2 = '<table>';
-    // table2 += `<thead class="thead">
-    //   <th scope="col">grade</th>
-    //   <th scope="col">subject code</th>
-    //   <th scope="col">subject</th>
-    //   <th scope="col">Edit</th>
-    //   <th scope="col">Delete</th>
-    // </thead>`;
+   
     data.forEach((d, index) => {
 
       content = content + `  <div class="card" id=${d.id}>
@@ -134,34 +107,9 @@ function get(){
    container.innerHTML = content;
    list.innerHTML = ''
   })}
+}
+else{
+  window.location.href = `${host}/404`
+}
 </script>
-<!-- 
-        </div>
-        <div>
-
-            <table class="table">
-                <thead class="thead">
-                  <tr>                   
-                    <th scope="col">Grade</th>                
-                  </tr>
-                </thead>
-                {% for l in grade %}
-              
-      
-                <tbody>                   
-                  <tr>                   
-                    <td>{{l.grade}}</td>                                  
-                  </tr>
-              
-                  {% endfor %}
-              
-          </tbody>
-      </table>
-              
-                
-
-
-            
-        </div> -->
-      
     {% endblock %}

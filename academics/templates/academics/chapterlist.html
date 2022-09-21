@@ -225,7 +225,109 @@
 
                 
             })
-
+            function deletechapter(id, grade_name, subject_name) {
+                // subject_name = subject_name.replace('_', ' ')
+                fetch(`https://schooltestproject.herokuapp.com/api/chapters/${id}/`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': 'token' + ' ' + token
+                    },
+                }).then(() => {
+                    form.style.display = 'none'
+                    get(grade_name, subject_name)
+                }
+                )
+            }
+        
+            container3.addEventListener('click', (e) => {
+                // form_subject = document.getElementById('id_subject')
+                form_chapter_no = document.getElementById('id_chapter_no')
+                form_name = document.getElementById('id_name')
+                form_description = document.getElementById('id_description');
+                chapter_btn = document.getElementById('chapter-btn')
+                var subject_name = e.target.parentElement.parentElement.querySelector('.subject').textContent;
+                console.log(subject_name)
+                var grade_name = e.target.parentElement.parentElement.querySelector('.grade').textContent;
+                e.preventDefault();
+                let delbutton = e.target.id == 'delete';
+                let editbutton = e.target.id == 'edit';
+                edit = editbutton
+                let id = e.target.parentElement.parentElement.id;
+                console.log(e.target.parentElement.parentElement)
+                let yes_button = document.getElementById('delete-btn-yes')
+                let no_btn = document.getElementById('delete-btn-no')
+        
+                const parent = e.target.parentElement.parentElement;
+                var subject = parent.querySelector('.subject').id;
+        
+                if (delbutton) {
+                    yes_button.setAttribute("onClick", `deletechapter(${id},${grade_name},'${subject}')`)
+                }
+        
+                if (editbutton) {
+                    window.location.href = '#grade';
+                    form.style.display = 'block'
+                //    const parent = e.target.parentElement.parentElement;
+                 //   var subject = parent.querySelector('.subject').id;
+                    console.log(subject)
+                    var chapter_no = parent.querySelector('.chapter_no').textContent;
+                    var name = parent.querySelector('.name').textContent;
+                    var description = parent.querySelector('.description').textContent;
+                    console.log(chapter_no)
+                    form_chapter_no.value = chapter_no
+                    form_name.value = name
+                    form_description.value = description
+                    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                    url3 = 'https://schooltestproject.herokuapp.com/api/chapters/'
+                    chapter_btn.addEventListener('click', () => {
+                        if (edit) {
+                            fetch(`${url3}${id}/`, {
+                                method: 'PUT',
+                                headers: {
+                                    'content-Type': 'application/json',
+                                    'Authorization': 'token' + ' ' + token,
+                                    'X-CSRFToken': csrftoken
+                                },
+                                body: JSON.stringify({
+                                    'subject': subject,
+                                    'chapter_no': form_chapter_no.value,
+                                    'name': form_name.value,
+                                    'description': form_description.value,
+                                })
+                            }).then(function (response) {
+                                if (response.status == 200) {
+                                    console.log("Sucess response", response)
+                                    messages.innerHTML = `${name} is updated succesfully`;
+                                    error_messages.innerHTML = ''
+                                    form.style.display = 'none'
+                                    get(grade_name, subject)
+                                } else {
+                                    console.log(response);
+                                }
+                                return response.json()
+        
+                            }).then(data => {
+                                console.log(data)
+                                if (data.status != 'success') {
+                                    error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+                                    messages.innerHTML = ''
+                                    form.innerHTML = ``
+                                    form.style.display = 'none'
+                                    get(grade_name, subject)
+                                }
+                            }
+                            )
+        
+                        }
+                    })
+                }
+            });
+        
+         
+            let input=document.getElementById('id_subject')
+            input.addEventListener('click',(e) => {
+                    getchapter();
+            })
 
 
         } else {
@@ -237,109 +339,7 @@
 
     // edit chapter
 
-    function deletechapter(id, grade_name, subject_name) {
-        // subject_name = subject_name.replace('_', ' ')
-        fetch(`https://schooltestproject.herokuapp.com/api/chapters/${id}/`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': 'token' + ' ' + token
-            },
-        }).then(() => {
-            form.style.display = 'none'
-            get(grade_name, subject_name)
-        }
-        )
-    }
-
-    container3.addEventListener('click', (e) => {
-        // form_subject = document.getElementById('id_subject')
-        form_chapter_no = document.getElementById('id_chapter_no')
-        form_name = document.getElementById('id_name')
-        form_description = document.getElementById('id_description');
-        chapter_btn = document.getElementById('chapter-btn')
-        var subject_name = e.target.parentElement.parentElement.querySelector('.subject').textContent;
-        console.log(subject_name)
-        var grade_name = e.target.parentElement.parentElement.querySelector('.grade').textContent;
-        e.preventDefault();
-        let delbutton = e.target.id == 'delete';
-        let editbutton = e.target.id == 'edit';
-        edit = editbutton
-        let id = e.target.parentElement.parentElement.id;
-        console.log(e.target.parentElement.parentElement)
-        let yes_button = document.getElementById('delete-btn-yes')
-        let no_btn = document.getElementById('delete-btn-no')
-
-        const parent = e.target.parentElement.parentElement;
-        var subject = parent.querySelector('.subject').id;
-
-        if (delbutton) {
-            yes_button.setAttribute("onClick", `deletechapter(${id},${grade_name},'${subject}')`)
-        }
-
-        if (editbutton) {
-            window.location.href = '#grade';
-            form.style.display = 'block'
-        //    const parent = e.target.parentElement.parentElement;
-         //   var subject = parent.querySelector('.subject').id;
-            console.log(subject)
-            var chapter_no = parent.querySelector('.chapter_no').textContent;
-            var name = parent.querySelector('.name').textContent;
-            var description = parent.querySelector('.description').textContent;
-            console.log(chapter_no)
-            form_chapter_no.value = chapter_no
-            form_name.value = name
-            form_description.value = description
-            let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-            url3 = 'https://schooltestproject.herokuapp.com/api/chapters/'
-            chapter_btn.addEventListener('click', () => {
-                if (edit) {
-                    fetch(`${url3}${id}/`, {
-                        method: 'PUT',
-                        headers: {
-                            'content-Type': 'application/json',
-                            'Authorization': 'token' + ' ' + token,
-                            'X-CSRFToken': csrftoken
-                        },
-                        body: JSON.stringify({
-                            'subject': subject,
-                            'chapter_no': form_chapter_no.value,
-                            'name': form_name.value,
-                            'description': form_description.value,
-                        })
-                    }).then(function (response) {
-                        if (response.status == 200) {
-                            console.log("Sucess response", response)
-                            messages.innerHTML = `${name} is updated succesfully`;
-                            error_messages.innerHTML = ''
-                            form.style.display = 'none'
-                            get(grade_name, subject)
-                        } else {
-                            console.log(response);
-                        }
-                        return response.json()
-
-                    }).then(data => {
-                        console.log(data)
-                        if (data.status != 'success') {
-                            error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-                            messages.innerHTML = ''
-                            form.innerHTML = ``
-                            form.style.display = 'none'
-                            get(grade_name, subject)
-                        }
-                    }
-                    )
-
-                }
-            })
-        }
-    });
-
- 
-    let input=document.getElementById('id_subject')
-    input.addEventListener('click',(e) => {
-            getchapter();
-    })
+   
 </script>
 <div class="chapters">
 

@@ -109,9 +109,11 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
   let head = document.querySelector('.header')
+  var token = localStorage.getItem('token')
   head.style.display = 'none'
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
+  
   function back() {
     document.getElementById('questionForm').style.display = 'none'
     document.getElementById('question-box').style.display = 'block'
@@ -122,7 +124,7 @@
   let yes_button = document.getElementById('delete-btn-yes')
   let no_btn = document.getElementById('delete-btn-no')
   var host = window.location.protocol + "//" + window.location.host;
-  var token = localStorage.getItem('token')
+ 
   document.getElementById('nav-question').style.opacity = '0.5';
   document.getElementById('message-close-btn').addEventListener('click', () => {
     messages.innerHTML = '';
@@ -451,7 +453,7 @@
     });
   }
   else {
-    window.location.href = `${host}/login`
+    window.location.href = `${host}/404`
   }
 
 

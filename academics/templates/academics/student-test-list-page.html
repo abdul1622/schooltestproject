@@ -37,6 +37,7 @@ Get Test
     url1 = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
     url1.searchParams.append('grade', standard);
     url1.searchParams.append('studentid',student_id)
+    if (token){
     fetch(url1,
             {
                 method: 'GET',
@@ -196,6 +197,10 @@ function getrequiredtest(){
   }else{
     single_test.innerHTML = `<p class="text-center text-danger">Test id is required</p>`
   }
+}
+}
+else{
+  window.location.href=`${host}/404` 
 }
 </script>
 {% endblock %}
