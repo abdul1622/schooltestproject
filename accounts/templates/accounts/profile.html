@@ -136,80 +136,81 @@ aria-hidden="true">
                   }
             }
             )
+
+            container.addEventListener('click',(e)=>{
+              fname= document.getElementById('fname');
+              lname= document.getElementById('lname');
+              ffname= document.getElementById('ffname');
+              std= document.getElementById('std');
+              sec= document.getElementById('sec');
+              ad=document.getElementById('address');
+              button= document.getElementById('profile-btn')
+              e.preventDefault();
+              let editbutton = e.target.id == 'profile-edit';
+              let id = e.target.parentElement.parentElement.id;
+              console.log(id)
+              if (editbutton) 
+              {
+                form.style.display='block'
+                container.style.display = 'none'
+                console.log('hi')
+                url="https://schooltestproject.herokuapp.com/api/student-profile/"
+                const parent = e.target.parentElement;
+                console.log(parent)
+                let fullname = parent.parentElement.querySelector('.fullname').textContent;
+                let lastname= parent.querySelector('.lastname').textContent;
+                let firstname= parent.querySelector('.firstname').textContent;
+                let standard= parent.querySelector('.std').textContent;
+                let section= parent.querySelector('.sec').textContent;
+                let address= parent.querySelector('.address').textContent;
+                document.getElementById('ffname').value=fullname
+                document.getElementById('lname').value=lastname
+                document.getElementById('fname').value=firstname
+                document.getElementById('std').value=standard
+                document.getElementById('sec').value=section
+                document.getElementById('address').value=address
+                button.addEventListener('click',()=>{
+                  fetch(`${url}${id}/`,{
+                    method : 'PUT',
+                    headers : {
+                      'Content-Type' : 'application/json',
+                      'Authorization':'token'+" " +localStorage.getItem('token'),
+                      'X-CSRFToken': csrftoken
+                    },
+                    body:JSON.stringify(
+                    {'first_name':fname.value,'last_name':lname.value,'standard':std.value,'section':sec.value,'full_name':ffname.value,'address':ad.value}
+                    )
+                }).then(response => {
+                  if (response.status == 200) {
+                      console.log("Sucess response", response)
+                      messages.innerHTML = 'updated successfully'
+                      error_messages.innerHTML= ''
+                    profile();
+                  }
+                form.style.display='none'
+                container.style.display = 'block'
+                  return response.json();
+              }).then(function (data) {
+                  console.log(data)
+                  if (data.status != 'success'){
+                  error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+                  messages.innerHTML = ''
+                  }
+              })            })
+             
+            }
+          
+           
+            }
+           
+          );
         }
         else{
-          window.location.href=`${host}/login`  
+          window.location.href=`${host}/404`  
         }
        
-        }profile();
+      }profile();
  
-            container.addEventListener('click',(e)=>{
-            fname= document.getElementById('fname');
-            lname= document.getElementById('lname');
-            ffname= document.getElementById('ffname');
-            std= document.getElementById('std');
-            sec= document.getElementById('sec');
-            ad=document.getElementById('address');
-            button= document.getElementById('profile-btn')
-            e.preventDefault();
-            let editbutton = e.target.id == 'profile-edit';
-            let id = e.target.parentElement.parentElement.id;
-            console.log(id)
-            if (editbutton) 
-            {
-              form.style.display='block'
-              container.style.display = 'none'
-              console.log('hi')
-              url="https://schooltestproject.herokuapp.com/api/student-profile/"
-              const parent = e.target.parentElement;
-              console.log(parent)
-              let fullname = parent.parentElement.querySelector('.fullname').textContent;
-              let lastname= parent.querySelector('.lastname').textContent;
-              let firstname= parent.querySelector('.firstname').textContent;
-              let standard= parent.querySelector('.std').textContent;
-              let section= parent.querySelector('.sec').textContent;
-              let address= parent.querySelector('.address').textContent;
-              document.getElementById('ffname').value=fullname
-              document.getElementById('lname').value=lastname
-              document.getElementById('fname').value=firstname
-              document.getElementById('std').value=standard
-              document.getElementById('sec').value=section
-              document.getElementById('address').value=address
-              button.addEventListener('click',()=>{
-                fetch(`${url}${id}/`,{
-                  method : 'PUT',
-                  headers : {
-                    'Content-Type' : 'application/json',
-                    'Authorization':'token'+" " +localStorage.getItem('token'),
-                    'X-CSRFToken': csrftoken
-                  },
-                  body:JSON.stringify(
-                  {'first_name':fname.value,'last_name':lname.value,'standard':std.value,'section':sec.value,'full_name':ffname.value,'address':ad.value}
-                  )
-              }).then(response => {
-                if (response.status == 200) {
-                    console.log("Sucess response", response)
-                    messages.innerHTML = 'updated successfully'
-                    error_messages.innerHTML= ''
-                  profile();
-                }
-              form.style.display='none'
-              container.style.display = 'block'
-                return response.json();
-            }).then(function (data) {
-                console.log(data)
-                if (data.status != 'success'){
-                error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-                messages.innerHTML = ''
-                }
-            })            })
-           
-          }
-        
-         
-          }
-         
-        );
       
       
 </script>

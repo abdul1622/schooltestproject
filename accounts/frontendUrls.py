@@ -13,6 +13,6 @@ urlpatterns=[
     path('profile/',profile,name='profile'),
      path('students/',students,name='userdetails'),
      path('staffs/',staff,name='staff'),
-     path('logout/',logoutview),
+     path('404',unknown),
      path('index',index)
 ]

@@ -131,7 +131,6 @@
     })
 
     // get grade
-
     function get() {
         var content = ' <h2>Grades </h2> <hr> <div class="cards">'
         fetch('https://schooltestproject.herokuapp.com/api/grades/', {
@@ -166,9 +165,7 @@
     };
     if (token) {
         get();
-    } else {
-        window.location.href = `${host}/login`
-    }
+   
     // delete grade 
     function deletegradesetup(id) {
         let url = 'https://schooltestproject.herokuapp.com/api/grades/'
@@ -615,6 +612,8 @@
                 })
         }
     })
-
+} else {
+    window.location.href = `${host}/404`
+}
 </script>
 {% endblock %}

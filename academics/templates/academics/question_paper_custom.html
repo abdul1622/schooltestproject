@@ -94,7 +94,7 @@
     document.getElementById('q-form-4').style.display = 'none';
     document.getElementById('nav-questionpaper').style.opacity = '0.5';
     // document.getElementById('id_grade').setAttribute("onchange", getgradename());
-
+if (token){
  function get(){
     document.getElementById('q-form-1').style.display = 'block';
     document.getElementById('q-form-2').style.display = 'none';
@@ -531,5 +531,9 @@
 
             })
     }
+}
+else{
+    window.location.href = `${host}/404`
+}
 </script>
 {% endblock %}
