@@ -33,6 +33,7 @@ from .auth_backend import PasswordlessAuthBackend
 from random import randint
 from http import client
 from django.contrib.auth import get_user_model
+from . import frontendviews
 # Create your views here.
 
 User = get_user_model()
@@ -68,8 +69,8 @@ class SimpleLoginView(APIView):
             except:
                 return Response({"status": "User doesn't exits"}, status=HTTP_204_NO_CONTENT)
             if user:
+                frontendviews.user(request,email,phone)
                 token, created = Token.objects.get_or_create(user=user)
-                login(request,user)
                 data = {
                     "id" : user.id,
                     "token" : token.key,
