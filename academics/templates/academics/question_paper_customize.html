@@ -586,11 +586,12 @@ function submit_woc(){
                 <p class="success">Test ID :  ${data.data.test_id}</p>
                 <p> Grade : ${grade}</p>
                 <p> subject : ${subject_name}</p>
-                <div> <h1> list of questions </h1>
+                <div> <p class='heading'> list of questions </p>
                 `;
                     for(i=0;i<question_name.length;i++){
-                        content4 += `${i+1}. ${question_name[i]}`
+                        content4 += `<p>${i+1}. ${question_name[i]}</p>`
                     }
+                content4 += `<p><button class='btn btn-sm btn-primary' onclick=refresh()>Ok</button></p>`
                     content4 += `</div>`
                     document.querySelector('.q-form-5').innerHTML= content4
                                 error_messages.innerHTML = ''
@@ -693,11 +694,12 @@ function submit_woc(){
                 <p class="success">Test ID :  ${data.data.test_id}</p>
                 <p> Grade : ${grade}</p>
                 <p> subject : ${subject_name}</p>
-                <div> <h1> list of questions </h1>
+                <div> <p class='heading'> list of questions </p>
                 `;
                     for(i=0;i<question_name.length;i++){
-                        content4 += `${i+1}. ${question_name[i]}`
+                        content4 += `<p>${i+1}. ${question_name[i]}</p>`
                     }
+                content4 += `<p><button class='btn btn-sm btn-primary' onclick=refresh()>Ok</button></p>`
                     content4 += `</div>`
                     document.querySelector('.q-form-5').innerHTML= content4
                                 error_messages.innerHTML = ''
@@ -708,5 +710,11 @@ function submit_woc(){
 
             })
     }
+
+function refresh(){
+    location.reload();
+}
+
+
 </script>
 {% endblock %}
