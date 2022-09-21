@@ -23,7 +23,7 @@ def simple(request):
     return render(request,'accounts/login.html',{'form':form})
 
 def profile(request): 
-    if request.user !=	'AnonymousUser':
+    if request.user != 'AnonymousUser':
         print(request.user,'hi')
         return render(request,'accounts/profile.html')
     return redirect('/login/')
