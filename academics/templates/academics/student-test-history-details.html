@@ -15,6 +15,9 @@
           <option value="" selected="">---------</option>
         </select>
         <button class="btn btn-sm btn-primary" onclick=get()>Get</button>
+        <div class="error-messages">
+
+        </div>
 </div>
 <div class="history-container">
 
@@ -25,7 +28,13 @@
        var subjectId,gradeId,testId,content='',data2;
        let container = document.querySelector('.history-container')
        document.getElementById('nav-studenttesthistory').style.opacity = '0.5';
+<<<<<<< HEAD
        if (token){
+=======
+       let element = document.getElementById('id_test')
+        let grade_element = document.getElementById('id_grade')
+        let subject_element = document.getElementById('id_subject')
+>>>>>>> dca75e402959a10a98ff0a0bb5f637f8ae5e9b37
     // var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
     
     // $.ajax({                       
@@ -72,6 +81,10 @@
 
 function get(){
     testId = document.getElementById('id_test').value
+    test_name = element.options[element.selectedIndex].text;
+    grade_name = grade_element.options[grade_element.selectedIndex].text
+    subject_name = subject_element.options[subject_element.selectedIndex].text
+    console.log(subject_name)
     url = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
   url.searchParams.append('test_id',testId)
   container.innerHTML = ''
@@ -89,9 +102,10 @@ function get(){
             data2 = data
             let i = 0;
     if(data.length){
+      document.querySelector('.error-messages').innerHTML =''
             content += `<div class='history-container-div'>
             <button onclick=back() class='btn btn-sm btn-primary'>Back</button>
-            
+            <p  class='heading'> <span>Grade : ${grade_name}</span> <span class='test-heading'>${test_name}</span> <span>Subject : ${subject_name}</span></p>
             <table>`
             content += '<tr><th>Sl.no</th><th>Name</th><th>Register_number</th><th>Result</th><th>Score</th><th>Correct answer</th><th>Wrong answer</th><th>Unanswered questions</th></tr>'
                 data.forEach((d, index) => {
@@ -104,7 +118,7 @@ function get(){
         document.getElementById('history-container-form').style.display = 'none'
     }
     else{
-    container.innerHTML = `<li>Till now no one attended this test</li>`
+    document.querySelector('.error-messages').innerHTML = `<li>Till now no one attended this test</li>`
     }
     })
 }
