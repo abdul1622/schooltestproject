@@ -440,15 +440,15 @@ function getnext() {
                     }else{
                         question_content +=   `<span>no of questions : ${no_of_questions} </span> <button onclick="get_random()" class="btn btn-primary btn-sm" disabled>select random questions</button>`
                     }
-
+                    question_content += `<table> <tr><th>sl.no</th><th>select</th><th>question</th><th>question type</th><th>cognitive level</th><th>difficulty level</th><th>marks</th></tr>`
                 
             data.data.forEach((d, index) => {
                 i += 1
             question_id_list.push(d.id)
-            question_content += `<p> <span>${i}</span> <input type="checkbox" id="question_${d.id}" name="vehicle1" value="${d.id}"> <label for="vehicle1">${d.question}</label>
+            question_content += `<tr><td>${i}</td> <td><input type="checkbox" id="question_${d.id}" name="vehicle1" value="${d.id}"></td> <td><label for="vehicle1">${d.question}</label></td><td>${d.question_type}</td><td>${d.cognitive_level}</td><td>${d.difficulty_level}</td><td>${d.mark}</td></tr>
 `
             })
-            question_content += `
+            question_content += `</table>
             <p class='quespaper-btns'>
             <button class='btn btn-sm btn-primary' onclick=getnext()>Back</button>
             <button class='btn btn-sm btn-primary' onclick=review_woc() >Next</button>
