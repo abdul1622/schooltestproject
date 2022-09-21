@@ -582,14 +582,16 @@
             margin-left: 4vw;
         }
 
-        #q-form-6 input[type=checkbox] {
+        /* #q-form-6 input[type=checkbox] {
     width: 5%;
-}
+} */
         #chapterlist-btn:hover {
             color: white;
             background-color: #14279b;
         }
-
+        .question-list-container table {
+    width: 90%;
+}
         .question-list-container {
     margin: 5%;
 }
@@ -1771,6 +1773,7 @@ button.btn.btn-primary.btn-test-submit {
     width: 70%;
     margin: 2% 15%;
     padding: 1% 4%;
+    overflow-x: auto;
 }
 .history-container table {
     width: 100%;
@@ -1782,7 +1785,23 @@ button.btn.btn-primary.btn-test-submit {
 .history-container button{
     margin-bottom: 1%;
 }
-
+.history-container span.test-heading {
+    text-transform: capitalize;
+    font-size: 30px;
+}
+.history-container p.heading {
+    display: flex;
+    justify-content: space-around;
+}
+#q-form-6 input {
+    width: auto;
+}
+#q-form-6 th{
+    text-transform: capitalize;
+}
+.history-container-form select {
+    width: 100%;
+}
         @media screen and (min-width:1024px) and (max-width:1200px) {
             .navbar {
                 width: 100%;
@@ -1805,6 +1824,10 @@ button.btn.btn-primary.btn-test-submit {
 
             #profile-box input[type='text'] {
                 margin-bottom: 1vh;
+            }
+            .history-container-form {
+    width: 33%;
+    margin: 4% 37%;
             }
 
             #userDetails {
@@ -2251,8 +2274,11 @@ button.btn.btn-primary.btn-test-submit {
                 grid-template-columns: auto auto auto;
             }
 
+            .history-container-div {
+                width: 85%;
+                margin: 2% 15%;
         }
-
+    }
         @media screen and (min-width:1359px) and (max-width:1450px) {
             .navbar {
                 width: 100vw;
@@ -2772,7 +2798,12 @@ button.btn.btn-primary.btn-test-submit {
                 margin-left: 30%;
                 color: black;
             }
-
+           .history-container-div th:last-child {
+            position: static;
+            }
+            .history-container-form {
+    width: 38%;
+    margin: 3% 30%;}
             .navbar .nav-item a:hover {
                 background-color: #14279b;
                 ;
@@ -4216,7 +4247,24 @@ button.btn.btn-primary.btn-test-submit {
                 margin: -12.5% 58%;
                 padding: 7px;
             }
+            .history-container-form {
+    width: 70%;
+    margin: 4% 15%;
+    padding: 2% 7%;
+            }
+            .history-container-div {
+    background-color: darkgrey;
+    width: 70%;
+    margin: 2% 15%;
+            }
+            .history-container p.heading {
+    flex-direction: column;
         }
+        .history-container span.test-heading {
+    text-transform: capitalize;
+    font-size: 16px;
+}
+    }
     </style>
 </head>
 
