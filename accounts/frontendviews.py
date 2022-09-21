@@ -33,5 +33,4 @@ def staff(request):
 def index(request):
     return render(request,'index.html')
 def logout(request):
-    logout(request.user)
     return render(request,'accounts/logout.html')
