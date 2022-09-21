@@ -69,7 +69,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "corsheaders.middleware.CorsMiddleware",
-    'academics.middleware.SimpleMiddleware'
+   # 'academics.middleware.SimpleMiddleware'
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True

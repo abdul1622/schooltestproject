@@ -322,7 +322,7 @@ class QuestionEditView(RetrieveUpdateDestroyAPIView):
             return Response({'status': 'failure', "data": "Question doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
 
 
-class QuestionList(APIView):
+class QuestionList2(APIView):
     serializer_class = QuestionGetSerializer
     permission_classes = [AllowAny]
 
@@ -451,23 +451,21 @@ class QuestionList(APIView):
             return Response({"status": "failure", "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
 
 
-class QuestionList2(APIView):
+class QuestionList(APIView):
     serializer_class = QuestionGetSerializer
     permission_classes = [AllowAny]
 
     def post(self, request):
         type = str(self.request.query_params.get('type'))
         grade = request.data.get('grade')
-        subject = (request.data.get('subject'))
-        from_chapter = (request.data.get('from_chapter'))
-        to_chapter = (request.data.get('to_chapter'))
-        all_chapters = request.data.get('all_chapters')
+        subject=(request.data.get('subject'))
         timing = request.data.get('timing')
         overall_marks = request.data.get('overall_marks')
         list_of_questions = request.data.get('list_of_questions')
-        number_of_questions = int(request.data.get('number_of_questions'))
-        print(timing, overall_marks)
+        # print(list_of_questions)
+        # print(timing,overall_marks)
         customize = request.data.get('customize')
+        print(customize)
         # list_of_questions = [126,168,132,24,62]
 
         if timing:
@@ -479,18 +477,41 @@ class QuestionList2(APIView):
             subject_obj = Subject.objects.get(id=subject)
             user = self.request.user
             questions = []
-            for i in list_of_questions:
-                try:
-                    j = Question.objects.get(id=i)
-                    questions.append(j)
-                except:
-                    continue
-            serializer = QuestionSerializer(questions, many=True)
+            if customize:
+                print('hi')
+                customize = json.loads(customize)
+                for i in customize:
+                    print(i)
+                    chapter = Chapter.objects.get(id=i['id'])
+                    for j in i['cognitive_level']:
+                        try:
+                            cognitive = j.capitalize()
+                            newlist = Question.objects.filter(chapter=chapter.id,cognitive_level=cognitive)
+                            newlist =(sorted(newlist,key=lambda x: random.random()))
+                            num = int(i['cognitive_level'][j])
+                            if len(newlist) >= num:
+                                newlist = newlist[:num]
+                                questions.append(newlist)
+                            else:
+                                return Response({'status':'failure','data':('Required questions not available in {} level in chapter {}. Available number of questions is {}').format(cognitive,chapter,len(newlist))},status=HTTP_206_PARTIAL_CONTENT)
+                        except:
+                            return Response({"status": "failure","data":"given details are incorrect"},status=HTTP_206_PARTIAL_CONTENT)
+                questions = [item for sublist in questions for item in sublist]
+            else:
+                for i in list_of_questions:
+                    try:
+                        j = Question.objects.get(id=i)
+                        questions.append(j)
+                    except:
+                        continue
+            serializer = QuestionSerializer(questions,many=True)
             type = type.lower()
             # answers
             answers = []
+            question_list = []
             for question in questions:
-                ans = getattr(question.answers, str(question.answers))
+                ans = getattr(question.answers,str(question.answers))
+                question_list.append(question.question)
                 answers.append(ans)
             context = {'data': serializer.data, 'grade': grade.grade,
                 'subject': subject_obj.name, 'register_number': user.register_number}
@@ -521,9 +542,8 @@ class QuestionList2(APIView):
                 if not status:
                     return Response({"status": "failure", "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
                 serializer = QuestionPaperSerializer(question_paper)
-                return Response({'status': 'success', 'data': serializer.data, 'answer-file-path': '/media/answer_files/{answer_file}.pdf', 'subject_id': subject_obj.id, 'grade_id': grade.id}, status=HTTP_200_OK)
-            filename, status = render_to_pdf2(
-                'academics/question.html', 'question_paper', None, context)
+                return Response({'status':'success','data':serializer.data,'questions':question_list,'answer-file-path':'/media/answer_files/{answer_file}.pdf','subject_id':subject_obj.id,'grade_id':grade.id},status=HTTP_200_OK)
+            filename,status = render_to_pdf2('academics/question.html','question_paper',None,context)
             if not status:
                 return Response({"status": "failure", "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
             return Response({'status': 'success', 'question_path': f'/media/question_paper/{filename}.pdf', 'answer_path': f'/media/answer_files/{answer_file}.pdf', 'subject_id': subject_obj.id, 'grade_id': grade.id})

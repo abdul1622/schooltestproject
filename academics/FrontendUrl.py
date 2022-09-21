@@ -18,5 +18,6 @@ urlpatterns=[
     path('test-history',testhistory),
     path('instructions',instruct),
     path('questionbank',questionbank),
-    path('student-test-history',student_test_history)
+    path('student-test-history',student_test_history),
+    path('q',question_paperview2)
 ]

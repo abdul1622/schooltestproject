@@ -158,7 +158,7 @@ class QuestionAnswerSerializer(serializers.ModelSerializer):
         return instance
 
 
-class QuestionGetSerializer(serializers.ModelSerializer):
+class QuestionGetSerializer2(serializers.ModelSerializer):
     # subject_name = serializers.CharField()
     number_of_questions = serializers.IntegerField()
     from_chapter = serializers.PrimaryKeyRelatedField(queryset=Chapter.objects.all(),default=None)
@@ -169,17 +169,17 @@ class QuestionGetSerializer(serializers.ModelSerializer):
         model = Question_Paper
         fields = ['grade','subject','number_of_questions','from_chapter','to_chapter','all_chapters','timing','overall_marks','customize']
 
-class QuestionGetSerializer2(serializers.ModelSerializer):
+class QuestionGetSerializer(serializers.ModelSerializer):
     # subject_name = serializers.CharField()
-    number_of_questions = serializers.IntegerField()
-    from_chapter = serializers.PrimaryKeyRelatedField(queryset=Chapter.objects.all(),default=None)
-    to_chapter = serializers.PrimaryKeyRelatedField(queryset=Chapter.objects.all(),default=None)
-    all_chapters = serializers.BooleanField(required=False)
+    # number_of_questions = serializers.IntegerField()
+    # from_chapter = serializers.PrimaryKeyRelatedField(queryset=Chapter.objects.all(),default=None)
+    # to_chapter = serializers.PrimaryKeyRelatedField(queryset=Chapter.objects.all(),default=None)
+    # all_chapters = serializers.BooleanField(required=False)
     customize = serializers.JSONField(required=False)
     list_of_questions = serializers.ListField()
     class Meta:
         model = Question_Paper
-        fields = ['grade','subject','number_of_questions','from_chapter','to_chapter','all_chapters','timing','overall_marks','customize','list_of_questions']
+        fields = ['grade','subject','timing','overall_marks','customize','list_of_questions']
 
 
 class QuestionSerializer(serializers.ModelSerializer):
