@@ -14,7 +14,6 @@ def user(request,email,phone):
 def land(request):
     return render(request,'accounts/content.html')
 
-@login_required(login_url='/login')
 def home(request):
     return render(request,'base.html')
 
@@ -26,26 +25,26 @@ def simple(request):
     form=login_form()
     return render(request,'accounts/login.html',{'form':form})
 
-@login_required(login_url='/login')
+
 def profile(request): 
     if request.user != 'AnonymousUser':
         print(request.user,'hi')
         return render(request,'accounts/profile.html')
     return redirect('/login/')
 
-@login_required(login_url='/login')
+
 def students(request):
         if request.user.user_type=='is_admin' or request.user.user_type=='is_staff':
             return render(request,'accounts/students.html')
         return render(request,'404.html')
 
-@login_required(login_url='/login')
+
 def staff(request):
         if request.user.user_type=='is_admin' :
             return render(request,'accounts/staffs.html')
         return render(request,'404.html')
 
-@login_required(login_url='/login')
+
 def index(request):
     return render(request,'index.html')
 
