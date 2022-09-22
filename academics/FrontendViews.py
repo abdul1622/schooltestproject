@@ -16,7 +16,7 @@ def gradeview(request):
             subjectform = Subjectform
             chapterform = Chapterform
             return render(request,'academics/grade-subject-chapter.html',{'gradeform':gradeform,'subjectform':subjectform,'chapterform':chapterform})
-        return render(request,'404.html')
+     return render(request,'404.html')
 
 def questioncreationview(request):
     if not request.user.is_authenticated:
