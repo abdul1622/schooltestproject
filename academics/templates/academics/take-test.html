@@ -668,19 +668,12 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
 
             }
             console.log('your marks', marks)
-            var questionmark=0
-            for (i = 0; i < answer_details.length; i++) {
-                 questionmark += answer_details[i].mark
-            }
-            var weightage = (total_marks / questionmark)
-            var testmark= weightage*answer_details.length-1
-            var passmark= (pass_percentage/testmark)*100
-            console.log(passmark)
-            console.log(passmark)
-            score = parseInt(passmark)
+            var score = (marks / total_marks) * 100
+            console.log(score)
+            score = parseInt(score)
             console.log(score)
             var result;
-            if (passmark < marks) {
+            if (score < pass_percentage) {
                 result = 'fail'
             } else {
                 result = 'pass'
