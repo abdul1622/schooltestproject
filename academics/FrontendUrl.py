@@ -1,4 +1,6 @@
 from django.urls import path
+
+from accounts.frontendviews import logoutview
 from.FrontendViews import *
 
 
@@ -19,5 +21,6 @@ urlpatterns=[
     path('instructions',instruct),
     path('questionbank',questionbank),
     path('student-test-history',student_test_history),
-    path('q',question_paperview2)
+    path('q',question_paperview2),
+    path('logout',logoutview)
 ]
