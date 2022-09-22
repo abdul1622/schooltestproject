@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block chapterlist %}
+
+<!-- get chapter form -->
 <div class="form-box">
     <div class="box" id="mediabox">
 
@@ -16,6 +18,8 @@
         <button id="chapterlist-btn" onclick=getchapter()>Getchapters</button>
     </div>
 </div>
+
+<!-- message pop up -->
 <div class="modal fade" id="messageModal-chapterlist" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -42,7 +46,7 @@
     </div>
 </div>
 
-
+<!-- delete confirm pop up -->
 <div class="modal fade" id="delete-box-Modal-chapterlist" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -65,13 +69,13 @@
     </div>
 </div>
 
-
+<!-- chapter-list -->
 <div class="chapter-table">
 
 </div>
 
-
-<div class="form box" >
+<!-- chapter edit form -->
+<div class="form box" id="form-chaplist">
 
     <button onclick=closeform() class='back-btn'>&#x2715;</button>
     
@@ -95,17 +99,19 @@
 <script>
     var token = localStorage.getItem("token")
     let form = document.querySelector('.form')
-
+    let flag = false
+    let grade_element = document.getElementById('id_grade')
+    let subject_element = document.getElementById('id_subject')
     form.style.display = 'none'
     let messages = document.querySelector('.messages')
     let edit = null;
     var host = window.location.protocol + "//" + window.location.host;
     // form.style.display = 'none'
+    document.getElementById('')
     let container3 = document.querySelector('.chapter-table')
     let error_messages = document.querySelector('.error-messages')
     var grade;
     var subject;
-    let subject_name;
     document.getElementById('nav-chapterlist').style.opacity = '0.5';
     // var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
     
@@ -139,18 +145,19 @@
             });
       
           });
+
  document.getElementById('message-close-btn').addEventListener('click',()=>{
     messages.innerHTML = '';
     error_messages.innerHTML = '';
  })
    
-
+// 
     function back() {
         document.querySelector('.chapter-table').innerHTML = ''
+        flag = false
         document.querySelector('.box').style.display='block'
         document.getElementById('id_grade').value = '';
         document.getElementById('id_subject').value ='';
-     
     }
     function get(grade, subject) {
         document.getElementById('id_grade').value = grade;
@@ -158,30 +165,32 @@
         console.log(grade,subject)
         getchapter();
     }
-
+    if (token) {
     function getchapter() {
-        if (token) {
+
             let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             var grade = document.getElementById('id_grade').value
             var subject = document.getElementById('id_subject').value
+            let grade_name = grade_element.options[grade_element.selectedIndex].text
+            let subject_name = subject_element.options[subject_element.selectedIndex].text
             console.log(grade, subject)
-            console.log(grade + subject)
-            let url2 = `https://schooltestproject.herokuapp.com/api/subjects/${subject}/`
-            fetch(url2, {
-                method: 'GET',
-                headers: {
-                    'content-Type': 'application/json',
-                    'Authorization': 'token' + ' ' + token,
-                }
-            }).then(res => {
-                return res.json()
-            }).then(data => {
-                console.log(data.name)
-                subject_name = data.name
-            }).then(()=>{
+            console.log(grade_name + subject_name)
+            // let url2 = `https://schooltestproject.herokuapp.com/api/subjects/${subject}/`
+            // fetch(url2, {
+            //     method: 'GET',
+            //     headers: {
+            //         'content-Type': 'application/json',
+            //         'Authorization': 'token' + ' ' + token,
+            //     }
+            // }).then(res => {
+            //     return res.json()
+            // }).then(data => {
+            //     console.log(data.name)
+            //     subject_name = data.name
+            // }).then(()=>{
                 fetch('https://schooltestproject.herokuapp.com/api/chapter-list/', {
                     method: 'POST',
-                    body: JSON.stringify({ 'grade': grade, 'subject': subject_name }
+                    body: JSON.stringify({ 'grade': grade_name, 'subject': subject_name }
                     ),
                     headers: {
                         'Accept': 'application/json',
@@ -209,6 +218,7 @@
     
                         // console.log(path)
                         let container = document.querySelector('.chapter-table');
+                        flag = true
                         container.innerHTML = table2;
                         document.querySelector('.box').style.display = "none"
                         document.getElementById('id_chapter_no').value = ''
@@ -222,9 +232,7 @@
                         document.querySelector('.error-message').innerHTML = `<p class='text-center'>${data.status}</p>`
                     }
                 })
-
-                
-            })
+            }
             function deletechapter(id, grade_name, subject_name) {
                 // subject_name = subject_name.replace('_', ' ')
                 fetch(`https://schooltestproject.herokuapp.com/api/chapters/${id}/`, {
@@ -241,6 +249,7 @@
         
             container3.addEventListener('click', (e) => {
                 // form_subject = document.getElementById('id_subject')
+                if(flag){
                 form_chapter_no = document.getElementById('id_chapter_no')
                 form_name = document.getElementById('id_name')
                 form_description = document.getElementById('id_description');
@@ -321,7 +330,11 @@
                         }
                     })
                 }
+            }else{
+return
+}
             });
+  
         
          
             let input=document.getElementById('id_subject')
@@ -333,8 +346,6 @@
         } else {
             window.location.href = `${host}/login`
         }
-        return
-    }
 
 
     // edit chapter
