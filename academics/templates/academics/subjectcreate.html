@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+{% block subject %}
+<div class="subject-container">
+
+  <div class="subject-container-1">
+    <div class="get-subject">
+      <input id="gradeforsubject" type="number">
+    </div>
+    <div class="subject-list container-fluid">
+    </div>
+
+  </div>
+  <div class="subject-container-2">
+    <div class="subjectform">
+      <!-- <form> -->
+      {% csrf_token %}
+      {{form.as_p}}
+      <button id="subject-btn">Submit</button>
+      <!-- </form> -->
+    </div>
+
+    <div id="message">
+
+    </div>
+
+  </div>
+
+
+  <script>
+    var token = localStorage.getItem('token')
+    var host = window.location.protocol + "//" + window.location.host;
+    const container2 = document.querySelector('.subject-list');
+    var messages = document.getElementById('message')
+    url = 'https://schooltestproject.herokuapp.com/academics/subjects/'
+    var edit = null;
+    if (token) {
+      document.getElementById('gradeforsubject').onchange = function get_subject() {
+        grade_val = document.getElementById('gradeforsubject').value;
+        console.log(grade_val);
+        if (grade_val) {
+          url2 = new URL('https://schooltestproject.herokuapp.com/api/subject-list/');
+          url2.searchParams.append('grade', grade_val);
+          url1 = url2;
+          var content = '<div class="cards">'
+        } else {
+          url1 = url;
+          get();
+          return
+        }
+
+        fetch(url1, {
+          method: 'GET',
+          headers: {
+            'content-Type': 'application/json',
+            'Authorization': 'token' + ' ' + token,
+          }
+        }).then(res => {
+          return res.json()
+        }).then(data => {
+          // let table2 = '<table>';
+          // table2 += `<thead class="thead">
+          //   <th scope="col">grade</th>
+          //   <th scope="col">subject code</th>
+          //   <th scope="col">subject</th>
+          //   <th scope="col">Edit</th>
+          //   <th scope="col">Delete</th>
+          // </thead>`;
+          data.forEach((d, index) => {
+
+            content = content + `  <div class="card" id=${d.id}>
+      <p> Grade : <span class="grade">${d.grade_name}</span></p>
+      <p> Subject : <span class="name">${d.name}</span></p>
+      <p> Subject-code : <span class="code">${d.code}</span></p>
+      <br>
+      <p> <a style="color:blue;" href=# id="edit" >Edit</a> <a style="color:blue;" href=# id="delete" >delete</a></p>
+</div>`
+
+
+
+            // table2 = table2 + `<tr id=${d.id}>`;
+            // table2 = table2 + '<td class="grade">' + `${d.grade}` + '</td>';
+            // table2 = table2 + '<td class="code">' + `${d.code}` + '</td>';
+            // table2 = table2 + '<td class="name">' + `${d.name}` + '</td>';
+            //   table2 = table2 + '<td>' + `<a href=# id="edit" >Edit</a>` + '</td>',
+            //   table2 = table2 + '<td>' + `<a href=# id="delete" >delete</a>` + '</td>',
+            //   table2 = table2 + `</tr>`;
+          })
+          // table2 += "</table>";
+          content += '</div>'
+          container2.innerHTML = content;
+
+        })
+      }
+
+
+      function get() {
+        fetch(url, {
+          method: 'GET',
+          headers: {
+            'content-Type': 'application/json',
+            'Authorization': 'token' + ' ' + token,
+          }
+        }).then(res => {
+          return res.json()
+        }).then(data => {
+          let table2 = '<table>';
+          table2 += `<thead class="thead">
+    <th scope="col">grade</th>
+    <th scope="col">subject code</th>
+    <th scope="col">subject</th>
+    <th scope="col">Edit</th>
+    <th scope="col">Delete</th>
+  </thead>`;
+          data.forEach((d, index) => {
+            table2 = table2 + `<tbody><tr id=${d.id}>`;
+            table2 = table2 + '<td class="grade">' + `${d.grade}` + '</td>';
+            table2 = table2 + '<td class="code">' + `${d.code}` + '</td>';
+            table2 = table2 + '<td class="name">' + `${d.name}` + '</td>';
+            table2 = table2 + '<td>' + `<a href=# id="edit" >Edit</a>` + '</td>',
+              table2 = table2 + '<td>' + `<a href=# id="delete" >delete</a>` + '</td></tbody>',
+              table2 = table2 + `</tr>`;
+          })
+          table2 += "</table>";
+          container2.innerHTML = table2;
+
+        })
+      };
+      get();
+
+      container2.addEventListener('click', (e) => {
+        form_grade = document.getElementById('id_grade')
+        form_code = document.getElementById('id_code')
+        form_name = document.getElementById('id_name')
+        subject_btn = document.getElementById('subject-btn')
+        e.preventDefault();
+        let delbutton = e.target.id == 'delete';
+        let editbutton = e.target.id == 'edit';
+        edit = editbutton
+        console.log(edit)
+        let id = e.target.parentElement.parentElement.id;
+        if (delbutton) {
+          const parent1 = e.target.parentElement.parentElement;
+          var name = parent1.querySelector('.name').textContent
+          if (confirm(`You want to delete chapter ${(e.target.parentElement.parentElement.querySelector('.name')).textContent}`)) {
+            fetch(`${url}${id}/`, {
+              method: 'DELETE',
+              headers: {
+                'Authorization': 'token' + ' ' + token,
+              },
+            }).then(res => console.log(res)
+            )
+
+          }
+
+        }
+        console.log(editbutton, 'dfg')
+        if (editbutton) {
+          const parent = e.target.parentElement.parentElement;
+          var grade = parent.querySelector('.grade').textContent;
+          var code = parent.querySelector('.code').textContent;
+          var name = parent.querySelector('.name').textContent;
+          form_grade.value = grade
+          form_code.value = code
+          form_name.value = name
+          let id = e.target.parentElement.parentElement.id
+          console.log(e.target.parentElement.parentElement.id)
+          console.log(e.target.parentElement.parentElement)
+          console.log(id)
+          let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+          subject_btn.addEventListener('click', () => {
+            console.log(edit)
+            if (edit) {
+              fetch(`${url}${id}/`, {
+                method: 'PUT',
+                headers: {
+                  'content-Type': 'application/json',
+                  'Authorization': 'token' + ' ' + token,
+                  'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({
+                  'grade': form_grade.value,
+                  'code': form_code.value,
+                  'name': form_name.value,
+                })
+              }).then(res => res.json())
+
+            }
+          })
+        }
+      });
+
+
+      const subject_create = document.getElementById('subject-btn')
+      subject_create.addEventListener('click', () => {
+        var code = document.getElementById('id_code').value
+        var name = document.getElementById('id_name').value
+        var grade = document.getElementById('id_grade').value
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        console.log(edit)
+        if (!edit) {
+          console.log(edit)
+          fetch('https://schooltestproject.herokuapp.com/api/subjects/',
+            {
+              method: 'POST',
+              body: JSON.stringify({ 'code': code, 'name': name, 'grade': grade }
+              ),
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'token' + ' ' + token,
+                'X-CSRFToken': csrftoken
+              },
+            }).then(function (response) {
+              if (response.status == 201) {
+                console.log("Sucess response", response)
+                messages.innerHTML = `${name} is created succesfully`;
+                get();
+              } else {
+                console.log(response);
+              }
+            })
+        }
+      })
+    }
+    else {
+      window.location.href = `${host}/404`
+    }
+
+  </script>
+
+
+  {% endblock %}
