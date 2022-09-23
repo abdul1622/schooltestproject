@@ -149,7 +149,6 @@ if (token){
             },
             success: function (data) {
                 $("#id_chapter").html(data),
-
                 $('#id_chapter_get').html(data)
             }
         });
@@ -292,7 +291,6 @@ function getnext() {
             })
             question_content += `</table>
           `
-        //   <span class="more-btn"><button id="next-btn" class="submit-btn btn btn-sm btn-primary" onclick=add()>Add More</button> </span>
 
           document.querySelector('.q-form-6').innerHTML = question_content
         for(i=0;i<question_per_chapter_get.length;i++){
@@ -305,33 +303,6 @@ function getnext() {
             }
         }
             document.getElementById('q-form').style.display = 'none'
-  
-            // if(question_list.length){
-    //     for(i=0;i<question_list.length;i++){
-    //     document.getElementById(`question_${question_list[i]}`).checked = true
-    // }
-        // let current_index = null
-        // if (result.length) {
-        //     for (i = 0; i < chapters_list.length; i++) {
-        //         if (result[i]) {
-        //             if (result[i]['id'] == chapter_id) {
-        //                 current_index = i
-        //                 break
-        //             }
-        //         }
-        //     }
-        // }
-
-        // if (current_index != null) {
-        //     document.getElementById('id_knowledge').value = result[current_index]['cognitive_level']['knowledge']
-        //     document.getElementById('id_comprehension').value = result[current_index]['cognitive_level']['comprehension']
-        //     document.getElementById('id_application').value = result[current_index]['cognitive_level']['application']
-        // }
-        // else {
-        //     document.getElementById('id_knowledge').value = 0
-        //     document.getElementById('id_comprehension').value = 0
-        //     document.getElementById('id_application').value = 0
-        // }
 }
 
     function get_customize() {
