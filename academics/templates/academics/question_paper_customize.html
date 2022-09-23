@@ -46,32 +46,7 @@
         </p>
     </div>
 <!-- customize form -->
-    <div class="q-form-4" id="q-form-4" style="display: block;">
-        <p><label for="id_chapter_get">Chapters :</label> <select name="chapters" onchange=getcustomize_details()
-                required="" id="id_chapter_get">
-                <option value="" selected="">---------</option>
-            </select>
-        </p>
-        <p class="knowledge"><label for="">Knowledge</label> <input min="0" type="number" name="" id="id_knowledge"></p>
-        </p>
-        <p class="knowledge"><label for=""> Comprehension </label> <input min="0" type="number" name=""
-                id="id_comprehension"></p>
-        <p class="knowledge"><label for=""> Application </label> <input min="0" type="number" name=""
-                id="id_application">
-            <span class="more-btn"> </span>
-        <p class="chapter-btns">
-            <span class="back-btn"><button id="next-btn" class="submit-btn btn btn-primary"
-                    onclick="getnext()">Back</button></span>
-            <span class="next-btn"><button id="next-btn" class="submit-btn btn btn-primary"
-                    onclick=with_customize()>Next</button></span>
-        </p>
-        <div class="customize-details">
 
-        </div>
-        <div class="custom-error">
-
-        </div>
-    </div>
     <div class="q-form-5" id="q-form-5">
         <div class="messages"></div>
         <div class="error-messages"></div>
@@ -81,6 +56,32 @@
 </div>
 <!-- question list form -->
 <div class="q-form-6" id="q-form-6">
+</div>
+<div class="q-form-4" id="q-form-4" style="display: block;">
+    <p><label for="id_chapter_get">Chapters :</label> <select name="chapters" onchange=getcustomize_details()
+            required="" id="id_chapter_get">
+            <option value="" selected="">---------</option>
+        </select>
+    </p>
+    <!-- <p class="knowledge"><label for="">Knowledge</label> <input min="0" type="number" name="" id="id_knowledge"></p>
+    </p>
+    <p class="knowledge"><label for=""> Comprehension </label> <input min="0" type="number" name=""
+            id="id_comprehension"></p>
+    <p class="knowledge"><label for=""> Application </label> <input min="0" type="number" name=""
+            id="id_application">
+        <span class="more-btn"> </span> -->
+    
+        <span class="back-btn btn-primary "><button id="next-btn" class="submit-btn btn-sm btn-primary"
+                onclick="getnext()">Back</button></span>
+        <span class="next-btn btn-primary"><button id="next-btn" class="submit-btn btn-sm btn-primary"
+                onclick=with_customize()>Next</button></span>
+    
+    <div class="customize-details">
+
+    </div>
+    <div class="custom-error">
+
+    </div>
 </div>
 
 <script>
@@ -97,6 +98,10 @@
     let question_details_list = [],question_name
     let question_content = '';
     let chapter_name_list = []
+    let overall_question_list;
+    let question_per_chapter = [];
+    let question_per_chapter_get =[]
+    let question_per_chapter_res=[] ;
     let question_id_list = [],question_list = []
     document.getElementById('q-form-2').style.display = 'none';
     document.getElementById('q-form-3').style.display = 'none';
@@ -202,6 +207,8 @@ function getnext() {
         }).then(data => {
             console.log(data)
             da = data
+            overall_question_list = data['data']
+            console.log(overall_question_list,'list')
             console.log(data['data'].length)
             if(no_of_questions > data['data'].length){
                 document.querySelector('.error-form-1').innerHTML = `<li style='color:white;'>given number of questions is higher than the actual number of question</li><li style='color:white;'> number of question available is ${data['data'].length}</li>`
@@ -239,7 +246,13 @@ function getnext() {
             return res.json()
         }).then(data => {
             chapters_list = data.data
-            console.log(chapters_list)
+            console.log(chapters_list);
+            for(i=0;i<chapters_list.length;i++){
+                question_per_chapter_get.push({key: `${chapters_list[i].id}`,
+            value : []
+            });
+            }
+            console.log(question_per_chapter_get)
         })
     }
 
@@ -247,38 +260,79 @@ function getnext() {
     function getcustomize_details() {
 
         let chapter_id = parseInt(document.getElementById('id_chapter_get').value)
-        let current_index = null
-        if (result.length) {
-            for (i = 0; i < chapters_list.length; i++) {
-                if (result[i]) {
-                    if (result[i]['id'] == chapter_id) {
-                        current_index = i
-                        break
-                    }
+        question_content = ''
+        question_content +=`<div class='question-list-container-customize'>
+                <p>` 
+
+                    question_content += `<table> <tr><th>sl.no</th><th>select</th><th>question</th><th>question type</th><th>cognitive level</th><th>difficulty level</th><th>marks</th></tr>`    
+          let i = 0
+         question_per_chapter = []
+         overall_question_list.forEach((d, index) => {
+            // console.log(d)
+            question_id_list.push(d.id)
+            if(d.chapter==chapter_id){
+                i += 1
+            question_per_chapter.push(d.id)
+            question_content += `<tr><td>${i}</td> <td><input type="checkbox" id="question_${d.id}" name="vehicle1" value="${d.id}"></td> <td><label for="vehicle1">${d.question}</label></td><td>${d.question_type}</td><td>${d.cognitive_level}</td><td>${d.difficulty_level}</td><td>${d.mark}</td></tr>
+`}
+
+            })
+            question_content += `</table>
+            <span class="more-btn"><button id="next-btn" class="submit-btn btn btn-sm btn-primary" onclick=add()>Add More</button> </span>
+          `
+          document.querySelector('.q-form-6').innerHTML = question_content
+        for(i=0;i<question_per_chapter_get.length;i++){
+            if(question_per_chapter_get[i].key == chapter_id){
+                let current_list = question_per_chapter_get[i].value
+                for(j=0;j<current_list.length;j++){
+                    console.log(current_list[j],'li')
+                    document.getElementById(`question_${current_list[j]}`).checked = true
                 }
             }
         }
-        if (current_index != null) {
-            document.getElementById('id_knowledge').value = result[current_index]['cognitive_level']['knowledge']
-            document.getElementById('id_comprehension').value = result[current_index]['cognitive_level']['comprehension']
-            document.getElementById('id_application').value = result[current_index]['cognitive_level']['application']
-        }
-        else {
-            document.getElementById('id_knowledge').value = 0
-            document.getElementById('id_comprehension').value = 0
-            document.getElementById('id_application').value = 0
-        }
-    }
+            document.getElementById('q-form').style.display = 'none'
+  
+            // if(question_list.length){
+    //     for(i=0;i<question_list.length;i++){
+    //     document.getElementById(`question_${question_list[i]}`).checked = true
+    // }
+        // let current_index = null
+        // if (result.length) {
+        //     for (i = 0; i < chapters_list.length; i++) {
+        //         if (result[i]) {
+        //             if (result[i]['id'] == chapter_id) {
+        //                 current_index = i
+        //                 break
+        //             }
+        //         }
+        //     }
+        // }
+
+        // if (current_index != null) {
+        //     document.getElementById('id_knowledge').value = result[current_index]['cognitive_level']['knowledge']
+        //     document.getElementById('id_comprehension').value = result[current_index]['cognitive_level']['comprehension']
+        //     document.getElementById('id_application').value = result[current_index]['cognitive_level']['application']
+        // }
+        // else {
+        //     document.getElementById('id_knowledge').value = 0
+        //     document.getElementById('id_comprehension').value = 0
+        //     document.getElementById('id_application').value = 0
+        // }
+}
 
     function get_customize() {
+        document.getElementById('q-form').style.display = 'none'
         customize = true
-        document.getElementById('q-form-1').style.display = 'none';
-        document.getElementById('q-form-2').style.display = 'none';
-        document.getElementById('q-form-3').style.display = 'none';
+        // document.getElementById('q-form-1').style.display = 'none';
+        // document.getElementById('q-form-2').style.display = 'none';
+        // document.getElementById('q-form-3').style.display = 'none';
         document.getElementById('q-form-4').style.display = 'block';
         // document.getElementById('q-form-5').style.display = 'block';
         console.log('back',subject_id)
         var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+
+
+        
 
         $.ajax({
             url: url_for_change,
@@ -296,101 +350,52 @@ function getnext() {
     }
 
     function add() {
-        customize = true
-        chapters = chapters_list
-
-        let chapter_id = null
-        let knowledge = 0
-        let comprehension = 0
-        let application = 0
-        chapter_id = parseInt(document.getElementById('id_chapter_get').value)
-        knowledge = parseInt(document.getElementById('id_knowledge').value)
-         comprehension = parseInt(document.getElementById('id_comprehension').value)
-         application = parseInt(document.getElementById('id_application').value)
-        let current_index = null
-        questions_total = 0
-        let no_of_ques_chapter = 0
-        if (result.length) {
-            for (i = 0; i < chapters_list.length; i++) {
-                if (result[i]) {
-                    no_of_ques_chapter = result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
-                    questions_total += no_of_ques_chapter
-                    if (result[i]['id'] == chapter_id) {
-                        current_index = i
-                    }
-                }
-            }
+        let chapter_id = parseInt(document.getElementById('id_chapter_get').value)
+        let list = []
+        for(i=0;i<question_per_chapter.length;i++){
+        console.log(document.getElementById(`question_${question_per_chapter[i]}`))
+        if(document.getElementById(`question_${question_per_chapter[i]}`).checked){
+            list.push(question_per_chapter[i])
         }
-        if (current_index != null) {
-            result[current_index]['cognitive_level']['knowledge'] = knowledge;
-            result[current_index]['cognitive_level']['application'] = application;
-            result[current_index]['cognitive_level']['comprehension'] = comprehension;
-        } else {
-            result.push({
-                'id': chapter_id, 'cognitive_level': {
-                    'knowledge': knowledge,
-                    'comprehension': comprehension,
-                    'application': application
-                }
-            })
+    }
+    console.log(list)
+    for(i=0;i<question_per_chapter_get.length;i++){
+        if(question_per_chapter_get[i].key == chapter_id){
+            question_per_chapter_get[i].value = list
         }
+    }
+        // question_per_chapter_get[`${chapter_id}`] = list
+    console.log(question_per_chapter_res)
 
-        document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=with_customize()>Review</button>`
-
-        let content3 = ''
-
-        questions_total = 0;
-        if (result.length) {
-            for (i = 0; i < result.length; i++) {
-                let n = result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
-                if (n) {
-                    questions_total += n
-
-                for (j = 0; j < chapters.length; j++) {
-                    if (chapters[j]['id'] == result[i]['id']) {
-                        content3 += `<div> <p> CHAPTER ${i + 1} : ${(chapters_list[j]['name']).toUpperCase()} </p>
-                            <p> NO OF QUESTIONS : ${n} </p> </div>
-                            `
-                            break
-                        }
-
-                    }
-                }
-                content3 += `<p> Total No of questions : ${questions_total}`
-                customize_details.innerHTML = content3
-            }
-        }
-        // console.log(res)
     }
 
     function with_customize() {
-        content = ''
-        chapters = chapters_list
-        questions_total = 0
-        if (customize) {
-            for (i = 0; i < result.length; i++) {
-                questions_total += result[i]['cognitive_level']['knowledge'] + result[i]['cognitive_level']['comprehension'] + result[i]['cognitive_level']['application']
-            }
-            no_of_questions = questions_total
-            for (i = 0; i < result.length; i++) {
-                for (j = 0; j < chapters.length; j++) {
-                    if (chapters[j]['id'] == result[i]['id']) {
-                        content += `<li>${chapters[j]['name']}</li>`
-                        break
-                    }
+        document.getElementById('q-form').style.display = 'block'
+        question_list = []
+        let chap_list = []
+        let content = []
+        for(i=0;i<question_per_chapter_get.length;i++){
+                let current_list = question_per_chapter_get[i].value
+                console.log(current_list)
+                if(current_list.length){
+                    content += `<li>${chapters_list[i]['name']}</li>`
+                    for(j=0;j<current_list.length;j++){
+                   question_list.push(current_list[j])
                 }
-            }
+                }
+              
         }
         document.getElementById('grade_value').innerHTML = grade
         document.getElementById('subject_value').innerHTML = subject_name
-        document.getElementById('No_of_questions').innerHTML = questions_total
         document.getElementById('chapter_value').innerHTML = content
         document.querySelector('.back-btn-review').innerHTML = `<button class="btn btn-primary" onclick=get_customize()>Back</button>`
-        document.querySelector('.next-btn-woc').innerHTML = '  <button  class="submit-btn btn btn-primary" onclick=submit()>Create test</button>'
+        document.querySelector('.next-btn-woc').innerHTML = '  <button  class="submit-btn btn btn-primary" onclick=submit_woc()>Create test</button>'
         review();
+        document.getElementById('No_of_questions').innerHTML = question_list.length
+        document.getElementById('q-form-4').style.display = 'none';
+        document.querySelector('.q-form-6').innerHTML = ''
+
     }
- 
-//   without customize
 
     function without_customize() {
         chapters = chapters_list
@@ -716,7 +721,7 @@ function submit_woc(){
 function refresh(){
     location.reload();
 }
-}
+    }
 else{
     window.location.href = `${host}/404`
 }
