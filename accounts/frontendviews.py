@@ -27,22 +27,22 @@ def simple(request):
 
 
 def profile(request): 
-    if request.user != 'AnonymousUser':
+   # if request.user != 'AnonymousUser':
         print(request.user,'hi')
         return render(request,'accounts/profile.html')
-    return redirect('/login/')
+  #  return redirect('/login/')
 
 
 def students(request):
-        if request.user.user_type=='is_admin' or request.user.user_type=='is_staff':
+     #   if request.user.user_type=='is_admin' or request.user.user_type=='is_staff':
             return render(request,'accounts/students.html')
-        return render(request,'404.html')
+      #  return render(request,'404.html')
 
 
 def staff(request):
-        if request.user.user_type=='is_admin' :
+       # if request.user.user_type=='is_admin' :
             return render(request,'accounts/staffs.html')
-        return render(request,'404.html')
+     #   return render(request,'404.html')
 
 
 def index(request):
