@@ -535,6 +535,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
 
 <body>
 
+    <!-- submit button -->
     <div class="modal fade" id="take-test-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -601,6 +602,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         let pass_percentage;
         let counter_container = document.querySelector('#counter');
         var list = document.querySelector('.instruction');
+    //    get function
         function get() {
             if (user_type != 'is_student') {
                 return
@@ -626,6 +628,9 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
 
         }
         get();
+
+        //store test details
+    
         function test_details() {
 
             fetch(`https://schooltestproject.herokuapp.com/api/test/${id}/`, {
@@ -649,6 +654,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             })
         }
         test_details();
+
+// start test function
         document.getElementById('start-test-btn').addEventListener('click', () => {
             document.querySelector('.instructions').innerHTML = ''
             fetch(`https://schooltestproject.herokuapp.com/api/question-paper/${question_paper_id}/`, {
@@ -748,7 +755,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     }
                     first_question(0);
                     d = duration
-
+                    // counter
                     function counter() {
 
                         let h = Math.floor(d / 3600)

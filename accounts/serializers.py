@@ -65,8 +65,8 @@ class SignupSerializer(serializers.Serializer):
     full_name =serializers.CharField(max_length=30)
     address = serializers.CharField(max_length=45)
     profile_picture = serializers.ImageField(required=False, max_length=None, allow_empty_file=True, use_url=True,default='user_profile/profile.png')
-    standard = serializers.IntegerField(default= None,allow_null=True,required=False)
-    section = serializers.CharField(max_length=2,allow_blank=True, default=None)
+    standard = serializers.ListField(child=serializers.CharField())
+    # section = serializers.CharField(max_length=2,allow_blank=True, default=None)
     is_data_entry=serializers.BooleanField()
 
     def validate_standard(self, value):
@@ -90,14 +90,13 @@ class SignupSerializer(serializers.Serializer):
         full_name = validated_data.pop("full_name")
         profile_picture = validated_data.pop("profile_picture")
         standard = validated_data.pop("standard")
-        section = validated_data.pop("section")
         address = validated_data.pop("address")
         is_data_entry = validated_data.pop("is_data_entry")
         user =   User.objects.create(email =email,phone=phone,date_of_birth=date_of_birth,
         register_number=register_number,user_type = user_type,is_data_entry=is_data_entry)
         user.save()
         Profile.objects.create(user=user,first_name=first_name,last_name=last_name,
-        standard=standard,section=section,address=address, full_name=full_name,
+        standard=standard,address=address, full_name=full_name,
         profile_picture=profile_picture)
         # user_details = (email,phone,register_number,date_of_birth,user_type,first_name,last_name,full_name,profile_picture,standard,section,address,is_data_entry)
         subject = 'Welcome to our school'

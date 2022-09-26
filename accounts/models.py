@@ -113,12 +113,11 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=15)
     full_name = models.CharField(max_length=30 , blank = True , null =True)
     profile_picture = models.ImageField(upload_to=upload_design_to,blank=True,null=True,default='user_profile/profile.png')
-    standard = models.IntegerField(
-        validators=[
-            MaxValueValidator(12)
-        ] , blank = True , null = True
+    standard = ArrayField(
+        models.CharField(max_length=10, blank=True),
+        blank=True,
+        default=list
     )
-    section = models.CharField(max_length=2,blank = True , null = True)
     address = models.CharField(max_length=45 , blank = True , null = True)
 
     def __str__(self):

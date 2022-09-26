@@ -8,7 +8,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.postgres.fields import ArrayField,HStoreField
 import re
 import uuid
-
+import jsonfield
 
 from accounts.models import User
 from django.forms import IntegerField
@@ -230,12 +230,7 @@ class TestResult(models.Model):
     wrong_answer = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     unanswered_questions = models.IntegerField(null=True)
-    test_detail = ArrayField(
-        HStoreField(),
-        blank=True,
-        default=list,
-        null=True
-    )
+    test_detail = jsonfield.JSONField()
 
     def __str__(self):
         return self.result
