@@ -215,6 +215,7 @@ class Test(models.Model):
         ordering = ('grade', 'subject', 'created_staff_id', 'question_paper')
 
 
+
 class TestResult(models.Model):
     student_id = models.ForeignKey(
         User, on_delete=models.DO_NOTHING, null=True)
