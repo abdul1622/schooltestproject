@@ -185,8 +185,21 @@ aria-hidden="true">
                       console.log("Sucess response", response)
                       messages.innerHTML = 'updated successfully'
                       error_messages.innerHTML= ''
+                      fetch('https://schooltestproject.herokuapp.com/api/profile/', {
+                        method: 'GET',
+                        headers: {
+                          'content-Type': 'application/json',
+                          'Authorization': 'token' + ' ' + token,
+                        }
+                      }).then(res => {
+                        return res.json()
+                      }).then(d => {
+                        if(d.data.profile.standard){
+                          localStorage.setItem("standard", d.data.profile.standard);
+                        }
                     profile();
-                  }
+                  })
+                }
                 form.style.display='none'
                 container.style.display = 'block'
                   return response.json();

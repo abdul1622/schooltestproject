@@ -229,7 +229,11 @@ class TestResult(models.Model):
     wrong_answer = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     unanswered_questions = models.IntegerField(null=True)
-
+    testdetails = ArrayField(
+        models.CharField(max_length=100, blank=True),
+        blank=True,
+        default=list
+    )
     def __str__(self):
         return self.result
 
