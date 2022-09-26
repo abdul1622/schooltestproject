@@ -19,7 +19,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['first_name','last_name','full_name',"profile_picture","standard",
-                    "section","address"]
+                    "address"]
 
 
 # class SignupSerializer(serializers.ModelSerializer):
@@ -71,13 +71,13 @@ class SignupSerializer(serializers.Serializer):
     # section = serializers.CharField(max_length=2,allow_blank=True, default=None)
     is_data_entry=serializers.BooleanField()
 
-    def validate_standard(self, value):
-        if not value:
-            return None
-        try:
-            return int(value)
-        except ValueError:
-            raise serializers.ValidationError('You must supply an integer')
+    # def validate_standard(self, value):
+    #     if not value:
+    #         return None
+    #     try:
+    #         return int(value)
+    #     except ValueError:
+    #         raise serializers.ValidationError('You must supply an integer')
 
 
     def create(self, validated_data):
@@ -92,6 +92,7 @@ class SignupSerializer(serializers.Serializer):
         full_name = validated_data.pop("full_name")
         profile_picture = validated_data.pop("profile_picture")
         standard = validated_data.pop('standard')
+        print(standard)
         address = validated_data.pop("address")
         is_data_entry = validated_data.pop("is_data_entry")
         user =   User.objects.create(email =email,phone=phone,date_of_birth=date_of_birth,
@@ -119,6 +120,7 @@ class SignupSerializer(serializers.Serializer):
         elif queryset.filter(register_number=data['register_number']).exists() :
             raise serializers.ValidationError({'error':'register number already exists'})
         return data
+
 class SigninSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -157,10 +159,10 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             'standard',
             profile.standard
         )
-        profile.section = profile_data.get(
-            'section',
-            profile.section
-        )
+        # profile.section = profile_data.get(
+        #     'section',
+        #     profile.section
+        # )
         profile.address = profile_data.get(
             'address',
             profile.address
