@@ -723,6 +723,9 @@ class TestResultCreateView(CreateAPIView):
 
     def create(self, request):
         serializer = TestResultSerializer(data=request.data)
+        customize = json.loads(request.data['testdetails'])
+        for i in customize:
+            print(i)
         if serializer.is_valid():
             serializer.save()
             return Response({"status": "success", 'data': serializer.data}, status=HTTP_201_CREATED)
