@@ -33,7 +33,6 @@ from .auth_backend import PasswordlessAuthBackend
 from random import randint
 from http import client
 from django.contrib.auth import get_user_model
-from . import frontendviews
 # Create your views here.
 
 User = get_user_model()
@@ -66,10 +65,11 @@ class SimpleLoginView(APIView):
         if email and phone:
             try:
                 user=PasswordlessAuthBackend.authenticate(request,email=email,phone=phone)
+                print(user)
             except:
                 return Response({"status": "User doesn't exits"}, status=HTTP_204_NO_CONTENT)
             if user:
-                frontendviews.user(request,email,phone)
+                login(request,user)
                 token, created = Token.objects.get_or_create(user=user)
                 data = {
                     "id" : user.id,
@@ -92,7 +92,7 @@ class LoginView(APIView):
         phone=request.data.get('phone')
         if email and phone:
             try:
-                user=PasswordlessAuthBackend.authenticate(request,email=email,phone=phone)
+                 user=PasswordlessAuthBackend.authenticate(request,email=email,phone=phone)
             except:
                 return Response({"status": "User doesn't exits"}, status=HTTP_204_NO_CONTENT)
             if user:
@@ -158,14 +158,17 @@ class UserDetailsView(ListAPIView):
         if user.user_type == 'is_student':
             queryset = User.objects.get(id = user.id)
         elif user.user_type == 'is_staff':
-            standard_staff = user.profile.standard
-            section_staff = user.profile.section
-            queryset= User.objects.filter(user_type = 'is_student',profile__standard=standard_staff,profile__section=section_staff)
+            staff_standard = user.profile.standard
+            print(staff_standard)
+            queryset = User.objects.all()
+            # for i in staff_standard:
+                # queryset.append(User.objects.filter(user_type = 'is_student',profile__standard=i))
+            queryset = User.objects.filter(user_type = 'is_student',profile__standard__overlap=staff_standard)
+            print(queryset)
         elif user.user_type == 'is_admin':
             queryset= User.objects.all()
         if standard and user.user_type != 'is_student':
-            standard = int(standard)
-            queryset = queryset.filter(profile__standard=standard)
+            queryset = queryset.filter(profile__standard__overlap=[standard])
             if user_type:
                 queryset =queryset.filter(user_type = user_type)
             print(queryset)
