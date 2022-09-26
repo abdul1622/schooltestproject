@@ -5,7 +5,7 @@ from venv import create
 from django.conf import settings
 from django.db import DatabaseError, models
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.fields import ArrayField,HStoreField
 import re
 import uuid
 
@@ -229,6 +229,12 @@ class TestResult(models.Model):
     wrong_answer = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     unanswered_questions = models.IntegerField(null=True)
+    test_detail = ArrayField(
+        HStoreField(),
+        blank=True,
+        default=list,
+        null=True
+    )
 
     def __str__(self):
         return self.result
