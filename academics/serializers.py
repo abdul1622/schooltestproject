@@ -222,7 +222,7 @@ class TestResultSerializer(serializers.ModelSerializer):
     subject_name = serializers.SerializerMethodField('get_subject_name')
     student_name = serializers.SerializerMethodField('get_student')
     register_number = serializers.SerializerMethodField('get_register_no')
-    testdetails = serializers.JSONField(required=False)
+    test_details = serializers.JSONField(required=False)
     def get_subject_name(self, test):
         # print(subject.subject.name)
         return test.subject.name
@@ -232,7 +232,7 @@ class TestResultSerializer(serializers.ModelSerializer):
         return test.student_id.register_number
     class Meta:
         model = TestResult
-        fields = ['id','grade','subject','subject_name','register_number','student_name','student_id','test_id','question_paper','result','score','correct_answer','created_at','unanswered_questions','wrong_answer','testdetails']
+        fields = ['id','grade','subject','subject_name','register_number','student_name','student_id','test_id','question_paper','result','score','correct_answer','created_at','unanswered_questions','wrong_answer']
 
 class TestInstruction(serializers.ModelSerializer):
     class Meta:
