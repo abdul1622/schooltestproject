@@ -222,7 +222,6 @@ class TestResultSerializer(serializers.ModelSerializer):
     subject_name = serializers.SerializerMethodField('get_subject_name')
     student_name = serializers.SerializerMethodField('get_student')
     register_number = serializers.SerializerMethodField('get_register_no')
-    test_details = serializers.JSONField(required=False)
     def get_subject_name(self, test):
         # print(subject.subject.name)
         return test.subject.name

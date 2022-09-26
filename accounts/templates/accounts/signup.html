@@ -104,6 +104,8 @@ aria-hidden="true">
         standard = document.getElementById('id_standard').value
         section = (document.getElementById('id_section').value).toLowerCase()
         standards.push(standard+'-'+section)
+        document.getElementById('id_standard').value = ''
+        document.getElementById('id_section').value = ''
     }
 
     function signup() {

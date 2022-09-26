@@ -1,4 +1,6 @@
 from email.headerregistry import Address
+from email.policy import default
+from typing_extensions import Required
 from rest_framework import serializers
 from django.shortcuts import get_list_or_404
 from django.contrib.auth import get_user_model
@@ -65,7 +67,7 @@ class SignupSerializer(serializers.Serializer):
     full_name =serializers.CharField(max_length=30)
     address = serializers.CharField(max_length=45)
     profile_picture = serializers.ImageField(required=False, max_length=None, allow_empty_file=True, use_url=True,default='user_profile/profile.png')
-    standard = serializers.ListField(child=serializers.CharField())
+    standard = serializers.ListField(child=serializers.CharField( default= None),default=None)
     # section = serializers.CharField(max_length=2,allow_blank=True, default=None)
     is_data_entry=serializers.BooleanField()
 
@@ -89,7 +91,7 @@ class SignupSerializer(serializers.Serializer):
         last_name = validated_data.pop("last_name")        
         full_name = validated_data.pop("full_name")
         profile_picture = validated_data.pop("profile_picture")
-        standard = validated_data.pop("standard")
+        standard = validated_data.pop('standard')
         address = validated_data.pop("address")
         is_data_entry = validated_data.pop("is_data_entry")
         user =   User.objects.create(email =email,phone=phone,date_of_birth=date_of_birth,
