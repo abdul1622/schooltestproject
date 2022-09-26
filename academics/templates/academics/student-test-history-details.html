@@ -78,6 +78,13 @@
 
 function get(){
     testId = document.getElementById('id_test').value
+<<<<<<< HEAD
+=======
+    if(!testId){
+      document.querySelector('.error-messages').innerHTML ='give a valid test details'
+      return
+    }
+>>>>>>> dd1105321130e09372261add818fdac611b790bf
     test_name = element.options[element.selectedIndex].text;
     grade_name = grade_element.options[grade_element.selectedIndex].text
     subject_name = subject_element.options[subject_element.selectedIndex].text
@@ -100,10 +107,18 @@ function get(){
             let i = 0;
     if(data.length){
       document.querySelector('.error-messages').innerHTML =''
+<<<<<<< HEAD
             content += `<div class='history-container-div'>
             <button onclick=back() class='btn btn-sm btn-primary'>Back</button>
             <p  class='heading'> <span>Grade : ${grade_name}</span> <span class='test-heading'>${test_name}</span> <span>Subject : ${subject_name}</span></p>
             <table>`
+=======
+      content +=             `<div class='history-container-head'> <button onclick=back() class='btn btn-sm btn-primary'>Back</button>
+            <p  class='heading'> <span>Grade : ${grade_name}</span> <span class='test-heading'>${test_name}</span> <span>Subject : ${subject_name}</span></p>
+           </div> `
+            content += `<div class='history-container-div'><table>`
+
+>>>>>>> dd1105321130e09372261add818fdac611b790bf
             content += '<tr><th>Sl.no</th><th>Name</th><th>Register_number</th><th>Result</th><th>Score</th><th>Correct answer</th><th>Wrong answer</th><th>Unanswered questions</th></tr>'
                 data.forEach((d, index) => {
                     i += 1

@@ -152,14 +152,17 @@
             console.log(subject_id, grade_id)
             set_id = true
           }
+          let new_date = new Date(d.created_at)
+          console.log(new_date)
           content = content + `<div class="questions-paper-card" id='${d.id}'>
 
 
 <p >created_by : <span class="created_by">${d.created_by}</span></p>
 
-<p >created_at : <span class="created_at">${d.created_at.slice(0, 10)}</span></p>
+<p >created_at : <span class="created_at">${(new_date.toDateString())}</span></p>
 
 <p> No of questions : ${(d.no_of_questions).length} </p>`
+// .slice(3)
           if (d.test_id) {
             content += `Test ID : ${d.test_id}
             
