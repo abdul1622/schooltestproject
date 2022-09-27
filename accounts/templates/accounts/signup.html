@@ -4,30 +4,32 @@
 <div class="details"></div>
 <div class="signup-errors"></div>
 <div class="signbox">
-    
+
     {%csrf_token%}
     <div class="signbox1">
 
-        <input type="hidden" name="csrfmiddlewaretoken" value="a3cCmEUXAWnNpEIH7egd6gKS37Lpb0sOsWq6lZ3gJ2ZGxkw2lXj9ScZLoTAyXVtn">
+        <input type="hidden" name="csrfmiddlewaretoken"
+            value="a3cCmEUXAWnNpEIH7egd6gKS37Lpb0sOsWq6lZ3gJ2ZGxkw2lXj9ScZLoTAyXVtn">
         <label>Email:</label>
         <input type="text" name="email" class="form-control" placeholder="Email" id="id_email">
         <label>Phone:</label>
         <input type="text" name="phone" class="form-control" placeholder="Phone" id="id_phone">
         <label>Reg.No:</label>
-        <input type="text" name="register_number" class="form-control" placeholder="Register Number" id="id_register_number">
+        <input type="text" name="register_number" class="form-control" placeholder="Register Number"
+            id="id_register_number">
         <label>DOB:</label>
         <input type="date" name="date_of_birth" class="form-control" placeholder="Date of Birth" id="id_date_of_birth">
         <label>UserType:</label>
         <select onchange=user_type_change() name="user_type" id="id_user_type">
-<option value="" selected="">-------</option>
+            <option value="" selected="">-------</option>
 
-<option value="is_student">is_student</option>
+            <option value="is_student">is_student</option>
 
-<option value="is_staff">is_staff</option>
+            <option value="is_staff">is_staff</option>
 
-<option value="is_admin">is_admin</option>
+            <option value="is_admin">is_admin</option>
 
-</select>
+        </select>
         <label>Standard:</label>
         <input type="number" name="standard" class="form-control" placeholder="Standard" id="id_standard">
         <label>Section:</label>
@@ -36,85 +38,85 @@
     </div>
     <div class="signbox2">
 
-    <label>FirstName:</label>
-    <input type="text" name="first_name" class="form-control" placeholder="First Name" id="id_first_name">
-    <label>Lastname:</label>
-    <input type="text" name="last_name" class="form-control" placeholder="Last Name" id="id_last_name">
-    <label>FullName:</label>
-    <input type="text" name="full_name" class="form-control" placeholder="Fullname" id="id_full_name">
-    <label>Address:</label>
-    <input type="text" name="address" class="form-control" placeholder="Address" id="id_address">
-    <label>DataEntry:</label>
-    <input type="checkbox" name="data_entry_user" id="id_data_entry_user">
-</div>
+        <label>FirstName:</label>
+        <input type="text" name="first_name" class="form-control" placeholder="First Name" id="id_first_name">
+        <label>Lastname:</label>
+        <input type="text" name="last_name" class="form-control" placeholder="Last Name" id="id_last_name">
+        <label>FullName:</label>
+        <input type="text" name="full_name" class="form-control" placeholder="Fullname" id="id_full_name">
+        <label>Address:</label>
+        <input type="text" name="address" class="form-control" placeholder="Address" id="id_address">
+        <label>DataEntry:</label>
+        <input type="checkbox" name="data_entry_user" id="id_data_entry_user">
+    </div>
     <button data-toggle="modal" data-target="#messageModal-signup" id="signup-btn" onclick=signup()>Register</button>
 </div>
 <div class="modal fade" id="messageModal-signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-        <div class="messages container-fluid">
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="messages container-fluid">
 
+                </div>
+                <div class="error-messages container-fluid">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+            </div>
         </div>
-        <div class="error-messages container-fluid">
-    
-        </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-
-    </div>
-  </div>
-</div>
 </div>
 <footer style="background-color: whitesmoke;" class=" text-center text-white ">
     <div class="container p-4 pb-0">
-      <section class="mb-4">
-        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-facebook"></i></a>
-        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-twitter"></i></a>
-        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-google"></i></a>
-        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-instagram"></i></a>
-        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-linkedin"></i></a>
-        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-github"></i></a>
-      </section>
+        <section class="mb-4">
+            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-facebook"></i></a>
+            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-twitter"></i></a>
+            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-google"></i></a>
+            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-instagram"></i></a>
+            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-linkedin"></i></a>
+            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-github"></i></a>
+        </section>
 
-      <p> © 2020 Copyright:www.school.com</p>
+        <p> © 2020 Copyright:www.school.com</p>
     </div>
-    </footer>
+</footer>
 <script>
     let messages = document.querySelector('.messages')
     let error_messages = document.querySelector('.error-messages')
-    let user,standards = [];
-    function user_type_change(){
-       user = document.getElementById('id_user_type').value
-       console.log(user)
-       if(user != 'is_student'){
-        document.getElementById('standard_add_btn').disabled = false
-       }else{
-        document.getElementById('standard_add_btn').disabled = true
-       }
+    let user, standards = [];
+    function user_type_change() {
+        user = document.getElementById('id_user_type').value
+        console.log(user)
+        if (user != 'is_student') {
+            document.getElementById('standard_add_btn').disabled = false
+        } else {
+            document.getElementById('standard_add_btn').disabled = true
+        }
     }
 
-    function add_standard(){
+    function add_standard() {
         standard = document.getElementById('id_standard').value
         section = (document.getElementById('id_section').value).toUpperCase()
-        if(!section.match(/[a-z]/i)){
+        if (!section.match(/[a-z]/i)) {
             document.querySelector('.signup-errors').innerHTML = 'give a valid section'
             return
         }
-        standards.push(standard+'-'+section)
+        standards.push(standard + '-' + section)
         document.getElementById('id_standard').value = ''
         document.getElementById('id_section').value = ''
         let content = ''
         content += `<ul>standards list`
-        for(i=0;i<standards.length;i++){
+        for (i = 0; i < standards.length; i++) {
             content += `<li>${standards[i]}</li>`
         }
         content += `</ul>`
@@ -133,22 +135,22 @@ aria-hidden="true">
         var fullname = document.getElementById('id_full_name').value
         var address = document.getElementById('id_address').value
         var is_dataentry = document.getElementById('id_data_entry_user').value
-         /*var email = 's@gmail.com'
-         var phone =  9992945428
-         var dob = '2000-02-10'
-         var reg ='s10'
-         var standard = 1
-         var section = 'c'
-         var type = 'is_student'
-         var firstname = 's'
-         var lastname = 'p'
-         var fullname = 'sp'
-         var address ='home'
-         var is_dataentry = 'false'*/
-        if(!standards.length){
+        /*var email = 's@gmail.com'
+        var phone =  9992945428
+        var dob = '2000-02-10'
+        var reg ='s10'
+        var standard = 1
+        var section = 'c'
+        var type = 'is_student'
+        var firstname = 's'
+        var lastname = 'p'
+        var fullname = 'sp'
+        var address ='home'
+        var is_dataentry = 'false'*/
+        if (!standards.length) {
             standard = document.getElementById('id_standard').value
             section = document.getElementById('id_section').value
-            standards.push(standard+'-'+section)
+            standards.push(standard + '-' + section)
         }
         fetch('https://schooltestproject.herokuapp.com/api/signup/',
             {
@@ -163,19 +165,19 @@ aria-hidden="true">
                     'X-CSRFToken': csrftoken
                 },
             }).then(res => {
-            return res.json()
-        }).then(data => {
+                return res.json()
+            }).then(data => {
                 if (`${data.status}` == 'Registered succesfull') {
                     window.location.href = `${host}/login`
                 }
-                document.getElementById('response').innerHTML=`${data.data.error[0]}`
-                document.getElementById('response').style.display='block'
+                document.getElementById('response').innerHTML = `${data.data.error[0]}`
+                document.getElementById('response').style.display = 'block'
             })
         return true;
     }
-    let input=document.getElementById('id_address')
-    input.addEventListener('keyup',(e)=>{
-        if (e.keyCode===13){
+    let input = document.getElementById('id_address')
+    input.addEventListener('keyup', (e) => {
+        if (e.keyCode === 13) {
             signup();
         }
     })
