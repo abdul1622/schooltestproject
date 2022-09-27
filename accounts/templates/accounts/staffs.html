@@ -60,8 +60,8 @@
   <button id="addstaff" onclick=addstaff()>Add Staff</button>
 </div>
 <div id="userDetails">
+  <button class='back-btn' onclick=back()>&#x2715; </button>
   {%csrf_token%}
-  <button onclick=back() class='back-btn'>&#x2715; </button>
   <div class='grid-item'>
     <label for="email">Email:</label><br>
     <input type="email" id='email' placeholder="Email">
@@ -91,7 +91,6 @@
     <label for="sec">Section:</label><br>
     <input type="text" id="sec" placeholder="Section">
   </div>
-
   <div class='grid-item'>
     <label for="fname">Firstname:</label><br>
     <input type="text" id="fname" placeholder="First Name">
@@ -119,32 +118,107 @@
 
   <div class='grid-item'>
     <button data-toggle="modal" data-target="#messageModal-staff" id="userdetail-btn">submit</button>
+    <button id="standard_add_btn" onclick=addstandard() >Add standard</button>
   </div>
 
 </div>
 
 
 </div>
+<div class="details"></div>
+<div class="signup-errors"></div>
 <div class="container2"></div>
 
 <script>
+  let user,standards = [];
+  let token = localStorage.getItem("token")
+  $(document).ready(function(){ 
+    var user = localStorage.getItem('user_type')
+    if (user != 'is_admin'  || !token){
+     return window.location.href = '/404'; 
+    }
+  })
   function reload() {
     window.location.href = window.location.href;
-
+  }
+  function addstandard(){
+    standard = document.getElementById('std').value
+    section = (document.getElementById('sec').value).toUpperCase()
+    if(!section.match(/[a-z]/i)){
+        document.querySelector('.signup-errors').innerHTML = 'give a valid section'
+        return
+    }
+    standards.push(standard+'-'+section)
+    document.getElementById('id_standard').value = ''
+    document.getElementById('id_section').value = ''
+    let content = ''
+    content += `<ul>standards list`
+    for(i=0;i<standards.length;i++){
+        content += `<li>${standards[i]}</li>`
+    }
+    content += `</ul>`
+    document.querySelector('.details').innerHTML = content
+  }
+  function addstaff(){
+    form.style.display = 'grid'
+    add.style.display = 'none'
+    form.style.marginTop = '10vh';
+    var is_dataentry = 'false'
+    button.addEventListener('click', () => {
+      form.style.display = 'none'
+      add.style.display = 'block'
+      let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      var email = document.getElementById('email').value
+      var phone = document.getElementById('phone').value
+      var dob = document.getElementById('dob').value
+      var reg = document.getElementById('reg').value
+      var standard = document.getElementById('std').value
+      var section = document.getElementById('sec').value
+      var type = 'is_staff'
+      var firstname = document.getElementById('fname').value
+      var lastname = document.getElementById('lname').value
+      var fullname = document.getElementById('ffname').value
+      var address = document.getElementById('address').value
+      var is_dataentry = 'false'
+      fetch('https://schooltestproject.herokuapp.com/api/signup/',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
+            'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standard, 'section': section, 'full_name': fullname, 'address': address
+          }
+          ),
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          }
+        }).then(response => {
+          if (response.status == 201) {
+            console.log("Sucess response", response)
+            messages.innerHTML = 'created successfully'
+            error_messages.innerHTML = ''
+          }
+          return response.json();
+        }).then(function (data) {
+          console.log(data)
+          if (data.status != 'success') {
+            error_messages.innerHTML = `<li>${(data.data.error[0])}</li>`
+            messages.innerHTML = ''
+          }
+        })
+    })
   }
   document.getElementById('nav-staffs').style.opacity = '0.5';
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
-  let token = localStorage.getItem("token")
   add = document.getElementById('addstaff')
   button = document.getElementById('userdetail-btn');
   var host = window.location.protocol + "//" + window.location.host;
   let form = document.getElementById('userDetails')
   const container2 = document.querySelector('.container2');
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-  if (token) {
     function userdetails() {
-      console.log(token)
       fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
         method: 'GET',
         headers: new Headers({
@@ -166,7 +240,6 @@
                 <th scope="col">Date Of Birth</th>    
                 <th scope="col">Address</th>
                 <th scope="col">Standard</th>
-                <th scope="col">Section</th>
                 <th id='action' scope="col">Action</th>
               </thead>`;
         data.forEach((d, index) => {
@@ -181,7 +254,7 @@
             table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
             table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
             table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
-            table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
+           // table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
             table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i class="fa fa-trash-o" id="delete" data-toggle="modal" data-target="#delete-staff-Modal"  ></i>` + '</td></tbody>',
               table2 = table2 + `</tr>`;
           }
@@ -190,8 +263,6 @@
         container2.innerHTML = table2;
       })
     } userdetails();
-
-
     function back() {
       window.location.href = window.location.href;
       form.style.display = "none"
@@ -204,76 +275,13 @@
       document.getElementById('lname').value = ''
       document.getElementById('fname').value = ''
       document.getElementById('std').value = ''
-      document.getElementById('sec').value = ''
+     // document.getElementById('sec').value = ''
       document.getElementById('address').value = ''
     }
-
-
-    function addstaff() {
-      form.style.display = 'grid'
-      add.style.display = 'none'
-      form.style.marginTop = '10vh';
-      /* var email = 's10@gmail.com'
-      var phone = 9992945420
-      var dob = '2000-02-10'
-      var reg = 's11'
-      var standard = 1
-      var section = 'c'
-      var type = 'is_student'
-      var firstname = 's'
-      var lastname = 'p'
-      var fullname = 'sp'
-      var address = 'home'*/
-      var is_dataentry = 'false'
-
-      button.addEventListener('click', () => {
-        window.location.href = window.location.href;
-        form.style.display = 'none'
-        add.style.display = 'block'
-        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        var email = document.getElementById('email').value
-        var phone = document.getElementById('phone').value
-        var dob = document.getElementById('dob').value
-        var reg = document.getElementById('reg').value
-        var standard = document.getElementById('std').value
-        var section = document.getElementById('sec').value
-        var type = 'is_staff'
-        var firstname = document.getElementById('fname').value
-        var lastname = document.getElementById('lname').value
-        var fullname = document.getElementById('ffname').value
-        var address = document.getElementById('address').value
-        var is_dataentry = 'false'
-        fetch('https://schooltestproject.herokuapp.com/api/signup/',
-          {
-            method: 'POST',
-            body: JSON.stringify({
-              'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
-              'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standard, 'section': section, 'full_name': fullname, 'address': address
-            }
-            ),
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRFToken': csrftoken
-              // 'Content-Type': 'application/x-www-form-urlencoded',
-            }
-          }).then(response => {
-            if (response.status == 201) {
-              console.log("Sucess response", response)
-              messages.innerHTML = 'created successfully'
-              error_messages.innerHTML = ''
-            }
-            return response.json();
-          }).then(function (data) {
-            console.log(data)
-            if (data.status != 'success') {
-              error_messages.innerHTML = `<li>${(data.data.error[0])}</li>`
-              messages.innerHTML = ''
-            }
-          })
-      })
-    }
+    document.getElementById('standard_add_btn').addEventListener("click", addstaff, false)
+ 
+  
     function print(data){
-      console.log('hi')
       let table2 = `<table class='--staff'>`;
         table2 += `<thead class="thead">
               <th scope="col">Email</th>
@@ -285,7 +293,6 @@
               <th scope="col">Date Of Birth</th>  
               <th scope="col">Address</th>
               <th scope="col">Standard</th>
-              <th scope="col">Section</th>
               <th scope="col">Action</th>
             </thead>`;
             data.forEach((d, index) => {
@@ -299,7 +306,7 @@
               table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
               table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
               table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
-              table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
+            //  table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
               table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
               table2 = table2 + `</tr>`;
             })
@@ -360,7 +367,8 @@
         sort();
       }
     })
-    function deletestudent(id) {
+    
+    function deletestaff(id) {
       url = "https://schooltestproject.herokuapp.com/api/user-details/"
       fetch(`${url}${id}/`, {
         method: 'DELETE',
@@ -393,7 +401,7 @@
       console.log(id)
       if (delbutton) {
         yes = document.getElementById('yes')
-        yes.setAttribute("onClick", `deletestudent(${id})`);
+        yes.setAttribute("onClick", `deletestaff(${id})`);
       }
       if (editbutton) {
         form.style.display = 'grid'
@@ -409,7 +417,7 @@
         let lastname = parent.querySelector('.userlastname').textContent;
         let firstname = parent.querySelector('.userfirstname').textContent;
         let standard = parent.querySelector('.userstandard').textContent;
-        let section = parent.querySelector('.usersection').textContent;
+        //let section = parent.querySelector('.usersection').textContent;
         let address = parent.querySelector('.useraddress').textContent;
         document.getElementById('email').value = email
         document.getElementById('phone').value = phone
@@ -419,11 +427,11 @@
         document.getElementById('lname').value = lastname
         document.getElementById('fname').value = firstname
         document.getElementById('std').value = standard
-        document.getElementById('sec').value = section
+      //  document.getElementById('sec').value = section
         document.getElementById('address').value = address
         d = JSON.stringify({
           'email': form_email.value, 'phone': form_phone.value, 'date_of_birth': form_dob.value, 'register_number': form_reg.value,
-          'first_name': form_fname.value, 'last_name': form_lname.value, 'standard': form_std.value, 'section': form_sec.value, 'full_name': form_fullname.value, 'address': form_ad.value
+          'first_name': form_fname.value, 'last_name': form_lname.value,  'standard': standards,'full_name': form_fullname.value, 'address': form_ad.value
         }
         )
         console.log(d)
@@ -456,11 +464,7 @@
         })
       }
     })
-  }
 
-  else {
-    window.location.href = `${host}/404`
-  }
 
 </script>
 {% endblock %}

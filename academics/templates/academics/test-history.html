@@ -8,6 +8,12 @@
   </div>
 <div class="history"></div>
 <script>
+  $(document).ready(function(){ 
+    var user = localStorage.getItem('user_type')
+    if (user != 'is_student' || !token){
+     return window.location.href = '/404'; 
+    }
+  })
   var student_id = localStorage.getItem('id')
   var token = localStorage.getItem('token')
   var standard = localStorage.getItem('standard')
@@ -107,6 +113,5 @@
 
       })
     })
-
 </script>
 {% endblock %}

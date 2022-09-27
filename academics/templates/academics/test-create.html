@@ -95,8 +95,6 @@
   var grade_name;
   var token = localStorage.getItem('token')
   let head = document.querySelector('.header')
-  // let test_messages = document.querySelector('.test-messages')
-  // let test_errors = document.querySelector('.test-error-messages')
   head.style.display = 'none'
   let modal_body = document.querySelector('.modal-body-1')
   url = 'https://schooltestproject.herokuapp.com/api/question-paper-list/'
@@ -111,35 +109,12 @@
   let container = document.querySelector('.question-papers-card')
 
   document.getElementById('nav-questionpaperlist').style.opacity = '0.5';
-  let grade_list;
-  let content = ''
-  var host = window.location.protocol + "//" + window.location.host;
- 
-
- fetch('https://schooltestproject.herokuapp.com/api/grades/', {
-           method: 'GET',
-           headers: {
-               // 'X-CSRFToken': csrftoken,
-               'Authorization': 'token' + ' ' + token
-           },
-       }).then(res => {
-           return res.json()
-       }).then(data => {
-           grade_list = data.data
-           console.log(data.data)
-          if(data.status == 'failure'){
-           window.location.href = `${host}/404`
-          } 
-       content += ` 
-           <option value="" selected="">---------</option>`
-       if(grade_list.length){
-       for(i=0;i<grade_list.length;i++){
-           content += ` <option value="${grade_list[i].id}">${grade_list[i].grade}</option>`
-       }
-   }
-       document.querySelector('.grade-in-form').innerHTML = content
-       })
-
+  $(document).ready(function(){ 
+    var user = localStorage.getItem('user_type')
+    if (user != 'is_admin' || !token){
+     return window.location.href = '/404'; 
+    }
+  })
 
   function get() {
     var grade = document.getElementById('get_grade').value
@@ -182,7 +157,7 @@
 <p >created_at : <span class="created_at">${(new_date.toDateString())}</span></p>
 
 <p> No of questions : ${(d.no_of_questions).length} </p>`
-// .slice(3)
+
           if (d.test_id) {
             content += `Test ID : ${d.test_id}
             
@@ -211,17 +186,15 @@
       }
     })
   }
-  //     $('#myModal').on('shown.bs.modal', function () {
-  //   $('#myInput').trigger('focus')
-  // })
+
 
   document.getElementById('get_grade').addEventListener('change',()=>{
-    // console.log(element,document.getElementById('get_grade').text)
+    
     let e = document.getElementById('get_grade')
     grade_name = e.options[e.selectedIndex].text;
-    // grade_name = document.getElementById('get_grade').text
+   
     console.log(grade_name)
-    // grade_name = element.options[element.selectedIndex].text;
+
   })
 
   $("#get_grade").change(function () {
@@ -242,24 +215,7 @@
 
 
 
-  // getting user-details
-  // function get_user_id() {
-  //   fetch('https://schooltestproject.herokuapp.com/api/profile/', {
-  //     method: 'GET',
-  //     headers: {
-  //       'content-Type': 'application/json',
-  //       'Authorization': 'token' + ' ' + token,
-  //     }
-  //   }).then(res => {
-  //     return res.json()
-  //   }).then(data => {
-  //     user_id = data.data.id
-  //     user_type = data.data.user_type
-  //     console.log(user_id)
-  //   })
-  //   return user_id, user_type
-  // };
-
+  
 
 
   function test_create(id) {
@@ -333,15 +289,9 @@
         })
     })
 
-    /**/
+   
 
   }
-  // let input = document.getElementById('id_subject_2')
-  // input.addEventListener('change', (e) => {
-
-  //   get();
-
-  // })
   function getsubjectname(element){
     subject_name = element.options[element.selectedIndex].text;
     get();
@@ -380,8 +330,7 @@
       }).then(response => {
         if (response.status == 200) {
           console.log("Sucess response", response);
-          // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
-          // test_errors.innerHTML = ''
+         
         modal2.innerHTML = `<p class="text-success">  updated successfully</p>`;
           document.getElementById('questionpaper-edit-btn').style.display = 'none'
         }
@@ -390,13 +339,12 @@
         console.log(data)
         if (data.status != 'success') {
           modal2.innerHTML = `<li class='test-warning'>${(data.data.error)}</li>`;
-          // test_messages.innerHTML = '';
+         
         }
         get()
       }
 
       )
   }
-
 </script>
 {% endblock %}

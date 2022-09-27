@@ -55,7 +55,7 @@
 </div>
 
 
-<button id="add" onclick=adduser()>Add Student</button>
+<button id="add">Add Student</button>
 <div class="sort-input">
   <input type="text" id="student-filter" placeholder="search" min="0" max="12">
   <button id="sort" onclick=sort()>search</button>
@@ -64,7 +64,7 @@
 <div id="userDetails">
   {%csrf_token%}
 
-  <button onclick=back() class='back-btn'>&#x2715;</button>
+  <button id="back" class='back-btn' onclick=back() >&#x2715;</button>
 
   <div class='grid-item'>
     <label for="email">Email:</label><br>
@@ -122,7 +122,7 @@
   </div>
 
   <div class='grid-item'>
-    <button data-toggle="modal" data-target="#messageModal-student" id="userdetail-btn">submit</button>
+    <button data-toggle="modal" data-target="#messageModal-student" id="userdetail-btn" onclick=adduser()>submit</button>
   </div>
 
 </div>
@@ -132,20 +132,25 @@
 <div class="container2"></div>
 
 <script>
+  let token = localStorage.getItem("token")
+  $(document).ready(function(){ 
+    var user = localStorage.getItem('user_type')
+    if (user != 'is_admin'  || !token){
+     return window.location.href = '/404'; 
+    }
+  })
   function reload() {
     window.location.href = window.location.href;
   }
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
-  let token = localStorage.getItem("token")
   button = document.getElementById('userdetail-btn');
   var host = window.location.protocol + "//" + window.location.host;
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
   let form = document.getElementById('userDetails')
   const container2 = document.querySelector('.container2');
   document.getElementById('nav-students').style.opacity = '0.5';
-  if (token) {
-
+ // document.getElementById('back').addEventListener("click", back, false)
     function back() {
       form.style.display = "none"
       add.style.display = 'block'
@@ -183,7 +188,6 @@
             <th>Date Of Birth</th>
             <th>Address</th>
             <th>Standard</th>
-            <th>Section</th>
             <th id="action" >Action</th>
           </thead>`;
         data.forEach((d, index) => {
@@ -198,7 +202,7 @@
             table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
             table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
             table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
-            table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
+           // table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
             table2 = table2 + '<td>' + ` <i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
               table2 = table2 + `</tr>`;
           }
@@ -221,7 +225,6 @@
               <th scope="col">Date Of Birth</th>  
               <th scope="col">Address</th>
               <th scope="col">Standard</th>
-              <th scope="col">Section</th>
               <th scope="col">Action</th>
             </thead>`;
             data.forEach((d, index) => {
@@ -235,7 +238,7 @@
               table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
               table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
               table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
-              table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
+             // table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
               table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
               table2 = table2 + `</tr>`;
             })
@@ -296,7 +299,7 @@
             sort();
           }
         })
-        function deletestaff(id) {
+        function deletestudent(id) {
           url = "https://schooltestproject.herokuapp.com/api/user-details/"
           fetch(`${url}${id}/`, {
             method: 'DELETE',
@@ -317,7 +320,7 @@
           form_lname = document.getElementById('lname');
           form_fullname = document.getElementById('ffname');
           form_std = document.getElementById('std');
-          form_sec = document.getElementById('sec');
+         // form_sec = document.getElementById('sec');
           form_ad = document.getElementById('address');
           button = document.getElementById('userdetail-btn');
           e.preventDefault();
@@ -328,7 +331,7 @@
           yes = document.getElementById('yes')
           no = document.getElementById('no')
           if (delbutton) {
-            yes.setAttribute("onClick", `deletestaff(${id})`);
+            yes.setAttribute("onClick", `deletestudent(${id})`);
           }
           if (editbutton) {
             form.style.display = 'grid'
@@ -343,7 +346,7 @@
             let lastname = parent.querySelector('.userlastname').textContent;
             let firstname = parent.querySelector('.userfirstname').textContent;
             let standard = parent.querySelector('.userstandard').textContent;
-            let section = parent.querySelector('.usersection').textContent;
+           // let section = parent.querySelector('.usersection').textContent;
             let address = parent.querySelector('.useraddress').textContent;
             document.getElementById('email').value = email
             document.getElementById('phone').value = phone
@@ -353,7 +356,7 @@
             document.getElementById('lname').value = lastname
             document.getElementById('fname').value = firstname
             document.getElementById('std').value = standard
-            document.getElementById('sec').value = section
+          //  document.getElementById('sec').value = section
             document.getElementById('address').value = address
             button.addEventListener('click', () => {
               form.style.display = 'none'
@@ -366,7 +369,7 @@
                 },
                 body: JSON.stringify({
                   'email': form_email.value, 'phone': form_phone.value, 'date_of_birth': form_dob.value, 'register_number': form_reg.value,
-                  'profile': { 'first_name': form_fname.value, 'last_name': form_lname.value, 'standard': form_std.value, 'section': form_sec.value, 'full_name': form_fullname.value, 'address': form_ad.value }
+                  'profile': { 'first_name': form_fname.value, 'last_name': form_lname.value, 'standard': form_std.value, 'full_name': form_fullname.value, 'address': form_ad.value }
                 }
                 )
               }).then(response => {
@@ -379,6 +382,7 @@
             })
           }
         })
+        document.getElementById("add").addEventListener('click',adduser,false)
         function adduser() {
           form.style.display = 'grid'
           //document.getElementById('userDetails').reset();
@@ -440,9 +444,5 @@
               })
           })
         }
-      }
-      else {
-        window.location.href = `${host}/404`
-      }
 </script>
 {% endblock %}

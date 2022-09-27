@@ -27,7 +27,12 @@
        var subjectId,gradeId,testId,content='',data2;
        let container = document.querySelector('.history-container')
        document.getElementById('nav-studenttesthistory').style.opacity = '0.5';
-       if (token){
+       $(document).ready(function(){ 
+        var user = localStorage.getItem('user_type')
+        if (user != 'is_admin' || !token){
+         return window.location.href = '/404'; 
+        }
+      })
        let element = document.getElementById('id_test')
         let grade_element = document.getElementById('id_grade')
         let subject_element = document.getElementById('id_subject')
@@ -167,10 +172,6 @@ function get(){
 function back(){
   document.getElementById('history-container-form').style.display = 'block'
   container.innerHTML = ''
-}
-}
-else{
-  window.location.href=`${host}/404` 
 }
 
 </script>

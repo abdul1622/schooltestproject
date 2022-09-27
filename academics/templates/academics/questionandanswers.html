@@ -125,6 +125,12 @@
         console.log(subject_name);
   }
 
+  $(document).ready(function(){ 
+    var user = localStorage.getItem('user_type')
+    if (user != 'is_admin' || !token){
+     return window.location.href = '/404'; 
+    }
+  })
   function back() {
     document.getElementById('questionForm').style.display = 'none'
     document.getElementById('question-box').style.display = 'block'
@@ -192,8 +198,6 @@
     });
 
   });
-
-  if (token) {
     const container2 = document.querySelector('.question-list');
     url='https://schooltestproject.herokuapp.com/api/question/'
 
@@ -502,10 +506,8 @@
     input.addEventListener("change", function () {
       get();
     });
-  }
-  else {
-    window.location.href = `${host}/404`
-  }
+  
+
 
 
 </script>

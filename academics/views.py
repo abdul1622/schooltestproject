@@ -731,7 +731,7 @@ class TestResultCreateView(CreateAPIView):
 
     def create(self, request):
         serializer = TestResultSerializer(data=request.data)
-        customize = json.loads(request.data['testdetails'])
+        customize = json.loads(request.data['test_detail'])
         for i in customize:
             print(i)
         if serializer.is_valid():

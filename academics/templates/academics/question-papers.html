@@ -13,7 +13,12 @@
   const container2 = document.querySelector('.question-paper-list');
   var messages = document.getElementById('message')
   var token = localStorage.getItem('token')
-  if (token){
+  $(document).ready(function(){ 
+    var user = localStorage.getItem('user_type')
+    if (user != 'is_admin' || !token){
+     return window.location.href = '/404'; 
+    }
+  })
   blank_url = 'https://schooltestproject.herokuapp.com'
   for_answer = '/academics/question-paper/'
   url = 'https://schooltestproject.herokuapp.com/academics/question-paper-list/'
@@ -89,9 +94,8 @@ var url = new URL(`${blank_url}${for_answer}${id}/`);
         console.log(`${blank_url}${response.path}`)
   })
   }});
-}
-else{
-  window.location.href = `${host}/404`
-}
+
+
+
   </script>
   {% endblock %}

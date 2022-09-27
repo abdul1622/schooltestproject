@@ -9,7 +9,12 @@
     <script>
         var token=localStorage.getItem('token')
         var host = window.location.protocol + "//" + window.location.host;
-        if(token){
+        $(document).ready(function(){ 
+            var user = localStorage.getItem('user_type')
+            if (user != 'is_admin' || !token){
+             return window.location.href = '/404'; 
+            }
+        })
             function createquestion() {
                 var grade = document.getElementById('id_grade').value
                 var subject = document.getElementById('id_subject').value
@@ -55,23 +60,8 @@
                 });
             return true;
          }
-        }
-      else{
-        window.location.href=`${host}/404` 
-      }
-      
+        
+
     </script>
-    
-    
-
-
- <div>
-            {% for l in question %}
-            {{l.question}}<br>
-           
-            {% endfor %}
-        </div>
-  
-       {% endblock %} 
-
+{% endblock %}
        

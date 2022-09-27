@@ -63,13 +63,7 @@
             <option value="" selected="">---------</option>
         </select>
     </p>
-    <!-- <p class="knowledge"><label for="">Knowledge</label> <input min="0" type="number" name="" id="id_knowledge"></p>
-    </p>
-    <p class="knowledge"><label for=""> Comprehension </label> <input min="0" type="number" name=""
-            id="id_comprehension"></p>
-    <p class="knowledge"><label for=""> Application </label> <input min="0" type="number" name=""
-            id="id_application">
-        <span class="more-btn"> </span> -->
+
     
         <span class="back-btn btn-primary "><button id="next-btn" class="submit-btn btn-sm btn-primary"
                 onclick="getnext()">Back</button></span>
@@ -95,7 +89,8 @@
     let chapter_id = null;
     let custom_end= false;
     let question_paper_id, userId, user_type, chapters_list = [];
-    var content = '';da=null
+    var content = '';
+    da=null
     let customize_details = document.querySelector('.customize-details')
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     let question_details_list = [],question_name
@@ -111,7 +106,12 @@
     document.getElementById('q-form-4').style.display = 'none';
     document.getElementById('nav-questionpaper').style.opacity = '0.5';
     // document.getElementById('id_grade').setAttribute("onchange", getgradename());
-if (token){
+    $(document).ready(function(){ 
+        var user = localStorage.getItem('user_type')
+        if (user != 'is_admin' || !token){
+         return window.location.href = '/404'; 
+        }
+    })
 
     let grade_list;
   let content = ''
@@ -216,7 +216,6 @@ function getnext() {
             return
         }
 
-
         if(!isNaN(no_of_questions)){
             url = new URL('https://schooltestproject.herokuapp.com/api/question/');
   url.searchParams.append('grade',grade_id);
@@ -284,7 +283,6 @@ function getnext() {
 
 // for customize
     function getcustomize_details() {
-
         // add
         let list = []
         if(!custom_end){
@@ -768,10 +766,7 @@ function submit_woc(){
 function refresh(){
     location.reload();
 }
-    }
-else{
-    window.location.href = `${host}/404`
-}
+
 
 
 </script>

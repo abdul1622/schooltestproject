@@ -102,10 +102,12 @@
 
 </div>
 <script>
-    // document.getElementById('messagemodal-btn').style.display = 'hidden'
-
-    // var delete_box = document.querySelector('.delete-box');
-    // delete_box.style.display = 'none';
+    $(document).ready(function(){ 
+        var user = localStorage.getItem('user_type')
+        if (user != 'is_admin' || !token){
+         return window.location.href = '/404'; 
+        }
+    })
     var token = localStorage.getItem('token')
     var form_all = document.querySelector('.form-all')
     let user_type = localStorage.getItem('user_type')
@@ -113,7 +115,6 @@
     let chapter_list = []
     const subject_create = document.getElementById('subject-btn')
     const grade_create = document.getElementById('grade-btn')
-    // const subject_create = document.getElementById('subject-btn')
     const chapter_create = document.getElementById('chapter-btn')
     let messages = document.querySelector('.messages')
     let error_messages = document.querySelector('.error-messages')
@@ -172,7 +173,6 @@
             }
         })
     };
-    if (token) {
         get();
    
     // delete grade 
@@ -628,9 +628,7 @@
                 })
         }
     })
-}
- else {
-    window.location.href = `${host}/404`
-}
+
+
 </script>
 {% endblock %}

@@ -15,7 +15,12 @@
 <script>
   var host = window.location.protocol + "//" + window.location.host;
   var token = localStorage.getItem("token")
-  if (token) {
+  $(document).ready(function(){ 
+    var user = localStorage.getItem('user_type')
+    if (user != 'is_admin' || !token){
+     return window.location.href = '/404'; 
+    }
+  })
     function savequestion() {
 
       var grade = document.getElementById('id_grade').value
@@ -103,10 +108,6 @@
       })
     }
 
-  }
-  else{
-    window.location.href=`${host}/404`  
-  }
  
 </script>
 

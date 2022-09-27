@@ -99,6 +99,11 @@
 
 <script>
     var token = localStorage.getItem("token")
+    $(document).ready(function(){ 
+        var user = localStorage.getItem('user_type')
+        if (user != 'is_admin'){
+         return window.location.href = '/404'; 
+        }
     let form = document.querySelector('.form')
     let flag = false
     let grade_element = document.getElementById('id_grade')
@@ -198,7 +203,7 @@
         console.log(grade,subject)
         getchapter();
     }
-    if (token) {
+   
     function getchapter() {
 
             let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -376,10 +381,7 @@ return
             })
 
 
-        } else {
-            window.location.href = `${host}/login`
-        }
-
+        } )
 
     // edit chapter
 
