@@ -346,8 +346,9 @@
             let fullname = parent.querySelector('.userfullname').textContent;
             let lastname = parent.querySelector('.userlastname').textContent;
             let firstname = parent.querySelector('.userfirstname').textContent;
-            let standard = parent.querySelector('.userstandard').textContent;
-           // let section = parent.querySelector('.usersection').textContent;
+            let stdsec=parent.querySelector('.userstandard').textContent;
+            let standard = parseInt(stdsec);
+            let section = stdsec.slice(-1);
             let address = parent.querySelector('.useraddress').textContent;
             document.getElementById('email').value = email
             document.getElementById('phone').value = phone
@@ -357,10 +358,15 @@
             document.getElementById('lname').value = lastname
             document.getElementById('fname').value = firstname
             document.getElementById('std').value = standard
-          //  document.getElementById('sec').value = section
+            document.getElementById('sec').value = section
             document.getElementById('address').value = address
             button.addEventListener('click', () => {
               form.style.display = 'none'
+              if (!standards.length) {
+                standard = document.getElementById('std').value
+                section = document.getElementById('sec').value
+                standards.push(standard + '-' + section)
+            }
               fetch(`${url}${id}/`, {
                 method: 'PATCH',
                 headers: {
