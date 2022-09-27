@@ -4,11 +4,8 @@
 
     <div class="q-form" id="q-form-1">
         {% csrf_token %}
-        <!-- grade form -->
         <p><label for="id_grade">Grade:</label>{{form.grade}} </p>
-        <!-- <p><label for="id_grade">Grade:</label><select name="grade" onchange=getgradename(this) required="" id="id_grade">
-            <option value="" selected="">---------</option>
-          </select> </p> -->
+      
         <p><label for="id_subject">Subject:</label> <select name="subject" onchange=getsubjectname(this) required=""
                 id="id_subject">
                 <option value="" selected="">---------</option>
@@ -63,13 +60,7 @@
             <option value="" selected="">---------</option>
         </select>
     </p>
-    <!-- <p class="knowledge"><label for="">Knowledge</label> <input min="0" type="number" name="" id="id_knowledge"></p>
-    </p>
-    <p class="knowledge"><label for=""> Comprehension </label> <input min="0" type="number" name=""
-            id="id_comprehension"></p>
-    <p class="knowledge"><label for=""> Application </label> <input min="0" type="number" name=""
-            id="id_application">
-        <span class="more-btn"> </span> -->
+
     
         <span class="back-btn btn-primary "><button id="next-btn" class="submit-btn btn-sm btn-primary"
                 onclick="getnext()">Back</button></span>
@@ -95,7 +86,8 @@
     let chapter_id = null;
     let custom_end= false;
     let question_paper_id, userId, user_type, chapters_list = [];
-    var content = '';da=null
+    var content = '';
+    da=null
     let customize_details = document.querySelector('.customize-details')
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     let question_details_list = [],question_name
@@ -111,7 +103,12 @@
     document.getElementById('q-form-4').style.display = 'none';
     document.getElementById('nav-questionpaper').style.opacity = '0.5';
     // document.getElementById('id_grade').setAttribute("onchange", getgradename());
-if (token){
+    $(document).ready(function(){ 
+        var user = localStorage.getItem('user_type')
+        if (user != 'is_admin'){
+         return window.location.href = '/404'; 
+        }
+        else{
 
 
  function get(){
@@ -186,7 +183,6 @@ function getnext() {
             return
         }
 
-
         if(!isNaN(no_of_questions)){
             url = new URL('https://schooltestproject.herokuapp.com/api/question/');
   url.searchParams.append('grade',grade_id);
@@ -254,7 +250,6 @@ function getnext() {
 
 // for customize
     function getcustomize_details() {
-
         // add
         let list = []
         if(!custom_end){
@@ -738,10 +733,8 @@ function submit_woc(){
 function refresh(){
     location.reload();
 }
-    }
-else{
-    window.location.href = `${host}/404`
 }
+})
 
 
 </script>

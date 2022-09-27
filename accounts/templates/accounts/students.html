@@ -132,6 +132,11 @@
 <div class="container2"></div>
 
 <script>
+  $(document).ready(function(){ 
+    var user = localStorage.getItem('user_type')
+    if (user != 'is_admin'  || token){
+     return window.location.href = '/404'; 
+    }
   function reload() {
     window.location.href = window.location.href;
   }
@@ -144,7 +149,7 @@
   let form = document.getElementById('userDetails')
   const container2 = document.querySelector('.container2');
   document.getElementById('nav-students').style.opacity = '0.5';
-  if (token) {
+ 
 
     function back() {
       form.style.display = "none"
@@ -183,7 +188,6 @@
             <th>Date Of Birth</th>
             <th>Address</th>
             <th>Standard</th>
-            <th>Section</th>
             <th id="action" >Action</th>
           </thead>`;
         data.forEach((d, index) => {
@@ -198,7 +202,7 @@
             table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
             table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
             table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
-            table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
+           // table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
             table2 = table2 + '<td>' + ` <i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
               table2 = table2 + `</tr>`;
           }
@@ -221,7 +225,6 @@
               <th scope="col">Date Of Birth</th>  
               <th scope="col">Address</th>
               <th scope="col">Standard</th>
-              <th scope="col">Section</th>
               <th scope="col">Action</th>
             </thead>`;
             data.forEach((d, index) => {
@@ -235,7 +238,7 @@
               table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
               table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
               table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
-              table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
+             // table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
               table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
               table2 = table2 + `</tr>`;
             })
@@ -353,7 +356,7 @@
             document.getElementById('lname').value = lastname
             document.getElementById('fname').value = firstname
             document.getElementById('std').value = standard
-            document.getElementById('sec').value = section
+          //  document.getElementById('sec').value = section
             document.getElementById('address').value = address
             button.addEventListener('click', () => {
               form.style.display = 'none'
@@ -440,9 +443,6 @@
               })
           })
         }
-      }
-      else {
-        window.location.href = `${host}/404`
-      }
+      })
 </script>
 {% endblock %}

@@ -28,18 +28,15 @@
        var subjectId,gradeId,testId,content='',data2;
        let container = document.querySelector('.history-container')
        document.getElementById('nav-studenttesthistory').style.opacity = '0.5';
-       if (token){
+       $(document).ready(function(){ 
+        var user = localStorage.getItem('user_type')
+        if (user != 'is_admin'){
+         return window.location.href = '/404'; 
+        }
+        else{
        let element = document.getElementById('id_test')
         let grade_element = document.getElementById('id_grade')
         let subject_element = document.getElementById('id_subject')
-    // var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
-    
-    // $.ajax({                       
-    //   url: url_for_change,                  
-    //   success: function (data) {
-    //     $("#id_grade").html(data); 
-    //   }
-    // });
        
        $("#id_grade").change(function () {
       var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
@@ -136,9 +133,6 @@ function back(){
   container.innerHTML = ''
 }
 }
-else{
-  window.location.href=`${host}/404` 
-}
-
+})
 </script>
 {% endblock %}

@@ -16,9 +16,16 @@
         <button id="grade-btn"onclick=creategrade()>Create</button>
        </div>
        </div>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> </script> 
 <script>
+    var host = window.location.protocol + "//" + window.location.host;
     var token = localStorage.getItem('token')
-    if (token){
+    $(document).ready(function(){ 
+      var user = localStorage.getItem('user_type')
+      if (user != 'is_admin'){
+        window.location.href = `${host}/404`; 
+      }
+      else{
     function creategrade() {
        var grade = document.getElementById('id_grade').value
        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -108,8 +115,6 @@ function get(){
    list.innerHTML = ''
   })}
 }
-else{
-  window.location.href = `${host}/404`
-}
+})
 </script>
     {% endblock %}

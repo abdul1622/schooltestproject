@@ -1,6 +1,6 @@
 from django.urls import path
 
-from accounts.frontendviews import logoutview
+from accounts.frontendviews import logoutview, unknown
 from.FrontendViews import *
 
 
@@ -22,5 +22,6 @@ urlpatterns=[
     path('questionbank',questionbank),
     path('student-test-history',student_test_history),
     path('q',question_paperview2),
-    path('logout',logoutview)
+    path('logout',logoutview),
+    path('404',unknown)
 ]
