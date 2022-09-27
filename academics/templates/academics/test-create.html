@@ -111,7 +111,7 @@
   document.getElementById('nav-questionpaperlist').style.opacity = '0.5';
   $(document).ready(function(){ 
     var user = localStorage.getItem('user_type')
-    if (user != 'is_admin'){
+    if (user != 'is_admin' || !token){
      return window.location.href = '/404'; 
     }
     else{

@@ -605,7 +605,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
     //    get function
     $(document).ready(function(){ 
         var user = localStorage.getItem('user_type')
-        if (user != 'is_student'){
+        if (user != 'is_student' || !token){
          return window.location.href = '/404'; 
         }
         else{
