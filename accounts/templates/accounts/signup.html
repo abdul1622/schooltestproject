@@ -102,7 +102,7 @@ aria-hidden="true">
 
     function add_standard(){
         standard = document.getElementById('id_standard').value
-        section = (document.getElementById('id_section').value).toLowerCase()
+        section = (document.getElementById('id_section').value).toUpperCase()
         standards.push(standard+'-'+section)
         document.getElementById('id_standard').value = ''
         document.getElementById('id_section').value = ''
