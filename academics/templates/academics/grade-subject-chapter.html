@@ -131,30 +131,6 @@
         error_messages.innerHTML = ''
     })
 
-    // fetch('https://schooltestproject.herokuapp.com/api/grades/', {
-    //         method: 'GET',
-    //         headers: {
-    //             // 'X-CSRFToken': csrftoken,
-    //             'Authorization': 'token' + ' ' + token
-    //         },
-    //     }).then(res => {
-    //         return res.json()
-    //     }).then(data => {
-    //         grade_list = data.data
-    //         console.log(data.data)
-    //        if(data.status == 'failure'){
-    //         window.location.href = `${host}/404`
-    //        } 
-    //     content += ` 
-    //         <option value="" selected="">---------</option>`
-    //     if(grade_list.length){
-    //     for(i=0;i<grade_list.length;i++){
-    //         content += ` <option value="${grade_list[i].id}" >${grade_list[i].grade}</option>`
-    //     }
-    // }
-    //     document.querySelector('.grade-in-form').innerHTML = content
-    //     })
-
     // get grade
     function get() {
         var content = ' <h2>Grades </h2> <hr> <div class="cards">'
@@ -492,6 +468,7 @@
             return res.json()
         }).then(data => {
             container3.innerHTML = ''
+            if(data.status == 'success'){
             subject_id = data.data[0].subject_id
             console.log(data.data[0].subject_id)
             chapter_list = data.data
@@ -505,9 +482,14 @@
         <br>
         <p><i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></p>
  </div>`
-            });
-            container3.innerHTML = content;
+ container3.innerHTML = content;
 
+            });
+        }else{
+            container3.innerHTML = 'no chapter in this subject';
+
+        }
+            
 
             console.log(document.querySelector('.submit-btn').id)
         })

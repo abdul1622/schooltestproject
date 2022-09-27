@@ -251,6 +251,7 @@ class ChapterListView(APIView):
                         "chapter_no": object.chapter_no,
                         "description": object.description,
                     })
+            if len(data):
                 return Response({"status": "success", 'data': data})
         except:
             return Response({"status": "Not found"}, status=HTTP_206_PARTIAL_CONTENT)

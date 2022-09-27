@@ -218,7 +218,7 @@ class Test(models.Model):
 
 class TestResult(models.Model):
     student_id = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, null=True)
+        User, on_delete=models.SET_NULL, null=True)
     grade = models.ForeignKey(Grade, on_delete=models.SET_NULL, null=True)
     subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, null=True)
     test_id = models.ForeignKey(Test, on_delete=models.DO_NOTHING, null=True)
