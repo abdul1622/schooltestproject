@@ -979,13 +979,17 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     <p> Your Answer : ${answer_details[i][`${answer_details[i].answer}`]}</p>
                 </div>`
             }
+            testdetails=[]
+            for (i = 0; i < answer_details.length; i++) {
+              test_details.push(JSON.stringify({'question':answer_details[i].question,'correct_answer':answer_details[i].correct_answer,'answer':answer_details[i].answer}))
+            }
             counter_container.innerHTML = ''
             document.querySelector('.testreview').innerHTML = overallreview
             console.log('c', correct_answer, 'u', unanswered, 'w', wrong_answer, score)
             fetch('https://schooltestproject.herokuapp.com/api/test-history/',
                 {
                     method: 'POST',
-                    body: JSON.stringify({ 'grade': grade, 'subject': subject, 'student_id': student_id, 'test_id': id, 'question_paper': question_paper_id, 'result': result, 'score': score, 'correct_answer': correct_answer, 'wrong_answer': wrong_answer, 'unanswered_questions': unanswered }
+                    body: JSON.stringify({ 'grade': grade, 'subject': subject, 'student_id': student_id, 'test_id': id, 'question_paper': question_paper_id, 'result': result, 'score': score, 'correct_answer': correct_answer, 'wrong_answer': wrong_answer, 'unanswered_questions': unanswered,'test_detail':testdetails }
                     ),
                     headers: {
                         'Accept': 'application/json',
