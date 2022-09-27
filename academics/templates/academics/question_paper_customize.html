@@ -93,8 +93,7 @@
     let all_chapter, result = [], questions_total = 0, customize = false;
 
     let chapter_id = null;
-  
-    let chapter_id = null;
+    let custom_end= false;
     let question_paper_id, userId, user_type, chapters_list = [];
     var content = '';
     da=null
@@ -144,17 +143,6 @@ if (token){
     $('#id_subject').change(function () {
         var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
         subject_id = $(this).val();
-
-        $.ajax({
-            url: url_for_change,
-            data: {
-                'subject': subject_id
-            },
-            success: function (data) {
-                $("#id_chapter").html(data),
-                $('#id_chapter_get').html(data)
-            }
-        });
         $.ajax({
             url: 'https://schooltestproject.herokuapp.com/api/ajax/load-chapter-no/',
             data: {
@@ -287,8 +275,6 @@ function getnext() {
 // 
     custom_end = false
         chapter_id = parseInt(document.getElementById('id_chapter_get').value)
-
-        let chapter_id = parseInt(document.getElementById('id_chapter_get').value)
         question_content = ''
         question_content +=`<div class='question-list-container-customize'>
                 <p>` 
@@ -308,10 +294,11 @@ function getnext() {
             })
             question_content += `</table>
 
-            <span class="more-btn"><button id="next-btn" class="submit-btn btn btn-sm btn-primary" onclick=add()>Add More</button> </span>
           `
 
-    
+
+            // <span class="more-btn"><button id="next-btn" class="submit-btn btn btn-sm btn-primary" onclick=add()>Add More</button> </span>
+
           document.querySelector('.q-form-6').innerHTML = question_content
         for(i=0;i<question_per_chapter_get.length;i++){
             if(question_per_chapter_get[i].key == chapter_id){
@@ -323,38 +310,13 @@ function getnext() {
             }
         }
             document.getElementById('q-form').style.display = 'none'
-  
-            // if(question_list.length){
-    //     for(i=0;i<question_list.length;i++){
-    //     document.getElementById(`question_${question_list[i]}`).checked = true
-    // }
-        // let current_index = null
-        // if (result.length) {
-        //     for (i = 0; i < chapters_list.length; i++) {
-        //         if (result[i]) {
-        //             if (result[i]['id'] == chapter_id) {
-        //                 current_index = i
-        //                 break
-        //             }
-        //         }
-        //     }
-        // }
-
-        // if (current_index != null) {
-        //     document.getElementById('id_knowledge').value = result[current_index]['cognitive_level']['knowledge']
-        //     document.getElementById('id_comprehension').value = result[current_index]['cognitive_level']['comprehension']
-        //     document.getElementById('id_application').value = result[current_index]['cognitive_level']['application']
-        // }
-        // else {
-        //     document.getElementById('id_knowledge').value = 0
-        //     document.getElementById('id_comprehension').value = 0
-        //     document.getElementById('id_application').value = 0
-        // }
 }
 
     function get_customize() {
         document.getElementById('q-form').style.display = 'none'
         customize = true
+        
+        
         // document.getElementById('q-form-1').style.display = 'none';
         // document.getElementById('q-form-2').style.display = 'none';
         // document.getElementById('q-form-3').style.display = 'none';
@@ -375,16 +337,9 @@ function getnext() {
                 $("#id_chapter_get").html(data)
             }
         });
-
+        // document.querySelector('.more-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=add()>Add More</button>`
         // document.querySelector('.more-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=add()>Add More</button>`
         document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=with_customize()>Review</button>`
-        document.querySelector('.more-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=add()>Add More</button>`
-        document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary">Review</button>`
-
-
-        // document.querySelector('.more-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=add()>Add More</button>`
-        document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=with_customize()>Review</button>`
-
         document.querySelector('.back-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Back</button>`
         console.log(result)
     }
@@ -420,12 +375,6 @@ function getnext() {
         for(let i=0;i<question_per_chapter.length;i++){
         console.log(document.getElementById(`question_${question_per_chapter[i]}`))
     if(document.getElementById(`question_${question_per_chapter[i]}`)){
-    function add() {
-        let chapter_id = parseInt(document.getElementById('id_chapter_get').value)
-        let list = []
-        for(i=0;i<question_per_chapter.length;i++){
-        console.log(document.getElementById(`question_${question_per_chapter[i]}`))
-
         if(document.getElementById(`question_${question_per_chapter[i]}`).checked){
             list.push(question_per_chapter[i])
         }
@@ -434,29 +383,13 @@ function getnext() {
     console.log(list)
     for(let i=0;i<question_per_chapter_get.length;i++){
         if(chapter_id && question_per_chapter_get[i].key == chapter_id){
-    console.log(list)
-    for(i=0;i<question_per_chapter_get.length;i++){
-        if(question_per_chapter_get[i].key == chapter_id){
             question_per_chapter_get[i].value = list
         }
     }
         // question_per_chapter_get[`${chapter_id}`] = list
     console.log(question_per_chapter_res)
-
 // 
-    chapter_id  = null;
-
-
-    }
-
-    function with_customize() {
-        document.getElementById('q-form').style.display = 'block'
-        question_list = []
-        let chap_list = []
-        let content = []
-
 // 
-    chapter_id  = null;
         for(i=0;i<question_per_chapter_get.length;i++){
                 let current_list = question_per_chapter_get[i].value
                 console.log(current_list)
@@ -800,12 +733,12 @@ function submit_woc(){
 
             })
     }
-}
 
 function refresh(){
     location.reload();
 }
-    }
+}
+
 else{
     window.location.href = `${host}/404`
 }
