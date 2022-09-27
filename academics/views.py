@@ -302,9 +302,11 @@ class QuestionCreateView(CreateAPIView):
             except:
                 # questions = Question.objects.all()
                  return Response({'status': 'failed','data':'give a valid grade and subject'}, status=HTTP_206_PARTIAL_CONTENT)
-        serializer_name = questionanswerserializer(questions, many=True)
-        serializer = QuestionAnswerSerializer(questions, many=True)
-        return Response({"status": "success", 'name': serializer_name.data, 'data': serializer.data})
+        if len(questions):
+            serializer_name = questionanswerserializer(questions, many=True)
+            serializer = QuestionAnswerSerializer(questions, many=True)
+            return Response({"status": "success", 'name': serializer_name.data, 'data': serializer.data})
+        return Response({'status': 'failed','data':"subject don't have a questions"}, status=HTTP_206_PARTIAL_CONTENT)
 
     def post(self, request):
         serializer = QuestionAnswerSerializer(data=request.data)
