@@ -7,6 +7,7 @@
   <div class="colorbox2"><p>fail</p></div>
   </div>
 <div class="history"></div>
+<div class="test-details"></div>
 <script>
   $(document).ready(function(){ 
     var user = localStorage.getItem('user_type')
@@ -18,11 +19,13 @@
   var token = localStorage.getItem('token')
   var standard = localStorage.getItem('standard')
   let temp;
+  let current_details;
   let content = ''
-  let result = []
+  let result = [],test_content= ''
+  let list;
   document.getElementById('nav-testhistory').style.opacity = '0.5';
   url = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
-  url.searchParams.append('grade', standard);
+  url.searchParams.append('grade', standard[0]);
   url.searchParams.append('student_id', student_id)
   fetch(url,
     {
@@ -36,10 +39,10 @@
     }).then(function (response) {
       return response.json()
     }).then(data => {
+      list = data
       data.forEach((d, index) => {
         let test_id = d.test_id
-      
-
+        
         result.push({ index: { 'subject': d.subject, 'result': d.result, 'correct': d.correct_answer, 'wrong': d.wrong_answer, 'unanswered': d.unanswered_questions, 'create': d.created_at }, 'remarks': null })
         fetch(`https://schooltestproject.herokuapp.com/api/test/${test_id}/`,
           {
@@ -87,6 +90,7 @@
               <p>Score : ${d.score} %</p>
               <p>Date : ${d.created_at.slice(0, 10)} </p>
               <p>Time : ${d.created_at.slice(11, 16)} </p>
+              <button onclick=details(${d.id})>details</button>
           </div>  `
             // console.log(result)
             let flag = false
@@ -113,5 +117,15 @@
 
       })
     })
+
+    function details(index){
+      for(i=0;i<list.length;i++){
+        if(list[i].id == index){
+          current_details = JSON.parse(list[i].test_detail)
+          break
+        }
+      }
+      
+    }
 </script>
 {% endblock %}
