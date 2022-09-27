@@ -149,8 +149,8 @@
         return
     }
     standards.push(standard+'-'+section)
-    document.getElementById('id_standard').value = ''
-    document.getElementById('id_section').value = ''
+    document.getElementById('std').value = ''
+    document.getElementById('sec').value = ''
     let content = ''
     content += `<ul>standards list`
     for(i=0;i<standards.length;i++){
@@ -185,7 +185,7 @@
           method: 'POST',
           body: JSON.stringify({
             'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
-            'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standard, 'section': section, 'full_name': fullname, 'address': address
+            'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standards, 'section': section, 'full_name': fullname, 'address': address
           }
           ),
           headers: {

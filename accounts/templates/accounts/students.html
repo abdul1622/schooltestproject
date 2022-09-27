@@ -132,6 +132,7 @@
 <div class="container2"></div>
 
 <script>
+  let user, standards = [];
   let token = localStorage.getItem("token")
   $(document).ready(function(){ 
     var user = localStorage.getItem('user_type')
@@ -369,7 +370,7 @@
                 },
                 body: JSON.stringify({
                   'email': form_email.value, 'phone': form_phone.value, 'date_of_birth': form_dob.value, 'register_number': form_reg.value,
-                  'profile': { 'first_name': form_fname.value, 'last_name': form_lname.value, 'standard': form_std.value, 'full_name': form_fullname.value, 'address': form_ad.value }
+                  'profile': { 'first_name': form_fname.value, 'last_name': form_lname.value, 'standard': standards, 'full_name': form_fullname.value, 'address': form_ad.value }
                 }
                 )
               }).then(response => {
@@ -414,12 +415,17 @@
             var fullname = document.getElementById('ffname').value
             var address = document.getElementById('address').value
             var is_dataentry = 'false'
+            if (!standards.length) {
+              standard = document.getElementById('std').value
+              section = document.getElementById('sec').value
+              standards.push(standard + '-' + section)
+          }
             fetch('https://schooltestproject.herokuapp.com/api/signup/',
               {
                 method: 'POST',
                 body: JSON.stringify({
                   'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
-                  'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standard, 'section': section, 'full_name': fullname, 'address': address
+                  'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standards, 'section': section, 'full_name': fullname, 'address': address
                 }
                 ),
                 headers: {
