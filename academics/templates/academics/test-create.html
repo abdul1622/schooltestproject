@@ -4,10 +4,9 @@
   <div class="question-papers-get">
     <div class="container">
       {% csrf_token %}
-      <!-- <p><label for="get_grade">Grade:</label> <select name="grade" onchange=getgradename(this) required="" id="get_grade">
-        <option value="" selected="">---------</option>
-      </select></p> -->
-      {{form.as_p}}
+      <p><label for="get_grade">Grade:</label> <select name="grade" class="grade-in-form" onchange=getgradename(this) required="" id="get_grade">
+      </select></p>
+      <!-- {{form.as_p}} -->
       <label for=""> Subject: </label>
       <select name="subject" required="" onchange=getsubjectname(this) id="id_subject_2">
         <option value="" selected="">---------</option>
@@ -108,6 +107,7 @@
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
   let container = document.querySelector('.question-papers-card')
+
   document.getElementById('nav-questionpaperlist').style.opacity = '0.5';
   $(document).ready(function(){ 
     var user = localStorage.getItem('user_type')

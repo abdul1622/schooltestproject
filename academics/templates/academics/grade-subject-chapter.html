@@ -110,6 +110,7 @@
     })
     var token = localStorage.getItem('token')
     var form_all = document.querySelector('.form-all')
+    let user_type = localStorage.getItem('user_type')
     let edit = null
     let chapter_list = []
     const subject_create = document.getElementById('subject-btn')
@@ -131,6 +132,30 @@
         error_messages.innerHTML = ''
     })
 
+    // fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+    //         method: 'GET',
+    //         headers: {
+    //             // 'X-CSRFToken': csrftoken,
+    //             'Authorization': 'token' + ' ' + token
+    //         },
+    //     }).then(res => {
+    //         return res.json()
+    //     }).then(data => {
+    //         grade_list = data.data
+    //         console.log(data.data)
+    //        if(data.status == 'failure'){
+    //         window.location.href = `${host}/404`
+    //        } 
+    //     content += ` 
+    //         <option value="" selected="">---------</option>`
+    //     if(grade_list.length){
+    //     for(i=0;i<grade_list.length;i++){
+    //         content += ` <option value="${grade_list[i].id}" >${grade_list[i].grade}</option>`
+    //     }
+    // }
+    //     document.querySelector('.grade-in-form').innerHTML = content
+    //     })
+
     // get grade
     function get() {
         var content = ' <h2>Grades </h2> <hr> <div class="cards">'
@@ -144,6 +169,11 @@
             return res.json()
         }).then(data => {
             console.log(data.data)
+            grade_list = data.data
+            console.log(data.data)
+           if(data.status == 'failure'){
+            window.location.href = `${host}/404`
+           } 
             data.data.forEach((d, index) => {
                 content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button>
         <p  onclick=getsubject(${d.grade},${d.id}) class="grade">${d.grade} </p>
@@ -162,6 +192,9 @@
             document.getElementById('chapterlist').style.display = "none"
             form_all.innerHTML = `<div class='grade-form-box'>{{gradeform.as_p}}</div>`
             document.getElementById('subjects-by-grade').style.display = "none"
+            if(user_type != 'is_admin'){
+                document.getElementById('grade').style.display = 'none'
+            }
         })
     };
         get();
@@ -233,6 +266,7 @@
     function getsubject(val1, val2) {
         grade_val = val1
         grade_id = val2
+        document.getElementById('grade').style.display = 'block'
         console.log(grade_val);
 
         form_all.innerHTML = `<div class='subject-form-box'>{{subjectform.as_p}} </div>`

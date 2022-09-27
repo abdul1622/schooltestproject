@@ -5,8 +5,7 @@
   <button onclick=back() class='back-btn'>&#x2715; </button>
   <div class='grid-item'>      
       <label for=""> Grade: </label>
-    <!-- <select name="grade" required="" id="id_grade"> 
-        <option value="" selected="">---------</option>
+    <!-- <select name="grade" required="" class="grade_in_form" id="id_grade"> 
       </select> -->
       {{questionform.grade}}
  
@@ -89,7 +88,10 @@
 
 <div id="question-box">
   {% csrf_token %}
-  {{ form.as_p }}
+  <!-- {{ form.as_p }} -->
+  <label for=""> Grade: </label>
+  <select name="grade" required="" class="grade-in-form" id="get_grade"> 
+    </select>
   <label for=""> Subject: </label>
   <select name="subject" required="" id="id_subject_2">
     <option value="" selected="">---------</option>
@@ -130,6 +132,33 @@
   let no_btn = document.getElementById('delete-btn-no')
   var host = window.location.protocol + "//" + window.location.host;
  
+
+  fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+            method: 'GET',
+            headers: {
+                // 'X-CSRFToken': csrftoken,
+                'Authorization': 'token' + ' ' + token
+            },
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            grade_list = data.data
+            console.log(data.data)
+           if(data.status == 'failure'){
+            window.location.href = `${host}/404`
+           } 
+        content += ` 
+            <option value="" selected="">---------</option>`
+        if(grade_list.length){
+        for(i=0;i<grade_list.length;i++){
+            content += ` <option value="${grade_list[i].id}" >${grade_list[i].grade}</option>`
+        }
+    }
+        document.querySelector('.grade-in-form').innerHTML = content
+        })
+
+
+
   document.getElementById('nav-question').style.opacity = '0.5';
   document.getElementById('message-close-btn').addEventListener('click', () => {
     messages.innerHTML = '';
@@ -161,10 +190,13 @@
   });
     const container2 = document.querySelector('.question-list');
     url='https://schooltestproject.herokuapp.com/api/question/'
+
+
     function get() {
       let grade=document.getElementById('get_grade').value
       let subject=document.getElementById('id_subject_2').value
       console.log(grade,subject)
+      if(grade && subject){
       let url1 = new URL('https://schooltestproject.herokuapp.com/api/question/')
       url1.searchParams.append('grade', grade);
       url1.searchParams.append('subject',subject)
@@ -181,6 +213,7 @@
       let content = '';
         console.log(data.name[0])
         console.log(data.status)
+        if(data.status == 'success'){
         data.data.forEach((d, index) => {
           name_value = data.name[index]
             content = content + `<div class="question-card" id='${d.id}'>
@@ -204,9 +237,18 @@
         document.getElementById('grade-head-question').textContent = grade
         document.getElementById('subject-head-question').textContent = data.name[0]['subject']
         container2.innerHTML = content;
+      }else{
+        head.style.display = 'none'
+        container2.innerHTML = '<p>select a valid subject</p>'
+      }
         edit = false
       })
-    };
+    }else{
+        head.style.display = 'none'
+        container2.innerHTML = '<p>select a valid subject</p>'
+        edit = false
+      }
+  };
     var edit = null;
 
     $("#id_grade").change(function () {
@@ -451,7 +493,7 @@
       document.getElementById('--question').style.display = 'none'
     }
     let input = document.getElementById('id_subject_2')
-    input.addEventListener("click", function () {
+    input.addEventListener("change", function () {
       get();
     });
   

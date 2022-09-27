@@ -4,8 +4,11 @@
 
     <div class="q-form" id="q-form-1">
         {% csrf_token %}
-        <p><label for="id_grade">Grade:</label>{{form.grade}} </p>
-      
+        <!-- grade form -->
+        <!-- <p><label for="id_grade">Grade:</label>{{form.grade}} </p> -->
+        <p><label for="id_grade">Grade:</label><select name="grade" class="grade-in-form" onchange=getgradename(this) required="" id="id_grade">
+            <option value="" selected="">---------</option>
+          </select> </p>
         <p><label for="id_subject">Subject:</label> <select name="subject" onchange=getsubjectname(this) required=""
                 id="id_subject">
                 <option value="" selected="">---------</option>
@@ -109,6 +112,36 @@
          return window.location.href = '/404'; 
         }
     })
+
+    let grade_list;
+  let content = ''
+  var host = window.location.protocol + "//" + window.location.host;
+ 
+
+ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+           method: 'GET',
+           headers: {
+               // 'X-CSRFToken': csrftoken,
+               'Authorization': 'token' + ' ' + token
+           },
+       }).then(res => {
+           return res.json()
+       }).then(data => {
+           grade_list = data.data
+           console.log(data.data)
+          if(data.status == 'failure'){
+           window.location.href = `${host}/404`
+          } 
+       content += ` 
+           <option value="" selected="">---------</option>`
+       if(grade_list.length){
+       for(i=0;i<grade_list.length;i++){
+           content += ` <option value="${grade_list[i].id}">${grade_list[i].grade}</option>`
+       }
+   }
+       document.querySelector('.grade-in-form').innerHTML = content
+       })
+
 
 
  function get(){
