@@ -8,8 +8,10 @@
   
   {%csrf_token%}
   <button onclick=back() class='delete-grade profile-back-btn'>&#x2715; </button>
-<p> <label >Standard:</label><br><input type="text" id="std" placeholder="Standard"> </p>
-<p></p><label >Section:</label><br><input type="text" id="sec" placeholder="Section"> </p>
+<div class="standard-edit"></div>
+<div class="profile-errors"></div>
+<!-- <label >Standard:</label><br><input type="number" id="std" placeholder="Standard">  -->
+
 <p></p><label >Firstname:</label><br><input type="text" id="fname" placeholder="First Name"> </p>
 <p></p><label >Lastname:</label><br><input type="text" id="lname" placeholder="Last Name"> </p>
 <p></p><label >Fullname:</label><br><input type="text" id="ffname"placeholder="Full Name"> </p>
@@ -54,7 +56,7 @@ aria-hidden="true">
   let container = document.querySelector('.container');
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
-
+  let standards,get_standard;
   let form=document.getElementById('profile-box')
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
   document.getElementById('nav-profile').style.opacity = '0.5';
@@ -62,6 +64,46 @@ aria-hidden="true">
     form.style.display='none'
     container.style.display = 'block'
   }
+
+  function delete_standard(index){
+    standards.splice(index,1);
+    let content = ''
+    content += `    <p> standards list</p>`
+                    for(i=0;i<standards.length;i++){
+                      content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
+                    }
+                    content += `<input type="number" id="std" placeholder="Standard">
+                    <label >Section:</label><br><input type="text" id="sec" placeholder="section">
+                    <button onclick=add()>add</button>
+                    <hr>
+                    `
+                    document.querySelector('.standard-edit').innerHTML = content
+  }
+  function add(){
+    let std = document.getElementById('std').value
+    let section = (document.getElementById('sec').value).toUpperCase()
+    if(!section.match(/[a-z]/i)){
+            document.querySelector('.profile-errors').innerHTML = 'give a valid section'
+            return
+    }
+    if(!standards.includes(std+'-'+section)){
+    standards.push(std+'-'+section)
+    }else{
+      document.querySelector('.profile-errors').innerHTML = 'standard and section altready added'
+            return
+    }
+    let content = ''
+    content += `    <p> standards list</p>`
+                    for(i=0;i<standards.length;i++){
+                      content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
+                    }
+                    content += `<input type="number" id="std" placeholder="Standard">
+                    <label >Section:</label><br><input type="text" id="sec" placeholder="section">
+                    <button onclick=add()>add</button>
+                    <hr>`
+                    document.querySelector('.standard-edit').innerHTML = content
+  }
+
   function profile() {
         let token = localStorage.getItem('token')
         console.log(token)
@@ -83,7 +125,22 @@ aria-hidden="true">
                 <div class="profile-head">
                 <div class='image'> <img src='https://schooltestproject.herokuapp.com${data.data.profile?.profile_picture}'></div>  
                 <p class="fullname">${data.data.profile?.full_name}</p><br>`
+                  console.log(data.data.profile?.standard.length)
+                  if(data.data.user_type!='is_student'){
+                    let content = ''
+                  content += `    <p> standards list</p>`
+                    standards = data.data.profile?.standard
+                    for(i=0;i<standards.length;i++){
+                      content += `
+                      <li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
+                    }
+                    content += `<input type="number" id="std" placeholder="Standard">
+                    <label >Section:</label><br><input type="text" id="sec" placeholder="section">
+                    <button onclick=add()>add</button>
+                    <hr>`
 
+                    document.querySelector('.standard-edit').innerHTML = content
+                  }
                   if(data.data.user_type=='is_admin'){
                     htmlSegment += `<p class ='occupation'> Admin </p>
                      </div>
@@ -91,9 +148,7 @@ aria-hidden="true">
                       <p ><label class=profile-label>First Name:</label><span  class="firstname">${data.data.profile?.first_name}</span></p>
                       <p><label class=profile-label>Last Name:</label><span class="lastname">${data.data.profile?.last_name}</span></p>
                       <p style='display:none;'> <label class=profile-label>Standard:</label><span  class="std">${data.data.profile?.standard}</span></p>
-                      <p style='display:none;'>     <label class=profile-label>Section:</label><span class="sec">${data.data.profile?.section}</span></p>
                       <p>  <label class=profile-label>Address: </label><span class="address">${data.data.profile?.address}</span></p>
-      
                          <i id='profile-edit' class="fa fa-edit"></i>
                          </div>`;
                   container.innerHTML = htmlSegment;
@@ -105,7 +160,6 @@ aria-hidden="true">
                     <p><label class=profile-label>First Name:</label><span  class="firstname">${data.data.profile?.first_name}</span></p>
                     <p><label class=profile-label>Last Name:</label><span class="lastname">${data.data.profile?.last_name}</span></p>
                     <p style='display:none;'> <label class=profile-label>Standard:</label><span  class="std">${data.data.profile?.standard}</span></p>
-                    <p style='display:none;'>     <label class=profile-label>Section:</label><span class="sec">${data.data.profile?.section}</span></p>
                     <p>  <label class=profile-label>Address: </label><span class="address">${data.data.profile?.address}</span></p>
       
                          <i id='profile-edit' class="fa fa-edit"></i>
@@ -113,13 +167,13 @@ aria-hidden="true">
                   container.innerHTML = htmlSegment;
                   }
                   else if(data.data.user_type=='is_student'){
+                    standards = data.data.profile?.standard
                     htmlSegment += `<p class ='occupation'> Student</p>
                      </div>
                     <div class="profile-content">
                     <p><label class=profile-label>First Name:</label><span  class="firstname">${data.data.profile?.first_name}</span></p>
                     <p><label class=profile-label>Last Name:</label><span class="lastname">${data.data.profile?.last_name}</span></p>
                     <p> <label class=profile-label>Standard:</label><span  class="std">${data.data.profile?.standard}</span></p>
-                    <p>     <label class=profile-label>Section:</label><span class="sec">${data.data.profile?.section}</span></p>
                     <p>  <label class=profile-label>Address: </label><span class="address">${data.data.profile?.address}</span></p>
       
                          <i id='profile-edit' class="fa fa-edit"></i>
@@ -147,8 +201,8 @@ aria-hidden="true">
               fname= document.getElementById('fname');
               lname= document.getElementById('lname');
               ffname= document.getElementById('ffname');
-              std= document.getElementById('std');
-              sec= document.getElementById('sec');
+              // std= document.getElementById('std');
+              // sec= document.getElementById('sec');
               ad=document.getElementById('address');
               button= document.getElementById('profile-btn')
               e.preventDefault();
@@ -166,14 +220,14 @@ aria-hidden="true">
                 let fullname = parent.parentElement.querySelector('.fullname').textContent;
                 let lastname= parent.querySelector('.lastname').textContent;
                 let firstname= parent.querySelector('.firstname').textContent;
-                let standard= parent.querySelector('.std').textContent;
-                let section= parent.querySelector('.sec').textContent;
+                // let standard= parent.querySelector('.std').textContent;
+                // let section= parent.querySelector('.sec').textContent;
                 let address= parent.querySelector('.address').textContent;
                 document.getElementById('ffname').value=fullname
                 document.getElementById('lname').value=lastname
                 document.getElementById('fname').value=firstname
-                document.getElementById('std').value=standard
-                document.getElementById('sec').value=section
+                // document.getElementById('std').value=standard
+                // document.getElementById('sec').value=section
                 document.getElementById('address').value=address
                 button.addEventListener('click',()=>{
                   fetch(`${url}${id}/`,{
@@ -184,7 +238,7 @@ aria-hidden="true">
                       'X-CSRFToken': csrftoken
                     },
                     body:JSON.stringify(
-                    {'first_name':fname.value,'last_name':lname.value,'standard':std.value,'section':sec.value,'full_name':ffname.value,'address':ad.value}
+                    {'first_name':fname.value,'last_name':lname.value,'standard':standards,'full_name':ffname.value,'address':ad.value}
                     )
                 }).then(response => {
                   if (response.status == 200) {
@@ -205,16 +259,19 @@ aria-hidden="true">
                         }
                     profile();
                   })
+                }else{
+                  error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+                  messages.innerHTML = ''
                 }
                 form.style.display='none'
                 container.style.display = 'block'
                   return response.json();
               }).then(function (data) {
                   console.log(data)
-                  if (data.status != 'success'){
-                  error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-                  messages.innerHTML = ''
-                  }
+                  // if (data.status != 'success'){
+                  // error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+                  // messages.innerHTML = ''
+                  // }
               })            })
              
             }
