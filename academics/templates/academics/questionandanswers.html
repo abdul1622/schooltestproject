@@ -113,7 +113,12 @@
   head.style.display = 'none'
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
-  
+  $(document).ready(function(){ 
+    var user = localStorage.getItem('user_type')
+    if (user != 'is_admin'){
+     return window.location.href = '/404'; 
+    }
+    else{
   function back() {
     document.getElementById('questionForm').style.display = 'none'
     document.getElementById('question-box').style.display = 'block'
@@ -154,8 +159,6 @@
     });
 
   });
-
-  if (token) {
     const container2 = document.querySelector('.question-list');
     url='https://schooltestproject.herokuapp.com/api/question/'
     function get() {
@@ -452,9 +455,7 @@
       get();
     });
   }
-  else {
-    window.location.href = `${host}/404`
-  }
+ })
 
 
 </script>

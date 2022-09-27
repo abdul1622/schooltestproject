@@ -17,7 +17,12 @@
 
 
 <script>
-
+  $(document).ready(function(){ 
+    var user = localStorage.getItem('user_type')
+    if (user != 'is_admin'){
+     return window.location.href = '/404'; 
+    }
+    else{
   const container2 = document.querySelector('.chapter-list');
   var messages = document.getElementById('message')
   var token = localStorage.getItem('token')
@@ -142,6 +147,7 @@ container2.addEventListener('click',(e) => {
           }
         })
   }})
+}})
 </script>
 </div>
 {% endblock %}

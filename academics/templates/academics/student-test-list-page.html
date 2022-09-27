@@ -37,7 +37,12 @@ Get Test
     url1 = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
     url1.searchParams.append('grade', standard);
     url1.searchParams.append('studentid',student_id)
-    if (token){
+    $(document).ready(function(){ 
+      var user = localStorage.getItem('user_type')
+      if (user != 'is_admin'){
+       return window.location.href = '/404'; 
+      }
+      else{
     fetch(url1,
             {
                 method: 'GET',
@@ -172,8 +177,6 @@ function getrequiredtest(){
   }
 }
 }
-else{
-  window.location.href=`${host}/404` 
-}
+})
 </script>
 {% endblock %}

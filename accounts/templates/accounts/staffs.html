@@ -128,6 +128,12 @@
 <div class="container2"></div>
 
 <script>
+  let token = localStorage.getItem("token")
+  $(document).ready(function(){ 
+    var user = localStorage.getItem('user_type')
+    if (user != 'is_admin'  || token){
+     return window.location.href = '/404'; 
+    }
   function reload() {
     window.location.href = window.location.href;
 
@@ -135,14 +141,12 @@
   document.getElementById('nav-staffs').style.opacity = '0.5';
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
-  let token = localStorage.getItem("token")
   add = document.getElementById('addstaff')
   button = document.getElementById('userdetail-btn');
   var host = window.location.protocol + "//" + window.location.host;
   let form = document.getElementById('userDetails')
   const container2 = document.querySelector('.container2');
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-  if (token) {
     function userdetails() {
       console.log(token)
       fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
@@ -454,11 +458,7 @@
         })
       }
     })
-  }
-
-  else {
-    window.location.href = `${host}/404`
-  }
+  })
 
 </script>
 {% endblock %}

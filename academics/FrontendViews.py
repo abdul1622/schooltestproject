@@ -127,4 +127,5 @@ def student_test_history(request):
         form = form_for_chapterlist()
         return render(request,'academics/student-test-history-details.html',{'form':form})
    # return render(request,'404.html')
-  
+def unknown(request):
+     return render(request,'404.html')

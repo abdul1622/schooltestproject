@@ -43,10 +43,15 @@
   <div class="container2"></div>
   
   <script>
-   let form =document.getElementById('userDetails')
+    let token = localStorage.getItem("token")
+    $(document).ready(function(){ 
+      var user = localStorage.getItem('user_type')
+      if (user != 'is_admin' || token ){
+       return window.location.href = '/404'; 
+      }
+    let form =document.getElementById('userDetails')
     const container2 = document.querySelector('.container2');
     function userdetails() {
-        let token = localStorage.getItem("token")
         console.log(token)
         fetch('https://schooltestproject.herokuapp.com/auth/user-details/', {
           method: 'GET',
@@ -171,5 +176,6 @@
       }) .then(response => response.text())            
       window.location.href='login'            
       } 
+    })
   </script>
 {% endblock %}
