@@ -140,7 +140,7 @@
             <option value="" selected="">---------</option>`
         if(grade_list.length){
         for(i=0;i<grade_list.length;i++){
-            content += ` <option value="${grade_list[i].id}" selected="">${grade_list[i].grade}</option>`
+            content += ` <option value="${grade_list[i].id}">${grade_list[i].grade}</option>`
         }
     }
         document.querySelector('.grade-in-form').innerHTML = content

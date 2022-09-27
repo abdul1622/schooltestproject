@@ -149,7 +149,7 @@
             <option value="" selected="">---------</option>`
         if(grade_list.length){
         for(i=0;i<grade_list.length;i++){
-            content += ` <option value="${grade_list[i].id}" selected="">${grade_list[i].grade}</option>`
+            content += ` <option value="${grade_list[i].id}" >${grade_list[i].grade}</option>`
         }
     }
         document.querySelector('.grade-in-form').innerHTML = content
@@ -196,6 +196,7 @@
       let grade=document.getElementById('get_grade').value
       let subject=document.getElementById('id_subject_2').value
       console.log(grade,subject)
+      if(grade && subject){
       let url1 = new URL('https://schooltestproject.herokuapp.com/api/question/')
       url1.searchParams.append('grade', grade);
       url1.searchParams.append('subject',subject)
@@ -242,7 +243,12 @@
       }
         edit = false
       })
-    };
+    }else{
+        head.style.display = 'none'
+        container2.innerHTML = '<p>select a valid subject</p>'
+        edit = false
+      }
+  };
     var edit = null;
 
     $("#id_grade").change(function () {

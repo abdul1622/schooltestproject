@@ -131,7 +131,29 @@
         error_messages.innerHTML = ''
     })
 
-
+    // fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+    //         method: 'GET',
+    //         headers: {
+    //             // 'X-CSRFToken': csrftoken,
+    //             'Authorization': 'token' + ' ' + token
+    //         },
+    //     }).then(res => {
+    //         return res.json()
+    //     }).then(data => {
+    //         grade_list = data.data
+    //         console.log(data.data)
+    //        if(data.status == 'failure'){
+    //         window.location.href = `${host}/404`
+    //        } 
+    //     content += ` 
+    //         <option value="" selected="">---------</option>`
+    //     if(grade_list.length){
+    //     for(i=0;i<grade_list.length;i++){
+    //         content += ` <option value="${grade_list[i].id}" >${grade_list[i].grade}</option>`
+    //     }
+    // }
+    //     document.querySelector('.grade-in-form').innerHTML = content
+    //     })
 
     // get grade
     function get() {
@@ -146,6 +168,11 @@
             return res.json()
         }).then(data => {
             console.log(data.data)
+            grade_list = data.data
+            console.log(data.data)
+           if(data.status == 'failure'){
+            window.location.href = `${host}/404`
+           } 
             data.data.forEach((d, index) => {
                 content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button>
         <p  onclick=getsubject(${d.grade},${d.id}) class="grade">${d.grade} </p>

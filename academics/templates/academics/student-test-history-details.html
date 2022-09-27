@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="history-container-form" id="history-container-form">
-    <!-- <label for=""> Grade: </label>
-    <select name="grade" required="" id="id_grade">
-        <option value="" selected="">---------</option>
-      </select> -->
-      {{form.as_p}}
+    <label for=""> Grade: </label>
+    <select name="grade" required="" class="grade-in-form" id="id_grade">
+      </select>
+      <!-- {{form.as_p}} -->
     <label for=""> Subject: </label>
     <select name="subject" required="" id="id_subject">
         <option value="" selected="">---------</option>
@@ -32,6 +31,40 @@
        let element = document.getElementById('id_test')
         let grade_element = document.getElementById('id_grade')
         let subject_element = document.getElementById('id_subject')
+
+        let grade_list;
+  let content = ''
+  var host = window.location.protocol + "//" + window.location.host;
+ 
+
+ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+           method: 'GET',
+           headers: {
+               // 'X-CSRFToken': csrftoken,
+               'Authorization': 'token' + ' ' + token
+           },
+       }).then(res => {
+           return res.json()
+       }).then(data => {
+           grade_list = data.data
+           console.log(data.data)
+          if(data.status == 'failure'){
+           window.location.href = `${host}/404`
+          } 
+       content += ` 
+           <option value="" selected="">---------</option>`
+       if(grade_list.length){
+       for(i=0;i<grade_list.length;i++){
+           content += ` <option value="${grade_list[i].id}">${grade_list[i].grade}</option>`
+       }
+   }
+       document.querySelector('.grade-in-form').innerHTML = content
+       })
+
+
+
+
+
     // var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
     
     // $.ajax({                       
