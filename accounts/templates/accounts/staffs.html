@@ -57,7 +57,7 @@
 <div class='sort-input'>
   <input type="text" id="student-filter" placeholder="search" min="0" max="12">
   <button id="sort" onclick=sort()>search</button>
-  <button id="addstaff">Add Staff</button>
+  <button id="addstaff" onclick=addstaff()>Add Staff</button>
 </div>
 <div id="userDetails">
   <button class='back-btn' onclick=back()>&#x2715; </button>
@@ -118,7 +118,7 @@
 
   <div class='grid-item'>
     <button data-toggle="modal" data-target="#messageModal-staff" id="userdetail-btn">submit</button>
-    <button id="standard_add_btn" onclick=addstaff() >Add standard</button>
+    <button id="standard_add_btn" onclick=addstandard() >Add standard</button>
   </div>
 
 </div>
@@ -140,28 +140,31 @@
   })
   function reload() {
     window.location.href = window.location.href;
-
   }
-  document.getElementById('addstaff').addEventListener("click", addstaff, false)
+  function addstandard(){
+    standard = document.getElementById('std').value
+    section = (document.getElementById('sec').value).toUpperCase()
+    if(!section.match(/[a-z]/i)){
+        document.querySelector('.signup-errors').innerHTML = 'give a valid section'
+        return
+    }
+    standards.push(standard+'-'+section)
+    document.getElementById('id_standard').value = ''
+    document.getElementById('id_section').value = ''
+    let content = ''
+    content += `<ul>standards list`
+    for(i=0;i<standards.length;i++){
+        content += `<li>${standards[i]}</li>`
+    }
+    content += `</ul>`
+    document.querySelector('.details').innerHTML = content
+  }
   function addstaff(){
     form.style.display = 'grid'
     add.style.display = 'none'
     form.style.marginTop = '10vh';
-    /* var email = 's10@gmail.com'
-    var phone = 9992945420
-    var dob = '2000-02-10'
-    var reg = 's11'
-    var standard = 1
-    var section = 'c'
-    var type = 'is_student'
-    var firstname = 's'
-    var lastname = 'p'
-    var fullname = 'sp'
-    var address = 'home'*/
     var is_dataentry = 'false'
-
     button.addEventListener('click', () => {
-      window.location.href = window.location.href;
       form.style.display = 'none'
       add.style.display = 'block'
       let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -260,7 +263,6 @@
         container2.innerHTML = table2;
       })
     } userdetails();
-    document.getElementById('back').addEventListener("click", back, false)
     function back() {
       window.location.href = window.location.href;
       form.style.display = "none"
@@ -277,24 +279,7 @@
       document.getElementById('address').value = ''
     }
     document.getElementById('standard_add_btn').addEventListener("click", addstaff, false)
-   function add_standard(){
-    standard = document.getElementById('id_standard').value
-    section = (document.getElementById('id_section').value).toUpperCase()
-    if(!section.match(/[a-z]/i)){
-        document.querySelector('.signup-errors').innerHTML = 'give a valid section'
-        return
-    }
-    standards.push(standard+'-'+section)
-    document.getElementById('id_standard').value = ''
-    document.getElementById('id_section').value = ''
-    let content = ''
-    content += `<ul>standards list`
-    for(i=0;i<standards.length;i++){
-        content += `<li>${standards[i]}</li>`
-    }
-    content += `</ul>`
-    document.querySelector('.details').innerHTML = content
-  }
+ 
   
     function print(data){
       let table2 = `<table class='--staff'>`;
@@ -416,7 +401,7 @@
       console.log(id)
       if (delbutton) {
         yes = document.getElementById('yes')
-        yes.setAttribute("onClick", `deletestudent(${id})`);
+        yes.setAttribute("onClick", `deletestaff(${id})`);
       }
       if (editbutton) {
         form.style.display = 'grid'
@@ -432,7 +417,7 @@
         let lastname = parent.querySelector('.userlastname').textContent;
         let firstname = parent.querySelector('.userfirstname').textContent;
         let standard = parent.querySelector('.userstandard').textContent;
-        let section = parent.querySelector('.usersection').textContent;
+        //let section = parent.querySelector('.usersection').textContent;
         let address = parent.querySelector('.useraddress').textContent;
         document.getElementById('email').value = email
         document.getElementById('phone').value = phone
