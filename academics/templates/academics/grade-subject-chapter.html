@@ -108,6 +108,7 @@
     // delete_box.style.display = 'none';
     var token = localStorage.getItem('token')
     var form_all = document.querySelector('.form-all')
+    let user_type = localStorage.getItem('user_type')
     let edit = null
     let chapter_list = []
     const subject_create = document.getElementById('subject-btn')
@@ -129,6 +130,8 @@
         messages.innerHTML = ''
         error_messages.innerHTML = ''
     })
+
+
 
     // get grade
     function get() {
@@ -161,6 +164,9 @@
             document.getElementById('chapterlist').style.display = "none"
             form_all.innerHTML = `<div class='grade-form-box'>{{gradeform.as_p}}</div>`
             document.getElementById('subjects-by-grade').style.display = "none"
+            if(user_type != 'is_admin'){
+                document.getElementById('grade').style.display = 'none'
+            }
         })
     };
     if (token) {
@@ -233,6 +239,7 @@
     function getsubject(val1, val2) {
         grade_val = val1
         grade_id = val2
+        document.getElementById('grade').style.display = 'block'
         console.log(grade_val);
 
         form_all.innerHTML = `<div class='subject-form-box'>{{subjectform.as_p}} </div>`

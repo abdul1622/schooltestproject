@@ -299,7 +299,8 @@ class QuestionCreateView(CreateAPIView):
                     questions = Question.objects.filter(
                         grade_id=int(grade), subject_id=int(subject))
             except:
-                questions = Question.objects.all()
+                # questions = Question.objects.all()
+                 return Response({'status': 'failed','data':'give a valid grade and subject'}, status=HTTP_206_PARTIAL_CONTENT)
         serializer_name = questionanswerserializer(questions, many=True)
         serializer = QuestionAnswerSerializer(questions, many=True)
         return Response({"status": "success", 'name': serializer_name.data, 'data': serializer.data})

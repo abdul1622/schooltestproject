@@ -5,8 +5,7 @@
   <button onclick=back() class='back-btn'>&#x2715; </button>
   <div class='grid-item'>      
       <label for=""> Grade: </label>
-    <!-- <select name="grade" required="" id="id_grade"> 
-        <option value="" selected="">---------</option>
+    <!-- <select name="grade" required="" class="grade_in_form" id="id_grade"> 
       </select> -->
       {{questionform.grade}}
  
@@ -89,7 +88,10 @@
 
 <div id="question-box">
   {% csrf_token %}
-  {{ form.as_p }}
+  <!-- {{ form.as_p }} -->
+  <label for=""> Grade: </label>
+  <select name="grade" required="" class="grade-in-form" id="get_grade"> 
+    </select>
   <label for=""> Subject: </label>
   <select name="subject" required="" id="id_subject_2">
     <option value="" selected="">---------</option>
@@ -113,6 +115,9 @@
   head.style.display = 'none'
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
+  var host = window.location.protocol + "//" + window.location.host;
+  let content= '';
+  let grade_list
   
   function back() {
     document.getElementById('questionForm').style.display = 'none'
@@ -125,6 +130,33 @@
   let no_btn = document.getElementById('delete-btn-no')
   var host = window.location.protocol + "//" + window.location.host;
  
+
+  fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+            method: 'GET',
+            headers: {
+                // 'X-CSRFToken': csrftoken,
+                'Authorization': 'token' + ' ' + token
+            },
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            grade_list = data.data
+            console.log(data.data)
+           if(data.status == 'failure'){
+            window.location.href = `${host}/404`
+           } 
+        content += ` 
+            <option value="" selected="">---------</option>`
+        if(grade_list.length){
+        for(i=0;i<grade_list.length;i++){
+            content += ` <option value="${grade_list[i].id}" selected="">${grade_list[i].grade}</option>`
+        }
+    }
+        document.querySelector('.grade-in-form').innerHTML = content
+        })
+
+
+
   document.getElementById('nav-question').style.opacity = '0.5';
   document.getElementById('message-close-btn').addEventListener('click', () => {
     messages.innerHTML = '';
@@ -448,7 +480,7 @@
       document.getElementById('--question').style.display = 'none'
     }
     let input = document.getElementById('id_subject_2')
-    input.addEventListener("click", function () {
+    input.addEventListener("change", function () {
       get();
     });
   }
