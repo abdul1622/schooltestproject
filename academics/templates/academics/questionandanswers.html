@@ -190,6 +190,8 @@
   if (token) {
     const container2 = document.querySelector('.question-list');
     url='https://schooltestproject.herokuapp.com/api/question/'
+
+
     function get() {
       let grade=document.getElementById('get_grade').value
       let subject=document.getElementById('id_subject_2').value
@@ -210,6 +212,7 @@
       let content = '';
         console.log(data.name[0])
         console.log(data.status)
+        if(data.status == 'success'){
         data.data.forEach((d, index) => {
           name_value = data.name[index]
             content = content + `<div class="question-card" id='${d.id}'>
@@ -233,6 +236,10 @@
         document.getElementById('grade-head-question').textContent = grade
         document.getElementById('subject-head-question').textContent = data.name[0]['subject']
         container2.innerHTML = content;
+      }else{
+        head.style.display = 'none'
+        container2.innerHTML = '<p>select a valid subject</p>'
+      }
         edit = false
       })
     };
