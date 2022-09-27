@@ -45,6 +45,11 @@ aria-hidden="true">
 </div>
 <script>
   let token = localStorage.getItem("token")
+  $(document).ready(function(){ 
+    var user = localStorage.getItem('user_type')
+    if ( !token){
+     return window.location.href = '/404'; 
+    }
   var host = window.location.protocol + "//" + window.location.host;
   let container = document.querySelector('.container');
   let messages = document.querySelector('.messages')
@@ -218,12 +223,9 @@ aria-hidden="true">
             }
            
           );
-        }
-        else{
-          window.location.href=`${host}/404`  
-        }
-       
+        } 
       }profile();
+    })
  
       
       
