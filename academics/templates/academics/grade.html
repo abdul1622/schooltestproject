@@ -22,7 +22,7 @@
     var token = localStorage.getItem('token')
     $(document).ready(function(){ 
       var user = localStorage.getItem('user_type')
-      if (user != 'is_admin'){
+      if (user != 'is_admin' || !token){
         window.location.href = `${host}/404`; 
       }
       else{

@@ -15,10 +15,9 @@
   var token = localStorage.getItem('token')
   $(document).ready(function(){ 
     var user = localStorage.getItem('user_type')
-    if (user != 'is_admin'){
+    if (user != 'is_admin' || !token){
      return window.location.href = '/404'; 
     }
-    else{
   blank_url = 'https://schooltestproject.herokuapp.com'
   for_answer = '/academics/question-paper/'
   url = 'https://schooltestproject.herokuapp.com/academics/question-paper-list/'
@@ -94,7 +93,7 @@ var url = new URL(`${blank_url}${for_answer}${id}/`);
         console.log(`${blank_url}${response.path}`)
   })
   }});
-}
+
 
 })
   </script>
