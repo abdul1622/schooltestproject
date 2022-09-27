@@ -6,7 +6,8 @@
     <div class="box" id="mediabox">
 
         {% csrf_token %}
-        {{form.as_p}}
+        <p ><label for=""> Grade: </label>
+            <select class="grade-in-form" name="grade" required="" id="id_grade"></select></p>
       <!--   <label for=""> Grade: </label>
         <select name="grade" required="" id="id_grade">
             <option value="" selected="">---------</option>
@@ -111,13 +112,44 @@
     let messages = document.querySelector('.messages')
     let edit = null;
     var host = window.location.protocol + "//" + window.location.host;
+    let standards = localStorage.getItem('standard')
+    let user_type = localStorage.getItem('user_type')
     // form.style.display = 'none'
     document.getElementById('')
+    
     let container3 = document.querySelector('.chapter-table')
     let error_messages = document.querySelector('.error-messages')
     var grade;
     var subject;
+    let content = '';
+    let grade_list
     document.getElementById('nav-chapterlist').style.opacity = '0.5';
+
+
+
+    fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+            method: 'GET',
+            headers: {
+                // 'X-CSRFToken': csrftoken,
+                'Authorization': 'token' + ' ' + token
+            },
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            grade_list = data.data
+            console.log(data.data)
+           if(data.status == 'failure'){
+            window.location.href = `${host}/404`
+           } 
+        content += ` 
+            <option value="" selected="">---------</option>`
+        if(grade_list.length){
+        for(i=0;i<grade_list.length;i++){
+            content += ` <option value="${grade_list[i].id}" selected="">${grade_list[i].grade}</option>`
+        }
+    }
+        document.querySelector('.grade-in-form').innerHTML = content
+        })
     // var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
     
     //         $.ajax({                       
@@ -135,6 +167,7 @@
         document.querySelector('.form').style.display ='none'
         
         }
+
         $("#id_grade").change(function () {
             var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
             var gradeId = $(this).val(); 
