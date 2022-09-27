@@ -61,7 +61,11 @@ class GradeView(ListCreateAPIView):
         queryset = self.get_queryset()
         if user.user_type == 'is_staff':
             grade = user.profile.standard
-            queryset = queryset.filter(grade=grade)
+            grade_list = []
+            for i in grade:
+                grade_list.append(int(i[0]))
+            print(grade,grade_list)
+            queryset = queryset.filter(grade__in=grade_list)
         elif user.user_type == 'is_student':
             return Response({"status": "failure", 'data': 'Your not have access to view this page'})
         serializer = GradeSerializer(queryset, many=True)
