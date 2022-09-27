@@ -4,10 +4,9 @@
 <script>
     $(document).ready(function(){ 
         var user = localStorage.getItem('user_type')
-        if (user != 'is_admin'){
+        if (user != 'is_admin' || !token){
          return window.location.href = '/404'; 
         }
-        else{
     token=localStorage.getItem('token')
     uri='https://schooltestproject.herokuapp.com'
     function get() {
@@ -42,7 +41,7 @@
         document.body.removeChild(link);
         delete link;
       }
-    }
+    
 })
 </script>
 {% endblock %}

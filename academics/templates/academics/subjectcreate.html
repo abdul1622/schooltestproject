@@ -33,7 +33,11 @@
     var messages = document.getElementById('message')
     url = 'https://schooltestproject.herokuapp.com/academics/subjects/'
     var edit = null;
-    if (token) {
+    $(document).ready(function(){ 
+      var user = localStorage.getItem('user_type')
+      if (user != 'is_admin' || !token){
+       return window.location.href = '/404'; 
+      }
       document.getElementById('gradeforsubject').onchange = function get_subject() {
         grade_val = document.getElementById('gradeforsubject').value;
         console.log(grade_val);
@@ -221,10 +225,7 @@
             })
         }
       })
-    }
-    else {
-      window.location.href = `${host}/404`
-    }
+    })
 
   </script>
 

@@ -96,10 +96,9 @@
     // document.getElementById('id_grade').setAttribute("onchange", getgradename());
     $(document).ready(function(){ 
         var user = localStorage.getItem('user_type')
-        if (user != 'is_admin'){
+        if (user != 'is_admin' || !token){
          return window.location.href = '/404'; 
         }
-        else{
  function get(){
     document.getElementById('q-form-1').style.display = 'block';
     document.getElementById('q-form-2').style.display = 'none';
@@ -536,7 +535,7 @@
 
             })
     }
-}
+
 })
 </script>
 {% endblock %}

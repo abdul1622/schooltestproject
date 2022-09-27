@@ -115,10 +115,9 @@
   let error_messages = document.querySelector('.error-messages')
   $(document).ready(function(){ 
     var user = localStorage.getItem('user_type')
-    if (user != 'is_admin'){
+    if (user != 'is_admin' || !token){
      return window.location.href = '/404'; 
     }
-    else{
   function back() {
     document.getElementById('questionForm').style.display = 'none'
     document.getElementById('question-box').style.display = 'block'
@@ -454,7 +453,7 @@
     input.addEventListener("click", function () {
       get();
     });
-  }
+  
  })
 
 
