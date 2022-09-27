@@ -4,10 +4,9 @@
   <div class="question-papers-get">
     <div class="container">
       {% csrf_token %}
-      <!-- <p><label for="get_grade">Grade:</label> <select name="grade" onchange=getgradename(this) required="" id="get_grade">
-        <option value="" selected="">---------</option>
-      </select></p> -->
-      {{form.as_p}}
+      <p><label for="get_grade">Grade:</label> <select name="grade" class="grade-in-form" onchange=getgradename(this) required="" id="get_grade">
+      </select></p>
+      <!-- {{form.as_p}} -->
       <label for=""> Subject: </label>
       <select name="subject" required="" onchange=getsubjectname(this) id="id_subject_2">
         <option value="" selected="">---------</option>
@@ -108,13 +107,37 @@
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
   let container = document.querySelector('.question-papers-card')
+
   document.getElementById('nav-questionpaperlist').style.opacity = '0.5';
-  $(document).ready(function(){ 
-    var user = localStorage.getItem('user_type')
-    if (user != 'is_admin' || !token){
-     return window.location.href = '/404'; 
-    }
-    else{
+  let grade_list;
+  let content = ''
+  var host = window.location.protocol + "//" + window.location.host;
+ 
+
+ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+           method: 'GET',
+           headers: {
+               // 'X-CSRFToken': csrftoken,
+               'Authorization': 'token' + ' ' + token
+           },
+       }).then(res => {
+           return res.json()
+       }).then(data => {
+           grade_list = data.data
+           console.log(data.data)
+          if(data.status == 'failure'){
+           window.location.href = `${host}/404`
+          } 
+       content += ` 
+           <option value="" selected="">---------</option>`
+       if(grade_list.length){
+       for(i=0;i<grade_list.length;i++){
+           content += ` <option value="${grade_list[i].id}">${grade_list[i].grade}</option>`
+       }
+   }
+       document.querySelector('.grade-in-form').innerHTML = content
+       })
+
 
   function get() {
     var grade = document.getElementById('get_grade').value
@@ -346,7 +369,6 @@
 
       )
   }
-}
-})
+
 </script>
 {% endblock %}
