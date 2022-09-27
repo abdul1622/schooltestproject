@@ -82,7 +82,7 @@ class SignupSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         userdetails = validated_data
-        email = validated_data.pop("email")
+        email = (validated_data.pop("email")).lower()
         phone = validated_data.pop("phone")
         register_number = validated_data.pop("register_number")
         date_of_birth = validated_data.pop("date_of_birth")

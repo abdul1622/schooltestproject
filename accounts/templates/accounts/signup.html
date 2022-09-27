@@ -1,6 +1,8 @@
 {% extends 'main.html'%}
 {% block signup %}
 <p id='response'></p>
+<div class="details"></div>
+<div class="signup-errors"></div>
 <div class="signbox">
     
     {%csrf_token%}
@@ -103,9 +105,20 @@ aria-hidden="true">
     function add_standard(){
         standard = document.getElementById('id_standard').value
         section = (document.getElementById('id_section').value).toUpperCase()
+        if(!section.match(/[a-z]/i)){
+            document.querySelector('.signup-errors').innerHTML = 'give a valid section'
+            return
+        }
         standards.push(standard+'-'+section)
         document.getElementById('id_standard').value = ''
         document.getElementById('id_section').value = ''
+        let content = ''
+        content += `<ul>standards list`
+        for(i=0;i<standards.length;i++){
+            content += `<li>${standards[i]}</li>`
+        }
+        content += `</ul>`
+        document.querySelector('.details').innerHTML = content
     }
 
     function signup() {

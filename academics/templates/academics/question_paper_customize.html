@@ -91,16 +91,9 @@
     let grade_id, subject_id, grade, subject_name, no_of_questions, overall_marks = null;
     let timing = null, chapters, from_chapter, to_chapter, from_chapter_id = null, to_chapter_id = null;
     let all_chapter, result = [], questions_total = 0, customize = false;
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     let chapter_id = null;
     let custom_end= false;
-=======
->>>>>>> dd1105321130e09372261add818fdac611b790bf
-=======
-    let chapter_id = null;
-    let custom_end= false;
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
     let question_paper_id, userId, user_type, chapters_list = [];
     var content = '';da=null
     let customize_details = document.querySelector('.customize-details')
@@ -149,24 +142,6 @@ if (token){
     $('#id_subject').change(function () {
         var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
         subject_id = $(this).val();
-
-        $.ajax({
-            url: url_for_change,
-            data: {
-                'subject': subject_id
-            },
-            success: function (data) {
-                $("#id_chapter").html(data),
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> dd1105321130e09372261add818fdac611b790bf
-=======
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
-                $('#id_chapter_get').html(data)
-            }
-        });
         $.ajax({
             url: 'https://schooltestproject.herokuapp.com/api/ajax/load-chapter-no/',
             data: {
@@ -194,16 +169,8 @@ if (token){
 
 function getnext() {
         document.querySelector('.q-form-6').innerHTML = ''
-<<<<<<< HEAD
-<<<<<<< HEAD
         question_per_chapter_get = []
         question_per_chapter = []
-=======
->>>>>>> dd1105321130e09372261add818fdac611b790bf
-=======
-        question_per_chapter_get = []
-        question_per_chapter = []
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
         document.getElementById('q-form').style.display = 'block'
         no_of_questions = parseInt(document.getElementById('id_no_of_questions').value);
         if (isNaN(grade_id) || isNaN(subject_id)) {
@@ -218,13 +185,9 @@ function getnext() {
             }
             return
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
+
         if(!isNaN(no_of_questions)){
->>>>>>> dd1105321130e09372261add818fdac611b790bf
-=======
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
             url = new URL('https://schooltestproject.herokuapp.com/api/question/');
   url.searchParams.append('grade',grade_id);
   url.searchParams.append('subject',subject_id)
@@ -255,9 +218,7 @@ function getnext() {
         result = []
 
         })
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
         }else{
 
             customize = false
@@ -267,9 +228,6 @@ function getnext() {
         document.getElementById('q-form-4').style.display = 'none';
         result = []
         }
->>>>>>> dd1105321130e09372261add818fdac611b790bf
-=======
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
         document.querySelector('.error-form-1').innerHTML = '';
         url3 = ('https://schooltestproject.herokuapp.com/api/chapter-list/');
         fetch(url3, {
@@ -296,10 +254,7 @@ function getnext() {
 
 // for customize
     function getcustomize_details() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
+
         // add
         let list = []
         if(!custom_end){
@@ -321,13 +276,6 @@ function getnext() {
 // 
     custom_end = false
         chapter_id = parseInt(document.getElementById('id_chapter_get').value)
-<<<<<<< HEAD
-=======
-
-        let chapter_id = parseInt(document.getElementById('id_chapter_get').value)
->>>>>>> dd1105321130e09372261add818fdac611b790bf
-=======
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
         question_content = ''
         question_content +=`<div class='question-list-container-customize'>
                 <p>` 
@@ -346,18 +294,12 @@ function getnext() {
 
             })
             question_content += `</table>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
           `
 
-=======
-            <span class="more-btn"><button id="next-btn" class="submit-btn btn btn-sm btn-primary" onclick=add()>Add More</button> </span>
-          `
->>>>>>> dd1105321130e09372261add818fdac611b790bf
-=======
-          `
 
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
+            // <span class="more-btn"><button id="next-btn" class="submit-btn btn btn-sm btn-primary" onclick=add()>Add More</button> </span>
+
           document.querySelector('.q-form-6').innerHTML = question_content
         for(i=0;i<question_per_chapter_get.length;i++){
             if(question_per_chapter_get[i].key == chapter_id){
@@ -369,52 +311,13 @@ function getnext() {
             }
         }
             document.getElementById('q-form').style.display = 'none'
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  
-            // if(question_list.length){
-    //     for(i=0;i<question_list.length;i++){
-    //     document.getElementById(`question_${question_list[i]}`).checked = true
-    // }
-        // let current_index = null
-        // if (result.length) {
-        //     for (i = 0; i < chapters_list.length; i++) {
-        //         if (result[i]) {
-        //             if (result[i]['id'] == chapter_id) {
-        //                 current_index = i
-        //                 break
-        //             }
-        //         }
-        //     }
-        // }
-
-        // if (current_index != null) {
-        //     document.getElementById('id_knowledge').value = result[current_index]['cognitive_level']['knowledge']
-        //     document.getElementById('id_comprehension').value = result[current_index]['cognitive_level']['comprehension']
-        //     document.getElementById('id_application').value = result[current_index]['cognitive_level']['application']
-        // }
-        // else {
-        //     document.getElementById('id_knowledge').value = 0
-        //     document.getElementById('id_comprehension').value = 0
-        //     document.getElementById('id_application').value = 0
-        // }
->>>>>>> dd1105321130e09372261add818fdac611b790bf
-=======
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
 }
 
     function get_customize() {
         document.getElementById('q-form').style.display = 'none'
         customize = true
-<<<<<<< HEAD
-<<<<<<< HEAD
         
-=======
->>>>>>> dd1105321130e09372261add818fdac611b790bf
-=======
         
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
         // document.getElementById('q-form-1').style.display = 'none';
         // document.getElementById('q-form-2').style.display = 'none';
         // document.getElementById('q-form-3').style.display = 'none';
@@ -435,26 +338,13 @@ function getnext() {
                 $("#id_chapter_get").html(data)
             }
         });
-<<<<<<< HEAD
-<<<<<<< HEAD
+        // document.querySelector('.more-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=add()>Add More</button>`
         // document.querySelector('.more-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=add()>Add More</button>`
         document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=with_customize()>Review</button>`
-=======
-        document.querySelector('.more-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=add()>Add More</button>`
-        document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary">Review</button>`
->>>>>>> dd1105321130e09372261add818fdac611b790bf
-=======
-        // document.querySelector('.more-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=add()>Add More</button>`
-        document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=with_customize()>Review</button>`
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
         document.querySelector('.back-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Back</button>`
         console.log(result)
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
     // function add() {
     //     let chapter_id = parseInt(document.getElementById('id_chapter_get').value)
     //     let list = []
@@ -486,59 +376,21 @@ function getnext() {
         for(let i=0;i<question_per_chapter.length;i++){
         console.log(document.getElementById(`question_${question_per_chapter[i]}`))
     if(document.getElementById(`question_${question_per_chapter[i]}`)){
-<<<<<<< HEAD
-=======
-    function add() {
-        let chapter_id = parseInt(document.getElementById('id_chapter_get').value)
-        let list = []
-        for(i=0;i<question_per_chapter.length;i++){
-        console.log(document.getElementById(`question_${question_per_chapter[i]}`))
->>>>>>> dd1105321130e09372261add818fdac611b790bf
-=======
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
         if(document.getElementById(`question_${question_per_chapter[i]}`).checked){
             list.push(question_per_chapter[i])
         }
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
 }
     console.log(list)
     for(let i=0;i<question_per_chapter_get.length;i++){
         if(chapter_id && question_per_chapter_get[i].key == chapter_id){
-<<<<<<< HEAD
-=======
-    console.log(list)
-    for(i=0;i<question_per_chapter_get.length;i++){
-        if(question_per_chapter_get[i].key == chapter_id){
->>>>>>> dd1105321130e09372261add818fdac611b790bf
-=======
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
             question_per_chapter_get[i].value = list
         }
     }
         // question_per_chapter_get[`${chapter_id}`] = list
     console.log(question_per_chapter_res)
-<<<<<<< HEAD
-<<<<<<< HEAD
 // 
-    chapter_id  = null;
-=======
-
-    }
-
-    function with_customize() {
-        document.getElementById('q-form').style.display = 'block'
-        question_list = []
-        let chap_list = []
-        let content = []
->>>>>>> dd1105321130e09372261add818fdac611b790bf
-=======
 // 
-    chapter_id  = null;
->>>>>>> 4187b817f85909980314505d4c344240743b0d61
         for(i=0;i<question_per_chapter_get.length;i++){
                 let current_list = question_per_chapter_get[i].value
                 console.log(current_list)
