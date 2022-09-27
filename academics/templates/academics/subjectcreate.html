@@ -38,6 +38,8 @@
       if (user != 'is_admin' || !token){
        return window.location.href = '/404'; 
       }
+    })
+
       document.getElementById('gradeforsubject').onchange = function get_subject() {
         grade_val = document.getElementById('gradeforsubject').value;
         console.log(grade_val);
@@ -225,8 +227,7 @@
             })
         }
       })
-    })
-
+   
   </script>
 
 

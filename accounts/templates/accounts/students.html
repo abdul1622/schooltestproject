@@ -55,7 +55,7 @@
 </div>
 
 
-<button id="add" onclick=adduser()>Add Student</button>
+<button id="add">Add Student</button>
 <div class="sort-input">
   <input type="text" id="student-filter" placeholder="search" min="0" max="12">
   <button id="sort" onclick=sort()>search</button>
@@ -64,7 +64,7 @@
 <div id="userDetails">
   {%csrf_token%}
 
-  <button onclick=back() class='back-btn'>&#x2715;</button>
+  <button id="back" class='back-btn' onclick=back() >&#x2715;</button>
 
   <div class='grid-item'>
     <label for="email">Email:</label><br>
@@ -122,7 +122,7 @@
   </div>
 
   <div class='grid-item'>
-    <button data-toggle="modal" data-target="#messageModal-student" id="userdetail-btn">submit</button>
+    <button data-toggle="modal" data-target="#messageModal-student" id="userdetail-btn" onclick=adduser()>submit</button>
   </div>
 
 </div>
@@ -138,6 +138,7 @@
     if (user != 'is_admin'  || !token){
      return window.location.href = '/404'; 
     }
+  })
   function reload() {
     window.location.href = window.location.href;
   }
@@ -149,8 +150,7 @@
   let form = document.getElementById('userDetails')
   const container2 = document.querySelector('.container2');
   document.getElementById('nav-students').style.opacity = '0.5';
- 
-
+ // document.getElementById('back').addEventListener("click", back, false)
     function back() {
       form.style.display = "none"
       add.style.display = 'block'
@@ -299,7 +299,7 @@
             sort();
           }
         })
-        function deletestaff(id) {
+        function deletestudent(id) {
           url = "https://schooltestproject.herokuapp.com/api/user-details/"
           fetch(`${url}${id}/`, {
             method: 'DELETE',
@@ -320,7 +320,7 @@
           form_lname = document.getElementById('lname');
           form_fullname = document.getElementById('ffname');
           form_std = document.getElementById('std');
-          form_sec = document.getElementById('sec');
+         // form_sec = document.getElementById('sec');
           form_ad = document.getElementById('address');
           button = document.getElementById('userdetail-btn');
           e.preventDefault();
@@ -331,7 +331,7 @@
           yes = document.getElementById('yes')
           no = document.getElementById('no')
           if (delbutton) {
-            yes.setAttribute("onClick", `deletestaff(${id})`);
+            yes.setAttribute("onClick", `deletestudent(${id})`);
           }
           if (editbutton) {
             form.style.display = 'grid'
@@ -346,7 +346,7 @@
             let lastname = parent.querySelector('.userlastname').textContent;
             let firstname = parent.querySelector('.userfirstname').textContent;
             let standard = parent.querySelector('.userstandard').textContent;
-            let section = parent.querySelector('.usersection').textContent;
+           // let section = parent.querySelector('.usersection').textContent;
             let address = parent.querySelector('.useraddress').textContent;
             document.getElementById('email').value = email
             document.getElementById('phone').value = phone
@@ -369,7 +369,7 @@
                 },
                 body: JSON.stringify({
                   'email': form_email.value, 'phone': form_phone.value, 'date_of_birth': form_dob.value, 'register_number': form_reg.value,
-                  'profile': { 'first_name': form_fname.value, 'last_name': form_lname.value, 'standard': form_std.value, 'section': form_sec.value, 'full_name': form_fullname.value, 'address': form_ad.value }
+                  'profile': { 'first_name': form_fname.value, 'last_name': form_lname.value, 'standard': form_std.value, 'full_name': form_fullname.value, 'address': form_ad.value }
                 }
                 )
               }).then(response => {
@@ -382,6 +382,7 @@
             })
           }
         })
+        document.getElementById("add").addEventListener('click',adduser,false)
         function adduser() {
           form.style.display = 'grid'
           //document.getElementById('userDetails').reset();
@@ -443,6 +444,5 @@
               })
           })
         }
-      })
 </script>
 {% endblock %}

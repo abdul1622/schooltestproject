@@ -7,6 +7,7 @@
         if (user != 'is_admin' || !token){
          return window.location.href = '/404'; 
         }
+    })
     token=localStorage.getItem('token')
     uri='https://schooltestproject.herokuapp.com'
     function get() {
@@ -42,6 +43,6 @@
         delete link;
       }
     
-})
+
 </script>
 {% endblock %}

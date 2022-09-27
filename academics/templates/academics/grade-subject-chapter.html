@@ -107,7 +107,7 @@
         if (user != 'is_admin' || !token){
          return window.location.href = '/404'; 
         }
-        else{
+    })
     var token = localStorage.getItem('token')
     var form_all = document.querySelector('.form-all')
     let edit = null
@@ -612,7 +612,7 @@
                 })
         }
     })
-}
-})
+
+
 </script>
 {% endblock %}

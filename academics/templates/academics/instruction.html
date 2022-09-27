@@ -37,7 +37,7 @@
       if (user != 'is_admin' || !token){
        return window.location.href = '/404'; 
       }
-      else{
+    })
     function createinstruction() {
        var instruction = document.getElementById('id_instruction').value
        console.log(instruction)
@@ -105,7 +105,5 @@ let yes_button = document.getElementById('delete-btn-yes')
       yes_button.setAttribute("onClick", `deleteInstruction(${id})`);
     }
  })
-}
-})
 </script>
 {% endblock %}

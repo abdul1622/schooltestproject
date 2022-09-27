@@ -608,7 +608,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         if (user != 'is_student' || !token){
          return window.location.href = '/404'; 
         }
-        else{
+    })
         function get() {
             if (user_type != 'is_student') {
                 return
@@ -1049,8 +1049,6 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         function redirect() {
             window.location.href = `${host}/test-history`
         }
-    }
-})
 
     </script>
 </body>

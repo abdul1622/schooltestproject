@@ -33,6 +33,7 @@
         if (user != 'is_admin' || !token){
          return window.location.href = '/404'; 
         }
+      })
        let element = document.getElementById('id_test')
         let grade_element = document.getElementById('id_grade')
         let subject_element = document.getElementById('id_subject')
@@ -132,6 +133,5 @@ function back(){
   container.innerHTML = ''
 }
 
-})
 </script>
 {% endblock %}

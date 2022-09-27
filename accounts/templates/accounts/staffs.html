@@ -57,12 +57,12 @@
 <div class='sort-input'>
   <input type="text" id="student-filter" placeholder="search" min="0" max="12">
   <button id="sort" onclick=sort()>search</button>
-  <button id="addstaff" onclick=addstaff()>Add Staff</button>
+  <button id="addstaff">Add Staff</button>
 </div>
 <div id="userDetails">
   <button class='back-btn' id="back">&#x2715; </button>
   {%csrf_token%}
-  <button onclick=back() class='back-btn'>&#x2715; </button>
+  <button  class='back-btn'>&#x2715; </button>
 
   <div class='grid-item'>
     <label for="email">Email:</label><br>
@@ -139,73 +139,10 @@
     if (user != 'is_admin'  || !token){
      return window.location.href = '/404'; 
     }
+  })
   function reload() {
     window.location.href = window.location.href;
 
-  }
-  document.getElementById('addstaff').addEventListener("click", addstaff, false)
-  function addstaff(){
-    form.style.display = 'grid'
-    add.style.display = 'none'
-    form.style.marginTop = '10vh';
-    /* var email = 's10@gmail.com'
-    var phone = 9992945420
-    var dob = '2000-02-10'
-    var reg = 's11'
-    var standard = 1
-    var section = 'c'
-    var type = 'is_student'
-    var firstname = 's'
-    var lastname = 'p'
-    var fullname = 'sp'
-    var address = 'home'*/
-    var is_dataentry = 'false'
-
-    button.addEventListener('click', () => {
-      window.location.href = window.location.href;
-      form.style.display = 'none'
-      add.style.display = 'block'
-      let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-      var email = document.getElementById('email').value
-      var phone = document.getElementById('phone').value
-      var dob = document.getElementById('dob').value
-      var reg = document.getElementById('reg').value
-      var standard = document.getElementById('std').value
-      var section = document.getElementById('sec').value
-      var type = 'is_staff'
-      var firstname = document.getElementById('fname').value
-      var lastname = document.getElementById('lname').value
-      var fullname = document.getElementById('ffname').value
-      var address = document.getElementById('address').value
-      var is_dataentry = 'false'
-      fetch('https://schooltestproject.herokuapp.com/api/signup/',
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
-            'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standard, 'section': section, 'full_name': fullname, 'address': address
-          }
-          ),
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-          }
-        }).then(response => {
-          if (response.status == 201) {
-            console.log("Sucess response", response)
-            messages.innerHTML = 'created successfully'
-            error_messages.innerHTML = ''
-          }
-          return response.json();
-        }).then(function (data) {
-          console.log(data)
-          if (data.status != 'success') {
-            error_messages.innerHTML = `<li>${(data.data.error[0])}</li>`
-            messages.innerHTML = ''
-          }
-        })
-    })
   }
   document.getElementById('nav-staffs').style.opacity = '0.5';
   let messages = document.querySelector('.messages')
@@ -261,6 +198,68 @@
         container2.innerHTML = table2;
       })
     } userdetails();
+  function addstaff(){
+    form.style.display = 'grid'
+    add.style.display = 'none'
+    form.style.marginTop = '10vh';
+    /* var email = 's10@gmail.com'
+    var phone = 9992945420
+    var dob = '2000-02-10'
+    var reg = 's11'
+    var standard = 1
+    var section = 'c'
+    var type = 'is_student'
+    var firstname = 's'
+    var lastname = 'p'
+    var fullname = 'sp'
+    var address = 'home'*/
+    var is_dataentry = 'false'
+
+    button.addEventListener('click', () => {
+      form.style.display = 'none'
+      add.style.display = 'block'
+      let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      var email = document.getElementById('email').value
+      var phone = document.getElementById('phone').value
+      var dob = document.getElementById('dob').value
+      var reg = document.getElementById('reg').value
+      var standard = document.getElementById('std').value
+      var section = document.getElementById('sec').value
+      var type = 'is_staff'
+      var firstname = document.getElementById('fname').value
+      var lastname = document.getElementById('lname').value
+      var fullname = document.getElementById('ffname').value
+      var address = document.getElementById('address').value
+      var is_dataentry = 'false'
+      fetch('https://schooltestproject.herokuapp.com/api/signup/',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
+            'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname,'full_name': fullname, 'address': address,'standards':standards
+          }
+          ),
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          }
+        }).then(response => {
+          if (response.status == 201) {
+            console.log("Sucess response", response)
+            messages.innerHTML = 'created successfully'
+            error_messages.innerHTML = ''
+          }
+          return response.json();
+        }).then(function (data) {
+          console.log(data)
+          if (data.status != 'success') {
+            error_messages.innerHTML = `<li>${(data.data.error[0])}</li>`
+            messages.innerHTML = ''
+          }
+        })
+    })
+  }
     document.getElementById('back').addEventListener("click", back, false)
     function back() {
       window.location.href = window.location.href;
@@ -383,7 +382,8 @@
         sort();
       }
     })
-    function deletestudent(id) {
+    
+    function deletestaff(id) {
       url = "https://schooltestproject.herokuapp.com/api/user-details/"
       fetch(`${url}${id}/`, {
         method: 'DELETE',
@@ -479,7 +479,7 @@
         })
       }
     })
-  })
+
 
 </script>
 {% endblock %}
