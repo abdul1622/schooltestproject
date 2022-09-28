@@ -69,7 +69,6 @@ class SimpleLoginView(APIView):
             except:
                 return Response({"status": "User doesn't exits"}, status=HTTP_204_NO_CONTENT)
             if user:
-                login(request,user)
                 token, created = Token.objects.get_or_create(user=user)
                 data = {
                     "id" : user.id,
@@ -189,7 +188,6 @@ class UserDetailsEditView(RetrieveUpdateDestroyAPIView):
     serializer_class=UserDetailsSerializer
     permission_classes=[AllowAny]
     queryset=User.objects.all()
-
     def retrieve(self,request,pk):
         try:
             requestuser = self.request.user

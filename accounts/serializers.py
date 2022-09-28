@@ -20,26 +20,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ['first_name','last_name','full_name',"profile_picture","standard",
                     "address"]
-
-
-# class SignupSerializer(serializers.ModelSerializer):
-#     profile = ProfileSerializer()
-
-#     class Meta:
-#         model = User
-#         fields = ['id','email','phone','register_number','date_of_birth','is_active',
-#                     'user_type','is_data_entry','profile']
-
-#     def create(self, validated_data):
-#         profile_data = validated_data.pop('profile')
-#         user = User.objects.create(**validated_data)
-#         profile = Profile.objects.create(user=user, **profile_data)
-#         subject = 'Welcome to our school'
-#         message = f'Hi {profile.full_name}, thank you for joining in our school'
-#         email_from = settings.EMAIL_HOST_USER
-#         recipient_list = [user.email,]
-#         send_mail(subject,message,email_from,recipient_list)
-#         return user
 usertype_choice=(
 (None,'-------'),
 ('is_student','is_student'),
@@ -47,10 +27,6 @@ usertype_choice=(
 ('is_admin','is_admin'),
 
 )
-
-
-
-
 class SignupSerializer(serializers.Serializer):
     email = serializers.EmailField()
     phone = serializers.CharField(max_length=10)
@@ -61,7 +37,6 @@ class SignupSerializer(serializers.Serializer):
     allow_blank=True,
     default=None
     )
-
     first_name = serializers.CharField(max_length=15)
     last_name = serializers.CharField(max_length=15)
     full_name =serializers.CharField(max_length=30)
