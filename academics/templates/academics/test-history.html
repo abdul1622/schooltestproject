@@ -134,7 +134,7 @@
           break
         }
       }
-      let table2 = '   <a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back() >Back</a> <table>';
+      let table2 = '  <div class= "test-details-div">  <a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back() >Back</a> <table>';
                         table2 += `<thead class="thead"><th>Question</th><th>correct answer</th><th>given answer</th></thead>`;
                         for(i=0;i<current_details.length;i++){
                             table2 = table2 + `<tr>`;
@@ -143,7 +143,7 @@
                             table2 = table2 + '<td>' + `${current_details[i].answer}` + '</td>';
                                 table2 = table2 + `</tr>`;
                             }
-                        table2 += "</table>";
+                        table2 += "</table></div>";
               document.querySelector('.test-details').innerHTML  = table2
     }
 </script>

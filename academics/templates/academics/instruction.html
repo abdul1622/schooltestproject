@@ -34,7 +34,7 @@
     document.getElementById('nav-instruction').style.opacity = '0.5';
     $(document).ready(function(){ 
       var user = localStorage.getItem('user_type')
-      if (user != 'is_admin' || !token){
+      if (user == 'is_student' || !token){
        return window.location.href = '/404'; 
       }
     })

@@ -101,7 +101,7 @@
     var token = localStorage.getItem("token")
     $(document).ready(function(){ 
         var user = localStorage.getItem('user_type')
-        if (user != 'is_admin' || !token){
+        if (user == 'is_student' || !token){
          return window.location.href = '/404'; 
         }
     })

@@ -98,7 +98,7 @@
   head.style.display = 'none'
   let modal_body = document.querySelector('.modal-body-1')
   url = 'https://schooltestproject.herokuapp.com/api/question-paper-list/'
-
+  var host = window.location.protocol + "//" + window.location.host;
   let error = true
   let set_id = false
   let subject_name
@@ -108,10 +108,40 @@
   let error_messages = document.querySelector('.error-messages')
   let container = document.querySelector('.question-papers-card')
 
-  document.getElementById('nav-questionpaperlist').style.opacity = '0.5';
+
+  let content = '';
+    let grade_list
+    document.getElementById('nav-questionpaperlist').style.opacity = '0.5';
+
+
+
+    fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+            method: 'GET',
+            headers: {
+                // 'X-CSRFToken': csrftoken,
+                'Authorization': 'token' + ' ' + token
+            },
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            grade_list = data.data
+            console.log(data.data)
+           if(data.status == 'failure'){
+            window.location.href = `${host}/404`
+           } 
+        content += ` 
+            <option value="" selected="">---------</option>`
+        if(grade_list.length){
+        for(i=0;i<grade_list.length;i++){
+            content += ` <option value="${grade_list[i].id}">${grade_list[i].grade}</option>`
+        }
+    }
+        document.querySelector('.grade-in-form').innerHTML = content
+        })
+
   $(document).ready(function(){ 
     var user = localStorage.getItem('user_type')
-    if (user != 'is_admin' || !token){
+    if (user == 'is_student' || !token){
      return window.location.href = '/404'; 
     }
   })
@@ -119,6 +149,8 @@
   function get() {
     var grade = document.getElementById('get_grade').value
     var subject = document.getElementById('id_subject_2').value
+    error_messages.innerHTML = ''
+    messages.innerHTML = ''
     url2 = new URL('https://schooltestproject.herokuapp.com/api/question-paper-list/');
     url2.searchParams.append('grade', grade_name);
     url2.searchParams.append('subject', subject_name)
