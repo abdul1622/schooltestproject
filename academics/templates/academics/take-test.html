@@ -93,7 +93,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             }
             
             .question-path div {
-                height: 68%;
+                height: 55%;
                 width: 50%;
                 padding: 9%;
             }
@@ -364,9 +364,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         }
 
         .question-path div {
-            height: 16%;
             width: 64%;
-            padding: 16%;
+    /* padding: 36% 4%; */
         }
 
         .question-direction {
@@ -873,10 +872,9 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             <p> Answered questions - 0 </p>
             <p> Unanswered questions - 0</p> 
             <div class="color-description"> 
-            <div class="answer"><p>Answered</p></div>
-            <div class="un-answer"><p>UnAnswered</p></div>
-            <div class="un-visited"><p>UnVisited</p></div></div>
-            `
+            <div class="answer"><p>Answered</p></div>
+            <div class="un-answer"><p>UnAnswered</p></div>
+            <div class="un-visited"><p>UnVisited</p></div></div>`
         }
         function path(current) {
             console.log(answer_details.length)
@@ -902,6 +900,9 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             document.querySelector('.answer-data').innerHTML = `<p> Unvisited  questions - ${unvisited}</p>
             <p> Answered questions - ${answered} </p>
             <p> Unanswered questions - ${unanswered - 1} </p> 
+            <div class="answer"><p>Answered</p></div>
+            <div class="un-answer"><p>UnAnswered</p></div>
+            <div class="un-visited"><p>UnVisited</p></div></div>    
             `
             if (answered === answer_details.length) {
                 document.getElementById("submit").style.display = 'block'
@@ -966,27 +967,12 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                 result = 'pass'
             }
             overallreview = ''
-            for (i = 0; i < answer_details.length; i++) {
-                if (answer_details[i].question_type != 'MCQ') {
-                    overallreview += `<div class='reviewcards'>
-                        <p>${answer_details[i].question}</p>
-                        <p>Correct Answer : ${answer_details[i].correct_answer}</p>
-                        <p> Your Answer : ${answer_details[i].answer}</p>
-                    </div>`
-                }
-                overallreview += `<div class='reviewcards'>
-                    <p>${answer_details[i].question}</p>
-                    <p>Correct Answer : ${answer_details[i][`${answer_details[i].correct_answer}`]}</p>
-                    <p> Your Answer : ${answer_details[i][`${answer_details[i].answer}`]}</p>
-                </div>`
-            }
             // testdetails=[]
             for (i = 0; i < answer_details.length; i++) {
                 testdetails_list.push({'question':answer_details[i].question,'correct_answer':answer_details[i].correct_answer,'answer':answer_details[i].answer})
             }
             testdetails_list = JSON.stringify(testdetails_list)
-            counter_container.innerHTML = ''
-            document.querySelector('.testreview').innerHTML = overallreview
+
             console.log('c', correct_answer, 'u', unanswered, 'w', wrong_answer, score)
             fetch('https://schooltestproject.herokuapp.com/api/test-history/',
                 {
@@ -1016,7 +1002,24 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     document.querySelector('.question-direction').innerHTML = ''
                     if (data.status != 'success') {
                         console.log(data)
-
+                    }else{
+                        for (i = 0; i < answer_details.length; i++) {
+                if (answer_details[i].question_type != 'MCQ') {
+                    overallreview += `<div class='reviewcards'>
+                        <p>${answer_details[i].question}</p>
+                        <p>Correct Answer : ${answer_details[i].correct_answer}</p>
+                        <p> Your Answer : ${answer_details[i].answer}</p>
+                    </div>`
+                }else{
+                overallreview += `<div class='reviewcards'>
+                    <p>${answer_details[i].question}</p>
+                    <p>Correct Answer : ${answer_details[i][`${answer_details[i].correct_answer}`]}</p>
+                    <p> Your Answer : ${answer_details[i][`${answer_details[i].answer}`]}</p>
+                </div>`
+            }
+            counter_container.innerHTML = ''
+            document.querySelector('.testreview').innerHTML = overallreview
+            }
                     }
                 })
 

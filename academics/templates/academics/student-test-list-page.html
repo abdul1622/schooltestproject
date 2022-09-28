@@ -24,7 +24,7 @@ Get Test
     let messages = document.querySelector('.messages')
     let error_messages = document.querySelector('.error-messages')
     let head = document.querySelector('.header')
-    var standard = parseInt(localStorage.getItem('standard'))
+    var standard =localStorage.getItem('standard')
     let history=[]
     document.getElementById('nav-test').style.opacity = '0.5';
     var  student_id=localStorage.getItem('id')
@@ -35,7 +35,7 @@ Get Test
     var container = document.querySelector('.test-list')
 
     url1 = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
-    url1.searchParams.append('grade', standard);
+    url1.searchParams.append('grade', standard[0]);
     url1.searchParams.append('studentid',student_id)
     $(document).ready(function(){ 
       var user = localStorage.getItem('user_type')

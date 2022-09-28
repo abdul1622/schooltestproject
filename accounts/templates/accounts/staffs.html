@@ -380,6 +380,10 @@
  function addstandard() {
     let std = document.getElementById('std').value
     let section = (document.getElementById('sec').value).toUpperCase()
+    if(!standard){
+           error_messages.innerHTML = '<li class="text-danger">give a valid standard</li>'
+            return
+        }
     if (!section.match(/[a-z]/i)) {
       error_messages.innerHTML = 'give a valid section'
       return
@@ -445,7 +449,14 @@
       let firstname = parent.querySelector('.userfirstname').textContent;
       // let standard = parent.querySelector('.userstandard')
       // let section = parent.querySelector('.usersection')
+      // console.log((parent.querySelector('.stdsec').textContent).length)
+      if((parent.querySelector('.stdsec').textContent).length){
       standards = parent.querySelector('.stdsec').textContent.split(',');
+      console.log(standards)
+      }else{
+        standards = []
+        console.log(standards)
+      }
       let content = ` <p> standards list</p>`
       for (i = 0; i < standards.length; i++) {
         content += ` 
