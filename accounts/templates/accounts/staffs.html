@@ -59,7 +59,6 @@
   <button id="sort" onclick=sort()>search</button>
   <button id="addstaff" onclick=addstaff()>Add Staff</button>
 </div>
-<div class="standards-list"></div>
 <div id="userDetails">
   <button class='back-btn' onclick=back()>&#x2715; </button>
   {%csrf_token%}
@@ -67,7 +66,7 @@
     <label for="email">Email:</label><br>
     <input type="email" id='email' placeholder="Email">
   </div>
-
+  <div class="standards-list"></div>
   <div class='grid-item'>
     <label for="phone">Phone:</label><br>
     <input type="phone" id="phone" placeholder="Phone">
