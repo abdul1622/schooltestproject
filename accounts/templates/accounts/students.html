@@ -364,7 +364,7 @@
               form.style.display = 'none'
               if (!standards.length) {
                 standard = document.getElementById('std').value
-                section = document.getElementById('sec').value
+                section = (document.getElementById('sec').value).toUpperCase()
                 standards.push(standard + '-' + section)
             }
               fetch(`${url}${id}/`, {
@@ -424,6 +424,7 @@
             if (!standards.length) {
               standard = document.getElementById('std').value
               section = (document.getElementById('sec').value).toUpperCase()
+              console.log(standards)
               standards.push(standard + '-' + section)
           }
             fetch('https://schooltestproject.herokuapp.com/api/signup/',
@@ -431,7 +432,7 @@
                 method: 'POST',
                 body: JSON.stringify({
                   'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
-                  'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standards, 'section': section, 'full_name': fullname, 'address': address
+                  'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standards, 'full_name': fullname, 'address': address
                 }
                 ),
                 headers: {
