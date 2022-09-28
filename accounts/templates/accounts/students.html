@@ -423,7 +423,7 @@
             var is_dataentry = 'false'
             if (!standards.length) {
               standard = document.getElementById('std').value
-              section = document.getElementById('sec').value
+              section = (document.getElementById('sec').value).toUpperCase()
               standards.push(standard + '-' + section)
           }
             fetch('https://schooltestproject.herokuapp.com/api/signup/',
