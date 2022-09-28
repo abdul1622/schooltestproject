@@ -369,6 +369,29 @@
       userdetails();
     })
   }
+  
+ function addstandard() {
+    let std = document.getElementById('std').value
+    let section = (document.getElementById('sec').value).toUpperCase()
+    if (!section.match(/[a-z]/i)) {
+      error_messages.innerHTML = 'give a valid section'
+      return
+    }
+    if (!standards.includes(std + '-' + section)) {
+      standards.push(std + '-' + section)
+    } else {
+      messages.innerHTML = ''
+      error_messages.innerHTML=''
+      error_messages.innerHTML = 'standard and section already added'
+      return
+    }
+    let content = ''
+    content += `    <p> standards list</p>`
+    for (i = 0; i < standards.length; i++) {
+      content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
+    }
+    document.querySelector('.standards-list').innerHTML = content
+  }
   function delete_standard(index) {
     console.log(standards)
     standards.splice(index, 1);
@@ -433,31 +456,6 @@
       // document.getElementById('std').value = standard
       //  document.getElementById('sec').value = section
       document.getElementById('address').value = address
-      function addstandard() {
-        let std = document.getElementById('std').value
-        let section = (document.getElementById('sec').value).toUpperCase()
-        if (!section.match(/[a-z]/i)) {
-          error_messages.innerHTML = 'give a valid section'
-          return
-        }
-        if (!standards.includes(std + '-' + section)) {
-          standards.push(std + '-' + section)
-        } else {
-          error_messages.innerHTML = 'standard and section already added'
-          return
-        }
-        let content = ''
-        content += `    <p> standards list</p>`
-        for (i = 0; i < standards.length; i++) {
-          content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
-        }
-        content += `<input type="number" id="std" placeholder="Standard">
-                          <label >Section:</label><br><input type="text" id="sec" placeholder="section">
-                          <button onclick=add()>add</button>
-                          <hr>`
-        document.querySelector('.standard-edit').innerHTML = content
-      }
-
       button.addEventListener('click', () => {
         if (!standards.length) {
           std = document.getElementById('std').value
@@ -483,9 +481,9 @@
           )
         }).then(response => {
           if (response.status == 200) {
+            error_messages.innerHTML = ''
             console.log(messages)
             console.log("Sucess response", response)
-            error_messages.innerHTML = ''
             messages.innerHTML = 'updated successfully'
            
           }
