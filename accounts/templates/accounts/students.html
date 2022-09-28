@@ -362,11 +362,20 @@
             document.getElementById('address').value = address
             button.addEventListener('click', () => {
               form.style.display = 'none'
-              if (!standards.length) {
-                standard = document.getElementById('std').value
-                section = (document.getElementById('sec').value).toUpperCase()
-                standards.push(standard + '-' + section)
-            }
+            //   if (!standards.length) {
+            //     standard = document.getElementById('std').value
+            //     section = (document.getElementById('sec').value).toUpperCase()
+            //     standards.push(standard + '-' + section)
+            // }
+
+        // if (standard && section) {
+        //     standards.push(standard + '-' + section)
+        // }else if(type=='is_student'){
+        //     document.querySelector('.signup-errors').innerHTML = '<li class="text-center text-danger">add a standard and section</li>'
+        //     return
+        // }
+
+
               fetch(`${url}${id}/`, {
                 method: 'PATCH',
                 headers: {

@@ -114,18 +114,33 @@
             document.querySelector('.signup-errors').innerHTML = '<li class="text-danger">give a valid section</li>'
             return
         }
+        if(!standard){
+            document.querySelector('.signup-errors').innerHTML = '<li class="text-danger">give a valid standard</li>'
+            return
+        }
         standards.push(standard + '-' + section)
         document.getElementById('id_standard').value = ''
         document.getElementById('id_section').value = ''
         let content = ''
         content += `<ul>standards list`
         for (i = 0; i < standards.length; i++) {
-            content += `<li>${standards[i]}</li>`
+            content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
         }
         content += `</ul>`
         document.querySelector('.signup-errors').innerHTML = ''
         document.querySelector('.details').innerHTML = content
     }
+
+    function delete_standard(index){
+    standards.splice(index,1);
+    let content = ''
+    content += `    <p> standards list</p>`
+                    for(i=0;i<standards.length;i++){
+                      content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
+                    }
+                    document.querySelector('.details').innerHTML = content
+  }
+
 
     function signup() {
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -151,10 +166,13 @@
         var fullname = 'sp'
         var address ='home'
         var is_dataentry = 'false'*/
-        if (!standards.length) {
-            standard = document.getElementById('id_standard').value
-            section = document.getElementById('id_section').value
+        standard = document.getElementById('id_standard').value
+        section = document.getElementById('id_section').value
+        if (!standards.length && standard && section) {
             standards.push(standard + '-' + section)
+        }else if(type=='is_student'){
+            document.querySelector('.signup-errors').innerHTML = '<li class="text-center text-danger">add a standard and section</li>'
+            return
         }
         fetch('https://schooltestproject.herokuapp.com/api/signup/',
             {
