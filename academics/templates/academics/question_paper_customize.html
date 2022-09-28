@@ -480,7 +480,8 @@ function getnext() {
             return res.json()
         }).then(data => {
             console.log(data,'question-list')
-            question_content = ''
+            if(data.status == 'success'){
+                question_content = ''
             question_id_list = []
             let i = 0
             question_content +=`<div class='question-list-container'>
@@ -510,7 +511,9 @@ function getnext() {
             if(question_list.length){
         for(i=0;i<question_list.length;i++){
         document.getElementById(`question_${question_list[i]}`).checked = true
-    }
+    }}
+}else{
+    document.querySelector('.error-form-2').innerHTML = `<li style='color:white;'>Chapters selected is not in correct order</li>`
 }
         })
       

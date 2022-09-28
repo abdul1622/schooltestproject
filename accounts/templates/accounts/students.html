@@ -364,7 +364,7 @@
               form.style.display = 'none'
               if (!standards.length) {
                 standard = document.getElementById('std').value
-                section = document.getElementById('sec').value
+                section = (document.getElementById('sec').value).toUpperCase()
                 standards.push(standard + '-' + section)
             }
               fetch(`${url}${id}/`, {

@@ -101,9 +101,10 @@
     var token = localStorage.getItem("token")
     $(document).ready(function(){ 
         var user = localStorage.getItem('user_type')
-        if (user != 'is_admin'){
+        if (user != 'is_admin' || !token){
          return window.location.href = '/404'; 
         }
+    })
     let form = document.querySelector('.form')
     let flag = false
     let grade_element = document.getElementById('id_grade')
@@ -380,8 +381,6 @@ return
                     getchapter();
             })
 
-
-        } )
 
     // edit chapter
 
