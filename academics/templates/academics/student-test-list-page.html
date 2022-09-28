@@ -69,7 +69,7 @@ function get_test(standard){
         document.getElementById('grade-head').textContent = `${standard}`
         let content = '';
         url2 = new URL('https://schooltestproject.herokuapp.com/api/test/');
-        url2.searchParams.append('grade', standard);
+        url2.searchParams.append('grade', standard[0]);
         fetch(url2, {
       method: 'GET',
       headers: {

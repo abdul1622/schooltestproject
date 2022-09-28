@@ -972,11 +972,12 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             }
             overallreview = ''
             // testdetails=[]
+            console.log(answer_details)
             for (i = 0; i < answer_details.length; i++) {
                 if (answer_details[i].question_type != 'MCQ') {
                     testdetails_list.push({ 'question': answer_details[i].question, 'correct_answer': answer_details[i].correct_answer, 'answer': answer_details[i].answer })
                 }
-                testdetails_list.push({ 'question': answer_details[i].question, 'correct_answer': answer_details[i][`${answer_details[i].correct_answer}`], 'answer': answer_details[i].answer })
+                testdetails_list.push({ 'question': answer_details[i].question, 'correct_answer': answer_details[i][`${answer_details[i].correct_answer}`], 'answer': answer_details[i][`${answer_details[i].answer}`] })
             }
             testdetails_list = JSON.stringify(testdetails_list)
             console.log('c', correct_answer, 'u', unanswered, 'w', wrong_answer, score)
