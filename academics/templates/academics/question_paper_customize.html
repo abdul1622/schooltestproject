@@ -107,8 +107,11 @@
     document.getElementById('nav-questionpaper').style.opacity = '0.5';
     // document.getElementById('id_grade').setAttribute("onchange", getgradename());
     $(document).ready(function(){ 
+        if(!token){
+      return window.location.href = '/login';
+    }
         var user = localStorage.getItem('user_type')
-        if (user != 'is_admin' || !token){
+        if (user != 'is_admin'){
          return window.location.href = '/404'; 
         }
     })

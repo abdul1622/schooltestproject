@@ -30,8 +30,11 @@
        let current_details,student_details;
        document.getElementById('nav-studenttesthistory').style.opacity = '0.5';
        $(document).ready(function(){ 
+        if(!token){
+      return window.location.href = '/login';
+    }
         var user = localStorage.getItem('user_type')
-        if (user == 'is_student' || !token){
+        if (user == 'is_student'){
          return window.location.href = '/404'; 
         }
       })

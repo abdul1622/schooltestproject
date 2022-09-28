@@ -135,8 +135,11 @@
   let user,standards = [];
   let token = localStorage.getItem("token")
   $(document).ready(function(){ 
+    if(!token){
+      return window.location.href = '/login';
+    }
     var user = localStorage.getItem('user_type')
-    if (user != 'is_admin'  || !token){
+    if (user != 'is_admin'){
      return window.location.href = '/404'; 
     }
   })
