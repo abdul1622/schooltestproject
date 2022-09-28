@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <button id="--question" onclick=show()>Add Question</button>
-<form id="questionForm" class="question_create" method="get">
+<div id="questionForm" class="question_create" method="get">
   <button onclick=back() class='back-btn'>&#x2715; </button>
   <div class='grid-item'>      
       <label for=""> Grade: </label>
@@ -35,8 +35,8 @@
 
   <div class='grid-item'><button class="question-btn" data-toggle="modal" data-target="#messageModal-question"
       id="question-btn">Submit</button></div>
-</form>
-
+    </div>
+  </div>
 <div class="modal fade" id="delete-box-Modal-question" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" id="media-question" role="document">
@@ -135,7 +135,7 @@
     document.getElementById('questionForm').style.display = 'none'
     document.getElementById('question-box').style.display = 'block'
     document.getElementById('--question').style.display = 'block'
-    document.getElementById('questionForm').reset();
+    // document.getElementById('questionForm').reset();
   }
 
   let yes_button = document.getElementById('delete-btn-yes')
@@ -221,8 +221,8 @@
     }).then(data => {
       console.log(data)
       let content = '';
-        console.log(data.name[0])
-        console.log(data.status)
+        // console.log(data.name[0])
+        // console.log(data.status)
         if(data.status == 'success'){
         data.data.forEach((d, index) => {
           name_value = data.name[index]
@@ -249,13 +249,13 @@
         container2.innerHTML = content;
       }else{
         head.style.display = 'none'
-        container2.innerHTML = '<p>select a valid subject</p>'
+        container2.innerHTML = `<p>subject - ${subject_name} has no questions</p>`
       }
         edit = false
       })
     }else{
         head.style.display = 'none'
-        container2.innerHTML = '<p>select a valid subject</p>'
+        container2.innerHTML = ``
         edit = false
       }
   };
@@ -476,9 +476,9 @@
             if (response.status == 201) {
               console.log("Sucess response", response)
               messages.innerHTML = `${name} is created succesfully`;
-              document.getElementById('id_grade').value = ''
-              document.getElementById('id_subject').value = ''
-              document.getElementById('id_chapter').value = ''
+              // document.getElementById('id_grade').value = ''
+              // document.getElementById('id_subject').value = ''
+              // document.getElementById('id_chapter').value = ''
               document.getElementById('id_question').value = ''
               document.getElementById('id_question_type').value = ''
               document.getElementById('id_cognitive_level').value = ''

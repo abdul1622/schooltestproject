@@ -6,8 +6,9 @@
   <div class="colorbox1"> <p>pass</p></div>
   <div class="colorbox2"><p>fail</p></div>
   </div>
+  <div class="test-details"></div>
+
 <div class="history"></div>
-<div class="test-details"></div>
 <script>
   $(document).ready(function(){ 
     var user = localStorage.getItem('user_type')
@@ -118,14 +119,32 @@
       })
     })
 
+ function back(){
+  document.querySelector('.test-details').innerHTML = ''
+  current_details = null
+ }
+
+
     function details(index){
       for(i=0;i<list.length;i++){
         if(list[i].id == index){
           current_details = JSON.parse(list[i].test_detail)
+          current_details = JSON.parse(current_details)
+          console.log(typeof((current_details)))
           break
         }
       }
-      
+      let table2 = '   <a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back() >Back</a> <table>';
+                        table2 += `<thead class="thead"><th>Question</th><th>correct answer</th><th>given answer</th></thead>`;
+                        for(i=0;i<current_details.length;i++){
+                            table2 = table2 + `<tr>`;
+                            table2 = table2 + `<td>` + `${current_details[i].question}` + `</td>`,
+                                table2 = table2 + `<td>` + `${current_details[i].correct_answer}` + '</td>';
+                            table2 = table2 + '<td>' + `${current_details[i].answer}` + '</td>';
+                                table2 = table2 + `</tr>`;
+                            }
+                        table2 += "</table>";
+              document.querySelector('.test-details').innerHTML  = table2
     }
 </script>
 {% endblock %}

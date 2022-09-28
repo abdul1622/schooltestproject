@@ -1,8 +1,7 @@
 {% extends 'main.html'%}
 {% block signup %}
 <p id='response'></p>
-<div class="details"></div>
-<div class="signup-errors"></div>
+
 <div class="signbox">
 
     {%csrf_token%}
@@ -30,11 +29,15 @@
             <option value="is_admin">is_admin</option>
 
         </select>
+        <hr>
         <label>Standard:</label>
         <input type="number" name="standard" class="form-control" placeholder="Standard" id="id_standard">
         <label>Section:</label>
         <input type="text" name="section" class="form-control" placeholder="Section" id="id_section">
         <button id="standard_add_btn" onclick=add_standard() disabled>Add standard</button>
+        <div class="signup-errors"></div>
+        <div class="details"></div>
+        <hr>
     </div>
     <div class="signbox2">
 
@@ -108,7 +111,7 @@
         standard = document.getElementById('id_standard').value
         section = (document.getElementById('id_section').value).toUpperCase()
         if (!section.match(/[a-z]/i)) {
-            document.querySelector('.signup-errors').innerHTML = 'give a valid section'
+            document.querySelector('.signup-errors').innerHTML = '<li class="text-danger">give a valid section</li>'
             return
         }
         standards.push(standard + '-' + section)
@@ -120,6 +123,7 @@
             content += `<li>${standards[i]}</li>`
         }
         content += `</ul>`
+        document.querySelector('.signup-errors').innerHTML = ''
         document.querySelector('.details').innerHTML = content
     }
 

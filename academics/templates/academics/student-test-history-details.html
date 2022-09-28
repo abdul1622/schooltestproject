@@ -21,11 +21,13 @@
 <div class="history-container">
 
 </div>
+<div class="test-details"></div>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
        var token = localStorage.getItem("token")
        var subjectId,gradeId,testId,content='',data2;
        let container = document.querySelector('.history-container')
+       let current_details,student_details;
        document.getElementById('nav-studenttesthistory').style.opacity = '0.5';
        $(document).ready(function(){ 
         var user = localStorage.getItem('user_type')
@@ -38,7 +40,6 @@
         let subject_element = document.getElementById('id_subject')
 
         let grade_list;
-  let content = ''
   var host = window.location.protocol + "//" + window.location.host;
  
 
@@ -144,20 +145,16 @@ function get(){
     if(data.length){
       document.querySelector('.error-messages').innerHTML =''
 
-            content += `<div class='history-container-div'>
-            <button onclick=back() class='btn btn-sm btn-primary'>Back</button>
-            <p  class='heading'> <span>Grade : ${grade_name}</span> <span class='test-heading'>${test_name}</span> <span>Subject : ${subject_name}</span></p>
-            <table>`
       content +=             `<div class='history-container-head'> <button onclick=back() class='btn btn-sm btn-primary'>Back</button>
             <p  class='heading'> <span>Grade : ${grade_name}</span> <span class='test-heading'>${test_name}</span> <span>Subject : ${subject_name}</span></p>
            </div> `
             content += `<div class='history-container-div'><table>`
 
-            content += '<tr><th>Sl.no</th><th>Name</th><th>Register_number</th><th>Result</th><th>Score</th><th>Correct answer</th><th>Wrong answer</th><th>Unanswered questions</th></tr>'
+            content += '<tr><th>Sl.no</th><th>Name</th><th>Register_number</th><th>Result</th><th>Score</th><th>Correct <br> answer</th><th>Wrong <br> answer</th><th>Unanswered <br> questions</th><th>Details</th></tr>'
                 data.forEach((d, index) => {
                     i += 1
                 content += `<tr><td>${i}</td><td>${d.student_name}</td><td>${d.register_number}</td><td>${d.result}</td><td>${d.score}</td><td>${d.correct_answer}</td><td>${d.wrong_answer}</td><td>${d.unanswered_questions
-}</td></tr>`
+}</td><td><button onclick=details(${d.id})>details</td></tr>`
         })
       content += `</table></div>`
         container.innerHTML = content
@@ -172,6 +169,36 @@ function get(){
 function back(){
   document.getElementById('history-container-form').style.display = 'block'
   container.innerHTML = ''
+}
+
+function details(index){
+  for(i=0;i<data2.length;i++){
+        if(data2[i].id == index){
+         student_details = data2[i]
+          current_details = JSON.parse(data2[i].test_detail)
+          current_details = JSON.parse(current_details)
+          console.log(typeof((current_details)))
+          break
+        }
+      }
+    let table2 = ` <div class= "test-details-div"> <p> <span>${student_details.student_name}</span> <a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back_details() ><span aria-hidden="true">&times;</span></a> </p> <table>`;
+                        table2 += `<thead class="thead"><th>sl no</th><th>Question</th><th>correct answer</th><th>given answer</th></thead>`;
+                        for(i=0;i<current_details.length;i++){
+                            table2 = table2 + `<tr>`;
+                            table2 = table2 + `<td>` + `${i+1}` +`</td>`
+                            table2 = table2 + `<td>` + `${current_details[i].question}` + `</td>`,
+                                table2 = table2 + `<td>` + `${current_details[i].correct_answer}` + '</td>';
+                            table2 = table2 + '<td>' + `${current_details[i].answer}` + '</td>';
+                                table2 = table2 + `</tr>`;
+                            }
+                        table2 += "</table> </div>";
+              document.querySelector('.test-details').innerHTML  = table2
+}
+
+
+function back_details(){
+  document.querySelector('.test-details').innerHTML  =''
+  current_details = null
 }
 
 </script>
