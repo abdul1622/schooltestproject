@@ -57,8 +57,7 @@
 
 <button id="add">Add Student</button>
 <div class="sort-input">
-  <input type="text" id="student-filter" placeholder="search" min="0" max="12">
-  <button id="sort" onclick=sort()>search</button>
+  <input type="text" id="student-filter" placeholder="search" min="0" max="12"  onkeyup="myFunction()" >
 </div>
 </div>
 <div id="userDetails">
@@ -133,6 +132,8 @@
 
 <script>
   let user, standards = [];
+  let students=[];
+  
   let token = localStorage.getItem("token")
   $(document).ready(function(){ 
     if(!token){
@@ -154,7 +155,6 @@
   let form = document.getElementById('userDetails')
   const container2 = document.querySelector('.container2');
   document.getElementById('nav-students').style.opacity = '0.5';
- // document.getElementById('back').addEventListener("click", back, false)
     function back() {
       form.style.display = "none"
       add.style.display = 'block'
@@ -170,69 +170,38 @@
       document.getElementById('sec').value = ''
       document.getElementById('address').value = ''
     }
-    function userdetails() {
-      fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
-        method: 'GET',
-        headers: new Headers({
-          'Authorization': 'token' + ' ' + token,
-          'Content-Type': 'application/json',
-        })
-      }).then(res => {
-        return res.json()
-      }).then(data => {
-        console.log(data)
-        let table2 = `<table class='--user'>`;
-        table2 += `<thead class="thead">
-            <th >Email</th>
-            <th >Phone</th>
-            <th>RegNo</th>
-            <th>FullName</th>
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th>Date Of Birth</th>
-            <th>Address</th>
-            <th>Standard</th>
-            <th id="action" >Action</th>
-          </thead>`;
-        data.forEach((d, index) => {
-          if (`${d.user_type}` == 'is_student') {
-            table2 = table2 + `<tbody><tr id=${d.id}>`;
-            table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
-            table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
-            table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
-            table2 = table2 + '<td class="userfullname">' + `${d.profile?.full_name}` + '</td>';
-            table2 = table2 + '<td class="userfirstname">' + `${d.profile?.first_name}` + '</td>';
-            table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
-            table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
-            table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
-            table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
-           // table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
-            table2 = table2 + '<td>' + ` <i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
-              table2 = table2 + `</tr>`;
-          }
-        })
-        table2 += "</table>";
-        container2.innerHTML = table2;
+    fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
+      method: 'GET',
+      headers: new Headers({
+        'Authorization': 'token' + ' ' + token,
+        'Content-Type': 'application/json',
       })
-    } userdetails();
-
-    function print(data){
-      console.log('hi')
-      let table2 = `<table class='--user'>`;
-        table2 += `<thead class="thead">
-              <th scope="col">Email</th>
-              <th scope="col">Phone</th>
-              <th scope="col">RegNo</th>
-              <th scope="col">FullName</th>
-              <th scope="col">FirstName</th>
-              <th scope="col">LastName</th>
-              <th scope="col">Date Of Birth</th>  
-              <th scope="col">Address</th>
-              <th scope="col">Standard</th>
-              <th scope="col">Action</th>
-            </thead>`;
-            data.forEach((d, index) => {
-            table2 = table2 + `<tbody><tr id=${d.id}>`;
+    }).then(res => {
+      return res.json()
+    }).then(data => {
+      data.forEach((d, index) => {
+        if (`${d.user_type}` == 'is_student') {
+          students.push(d)
+        }
+    })
+    console.log(students)
+    let table2 = `<table class='--user' id='usr'>`;
+      table2 += `<tr class="header">
+             <th >Email</th>
+             <th >Phone</th>
+             <th>RegNo</th>
+             <th>FullName</th>
+             <th>FirstName</th>
+             <th>LastName</th>
+             <th>Date Of Birth</th>
+             <th>Address</th>
+             <th>Standard</th>
+             <th id="action" >Action</th>
+      </tr>`;
+           console.log(students.length)
+           students.forEach((d, index) => {
+            console.log('to')
+              table2 = table2 + `<tbody><tr id=${d.id}>`;
               table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
               table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
               table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
@@ -242,21 +211,46 @@
               table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
               table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
               table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
-             // table2 = table2 + '<td class="usersection">' + `${d.profile?.section}` + '</td>';
-              table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
-              table2 = table2 + `</tr>`;
-            })
-            table2 += "</table>";
-            container2.innerHTML = table2;
+              table2 = table2 + '<td>' + ` <i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
+                table2 = table2 + `</tr>`;
+              })
+          table2 += "</table>";
+          container2.innerHTML = table2;
+  })  
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("student-filter");
+    filter = input.value.toLowerCase();
+    table = document.getElementById("usr");
+    tr = table.getElementsByTagName("tr");
+    
+    for (i = 0; i < tr.length; i++) {
+        // td = tr[i].getElementsByTagName("td")[0];
+        alltags = tr[i].getElementsByTagName("td");
+        isFound = false;
+        for(j=0; j< alltags.length; j++) {
+          td = alltags[j];
+          console.log(td)
+          if (td) {
+              txtValue = td.textContent || td.innerText;
+              console.log(txtValue)
+              if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+                  j = alltags.length;
+                  isFound = true;
+              }
+            }       
+          }
+          if(!isFound && tr[i].className !== "header") {
+            tr[i].style.display = "none";
+          }
+        }
     }
     function sort() {
       data_filter=[]
       button = document.getElementById('sort');
       var val = document.getElementById('student-filter').value
-      const email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      var Email = email.test(val)
-      const phone = /^[6-9]\d{9}$/
-      var Phone = phone.test(val)
+      
       console.log(Email)
       var grade = parseInt(val)
         fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
@@ -297,12 +291,7 @@
         }
         })
       }
-        let input = document.getElementById('student-filter')
-        input.addEventListener('keyup', (e) => {
-          if (e.keyCode === 13) {
-            sort();
-          }
-        })
+       
         function deletestudent(id) {
           url = "https://schooltestproject.herokuapp.com/api/user-details/"
           fetch(`${url}${id}/`, {

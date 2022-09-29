@@ -184,7 +184,6 @@ class UserDetailsView(ListAPIView):
 
 
 class UserDetailsEditView(RetrieveUpdateDestroyAPIView):
-
     serializer_class=UserDetailsSerializer
     permission_classes=[AllowAny]
     queryset=User.objects.all()

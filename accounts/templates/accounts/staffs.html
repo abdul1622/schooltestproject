@@ -56,8 +56,7 @@
 </div>
 <div class="standard-errors"></div>
 <div class='sort-input'>
-  <input type="text" id="student-filter" placeholder="search" min="0" max="12">
-  <button id="sort" onclick=sort()>search</button>
+  <input type="text" id="student-filter" placeholder="search" min="0" max="12"   onkeyup="myFunction()">
   <button id="addstaff" onclick=addstaff()>Add Staff</button>
 </div>
 <div id="userDetails">
@@ -134,6 +133,7 @@
 <script>
   let stdsec;
   let user, standards = [];
+  let staffs=[];
   let token = localStorage.getItem("token")
   $(document).ready(function(){ 
     if(!token){
@@ -210,54 +210,81 @@
   let form = document.getElementById('userDetails')
   const container2 = document.querySelector('.container2');
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-  function userdetails() {
-    fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
-      method: 'GET',
-      headers: new Headers({
-        'Authorization': 'token' + ' ' + token,
-        'Content-Type': 'application/json',
-      })
-    }).then(res => {
-      return res.json()
-    }).then(data => {
-      let table2 = `<table class='--staff'>`;
-      table2 += `<thead class="thead">
-                <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-                <th scope="col">RegNo</th>
-                <th scope="col">FullName</th>
-                <th scope="col">FirstName</th>
-                <th scope="col">LastName</th>
-                <th scope="col">Date Of Birth</th>    
-                <th scope="col">Address</th>
-                <th scope="col">Standards</th>
-                <th id='action' scope="col">Action</th>
-              </thead>`;
-      data.forEach((d, index) => {
-        let content = ''
-        for (i = 0; i < d.profile.standard.length; i++) {
-          content += `<li>${d.profile.standard[i]}</li>`
-        }
-        if (`${d.user_type}` == 'is_staff') {
-          table2 = table2 + `<tbody><tr id=${d.id}>`;
-          table2 = table2 + '<td class="stdsec" style="display:none">' + `${d.profile?.standard}` + '</td>'
-          table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
-          table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
-          table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
-          table2 = table2 + '<td class="userfullname">' + `${d.profile?.full_name}` + '</td>';
-          table2 = table2 + '<td class="userfirstname">' + `${d.profile?.first_name}` + '</td>';
-          table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
-          table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
-          table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
-          table2 = table2 + '<td class="userstandard">' + `${content}` + '</td>';
-          table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i><i class="fa fa-trash-o" id="delete" data-toggle="modal" data-target="#delete-staff-Modal"  ></i>` + '</td></tbody>',
-            table2 = table2 + `</tr>`;
-        }
-      })
-      table2 += "</table>";
-      container2.innerHTML = table2;
+  fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
+    method: 'GET',
+    headers: new Headers({
+      'Authorization': 'token' + ' ' + token,
+      'Content-Type': 'application/json',
     })
-  } userdetails();
+  }).then(res => {
+    return res.json()
+  }).then(data => {
+    data.forEach((d, index) => {
+      if (`${d.user_type}` == 'is_staff') {
+        staffs.push(d)
+      }
+  })
+  console.log(staffs)
+  let table2 = `<table class='--user' id='usr'>`;
+    table2 += `<tr class="header">
+           <th >Email</th>
+           <th >Phone</th>
+           <th>RegNo</th>
+           <th>FullName</th>
+           <th>FirstName</th>
+           <th>LastName</th>
+           <th>Date Of Birth</th>
+           <th>Address</th>
+           <th>Standard</th>
+           <th id="action" >Action</th>
+    </tr>`;
+         console.log(staffs.length)
+         staffs.forEach((d, index) => {
+          console.log('to')
+            table2 = table2 + `<tbody><tr id=${d.id}>`;
+            table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
+            table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
+            table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
+            table2 = table2 + '<td class="userfullname">' + `${d.profile?.full_name}` + '</td>';
+            table2 = table2 + '<td class="userfirstname">' + `${d.profile?.first_name}` + '</td>';
+            table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
+            table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
+            table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
+            table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
+            table2 = table2 + '<td>' + ` <i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
+              table2 = table2 + `</tr>`;
+            })
+        table2 += "</table>";
+        container2.innerHTML = table2;
+})  
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("student-filter");
+    filter = input.value.toLowerCase();
+    table = document.getElementById("usr");
+    tr = table.getElementsByTagName("tr");
+    
+    for (i = 0; i < tr.length; i++) {
+        alltags = tr[i].getElementsByTagName("td");
+        isFound = false;
+        for(j=0; j< alltags.length; j++) {
+          td = alltags[j];
+          console.log(td)
+          if (td) {
+              txtValue = td.textContent || td.innerText;
+              console.log(txtValue)
+              if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+                  j = alltags.length;
+                  isFound = true;
+              }
+            }       
+          }
+          if(!isFound && tr[i].className !== "header") {
+            tr[i].style.display = "none";
+          }
+        }
+    }
   function back() {
     window.location.href = window.location.href;
     form.style.display = "none"
