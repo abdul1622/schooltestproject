@@ -1079,11 +1079,12 @@
 
         .grade-list .card .delete-grade {
             position: absolute;
-            top: 0;
-            right: 0;
-            display: none;
-            background: none;
-            color: #817f7f;
+    top: 0;
+    right: 0;
+    width: 17%;
+    /* display: none; */
+    background: none;
+    color: #817f7f;
         }
 
         .grade-list .card:hover .delete-grade {
@@ -1483,6 +1484,17 @@
             color: #14279B;
         }
 
+        .grade-list .card #edit {
+    padding: 5px 15px;
+    margin-left: -1vw;
+    border-radius: 5px;
+    font-size: 50%;
+    color: #14279B;
+    position: absolute;
+    top: 0;
+    background: none;
+    right: 13%;
+}
         #delete {
             padding: 5px 15px;
             margin-left: 1%;
@@ -1921,6 +1933,8 @@ button#add-section {
 p.section-btn {
     margin: 5% 14%;
 }
+
+
         @media screen and (min-width:1024px) and (max-width:1200px) {
             .navbar {
                 width: 100%;

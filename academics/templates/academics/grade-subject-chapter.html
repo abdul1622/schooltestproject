@@ -126,6 +126,7 @@
     let container2 = document.querySelector('.cards')
     var subject_id;
     var grade_val;
+    let current_grade;
     var container = document.querySelector('.cards')
     var host = window.location.protocol + "//" + window.location.host;
     var container3 = document.querySelector('.chapter-cards')
@@ -162,7 +163,7 @@ function section_change(){
             window.location.href = `${host}/404`
            } 
             data.data.forEach((d, index) => {
-                content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button>
+                content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button> <button id="edit" onclick=edit_grade(${d.id})><i class="fa fa-edit"></i></button>
         <p  onclick=getsubject(${d.grade},${d.id}) class="grade">${d.grade} </p>
         
  </div>`
@@ -200,6 +201,32 @@ function section_change(){
         let no_btn = document.getElementById('delete-btn-no')
         yes_button.setAttribute("onClick", `deletegrade(${id})`);
     }
+
+function edit_grade(id){
+    edit = true
+    for(i=0;i<grade_list.length;i++){
+        if(grade_list[i].id == id){
+            current_grade = grade_list[i]
+            section_list = grade_list[i].section
+        }
+    }
+    form_all.innerHTML = `<div class='grade-form-box'>
+            {% csrf_token %}
+                <p><label for="id_grade">Grade:</label> <input type="number" disabled name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
+               <p class='section-btn'><span> <button onclick=add_section() id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
+                <p class='section-list'> </p>
+                <p class='section-error'></p>
+                </div>`
+        let section_content = ''
+        for(i=0;i<section_list.length;i++){
+            section_content += `<li>${section_list[i]}</li> `
+        }
+        if(section_list.length){
+        document.querySelector('.delete-section').innerHTML =  ` <button onclick=remove_section() id='add-section'>remove_section</button>`
+        }
+        document.querySelector('.section-list').innerHTML = section_content
+}
+
 
 function add_section(flag){
     // if(flag=='edit'){
@@ -270,9 +297,46 @@ function remove_section(){
 
     // create grade 
     grade_create.addEventListener('click', () => {
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        let url_grade = 'http://127.0.0.1:8000/api/grades/'
+        let id = current_grade.id
+        if(edit){
+            fetch(`${url_grade}${id}/`, {
+                        method: 'PUT',
+                        headers: {
+                            'content-Type': 'application/json',
+                            'Authorization': 'token' + ' ' + token,
+                            'X-CSRFToken': csrftoken
+                        },
+                        body: JSON.stringify({
+                            'section':section_list
+                        })
+                    }).then(function (response) {
+                        if (response.status == 200) {
+                            console.log("Sucess response", response)
+                            messages.innerHTML = 'Updated succesfully';
+                            error_messages.innerHTML = ''
+                            // get();
+                            get();
+                        } else {
+                            console.log(response);
+                        }
+                        return response.json()
+                    }).then(data => {
+                        console.log(data)
+                        if (data.status != 'success') {
+                            error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+                            messages.innerHTML = ''
+                        }
+                        edit = false
+                        return
+                    })
+        }
+else{
+    console.log('nja')
         var grade = document.getElementById('id_grade').value
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        fetch('http://127.0.0.1:8000/api/grades/',
+        fetch(url_grade,
             {
                 method: 'POST',
                 body: JSON.stringify({ 'grade': grade,'section':section_list }
@@ -299,6 +363,7 @@ function remove_section(){
                 }
             })
         return true;
+}
     })
 
 

@@ -93,9 +93,9 @@ class GradeEditView(RetrieveUpdateDestroyAPIView):
         serializer = GradeSerializer(queryset)
         return Response(serializer.data, status=HTTP_200_OK)
 
-    def update(self, request, pk):
-        subject = Subject.objects.get(pk=pk)
-        serializer = SubjectSerializer(subject, data=request.data)
+    def patch(self, request, pk):
+        subject = Grade.objects.get(pk=pk)
+        serializer = GradeSerializer(subject, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response({"status": "success", 'data': serializer.data}, status=HTTP_200_OK)
