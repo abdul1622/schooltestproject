@@ -733,7 +733,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                                         question_content = `<div> 
                        <hr class="hr1"> <p> ${question_no}). ${d.question}</p> 
                         <ol type="a">
-                           <li> <input type="radio" class='option_a_${question_details.id}' id="option_a_${question_details.id}" name="answer_${question_details.id}" value='option_b'> ${question_details.option_a}</li>
+                           <li> <input type="radio" class='option_a_${question_details.id}' id="option_a_${question_details.id}" name="answer_${question_details.id}" value='option_a'> ${question_details.option_a}</li>
 
                             <li>
                                 <input type="radio" class='option_b_${question_details.id}' id="option_b_${question_details.id}" name="answer_${question_details.id}" value='option_b'> ${question_details.option_b}</li>
@@ -940,10 +940,12 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             let unanswered = 0;
             let marks = 0
             console.log('total-mark', total_marks)
+            var weight = total_marks / (answer_details.length)
+            
             for (i = 0; i < answer_details.length; i++) {
                 if (answer_details[i].answer == answer_details[i].correct_answer) {
                     correct_answer += 1;
-                    marks += answer_details[i].mark
+                    marks += ((answer_details[i].mark) * weight)
                 } else if (answer_details[i].answer) {
                     wrong_answer += 1
                 } else {
@@ -953,15 +955,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             }
             console.log('your marks', marks)
 
-            var weight = total_marks / marks
-            var weightage = 100 / (correct_answer * weight)
-            var score = weightage * correct_answer
 
             var score = (marks / total_marks) * 100
-
-            var weight = total_marks / marks
-            var weightage = 100 / (correct_answer * weight)
-            var score = weightage * correct_answer
 
             console.log(score)
             score = parseInt(score)
@@ -978,8 +973,9 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             for (i = 0; i < answer_details.length; i++) {
                 if (answer_details[i].question_type != 'MCQ') {
                     testdetails_list.push({ 'question': answer_details[i].question, 'correct_answer': answer_details[i].correct_answer, 'answer': answer_details[i].answer })
-                }
+                }else{
                 testdetails_list.push({ 'question': answer_details[i].question, 'correct_answer': answer_details[i][`${answer_details[i].correct_answer}`], 'answer': answer_details[i][`${answer_details[i].answer}`] })
+                }
             }
             testdetails_list = JSON.stringify(testdetails_list)
             console.log('c', correct_answer, 'u', unanswered, 'w', wrong_answer, score)

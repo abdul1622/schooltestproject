@@ -205,6 +205,9 @@ function getnext() {
         question_per_chapter = []
         document.getElementById('q-form').style.display = 'block'
         no_of_questions = parseInt(document.getElementById('id_no_of_questions').value);
+        grade_id = parseInt(document.getElementById('id_grade').value);
+        subject_id = parseInt(document.getElementById('id_subject').value)
+        console.log('isgrade',grade_id,subject_id)
         if (isNaN(grade_id) || isNaN(subject_id)) {
             if (!isNaN(grade_id)) {
                 document.querySelector('.error-form-1').innerHTML = "<li style='color:white'>subject is a required field </li>"
