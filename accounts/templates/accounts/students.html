@@ -246,52 +246,7 @@
           }
         }
     }
-    function sort() {
-      data_filter=[]
-      button = document.getElementById('sort');
-      var val = document.getElementById('student-filter').value
-      
-      console.log(Email)
-      var grade = parseInt(val)
-        fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
-          method: 'GET',
-          headers: new Headers({
-            'Authorization': 'token' + ' ' + token,
-            'Content-Type': 'application/json',
-          })
-        }).then(res => {
-          return res.json()
-        }).then(data => {
-          data.forEach((d, index) => {
-            if (Email){
-              if ((`${d.email}` == val)&&(`${d.user_type}` == 'is_student')){
-              data_filter.push(d)
-              }
-            }
-           else if (Phone){
-              if ((`${d.phone}` == val )&& (`${d.user_type}` == 'is_student')){
-              data_filter.push(d)
-              }
-            }
-            else if (grade && grade <=12) {
-              if ((`${d.profile.standard}` == grade) && (`${d.user_type}` == 'is_student')){
-              data_filter.push(d)
-              }
-            }
-           else if (val){
-              if ((`${d.register_number}` == val) && (`${d.user_type}` == 'is_student')) {
-                data_filter.push(d)
-              }
-            }
-          })
-          console.log(data_filter)
-          print(data_filter);
-          while(data_filter.length > 0) {
-            data_filter.pop();
-        }
-        })
-      }
-       
+
         function deletestudent(id) {
           url = "https://schooltestproject.herokuapp.com/api/user-details/"
           fetch(`${url}${id}/`, {

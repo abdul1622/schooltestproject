@@ -25,7 +25,6 @@ class Grade(models.Model):
     section = ArrayField(
         models.CharField(max_length=1, blank=True),
         blank=True,
-        null = True,
         default=list
     )
 

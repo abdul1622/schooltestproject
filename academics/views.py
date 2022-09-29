@@ -73,6 +73,7 @@ class GradeView(ListCreateAPIView):
 
     def create(self, request):
         serializer = GradeSerializer(data=request.data)
+        print(serializer)
         if serializer.is_valid():
             serializer.save()
             return Response({"status": "success", 'data': serializer.data}, status=HTTP_201_CREATED)
