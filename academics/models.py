@@ -21,6 +21,14 @@ class Grade(models.Model):
             MaxValueValidator(12)
         ]
     )
+
+    section = ArrayField(
+        models.CharField(max_length=1, blank=True),
+        blank=True,
+        null = True,
+        default=list
+    )
+
     def __str__(self):
         return str(self.grade)
 
