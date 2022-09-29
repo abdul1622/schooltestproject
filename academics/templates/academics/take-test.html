@@ -604,6 +604,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         let duration;
         let pass_percentage;
         let testdetails_list = [];
+        let interval;
         let counter_container = document.querySelector('#counter');
         var list = document.querySelector('.instruction');
         //    get function
@@ -781,7 +782,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     }
 
                     //65
-                    let interval = setInterval(counter, 1000)
+                 interval = setInterval(counter, 1000)
+                //  console.log(interval,'int')
                 }
             })
         })
@@ -1024,7 +1026,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     <p> Your Answer : ${answer_details[i][`${answer_details[i].answer}`]}</p>
                 </div>`
                             }
-                            counter_container.innerHTML = ''
+                            clearInterval(interval)
+                            // counter_container.innerHTML = ''
                             document.querySelector('.testreview').innerHTML = overallreview
                         }
                     }
