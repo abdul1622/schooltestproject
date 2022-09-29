@@ -82,7 +82,7 @@ function get_test(standard){
     }).then(res => {
       return res.json()
     }).then(data => {
-
+let temp;
       for (i = 0; i < data.length; i++) {
           //   console.log(history[i].test_id,d.id,'as')
           //  if ( history[i].test_id == d.id ){
@@ -100,8 +100,9 @@ function get_test(standard){
           }
         }
 
+console.log(test_list.length)
 if(test_list.length){
-      let temp = (data[0].subject)
+      temp = (data[0].subject)
       content += `<fieldset>
   <legend> ${data[0].subject_name} </legend>`
       }
