@@ -30,19 +30,21 @@ Get Test
     var  student_id=localStorage.getItem('id')
     let single_test = document.querySelector('.single-test')
     head.style.display = 'none'
+    let test_list = []
     let set_id = false
     url = 'https://schooltestproject.herokuapp.com/api/test/'
     var container = document.querySelector('.test-list')
 
-    url1 = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
-    url1.searchParams.append('grade', standard[0]);
-    url1.searchParams.append('studentid',student_id)
     $(document).ready(function(){ 
       var user = localStorage.getItem('user_type')
       if (user != 'is_student'){
        return window.location.href = '/404'; 
       }
     })
+    url1 = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
+    url1.searchParams.append('grade', standard[0]);
+    url1.searchParams.append('studentid',student_id)
+
     fetch(url1,
             {
                 method: 'GET',
@@ -61,6 +63,7 @@ Get Test
                 if (data.status != 'success') {
                 console.log(data)
                 }
+                get_test(standard)
             })
             console.log(history)
 function get_test(standard){
@@ -80,20 +83,41 @@ function get_test(standard){
       return res.json()
     }).then(data => {
 
+      for (i = 0; i < data.length; i++) {
+          //   console.log(history[i].test_id,d.id,'as')
+          //  if ( history[i].test_id == d.id ){
+          //   flag=false
+          //   console.log('hi')
+          //  }
+          flag = true
+            for(j=0;j<history.length;j++){
+              if ( history[j].test_id == data[i].id ){
+                flag = false
+            }
+          }
+          if(flag){
+            test_list.push(data[i])
+          }
+        }
 
+if(test_list.length){
       let temp = (data[0].subject)
       content += `<fieldset>
   <legend> ${data[0].subject_name} </legend>`
-        data.forEach((d, index) => {
+      }
+        test_list.forEach((d, index) => {
     //    if(d.grade_name = standard){
       
-          let flag=true
-          for (i = 0; i < history.length; i++) {
-           if ( history[i].test_id == d.id ){
-            flag=false
-           }
-          }
-          if (flag==true){
+          // let flag=true
+          // console.log(history,'sa')
+          // for (i = 0; i < history.length; i++) {
+          //   console.log(history[i].test_id,d.id,'as')
+          //  if ( history[i].test_id == d.id ){
+          //   flag=false
+          //   console.log('hi')
+          //  }
+          // }
+          // if (flag==true){
 
         if(temp != d.subject){
          content += `</fieldset>`
@@ -113,7 +137,7 @@ function get_test(standard){
 <p> Description : ${d.description} </p>
 <p class='text-right'><button class='btn btn-primary btn-sm' onclick=take(${d.id})>take test</button></p> 
 </div>`
-}
+
 //}
 
     })
@@ -123,7 +147,7 @@ function get_test(standard){
 }
 }
 
-get_test(standard)
+
 
 function take(id){
   console.log('sjfd')
