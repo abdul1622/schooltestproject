@@ -9,7 +9,6 @@ from django.contrib.postgres.fields import ArrayField
 
 class MyUserManager(BaseUserManager):
    def create_user(self, email,phone,date_of_birth,register_number,is_data_entry):
-
        if not email:
            raise ValueError('Users must have an email address')
        if not phone:

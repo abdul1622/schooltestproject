@@ -464,14 +464,19 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         }
 
         .testreview {
-           
+
             margin-left: 26%;
         }
 
-        .reviewcards {
-            background-color: #5c7aea;
-            padding: 12%;
-            width: 80%;
+        .testreview table,
+        .testreview td,
+        .testreview th {
+
+            border:1px solid black;
+            border-collapse: collapse;
+        }
+        .testreview td{
+            padding: 2%;
         }
 
         @media screen and (max-width:600px) {
@@ -780,8 +785,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     }
 
                     //65
-                 interval = setInterval(counter, 1000)
-                //  console.log(interval,'int')
+                    interval = setInterval(counter, 1000)
+                    //  console.log(interval,'int')
                 }
             })
         })
@@ -939,7 +944,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             let marks = 0
             console.log('total-mark', total_marks)
             var weight = total_marks / (answer_details.length)
-            
+
             for (i = 0; i < answer_details.length; i++) {
                 if (answer_details[i].answer == answer_details[i].correct_answer) {
                     correct_answer += 1;
@@ -971,8 +976,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             for (i = 0; i < answer_details.length; i++) {
                 if (answer_details[i].question_type != 'MCQ') {
                     testdetails_list.push({ 'question': answer_details[i].question, 'correct_answer': answer_details[i].correct_answer, 'answer': answer_details[i].answer })
-                }else{
-                testdetails_list.push({ 'question': answer_details[i].question, 'correct_answer': answer_details[i][`${answer_details[i].correct_answer}`], 'answer': answer_details[i][`${answer_details[i].answer}`] })
+                } else {
+                    testdetails_list.push({ 'question': answer_details[i].question, 'correct_answer': answer_details[i][`${answer_details[i].correct_answer}`], 'answer': answer_details[i][`${answer_details[i].answer}`] })
                 }
             }
             testdetails_list = JSON.stringify(testdetails_list)
@@ -1006,7 +1011,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     if (data.status != 'success') {
                         console.log(data)
                     } else {
-                        overallreview += `<table>
+                        overallreview += `<table class='overallreview'>
                             <tr>
                                 <th >Question</th>
                                 <th >Correct Answer</th>
@@ -1014,29 +1019,29 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                             </tr>`
                         for (i = 0; i < answer_details.length; i++) {
                             if (answer_details[i].question_type != 'MCQ') {
-                                if (answer_details[i][`${answer_details[i].correct_answer}`]== answer_details[i].answer){
-                                overallreview += `<tr><td>${answer_details[i].question}</td>`+`<td>${answer_details[i][`${answer_details[i].correct_answer}`]}</td>`+`<td>${answer_details[i].answer}</td></tr>`
+                                if (answer_details[i][`${answer_details[i].correct_answer}`] == answer_details[i].answer) {
+                                    overallreview += `<tr><td>${answer_details[i].question}</td>` + `<td>${answer_details[i][`${answer_details[i].correct_answer}`]}</td>` + `<td>${answer_details[i].answer}</td></tr>`
                                 }
-                            else{
-                                    overallreview += `<tr><td>${answer_details[i].question}</td>`+`<td>${answer_details[i][`${answer_details[i].correct_answer}`]}</td>`+`<td>${answer_details[i].answer}</td></tr>`
+                                else {
+                                    overallreview += `<tr><td>${answer_details[i].question}</td>` + `<td>${answer_details[i][`${answer_details[i].correct_answer}`]}</td>` + `<td>${answer_details[i].answer}</td></tr>`
                                 }
-                            } 
-                            else  {
-                                if (answer_details[i][`${answer_details[i].correct_answer}`]==answer_details[i][`${answer_details[i].answer}`]){
-                                    overallreview +=`<tr ><td>${answer_details[i].question}</td>`+`<td>${answer_details[i][`${answer_details[i].correct_answer}`]}</td>`+`<td>${answer_details[i][`${answer_details[i].answer}`]}</td>`
+                            }
+                            else {
+                                if (answer_details[i][`${answer_details[i].correct_answer}`] == answer_details[i][`${answer_details[i].answer}`]) {
+                                    overallreview += `<tr ><td>${answer_details[i].question}</td>` + `<td>${answer_details[i][`${answer_details[i].correct_answer}`]}</td>` + `<td>${answer_details[i][`${answer_details[i].answer}`]}</td>`
                                 }
-                                else{
-                                    overallreview +=`<tr><td>${answer_details[i].question}</td>`+`<td>${answer_details[i][`${answer_details[i].correct_answer}`]}</td>`+`<td>${answer_details[i][`${answer_details[i].answer}`]}</td>`
+                                else {
+                                    overallreview += `<tr><td>${answer_details[i].question}</td>` + `<td>${answer_details[i][`${answer_details[i].correct_answer}`]}</td>` + `<td>${answer_details[i][`${answer_details[i].answer}`]}</td>`
                                 }
-                                  
+
                             }
                         }
                     }
-                            clearInterval(interval)
-                            // counter_container.innerHTML = ''
-                            document.querySelector('.testreview').innerHTML = overallreview+`</table>`
-                        })
-                    }
+                    clearInterval(interval)
+                    // counter_container.innerHTML = ''
+                    document.querySelector('.testreview').innerHTML = overallreview + `</table>`
+                })
+        }
 
 
         function clear_answer(index) {
