@@ -31,9 +31,10 @@
         </select>
         <hr>
         <label>Standard:</label>
-        <input type="number" name="standard" class="form-control" placeholder="Standard" id="id_standard">
+       <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required="" id="id_standard">
+      </select>
         <label>Section:</label>
-        <input type="text" name="section" class="form-control" placeholder="Section" id="id_section">
+        <select name="grade" class="sec-in-form form-control" required="" id="id_section">      </select>
         <button id="standard_add_btn" onclick=add_standard() disabled>Add standard</button>
         <div class="signup-errors"></div>
         <div class="details"></div>
@@ -97,8 +98,58 @@
     let messages = document.querySelector('.messages')
     let error_messages = document.querySelector('.error-messages')
     let user, standards = [];
+    let content = ''
+    let grade_list = []
+ 
+    function getsectionname(element){
+        let standard = element.value
+        let sec_list;
+        content = ''
+        for(i=0;i<grade_list.length;i++){
+            if(grade_list[i].grade==standard){
+                sec_list = grade_list[i].section
+            }
+        }
+        content += ` 
+            <option value="" selected="">---------</option>`
+        if(sec_list.length){
+        for(i=0;i<sec_list.length;i++){
+            content += ` <option value="${sec_list[i]}">${sec_list[i]}</option>`
+        }
+    }
+        document.querySelector('.sec-in-form').innerHTML = content
+    }
+
+
+    fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+            method: 'GET',
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            grade_list = data.data
+            console.log(data.data)
+           if(data.status == 'failure'){
+            window.location.href = `${host}/404`
+           } 
+        content += ` 
+            <option value="" selected="">---------</option>`
+        if(grade_list.length){
+        for(i=0;i<grade_list.length;i++){
+            content += ` <option value="${grade_list[i].grade}">${grade_list[i].grade}</option>`
+        }
+    }
+        document.querySelector('.std-in-form').innerHTML = content
+        })
+
+
+
+
     function user_type_change() {
         user = document.getElementById('id_user_type').value
+        document.querySelector('.signup-errors').innerHTML = ''
+        document.querySelector('.details').innerHTML = ''
+        content = ''
+        standards = []
         console.log(user)
         if (user != 'is_student') {
             document.getElementById('standard_add_btn').disabled = false
@@ -106,6 +157,8 @@
             document.getElementById('standard_add_btn').disabled = true
         }
     }
+
+
 
     function add_standard() {
         standard = document.getElementById('id_standard').value
