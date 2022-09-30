@@ -87,12 +87,14 @@
 
   <div class='grid-item'>
     <label for="std">Standard:</label><br>
-    <input type="text" id="std" placeholder="Standard">
+    <!-- <input type="text" id="std" placeholder="Standard"> -->
+  <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required="" id="sec">
+  </select>
   </div>
-
   <div class='grid-item'>
     <label for="sec">Section:</label><br>
-    <input type="text" id="sec" placeholder="Section">
+    <select name="grade" class="sec-in-form form-control" required="" id="sec">      </select>
+    <!-- <input type="text" id="sec" placeholder="Section"> -->
   </div>
 
   <div class='grid-item'>
@@ -133,6 +135,8 @@
 <script>
   let user, standards = [];
   let students=[];
+let content = '';
+let grade_list;
   
   let token = localStorage.getItem("token")
   $(document).ready(function(){ 
@@ -147,6 +151,55 @@
   function reload() {
     window.location.href = window.location.href;
   }
+
+  fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+            method: 'GET',
+            headers: new Headers({
+            'Authorization': 'token' + ' ' + token,
+            'Content-Type': 'application/json'
+          })
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            grade_list = data.data
+            console.log(data.data)
+           if(data.status == 'failure'){
+            window.location.href = `${host}/404`
+           } 
+        content += ` 
+            <option value="" selected="">---------</option>`
+        if(grade_list.length){
+        for(i=0;i<grade_list.length;i++){
+            content += ` <option value="${grade_list[i].grade}">${grade_list[i].grade}</option>`
+        }
+    }
+        document.querySelector('.std-in-form').innerHTML = content
+        })
+
+
+
+
+
+  function getsectionname(element){
+        let standard = element.value
+        let sec_list;
+        content = ''
+        for(i=0;i<grade_list.length;i++){
+            if(grade_list[i].grade==standard){
+                sec_list = grade_list[i].section
+            }
+        }
+        content += ` 
+            <option value="" selected="">---------</option>`
+        if(sec_list.length){
+        for(i=0;i<sec_list.length;i++){
+            content += ` <option value="${sec_list[i]}">${sec_list[i]}</option>`
+        }
+    }
+        document.querySelector('.sec-in-form').innerHTML = content
+    }
+
+
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
   button = document.getElementById('userdetail-btn');
