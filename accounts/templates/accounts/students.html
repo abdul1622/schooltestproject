@@ -57,7 +57,7 @@
 
 <button id="add">Add Student</button>
 <div class="sort-input">
-  <input type="text" id="student-filter" placeholder="search" min="0" max="12"  onkeyup="myFunction()" >
+  <input type="text" id="student-filter" placeholder="search" min="0" max="12"  onkeyup="filter()" >
 </div>
 </div>
 <div id="userDetails">
@@ -216,7 +216,7 @@
           table2 += "</table>";
           container2.innerHTML = table2;
   })  
-  function myFunction() {
+  function filter() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("student-filter");
     filter = input.value.toLowerCase();
@@ -245,6 +245,10 @@
           }
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9d39984980c736e2ff10173ba1c78994d8ef478e
         function deletestudent(id) {
           url = "https://schooltestproject.herokuapp.com/api/user-details/"
           fetch(`${url}${id}/`, {

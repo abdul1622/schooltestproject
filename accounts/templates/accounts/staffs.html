@@ -56,7 +56,7 @@
 </div>
 <div class="standard-errors"></div>
 <div class='sort-input'>
-  <input type="text" id="student-filter" placeholder="search" min="0" max="12"   onkeyup="myFunction()">
+  <input type="text" id="student-filter" placeholder="search" min="0" max="12"   onkeyup="filter()">
   <button id="addstaff" onclick=addstaff()>Add Staff</button>
 </div>
 <div id="userDetails">
@@ -257,7 +257,7 @@
         table2 += "</table>";
         container2.innerHTML = table2;
 })  
-  function myFunction() {
+  function filter() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("student-filter");
     filter = input.value.toLowerCase();

@@ -11,9 +11,11 @@ class GradeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Grade
         fields = '__all__'
+        
     def validate(self, data):
-        if Grade.objects.filter(grade=data['grade']).exists():
-            raise serializers.ValidationError({'error':'grade altready exists'})
+        if not self.instance:
+            if Grade.objects.filter(grade=data['grade']).exists():
+                raise serializers.ValidationError({'error':'grade altready exists'})
         return data
 
 class SubjectSerializer(serializers.ModelSerializer):

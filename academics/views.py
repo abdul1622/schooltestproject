@@ -59,7 +59,10 @@ class GradeView(ListCreateAPIView):
     def list(self, request):
         user = self.request.user
         queryset = self.get_queryset()
-        if user.user_type == 'is_staff':
+       
+        if user.is_anonymous:
+            queryset = Grade.objects.all()
+        elif user.user_type == 'is_staff':
             grade = user.profile.standard
             grade_list = []
             for i in grade:
@@ -73,6 +76,7 @@ class GradeView(ListCreateAPIView):
 
     def create(self, request):
         serializer = GradeSerializer(data=request.data)
+        print(serializer)
         if serializer.is_valid():
             serializer.save()
             return Response({"status": "success", 'data': serializer.data}, status=HTTP_201_CREATED)
@@ -92,9 +96,9 @@ class GradeEditView(RetrieveUpdateDestroyAPIView):
         serializer = GradeSerializer(queryset)
         return Response(serializer.data, status=HTTP_200_OK)
 
-    def update(self, request, pk):
-        subject = Subject.objects.get(pk=pk)
-        serializer = SubjectSerializer(subject, data=request.data)
+    def patch(self, request, pk):
+        subject = Grade.objects.get(pk=pk)
+        serializer = GradeSerializer(subject, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response({"status": "success", 'data': serializer.data}, status=HTTP_200_OK)
@@ -124,9 +128,8 @@ class SubjectCreateView(ListCreateAPIView):
                 subject = 'Subject creation'
                 message = f'{user.profile.full_name} HAD CREATED,ON GRADE : {grade.grade} SUBJECT : {subjects}'
                 email_from = settings.EMAIL_HOST_USER
-                recipient_list = [admin.email, ]
+                recipient_list = [admin.email,]
                 send_mail(subject, message, email_from, recipient_list)
-
             return Response({"status": "success", 'data': serializer.data}, status=HTTP_201_CREATED)
         return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 

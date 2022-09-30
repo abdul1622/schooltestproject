@@ -96,6 +96,8 @@
     </div>
     <div id="grade-list" class="grade-list container">
 
+
+
     </div>
   
 
@@ -124,9 +126,11 @@
     let container2 = document.querySelector('.cards')
     var subject_id;
     var grade_val;
+    let current_grade;
     var container = document.querySelector('.cards')
     var host = window.location.protocol + "//" + window.location.host;
     var container3 = document.querySelector('.chapter-cards')
+    let section_list=[]
     var list = document.querySelector('.grade-list');
     document.getElementById('nav-academics').style.opacity = '0.5';
     document.getElementById('back-btn-chapter').addEventListener('click', () => {
@@ -134,6 +138,11 @@
         messages.innerHTML = ''
         error_messages.innerHTML = ''
     })
+
+function section_change(){
+    document.querySelector('.section-list').innerHTML = ''
+    section_list = []
+}
 
     // get grade
     function get() {
@@ -154,7 +163,7 @@
             window.location.href = `${host}/404`
            } 
             data.data.forEach((d, index) => {
-                content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button>
+                content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button> <button id="edit" onclick=edit_grade(${d.id})><i class="fa fa-edit"></i></button>
         <p  onclick=getsubject(${d.grade},${d.id}) class="grade">${d.grade} </p>
         
  </div>`
@@ -169,13 +178,20 @@
             document.getElementById('grade-btn').style.display = "block"
             document.getElementById('grade-list').style.display = "block"
             document.getElementById('chapterlist').style.display = "none"
-            form_all.innerHTML = `<div class='grade-form-box'>{{gradeform.as_p}}</div>`
+            form_all.innerHTML = `<div class='grade-form-box'>
+                <p><label for="id_grade">Grade:</label> <input type="number" name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
+               <p class='section-btn'><span> <button onclick=add_section('create') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
+                <p class='section-list'> </p>
+                <p class='section-error'></p>
+                </div>`
             document.getElementById('subjects-by-grade').style.display = "none"
             if(user_type != 'is_admin'){
                 document.getElementById('grade').style.display = 'none'
             }
         })
     };
+    // <p> <label for='id_section'>Section :</label>
+                // <input type="text" name="" maxlength="1" id="id_section">
         get();
    
     // delete grade 
@@ -185,6 +201,91 @@
         let no_btn = document.getElementById('delete-btn-no')
         yes_button.setAttribute("onClick", `deletegrade(${id})`);
     }
+
+function edit_grade(id){
+    edit = true
+    for(i=0;i<grade_list.length;i++){
+        if(grade_list[i].id == id){
+            current_grade = grade_list[i]
+            section_list = grade_list[i].section
+        }
+    }
+    form_all.innerHTML = `<div class='grade-form-box'>
+            {% csrf_token %}
+                <p><label for="id_grade">Grade:</label> <input type="number" disabled name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
+               <p class='section-btn'><span> <button onclick=add_section('edit') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
+                <p class='section-list'> </p>
+                <p class='section-error'></p>
+                <p> <button onclick=cancel()> cancel </button> </p>
+                </div>`
+        let section_content = ''
+        for(i=0;i<section_list.length;i++){
+            section_content += `<li>${section_list[i]}</li> `
+        }
+        if(section_list.length){
+        document.querySelector('.delete-section').innerHTML =  ` <button onclick=remove_section() id='add-section'>remove_section</button>`
+        }
+        document.querySelector('.section-list').innerHTML = section_content
+}
+
+function cancel(){
+    form_all.innerHTML = `<div class='grade-form-box'>
+            {% csrf_token %}
+                <p><label for="id_grade">Grade:</label> <input type="number" name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
+               <p class='section-btn'><span> <button onclick=add_section('create') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
+                <p class='section-list'> </p>
+                <p class='section-error'></p>
+                </div>`
+                edit = false
+}
+
+function add_section(flag){
+    let standard
+    if(flag=='edit'){
+        standard = current_grade.grade
+    }
+    else{
+          standard = document.getElementById('id_grade').value
+    }
+    let section;
+
+        if(!standard){
+            document.querySelector('.section-error').innerHTML = `<li>add standard</li>`
+            return
+        }
+        if(section_list.length){
+            if(section_list[section_list.length-1] == 'Z'){
+                document.querySelector('.section-error').innerHTML = `<li>no more section</li>`
+                return
+            }
+           as_sec = ((section_list[section_list.length-1]).charCodeAt(0))+1
+           section = String.fromCharCode(as_sec)
+           section_list.push(section)
+        }else{
+            section_list.push('A')
+        }
+        document.querySelector('.section-error').innerHTML =''
+
+        let section_content = ''
+        for(i=0;i<section_list.length;i++){
+            section_content += `<li>${section_list[i]}</li> `
+        }
+        if(section_list.length){
+        document.querySelector('.delete-section').innerHTML =  ` <button onclick=remove_section() id='add-section'>remove_section</button>`
+        }
+        document.querySelector('.section-list').innerHTML = section_content
+}
+
+function remove_section(){
+    section_list.pop()
+    let section_content = ''
+    for(i=0;i<section_list.length;i++){
+            section_content += `<li>${section_list[i]}</li> `
+        }
+        document.querySelector('.section-list').innerHTML = section_content
+        document.querySelector('.section-error').innerHTML =''
+}
+
 
     function deletegrade(id) {
         let url = 'https://schooltestproject.herokuapp.com/api/grades/'
@@ -208,12 +309,49 @@
 
     // create grade 
     grade_create.addEventListener('click', () => {
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        let url_grade = 'https://schooltestproject.herokuapp.com/api/grades/'
+        let id = current_grade.id
+        if(edit){
+            fetch(`${url_grade}${id}/`, {
+                        method: 'PUT',
+                        headers: {
+                            'content-Type': 'application/json',
+                            'Authorization': 'token' + ' ' + token,
+                            'X-CSRFToken': csrftoken
+                        },
+                        body: JSON.stringify({
+                            'section':section_list
+                        })
+                    }).then(function (response) {
+                        if (response.status == 200) {
+                            console.log("Sucess response", response)
+                            messages.innerHTML = 'Updated succesfully';
+                            error_messages.innerHTML = ''
+                            // get();
+                            get();
+                        } else {
+                            console.log(response);
+                        }
+                        return response.json()
+                    }).then(data => {
+                        console.log(data)
+                        if (data.status != 'success') {
+                            error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+                            messages.innerHTML = ''
+                        }
+                        edit = false
+                        return
+                    })
+        }
+else{
+    console.log('nja')
         var grade = document.getElementById('id_grade').value
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        fetch('https://schooltestproject.herokuapp.com/api/grades/',
+        fetch(url_grade,
             {
                 method: 'POST',
-                body: JSON.stringify({ 'grade': grade }
+                body: JSON.stringify({ 'grade': grade,'section':section_list }
                 ),
                 headers: {
                     'Accept': 'application/json',
@@ -237,6 +375,7 @@
                 }
             })
         return true;
+}
     })
 
 

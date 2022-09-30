@@ -48,7 +48,7 @@ class grade_form(forms.ModelForm):
 
     class Meta:
         model = Grade
-        fields = '__all__'
+        fields = ['grade']
 
 
 class subject_form(forms.ModelForm):
