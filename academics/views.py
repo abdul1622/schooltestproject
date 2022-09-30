@@ -59,7 +59,10 @@ class GradeView(ListCreateAPIView):
     def list(self, request):
         user = self.request.user
         queryset = self.get_queryset()
-        if user.user_type == 'is_staff':
+       
+        if user.is_anonymous:
+            queryset = Grade.objects.all()
+        elif user.user_type == 'is_staff':
             grade = user.profile.standard
             grade_list = []
             for i in grade:
@@ -125,9 +128,8 @@ class SubjectCreateView(ListCreateAPIView):
                 subject = 'Subject creation'
                 message = f'{user.profile.full_name} HAD CREATED,ON GRADE : {grade.grade} SUBJECT : {subjects}'
                 email_from = settings.EMAIL_HOST_USER
-                recipient_list = [admin.email, ]
+                recipient_list = [admin.email,]
                 send_mail(subject, message, email_from, recipient_list)
-
             return Response({"status": "success", 'data': serializer.data}, status=HTTP_201_CREATED)
         return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 

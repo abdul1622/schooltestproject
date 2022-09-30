@@ -180,7 +180,7 @@ function section_change(){
             document.getElementById('chapterlist').style.display = "none"
             form_all.innerHTML = `<div class='grade-form-box'>
                 <p><label for="id_grade">Grade:</label> <input type="number" name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
-               <p class='section-btn'><span> <button onclick=add_section() id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
+               <p class='section-btn'><span> <button onclick=add_section('create') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
                 <p class='section-list'> </p>
                 <p class='section-error'></p>
                 </div>`
@@ -213,9 +213,10 @@ function edit_grade(id){
     form_all.innerHTML = `<div class='grade-form-box'>
             {% csrf_token %}
                 <p><label for="id_grade">Grade:</label> <input type="number" disabled name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
-               <p class='section-btn'><span> <button onclick=add_section() id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
+               <p class='section-btn'><span> <button onclick=add_section('edit') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
                 <p class='section-list'> </p>
                 <p class='section-error'></p>
+                <p> <button onclick=cancel()> cancel </button> </p>
                 </div>`
         let section_content = ''
         for(i=0;i<section_list.length;i++){
@@ -227,16 +228,27 @@ function edit_grade(id){
         document.querySelector('.section-list').innerHTML = section_content
 }
 
+function cancel(){
+    form_all.innerHTML = `<div class='grade-form-box'>
+            {% csrf_token %}
+                <p><label for="id_grade">Grade:</label> <input type="number" name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
+               <p class='section-btn'><span> <button onclick=add_section('create') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
+                <p class='section-list'> </p>
+                <p class='section-error'></p>
+                </div>`
+                edit = false
+}
 
 function add_section(flag){
-    // if(flag=='edit'){
-    
-    // }
-    // else{
-
-    // }
+    let standard
+    if(flag=='edit'){
+        standard = current_grade.grade
+    }
+    else{
+          standard = document.getElementById('id_grade').value
+    }
     let section;
-    let standard = document.getElementById('id_grade').value
+
         if(!standard){
             document.querySelector('.section-error').innerHTML = `<li>add standard</li>`
             return
@@ -298,7 +310,7 @@ function remove_section(){
     // create grade 
     grade_create.addEventListener('click', () => {
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        let url_grade = 'http://127.0.0.1:8000/api/grades/'
+        let url_grade = 'https://schooltestproject.herokuapp.com/api/grades/'
         let id = current_grade.id
         if(edit){
             fetch(`${url_grade}${id}/`, {
