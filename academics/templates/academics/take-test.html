@@ -464,10 +464,8 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
         }
 
         .testreview {
-            display: grid;
-            grid-template-columns: auto auto auto;
-            row-gap: 10%;
-            margin-left: 3%;
+           
+            margin-left: 26%;
         }
 
         .reviewcards {
@@ -967,7 +965,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
             } else {
                 result = 'pass'
             }
-            overallreview = ''
+            let overallreview = ''
             // testdetails=[]
             console.log(answer_details)
             for (i = 0; i < answer_details.length; i++) {
@@ -1008,28 +1006,38 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                     if (data.status != 'success') {
                         console.log(data)
                     } else {
+                        overallreview += `<table>
+                            <tr>
+                                <th >Question</th>
+                                <th >Correct Answer</th>
+                                <th>Given Answer</th>
+                            </tr>`
                         for (i = 0; i < answer_details.length; i++) {
                             if (answer_details[i].question_type != 'MCQ') {
-                                overallreview += `<div class='reviewcards'>
-                        <p>${answer_details[i].question}</p>
-                        <p>Correct Answer : ${answer_details[i].correct_answer}</p>
-                        <p> Your Answer : ${answer_details[i].answer}</p>
-                    </div>`
-                            } else {
-                                overallreview += `<div class='reviewcards'>
-                    <p>${answer_details[i].question}</p>
-                    <p>Correct Answer : ${answer_details[i][`${answer_details[i].correct_answer}`]}</p>
-                    <p> Your Answer : ${answer_details[i][`${answer_details[i].answer}`]}</p>
-                </div>`
+                                if (answer_details[i][`${answer_details[i].correct_answer}`]== answer_details[i].answer){
+                                overallreview += `<tr><td>${answer_details[i].question}</td>`+`<td>${answer_details[i][`${answer_details[i].correct_answer}`]}</td>`+`<td>${answer_details[i].answer}</td></tr>`
+                                }
+                            else{
+                                    overallreview += `<tr><td>${answer_details[i].question}</td>`+`<td>${answer_details[i][`${answer_details[i].correct_answer}`]}</td>`+`<td>${answer_details[i].answer}</td></tr>`
+                                }
+                            } 
+                            else  {
+                                if (answer_details[i][`${answer_details[i].correct_answer}`]==answer_details[i][`${answer_details[i].answer}`]){
+                                    overallreview +=`<tr ><td>${answer_details[i].question}</td>`+`<td>${answer_details[i][`${answer_details[i].correct_answer}`]}</td>`+`<td>${answer_details[i][`${answer_details[i].answer}`]}</td>`
+                                }
+                                else{
+                                    overallreview +=`<tr><td>${answer_details[i].question}</td>`+`<td>${answer_details[i][`${answer_details[i].correct_answer}`]}</td>`+`<td>${answer_details[i][`${answer_details[i].answer}`]}</td>`
+                                }
+                                  
                             }
-                            clearInterval(interval)
-                            // counter_container.innerHTML = ''
-                            document.querySelector('.testreview').innerHTML = overallreview
                         }
                     }
-                })
+                            clearInterval(interval)
+                            // counter_container.innerHTML = ''
+                            document.querySelector('.testreview').innerHTML = overallreview+`</table>`
+                        })
+                    }
 
-        }
 
         function clear_answer(index) {
             let question_details = answer_details[index]
