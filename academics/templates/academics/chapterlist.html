@@ -217,15 +217,14 @@
                         let  content=`<div  class='chapterhead'>
                             <h4 class='chaptergrade'>Grade:${data.data[0]['grade']}</h4>
                             <h4 class="subjectname" id=${data.data[0]['subject_id']}>Subject : ${data.data[0]['subject'] }</h4>
-                            <h4 class="chaptername">Chapter : ${data.data[0]['name'] .toUpperCase()}</h4>
-                           
                         </div>`
                         console.log(data);
                         let table2 = '<a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back() >Back</a> <table>';
-                        table2 +=  `<thead class="thead"><th>Chapter No</th><<th>Description</th><th>Action</th></thead>`;
+                        table2 +=  `<thead class="thead"><th>Chapter No</th><th>Chapter Name</th><<th>Description</th><th>Action</th></thead>`;
                         data.data.map(d => {
                             table2 = table2 + `<tr id=${d.id}>`;
                             table2 = table2 + '<td class="chapter_no">' + `${d.chapter_no}` + '</td>';
+                            table2 = table2 + '<td class="chapter_name">' + `${d.name}` + '</td>';
                             table2 = table2 + '<td class="description">' + `${d.description}` + '</td>',
                                 table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i>` + '</td>',
                                 table2 = table2 + '<td>' + `<i class="fa fa-trash-o" id="delete" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist"></i>` + '</td>',
@@ -294,7 +293,7 @@
                     window.location.href = '#grade';
                     form.style.display = 'block'
                     var chapter_no = parent.querySelector('.chapter_no').textContent;
-                    var name =document.querySelector('.chaptername').textContent.split(':')[1];
+                    var name =parent.querySelector('.chapter_name').textContent;
                     console.log(name)
                     var description = parent.querySelector('.description').textContent;
                     console.log(chapter_no)
