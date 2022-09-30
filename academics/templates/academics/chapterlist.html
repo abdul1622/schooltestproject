@@ -79,22 +79,14 @@
 <div class="form box" id="form-chaplist">
 
     <button onclick=closeform() class='back-btn'>&#x2715;</button>
-    
-    
-
     {% csrf_token %}
     {{form2.as_p}}
     <button class="submit-btn" data-toggle="modal" data-target="#messageModal-chapterlist" id="chapter-btn">Submit</button>
 </div>
 <div class="messages container-fluid">
-
 </div>
 <div class="error-message container-fluid">
-
 </div>
-
-
-
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <script>
@@ -120,7 +112,6 @@
     let user_type = localStorage.getItem('user_type')
     // form.style.display = 'none'
     document.getElementById('')
-    
     let container3 = document.querySelector('.chapter-table')
     let error_messages = document.querySelector('.error-messages')
     var grade;
@@ -128,9 +119,6 @@
     let content = '';
     let grade_list
     document.getElementById('nav-chapterlist').style.opacity = '0.5';
-
-
-
     fetch('https://schooltestproject.herokuapp.com/api/grades/', {
             method: 'GET',
             headers: {
@@ -164,12 +152,8 @@
     //             $("#id_grade").html(data); 
     //           }
     //         });
-      
-
-
     function closeform(){
         document.querySelector('.form').style.display ='none'
-        
         }
 
         $("#id_grade").change(function () {
@@ -217,19 +201,6 @@
             let subject_name = subject_element.options[subject_element.selectedIndex].text
             console.log(grade, subject)
             console.log(grade_name + subject_name)
-            // let url2 = `https://schooltestproject.herokuapp.com/api/subjects/${subject}/`
-            // fetch(url2, {
-            //     method: 'GET',
-            //     headers: {
-            //         'content-Type': 'application/json',
-            //         'Authorization': 'token' + ' ' + token,
-            //     }
-            // }).then(res => {
-            //     return res.json()
-            // }).then(data => {
-            //     console.log(data.name)
-            //     subject_name = data.name
-            // }).then(()=>{
                 fetch('https://schooltestproject.herokuapp.com/api/chapter-list/', {
                     method: 'POST',
                     body: JSON.stringify({ 'grade': grade_name, 'subject': subject_name }
@@ -242,15 +213,19 @@
                     }
                 }).then(response => response.json()).then(data => {
                     if (data.status == 'success') {
+                        console.log(data.data[0])
+                        let  content=`<div  class='chapterhead'>
+                            <h4 class='chaptergrade'>Grade:${data.data[0]['grade']}</h4>
+                            <h4 class="subjectname" id=${data.data[0]['subject_id']}>Subject : ${data.data[0]['subject'] }</h4>
+                            <h4 class="chaptername">Chapter : ${data.data[0]['name'] .toUpperCase()}</h4>
+                           
+                        </div>`
                         console.log(data);
-                        let table2 = '   <a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back() >Back</a> <table>';
-                        table2 += `<thead class="thead"><th>Grade</th><th>Subject</th><th>Chapter No</th><th>Chapter</th><th>Description</th><th>Action</th></thead>`;
+                        let table2 = '<a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back() >Back</a> <table>';
+                        table2 +=  `<thead class="thead"><th>Chapter No</th><<th>Description</th><th>Action</th></thead>`;
                         data.data.map(d => {
                             table2 = table2 + `<tr id=${d.id}>`;
-                            table2 = table2 + `<td class="grade">` + `${d.grade}` + `</td>`,
-                                table2 = table2 + `<td class="subject" id=${d.subject_id}>` + `${d.subject}` + '</td>';
                             table2 = table2 + '<td class="chapter_no">' + `${d.chapter_no}` + '</td>';
-                            table2 = table2 + '<td class="name">' + `${d.name}` + '</td>';
                             table2 = table2 + '<td class="description">' + `${d.description}` + '</td>',
                                 table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i>` + '</td>',
                                 table2 = table2 + '<td>' + `<i class="fa fa-trash-o" id="delete" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist"></i>` + '</td>',
@@ -261,7 +236,7 @@
                         // console.log(path)
                         let container = document.querySelector('.chapter-table');
                         flag = true
-                        container.innerHTML = table2;
+                        container.innerHTML = content+table2;
                         document.querySelector('.box').style.display = "none"
                         document.getElementById('id_chapter_no').value = ''
                         document.getElementById('id_name').value = ''
@@ -296,9 +271,9 @@
                 form_name = document.getElementById('id_name')
                 form_description = document.getElementById('id_description');
                 chapter_btn = document.getElementById('chapter-btn')
-                var subject_name = e.target.parentElement.parentElement.querySelector('.subject').textContent;
+                var subject_name = document.querySelector('.subjectname').textContent;
                 console.log(subject_name)
-                var grade_name = e.target.parentElement.parentElement.querySelector('.grade').textContent;
+                var grade_name = document.querySelector('.chaptergrade').textContent;
                 e.preventDefault();
                 let delbutton = e.target.id == 'delete';
                 let editbutton = e.target.id == 'edit';
@@ -309,8 +284,8 @@
                 let no_btn = document.getElementById('delete-btn-no')
         
                 const parent = e.target.parentElement.parentElement;
-                var subject = parent.querySelector('.subject').id;
-        
+                var subject = document.querySelector('.subjectname').id;
+                console.log(subject)
                 if (delbutton) {
                     yes_button.setAttribute("onClick", `deletechapter(${id},${grade_name},'${subject}')`)
                 }
@@ -318,11 +293,9 @@
                 if (editbutton) {
                     window.location.href = '#grade';
                     form.style.display = 'block'
-                //    const parent = e.target.parentElement.parentElement;
-                 //   var subject = parent.querySelector('.subject').id;
-                    console.log(subject)
                     var chapter_no = parent.querySelector('.chapter_no').textContent;
-                    var name = parent.querySelector('.name').textContent;
+                    var name =document.querySelector('.chaptername').textContent.split(':')[1];
+                    console.log(name)
                     var description = parent.querySelector('.description').textContent;
                     console.log(chapter_no)
                     form_chapter_no.value = chapter_no

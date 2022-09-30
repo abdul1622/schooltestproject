@@ -14,7 +14,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.status import (
     HTTP_200_OK,HTTP_404_NOT_FOUND,HTTP_401_UNAUTHORIZED,HTTP_204_NO_CONTENT,
     HTTP_400_BAD_REQUEST,HTTP_201_CREATED,HTTP_203_NON_AUTHORITATIVE_INFORMATION,HTTP_206_PARTIAL_CONTENT
-)
+) 
 from django.shortcuts import get_object_or_404
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
@@ -37,7 +37,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-class SignupView(CreateAPIView):
+class SignupView(APIView):
     serializer_class=SignupSerializer
     permission_classes = [AllowAny]
     def post(self, request):
