@@ -88,7 +88,7 @@
   <div class='grid-item'>
     <label for="std">Standard:</label><br>
     <!-- <input type="text" id="std" placeholder="Standard"> -->
-  <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required="" id="sec">
+  <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required="" id="std">
   </select>
   </div>
   <div class='grid-item'>
@@ -347,6 +347,7 @@ let grade_list;
             let firstname = parent.querySelector('.userfirstname').textContent;
             let stdsec=parent.querySelector('.userstandard').textContent;
             let standard = parseInt(stdsec);
+
             let section = stdsec.slice(-1);
             let address = parent.querySelector('.useraddress').textContent;
             document.getElementById('email').value = email
@@ -356,7 +357,26 @@ let grade_list;
             document.getElementById('ffname').value = fullname
             document.getElementById('lname').value = lastname
             document.getElementById('fname').value = firstname
+
             document.getElementById('std').value = standard
+
+                  // for section drop down
+                  let sec_list;
+        content = ''
+        for(i=0;i<grade_list.length;i++){
+            if(grade_list[i].grade==standard){
+                sec_list = grade_list[i].section
+            }
+        }
+        content += ` 
+            <option value="" selected="">---------</option>`
+        if(sec_list.length){
+        for(i=0;i<sec_list.length;i++){
+            content += ` <option value="${sec_list[i]}">${sec_list[i]}</option>`
+        }
+    }
+        document.querySelector('.sec-in-form').innerHTML = content
+
             document.getElementById('sec').value = section
             document.getElementById('address').value = address
             button.addEventListener('click', () => {
