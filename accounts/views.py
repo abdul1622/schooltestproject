@@ -104,7 +104,6 @@ class LoginView(APIView):
             return Response({"status": "failed"}, status=HTTP_203_NON_AUTHORITATIVE_INFORMATION)
 
 class LoginVerifyView(APIView):
-
     serializer_class= OtpVerificationserializer
     permission_classes=[AllowAny]
     def post(self,request):
