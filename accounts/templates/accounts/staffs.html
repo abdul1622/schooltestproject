@@ -259,7 +259,6 @@
   var host = window.location.protocol + "//" + window.location.host;
   let form = document.getElementById('userDetails')
   const container2 = document.querySelector('.container2');
-  
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
   fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
     method: 'GET',
@@ -275,7 +274,6 @@
         staffs.push(d)
       }
   })
-  console.log(staffs)
   let table2 = `<table class='--user' id='usr'>`;
     table2 += `<tr class="header">
            <th >Email</th>
@@ -328,7 +326,7 @@ function deletestaff(id) {
       'Authorization': 'token' + ' ' + localStorage.getItem('token')
     },
   }).then(res => {
-    userdetails();
+
   })
 }
 function edit(index,id){
@@ -421,12 +419,11 @@ function edit(index,id){
             console.log(messages)
             console.log("Sucess response", response)
             messages.innerHTML = 'updated successfully'
-           
           }
           else {
             error_messages.innerHTML = `<li>${(data.data.error)}</li>`
             messages.innerHTML = ''
-          } userdetails();
+          } staffslist();
         })
       })
     }
