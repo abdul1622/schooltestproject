@@ -234,7 +234,6 @@
           headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken
-            // 'Content-Type': 'application/x-www-form-urlencoded',
           }
         }).then(response => {
           if (response.status == 201) {
@@ -260,6 +259,7 @@
   var host = window.location.protocol + "//" + window.location.host;
   let form = document.getElementById('userDetails')
   const container2 = document.querySelector('.container2');
+  
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
   fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
     method: 'GET',
@@ -291,6 +291,11 @@
     </tr>`;
          console.log(staffs.length)
          staffs.forEach((d, index) => {
+          let std=new Array
+          for(let standard of d.profile?.standard){
+            std.push(`${standard}`)
+          }
+          console.log(std)
           console.log('to')
             table2 = table2 + `<tbody><tr id=${d.id}>`;
             table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
@@ -301,20 +306,34 @@
             table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
             table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
             table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
-            table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
+            table2 = table2 + `<td class="userstandard" onclick="std('${std}',${index})" id=${std}>` +`${std[0]}`+ '</td>';
             table2 = table2 + '<td>' + ` <i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
               table2 = table2 + `</tr>`;
             })
         table2 += "</table>";
         container2.innerHTML = table2;
 })  
+
+function std (id,index){
+  var td=document.querySelectorAll('.userstandard')
+  ar=id.split(',')
+  console.log(ar.length,ar)
+  if (ar.length > 1){
+    console.log('hi')
+    content=''
+    for( let i of ar){
+      content+= `<li>${i}</li>`
+     
+    }
+    td[index].innerHTML=content
+  }
+}
   function filter() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("student-filter");
     filter = input.value.toLowerCase();
     table = document.getElementById("usr");
     tr = table.getElementsByTagName("tr");
-    
     for (i = 0; i < tr.length; i++) {
         alltags = tr[i].getElementsByTagName("td");
         isFound = false;
@@ -351,7 +370,7 @@
     document.getElementById('sec').value = ''
     document.getElementById('address').value = ''
   }
-  document.getElementById('standard_add_btn').addEventListener("click", addstaff, false)
+ // document.querySelector('.--usr').addEventListener('click',=>())
  function addstandard() {
     let std = document.getElementById('std').value
     let section = (document.getElementById('sec').value).toUpperCase()
@@ -425,8 +444,8 @@
       // let standard = parent.querySelector('.userstandard')
       // let section = parent.querySelector('.usersection')
       // console.log((parent.querySelector('.stdsec').textContent).length)
-      if((parent.querySelector('.userstandard').textContent).length){
-      standards = parent.querySelector('.userstandard').textContent.split(',');
+      if((parent.querySelector('.userstandard').id).split(',').length){
+      standards = parent.querySelector('.userstandard').id.split(',');
       console.log(standards)
       }else{
         standards = []
