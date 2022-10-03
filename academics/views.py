@@ -293,7 +293,6 @@ class QuestionCreateView(CreateAPIView):
         from_chapter_no = self.request.query_params.get('from_chapter_no')
         to_chapter_no = self.request.query_params.get('to_chapter_no')
         questions = Question.objects.all()
-
         if grade and subject:
             try:
                 if from_chapter_no and to_chapter_no:
@@ -306,9 +305,8 @@ class QuestionCreateView(CreateAPIView):
                 # questions = Question.objects.all()
                  return Response({'status': 'failed','data':'give a valid grade and subject'}, status=HTTP_206_PARTIAL_CONTENT)
         if len(questions):
-            serializer_name = questionanswerserializer(questions, many=True)
             serializer = QuestionAnswerSerializer(questions, many=True)
-            return Response({"status": "success", 'name': serializer_name.data, 'data': serializer.data})
+            return Response({"status": "success",'data': serializer.data})
         return Response({'status': 'failed','data':"subject don't have a questions"}, status=HTTP_206_PARTIAL_CONTENT)
 
     def post(self, request):
