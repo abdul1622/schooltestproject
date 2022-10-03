@@ -304,7 +304,7 @@
             table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
             table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
             table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
-            table2 = table2 + `<td class="userstandard" onclick="std('${std}',${index},${false})" id=${std}>` +`${std[0]}`+ '</td>';
+            table2 = table2 + `<td class="userstandard" onclick="std('${std}',${index},${false})" id=${std}>` +`${std[0]} (${std.length})`+ '</td>';
             table2 = table2 + '<td>' + ` <i id="edit" class="fa fa-edit" onclick="edit(${index},${d.id})"></i><i id="delete" data-toggle="modal" data-target="#delete-staff-Modal" class="fa fa-trash-o" onclick="deleteuser(${d.id})" ></i>` + '</td></tbody>',
               table2 = table2 + `</tr>`;
             })
@@ -442,7 +442,7 @@ if(!flag){
   console.log(document.getElementById(`${id}`))
   document.getElementById(`${id}`).setAttribute("onclick", `std('${id}',${index},${true})`);
 }else{
-    td[index].innerHTML = `${ar[0]}`
+    td[index].innerHTML = `${ar[0]} (${ar.length})`
     document.getElementById(`${id}`).setAttribute("onclick", `std('${id}',${index},${false})`);
 }
 
