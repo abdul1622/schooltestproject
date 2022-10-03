@@ -304,7 +304,7 @@
             table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
             table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
             table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
-            table2 = table2 + `<td class="userstandard" onclick="std('${std}',${index})" id=${std}>` +`${std[0]}`+ '</td>';
+            table2 = table2 + `<td class="userstandard" onclick="std('${std}',${index},${false})" id=${std}>` +`${std[0]}`+ '</td>';
             table2 = table2 + '<td>' + ` <i id="edit" class="fa fa-edit" onclick="edit(${index},${d.id})"></i><i id="delete" data-toggle="modal" data-target="#delete-staff-Modal" class="fa fa-trash-o" onclick="deleteuser(${d.id})" ></i>` + '</td></tbody>',
               table2 = table2 + `</tr>`;
             })
@@ -427,21 +427,26 @@ function edit(index,id){
         })
       })
     }
-function std (id,index){
+function std (id,index,flag){
   var td=document.querySelectorAll('.userstandard')
   ar=id.split(',')
   console.log(ar.length,ar)
+if(!flag){
   if (ar.length > 1){
     content=''
     for( let i of ar){
       content+= `<li>${i}</li>`
     }
     td[index].innerHTML=content
-    ar[0]='true'
   }
+  console.log(document.getElementById(`${id}`))
+  document.getElementById(`${id}`).setAttribute("onclick", `std('${id}',${index},${true})`);
+}else{
+    td[index].innerHTML = `${ar[0]}`
+    document.getElementById(`${id}`).setAttribute("onclick", `std('${id}',${index},${false})`);
 }
 
-
+}
   function filter() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("student-filter");

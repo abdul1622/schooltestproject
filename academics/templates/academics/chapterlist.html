@@ -387,6 +387,8 @@ return
          
             let input=document.getElementById('id_subject')
             input.addEventListener('click',(e) => {
+                subject_name = input.options[input.selectedIndex].text;
+    subject = input.options[input.selectedIndex].value
                     getchapter();
             })
 
