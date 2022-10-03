@@ -259,7 +259,6 @@
   var host = window.location.protocol + "//" + window.location.host;
   let form = document.getElementById('userDetails')
   const container2 = document.querySelector('.container2');
-  
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
   fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
     method: 'GET',
@@ -275,7 +274,6 @@
         staffs.push(d)
       }
   })
-  console.log(staffs)
   let table2 = `<table class='--user' id='usr'>`;
     table2 += `<tr class="header">
            <th >Email</th>
@@ -295,9 +293,9 @@
           for(let standard of d.profile?.standard){
             std.push(`${standard}`)
           }
+        
           console.log(std)
-          console.log('to')
-            table2 = table2 + `<tbody><tr id=${d.id}>`;
+            table2 = table2 + `<tr id=${d.id} class='list'>`;
             table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
             table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
             table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
@@ -307,27 +305,143 @@
             table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
             table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
             table2 = table2 + `<td class="userstandard" onclick="std('${std}',${index})" id=${std}>` +`${std[0]}`+ '</td>';
-            table2 = table2 + '<td>' + ` <i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
+            table2 = table2 + '<td>' + ` <i id="edit" class="fa fa-edit" onclick="edit(${index},${d.id})"></i><i id="delete" data-toggle="modal" data-target="#delete-staff-Modal" class="fa fa-trash-o" onclick="deleteuser(${d.id})" ></i>` + '</td></tbody>',
               table2 = table2 + `</tr>`;
             })
         table2 += "</table>";
         container2.innerHTML = table2;
 })  
 
+function deleteuser(id){
+  console.log('hi')
+  yes = document.getElementById('yes')
+  yes.setAttribute("onClick", `deletestaff(${id})`);
+}
+function deletestaff(id) {
+  url = "https://schooltestproject.herokuapp.com/api/user-details/"
+  fetch(`${url}${id}/`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'token' + ' ' + localStorage.getItem('token')
+    },
+  }).then(res => {
+
+  })
+}
+function edit(index,id){
+      tr=document.querySelectorAll('.list')[index]
+      let email =tr.querySelector(".useremail").textContent;
+      let phone = tr.querySelector('.userphone').textContent;
+      let reg = tr.querySelector('.userreg').textContent;
+      let dob = tr.querySelector('.userDOB').textContent;
+      let fullname = tr.querySelector('.userfullname').textContent;
+      let lastname = tr.querySelector('.userlastname').textContent;
+      let firstname = tr.querySelector('.userfirstname').textContent;
+      console.log(email)
+      form.style.display = 'grid'
+      form.style.marginTop = '10vh'
+      form_email = document.getElementById('email');
+      form_phone = document.getElementById('phone');
+      form_reg = document.getElementById('reg');
+      form_dob = document.getElementById('dob');
+      form_fname = document.getElementById('fname');
+      form_lname = document.getElementById('lname');
+      form_fullname = document.getElementById('ffname');
+      form_std = document.getElementById('std');
+      form_sec = document.getElementById('sec');
+      form_ad = document.getElementById('address');
+      button = document.getElementById('userdetail-btn');
+      if((tr.querySelector('.userstandard').id).split(',').length){
+        standards = tr.querySelector('.userstandard').id.split(',');
+        console.log(standards)
+        }else{
+          standards = []
+          console.log(standards)
+        }
+        let editcontent = ` <p> standards list</p>`
+        for (i = 0; i < standards.length; i++) {
+         editcontent += ` 
+            <li>${standards[i]}<button onclick=delete_standard(${i})>delete</button></li>`
+        }
+        document.querySelector('.standards-list').innerHTML = editcontent
+        form.style.display = 'grid'
+      form.style.marginTop = '10vh'
+      url = "https://schooltestproject.herokuapp.com/api/user-details/"
+      if((tr.querySelector('.userstandard').id).split(',').length){
+      standards = tr.querySelector('.userstandard').id.split(',');
+      console.log(standards)
+      }else{
+        standards = []
+        console.log(standards)
+      }
+      let content = ` <p> standards list</p>`
+      for (i = 0; i < standards.length; i++) {
+        content += ` 
+          <li>${standards[i]}<button onclick=delete_standard(${i})>delete</button></li>`
+      }
+      document.querySelector('.standards-list').innerHTML = content
+      let address = tr.querySelector('.useraddress').textContent;
+      document.getElementById('email').value = email
+      document.getElementById('phone').value = phone
+      document.getElementById('reg').value = reg
+      document.getElementById('dob').value = dob
+      document.getElementById('ffname').value = fullname
+      document.getElementById('lname').value = lastname
+      document.getElementById('fname').value = firstname
+      document.getElementById('address').value = address
+      button.addEventListener('click', () => {
+        if (!standards.length) {
+          std = document.getElementById('std').value
+          sec = (document.getElementById('sec').value).toUpperCase()
+          if (!std || !sec) {
+            error_messages.innerHTML = 'Enter valid standard and section'
+            return
+          }
+          standards.push(std + '-' + sec)
+        }
+        form.style.display = 'none'
+        fetch(`${url}${id}/`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'token'+' '+localStorage.getItem('token'),
+            'X-CSRFToken': csrftoken
+          },
+          body: JSON.stringify({
+            'email': form_email.value, 'phone': form_phone.value, 'date_of_birth': form_dob.value, 'register_number': form_reg.value,
+            'profile': { 'first_name': form_fname.value, 'last_name': form_lname.value, 'standard': standards, 'full_name': form_fullname.value, 'address': form_ad.value }
+          }
+          )
+        }).then(response => {
+          if (response.status == 200) {
+            error_messages.innerHTML = ''
+            console.log(messages)
+            console.log("Sucess response", response)
+            messages.innerHTML = 'updated successfully'
+          }
+          else {
+            error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+            messages.innerHTML = ''
+          } staffslist();
+        })
+      })
+    }
 function std (id,index){
   var td=document.querySelectorAll('.userstandard')
   ar=id.split(',')
   console.log(ar.length,ar)
   if (ar.length > 1){
-    console.log('hi')
     content=''
     for( let i of ar){
       content+= `<li>${i}</li>`
-     
     }
     td[index].innerHTML=content
+    ar[0]='true'
   }
 }
+
+
   function filter() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("student-filter");
@@ -407,107 +521,5 @@ function std (id,index){
     }
     document.querySelector('.standards-list').innerHTML = content
   }
-  container2.addEventListener('click', (e) => {
-    form_email = document.getElementById('email');
-    form_phone = document.getElementById('phone');
-    form_reg = document.getElementById('reg');
-    form_dob = document.getElementById('dob');
-    form_fname = document.getElementById('fname');
-    form_lname = document.getElementById('lname');
-    form_fullname = document.getElementById('ffname');
-    form_std = document.getElementById('std');
-    form_sec = document.getElementById('sec');
-    form_ad = document.getElementById('address');
-    button = document.getElementById('userdetail-btn');
-    e.preventDefault();
-    let delbutton = e.target.id == 'delete';
-    let editbutton = e.target.id == 'edit';
-    let id = e.target.parentElement.parentElement.id
-    console.log(id)
-    if (delbutton) {
-      yes = document.getElementById('yes')
-      yes.setAttribute("onClick", `deletestaff(${id})`);
-    }
-    if (editbutton) {
-      form.style.display = 'grid'
-      form.style.marginTop = '10vh'
-      url = "https://schooltestproject.herokuapp.com/api/user-details/"
-      const parent = e.target.parentElement.parentElement;
-      console.log(parent)
-      let email = parent.querySelector(".useremail").textContent;
-      let phone = parent.querySelector('.userphone').textContent;
-      let reg = parent.querySelector('.userreg').textContent;
-      let dob = parent.querySelector('.userDOB').textContent;
-      let fullname = parent.querySelector('.userfullname').textContent;
-      let lastname = parent.querySelector('.userlastname').textContent;
-      let firstname = parent.querySelector('.userfirstname').textContent;
-      // let standard = parent.querySelector('.userstandard')
-      // let section = parent.querySelector('.usersection')
-      // console.log((parent.querySelector('.stdsec').textContent).length)
-      if((parent.querySelector('.userstandard').id).split(',').length){
-      standards = parent.querySelector('.userstandard').id.split(',');
-      console.log(standards)
-      }else{
-        standards = []
-        console.log(standards)
-      }
-      let content = ` <p> standards list</p>`
-      for (i = 0; i < standards.length; i++) {
-        content += ` 
-          <li>${standards[i]}<button onclick=delete_standard(${i})>delete</button></li>`
-      }
-      document.querySelector('.standards-list').innerHTML = content
-      let address = parent.querySelector('.useraddress').textContent;
-      document.getElementById('email').value = email
-      document.getElementById('phone').value = phone
-      document.getElementById('reg').value = reg
-      document.getElementById('dob').value = dob
-      document.getElementById('ffname').value = fullname
-      document.getElementById('lname').value = lastname
-      document.getElementById('fname').value = firstname
-      // document.getElementById('std').value = standard
-      //  document.getElementById('sec').value = section
-      document.getElementById('address').value = address
-      button.addEventListener('click', () => {
-        if (!standards.length) {
-          std = document.getElementById('std').value
-          sec = (document.getElementById('sec').value).toUpperCase()
-          if (!std || !sec) {
-            error_messages.innerHTML = 'Enter valid standard and section'
-            return
-          }
-          standards.push(std + '-' + sec)
-        }
-        form.style.display = 'none'
-        fetch(`${url}${id}/`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token' + +localStorage.getItem('token'),
-            'X-CSRFToken': csrftoken
-          },
-          body: JSON.stringify({
-            'email': form_email.value, 'phone': form_phone.value, 'date_of_birth': form_dob.value, 'register_number': form_reg.value,
-            'profile': { 'first_name': form_fname.value, 'last_name': form_lname.value, 'standard': standards, 'full_name': form_fullname.value, 'address': form_ad.value }
-          }
-          )
-        }).then(response => {
-          if (response.status == 200) {
-            error_messages.innerHTML = ''
-            console.log(messages)
-            console.log("Sucess response", response)
-            messages.innerHTML = 'updated successfully'
-           
-          }
-          else {
-            error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-            messages.innerHTML = ''
-          } userdetails();
-        })
-      })
-    }
-  })
-
-
 </script>
 {% endblock %}
