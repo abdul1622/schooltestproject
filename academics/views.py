@@ -5,6 +5,7 @@ from os import stat
 import json
 from itertools import chain
 from re import sub
+from matplotlib import test
 from rest_framework.generics import (
     CreateAPIView,
     RetrieveAPIView,
@@ -696,6 +697,14 @@ class TestEditView(RetrieveUpdateDestroyAPIView):
             serializer.save()
             return Response({"status": "success", 'data': serializer.data}, status=HTTP_200_OK)
         return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
+
+    def destroy(self, request,pk, *args, **kwargs):
+        test = Test.objects.get(id=pk)
+        test_id = test.test_id
+        question_paper = Question_Paper.objects.get(test_id=test_id)
+        question_paper.test_id = None
+        question_paper.save()
+        return super(TestEditView, self).destroy(request, *args, **kwargs)
 
 
 class TestResultCreateView(CreateAPIView):

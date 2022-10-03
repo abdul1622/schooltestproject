@@ -2,10 +2,10 @@
 {% block content %}
 <div class="history-container-form" id="history-container-form">
     <label for=""> Grade: </label>
-    <select name="grade" required="" class="grade-in-form" id="id_grade">
-      </select>
+    <span class="grade-p"><select name="grade" required="" class="grade-in-form" id="id_grade">
+      </select></span>
       <!-- {{form.as_p}} -->
-    <label for=""> Subject: </label>
+    <br><label for=""> Subject: </label>
     <select name="subject" required="" id="id_subject">
         <option value="" selected="">---------</option>
       </select>
@@ -28,6 +28,7 @@
        var subjectId,gradeId,testId,content='',data2;
        let container = document.querySelector('.history-container')
        let current_details,student_details;
+       let grade_name
        document.getElementById('nav-studenttesthistory').style.opacity = '0.5';
        $(document).ready(function(){ 
         if(!token){
@@ -55,19 +56,38 @@
        }).then(res => {
            return res.json()
        }).then(data => {
-           grade_list = data.data
-           console.log(data.data)
-          if(data.status == 'failure'){
-           window.location.href = `${host}/404`
-          } 
-       content += ` 
-           <option value="" selected="">---------</option>`
-       if(grade_list.length){
-       for(i=0;i<grade_list.length;i++){
-           content += ` <option value="${grade_list[i].id}">${grade_list[i].grade}</option>`
-       }
-   }
-       document.querySelector('.grade-in-form').innerHTML = content
+        grade_list = data.data
+            console.log(data.data)
+           if(data.status == 'failure'){
+            window.location.href = `${host}/404`
+           } 
+           if(grade_list.length == 1){
+            grade = grade_list[0].id
+            // document.querySelector('.grade-p').innerHTML = grade
+                // content += ` <option value="${grade_list[0].id}">${grade_list[0].grade}</option>`
+                document.querySelector('.grade-p').innerHTML = ` ${grade_list[0].grade}`
+                // document.querySelector('.grade-p-get').innerHTML = ` ${grade_list[0].grade}`
+                var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+            grade_name =   grade_list[0].grade
+            $.ajax({                       
+              url: url_for_change,                  
+              data: {
+                'grade': grade     
+              },
+              success: function (data) {
+                $("#id_subject").html(data)
+              }
+            });
+
+            }else{
+                content += ` 
+            <option value="" selected="">---------</option>`
+        for(i=0;i<grade_list.length;i++){
+            content += ` <option value="${grade_list[i].id}">${grade_list[i].grade}</option>`
+        }
+        document.querySelector('.grade-in-form').innerHTML = content
+    }
+   
        })
 
 
@@ -126,7 +146,7 @@ function get(){
       return
     }
     test_name = element.options[element.selectedIndex].text;
-    grade_name = grade_element.options[grade_element.selectedIndex].text
+    // grade_name = grade_element.options[grade_element.selectedIndex].text
     subject_name = subject_element.options[subject_element.selectedIndex].text
     console.log(subject_name)
     url = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
@@ -161,6 +181,7 @@ function get(){
         })
       content += `</table></div>`
         container.innerHTML = content
+        document.querySelector('.test-details').innerHTML = ''
         document.getElementById('history-container-form').style.display = 'none'
     }
     else{
@@ -171,6 +192,7 @@ function get(){
 
 function back(){
   document.getElementById('history-container-form').style.display = 'block'
+  document.querySelector('.test-details').innerHTML = ''
   container.innerHTML = ''
 }
 
@@ -191,8 +213,12 @@ function details(index){
                             table2 = table2 + `<td>` + `${i+1}` +`</td>`
                             table2 = table2 + `<td>` + `${current_details[i].question}` + `</td>`,
                                 table2 = table2 + `<td>` + `${current_details[i].correct_answer}` + '</td>';
+                            if(current_details[i].answer){
                             table2 = table2 + '<td>' + `${current_details[i].answer}` + '</td>';
-                                table2 = table2 + `</tr>`;
+                            }else{
+                              table2 = table2 + '<td>' + `` + '</td>';
+                            }
+                            table2 = table2 + `</tr>`;
                             }
                         table2 += "</table> </div>";
               document.querySelector('.test-details').innerHTML  = table2

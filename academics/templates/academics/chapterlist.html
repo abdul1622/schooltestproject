@@ -6,16 +6,16 @@
     <div class="box" id="mediabox">
 
         {% csrf_token %}
-        <p ><label for=""> Grade: </label>
-            <select class="grade-in-form" name="grade" required="" id="id_grade"></select></p>
+        <p class="grade-p"><label for="" > Grade: </label>
+            <select class="grade-in-form" onchange=getgradename(this) name="grade" required="" id="id_grade"></select></p>
       <!--   <label for=""> Grade: </label>
         <select name="grade" required="" id="id_grade">
             <option value="" selected="">---------</option>
           </select>-->
         <label for=""> Subject: </label>
-        <select name="subject" required="" id="id_subject">
+        <select name="subject" onchange=getsubjectname(this) required="" id="id_subject">
             <option value="" selected="">---------</option>
-          </select> 
+          </select>
         <button id="chapterlist-btn" onclick=getchapter()>Getchapters</button>
     </div>
 </div>
@@ -100,6 +100,15 @@
          return window.location.href = '/404'; 
         }
     })
+
+    function getgradename(element){
+    grade_name = element.options[element.selectedIndex].text;
+    grade = element.options[element.selectedIndex].value
+  }
+  function getsubjectname(element){
+    subject_name = element.options[element.selectedIndex].text;
+    subject = element.options[element.selectedIndex].value
+  }
     let form = document.querySelector('.form')
     let flag = false
     let grade_element = document.getElementById('id_grade')
@@ -118,6 +127,8 @@
     var subject;
     let content = '';
     let grade_list
+    var grade_name;
+    var subject_name;
     document.getElementById('nav-chapterlist').style.opacity = '0.5';
     fetch('https://schooltestproject.herokuapp.com/api/grades/', {
             method: 'GET',
@@ -133,14 +144,35 @@
            if(data.status == 'failure'){
             window.location.href = `${host}/404`
            } 
-        content += ` 
-            <option value="" selected="">---------</option>`
+    
         if(grade_list.length){
+            if(grade_list.length == 1){
+                // content += ` <option value="${grade_list[0].id}">${grade_list[0].grade}</option>`
+                document.querySelector('.grade-p').innerHTML = `Grade -- ${grade_list[0].grade}`
+                var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+            var gradeId =grade_list[0].id ; 
+            grade_name =   grade_list[0].grade
+            $.ajax({                       
+              url: url_for_change,                  
+              data: {
+                'grade': gradeId      
+              },
+              success: function (data) {
+                $("#id_subject").html(data); 
+              }
+            });
+
+            }else{
+                content += ` 
+            <option value="" selected="">---------</option>`
         for(i=0;i<grade_list.length;i++){
             content += ` <option value="${grade_list[i].id}">${grade_list[i].grade}</option>`
         }
-    }
         document.querySelector('.grade-in-form').innerHTML = content
+    }
+   
+    }
+ 
         })
     // var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
     
@@ -182,7 +214,9 @@
         document.querySelector('.chapter-table').innerHTML = ''
         flag = false
         document.querySelector('.box').style.display='block'
+        if(document.getElementById('id_grade')){
         document.getElementById('id_grade').value = '';
+        }
         document.getElementById('id_subject').value ='';
     }
     function get(grade, subject) {
@@ -195,10 +229,10 @@
     function getchapter() {
 
             let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-            var grade = document.getElementById('id_grade').value
-            var subject = document.getElementById('id_subject').value
-            let grade_name = grade_element.options[grade_element.selectedIndex].text
-            let subject_name = subject_element.options[subject_element.selectedIndex].text
+            // var grade = document.getElementById('id_grade').value
+            // var subject = document.getElementById('id_subject').value
+            // let grade_name = grade_element.options[grade_element.selectedIndex].text
+            // let subject_name = subject_element.options[subject_element.selectedIndex].text
             console.log(grade, subject)
             console.log(grade_name + subject_name)
                 fetch('https://schooltestproject.herokuapp.com/api/chapter-list/', {

@@ -65,6 +65,7 @@ class SimpleLoginView(APIView):
         if email and phone:
             try:
                 user=PasswordlessAuthBackend.authenticate(request,email=email,phone=phone)
+                login(request,user)
                 print(user)
             except:
                 return Response({"status": "User doesn't exits"}, status=HTTP_204_NO_CONTENT)

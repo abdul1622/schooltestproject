@@ -62,8 +62,9 @@ class ChapterSerializer(serializers.ModelSerializer):
     subject_name = serializers.SerializerMethodField('get_subject_name')
 
     def get_subject_name(self, chapter):
-      subject = Subject.objects.get(id=(chapter.subject.id))
-      return subject.name
+    #   subject = Subject.objects.get(id=(chapter.subject_id))
+        print(chapter.subject)
+        return (chapter.subject.name)
 
     class Meta:
         model = Chapter

@@ -4,8 +4,8 @@
   <div class="question-papers-get">
     <div class="container">
       {% csrf_token %}
-      <p><label for="get_grade">Grade:</label> <select name="grade" class="grade-in-form" onchange=getgradename(this) required="" id="get_grade">
-      </select></p>
+      <p><label for="get_grade">Grade:</label> <span class="grade-p"> <select name="grade" class="grade-in-form" onchange=getgradename(this) required="" id="get_grade">
+      </select></span></p>
       <!-- {{form.as_p}} -->
       <label for=""> Subject: </label>
       <select name="subject" required="" onchange=getsubjectname(this) id="id_subject_2">
@@ -101,19 +101,23 @@
   var host = window.location.protocol + "//" + window.location.host;
   let error = true
   let set_id = false
-  let subject_name
+
+  let subject_name,grade,subject;
   var user_id = localStorage.getItem('id')
   var user_type = localStorage.getItem('user_type')
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
   let container = document.querySelector('.question-papers-card')
 
-
   let content = '';
     let grade_list
     document.getElementById('nav-questionpaperlist').style.opacity = '0.5';
 
-
+    function getgradename(element){
+    grade_name = element.options[element.selectedIndex].text;
+    grade = element.options[element.selectedIndex].value;
+    console.log(grade)
+  }
 
     fetch('https://schooltestproject.herokuapp.com/api/grades/', {
             method: 'GET',
@@ -124,19 +128,38 @@
         }).then(res => {
             return res.json()
         }).then(data => {
-            grade_list = data.data
+          grade_list = data.data
             console.log(data.data)
            if(data.status == 'failure'){
             window.location.href = `${host}/404`
            } 
-        content += ` 
+           if(grade_list.length == 1){
+            grade = grade_list[0].id
+            // document.querySelector('.grade-p').innerHTML = grade
+                // content += ` <option value="${grade_list[0].id}">${grade_list[0].grade}</option>`
+                document.querySelector('.grade-p').innerHTML = ` ${grade_list[0].grade}`
+                // document.querySelector('.grade-p-get').innerHTML = ` ${grade_list[0].grade}`
+                var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+            grade_name =   grade_list[0].grade
+            $.ajax({                       
+              url: url_for_change,                  
+              data: {
+                'grade': grade     
+              },
+              success: function (data) {
+                $("#id_subject_2").html(data)
+              }
+            });
+
+            }else{
+                content += ` 
             <option value="" selected="">---------</option>`
-        if(grade_list.length){
         for(i=0;i<grade_list.length;i++){
             content += ` <option value="${grade_list[i].id}">${grade_list[i].grade}</option>`
         }
-    }
         document.querySelector('.grade-in-form').innerHTML = content
+    }
+   
         })
 
   $(document).ready(function(){ 
@@ -147,15 +170,15 @@
   })
 
   function get() {
-    var grade = document.getElementById('get_grade').value
-    var subject = document.getElementById('id_subject_2').value
+    // var grade = document.getElementById('get_grade').value
+    subject = document.getElementById('id_subject_2').value
     error_messages.innerHTML = ''
     messages.innerHTML = ''
     url2 = new URL('https://schooltestproject.herokuapp.com/api/question-paper-list/');
     url2.searchParams.append('grade', grade_name);
     url2.searchParams.append('subject', subject_name)
     console.log(grade, subject)
-  if(!grade || !subject_name){
+  if(!grade || !subject){
       container.innerHTML = `Subject is not selected`;
       return
     }
@@ -224,7 +247,7 @@
     
     let e = document.getElementById('get_grade')
     grade_name = e.options[e.selectedIndex].text;
-   
+    grade = e.options[e.selectedIndex].value;
     console.log(grade_name)
 
   })
@@ -320,9 +343,6 @@
           }
         })
     })
-
-   
-
   }
   function getsubjectname(element){
     subject_name = element.options[element.selectedIndex].text;
