@@ -112,10 +112,23 @@ class AnswerSerializer(serializers.ModelSerializer):
         model = Answers
         fields = ['option_a','option_b','option_c','option_d','answer']
 class QuestionAnswerSerializer(serializers.ModelSerializer):
+    grade_name = serializers.SerializerMethodField('get_grade_name')
+    subject_name = serializers.SerializerMethodField('get_subject_name')
+    chapter_name = serializers.SerializerMethodField('get_chapter_name')
+    def get_grade_name(self, question):
+        return question.grade.grade
+
+    def get_subject_name(self, question):
+      return question.subject.name
+
+    def get_chapter_name(self, question):
+      return question.chapter.name
+
+    # def get_chapter_name(self,chapter)
     answers = AnswerSerializer()
     class Meta:
         model = Question
-        fields = ['id','grade','subject','chapter','question',
+        fields = ['id','grade','grade_name','subject','subject_name','chapter','chapter_name','question',
                     'question_type','cognitive_level','difficulty_level','mark','duration','answers']
     def create(self, validated_data):
         answers_data = validated_data.pop('answers')

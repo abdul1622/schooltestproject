@@ -163,10 +163,17 @@ function section_change(){
             window.location.href = `${host}/404`
            } 
             data.data.forEach((d, index) => {
+        if(user_type == 'is_admin'){
                 content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button> <button id="edit" onclick=edit_grade(${d.id})><i class="fa fa-edit"></i></button>
         <p  onclick=getsubject(${d.grade},${d.id}) class="grade">${d.grade} </p>
         
  </div>`
+}else{
+    content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button>
+        <p  onclick=getsubject(${d.grade},${d.id}) class="grade">${d.grade} </p>
+        
+ </div>`
+}
             })
             content += '</div>'
             list.innerHTML = content;
