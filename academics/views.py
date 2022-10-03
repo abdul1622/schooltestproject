@@ -265,7 +265,7 @@ class ChapterListView(APIView):
 class SubjectListView(ListAPIView):
     serializer_class = SubjectSerializer
     permission_classes = [AllowAny]
-
+    
     def get_queryset(self):
         queryset = Subject.objects.all()
         grade = self.request.query_params.get('grade')
