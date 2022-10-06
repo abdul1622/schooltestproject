@@ -253,8 +253,9 @@
                             <h4 class="subjectname" id=${data.data[0]['subject_id']}>Subject : ${data.data[0]['subject'] }</h4>
                         </div>`
                         console.log(data);
-                        let table2 = '<a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back()>Back</a> <table>';
-                        table2 +=  `<thead class="thead"><th>Chapter No</th><th>Chapter Name</th><th>Description</th><th>Action</th></thead>`;
+                        let table2 = ''
+                        table2 += `<a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back()> Back </a>`
+                        table2 +=  `<table><thead class="thead"><th>Chapter No</th><th>Chapter Name</th><th>Description</th><th>Action</th></thead>`;
                         data.data.map(d => {
                             table2 = table2 + `<tr id=${d.id}>`;
                             table2 = table2 + '<td class="chapter_no">' + `${d.chapter_no}` + '</td>';
