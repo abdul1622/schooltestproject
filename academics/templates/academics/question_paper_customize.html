@@ -221,7 +221,7 @@ function getnext() {
             return
         }
 
-        if(!isNaN(no_of_questions)){
+        // if(!isNaN(no_of_questions)){
             url = new URL('https://schooltestproject.herokuapp.com/api/question/');
   url.searchParams.append('grade',grade_id);
   url.searchParams.append('subject',subject_id)
@@ -240,7 +240,8 @@ function getnext() {
             console.log(overall_question_list,'list')
             console.log(data['data'].length)
             if(no_of_questions > data['data'].length){
-                document.querySelector('.error-form-1').innerHTML = `<li style='color:white;'>given number of questions is higher than the actual number of question</li><li style='color:white;'> number of question available is ${data['data'].length}</li>`
+                document.querySelector('.error-form-1').innerHTML = `<li style='color:white;'>given number 
+                    of questions is higher than the actual number of question - ${data['data'].length}</li>`
                 return
             }
 
@@ -253,15 +254,15 @@ function getnext() {
 
         })
 
-        }else{
+        // }else{
 
-            customize = false
-        document.getElementById('q-form-1').style.display = 'none';
-        document.getElementById('q-form-2').style.display = 'block';
-        document.getElementById('q-form-3').style.display = 'none';
-        document.getElementById('q-form-4').style.display = 'none';
-        result = []
-        }
+        //     customize = false
+        // document.getElementById('q-form-1').style.display = 'none';
+        // document.getElementById('q-form-2').style.display = 'block';
+        // document.getElementById('q-form-3').style.display = 'none';
+        // document.getElementById('q-form-4').style.display = 'none';
+        // result = []
+        // }
         document.querySelector('.error-form-1').innerHTML = '';
         url3 = ('https://schooltestproject.herokuapp.com/api/chapter-list/');
         fetch(url3, {
@@ -313,7 +314,13 @@ function getnext() {
         question_content +=`<div class='question-list-container-customize'>
                 <p>` 
 
-                    question_content += `<table> <tr><th>sl.no</th><th>select</th><th>question</th><th>question type</th><th>cognitive level</th><th>difficulty level</th><th>marks</th></tr>`    
+                    question_content += `<table> <tr><th>sl.no</th>
+                        <th>select</th>
+                        <th>question</th>
+                        <th>question type</th>
+                        <th>cognitive level</th>
+                        <th>difficulty level</th>
+                        <th>marks</th></tr>`    
           let i = 0
          question_per_chapter = []
          overall_question_list.forEach((d, index) => {
@@ -322,14 +329,16 @@ function getnext() {
             if(d.chapter==chapter_id){
                 i += 1
             question_per_chapter.push(d.id)
-            question_content += `<tr><td>${i}</td> <td><input type="checkbox" id="question_${d.id}" name="vehicle1" value="${d.id}"></td> <td><label for="vehicle1">${d.question}</label></td><td>${d.question_type}</td><td>${d.cognitive_level}</td><td>${d.difficulty_level}</td><td>${d.mark}</td></tr>
+            question_content += `<tr><td>${i}</td> <td><input type="checkbox" id="question_${d.id}" value="${d.id}"></td>
+                 <td><label for="question_${d.id}">${d.question}</label></td>
+                 <td>${d.question_type}</td>
+                 <td>${d.cognitive_level}</td>
+                 <td>${d.difficulty_level}</td>
+                 <td>${d.mark}</td>
+                 </tr>
 `}
-
             })
-            question_content += `</table>
-
-          `
-
+            question_content += `</table>`
 
             // <span class="more-btn"><button id="next-btn" class="submit-btn btn btn-sm btn-primary" onclick=add()>Add More</button> </span>
 
@@ -503,7 +512,9 @@ function getnext() {
             data.data.forEach((d, index) => {
                 i += 1
             question_id_list.push(d.id)
-            question_content += `<tr><td>${i}</td> <td><input type="checkbox" id="question_${d.id}" name="vehicle1" value="${d.id}"></td> <td><label for="vehicle1">${d.question}</label></td><td>${d.question_type}</td><td>${d.cognitive_level}</td><td>${d.difficulty_level}</td><td>${d.mark}</td></tr>
+            question_content += `<tr><td>${i}</td> <td><input type="checkbox" id="question_${d.id}" name="vehicle1" value="${d.id}"></td>
+                 <td><label for="vehicle1">${d.question}</label></td><td>${d.question_type}</td>
+                 <td>${d.cognitive_level}</td><td>${d.difficulty_level}</td><td>${d.mark}</td></tr>
 `
             })
             question_content += `</table>
@@ -616,7 +627,9 @@ function submit_woc(){
                     fetch('https://schooltestproject.herokuapp.com/api/test/',
                         {
                             method: 'POST',
-                            body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_paper_id, 'created_staff_id': userId, 'marks': overall_marks, 'duration': timing, 'remarks': form_remarks, 'pass_percentage': form_percentage, 'description': form_description }
+                            body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_paper_id, 
+                            'created_staff_id': userId, 'marks': overall_marks, 'duration': timing, 
+                            'remarks': form_remarks, 'pass_percentage': form_percentage, 'description': form_description }
                             ),
                             headers: {
                                 'Accept': 'application/json',
@@ -724,7 +737,9 @@ function submit_woc(){
                     fetch('https://schooltestproject.herokuapp.com/api/test/',
                         {
                             method: 'POST',
-                            body: JSON.stringify({ 'grade': grade, 'subject': subject_id, 'question_paper': question_paper_id, 'created_staff_id': userId, 'marks': overall_marks, 'duration': timing, 'remarks': form_remarks, 'pass_percentage': form_percentage, 'description': form_description }
+                            body: JSON.stringify({ 'grade': grade, 'subject': subject_id, 'question_paper': question_paper_id, 
+                            'created_staff_id': userId, 'marks': overall_marks, 'duration': timing, 'remarks': form_remarks,
+                             'pass_percentage': form_percentage, 'description': form_description }
                             ),
                             headers: {
                                 'Accept': 'application/json',
