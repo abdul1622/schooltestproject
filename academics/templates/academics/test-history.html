@@ -1,12 +1,30 @@
 {% extends 'base.html' %}
 {% block history %}
+<!-- Modal -->
+<div class="modal fade" id="TestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Test Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <h1 class="test-history">Test History</h1>
 <hr>
 <div class="colorbox">
   <div class="colorbox1"> <p>pass</p></div>
   <div class="colorbox2"><p>fail</p></div>
   </div>
-  <div class="test-details"></div>
 
 <div class="history"></div>
 <script>
@@ -91,7 +109,7 @@
               <p>Score : ${d.score} %</p>
               <p>Date : ${d.created_at.slice(0, 10)} </p>
               <p>Time : ${d.created_at.slice(11, 16)} </p>
-              <button class='details-btn' onclick=details(${d.id})>details</button>
+              <button class='details-btn' onclick=details(${d.id}) data-toggle="modal" data-target="#TestModal">details</button>
           </div>  `
             // console.log(result)
             let flag = false
@@ -126,6 +144,7 @@
 
 
     function details(index){
+      console.log(list)
       for(i=0;i<list.length;i++){
         if(list[i].id == index){
           current_details = JSON.parse(list[i].test_detail)
@@ -134,7 +153,7 @@
           break
         }
       }
-      let table2 = '  <div class= "test-details-div">  <a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back() >Back</a> <table>';
+      let table2 = ' <div class= "test-details"> <table >';
                         table2 += `<thead class="thead"><th>Question</th><th>correct answer</th><th>given answer</th></thead>`;
                         for(i=0;i<current_details.length;i++){
                             table2 = table2 + `<tr>`;
@@ -144,7 +163,8 @@
                                 table2 = table2 + `</tr>`;
                             }
                         table2 += "</table></div>";
-              document.querySelector('.test-details').innerHTML  = table2
+                    
+              document.querySelector('.modal-body').innerHTML  = table2
     }
 </script>
 {% endblock %}

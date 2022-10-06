@@ -873,14 +873,15 @@
         }
 
         .question-card {
-    font-size: 15px;
-    padding: 20px 9%;
-    background-color: #5c7aea;
-    border-radius: 5px;
-    margin: 1% 5% 6%;
-    height: auto;
-    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-}
+            font-size: 15px;
+            padding: 20px 9%;
+            background-color: #5c7aea;
+            border-radius: 5px;
+            margin: 1% 5% 6%;
+            height: auto;
+            box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+        }
+
         .question-card #edit {
             padding: 5px 15px;
             margin-left: -1vw;
@@ -911,11 +912,12 @@
         }
 
         .question-list fieldset {
-    display: grid;
-    margin: 2% 4%;
-    /* gap: 3%; */
-    grid-template-columns: auto auto auto auto;
-}
+            display: grid;
+            margin: 2% 4%;
+            /* gap: 3%; */
+            grid-template-columns: auto auto auto auto;
+        }
+
         .question-card p {
             color: rgba(0, 0, 0, 0.753);
             width: 237px;
@@ -1078,12 +1080,12 @@
 
         .grade-list .card .delete-grade {
             position: absolute;
-    top: 0;
-    right: 0;
-    width: 17%;
-    /* display: none; */
-    background: none;
-    color: #817f7f;
+            top: 0;
+            right: 0;
+            width: 17%;
+            /* display: none; */
+            background: none;
+            color: #817f7f;
         }
 
         .grade-list .card:hover .delete-grade {
@@ -1252,9 +1254,10 @@
         }
 
         .chapter-table table {
-    width: 50%;
-    margin-left: 17%;
-}
+            width: 50%;
+            margin-left: 17%;
+        }
+
         .chapter-table .btn {
     margin-bottom: 2%;
     margin-left: 20%;
@@ -1453,6 +1456,7 @@
 
         .modal-body {
             text-align: center;
+            overflow: scroll;
         }
 
         #userDetails .back-btn {
@@ -1487,16 +1491,17 @@
         }
 
         .grade-list .card #edit {
-    padding: 5px 15px;
-    margin-left: -1vw;
-    border-radius: 5px;
-    font-size: 50%;
-    color: #14279B;
-    position: absolute;
-    top: 0;
-    background: none;
-    right: 13%;
-}
+            padding: 5px 15px;
+            margin-left: -1vw;
+            border-radius: 5px;
+            font-size: 50%;
+            color: #14279B;
+            position: absolute;
+            top: 0;
+            background: none;
+            right: 13%;
+        }
+
         #delete {
             padding: 5px 15px;
             margin-left: 1%;
@@ -1938,24 +1943,31 @@
             color: black;
             border: black 1px solid;
         }
-        input#id_section {
-    width: 20%;
-}
-button#add-section {
-    margin-left: 1%;
-}
-p.section-btn {
-    margin: 5% 14%;
-}
 
-.chapterhead {
-    /* position: absolute; */
-    display: flex;
-    flex-flow: column;
-    /* margin-left: 45%; */
-    /* margin-top: -1%; */
-    text-align: center;
-}
+        input#id_section {
+            width: 20%;
+        }
+
+        button#add-section {
+            margin-left: 1%;
+        }
+
+        p.section-btn {
+            margin: 5% 14%;
+        }
+
+        .chapterhead {
+            /* position: absolute; */
+            display: flex;
+            flex-flow: column;
+            /* margin-left: 45%; */
+            /* margin-top: -1%; */
+            text-align: center;
+        }
+
+        .modal-body {
+            overflow: scroll;
+        }
 
         @media screen and (min-width:1024px) and (max-width:1200px) {
             .navbar {
@@ -2483,6 +2495,11 @@ p.section-btn {
                 position: absolute;
                 height: 4.7%;
                 margin-top: 3%;
+            }
+
+            #add-section {
+                height: 2vh;
+                width: 2%
             }
 
             #sort {
@@ -3091,7 +3108,7 @@ p.section-btn {
                 padding: 2%;
             }
 
-            th:last-child {
+            .--user th:last-child {
                 padding-left: 1%;
                 position: absolute;
                 margin-left: 3%;
@@ -3318,10 +3335,10 @@ p.section-btn {
             }
 
             #question-box {
-                width: 34vw;
-                height: 20vh;
+                width: 36vw;
+                height: 29vh;
                 padding-top: 1vh;
-                margin-top: -4vh;
+                margin-top: 2vh;
             }
 
             #question-box input {
@@ -3374,14 +3391,8 @@ p.section-btn {
                 display: inline-block;
             }
 
-            .question-list {
-                display: grid;
+            .question-list fieldset {
                 grid-template-columns: auto auto;
-                gap: 0;
-                margin-top: 2%;
-                margin-left: 9%;
-                width: 90%;
-                row-gap: 1%;
             }
 
             #questionForm input[type=text] {
@@ -3391,6 +3402,28 @@ p.section-btn {
                 color: black;
                 font-size: 11px;
                 border: none;
+            }
+
+            .question-papers-card {
+                display: grid;
+                height: auto;
+                width: 42%;
+                margin: 2% 2%;
+                grid-template-columns: auto auto auto;
+                column-gap: 44%;
+            }
+
+
+
+            .questions-paper-card {
+                font-size: 15px;
+                background-color: #fff8dcb0;
+                color: black;
+                width: 208%;
+                box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+                padding: 10%;
+                margin: 6%;
+                margin-left: 16%;
             }
 
             .chapter-table table {
@@ -3893,7 +3926,7 @@ p.section-btn {
             #grade button {
                 margin-left: 34%;
                 height: 3vh;
-                width: 33%;
+                /*width: 33%;*/
             }
 
             .grade-container h2 {
@@ -3971,6 +4004,15 @@ p.section-btn {
                 position: absolute;
                 margin-left: -13%;
             }
+
+            .test-details #back-btn {
+                margin-top: -14%;
+                position: absolute;
+                margin-left: 3%;
+                background: transparent;
+                border: black 1px solid;
+            }
+
 
             #chapterlist-btn {
                 width: 45%;
@@ -4215,8 +4257,7 @@ p.section-btn {
 
 
             #Test_id {
-                margin: 1% 1% 1% 21%;
-
+                margin: 1% 1% 1% 11%;
             }
 
             .counter {
@@ -4435,6 +4476,17 @@ p.section-btn {
             .history-container span.test-heading {
                 text-transform: capitalize;
                 font-size: 16px;
+            }
+
+            .test-details-div {
+                margin: 21% 2%;
+                width: 98%;
+                overflow: scroll;
+                overflow-y: hidden;
+            }
+
+            .colorbox {
+                margin-right: 17%;
             }
         }
     </style>
