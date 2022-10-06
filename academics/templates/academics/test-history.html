@@ -25,7 +25,6 @@
   <div class="colorbox1"> <p>pass</p></div>
   <div class="colorbox2"><p>fail</p></div>
   </div>
-  <div class="test-details"></div>
 
 <div class="history"></div>
 <script>
@@ -154,7 +153,7 @@
           break
         }
       }
-      let table2 = ' <div class= "test-details-div"> <table class="testhistory">';
+      let table2 = ' <div class= "test-details"> <table >';
                         table2 += `<thead class="thead"><th>Question</th><th>correct answer</th><th>given answer</th></thead>`;
                         for(i=0;i<current_details.length;i++){
                             table2 = table2 + `<tr>`;
