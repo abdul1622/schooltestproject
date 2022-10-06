@@ -1259,7 +1259,10 @@
     margin-bottom: 2%;
     margin-left: 20%;
 }
-
+#questionForm span.grade-p {
+    font-size: 15px;
+    display: block;
+}
         .chapter-table #delete {
             padding: 7px 15px;
             margin-left: -107%;
@@ -1518,7 +1521,7 @@
 
         .modal-content {
             width: 120%;
-            margin-left: -14%;
+            /* margin-left: -14%; */
             padding: 2% 5%;
             background-color: #b2c8df;
         }
@@ -1875,10 +1878,14 @@
         .test-details table {
             width: 100%;
         }
+     #test-details-model .modal-dialog {
+    max-width: 70%;
+}
 
         .test-details-div {
-            margin: 3% 20%;
-            background-color: lightgray;
+            /* margin: 3% 20%;
+            background-color: lightgray; */
+            overflow-x: auto;
             padding: 1%;
         }
 
@@ -1904,6 +1911,12 @@
             width: 18%;
         }
 
+        #test-details-model .modal-content {
+    width: 100%;
+    /* margin-left: -14%; */
+    padding: 2% 5%;
+    background-color: #b2c8df;
+}
         .details-btn {
             font-weight: 100;
             width: 30%;
@@ -4276,6 +4289,13 @@ p.section-btn {
                 margin-top: 16%;
                 margin-left: 0%;
             }
+            #test-details-model .modal-content .modal-content {
+    /* min-width: 120vw; */
+    /* margin-left: -14%; */
+    width: 100%;
+    overflow-x: scroll;
+
+            }
 
             .box label {
                 margin-left: 5%;
@@ -4472,7 +4492,7 @@ p.section-btn {
                     </li>
                     <li class="nav-item">
                         <a href="#" onclick="logout()">Logout</a>
-                    </li>
+                    </li>a
                 </ul>
             </div>
         </div>

@@ -21,14 +21,38 @@
 <div class="history-container">
 
 </div>
-<div class="test-details"></div>
+
+
+<div class="modal fade" id="test-details-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content test-model ">
+    <div class="modal-header">
+      <h4 class="modal-title" id="exampleModalLabel">Test details</h4>
+      <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body modal-body-1">
+      <div class="test-details"></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+    </div>
+  </div>
+</div>
+</div>
+
+
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
        var token = localStorage.getItem("token")
        var subjectId,gradeId,testId,content='',data2;
        let container = document.querySelector('.history-container')
        let current_details,student_details;
-       let grade_name
+       let grade_name;
        document.getElementById('nav-studenttesthistory').style.opacity = '0.5';
        $(document).ready(function(){ 
         if(!token){
@@ -65,10 +89,11 @@
             grade = grade_list[0].id
             // document.querySelector('.grade-p').innerHTML = grade
                 // content += ` <option value="${grade_list[0].id}">${grade_list[0].grade}</option>`
-                document.querySelector('.grade-p').innerHTML = ` ${grade_list[0].grade}`
+                document.querySelector('.grade-p').innerHTML = ` ${grade_list[0]['grade']}`
                 // document.querySelector('.grade-p-get').innerHTML = ` ${grade_list[0].grade}`
                 var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
-            grade_name =   grade_list[0].grade
+            grade_name =   grade_list[0]['grade']
+            console.log(grade_name)
             $.ajax({                       
               url: url_for_change,                  
               data: {
@@ -140,7 +165,7 @@
 
 function get(){
     testId = document.getElementById('id_test').value
-
+    container.innerHTML = ''
     if(!testId){
       document.querySelector('.error-messages').innerHTML ='give a valid test details'
       return
@@ -169,7 +194,7 @@ function get(){
       document.querySelector('.error-messages').innerHTML =''
 
       content +=             `<div class='history-container-head'> <button onclick=back() class='btn btn-sm btn-primary'>Back</button>
-            <p  class='heading'> <span>Grade : ${grade_name}</span> <span class='test-heading'>${test_name}</span> <span>Subject : ${subject_name}</span></p>
+            <p  class='heading'> <span>Grade : ${grade_list[0]['grade']}</span> <span class='test-heading'>${test_name}</span> <span>Subject : ${subject_name}</span></p>
            </div> `
             content += `<div class='history-container-div'><table>`
 
@@ -177,7 +202,7 @@ function get(){
                 data.forEach((d, index) => {
                     i += 1
                 content += `<tr><td>${i}</td><td>${d.student_name}</td><td>${d.register_number}</td><td>${d.result}</td><td>${d.score}</td><td>${d.correct_answer}</td><td>${d.wrong_answer}</td><td>${d.unanswered_questions
-}</td><td><button onclick=details(${d.id})>details</td></tr>`
+}</td><td><button data-toggle="modal" data-target="#test-details-model" onclick=details(${d.id})>details</td></tr>`
         })
       content += `</table></div>`
         container.innerHTML = content
@@ -206,7 +231,8 @@ function details(index){
           break
         }
       }
-    let table2 = ` <div class= "test-details-div"> <p> <span>${student_details.student_name}</span> <a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back_details() ><span aria-hidden="true">&times;</span></a> </p> <table>`;
+      
+    let table2 = ` <div class= "test-details-div"> <p> <span>${student_details.student_name}</span> </p> <table>`;
                         table2 += `<thead class="thead"><th>sl no</th><th>Question</th><th>correct answer</th><th>given answer</th></thead>`;
                         for(i=0;i<current_details.length;i++){
                             table2 = table2 + `<tr>`;
