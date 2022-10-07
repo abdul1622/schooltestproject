@@ -143,7 +143,7 @@
         }
 
         #grade button {
-            margin-left: 33%;
+            margin-left: 37%;
         }
 
         input {
@@ -231,12 +231,41 @@
         #profile-btn {
             width: 110px;
             height: 39px;
-            margin-left: 68px;
+            /* margin-left: 68px; */
             margin-top: 20px;
             background-color: #b2c8df;
             color: #14279b;
             border: 1px solid #14279b;
         }
+
+        .standard-edit li {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .standard-edit li {
+            margin-bottom: 5%;
+        }
+
+        .standard-details select {
+            width: 90%;
+            margin: 0% 5%;
+        }
+
+        .standard-details select#sec {
+            margin-bottom: 3%;
+        }
+
+        .standard-edit {
+            position: absolute;
+            background-color: #5c7aea;
+            top: 17%;
+            right: 31%;
+            padding: 1%;
+            border-radius: 7%;
+        }
+
+
 
         #profile-box {
             background-color: #5c7aea;
@@ -246,6 +275,7 @@
             box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
             margin-top: 11vh;
             padding: 30px 43px;
+            text-align: center;
             margin-bottom: 4%;
             border-radius: 5px;
         }
@@ -794,11 +824,11 @@
         }
 
         .userDetails {
-        
-           display: grid;
+
+            display: grid;
             grid-template-columns: auto auto auto;
-            
-           
+
+
         }
 
         #userdetail-btn {
@@ -1006,7 +1036,12 @@
             gap: 8%;
         }
 
+        #grade {
+            display: none;
+        }
+
         .grade-container {
+            display: none;
             padding-bottom: 4%;
         }
 
@@ -1254,13 +1289,15 @@
         }
 
         .chapter-table .btn {
-    margin-bottom: 2%;
-    margin-left: 20%;
-}
-#questionForm span.grade-p {
-    font-size: 15px;
-    display: block;
-}
+            margin-bottom: 2%;
+            margin-left: 20%;
+        }
+
+        #questionForm span.grade-p {
+            font-size: 15px;
+            display: block;
+        }
+
         .chapter-table #delete {
             padding: 7px 15px;
             margin-left: -107%;
@@ -1518,12 +1555,14 @@
             margin-left: 7%;
             border-radius: 5px;
         }
-#Form-modal-content{
-    width: 172%;
-    background-color: #b2c8df;
-    padding: 2% 5%;
-    margin-left: -31%;
-}
+
+        #Form-modal-content {
+            width: 172%;
+            background-color: #b2c8df;
+            padding: 2% 5%;
+            margin-left: -31%;
+        }
+
         .modal-content {
             width: 120%;
             /* margin-left: -14%; */
@@ -1871,14 +1910,15 @@
             margin: 2% 3%;
         }
 
-     
+
 
         .test-details table {
             width: 100%;
         }
-     #test-details-model .modal-dialog {
-    max-width: 70%;
-}
+
+        #test-details-model .modal-dialog {
+            max-width: 70%;
+        }
 
         .test-details-div {
             /* margin: 3% 20%;
@@ -1910,11 +1950,12 @@
         }
 
         #test-details-model .modal-content {
-    width: 100%;
-    /* margin-left: -14%; */
-    padding: 2% 5%;
-    background-color: #b2c8df;
-}
+            width: 100%;
+            /* margin-left: -14%; */
+            padding: 2% 5%;
+            background-color: #b2c8df;
+        }
+
         .details-btn {
             font-weight: 100;
             width: 30%;
@@ -1946,6 +1987,14 @@
         }
 
         p.section-btn {
+            text-align: center;
+        }
+
+        button#add-section {
+            margin-left: 1%;
+        }
+
+        p.section-btn {
             margin: 5% 14%;
         }
 
@@ -1961,6 +2010,8 @@
         .modal-body {
             overflow: scroll;
         }
+
+
 
         @media screen and (min-width:1024px) and (max-width:1200px) {
             .navbar {
@@ -1980,6 +2031,11 @@
             #profile-box {
                 width: 35vw;
                 margin-top: 1%;
+            }
+
+            .standard-edit {
+                top: 10%;
+                right: 17%;
             }
 
             #profile-box input[type='text'] {
@@ -2262,9 +2318,11 @@
                 border-radius: 5px;
                 box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
             }
+
             .question-list fieldset {
                 grid-template-columns: auto auto auto;
             }
+
             .question-card p {
                 color: rgba(0, 0, 0, 0.753);
                 width: 199px;
@@ -2458,6 +2516,11 @@
 
             #profile-box {
                 width: 27vw;
+            }
+
+            .standard-edit {
+                top: 20%;
+                right: 24%;
             }
 
             #profile-box input[type='text'] {
@@ -2710,6 +2773,7 @@
             .chapter-cards .chapter-card {
                 min-height: 99%;
             }
+
             .question-list #delete {
                 margin-left: auto;
             }
@@ -2963,14 +3027,17 @@
             #action {
                 padding-left: 1%;
             }
+
             .userDetails {
                 grid-template-columns: auto auto;
             }
+
             #Form-modal-content {
                 width: 121%;
                 padding: 2% 5%;
                 margin-left: -23%;
             }
+
             #profile-box {
                 display: none;
                 color: black;
@@ -2980,6 +3047,11 @@
                 padding: 30px 50px;
                 font-size: 15px;
                 border-radius: 5px;
+            }
+
+            .standard-edit {
+                top: 12.5%;
+                right: 9%;
             }
 
             .ch-btn {
@@ -3612,20 +3684,23 @@
                 background-color: transparent;
                 color: white;
             }
+
             .userDetails {
                 grid-template-columns: auto;
             }
+
             #Form-modal-content {
                 width: 78%;
-              
+
                 margin-left: 0%;
             }
-           #standard_add_btn {
+
+            #standard_add_btn {
                 margin-left: 49%;
                 position: absolute;
                 margin-top: -18%;
             }
-            
+
             .back-btn-nav button:focus {
                 outline: none;
             }
@@ -3654,6 +3729,10 @@
 
             .navbar-light .navbar-toggler-icon {
                 width: 18px;
+            }
+
+            .standard-edit {
+                position: static;
             }
 
             #profile-box {
@@ -3964,7 +4043,7 @@
                 border-radius: 5px;
                 margin-top: -4%;
                 font-size: 155%;
-                
+
             }
 
 
@@ -4177,7 +4256,7 @@
             }
 
             #profile-btn {
-                margin-left: 27%;
+                /* margin-left: 27%; */
                 margin-top: 2%;
             }
 
@@ -4322,11 +4401,12 @@
                 margin-top: 16%;
                 margin-left: 0%;
             }
+
             #test-details-model .modal-content .modal-content {
-    /* min-width: 120vw; */
-    /* margin-left: -14%; */
-    width: 100%;
-    overflow-x: scroll;
+                /* min-width: 120vw; */
+                /* margin-left: -14%; */
+                width: 100%;
+                overflow-x: scroll;
 
             }
 
@@ -4478,6 +4558,7 @@
             .colorbox {
                 margin-right: 17%;
             }
+
             .question-list fieldset {
                 grid-template-columns: auto;
             }
@@ -4537,7 +4618,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" onclick="logout()">Logout</a>
-                    </li>a
+                    </li>
                 </ul>
             </div>
         </div>
