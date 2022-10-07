@@ -793,17 +793,12 @@
             display: inline;
         }
 
-        #userDetails {
-            display: none;
-            background-color: #b2c8df;
-            margin-left: 22%;
+        .userDetails {
+        
+           display: grid;
             grid-template-columns: auto auto auto;
-            width: 51%;
-            position: absolute;
-            margin-top: 10vh;
-            z-index: 1;
-            height: auto;
-            padding: 1% 4%;
+            
+           
         }
 
         #userdetail-btn {
@@ -1523,7 +1518,12 @@
             margin-left: 7%;
             border-radius: 5px;
         }
-
+#Form-modal-content{
+    width: 172%;
+    background-color: #b2c8df;
+    padding: 2% 5%;
+    margin-left: -31%;
+}
         .modal-content {
             width: 120%;
             /* margin-left: -14%; */
@@ -1871,14 +1871,7 @@
             margin: 2% 3%;
         }
 
-        #standard_add_btn {
-            width: 7%;
-            height: 12%;
-            position: absolute;
-            margin-top: -12.5%;
-            font-size: 11px;
-            margin-left: 2%;
-        }
+     
 
         .test-details table {
             width: 100%;
@@ -1976,7 +1969,7 @@
             }
 
             .navbar li a {
-                padding: 0.8vh;
+                padding: 0.12vh;
 
             }
 
@@ -2261,16 +2254,17 @@
             }
 
             .question-card {
-                margin-left: 19vh;
                 margin-top: 1vh;
                 font-size: 15px;
-                width: 58%;
+                width: 84%;
                 padding: 25px;
                 background-color: #5c7aea;
                 border-radius: 5px;
                 box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
             }
-
+            .question-list fieldset {
+                grid-template-columns: auto auto auto;
+            }
             .question-card p {
                 color: rgba(0, 0, 0, 0.753);
                 width: 199px;
@@ -2324,12 +2318,6 @@
                 font-size: 1.2vw;
             }
 
-            .question-list {
-                display: grid;
-                grid-template-columns: auto auto;
-                gap: 1%;
-                margin-top: 0px;
-            }
 
             #questionForm {
                 display: none;
@@ -2722,17 +2710,6 @@
             .chapter-cards .chapter-card {
                 min-height: 99%;
             }
-
-
-            .question-list {
-                width: 85%;
-                display: grid;
-                grid-template-columns: auto auto;
-                gap: 1%;
-                margin-top: 0px;
-                margin-left: 7%;
-            }
-
             .question-list #delete {
                 margin-left: auto;
             }
@@ -2753,11 +2730,6 @@
             .question-card p:nth-child(11),
             .question-card p:nth-child(12) {
                 margin-left: 20vw;
-            }
-
-            .question-list .question-card:nth-child(even) {
-                margin-left: 1vh;
-                width: 79%;
             }
 
             #--question {
@@ -4487,6 +4459,9 @@
 
             .colorbox {
                 margin-right: 17%;
+            }
+            .question-list fieldset {
+                grid-template-columns: auto;
             }
         }
     </style>

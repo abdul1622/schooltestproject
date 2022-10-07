@@ -54,79 +54,96 @@
     </div>
   </div>
 </div>
+<!-- Creation and updation modal -->
+<div class="modal fade" id="FormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    
+    <div class="modal-content" id="Form-modal-content">
+      <div class="modal-header" >
+        <h5 class="modal-title" id="exampleModalLabel">Student</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="userDetails">
+        {%csrf_token%}
+        <div class='grid-item'>
+          <label for="email">Email:</label><br>
+          <input type="email" id='email' placeholder="Email">
+        </div>
+        <div class="standards-list"></div>
+      
+      
+        <div class='grid-item'>
+          <label for="phone">Phone:</label><br>
+          <input type="phone" id="phone" placeholder="Phone">
+        </div>
+      
+        <div class='grid-item'>
+          <label for="reg">Reg:</label><br>
+          <input type="text" id="reg" placeholder="Reg">
+        </div>
+      
+        <div class='grid-item'>
+          <label for="dob">DOB:</label><br>
+          <input type="date" id="dob" placeholder="DOB">
+        </div>
+      
+       
+        <div class='grid-item'>
+          <label for="fname">Firstname:</label><br>
+          <input type="text" id="fname" placeholder="First Name">
+        </div>
+      
+        <div class='grid-item'>
+          <label for="lname">Last Name:</label><br>
+          <input type="text" id="lname" placeholder="Last Name">
+        </div>
+      
+        <div class='grid-item'>
+          <label for="ffname">Full Name:</label><br>
+          <input type="text" id="ffname" placeholder="Full Name">
+        </div>
+       <div class='grid-item'>
+          <label for="std">Standard:</label><br>
+          <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required="" id="std"></select>
+        </div>
+      
+        <div class='grid-item'>
+          <label for="sec">Section:</label><br>
+          <select name="grade" class="sec-in-form form-control" required="" id="sec">      </select>
+        </div>
+        <div class='grid-item'>
+          <label for="address">Address:</label><br>
+          <input type="text" id="address" placeholder="Address">
+        </div>
+      
+        <div class='grid-item'>
+          <label for="file">Profile picture:</label><br>
+          <input type="file" id="file">
+        </div>
+      
+      
+        <div class='grid-item'>
+          <button id="standard_add_btn" onclick=addstandard() >Add standard</button>
+        </div>
+      </form>
+      <div class="formmodal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <span class="create-btn-container"> <button type="button" id="userdetail-btn"
+          class="btn btn-primary">Submit</button></span>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="erase()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end  -->
 <div class="standard-errors"></div>
 <div class='sort-input'>
   <input type="text" id="student-filter" placeholder="search" min="0" max="12"   onkeyup="filter()">
-  <button id="addstaff" onclick=addstaff()>Add Staff</button>
-</div>
-<div id="userDetails">
-  <button class='back-btn' onclick=back()>&#x2715; </button>
-  {%csrf_token%}
-  <div class='grid-item'>
-    <label for="email">Email:</label><br>
-    <input type="email" id='email' placeholder="Email">
-  </div>
-  <div class="standards-list"></div>
-
-
-  <div class='grid-item'>
-    <label for="phone">Phone:</label><br>
-    <input type="phone" id="phone" placeholder="Phone">
-  </div>
-
-  <div class='grid-item'>
-    <label for="reg">Reg:</label><br>
-    <input type="text" id="reg" placeholder="Reg">
-  </div>
-
-  <div class='grid-item'>
-    <label for="dob">DOB:</label><br>
-    <input type="date" id="dob" placeholder="DOB">
-  </div>
-
-  <div class='grid-item'>
-    <label for="std">Standard:</label><br>
-    <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required="" id="std"></select>
-  </div>
-
-  <div class='grid-item'>
-    <label for="sec">Section:</label><br>
-    <select name="grade" class="sec-in-form form-control" required="" id="sec">      </select>
-  </div>
-  <div class='grid-item'>
-    <label for="fname">Firstname:</label><br>
-    <input type="text" id="fname" placeholder="First Name">
-  </div>
-
-  <div class='grid-item'>
-    <label for="lname">Last Name:</label><br>
-    <input type="text" id="lname" placeholder="Last Name">
-  </div>
-
-  <div class='grid-item'>
-    <label for="ffname">Full Name:</label><br>
-    <input type="text" id="ffname" placeholder="Full Name">
-  </div>
-
-  <div class='grid-item'>
-    <label for="address">Address:</label><br>
-    <input type="text" id="address" placeholder="Address">
-  </div>
-
-  <div class='grid-item'>
-    <label for="file">Profile picture:</label><br>
-    <input type="file" id="file">
-  </div>
-
-
-  <div class='grid-item'>
-    <button data-toggle="modal" data-target="#messageModal-staff" id="userdetail-btn">submit</button>
-    <button id="standard_add_btn" onclick=addstandard()>Add standard</button>
-  </div>
-
-</div>
-
-
+  <button data-toggle="modal" data-target="#FormModal" id="addstaff" >Add Staff</button>
 </div>
 <div class="details"></div>
 <div class="container2"></div>
@@ -138,6 +155,7 @@
   let grade_list;
   let content = ''
   let token = localStorage.getItem("token")
+  button=document.getElementById('userdetail-btn')
   $(document).ready(function(){ 
     if(!token){
       return window.location.href = '/login';
@@ -151,7 +169,9 @@
     window.location.href = window.location.href;
   }
 
-
+  $('#FormModal').on('hidden.bs.modal', function () {
+    $(this).find('form').trigger('reset');
+})
   fetch('https://schooltestproject.herokuapp.com/api/grades/', {
             method: 'GET',
             headers: new Headers({
@@ -197,15 +217,8 @@
         document.querySelector('.sec-in-form').innerHTML = content
     }
 
-
-  function addstaff() {
-    form.style.display = 'grid'
-    add.style.display = 'none'
-    form.style.marginTop = '10vh';
-    var is_dataentry = 'false'
     button.addEventListener('click', () => {
-      form.style.display = 'none'
-      add.style.display = 'block'
+      console.log('hi')
       let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
       var email = document.getElementById('email').value
       var phone = document.getElementById('phone').value
@@ -250,7 +263,6 @@
           }
         })
     })
-  }
   document.getElementById('nav-staffs').style.opacity = '0.5';
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
@@ -259,7 +271,6 @@
   var host = window.location.protocol + "//" + window.location.host;
   let form = document.getElementById('userDetails')
   const container2 = document.querySelector('.container2');
-  let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
   fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
     method: 'GET',
     headers: new Headers({
@@ -306,7 +317,7 @@
             table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
             table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
             table2 = table2 + `<td class="userstandard" onclick="std('${std}',${index},${false})" id=${std}>` +`${std[0]} (${std.length})`+ '</td>';
-            table2 = table2 + '<td>' + ` <i id="edit" class="fa fa-edit" onclick="edit(${index},${d.id})"></i><i id="delete" data-toggle="modal" data-target="#delete-staff-Modal" class="fa fa-trash-o" onclick="deleteuser(${d.id})" ></i>` + '</td></tbody>',
+            table2 = table2 + '<td>' + ` <i id="edit" data-toggle="modal" data-target="#FormModal"  class="fa fa-edit" onclick="edit(${index},${d.id})"></i><i id="delete" data-toggle="modal" data-target="#delete-staff-Modal" class="fa fa-trash-o" onclick="deleteuser(${d.id})" ></i>` + '</td></tbody>',
               table2 = table2 + `</tr>`;
             })
         table2 += "</table>";
@@ -331,6 +342,7 @@ function deletestaff(id) {
   })
 }
 function edit(index,id){
+  let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
       tr=document.querySelectorAll('.list')[index]
       let email =tr.querySelector(".useremail").textContent;
       let phone = tr.querySelector('.userphone').textContent;
@@ -340,8 +352,7 @@ function edit(index,id){
       let lastname = tr.querySelector('.userlastname').textContent;
       let firstname = tr.querySelector('.userfirstname').textContent;
       console.log(email)
-      form.style.display = 'grid'
-      form.style.marginTop = '10vh'
+
       form_email = document.getElementById('email');
       form_phone = document.getElementById('phone');
       form_reg = document.getElementById('reg');
@@ -366,8 +377,6 @@ function edit(index,id){
             <li>${standards[i]}<button onclick=delete_standard(${i})>delete</button></li>`
         }
         document.querySelector('.standards-list').innerHTML = editcontent
-        form.style.display = 'grid'
-      form.style.marginTop = '10vh'
       url = "https://schooltestproject.herokuapp.com/api/user-details/"
       if((tr.querySelector('.userstandard').id).split(',').length){
       standards = tr.querySelector('.userstandard').id.split(',');
@@ -401,7 +410,6 @@ function edit(index,id){
           }
           standards.push(std + '-' + sec)
         }
-        form.style.display = 'none'
         fetch(`${url}${id}/`, {
           method: 'PATCH',
           headers: {
@@ -423,7 +431,7 @@ function edit(index,id){
           else {
             error_messages.innerHTML = `<li>${(data.data.error)}</li>`
             messages.innerHTML = ''
-          } staffslist();
+          } 
         })
       })
     }
