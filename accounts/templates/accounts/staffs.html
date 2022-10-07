@@ -411,8 +411,7 @@ function edit(index,id){
           body: JSON.stringify({
             'email': form_email.value, 'phone': form_phone.value, 'date_of_birth': form_dob.value, 'register_number': form_reg.value,
             'profile': { 'first_name': form_fname.value, 'last_name': form_lname.value, 'standard': standards, 'full_name': form_fullname.value, 'address': form_ad.value }
-          }
-          )
+          } )
         }).then(response => {
           if (response.status == 200) {
             error_messages.innerHTML = ''
