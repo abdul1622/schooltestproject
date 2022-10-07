@@ -12,7 +12,7 @@
     <button class="submit-btn" id="chapter-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
 </div>
 
-<div class="grade-container container">
+<div class="grade-container container" id="grade-container">
 
 
     <div id="subjects-by-grade" class="subjects-by-grade">
@@ -113,6 +113,7 @@
          return window.location.href = '/404'; 
         }
     })
+    // function
     var token = localStorage.getItem('token')
     var form_all = document.querySelector('.form-all')
     let user_type = localStorage.getItem('user_type')
@@ -162,6 +163,10 @@ function section_change(){
            if(data.status == 'failure'){
             window.location.href = `${host}/404`
            } 
+        if(data.data){
+            document.getElementById('grade').style.display = 'block'
+            document.getElementById('grade-container').style.display = 'block'
+        }
             data.data.forEach((d, index) => {
         if(user_type == 'is_admin'){
                 content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button> <button id="edit" onclick=edit_grade(${d.id})><i class="fa fa-edit"></i></button>

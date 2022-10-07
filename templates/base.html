@@ -143,7 +143,7 @@
         }
 
         #grade button {
-            margin-left: 33%;
+            margin-left: 37%;
         }
 
         input {
@@ -231,12 +231,37 @@
         #profile-btn {
             width: 110px;
             height: 39px;
-            margin-left: 68px;
+            /* margin-left: 68px; */
             margin-top: 20px;
             background-color: #b2c8df;
             color: #14279b;
             border: 1px solid #14279b;
         }
+        .standard-edit li {
+    display: flex;
+    justify-content: space-around;
+        }
+
+        .standard-edit li {
+    margin-bottom: 5%;
+}
+.standard-details select {
+    width: 90%;
+    margin: 0% 5%;
+}
+.standard-details select#sec {
+    margin-bottom: 3%;
+}
+.standard-edit {
+    position: absolute;
+    background-color: #5c7aea;
+    top: 17%;
+    right: 31%;
+    padding: 1%;
+    border-radius: 7%;
+}
+
+
 
         #profile-box {
             background-color: #5c7aea;
@@ -246,6 +271,7 @@
             box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
             margin-top: 11vh;
             padding: 30px 43px;
+            text-align: center;
             margin-bottom: 4%;
             border-radius: 5px;
         }
@@ -1009,7 +1035,12 @@
             gap: 8%;
         }
 
+        #grade{
+            display: none;
+        }
+
         .grade-container {
+            display: none;
             padding-bottom: 4%;
         }
 
@@ -1945,7 +1976,7 @@ button#add-section {
     margin-left: 1%;
 }
 p.section-btn {
-    margin: 5% 14%;
+    text-align: center;
 }
 
 .chapterhead {
@@ -1956,6 +1987,8 @@ p.section-btn {
     /* margin-top: -1%; */
     text-align: center;
 }
+
+
 
         @media screen and (min-width:1024px) and (max-width:1200px) {
             .navbar {
@@ -1976,6 +2009,9 @@ p.section-btn {
                 width: 35vw;
                 margin-top: 1%;
             }
+            .standard-edit {
+                top: 10%;
+    right: 17%;            }
 
             #profile-box input[type='text'] {
                 margin-bottom: 1vh;
@@ -2458,6 +2494,10 @@ p.section-btn {
 
             #profile-box {
                 width: 27vw;
+            }
+            .standard-edit {
+    top: 20%;
+    right: 24%;
             }
 
             #profile-box input[type='text'] {
@@ -2984,6 +3024,10 @@ p.section-btn {
                 padding: 30px 50px;
                 font-size: 15px;
                 border-radius: 5px;
+            }
+            .standard-edit {
+                top: 12.5%;
+    right: 9%;
             }
 
             .ch-btn {
@@ -3631,6 +3675,10 @@ p.section-btn {
                 width: 18px;
             }
 
+            .standard-edit {
+                position: static;
+}
+
             #profile-box {
                 display: none;
                 color: black;
@@ -4143,7 +4191,7 @@ p.section-btn {
             }
 
             #profile-btn {
-                margin-left: 27%;
+                /* margin-left: 27%; */
                 margin-top: 2%;
             }
 
@@ -4492,7 +4540,7 @@ p.section-btn {
                     </li>
                     <li class="nav-item">
                         <a href="#" onclick="logout()">Logout</a>
-                    </li>a
+                    </li>
                 </ul>
             </div>
         </div>

@@ -8,9 +8,19 @@
   
   {%csrf_token%}
   <button onclick=back() class='delete-grade profile-back-btn'>&#x2715; </button>
-<div class="standard-edit"></div>
-<div class="profile-errors"></div>
-<!-- <label >Standard:</label><br><input type="number" id="std" placeholder="Standard">  -->
+  <div class="standard-edit" id="standard-edit">
+
+  </div>
+  <div class="standard-details" id="standard-details">
+    <label>Standard:</label>
+    <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required="" id="std">
+    </select>
+    <label>Section:</label>
+  <select name="grade" class="sec-in-form form-control" required="" id="sec"></select>
+  <button onclick=add()>add</button>
+  <div class="profile-errors"></div>
+  <hr>
+</div>
 
 <p></p><label >Firstname:</label><br><input type="text" id="fname" placeholder="First Name"> </p>
 <p></p><label >Lastname:</label><br><input type="text" id="lname" placeholder="Last Name"> </p>
@@ -47,12 +57,14 @@ aria-hidden="true">
 </div>
 <script>
   let token = localStorage.getItem("token")
+  var user = localStorage.getItem('user_type')
   $(document).ready(function(){ 
-    var user = localStorage.getItem('user_type')
+  
     if ( !token){
      return window.location.href = '/login'; 
     }
   })
+  
   var host = window.location.protocol + "//" + window.location.host;
   let container = document.querySelector('.container');
   let messages = document.querySelector('.messages')
@@ -60,6 +72,58 @@ aria-hidden="true">
   let standards,get_standard;
   let form=document.getElementById('profile-box')
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  let content = ''
+  let grade_list = []
+
+if(user == 'is_student'){
+  document.getElementById('standard-details').style.display = 'none'
+}else{
+  fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+            method: 'GET',
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            grade_list = data.data
+            console.log(data.data)
+           if(data.status == 'failure'){
+            window.location.href = `${host}/404`
+           } 
+        content += ` 
+            <option value="" selected="">---------</option>`
+        if(grade_list.length){
+          document.getElementById('standard-edit').style.display = 'block'
+        for(i=0;i<grade_list.length;i++){
+            content += ` <option value="${grade_list[i].grade}">${grade_list[i].grade}</option>`
+        }
+    }
+        document.querySelector('.std-in-form').innerHTML = content
+        })
+      }
+  
+if(!grade_list.length){
+  document.getElementById('standard-edit').style.display = 'none'
+}
+
+      function getsectionname(element){
+        let standard = element.value
+        let sec_list;
+        content = ''
+        for(i=0;i<grade_list.length;i++){
+            if(grade_list[i].grade==standard){
+                sec_list = grade_list[i].section
+            }
+        }
+        content += ` 
+            <option value="" selected="">---------</option>`
+        if(sec_list && sec_list.length){
+        for(i=0;i<sec_list.length;i++){
+            content += ` <option value="${sec_list[i]}">${sec_list[i]}</option>`
+        }
+    }
+        document.querySelector('.sec-in-form').innerHTML = content
+    }
+
+
   document.getElementById('nav-profile').style.opacity = '0.5';
   function back(){
     form.style.display='none'
@@ -73,24 +137,24 @@ aria-hidden="true">
                     for(i=0;i<standards.length;i++){
                       content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
                     }
-                    content += `<input type="number" id="std" placeholder="Standard">
-                    <label >Section:</label><br><input type="text" id="sec" placeholder="section">
-                    <button onclick=add()>add</button>
-                    <hr>
-                    `
+                    // content += `<input type="number" id="std" placeholder="Standard">
+                    // <label >Section:</label><br><input type="text" id="sec" placeholder="section">
+                    // <button onclick=add()>add</button>
+                    // <hr>
+                    // `
                     document.querySelector('.standard-edit').innerHTML = content
   }
   function add(){
     let std = document.getElementById('std').value
     let section = (document.getElementById('sec').value).toUpperCase()
     if(!section.match(/[a-z]/i)){
-            document.querySelector('.profile-errors').innerHTML = 'give a valid section'
+            document.querySelector('.profile-errors').innerHTML = '<li class="text-danger">give a valid section</li>'
             return
     }
     if(!standards.includes(std+'-'+section)){
     standards.push(std+'-'+section)
     }else{
-      document.querySelector('.profile-errors').innerHTML = 'standard and section altready added'
+      document.querySelector('.profile-errors').innerHTML = '<li class="text-danger">standard and section altready added</li>'
             return
     }
     let content = ''
@@ -98,10 +162,10 @@ aria-hidden="true">
                     for(i=0;i<standards.length;i++){
                       content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
                     }
-                    content += `<input type="number" id="std" placeholder="Standard">
-                    <label >Section:</label><br><input type="text" id="sec" placeholder="section">
-                    <button onclick=add()>add</button>
-                    <hr>`
+                    // content += `<input type="number" id="std" placeholder="Standard">
+                    // <label >Section:</label><br><input type="text" id="sec" placeholder="section">
+                    // <button onclick=add()>add</button>
+                    // <hr>`
                     document.querySelector('.standard-edit').innerHTML = content
   }
 
@@ -135,10 +199,10 @@ aria-hidden="true">
                       content += `
                       <li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
                     }
-                    content += `<input type="number" id="std" placeholder="Standard">
-                    <label >Section:</label><br><input type="text" id="sec" placeholder="section">
-                    <button onclick=add()>add</button>
-                    <hr>`
+                    // content += `<input type="number" id="std" placeholder="Standard">
+                    // <label >Section:</label><br><input type="text" id="sec" placeholder="section">
+                    // <button onclick=add()>add</button>
+                    // <hr>`
 
                     document.querySelector('.standard-edit').innerHTML = content
                   }

@@ -205,7 +205,7 @@ class UserDetailsEditView(RetrieveUpdateDestroyAPIView):
 
 class ProfileView(APIView):
     serializer_class=UserDetailsSerializer
-    permission_classes=[AllowAny]
+    permission_classes=[AllowAny,IsAuthenticated]
     queryset=User.objects.all()
 
     def get(self,request):
