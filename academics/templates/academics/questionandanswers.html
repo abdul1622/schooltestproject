@@ -121,6 +121,7 @@
   <hr>
   <h3 class="text-center">Subject - <span id="subject-head-question"></span></h3>
 </div>
+<div class="question-error"></div>
 <div class="question-list">
 </div>
 
@@ -307,17 +308,18 @@
       </div>
       `
 
-          })
-          content += `</fieldset>`
-          head.style.display = 'block'
-          document.getElementById('grade-head-question').textContent = grade
-          document.getElementById('subject-head-question').textContent = data.data[0]['subject_name']
-
-          container2.innerHTML = content;
-        } else {
-          head.style.display = 'none'
-          container2.innerHTML = `<p>subject - ${subject_name} has no questions</p>`
-        }
+        })
+        content += `</fieldset>`
+        head.style.display = 'block'
+        document.getElementById('grade-head-question').textContent = grade
+        document.getElementById('subject-head-question').textContent = data.data[0]['subject_name']
+        document.querySelector('.question-error').innerHTML = ''
+        container2.innerHTML = content;
+      }else{
+        head.style.display = 'none'
+        container2.innerHTML = ''
+        document.querySelector('.question-error').innerHTML = `<li>subject - ${subject_name} has no questions</li>`
+      }
         edit = false
       })
     } else {

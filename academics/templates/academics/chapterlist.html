@@ -106,8 +106,15 @@
     grade = element.options[element.selectedIndex].value
   }
   function getsubjectname(element){
+    subject = parseInt(element.options[element.selectedIndex].value)
+    console.log(subject,'da')
+    if(!isNaN(subject)){
+        console.log(subject,'da1')
     subject_name = element.options[element.selectedIndex].text;
-    subject = element.options[element.selectedIndex].value
+    }else{
+        subject_name = null;
+    }
+    getchapter();
   }
     let form = document.querySelector('.form')
     let flag = false
@@ -235,6 +242,7 @@
             // let subject_name = subject_element.options[subject_element.selectedIndex].text
             console.log(grade, subject)
             console.log(grade_name + subject_name)
+            if(!isNaN(subject)){
                 fetch('https://schooltestproject.herokuapp.com/api/chapter-list/', {
                     method: 'POST',
                     body: JSON.stringify({ 'grade': grade_name, 'subject': subject_name }
@@ -280,9 +288,12 @@
                     }
                     else {
                        // error_messages.innerHTML = `${data.status}`
-                        document.querySelector('.error-message').innerHTML = `<p class='text-center'>${data.status}</p>`
+                        document.querySelector('.error-message').innerHTML = `<li class='text-center'>${subject_name} don't have a chapters</li>`
                     }
                 })
+            }else{
+                document.querySelector('.error-message').innerHTML = `<li class='text-center'>select subject</li>`
+            }
             }
             function deletechapter(id, grade_name, subject_name) {
                 // subject_name = subject_name.replace('_', ' ')
@@ -386,12 +397,12 @@ return
   
         
          
-            let input=document.getElementById('id_subject')
-            input.addEventListener('click',(e) => {
-                subject_name = input.options[input.selectedIndex].text;
-    subject = input.options[input.selectedIndex].value
-                    getchapter();
-            })
+    //         let input=document.getElementById('id_subject')
+    //         input.addEventListener('click',(e) => {
+    //             subject_name = input.options[input.selectedIndex].text;
+    // subject = input.options[input.selectedIndex].value
+    //                 getchapter();
+    //         })
 
 
     // edit chapter

@@ -143,7 +143,7 @@
         }
 
         #grade button {
-            margin-left: 33%;
+            margin-left: 37%;
         }
 
         input {
@@ -231,12 +231,41 @@
         #profile-btn {
             width: 110px;
             height: 39px;
-            margin-left: 68px;
+            /* margin-left: 68px; */
             margin-top: 20px;
             background-color: #b2c8df;
             color: #14279b;
             border: 1px solid #14279b;
         }
+
+        .standard-edit li {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .standard-edit li {
+            margin-bottom: 5%;
+        }
+
+        .standard-details select {
+            width: 90%;
+            margin: 0% 5%;
+        }
+
+        .standard-details select#sec {
+            margin-bottom: 3%;
+        }
+
+        .standard-edit {
+            position: absolute;
+            background-color: #5c7aea;
+            top: 17%;
+            right: 31%;
+            padding: 1%;
+            border-radius: 7%;
+        }
+
+
 
         #profile-box {
             background-color: #5c7aea;
@@ -246,6 +275,7 @@
             box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
             margin-top: 11vh;
             padding: 30px 43px;
+            text-align: center;
             margin-bottom: 4%;
             border-radius: 5px;
         }
@@ -639,22 +669,21 @@
         }
 
         #question-box {
-            margin-left: 38%;
-            margin-top: 4%;
-            background-color: #b2c8df;
-            width: 17%;
-            padding: 1%;
-            border-radius: 9px;
-        }
+    text-align: center;
+    background-color: #b2c8df;
+    width: 16%;
+    margin: 1% 42%;
+    padding: 1%;
+    border-radius: 9px;
+}
+.question-error {
+    text-align: center;
+    margin-top: 3%;
+}
 
-        button#questioncreate-btn {
-            margin-left: 30%;
-            margin-top: 5%;
-        }
-
-        button#questioncreate-btn {
-            margin-left: 30%;
-            margin-top: 5%;
+button#questioncreate-btn {
+    margin-top: 9%;
+    font-size: 14px;
         }
 
         #question-box label {
@@ -1017,7 +1046,12 @@
             gap: 8%;
         }
 
+        #grade {
+            display: none;
+        }
+
         .grade-container {
+            display: none;
             padding-bottom: 4%;
         }
 
@@ -1963,6 +1997,14 @@
         }
 
         p.section-btn {
+            text-align: center;
+        }
+
+        button#add-section {
+            margin-left: 1%;
+        }
+
+        p.section-btn {
             margin: 5% 14%;
         }
 
@@ -1978,6 +2020,8 @@
         .modal-body {
             overflow: scroll;
         }
+
+
 
         @media screen and (min-width:1024px) and (max-width:1200px) {
             .navbar {
@@ -1997,6 +2041,11 @@
             #profile-box {
                 width: 35vw;
                 margin-top: 1%;
+            }
+
+            .standard-edit {
+                top: 10%;
+                right: 17%;
             }
 
             #profile-box input[type='text'] {
@@ -2223,15 +2272,14 @@
             }
 
             #question-box {
-                margin-left: 3vw;
-                background-color: #b2c8df;
-                width: 32vw;
-                height: 32vh;
-                padding: 3vh;
-                border-radius: 9px;
-                margin-top: -3vh;
-            }
-
+    margin-left: 34vw;
+    background-color: #b2c8df;
+    width: 32vw;
+    height: 32vh;
+    padding: 3vh;
+    border-radius: 9px;
+    margin-top: -3vh;
+}
             .question_create {
                 display: none;
                 grid-template-columns: auto auto auto;
@@ -2327,7 +2375,7 @@
             #--question {
                 display: block;
                 color: #14279b;
-                margin-left: 38vw;
+                /* margin-left: 38vw; */
                 outline: 1px solid;
                 background: transparent;
                 margin-bottom: 0;
@@ -2482,6 +2530,11 @@
 
             #profile-box {
                 width: 27vw;
+            }
+
+            .standard-edit {
+                top: 20%;
+                right: 24%;
             }
 
             #profile-box input[type='text'] {
@@ -2878,9 +2931,10 @@
             }
 
             #question-box {
-                margin-left: 3vw;
+                /* margin-left: 3vw; */
                 background-color: #b2c8df;
-                width: 21vw;
+                width: 21%;
+    margin: 1% 39%;
                 height: 36vh;
                 padding: 3vh;
                 border-radius: 9px;
@@ -2894,7 +2948,7 @@
                 font-size: 15px;
                 font-weight: 800;
                 margin-top: 1vh;
-                margin-left: 5vw;
+                /* margin-left: 5vw; */
             }
 
             #chapterlist-btn {
@@ -3015,6 +3069,11 @@
                 padding: 30px 50px;
                 font-size: 15px;
                 border-radius: 5px;
+            }
+
+            .standard-edit {
+                top: 12.5%;
+                right: 9%;
             }
 
             .ch-btn {
@@ -3349,12 +3408,18 @@
             }
 
             #question-box {
-                width: 36vw;
-                height: 29vh;
-                padding-top: 1vh;
-                margin-top: 2vh;
+                width: 36%;
+    /* height: 29vh; */
+    padding-top: 1vh;
+    margin: 2vh 32%;
             }
-
+            button#questioncreate-btn {
+    margin: 9%;
+}
+            #question-box select {
+    width: 90%;
+    margin: 0 5%;
+}
             #question-box input {
                 width: 17vw;
                 margin-left: 4vw;
@@ -3486,13 +3551,15 @@
             }
 
             #--question {
-                display: block;
-                margin-left: 46vw;
-                outline: 1px solid;
-                padding: 5px;
-                margin-bottom: 0;
-                margin-top: 2vh;
-            }
+    display: block;
+    margin-left: 4vw;
+    /* text-align: center; */
+    outline: 1px solid;
+    padding: 5px;
+    margin-bottom: 0;
+    margin-top: 2vh;
+}
+
 
             #question_creation {
                 display: none;
@@ -3692,6 +3759,10 @@
 
             .navbar-light .navbar-toggler-icon {
                 width: 18px;
+            }
+
+            .standard-edit {
+                position: static;
             }
 
             #profile-box {
@@ -4224,7 +4295,7 @@
             }
 
             #profile-btn {
-                margin-left: 27%;
+                /* margin-left: 27%; */
                 margin-top: 2%;
             }
 
@@ -4586,7 +4657,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" onclick="logout()">Logout</a>
-                    </li>a
+                    </li>
                 </ul>
             </div>
         </div>

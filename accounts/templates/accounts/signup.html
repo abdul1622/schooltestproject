@@ -171,15 +171,23 @@
             document.querySelector('.signup-errors').innerHTML = '<li class="text-danger">give a valid standard</li>'
             return
         }
+        if(standards.includes(standard + '-' + section)){
+        document.querySelector('.signup-errors').innerHTML = '<li class="text-danger">given standard and section altready exist</li>'
+        return
+        }
         standards.push(standard + '-' + section)
         document.getElementById('id_standard').value = ''
         document.getElementById('id_section').value = ''
         let content = ''
-        content += `<ul>standards list`
+        if(standards.length){
+    content += `<ul>Standards list 
+            <p> No of standards-${standards.length} </p>`
+    
         for (i = 0; i < standards.length; i++) {
             content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
         }
         content += `</ul>`
+    }
         document.querySelector('.signup-errors').innerHTML = ''
         document.querySelector('.details').innerHTML = content
     }
@@ -187,10 +195,15 @@
     function delete_standard(index){
     standards.splice(index,1);
     let content = ''
-    content += `    <p> standards list</p>`
+        if(standards.length){
+    content += `<ul>Standards list 
+            <p> No of standards-${standards.length} </p>`
+    
                     for(i=0;i<standards.length;i++){
                       content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
                     }
+        }
+        document.querySelector('.signup-errors').innerHTML = ''
                     document.querySelector('.details').innerHTML = content
   }
 
