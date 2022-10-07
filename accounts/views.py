@@ -52,7 +52,7 @@ class LogoutView(APIView):
     def get(self, request):
         if self.request.user:
             logout(request)
-            return Response({'status':'your are not logged out'},status=HTTP_200_OK)
+            return Response({'status':'your are logged out'},status=HTTP_200_OK)
         return Response(status=HTTP_204_NO_CONTENT)
 
 
