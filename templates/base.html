@@ -368,6 +368,17 @@
             text-decoration: none;
         }
 
+        form.questionanswer {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+        }
+
+        #QForm-modal-content{
+            width: 233%;
+            background-color: #b2c8df;
+            padding: 2% 5%;
+            margin-left: -31%;
+        }
         .delete a:hover {
             color: black;
             text-decoration: none;
@@ -794,11 +805,11 @@
         }
 
         .userDetails {
-        
-           display: grid;
+
+            display: grid;
             grid-template-columns: auto auto auto;
-            
-           
+
+
         }
 
         #userdetail-btn {
@@ -1254,13 +1265,15 @@
         }
 
         .chapter-table .btn {
-    margin-bottom: 2%;
-    margin-left: 20%;
-}
-#questionForm span.grade-p {
-    font-size: 15px;
-    display: block;
-}
+            margin-bottom: 2%;
+            margin-left: 20%;
+        }
+
+        #questionForm span.grade-p {
+            font-size: 15px;
+            display: block;
+        }
+
         .chapter-table #delete {
             padding: 7px 15px;
             margin-left: -107%;
@@ -1518,12 +1531,14 @@
             margin-left: 7%;
             border-radius: 5px;
         }
-#Form-modal-content{
-    width: 172%;
-    background-color: #b2c8df;
-    padding: 2% 5%;
-    margin-left: -31%;
-}
+
+        #Form-modal-content {
+            width: 172%;
+            background-color: #b2c8df;
+            padding: 2% 5%;
+            margin-left: -31%;
+        }
+
         .modal-content {
             width: 120%;
             /* margin-left: -14%; */
@@ -1871,14 +1886,15 @@
             margin: 2% 3%;
         }
 
-     
+
 
         .test-details table {
             width: 100%;
         }
-     #test-details-model .modal-dialog {
-    max-width: 70%;
-}
+
+        #test-details-model .modal-dialog {
+            max-width: 70%;
+        }
 
         .test-details-div {
             /* margin: 3% 20%;
@@ -1910,11 +1926,12 @@
         }
 
         #test-details-model .modal-content {
-    width: 100%;
-    /* margin-left: -14%; */
-    padding: 2% 5%;
-    background-color: #b2c8df;
-}
+            width: 100%;
+            /* margin-left: -14%; */
+            padding: 2% 5%;
+            background-color: #b2c8df;
+        }
+
         .details-btn {
             font-weight: 100;
             width: 30%;
@@ -2038,7 +2055,12 @@
             .container2 {
                 width: 100%;
             }
-
+            #QForm-modal-content {
+                width: 203%;
+                background-color: #b2c8df;
+                padding: 2% 5%;
+                margin-left: -50%;
+            }
             .grade-list .card {
                 height: 15vh;
             }
@@ -2262,9 +2284,11 @@
                 border-radius: 5px;
                 box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
             }
+
             .question-list fieldset {
                 grid-template-columns: auto auto auto;
             }
+
             .question-card p {
                 color: rgba(0, 0, 0, 0.753);
                 width: 199px;
@@ -2530,7 +2554,7 @@
                 width: 14vw;
                 height: 39px;
                 margin-left: 0vw;
-                margin-top: 56px;
+                margin-top: 10%;
                 margin-bottom: 17px;
                 background-color: #b2c8df;
                 color: #14279b;
@@ -2688,17 +2712,18 @@
                 margin-top: 5%;
             }
 
-            .question-card {
-                margin-left: 17vh;
-                margin-top: 1vh;
-                font-size: 15px;
-                width: 64%;
-                padding: 25px;
-                background-color: #5c7aea;
-                border-radius: 5px;
-                box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-            }
-
+            
+                .question-card {
+                    margin-left: -1vh;
+                    margin-top: 1vh;
+                    font-size: 15px;
+                    width: 87%;
+                    padding: 25px;
+                    background-color: #5c7aea;
+                    border-radius: 5px;
+                    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+                }
+           
             .question-card p {
                 color: rgba(0, 0, 0, 0.753);
                 width: 199px;
@@ -2710,12 +2735,13 @@
             .chapter-cards .chapter-card {
                 min-height: 99%;
             }
+
             .question-list #delete {
                 margin-left: auto;
             }
 
             .question-list #edit {
-                margin-left: auto;
+                margin-left: 3%;
                 border-radius: 5px;
             }
 
@@ -2774,7 +2800,13 @@
                 border: 1px solid #14279b;
                 position: absolute;
             }
-
+            .question-list #delete {
+                margin-left: 6%;
+            }
+            #QForm-modal-content {
+                
+                margin-left: -64%;
+            }
             .question_create label {
                 font-size: 1vw;
                 margin-bottom: 0.2vh;
@@ -2963,14 +2995,17 @@
             #action {
                 padding-left: 1%;
             }
+
             .userDetails {
                 grid-template-columns: auto auto;
             }
+
             #Form-modal-content {
                 width: 121%;
                 padding: 2% 5%;
                 margin-left: -23%;
             }
+
             #profile-box {
                 display: none;
                 color: black;
@@ -3612,20 +3647,23 @@
                 background-color: transparent;
                 color: white;
             }
+
             .userDetails {
                 grid-template-columns: auto;
             }
+
             #Form-modal-content {
                 width: 78%;
-              
+
                 margin-left: 0%;
             }
-           #standard_add_btn {
+
+            #standard_add_btn {
                 margin-left: 49%;
                 position: absolute;
                 margin-top: -18%;
             }
-            
+
             .back-btn-nav button:focus {
                 outline: none;
             }
@@ -3787,7 +3825,16 @@
                 margin-top: -119%;
                 width: 11vw;
             }
-
+            #QForm-modal-content {
+                width: 81%;
+                background-color: #b2c8df;
+                padding: 2% 5%;
+                margin-left: 9%;
+            }
+            form.questionanswer {
+                display: grid;
+                grid-template-columns: auto;
+            }
             #userDetails3 {
                 margin-left: 39vw;
                 margin-top: -31.1vh;
@@ -3964,7 +4011,7 @@
                 border-radius: 5px;
                 margin-top: -4%;
                 font-size: 155%;
-                
+
             }
 
 
@@ -4322,11 +4369,12 @@
                 margin-top: 16%;
                 margin-left: 0%;
             }
+
             #test-details-model .modal-content .modal-content {
-    /* min-width: 120vw; */
-    /* margin-left: -14%; */
-    width: 100%;
-    overflow-x: scroll;
+                /* min-width: 120vw; */
+                /* margin-left: -14%; */
+                width: 100%;
+                overflow-x: scroll;
 
             }
 
@@ -4478,6 +4526,7 @@
             .colorbox {
                 margin-right: 17%;
             }
+
             .question-list fieldset {
                 grid-template-columns: auto;
             }

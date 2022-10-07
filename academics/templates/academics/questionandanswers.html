@@ -1,48 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
-<button id="--question" onclick=show()>Add Question</button>
-<div id="questionForm" class="question_create" method="get">
-  <button onclick=back() class='back-btn'>&#x2715; </button>
-  <div class='grid-item'>      
-      <label for=""> Grade: </label>
-    <!-- <select name="grade" required="" class="grade_in_form" id="id_grade"> 
-      </select> -->
-      <span class="grade-p">{{questionform.grade}}</span>
- 
+<!-- Creation and updation modal -->
+<div class="modal fade" id="QFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+
+    <div class=" modal-content" id="QForm-modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Student</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="questionanswer" id="questionanswer">
+        <div class='grid-item'>
+          <label for=""> Grade: </label>
+          <span class="grade-p">{{questionform.grade}}</span>
+
+        </div>
+        <div class="grid-item"> <label for="id_subject">Subject:</label> <br> <select name="subject" required=""
+            id="id_subject">
+            <option value="" selected="">---------</option>
+          </select></div>
+        <div class="grid-item"> <label for="id_chapter">Chapter:</label> <br> <select name="chapter" required=""
+            id="id_chapter">
+            <option value="" selected="">---------</option>
+          </select></div>
+        <div class='grid-item'> {{questionform.question.label_tag}} <br>{{questionform.question}}</div>
+        <div class='grid-item'> {{questionform.question_type.label_tag}} <br>{{questionform.question_type}}</div>
+        <div class='grid-item'> {{questionform.cognitive_level.label_tag}} <br>{{questionform.cognitive_level}}</div>
+        <div class='grid-item'> {{questionform.difficulty_level.label_tag}} <br> {{questionform.difficulty_level}}</div>
+        <div class='grid-item'> {{answerform.option_a.label_tag}} <br>{{answerform.option_a}}</div>
+        <div class='grid-item'> {{answerform.option_b.label_tag}} <br>{{answerform.option_b}}</div>
+        <div class='grid-item'> {{answerform.option_c.label_tag}} <br>{{answerform.option_c}}</div>
+        <div class='grid-item'> {{answerform.option_d.label_tag}} <br>{{answerform.option_d}}</div>
+        <div class='grid-item'> {{answerform.answer.label_tag}} <br>{{answerform.answer}}</div>
+        <div class='grid-item'> {{questionform.duration.label_tag}} <br> {{questionform.duration}}</div>
+        <div class='grid-item'> {{questionform.mark.label_tag}} <br> {{questionform.mark}}</div>
+        <div></div>
+
+      </form>
+      <div class="modal-footer">
+        <span class="create-btn-container"> <button type="button" id="question-btn"
+            class="btn btn-primary">Submit</button></span>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="erase()">Close</button>
+      </div>
     </div>
-  <div class="grid-item"> <label for="id_subject">Subject:</label> <br> <select name="subject" required=""
-      id="id_subject">
-      <option value="" selected="">---------</option>
-    </select></div>
-  <div class="grid-item"> <label for="id_chapter">Chapter:</label> <br> <select name="chapter" required=""
-      id="id_chapter">
-      <option value="" selected="">---------</option>
-    </select></div>
-  <div class='grid-item'> {{questionform.question.label_tag}} <br>{{questionform.question}}</div>
-  <div class='grid-item'> {{questionform.question_type.label_tag}} <br>{{questionform.question_type}}</div>
-  <div class='grid-item'> {{questionform.cognitive_level.label_tag}} <br>{{questionform.cognitive_level}}</div>
-  <div class='grid-item'> {{questionform.difficulty_level.label_tag}} <br> {{questionform.difficulty_level}}</div>
-  <div class='grid-item'> {{answerform.option_a.label_tag}} <br>{{answerform.option_a}}</div>
-  <div class='grid-item'> {{answerform.option_b.label_tag}} <br>{{answerform.option_b}}</div>
-  <div class='grid-item'> {{answerform.option_c.label_tag}} <br>{{answerform.option_c}}</div>
-  <div class='grid-item'> {{answerform.option_d.label_tag}} <br>{{answerform.option_d}}</div>
-  <div class='grid-item'> {{answerform.answer.label_tag}} <br>{{answerform.answer}}</div>
-  <div class='grid-item'> {{questionform.duration.label_tag}} <br> {{questionform.duration}}</div>
-  <div class='grid-item'> {{questionform.mark.label_tag}} <br> {{questionform.mark}}</div>
-  <div></div>
-
-
-
-  <div class='grid-item'><button class="question-btn" data-toggle="modal" data-target="#messageModal-question"
-      id="question-btn">Submit</button></div>
-    </div>
+    
   </div>
+</div>
+<!-- end  -->
+
+
 <div class="modal fade" id="delete-box-Modal-question" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" id="media-question" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" id="close-btn" data-dismiss="modal"  aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -85,15 +100,15 @@
     </div>
   </div>
 </div>
-
+<button id="--question" data-toggle="modal" data-target="#QFormModal">Add Question</button>
 <div id="question-box">
   {% csrf_token %}
   <!-- {{ form.as_p }} -->
   <label for=""> Grade: </label>
   <span class="grade-p-get">
-  <select name="grade" onchange="getgradename(this)" required="" class="grade-in-form" id="get_grade"> 
+    <select name="grade" onchange="getgradename(this)" required="" class="grade-in-form" id="get_grade">
     </select></span>
- <br> <label for=""> Subject: </label>
+  <br> <label for=""> Subject: </label>
   <select name="subject" onchange="get_subject_name(this)" required="" id="id_subject_2">
     <option value="" selected="">---------</option>
   </select>
@@ -117,31 +132,35 @@
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
   var host = window.location.protocol + "//" + window.location.host;
-  let content= '';
-  let subject_name ;
+  let content = '';
+  let subject_name;
   let grade_list
   let grade_name;
   let grade;
-let subject;
+  let subject;
 
-
-  function get_subject_name(element){
+  $('#QFormModal').on('hidden.bs.modal', function (e) {
+   
+        $('#questionanswer').find("input[type=text]").val("");
+        console.log('hi')
+    })
+  function get_subject_name(element) {
     subject_name = element.options[element.selectedIndex].text;
     subject = element.options[element.selectedIndex].value
   }
 
-  function getgradename(element){
+  function getgradename(element) {
     grade_name = element.options[element.selectedIndex].text;
     grade = element.options[element.selectedIndex].value
   }
 
-  $(document).ready(function(){ 
-    if(!token){
+  $(document).ready(function () {
+    if (!token) {
       return window.location.href = '/login';
     }
     var user = localStorage.getItem('user_type')
-    if (user == 'is_student'){
-     return window.location.href = '/404';
+    if (user == 'is_student') {
+      return window.location.href = '/404';
     }
   })
   function back() {
@@ -154,51 +173,51 @@ let subject;
   let yes_button = document.getElementById('delete-btn-yes')
   let no_btn = document.getElementById('delete-btn-no')
   var host = window.location.protocol + "//" + window.location.host;
- 
+
 
   fetch('https://schooltestproject.herokuapp.com/api/grades/', {
-            method: 'GET',
-            headers: {
-                // 'X-CSRFToken': csrftoken,
-                'Authorization': 'token' + ' ' + token
-            },
-        }).then(res => {
-            return res.json()
-        }).then(data => {
-            grade_list = data.data
-            console.log(data.data)
-           if(data.status == 'failure'){
-            window.location.href = `${host}/404`
-           } 
-           if(grade_list.length == 1){
-            grade = grade_list[0].id
-            // document.querySelector('.grade-p').innerHTML = grade
-                // content += ` <option value="${grade_list[0].id}">${grade_list[0].grade}</option>`
-                document.querySelector('.grade-p').innerHTML = ` ${grade_list[0].grade}`
-                document.querySelector('.grade-p-get').innerHTML = ` ${grade_list[0].grade}`
-                var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
-            grade_name =   grade_list[0].grade
-            $.ajax({                       
-              url: url_for_change,                  
-              data: {
-                'grade': grade     
-              },
-              success: function (data) {
-                $("#id_subject_2").html(data);
-                $("#id_subject").html(data)
-              }
-            });
-
-            }else{
-                content += ` 
-            <option value="" selected="">---------</option>`
-        for(i=0;i<grade_list.length;i++){
-            content += ` <option value="${grade_list[i].id}">${grade_list[i].grade}</option>`
-        }
-        document.querySelector('.grade-in-form').innerHTML = content
+    method: 'GET',
+    headers: {
+      // 'X-CSRFToken': csrftoken,
+      'Authorization': 'token' + ' ' + token
+    },
+  }).then(res => {
+    return res.json()
+  }).then(data => {
+    grade_list = data.data
+    console.log(data.data)
+    if (data.status == 'failure') {
+      window.location.href = `${host}/404`
     }
-   
-        })
+    if (grade_list.length == 1) {
+      grade = grade_list[0].id
+      // document.querySelector('.grade-p').innerHTML = grade
+      // content += ` <option value="${grade_list[0].id}">${grade_list[0].grade}</option>`
+      document.querySelector('.grade-p').innerHTML = ` ${grade_list[0].grade}`
+      document.querySelector('.grade-p-get').innerHTML = ` ${grade_list[0].grade}`
+      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+      grade_name = grade_list[0].grade
+      $.ajax({
+        url: url_for_change,
+        data: {
+          'grade': grade
+        },
+        success: function (data) {
+          $("#id_subject_2").html(data);
+          $("#id_subject").html(data)
+        }
+      });
+
+    } else {
+      content += ` 
+            <option value="" selected="">---------</option>`
+      for (i = 0; i < grade_list.length; i++) {
+        content += ` <option value="${grade_list[i].id}">${grade_list[i].grade}</option>`
+      }
+      document.querySelector('.grade-in-form').innerHTML = content
+    }
+
+  })
 
 
 
@@ -231,54 +250,54 @@ let subject;
     });
 
   });
-    const container2 = document.querySelector('.question-list');
-    url='https://schooltestproject.herokuapp.com/api/question/'
+  const container2 = document.querySelector('.question-list');
+  url = 'https://schooltestproject.herokuapp.com/api/question/'
 
 
-    function get() {
-      // let grade=document.getElementById('get_grade').value
-      // let subject=document.getElementById('id_subject_2').value
-      console.log(grade,subject)
-      if(grade && subject){
+  function get() {
+    // let grade=document.getElementById('get_grade').value
+    // let subject=document.getElementById('id_subject_2').value
+    console.log(grade, subject)
+    if (grade && subject) {
       let url1 = new URL('https://schooltestproject.herokuapp.com/api/question/')
       url1.searchParams.append('grade', grade);
-      url1.searchParams.append('subject',subject)
+      url1.searchParams.append('subject', subject)
       fetch(url1, {
         method: 'GET',
         headers: {
-            'content-Type': 'application/json',
-            'Authorization': 'token' + ' ' + token,
+          'content-Type': 'application/json',
+          'Authorization': 'token' + ' ' + token,
         }
-    }).then(res => {
+      }).then(res => {
         return res.json()
-    }).then(data => {
-      console.log(data)
-      let content = '';
+      }).then(data => {
+        console.log(data)
+        let content = '';
         // console.log(data.name[0])
         // console.log(data.status)
-        if(data.status == 'success'){
-          if(data.data.length){
-      temp = (data.data[0].chapter)
-      content += `<fieldset>
+        if (data.status == 'success') {
+          if (data.data.length) {
+            temp = (data.data[0].chapter)
+            content += `<fieldset>
   <legend> ${data.data[0].chapter_name} </legend>`
-      }
+          }
 
 
-        data.data.forEach((d, index) => {
-          if(temp != d.chapter){
-         content += `</fieldset>`
-         temp = d.chapter
-         content += `<fieldset>
+          data.data.forEach((d, index) => {
+            if (temp != d.chapter) {
+              content += `</fieldset>`
+              temp = d.chapter
+              content += `<fieldset>
   <legend> ${d.chapter_name} </legend>`
-        }
-          // name_value = data.name[index]
+            }
+            // name_value = data.name[index]
             content = content + `<div class="question-card" id='${d.id}'>
       <p >Chapter : <span id='${d.chapter}' class="chapter-name">${d.chapter_name}</span></p>
       <p >Question Type : <span class="question_type" id=${d.subject}>${d.question_type}</span></p>
       <p >Cognitive Level : <span class="cognitive_level" id=${d.grade}>${d.cognitive_level}</span></p>
       <p >Difficulty Level : <span class="difficulty_level">${d.difficulty_level}</span></p>
       <p >Question : <span class="question">${d.question}</span></p>
-      <div class="d-flex justify-content-around question-edit-btn"><i id="edit" class="fa fa-edit"></i>&nbsp <i class="fa fa-trash-o" data-toggle="modal" data-target="#delete-box-Modal-question" href="#" id="delete"></i></div>
+      <div class="d-flex justify-content-around question-edit-btn" data-toggle="modal" data-target="#QFormModal"><i id="edit" class="fa fa-edit"></i>&nbsp <i class="fa fa-trash-o" data-toggle="modal" data-target="#delete-box-Modal-question" href="#" id="delete"></i></div>
       <div style="display: none;"> 
       <p >Option A : <span class="option_a">${d.answers.option_a}</span></p>
       <p >Option B : <span class="option_b">${d.answers.option_b}</span></p>
@@ -288,275 +307,268 @@ let subject;
       </div>
       `
 
-        })
-        content += `</fieldset>`
-        head.style.display = 'block'
-        document.getElementById('grade-head-question').textContent = grade
-        document.getElementById('subject-head-question').textContent = data.data[0]['subject_name']
-        
-        container2.innerHTML = content;
-      }else{
-        head.style.display = 'none'
-        container2.innerHTML = `<p>subject - ${subject_name} has no questions</p>`
-      }
+          })
+          content += `</fieldset>`
+          head.style.display = 'block'
+          document.getElementById('grade-head-question').textContent = grade
+          document.getElementById('subject-head-question').textContent = data.data[0]['subject_name']
+
+          container2.innerHTML = content;
+        } else {
+          head.style.display = 'none'
+          container2.innerHTML = `<p>subject - ${subject_name} has no questions</p>`
+        }
         edit = false
       })
-    }else{
-        head.style.display = 'none'
-        container2.innerHTML = ``
-        edit = false
-      }
+    } else {
+      head.style.display = 'none'
+      container2.innerHTML = ``
+      edit = false
+    }
   };
-    var edit = null;
+  var edit = null;
 
-    $("#id_grade").change(function () {
+  $("#id_grade").change(function () {
+    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+    var gradeId = $(this).val();
+
+    $.ajax({
+      url: url_for_change,
+      data: {
+        'grade': gradeId
+      },
+      success: function (data) {
+        $("#id_subject").html(data);
+      }
+    });
+
+  });
+
+  $('#id_subject').change(function () {
+    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+    var subjectId = $(this).val();
+
+    $.ajax({
+      url: url_for_change,
+      data: {
+        'subject': subjectId
+      },
+      success: function (data) {
+        $("#id_chapter").html(data)
+      }
+    });
+  });
+
+  function deletequestion(id) {
+
+    fetch(`${url}${id}/`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': 'token' + ' ' + token,
+      },
+    }).then(res => {
+      console.log(res)
+      get();
+    }
+    )
+
+  }
+
+  container2.addEventListener('click', (e) => {
+    form_grade = document.getElementById('id_grade')
+    console.log(form_grade)
+    form_subject = document.getElementById('id_subject')
+    form_chapter = document.getElementById('id_chapter')
+    form_question = document.getElementById('id_question')
+    form_question_type = document.getElementById('id_question_type')
+    form_cognitive_level = document.getElementById('id_cognitive_level')
+    form_difficulty_level = document.getElementById('id_difficulty_level')
+    form_option_a = document.getElementById('id_option_a')
+    form_option_b = document.getElementById('id_option_b')
+    form_option_c = document.getElementById('id_option_c')
+    form_option_d = document.getElementById('id_option_d')
+    form_answer = document.getElementById('id_answer')
+    form_duration = document.getElementById('id_duration')
+    form_mark = document.getElementById('id_mark')
+    question_btn = document.getElementById('question-btn')
+    console.log(form_subject)
+    e.preventDefault();
+    let delbutton = e.target.id == 'delete';
+    var editbutton = e.target.id == 'edit';
+    edit = editbutton;
+    let id = e.target.parentElement.parentElement.id;
+    console.log(e.target.parentElement.parentElement)
+    console.log(id)
+    if (delbutton) {
+      const parent1 = e.target.parentElement;
+      yes_button.setAttribute("onClick", `deletequestion(${id})`);
+    }
+    if (editbutton) {
+      const parent = e.target.parentElement.parentElement;
+      var subject = parent.querySelector('.question_type').id;
+      var grade = parent.querySelector('.cognitive_level').id
+      console.log(subject)
+      var chapter = parent.querySelector('.chapter-name').id;
+      var question = parent.querySelector('.question').textContent;
+      var question_type = parent.querySelector('.question_type').textContent;
+      var cognitive_level = parent.querySelector('.cognitive_level').textContent;
+      var difficulty_level = parent.querySelector('.difficulty_level').textContent;
+      var option_a = parent.querySelector('.option_a').textContent;
+      var option_b = parent.querySelector('.option_b').textContent;
+      var option_c = parent.querySelector('.option_c').textContent;
+      var option_d = parent.querySelector('.option_d').textContent;
+      var answer = parent.querySelector('.answer').textContent;
+      if (form_grade) {
+        form_grade.value = grade
+      }
       var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
-      var gradeId = $(this).val();
-
       $.ajax({
         url: url_for_change,
         data: {
-          'grade': gradeId
+          'grade': grade
         },
         success: function (data) {
           $("#id_subject").html(data);
         }
-      });
-
-    });
-
-    $('#id_subject').change(function () {
-      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
-      var subjectId = $(this).val();
-
-      $.ajax({
-        url: url_for_change,
-        data: {
-          'subject': subjectId
-        },
-        success: function (data) {
-          $("#id_chapter").html(data)
-        }
-      });
-    });
-
-    function deletequestion(id) {
-
-      fetch(`${url}${id}/`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': 'token' + ' ' + token,
-        },
-      }).then(res => {
-        console.log(res)
-        get();
-      }
-      )
-
-    }
-
-    container2.addEventListener('click', (e) => {
-      form_grade = document.getElementById('id_grade')
-      console.log(form_grade)
-      form_subject = document.getElementById('id_subject')
-      form_chapter = document.getElementById('id_chapter')
-      form_question = document.getElementById('id_question')
-      form_question_type = document.getElementById('id_question_type')
-      form_cognitive_level = document.getElementById('id_cognitive_level')
-      form_difficulty_level = document.getElementById('id_difficulty_level')
-      form_option_a = document.getElementById('id_option_a')
-      form_option_b = document.getElementById('id_option_b')
-      form_option_c = document.getElementById('id_option_c')
-      form_option_d = document.getElementById('id_option_d')
-      form_answer = document.getElementById('id_answer')
-      form_duration = document.getElementById('id_duration')
-      form_mark = document.getElementById('id_mark')
-      question_btn = document.getElementById('question-btn')
-      console.log(form_subject)
-      e.preventDefault();
-      let delbutton = e.target.id == 'delete';
-      var editbutton = e.target.id == 'edit';
-      edit = editbutton;
-      let id = e.target.parentElement.parentElement.id;
-      console.log(e.target.parentElement.parentElement)
-      console.log(id)
-      if (delbutton) {
-        const parent1 = e.target.parentElement;
-        yes_button.setAttribute("onClick", `deletequestion(${id})`);
-      }
-      if (editbutton) {
-        document.getElementById('questionForm').style.display = 'grid'
-        document.getElementById('question-box').style.display = 'none'
-        document.getElementById('--question').style.display = 'none'
-        const parent = e.target.parentElement.parentElement;
-        var subject = parent.querySelector('.question_type').id;
-        var grade = parent.querySelector('.cognitive_level').id
-        console.log(subject)
-        var chapter = parent.querySelector('.chapter-name').id;
-        var question = parent.querySelector('.question').textContent;
-        var question_type = parent.querySelector('.question_type').textContent;
-        var cognitive_level = parent.querySelector('.cognitive_level').textContent;
-        var difficulty_level = parent.querySelector('.difficulty_level').textContent;
-        var option_a = parent.querySelector('.option_a').textContent;
-        var option_b = parent.querySelector('.option_b').textContent;
-        var option_c = parent.querySelector('.option_c').textContent;
-        var option_d = parent.querySelector('.option_d').textContent;
-        var answer = parent.querySelector('.answer').textContent;
-        if(form_grade){
-        form_grade.value = grade
-        }
-        var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+      }).then(() => {
+        form_subject.value = subject
         $.ajax({
           url: url_for_change,
           data: {
-            'grade': grade
+            'subject': subject
           },
           success: function (data) {
-            $("#id_subject").html(data);
+            $("#id_chapter").html(data)
           }
         }).then(() => {
-          form_subject.value = subject
-          $.ajax({
-            url: url_for_change,
-            data: {
-              'subject': subject
-            },
-            success: function (data) {
-              $("#id_chapter").html(data)
-            }
-          }).then(() => {
-            form_chapter.value = chapter
-          });
+          form_chapter.value = chapter
         });
-        form_question.value = question
-        form_question_type.value = question_type
-        form_cognitive_level.value = cognitive_level
-        form_difficulty_level.value = difficulty_level
-        form_option_a.value = option_a
-        form_option_b.value = option_b
-        form_option_c.value = option_c
-        form_option_d.value = option_d
-        form_answer.value = answer
-        id = parent.id
-        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        question_btn.addEventListener('click', () => {
-          if (edit) {
-            console.log('no')
-            fetch(`${url}${id}/`, {
-              method: 'PUT',
-              headers: {
-                'content-Type': 'application/json',
-                'Authorization': 'token' + ' ' + token,
-                'X-CSRFToken': csrftoken
-              },
-              body: JSON.stringify({
-                'subject': form_subject.value,
-                'chapter': form_chapter.value,
-                'grade': form_grade?form_grade.value:grade,
-                'question': form_question.value,
-                'question_type': form_question_type.value,
-                'cognitive_level': form_cognitive_level.value,
-                'difficulty_level': form_difficulty_level.value,
-                'duration': form_duration.value,
-                'mark': form_mark.value,
-                'answers': {
-                  'option_a': form_option_a.value,
-                  'option_b': form_option_b.value,
-                  'option_c': form_option_c.value,
-                  'option_d': form_option_d.value,
-                  'answer': form_answer.value
-                }
-              })
-            }).then(res => res.json()).then(() =>
-              location.reload()
-            )
-          }
-        })
-      }
-    });
-
-
-    const question_create = document.getElementById('question-btn')
-    question_create.addEventListener('click', () => {
-      // var grade = document.getElementById('id_grade').value
-      var subject = document.getElementById('id_subject').value
-      var chapter = document.getElementById('id_chapter').value
-      var question = document.getElementById('id_question').value
-      var question_type = document.getElementById('id_question_type').value
-      var cognitive_level = document.getElementById('id_cognitive_level').value
-      var difficulty_level = document.getElementById('id_difficulty_level').value
-      var duration = document.getElementById('id_duration').value
-      var mark = document.getElementById('id_mark').value
-      var option_a = document.getElementById('id_option_a').value
-      var option_b = document.getElementById('id_option_b').value
-      var option_c = document.getElementById('id_option_c').value
-      var option_d = document.getElementById('id_option_d').value
-      var answer = document.getElementById('id_answer').value
+      });
+      form_question.value = question
+      form_question_type.value = question_type
+      form_cognitive_level.value = cognitive_level
+      form_difficulty_level.value = difficulty_level
+      form_option_a.value = option_a
+      form_option_b.value = option_b
+      form_option_c.value = option_c
+      form_option_d.value = option_d
+      form_answer.value = answer
+      id = parent.id
       let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-      if (!edit) {
-        fetch(url,
-          {
-            method: 'POST',
-            body: JSON.stringify({
-              'subject': subject,
-              'chapter': chapter,
-              'grade': grade,
-              'question': question,
-              'question_type': question_type,
-              'cognitive_level': cognitive_level,
-              'difficulty_level': difficulty_level,
-              'duration': duration,
-              'mark': mark,
-              'answers': {
-                'option_a': option_a,
-                'option_b': option_b,
-                'option_c': option_c,
-                'option_d': option_d,
-                'answer': answer
-              }
-            }
-            ),
+      question_btn.addEventListener('click', () => {
+        if (edit) {
+          console.log('no')
+          fetch(`${url}${id}/`, {
+            method: 'PUT',
             headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
+              'content-Type': 'application/json',
               'Authorization': 'token' + ' ' + token,
               'X-CSRFToken': csrftoken
             },
-          }).then(function (response) {
-            if (response.status == 201) {
-              console.log("Sucess response", response)
-              messages.innerHTML = `${name} is created succesfully`;
-              // document.getElementById('id_grade').value = ''
-              // document.getElementById('id_subject').value = ''
-              // document.getElementById('id_chapter').value = ''
-              document.getElementById('id_question').value = ''
-              document.getElementById('id_question_type').value = ''
-              document.getElementById('id_cognitive_level').value = ''
-              document.getElementById('id_difficulty_level').value = ''
-              document.getElementById('id_option_a').value = ''
-              document.getElementById('id_option_b').value = ''
-              document.getElementById('id_option_c').value = ''
-              document.getElementById('id_option_d').value = ''
-              document.getElementById('id_answer').value = ''
-              // get();
-              return response.json();
-            } else {
-              console.log(response);
-            }
-          })
-      }
-
-    })
-    function show() {
-      document.getElementById('questionForm').style.display = 'grid'
-      document.getElementById('question-box').style.display = 'none'
-      document.getElementById('--question').style.display = 'none'
+            body: JSON.stringify({
+              'subject': form_subject.value,
+              'chapter': form_chapter.value,
+              'grade': form_grade.value,
+              'question': form_question.value,
+              'question_type': form_question_type.value,
+              'cognitive_level': form_cognitive_level.value,
+              'difficulty_level': form_difficulty_level.value,
+              'duration': form_duration.value,
+              'mark': form_mark.value,
+              'answers': {
+                'option_a': form_option_a.value,
+                'option_b': form_option_b.value,
+                'option_c': form_option_c.value,
+                'option_d': form_option_d.value,
+                'answer': form_answer.value
+              }
+            })
+          }).then(res => res.json()).then(() =>
+            location.reload()
+          )
+        }
+      })
     }
-    let input = document.getElementById('id_subject_2')
+  });
+
+
+  const question_create = document.getElementById('question-btn')
+  question_create.addEventListener('click', () => {
+    var grade = document.getElementById('id_grade').value
+    var subject = document.getElementById('id_subject').value
+    var chapter = document.getElementById('id_chapter').value
+    var question = document.getElementById('id_question').value
+    var question_type = document.getElementById('id_question_type').value
+    var cognitive_level = document.getElementById('id_cognitive_level').value
+    var difficulty_level = document.getElementById('id_difficulty_level').value
+    var duration = document.getElementById('id_duration').value
+    var mark = document.getElementById('id_mark').value
+    var option_a = document.getElementById('id_option_a').value
+    var option_b = document.getElementById('id_option_b').value
+    var option_c = document.getElementById('id_option_c').value
+    var option_d = document.getElementById('id_option_d').value
+    var answer = document.getElementById('id_answer').value
+    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    if (!edit) {
+      fetch(url,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            'grade':grade,
+            'subject': subject,
+            'chapter': chapter,
+            'grade': grade,
+            'question': question,
+            'question_type': question_type,
+            'cognitive_level': cognitive_level,
+            'difficulty_level': difficulty_level,
+            'duration': duration,
+            'mark': mark,
+            'answers': {
+              'option_a': option_a,
+              'option_b': option_b,
+              'option_c': option_c,
+              'option_d': option_d,
+              'answer': answer
+            }
+          }
+          ),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'token' + ' ' + token,
+            'X-CSRFToken': csrftoken
+          },
+        }).then(function (response) {
+          if (response.status == 201) {
+            console.log("Sucess response", response)
+            messages.innerHTML = `${name} is created succesfully`;
+            // document.getElementById('id_grade').value = ''
+            // document.getElementById('id_subject').value = ''
+            // document.getElementById('id_chapter').value = ''
+            document.getElementById('id_question').value = ''
+            document.getElementById('id_question_type').value = ''
+            document.getElementById('id_cognitive_level').value = ''
+            document.getElementById('id_difficulty_level').value = ''
+            document.getElementById('id_option_a').value = ''
+            document.getElementById('id_option_b').value = ''
+            document.getElementById('id_option_c').value = ''
+            document.getElementById('id_option_d').value = ''
+            document.getElementById('id_answer').value = ''
+            // get();
+            return response.json();
+          } else {
+            console.log(response);
+          }
+        })
+    }
+
+  })
+  let input = document.getElementById('id_subject_2')
     // input.addEventListener("change", function () {
     //   get();
     // });
-  
+
 
 
 

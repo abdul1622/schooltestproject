@@ -93,7 +93,7 @@ aria-hidden="true">
       document.querySelector('.profile-errors').innerHTML = 'standard and section altready added'
             return
     }
-    let content = ''
+    let content = ''      
     content += `    <p> standards list</p>`
                     for(i=0;i<standards.length;i++){
                       content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
