@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    {% load static %}
 <head>
     <!-- JavaScript Bundle with Popper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-
+    <link rel="stylesheet" href="{% static 'css/chapterlist.css' %}">
     <title>School</title>
     <style>
         #id_instruction {
@@ -658,21 +658,22 @@
         }
 
         #question-box {
-    text-align: center;
-    background-color: #b2c8df;
-    width: 16%;
-    margin: 1% 42%;
-    padding: 1%;
-    border-radius: 9px;
-}
-.question-error {
-    text-align: center;
-    margin-top: 3%;
-}
+            text-align: center;
+            background-color: #b2c8df;
+            width: 16%;
+            margin: 1% 42%;
+            padding: 1%;
+            border-radius: 9px;
+        }
 
-button#questioncreate-btn {
-    margin-top: 9%;
-    font-size: 14px;
+        .question-error {
+            text-align: center;
+            margin-top: 3%;
+        }
+
+        button#questioncreate-btn {
+            margin-top: 9%;
+            font-size: 14px;
         }
 
         #question-box label {
@@ -720,9 +721,10 @@ button#questioncreate-btn {
             margin-left: 105%;
             margin-bottom: 8%;
         }
-    .chapter-edit-close .back-btn{
-        margin: auto;
-    }
+
+        .chapter-edit-close .back-btn {
+            margin: auto;
+        }
 
         .profile-content {
             padding: 5%;
@@ -1262,18 +1264,20 @@ button#questioncreate-btn {
             color: #14279b;
         }
 
-        .box {
+        /* .box {
             margin: 4% 40%;
-    /* margin-top: 4%; */
-    width: 20%;
-    min-width: 200px;
-    padding: 2% 3%;
-    border-radius: 5px;
-    background-color: #33699f;
-        }
-        p.chapter-edit-close{
+            /* margin-top: 4%; */
+            /* width: 20%;
+            min-width: 200px;
+            padding: 2% 3%;
+            border-radius: 5px;
+            background-color: #33699f;
+        }  */
+
+        p.chapter-edit-close {
             text-align: end;
         }
+
         .box label {
             width: 23%;
         }
@@ -1288,13 +1292,17 @@ button#questioncreate-btn {
         }
 
         .chapter-table table {
-    width: 60%;
-    margin-left: 20%;
+            width: 60%;
+            margin-left: 20%;
         }
-.chapter-table table, .chapter-table td,.chapter-table th {
-    border: 1px dotted;
-    text-align: center;
-}
+
+        .chapter-table table,
+        .chapter-table td,
+        .chapter-table th {
+            border: 1px dotted;
+            text-align: center;
+        }
+
         .chapter-table .btn {
             margin-bottom: 2%;
             margin-left: 20%;
@@ -1315,7 +1323,7 @@ button#questioncreate-btn {
 
         .chapter-table #edit {
             padding: 2% 5%;
-        margin-left: 0vw;
+            margin-left: 0vw;
             border-radius: 5px;
             cursor: pointer;
         }
@@ -1465,7 +1473,7 @@ button#questioncreate-btn {
             background: #14279b;
             margin-bottom: 2vh;
         }
-
+/* 
         .form-box input {
             padding: 5px;
             width: 100%;
@@ -1474,21 +1482,21 @@ button#questioncreate-btn {
             font-size: 15px;
             border: none;
             outline: none;
-        }
+        } */
 
         #grade label {
             width: 25%;
             text-align: left;
         }
 
-        .form-box input[type=text] {
+        /* .form-box input[type=text] {
             padding: 5px;
             width: 100%;
             margin-bottom: 10px;
             color: black;
             font-size: 15px;
             border: none;
-        }
+        } */
 
         #action {
             padding-left: 2vh;
@@ -2167,13 +2175,13 @@ button#questioncreate-btn {
             }
 
             /* .chapter-table #edit { */
-                /* padding: 0.5% 1%;
+            /* padding: 0.5% 1%;
                 margin-left: -116%; */
-                /* margin-top: -1.7vw; */
-                /* border-radius: 5px;
+            /* margin-top: -1.7vw; */
+            /* border-radius: 5px;
                 font-size: 150%; */
             /* } */
-/* 
+            /* 
             .chapter-table :nth-child(7) {
                 margin-left: -4.5%;
                 position: absolute;
@@ -2183,8 +2191,9 @@ button#questioncreate-btn {
                 margin-left: 2.5vw;
             } */
             p.chapter-edit-close {
-    margin: 0;
-}
+                margin: 0;
+            }
+
             #delete {
                 padding: 7px 15px;
                 margin-top: 0vh;
@@ -2255,9 +2264,9 @@ button#questioncreate-btn {
 
             .box {
                 margin-left: 34%;
-    width: 32%;
-    padding: 4%;
-    background-color: #33699f;
+                width: 32%;
+                padding: 4%;
+                background-color: #33699f;
             }
 
             /* .chapter-table #delete {
@@ -2267,14 +2276,15 @@ button#questioncreate-btn {
             } */
 
             #question-box {
-    margin-left: 34vw;
-    background-color: #b2c8df;
-    width: 32vw;
-    height: 32vh;
-    padding: 3vh;
-    border-radius: 9px;
-    margin-top: -3vh;
-}
+                margin-left: 34vw;
+                background-color: #b2c8df;
+                width: 32vw;
+                height: 32vh;
+                padding: 3vh;
+                border-radius: 9px;
+                margin-top: -3vh;
+            }
+
             .question_create {
                 display: none;
                 grid-template-columns: auto auto auto;
@@ -2918,7 +2928,7 @@ button#questioncreate-btn {
                 /* margin-left: 3vw; */
                 background-color: #b2c8df;
                 width: 21%;
-    margin: 1% 39%;
+                margin: 1% 39%;
                 height: 36vh;
                 padding: 3vh;
                 border-radius: 9px;
@@ -3081,12 +3091,13 @@ button#questioncreate-btn {
 
             .box {
                 margin: 9vh 30vw 4vh;
-    /* margin-top: 9vh; */
-    width: 40vw;
-    padding-top: 2vh;
-    padding-left: 3vh;
-    min-height: 30vh;
-}
+                /* margin-top: 9vh; */
+                width: 40vw;
+                padding-top: 2vh;
+                padding-left: 3vh;
+                min-height: 30vh;
+            }
+
             .box label {
                 font-size: 1.8vw;
             }
@@ -3386,17 +3397,20 @@ button#questioncreate-btn {
 
             #question-box {
                 width: 36%;
-    /* height: 29vh; */
-    padding-top: 1vh;
-    margin: 2vh 32%;
+                /* height: 29vh; */
+                padding-top: 1vh;
+                margin: 2vh 32%;
             }
+
             button#questioncreate-btn {
-    margin: 9%;
-}
+                margin: 9%;
+            }
+
             #question-box select {
-    width: 90%;
-    margin: 0 5%;
-}
+                width: 90%;
+                margin: 0 5%;
+            }
+
             #question-box input {
                 width: 17vw;
                 margin-left: 4vw;
@@ -3484,9 +3498,9 @@ button#questioncreate-btn {
 
             .chapter-table table {
                 white-space: nowrap;
-    /* margin-left: -10%; */
-    width: 70%;
-    margin-left: 15%;
+                /* margin-left: -10%; */
+                width: 70%;
+                margin-left: 15%;
             }
 
             .chapter-table thead {
@@ -3526,14 +3540,14 @@ button#questioncreate-btn {
             }
 
             #--question {
-    display: block;
-    margin-left: 4vw;
-    /* text-align: center; */
-    outline: 1px solid;
-    padding: 5px;
-    margin-bottom: 0;
-    margin-top: 2vh;
-}
+                display: block;
+                margin-left: 4vw;
+                /* text-align: center; */
+                outline: 1px solid;
+                padding: 5px;
+                margin-bottom: 0;
+                margin-top: 2vh;
+            }
 
 
             #question_creation {
@@ -4027,12 +4041,13 @@ button#questioncreate-btn {
                 height: 3.4%;
                 margin-top: 0%;
             }
+
             .chapter-table table {
-    font-size: 65%;
-    margin-left: 6%;
-    margin-top: 8%;
-    width: 128%;
-}
+                font-size: 65%;
+                margin-left: 6%;
+                margin-top: 8%;
+                width: 128%;
+            }
 
             .chapter-table #edit {
                 font-size: 155%;
@@ -4049,7 +4064,7 @@ button#questioncreate-btn {
                 text-align: center;
             }
 
-            #mediabox {
+            /* #mediabox {
                 margin-left: 16%;
                 margin-top: 4%;
                 width: 64%;
@@ -4058,7 +4073,7 @@ button#questioncreate-btn {
                 border-radius: 5px;
                 background-color: #33699f;
                 transform: rotate(0deg);
-            }
+            } */
 
             #subjects-by-grade #back-btn {
                 margin-top: -20%;
@@ -4382,7 +4397,7 @@ button#questioncreate-btn {
             }
 
             .chapter-table {
-             /* margin-left: 11%; */
+                /* margin-left: 11%; */
                 margin-top: 5%;
                 /* width: 80vw; */
                 /* min-height: 70vh; */
