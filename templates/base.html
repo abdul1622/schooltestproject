@@ -36,7 +36,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="{% static 'css/chapterlist.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/chapterlist.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/academics.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/question-paper.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/question.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/test-history.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/test-history-student.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/test-list.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/test-list-student.css' %}">
     <title>School</title>
     <style>
         #id_instruction {
@@ -128,22 +136,6 @@
         label {
             font-size: 15px;
             color: black;
-        }
-
-        #grade {
-            background-color: #b2c8df;
-            box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-            width: 20vw;
-            height: auto;
-            text-align: left;
-            padding: 3% 3%;
-            margin-top: 4%;
-            margin-bottom: 4%;
-            margin-left: 38%;
-        }
-
-        #grade button {
-            margin-left: 37%;
         }
 
         input {
@@ -450,10 +442,6 @@
             padding-bottom: 100px;
         }
 
-        .grade-container .container {
-            padding-top: 1%;
-            padding-bottom: 1%;
-        }
 
         th {
             text-align: start;
@@ -570,15 +558,6 @@
         }
 
 
-        .question-paper-form {
-            background-color: #435cf9;
-            padding: 30px 50px;
-            border-radius: 5px;
-            flex-basis: 23%;
-            width: 19%;
-            margin: 7% 40%;
-        }
-
 
 
 
@@ -612,13 +591,7 @@
             margin-left: 4vw;
         }
 
-        /* #q-form-6 input[type=checkbox] {
-    width: 5%;
-} */
-        #chapterlist-btn:hover {
-            color: white;
-            background-color: #14279b;
-        }
+   
 
         .question-list-container table {
             width: 90%;
@@ -644,19 +617,7 @@
             color: white;
         }
 
-        #grade-btn {
-            color: #14279B;
-            outline: none;
-            background-color: #b2c8df;
-            border: 1px solid #14279B;
-            border-radius: 5px;
-        }
-
-        #grade-btn:hover {
-            color: white;
-            background-color: #14279b;
-        }
-
+      
         #question-box {
             text-align: center;
             background-color: #b2c8df;
@@ -717,10 +678,7 @@
             line-height: 150%;
         }
 
-        .box .back-btn {
-            margin-left: 105%;
-            margin-bottom: 8%;
-        }
+
 
         .chapter-edit-close .back-btn {
             margin: auto;
@@ -778,11 +736,6 @@
             padding: 20px;
             border-radius: 10px;
             margin-left: 148px;
-        }
-
-        .chapter-table :nth-child(7) {
-            margin-left: -10%;
-            position: absolute;
         }
 
         .back-btn {
@@ -874,15 +827,7 @@
             border-radius: 5px;
         }
 
-        .q-form-5 p {
-            color: white;
-        }
 
-        .q-form-5 p.heading {
-            font-size: 27px;
-            text-transform: capitalize;
-            text-align: center;
-        }
 
         .question-card label {
             width: 20%;
@@ -976,16 +921,6 @@
             position: fixed;
         }
 
-        .subject-title {
-            margin-right: 6%;
-            margin-bottom: 0%;
-        }
-
-        .subjects-by-grade label {
-            width: 100px;
-            display: inline-block;
-            color: #000000;
-        }
 
         i#back-btn {
             padding: 1%;
@@ -995,209 +930,6 @@
             color: white;
         }
 
-        .subjects-by-grade a {
-            display: inline;
-            color: white;
-        }
-
-        .subject-title-subjects {
-            margin-right: 36%;
-            font-family: 'Cinzel', serif;
-            font-weight: 600;
-        }
-
-        .subject-head {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 2%;
-        }
-
-        .grade-container h2 {
-            margin-left: 38%;
-            font-family: 'Cinzel', serif;
-            font-weight: 600;
-            display: inline;
-            padding: 1% 3%;
-            border-radius: 5px;
-            margin-top: 5%;
-            color: #14279b;
-        }
-
-        .grade-container hr {
-            width: 30%;
-            margin-left: 32%;
-            border: 2px solid gray;
-        }
-
-        .subjects-by-grade .cards {
-            display: grid;
-            width: 80%;
-            padding-left: 0%;
-            margin: 0% 10% 15%;
-            height: auto;
-            padding-top: 5%;
-            grid-template-columns: auto auto auto;
-            gap: 8%;
-        }
-
-        #grade {
-            display: none;
-        }
-
-        .grade-container {
-            display: none;
-            padding-bottom: 4%;
-        }
-
-        .chapter-cards {
-            display: grid;
-            width: 80%;
-            padding-left: 0%;
-            margin: 0% 1% 15%;
-            height: auto;
-            padding-top: 5%;
-            grid-template-columns: auto auto auto;
-            gap: 8%;
-        }
-
-        #back-btn-chapter {
-            display: inline;
-        }
-
-        .ch-btn {
-            margin-left: 0%;
-            background-color: #0062cc;
-            border-color: #005cbf;
-            color: white;
-            border-radius: 5px;
-        }
-
-        .chapter-cards .chapter-card {
-            min-height: 30vh;
-            height: auto;
-
-            padding: 15% 12%;
-            cursor: pointer;
-            font-size: 16px;
-            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-        }
-
-        .subjects-by-grade .subject-card {
-
-            height: auto;
-            padding: 15% 12%;
-            cursor: pointer;
-            font-size: 16px;
-            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-        }
-
-        .grade-list .card {
-            position: relative;
-            text-align: center;
-            height: 15vh;
-            padding-top: 25%;
-            cursor: pointer;
-            background-color: antiquewhite;
-            font-size: 25px;
-            box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-        }
-
-        .grade-list .cards {
-            display: grid;
-            width: 70%;
-            padding-left: 5%;
-            margin: 0% 7.9% 20%;
-            padding-top: 5%;
-            grid-template-columns: auto auto auto;
-            gap: 8%;
-        }
-
-        .grade-list .card .delete-grade {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 17%;
-            /* display: none; */
-            background: none;
-            color: #817f7f;
-        }
-
-        .grade-list .card:hover .delete-grade {
-            display: block;
-            outline: none;
-            border: none
-        }
-
-        .subject-list {
-            width: 170%;
-            margin-top: 5%;
-        }
-
-        option {
-            font-size: 16px;
-        }
-
-        .subject-list label {
-            width: 10%;
-        }
-
-        .chapter-list label {
-            width: 10%;
-        }
-
-        #chapterlist-btn {
-            width: 41%;
-            height: 32px;
-            margin-left: 28%;
-            margin-top: 20px;
-            background-color: #b2c8df;
-            color: #14279b;
-            padding: 5px 10px;
-            outline: none;
-            border: 1px solid #14279b;
-
-        }
-
-        #gradeforsubject {
-            margin-left: 55%;
-            padding-left: 10px;
-        }
-
-        .subject-container {
-            display: flex;
-            margin-top: 5vh;
-            justify-content: space-around;
-        }
-
-        .subject-container-1 input {
-            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-
-        }
-
-        .subject-container-1 {
-            flex-basis: 60%;
-            margin-left: 5%;
-        }
-
-        .subject-container-2 {
-            flex-basis: 30%;
-            margin-right: 5%;
-        }
-
-        .subject-container-1 .cards {
-            display: grid;
-            height: auto;
-            width: 55%;
-            grid-template-columns: auto auto auto;
-            gap: 50px;
-        }
-
-        .subject-container-1 .card {
-            height: auto;
-            padding: 14%;
-            font-size: 16px;
-            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-        }
 
         .messages {
             text-align: center;
@@ -1245,88 +977,14 @@
             border: 1px solid rgba(0, 0, 0, .2);
         }
 
-        .chapterlist a {
-            color: white;
-            padding: 8px;
-        }
-
-        .chapterlist label {
-            color: #000000;
-            display: inline-block;
-            width: 100px;
-        }
-
-        .chapterlist h4 {
-            margin-left: 41.3%;
-            margin-top: 1%;
-            font-family: 'Cinzel', serif;
-            font-weight: 600;
-            color: #14279b;
-        }
-
-        /* .box {
-            margin: 4% 40%;
-            /* margin-top: 4%; */
-            /* width: 20%;
-            min-width: 200px;
-            padding: 2% 3%;
-            border-radius: 5px;
-            background-color: #33699f;
-        }  */
-
-        p.chapter-edit-close {
-            text-align: end;
-        }
-
-        .box label {
-            width: 23%;
-        }
-
-        .box button {
-            margin-left: 30%;
-        }
-
-        .chapter-table {
-            /* margin-left: 18%; */
-            margin-top: 5%;
-        }
-
-        .chapter-table table {
-            width: 60%;
-            margin-left: 20%;
-        }
-
-        .chapter-table table,
-        .chapter-table td,
-        .chapter-table th {
-            border: 1px dotted;
-            text-align: center;
-        }
-
-        .chapter-table .btn {
-            margin-bottom: 2%;
-            margin-left: 20%;
-        }
+        
 
         #questionForm span.grade-p {
             font-size: 15px;
             display: block;
         }
 
-        .chapter-table #delete {
-            padding: 2% 5%;
-            margin-left: 0%;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 150%;
-        }
-
-        .chapter-table #edit {
-            padding: 2% 5%;
-            margin-left: 0vw;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+        
 
         .chapter-btns {
             display: flex;
@@ -1348,16 +1006,7 @@
             border: 1px solid white;
         }
 
-        #subject-btn {
-            width: 25%;
-            height: 19%;
-            margin-left: 31%;
-            margin-top: 0;
-            background-color: #33699f;
-            color: white;
-            border: 1px solid white;
-        }
-
+        
         button {
             border: none;
             border-radius: 5px;
@@ -1474,29 +1123,11 @@
             margin-bottom: 2vh;
         }
 /* 
-        .form-box input {
-            padding: 5px;
-            width: 100%;
-            margin-bottom: 10px;
-            color: black;
-            font-size: 15px;
-            border: none;
-            outline: none;
-        } */
+       */
 
-        #grade label {
-            width: 25%;
-            text-align: left;
-        }
+        
 
-        /* .form-box input[type=text] {
-            padding: 5px;
-            width: 100%;
-            margin-bottom: 10px;
-            color: black;
-            font-size: 15px;
-            border: none;
-        } */
+        /* */
 
         #action {
             padding-left: 2vh;
@@ -1538,17 +1169,6 @@
             color: #14279B;
         }
 
-        .grade-list .card #edit {
-            padding: 5px 15px;
-            margin-left: -1vw;
-            border-radius: 5px;
-            font-size: 50%;
-            color: #14279B;
-            position: absolute;
-            top: 0;
-            background: none;
-            right: 13%;
-        }
 
         #delete {
             padding: 5px 15px;
@@ -1559,19 +1179,7 @@
             font-size: 150%;
         }
 
-        .chapter-card #delete {
-            padding: 5px 15px;
-            margin-left: 0%;
-            border-radius: 5px;
-            font-size: 150%;
-        }
-
-        .chapter-card #edit {
-            padding: 5px 15px;
-            margin-left: 7%;
-            border-radius: 5px;
-        }
-
+       
         #Form-modal-content {
             width: 172%;
             background-color: #b2c8df;
@@ -1624,10 +1232,6 @@
             margin-left: auto;
         }
 
-        #q-form-2 input[type=checkbox],
-        input[type=radio] {
-            width: 25%;
-        }
 
         .questions-paper-card {
             font-size: 15px;
@@ -1906,13 +1510,7 @@
             justify-content: space-around;
         }
 
-        #q-form-6 input {
-            width: auto;
-        }
-
-        #q-form-6 th {
-            text-transform: capitalize;
-        }
+      
 
         .history-container-form select {
             width: 100%;
@@ -1922,9 +1520,7 @@
             margin: 1% 15%;
         }
 
-        div#q-form-4 {
-            margin: 2% 3%;
-        }
+
 
 
 
@@ -2072,57 +1668,16 @@
                 margin: 8% 16%;
             }
 
-            #grade {
-                width: 44%;
-                margin-left: 26vw;
-            }
-
-            .subjects-by-grade .cards {
-                margin: 0% 4% 15%;
-            }
-
-            #subject-tittle {
-                margin-left: 1.5vw;
-            }
-
-            .chapter-cards {
-                width: 100%;
-            }
-
+         
             .question-paper-card {
                 margin: 0% -7% 15%;
             }
 
-            .chapter-cards .chapter-card {
-                min-height: auto;
-            }
+ 
 
-            .chapter-table {
-                /* margin-left: 13%; */
-                width: 100%;
-                margin-top: 5%;
-            }
 
             #sort {
                 width: 9vw;
-            }
-
-            .container2 {
-                width: 100%;
-            }
-
-            .grade-list .card {
-                height: 15vh;
-            }
-
-            .subjects-by-grade .subject-card {
-                width: 24vw;
-                height: auto;
-            }
-
-            .chapterlist h4 {
-                margin-left: 39%;
-                margin-bottom: 2%;
             }
 
             .thead {
@@ -2173,26 +1728,8 @@
                 padding: 7px 15px;
                 border-radius: 5px;
             }
-
-            /* .chapter-table #edit { */
-            /* padding: 0.5% 1%;
-                margin-left: -116%; */
-            /* margin-top: -1.7vw; */
-            /* border-radius: 5px;
-                font-size: 150%; */
-            /* } */
-            /* 
-            .chapter-table :nth-child(7) {
-                margin-left: -4.5%;
-                position: absolute;
-            } */
-
-            /* .chapter-table .thead:nth-child(7) {
-                margin-left: 2.5vw;
-            } */
-            p.chapter-edit-close {
-                margin: 0;
-            }
+    
+         
 
             #delete {
                 padding: 7px 15px;
@@ -2253,28 +1790,7 @@
                 font-size: 113%;
             }
 
-            .grade-container #edit {
-                margin-left: 0;
-            }
-
-
-            .grade-container h2 {
-                margin-left: 36%;
-            }
-
-            .box {
-                margin-left: 34%;
-                width: 32%;
-                padding: 4%;
-                background-color: #33699f;
-            }
-
-            /* .chapter-table #delete {
-                margin-top: -19%;
-                border-radius: 5px;
-                margin-left: -105%;
-            } */
-
+           
             #question-box {
                 margin-left: 34vw;
                 background-color: #b2c8df;
@@ -2416,21 +1932,7 @@
             width: 102%;
         } */
 
-            .chapter-cards {
-                display: grid;
-                width: 33vw;
-                padding-left: 0%;
-                margin: 0% -9% 15%;
-                height: auto;
-                padding-top: 5%;
-                grid-template-columns: auto auto auto;
-                gap: 8%;
-            }
-
-            #grade button {
-                margin-left: 53%;
-            }
-
+           
             #action {
                 padding-left: 4vh;
             }
@@ -2465,13 +1967,7 @@
                 height: 65vh;
             }
 
-            .question-paper-form {
-                background-color: #435cf9;
-                width: 34vw;
-                padding: 30px 50px;
-                margin: 10% 32%;
 
-            }
 
             input#id_AllChapter {
                 height: 2.2vh;
@@ -2528,10 +2024,7 @@
                 margin-left: 2%;
             }
 
-            .subjects-by-grade .cards {
-                margin: 0% 1% 15%;
-                height: auto;
-            }
+       
 
             #profile-box {
                 width: 27vw;
@@ -2550,10 +2043,7 @@
                 margin-left: 18%;
             }
 
-            #grade {
-                width: 32%;
-                margin-left: 25vw;
-            }
+
 
             #add {
                 width: 9%;
@@ -2580,18 +2070,7 @@
                 width: 100%;
             }
 
-            .grade-list .card {
-                height: 22vh;
-                border-radius: 10px;
-                padding: 30%;
-            }
-
-            .subjects-by-grade .subject-card {
-                width: 24vw;
-                border-radius: 10px;
-                height: auto;
-            }
-
+     
 
             .thead {
                 font-size: 1.2vw;
@@ -2683,22 +2162,7 @@
                 margin-left: 20vw;
                 border-radius: 5px;
             }
-
-            /* .chapter-table #edit {
-                padding: 5px 15px;
-                margin-left: -29%;
-                margin-top: -1.7vw;
-                border-radius: 5px;
-            } */
-
-            .chapter-table #delete {
-                position: static;
-            }
-
-            .subject-card #edit {
-                margin-left: 1vw;
-            }
-
+        
             .questions-paper-card {
                 font-size: 15px;
                 background-color: #fff8dcb0;
@@ -2738,32 +2202,6 @@
                 border-radius: 5px;
                 margin-top: 0;
                 position: absolute;
-            }
-
-            .grade-container #edit {
-                margin-left: 0;
-            }
-
-            .grade-container #delete {
-                margin-left: 0;
-                position: static;
-            }
-
-            .box {
-                margin-left: 33%;
-                width: 25%;
-                padding: 2% 4%;
-                background-color: #33699f;
-            }
-
-            .form .back-btn {
-                margin-left: 103%;
-            }
-
-            .chapter-table {
-                /* margin-left: 18%;
-                width: 80%; */
-                margin-top: 5%;
             }
 
             .question-card {
@@ -2893,9 +2331,7 @@
                 color: black;
             }
 
-            .question-paper-form label {
-                width: 9vw;
-            }
+
 
             #action {
                 padding-left: 5vh;
@@ -2945,20 +2381,9 @@
                 /* margin-left: 5vw; */
             }
 
-            #chapterlist-btn {
-                width: 47%;
-                margin-top: 5%;
-            }
+        
 
-            #subject-btn {
-                width: 22%;
-                height: 23%;
-                margin-left: 31%;
-                margin-top: 0;
-                background-color: #33699f;
-                color: white;
-                border: 1px solid white;
-            }
+       
 
             .question-papers-get {
                 width: 25%;
@@ -2971,12 +2396,6 @@
                 width: 11%;
             }
 
-            .question-paper-form {
-                background-color: #435cf9;
-                width: 24vw;
-                padding: 30px 3%;
-                margin: 7% 38%;
-            }
 
             #customize {
                 display: none;
@@ -3089,26 +2508,7 @@
                 margin: 8% 17%;
             }
 
-            .box {
-                margin: 9vh 30vw 4vh;
-                /* margin-top: 9vh; */
-                width: 40vw;
-                padding-top: 2vh;
-                padding-left: 3vh;
-                min-height: 30vh;
-            }
-
-            .box label {
-                font-size: 1.8vw;
-            }
-
-            .box input[type=text] {
-                font-size: 1.5vh;
-            }
-
-            .box #chapterlist-btn {
-                font-size: 10px;
-            }
+   
 
             #add {
                 width: 14%;
@@ -3177,13 +2577,6 @@
                 margin-left: 3%;
             }
 
-            /* .chapter-table {
-                margin-left: 20%;
-            } */
-
-            .chapter-table th {
-                padding-left: 4%;
-            }
 
             #bach-btn {
                 margin-left: -11vw;
@@ -3208,10 +2601,6 @@
                 font-size: 1.5vw;
             }
 
-            .chapter-table td {
-                text-align: center;
-                font-size: 100%;
-            }
 
 
             #userDetails {
@@ -3302,99 +2691,7 @@
                 background-color: #8d82ee;
             }
 
-            .grade-list .cards {
-                margin: 0% 27% 20%;
-            }
-
-            .grade-list {
-                margin-left: -9vw;
-            }
-
-            #grade {
-                margin-left: 26vw;
-                width: 52vw;
-                margin-top: 30%;
-            }
-
-            .grade-container #grade {
-                height: auto;
-            }
-
-            #grade p {
-                margin-top: 1vw;
-                margin-bottom: 1rem;
-            }
-
-            .grade-container h2 {
-                margin-left: 52%;
-            }
-
-            .grade-container hr {
-                margin-left: 49%;
-            }
-
-            .grade-list .card {
-                padding: 37%;
-            }
-
-            .subjects-by-grade .cards {
-                grid-template-columns: auto auto;
-                height: auto;
-                column-gap: 3%;
-                row-gap: 2%;
-            }
-
-            .subjects-by-grade .subject-card {
-                width: 36vw;
-                border-radius: 9px;
-                margin-left: 0vw;
-                height: auto;
-            }
-
-            .subjects-by-grade {
-                margin-left: -5vw;
-            }
-
-            .subjects-by-grade h2 {
-                margin-left: 38%;
-            }
-
-            .subjects-by-grade hr {
-                margin-left: 35%;
-            }
-
-            #chapterlist hr {
-                margin-left: 35%;
-            }
-
-            .chapterlist h4 {
-                margin-left: 43.5%;
-            }
-
-            .chapter-cards {
-                grid-template-columns: auto auto;
-                margin-left: 24%;
-                column-gap: 3%;
-                row-gap: 3%;
-            }
-
-            .chapter-card {
-                width: 40vw;
-                margin-left: -44%;
-            }
-
-            #subject-title {
-                margin-left: -15vw;
-            }
-
-            .subject-title-subjects {
-                margin-right: 26%;
-            }
-
-            #back-btn-chapter {
-                margin-left: -9%
-            }
-
+         
             #question-box {
                 width: 36%;
                 /* height: 29vh; */
@@ -3496,36 +2793,7 @@
                 margin-left: 16%;
             }
 
-            .chapter-table table {
-                white-space: nowrap;
-                /* margin-left: -10%; */
-                width: 70%;
-                margin-left: 15%;
-            }
 
-            .chapter-table thead {
-                font-size: 100%;
-            }
-
-            .chapter-table #edit {
-                /* margin-left: 4%;
-                padding: 4px 14px; */
-                font-size: 145%;
-            }
-
-            /* .chapter-table thead th:last-child(7) {
-                padding-left: 2vw;
-            } */
-
-            /* .chapter-table thead th:last-child(6) {
-                padding-left: 2vw;
-                font-size: 133%;
-            } */
-
-            .chapter-table #delete {
-                font-size: 150%;
-
-            }
 
             .question_create label {
                 font-size: 10px;
@@ -3562,12 +2830,6 @@
                 margin-top: 40vh;
             }
 
-            #chapterlist-btn {
-                width: 12vw;
-                font-size: 11px;
-                height: 4vh;
-                margin-left: 9vw;
-            }
 
             .prev-question-papers {
                 grid-template-columns: auto;
@@ -3629,13 +2891,6 @@
                 height: 58vh;
             }
 
-            .question-paper-form {
-
-                width: 45vw;
-                padding: 30px 50px;
-                margin: 7% 28%;
-
-            }
 
             input#id_AllChapter {
                 height: 2.2vh;
@@ -3893,136 +3148,6 @@
             }
 
 
-            .subjects-by-grade .subject-card {
-                padding: 7% 12%;
-                cursor: pointer;
-                font-size: 16px;
-                box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-            }
-
-            h3.subject-title-subjects {
-                font-size: 17px;
-                margin-left: 41%;
-            }
-
-            span#subject-title {
-                font-size: 20px;
-                margin-left: 8%;
-            }
-
-            .chapter-cards {
-                display: grid;
-                width: 100%;
-                padding-left: 0%;
-                margin: 0% 1% 15%;
-                height: auto;
-                padding-top: 5%;
-                grid-template-columns: auto auto auto;
-                gap: 8%;
-            }
-
-            .grade-list .cards {
-                display: grid;
-                width: 90%;
-                padding-left: 5%;
-                margin: 0% 4% 20%;
-                padding-top: 5%;
-                grid-template-columns: auto auto auto;
-                gap: 8%;
-            }
-
-            .grade-container hr {
-                width: 50%;
-                margin-left: 26%;
-            }
-
-            .subjects-by-grade .subject-card {
-                padding: 7% 8%;
-            }
-
-            .grade-list .card {
-                position: relative;
-                height: 100%;
-                cursor: pointer;
-                background-color: aliceblue;
-                font-size: 25px;
-                box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-            }
-
-            #grade {
-                width: 67vw;
-                margin-left: 16%;
-                margin-top: 35%;
-            }
-
-            #grade input {
-                padding: 5px;
-                width: 70%;
-                margin-bottom: 10px;
-                color: black;
-                font-size: 15px;
-                border: none;
-            }
-
-            .subjects-by-grade .cards {
-                display: grid;
-                grid-template-columns: auto;
-                gap: 1%;
-                margin-left: 13%;
-            }
-
-            .chapterlist h4 {
-                margin-left: 37.5%;
-                font-family: 'cinzel';
-            }
-
-            .chapter-cards {
-                display: grid;
-                grid-template-columns: auto;
-                gap: 1%;
-                margin: 0% -20%;
-            }
-
-            .chapter-cards .chapter-card {
-                min-height: 30vh;
-                height: auto;
-                width: 91%;
-                padding: 15% 10%;
-                cursor: pointer;
-                margin-left: 27%;
-                font-size: 16px;
-                box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-            }
-
-            .chapter-card #edit {
-                margin-left: 10%;
-                font-size: 150%;
-            }
-
-            .chapter-card #delete {
-                font-size: 150%;
-                margin-top: 0;
-                margin-left: 0%;
-                color: #850b0b;
-            }
-
-            #back-btn-chapter {
-                display: inline;
-                margin-left: -71%;
-                position: absolute;
-                margin-top: -30%;
-            }
-
-            #grade button {
-                margin-left: 34%;
-                height: 3vh;
-                /*width: 33%;*/
-            }
-
-            .grade-container h2 {
-                margin-left: 32%;
-                font-family: 'cinzel';
-            }
 
 
             #add {
@@ -4042,27 +3167,6 @@
                 margin-top: 0%;
             }
 
-            .chapter-table table {
-                font-size: 65%;
-                margin-left: 6%;
-                margin-top: 8%;
-                width: 128%;
-            }
-
-            .chapter-table #edit {
-                font-size: 155%;
-            }
-
-            .chapter-table #delete {
-                font-size: 155%;
-
-            }
-
-
-            .chapter-table table td {
-                /* padding: 2px 16px; */
-                text-align: center;
-            }
 
             /* #mediabox {
                 margin-left: 16%;
@@ -4075,13 +3179,7 @@
                 transform: rotate(0deg);
             } */
 
-            #subjects-by-grade #back-btn {
-                margin-top: -20%;
-                position: absolute;
-                margin-left: -64%;
-                transform: none;
-            }
-
+  
             #back-btn {
                 margin-top: -14%;
                 position: absolute;
@@ -4096,19 +3194,6 @@
                 border: black 1px solid;
             }
 
-
-            #chapterlist-btn {
-                width: 45%;
-                height: 2%;
-                margin-left: 27%;
-                margin-top: 5%;
-                background-color: #b2c8df;
-                color: #14279b;
-                padding: 2%;
-                outline: none;
-                border: 1px solid #14279b;
-                font-size: 75%;
-            }
 
             .question_create {
                 display: none;
@@ -4139,14 +3224,6 @@
             }
 
 
-            .question-paper-form {
-                background-color: #435cf9;
-                width: 100%;
-                padding: 30px 50px;
-                margin-bottom: 15%;
-                border-radius: 5px;
-                margin-left: 0%;
-            }
 
             .question-paper-subject {
                 display: flex;
@@ -4216,27 +3293,8 @@
             }
 
 
-            .subject-card #edit {
-                margin-left: 1vw;
-                font-size: 150%;
-                margin-top: 0;
-            }
 
-            .subject-card #delete {
-                margin-left: 1vw;
-                /* width: 41%; */
-                /* height: 46%; */
-                color: #850b0b;
-            }
 
-            .box {
-                margin-left: 11%;
-                padding: 5%;
-                margin-top: 15%;
-
-                width: 79%;
-
-            }
 
             .single-test {
                 margin: 2% 12%;
@@ -4276,35 +3334,9 @@
                 transform: rotate(90deg);
             }
 
-            .form .back-btn {
-                margin-left: 93%;
-            }
 
-            .grade-list .card .delete-grade {
-                position: absolute;
-                top: 0;
-                right: 0;
-                display: block;
-                font-size: 10px;
-                background: transparent;
-                color: #c0c0c066;
-            }
 
-            .grade-list .card .delete-grade:focus {
-                outline: none;
-                border: none;
-            }
-
-            .subject-title-subjects {
-                margin-left: -3%;
-            }
-
-            #back-btn-chapter {
-                display: inline;
-                position: absolute;
-                margin-left: -75%;
-                margin-top: -31%;
-            }
+           
 
             .history fieldset {
                 margin-top: 10%;
@@ -4396,17 +3428,8 @@
                 min-height: 70vh;
             }
 
-            .chapter-table {
-                /* margin-left: 11%; */
-                margin-top: 5%;
-                /* width: 80vw; */
-                /* min-height: 70vh; */
-                overflow: scroll;
-            }
+          
 
-            .question-paper-form input {
-                width: 90%;
-            }
 
             .modal-content {
                 width: 100%;
@@ -4422,13 +3445,7 @@
 
             }
 
-            .box label {
-                margin-left: 5%;
-            }
 
-            .box select {
-                margin-left: 5%;
-            }
 
             #userDetails input {
                 font-size: 10px;
