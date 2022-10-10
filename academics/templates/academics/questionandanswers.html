@@ -563,9 +563,21 @@
             console.log(response);
           }
         })
+    function show() {
+      document.getElementById('id_question').value = ''
+      document.getElementById('id_question_type').value = ''
+              document.getElementById('id_cognitive_level').value = ''
+              document.getElementById('id_difficulty_level').value = ''
+              document.getElementById('id_option_a').value = ''
+              document.getElementById('id_option_b').value = ''
+              document.getElementById('id_option_c').value = ''
+              document.getElementById('id_option_d').value = ''
+              document.getElementById('id_answer').value = ''
+      document.getElementById('questionForm').style.display = 'grid'
+      document.getElementById('question-box').style.display = 'none'
+      document.getElementById('--question').style.display = 'none'
     }
 
-  })
   let input = document.getElementById('id_subject_2')
     // input.addEventListener("change", function () {
     //   get();

@@ -1,0 +1,80 @@
+
+        .question-paper-form {
+            background-color: #435cf9;
+            padding: 30px 50px;
+            border-radius: 5px;
+            flex-basis: 23%;
+            width: 19%;
+            margin: 7% 40%;
+        }
+
+        .q-form-5 p {
+            color: white;
+        }
+
+        .q-form-5 p.heading {
+            font-size: 27px;
+            text-transform: capitalize;
+            text-align: center;
+        }
+
+        #q-form-2 input[type=checkbox],
+        input[type=radio] {
+            width: 25%;
+        }
+        #q-form-6 input {
+            width: auto;
+        }
+
+        #q-form-6 th {
+            text-transform: capitalize;
+        }
+        div#q-form-4 {
+            margin: 2% 3%;
+        }
+@media screen and (min-width:1024px) and (max-width:1200px) {
+    .question-paper-form {
+        background-color: #435cf9;
+        width: 34vw;
+        padding: 30px 50px;
+        margin: 10% 32%;
+
+    }
+}
+@media screen and (min-width:1359px) and (max-width:1450px) {
+    .question-paper-form {
+        background-color: #435cf9;
+        width: 24vw;
+        padding: 30px 3%;
+        margin: 7% 38%;
+    }
+
+    .question-paper-form label {
+        width: 9vw;
+    }
+}
+@media screen and (min-width:700px) and (max-width:800px) {
+
+    .question-paper-form {
+
+        width: 45vw;
+        padding: 30px 50px;
+        margin: 7% 28%;
+
+    }
+}
+@media screen and (max-width:600px) {
+
+    .question-paper-form {
+        background-color: #435cf9;
+        width: 100%;
+        padding: 30px 50px;
+        margin-bottom: 15%;
+        border-radius: 5px;
+        margin-left: 0%;
+    }
+    .question-paper-form input {
+        width: 90%;
+    }
+
+}
