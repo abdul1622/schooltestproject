@@ -187,7 +187,7 @@ function section_change(){
             document.getElementById('back-btn-chapter').style.display = "none"
             document.getElementById('subject-btn').style.display = "none"
             document.getElementById('chapter-btn').style.display = "none"
-            document.getElementById('grade-btn').style.display = "block"
+            document.getElementById('grade-btn').style.display = "inline"
             document.getElementById('grade-list').style.display = "block"
             document.getElementById('chapterlist').style.display = "none"
             form_all.innerHTML = `<div class='grade-form-box'>
@@ -403,7 +403,7 @@ else{
         list.innerHTML = ''
         document.getElementById('grade-title').textContent = `${grade_val}`
         document.getElementById('grade-btn').style.display = "none"
-        document.getElementById('subject-btn').style.display = "block"
+        document.getElementById('subject-btn').style.display = "inline"
         document.getElementById('chapter-btn').style.display = "none"
         document.getElementById('back-btn').style.display = "inline"
         document.getElementById('grade-list').style.display = "none"
@@ -599,7 +599,7 @@ else{
         document.getElementById('subject-title').textContent = `${subject_val}`
         document.getElementById('grade-btn').style.display = "none"
         document.getElementById('subject-btn').style.display = "none"
-        document.getElementById('chapter-btn').style.display = "block"
+        document.getElementById('chapter-btn').style.display = "inline"
         document.getElementById('back-btn').style.display = "none"
         document.getElementById('back-btn-chapter').style.display = "inline"
         document.getElementById('grade-list').style.display = "none"

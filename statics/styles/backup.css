@@ -1,0 +1,577 @@
+
+        .chapter_create {
+            background-color: #343a40;
+            color: white;
+            float: right;
+            border: 2px solid black;
+            width: 20%;
+            margin-right: 50px;
+            margin-top: 200px;
+            padding: 30px 50px;
+        }
+
+        .chapter {
+            background-color: #343a40;
+            color: white;
+            float: right;
+            margin-left: 1392px;
+            width: 20%;
+            margin-top: 200px;
+            padding: 30px 50px;
+            position: fixed;
+        }
+
+        #chapter-btn {
+            border: 1px solid #14279B;
+            border-radius: 5px;
+            color: #14279B;
+        }
+        .box1 {
+            background-color: #343a40;
+            color: white;
+            float: right;
+            margin-right: 50px;
+            width: 20%;
+            border-radius: 12px;
+            margin-top: 100px;
+            padding: 30px 50px;
+        }
+
+        .question-paper-card {
+            margin-left: 100px;
+            font-size: 15px;
+            color: white;
+            height: auto;
+            width: 100%;
+            margin-top: 28px;
+            padding: 12px;
+        }
+
+
+        .chapter_create {
+            background-color: #343a40;
+            color: white;
+            float: right;
+            border: 2px solid black;
+            width: 20%;
+            margin-right: 50px;
+            margin-top: 200px;
+            padding: 30px 50px;
+        }
+
+        .chapter {
+            background-color: #435cf9;
+            color: white;
+            float: right;
+            margin-left: 1100px;
+            width: 20%;
+            margin-top: 200px;
+            padding: 30px 50px;
+            position: fixed;
+        }
+        .question-paper-card a {
+            color: blue;
+        }
+
+        .question-paper-card {
+            font-size: 15px;
+            height: auto;
+            color: black;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            padding: 10%;
+        }
+        .question-paper {
+            flex-basis: 40%;
+            font-size: 16px;
+            background-color: #435cf9;
+            padding: 3%;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .prev-question-papers {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            gap: 5%;
+            margin: 5%;
+        }
+
+        .prev-questi {
+            margin-left: 24px;
+            border-radius: 5px;
+            margin-left: 36%;
+            border: 2px solid gray;
+        }
+        #get-questions-button {
+            text-align: center;
+            font-size: 12px;
+            padding: 8px;
+            margin: 2% 10% 5%;
+        }
+
+        #grades {
+            margin-left: 14%;
+            border-radius: 5px;
+            margin-top: 3%;
+        }
+
+
+   #userDetails .back-btn {
+            margin-left: 50vw;
+            height: 0;
+            background-color: transparent;
+            font-size: 100%;
+            outline: none;
+            position: absolute;
+            margin-left: 95%;
+            color: black;
+            margin-top: 1vh;
+        }
+
+        .question_create .back-btn {
+            margin-left: 59vw;
+            color: black;
+            height: 0;
+            margin-top: 2vh;
+            background-color: transparent;
+            font-size: 0.9vw;
+            outline: none;
+            position: absolute;
+        }
+        #customize #next-btn {
+            margin-left: 90%;
+            margin-top: -38%;
+            font-size: 12px;
+        }
+
+        #customize #customize-btn {
+            margin-left: -12%;
+            font-size: 12px;
+        }
+
+        #customize {
+            display: none;
+            background-color: #435cf9;
+            width: 23%;
+            padding: 30px 80px;
+            border-radius: 5px;
+            margin: 7% 36%;
+        }
+
+        #customize-form {
+            display: none;
+            background-color: #435cf9;
+            border-radius: 5px;
+            width: 24%;
+            margin: 7% 39%;
+            padding: 30px 50px;
+        }
+        input#id_no_difficulty_level {
+            width: 4%;
+            position: absolute;
+            margin: -2.7% 14%;
+            padding: 5px;
+        }
+
+        input#id_no_cognitive_level {
+            width: 4%;
+            position: absolute;
+            margin: -2.7% 14%;
+            padding: 5px;
+        }
+
+        #customize-form #next-btn {
+            font-size: 12px;
+            margin: 1% 85%;
+        }
+
+        #preview-form {
+            display: none;
+            background-color: #435cf9;
+            border-radius: 5px;
+            width: 20%;
+            margin: 7% 39%;
+            padding: 30px 50px;
+        }
+
+        #preview-form #back-btn {
+            font-size: 12px;
+            margin: 0% -7%;
+        }
+
+        #preview-form #createtest-btn {
+            font-size: 12px;
+            position: absolute;
+            margin: -2.6% 11%;
+        }
+        button.btn.btn-primary.btn-test-submit {
+            margin: 4% 17%;
+        }
+  
+        .testsubmit {
+            margin-left: 2%;
+            height: 0%;
+            width: 5%;
+            padding: 0.20%;
+            background: transparent;
+            color: black;
+            border: black 1px solid;
+        }
+@media screen and (min-width:1024px) and (max-width:1200px) {
+    #userDetails {
+        margin-left: 8%;
+        width: 89%;
+    }
+
+    .question-paper-card {
+        margin: 0% -7% 15%;
+    }
+    #userDetails .back-btn {
+        margin-left: 78vw;
+        font-size: 2vw;
+    }
+
+    #userDetails input {
+        margin-bottom: 2vh;
+    }
+    .question-paper-card {
+        margin-left: 0vw;
+        font-size: 15px;
+        height: auto;
+        color: white;
+        width: 100%;
+        margin-top: 28px;
+        padding: 12px;
+    }
+
+    .question-btn {
+        width: 20vw;
+        height: 4vh;
+        margin-left: 52vw;
+        margin-top: -2.5vh;
+        position: absolute;
+    }
+    .counter {
+        width: 11%;
+        margin: 0% 73%;
+    }
+
+    #customize {
+        background-color: #435cf9;
+        display: none;
+        width: 36%;
+        margin: 5% 30%;
+        padding: 30px 58px;
+        border-radius: 5px;
+        height: 65vh;
+    }
+    #customize-form {
+        display: none;
+        background-color: #435cf9;
+        border-radius: 5px;
+        width: 40%;
+        margin: 9% 31%;
+        padding: 30px 50px;
+    }
+
+    input#id_no_cognitive_level {
+        width: 5%;
+        position: absolute;
+        margin: -4.9% 25%;
+        padding: 6px;
+    }
+
+    input#id_no_difficulty_level {
+        width: 5%;
+        position: absolute;
+        margin: -4.8% 25%;
+        padding: 6px;
+    }
+}
+@media screen and (min-width:1359px) and (max-width:1450px) {
+    #userDetails {
+        width: 67%;
+    }
+
+    #userDetails .back-btn {
+        margin-left: 94%;
+        margin-top: 1vh;
+        background-color: transparent;
+    }
+
+    #userDetails Label {
+        display: none;
+    }
+
+    #userDetails input {
+        margin-bottom: 2vh;
+    }
+
+    #userDetails label {
+        display: block;
+        display: block;
+        margin-bottom: -2vh;
+    }
+
+    #userDetails input {
+        margin-bottom: 0.9vh;
+    }
+
+    .questions-paper-card {
+        font-size: 15px;
+        background-color: #fff8dcb0;
+        color: black;
+        width: 92%;
+        box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+        padding: 10%;
+    }
+    .question-paper-card {
+        margin-left: 0vw;
+        font-size: 15px;
+        color: white;
+        width: 100%;
+        margin-top: 28px;
+        padding: 12px;
+    }
+    .question_create .back-btn {
+        margin-left: 95%;
+        color: black;
+        font-size: 1.2vw;
+        margin-top: 1vh;
+        background-color: transparent;
+    }
+
+    .counter {
+        width: 11%;
+    }
+
+    #customize {
+        display: none;
+        background-color: #435cf9;
+        width: 25%;
+        padding: 30px 46px;
+        border-radius: 5px;
+        height: 74vh;
+        margin: 3% 39%;
+
+    }
+
+    #customize-form {
+        display: none;
+        width: 30%;
+        margin: 7% 37%;
+        padding: 30px 50px;
+    }
+
+    input#id_no_cognitive_level {
+        width: 4%;
+        position: absolute;
+        margin: -3.7% 19%;
+        padding: 6px;
+    }
+
+    input#id_no_difficulty_level {
+        width: 4%;
+        position: absolute;
+        margin: -3.7% 19%;
+        padding: 6px;
+    }
+}
+@media screen and (min-width:700px) and (max-width:800px) {
+    #userDetails {
+        margin-left: 16vw;
+        width: 70vw;
+        margin-top: 10vh;
+        padding: 3%;
+    }
+
+    #userDetails label {
+        font-size: 10px;
+    }
+
+    #userDetails input {
+        font-size: 10px;
+        width: 18vw;
+    }
+
+    #userDetails input[type=file] {
+        width: 23vw;
+    }
+
+    #userDetails .back-btn {
+        margin-left: 92%;
+        font-size: 2.3vw;
+        margin-top: 1.5%;
+    }            .chaplist-box {
+        margin-left: 28vw;
+        width: 45vw;
+        margin-top: 40vh;
+    }
+
+    .prev-question-papers {
+        grid-template-columns: auto;
+        margin: 5%;
+    }
+
+    .question-paper-card {
+        font-size: 15px;
+        width: 64vw;
+        margin-bottom: -19vw;
+    }
+    .counter {
+        width: 18%;
+    }
+
+    #customize {
+        background-color: #435cf9;
+        display: none;
+        width: 47%;
+        margin: 5% 26%;
+        padding: 30px 58px;
+        border-radius: 5px;
+        height: 58vh;
+    }
+
+    #customize-form {
+        display: none;
+        width: 53%;
+        margin: 9% 25%;
+        padding: 30px 50px;
+    }
+
+    input#id_no_difficulty_level {
+        width: 7%;
+        position: absolute;
+        margin: -6.5% 34%;
+        padding: 6px;
+    }
+
+    input#id_no_cognitive_level {
+        width: 7%;
+        position: absolute;
+        margin: -6.6% 34%;
+        padding: 6px;
+    }
+}
+@media screen and (max-width:600px) {
+    #customize-form {
+        display: none;
+        background-color: #435cf9;
+        border-radius: 5px;
+        width: 100%;
+        margin: 7% 0%;
+        padding: 30px 40px;
+        overflow-x: hidden;
+    }
+
+    #customize-form select {
+        width: 65%;
+    }
+
+    input#id_no_difficulty_level {
+        width: 13%;
+        position: absolute;
+        margin: -12.7% 58%;
+        padding: 7px;
+    }
+
+    input#id_no_cognitive_level {
+        width: 12%;
+        position: absolute;
+        margin: -12.5% 58%;
+        padding: 7px;
+    }
+    #customize #next-btn {
+        margin-left: 90%;
+        margin-top: -38%;
+        font-size: 12px;
+    }
+
+    #customize #customize-btn {
+        margin-left: -15%;
+        font-size: 12px;
+    }
+
+    #customize select {
+        width: 98%;
+    }
+    #customize {
+        display: none;
+        background-color: #435cf9;
+        width: 100%;
+        padding: 30px 80px;
+        margin-bottom: 15%;
+        border-radius: 5px;
+        margin-left: 0%;
+    }
+
+    .question-btn {
+        margin-left: 30%;
+        margin-top: 5%;
+        height: 29px;
+    }
+
+    #userDetails input {
+        font-size: 10px;
+        width: 27vw;
+    }
+    .counter {
+        width: 31%;
+        margin: 1% 63%;
+    }
+.test-input input {
+        width: 36%;
+    }
+    .questions-paper-card {
+        font-size: 15px;
+        background-color: #fff8dcb0;
+        color: black;
+        width: 100%;
+        box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+        padding: 10%;
+    }
+    .question-paper-subject {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-around;
+        margin: 5%;
+        height: auto;
+    }
+    #userDetails {
+        margin-left: 0%;
+        grid-template-columns: auto auto auto;
+        width: 100%;
+        margin-top: 62%;
+        z-index: 1;
+        height: auto;
+    }
+
+    #userDetails label {
+        font-size: 10px;
+    }
+
+    #userDetails .back-btn {
+        margin-left: 93%;
+        margin-top: 1%;
+        font-size: 3.9vw;
+    }
+
+    #userDetails1 {
+        margin-left: -5vw;
+        width: 2%;
+        margin-top: 0vh;
+    }
+
+    #userDetails2 {
+        margin-left: 17vw;
+        margin-top: -119%;
+        width: 11vw;
+    }
+
+    #userDetails3 {
+        margin-left: 39vw;
+        margin-top: -31.1vh;
+        width: 14vw;
+    }
+
+}
