@@ -86,27 +86,22 @@ p.chapter-edit-close {
 .box button {
     margin-left: 30%;
 }
-
-.chapter-table {
-    /* margin-left: 18%; */
-    margin-top: 5%;
-}
-
-.chapter-table table {
-    width: 60%;
-    margin-left: 20%;
-}
-
 .chapter-table table,
 .chapter-table td,
 .chapter-table th {
-    border: 1px dotted;
+    border: 1px solid #0000002e;
     text-align: center;
 }
 
 .chapter-table .btn {
     margin-bottom: 2%;
     margin-left: 20%;
+}
+.chapter-table table{
+    width: 60%;
+    margin-left: 20%;
+    background-color: rgb(255 248 220 / 94%);
+    box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
 }
 
 #chapterlist-btn {
@@ -140,7 +135,7 @@ p.chapter-edit-close {
     display: flex;
     flex-flow: column;
     /* margin-left: 45%; */
-    /* margin-top: -1%; */
+    margin-top: 4%;
     text-align: center;
 }
 

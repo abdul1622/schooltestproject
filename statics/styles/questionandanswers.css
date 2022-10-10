@@ -438,6 +438,9 @@ button#questioncreate-btn {
 .question-list #delete {
     margin-left: 6%;
 }
+.question-list fieldset {
+    grid-template-columns: auto auto auto;
+}
 #QForm-modal-content {
     
     margin-left: -64%;

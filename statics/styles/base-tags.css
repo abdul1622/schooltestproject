@@ -35,11 +35,14 @@ input[type=file] {
 }
 select {
     padding: 4px;
-    width: 248px;
+    width: 91%;
     color: black;
     border: none;
     outline: none;
     display: grid;
+}
+.std-in-form,.sec-in-form{
+    width: 91%;
 }
 a {
     color: white;

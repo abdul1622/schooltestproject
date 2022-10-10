@@ -232,6 +232,7 @@ i#back-btn {
 }
 .modal-content label {
     width: 30%;
+    white-space: nowrap;
 }
 
 .modal-title span {
