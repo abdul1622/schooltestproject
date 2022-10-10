@@ -32,13 +32,32 @@
         div#q-form-4 {
             margin: 2% 3%;
         }
+        button#get-question-papers {
+            margin-top: 8%;
+            margin-left: -15%;
+        }
+        .quespaper-btns button {
+            margin-left: 2%;
+        }
+
+        input#id_AllChapter {
+            height: 2.2vh;
+            position: absolute;
+            margin: 0.1% -6%;
+
+        }
+    
 @media screen and (min-width:1024px) and (max-width:1200px) {
     .question-paper-form {
         background-color: #435cf9;
         width: 34vw;
         padding: 30px 50px;
         margin: 10% 32%;
-
+    }
+    input#id_AllChapter {
+        height: 2.2vh;
+        position: absolute;
+        margin: 0.5% -11%;
     }
 }
 @media screen and (min-width:1359px) and (max-width:1450px) {
@@ -52,15 +71,24 @@
     .question-paper-form label {
         width: 9vw;
     }
+    input#id_AllChapter {
+        height: 3vh;
+        position: absolute;
+        margin: 0.4% -8.2%;
+    }
 }
 @media screen and (min-width:700px) and (max-width:800px) {
 
     .question-paper-form {
-
         width: 45vw;
         padding: 30px 50px;
         margin: 7% 28%;
+    }
 
+    input#id_AllChapter {
+        height: 2.2vh;
+        position: absolute;
+        margin: 0.5% -14%;
     }
 }
 @media screen and (max-width:600px) {
@@ -76,5 +104,9 @@
     .question-paper-form input {
         width: 90%;
     }
-
+            input#id_AllChapter {
+                height: 2.2vh;
+                position: absolute;
+                margin: 0.8% -27%;
+            }
 }

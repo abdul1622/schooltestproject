@@ -1,0 +1,530 @@
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #f6d365;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+}
+.back-btn-nav {
+    display: none;
+}
+
+.container-1 {
+    width: 34%;
+    margin-top: 5%;
+    margin-left: 15%;
+}
+
+.navbar-light .navbar-toggler {
+    color: rgba(0, 0, 0, .5);
+    border-color: rgba(0, 0, 0, .1);
+    margin-left: 86vw;
+}
+
+.nav-item :hover {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.nav-item {
+    padding: 1%;
+}
+
+.errorlist {
+    display: none;
+}
+
+.navbar {
+    background-color: #14279B;
+    font-size: 16px;
+    border-radius: 0px;
+    width: 100%;
+    z-index: 3;
+    height: 6vh;
+}
+
+.navbar .nav-item a:hover {
+    background-color: white;
+    color: black;
+}
+
+.navbar li a {
+    padding: 1.8vh;
+    margin-left: 2%;
+    white-space: nowrap;
+}
+
+.update {
+    border: none;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.update a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.update a:hover {
+    color: black;
+    text-decoration: none;
+}
+#create {
+    color: #343a40;
+    margin-left: 100px;
+    margin-top: 20px;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.id_grade {
+    font-size: 15px;
+}
+.delete {
+    border: none;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.pdf {
+    padding: 5px;
+    color: black
+}
+
+.delete a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+}
+.delete a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.download {
+    width: 20%;
+    height: 120px;
+    border-radius: 5px;
+    margin-top: 350px;
+    margin-left: 200px;
+    padding: 50px;
+    font-size: 20px;
+    color: white;
+    background-color: #343a40;
+}  
+        .download a {
+            padding-left: 0;
+            text-decoration: underline;
+            color: white;
+        }
+.navbar-brand {
+    padding: 12px;
+    color: black;
+    font-weight: 500px;
+    font-size: 18px;
+}
+.container {
+    width: 100%;
+    padding-top: 60px;
+    padding-bottom: 100px;
+}
+.frame {
+    height: 425px;
+    width: 430px;
+    background-color: #ffffff;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    border-top: solid 1px rgba(255, 255, 255, .5);
+    border-radius: 5px;
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: all .5s ease;
+    padding-top: 107px;
+    padding-left: 60px;
+    margin-top: 200px;
+}
+.text-center {
+    text-align: center !important;
+    font-family: cinzel;
+}
+.container3 {
+    margin-top: 175px;
+}
+.back-btn {
+    margin-left: 0;
+}
+
+.delete-box {
+    text-align: center;
+    font-size: 16px;
+    background-color: #b2c8df;
+}
+
+.delete-box h4 {
+    font-size: 192%;
+}
+i#back-btn {
+    padding: 1%;
+    cursor: pointer;
+    border-radius: 16%;
+    background-color: #0062cc;
+    color: white;
+}
+
+.messages {
+    text-align: center;
+    color: green;
+    font-size: 14px;
+}
+
+.error-messages {
+    text-align: center;
+    color: #ff0000;
+    font-size: 14px;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+.chapter-btns {
+    display: flex;
+    justify-content: space-around;
+}
+
+.chapter-btns button {
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+#submit {
+    width: 110px;
+    height: 39px;
+    margin-left: 68px;
+    margin-top: 50px;
+    background-color: #343a40;
+    color: white;
+    border: 1px solid white;
+}
+.modal-body {
+    text-align: center;
+    overflow: scroll;
+}
+#edit {
+    padding: 5px 15px;
+    margin-left: -1vw;
+    border-radius: 5px;
+    font-size: 150%;
+    color: #14279B;
+}
+
+#delete {
+    padding: 5px 15px;
+    margin-left: 1%;
+    border-radius: 5px;
+    margin-top: 0vh;
+    color: #900202;
+    font-size: 150%;
+}
+.modal-content label {
+    width: 30%;
+}
+
+.modal-title span {
+    font-size: 20px;
+}
+.cards {
+    margin-bottom: 2%;
+}
+
+element.style {
+    display: block;
+}
+.modal-body {
+    overflow: scroll;
+}
+
+.modal-content {
+    width: 120%;
+    /* margin-left: -14%; */
+    padding: 2% 5%;
+    background-color: #b2c8df;
+}
+.success {
+    color: white;
+    font-size: 15px;
+}
+input#id_section {
+    width: 20%;
+}
+
+button#add-section {
+    margin-left: 1%;
+}
+
+p.section-btn {
+    text-align: center;
+}
+
+p.section-btn {
+    margin: 5% 14%;
+}
+
+@media screen and (min-width:1024px) and (max-width:1200px) {
+    .navbar {
+        width: 100%;
+        height: 7%;
+    }
+
+    .navbar li a {
+        padding: 0.12vh;
+    }
+
+    .navbar-nav {
+        margin-left: -3%;
+    }
+    #edit {
+        padding: 7px 15px;
+        border-radius: 5px;
+    }
+    
+    #delete {
+        padding: 7px 15px;
+        margin-top: 0vh;
+        border-radius: 5px;
+        color: #850b0b;
+    }
+}
+@media screen and (min-width:1359px) and (max-width:1450px) {
+    .navbar {
+        width: 100vw;
+        height: 8vh;
+    }
+
+    .nav-item {
+        padding: 0.7%;
+    }
+
+    .navbar li a {
+        padding: 2.8vh;
+        margin-left: 2%;
+    }
+    .already {
+        margin-left: 45vw;
+    }
+
+    #edit {
+        padding: 5px 15px;
+        margin-left: 20vw;
+        border-radius: 5px;
+    }
+    #delete {
+        color: #900202;
+        padding: 5px 15px;
+        margin-left: 21%;
+        position: absolute;
+        border-radius: 5px;
+    }
+    .chapter-btns {
+        display: flex;
+        justify-content: space-around;
+        margin: 7%;
+    }
+    #add-section {
+        width: 50%;
+    }
+    .navbar .nav-item a:hover {
+        background-color: white;
+        color: black;
+    }
+    .back-btn {
+        margin-left: 88%;
+        color: black;
+        margin-top: -2vh;
+        background-color: transparent;
+    }
+
+    .back-btn :focus {
+        outline: none;
+    }
+}
+@media screen and (min-width:700px) and (max-width:800px) {
+    .back-btn {
+        margin-left: 56vw;
+        color: black;
+        height: 0;
+        margin-top: -1vh;
+        background-color: transparent;
+        font-size: 1.5vw;
+        margin-top: -2vh;
+        outline: none;
+        position: absolute;
+    }
+    .navbar .nav-item a:hover {
+        background-color: #14279b;
+        ;
+        color: white;
+    }
+    #bach-btn {
+        margin-left: -11vw;
+    }
+
+    #edit {
+        margin-left: -2vw;
+        font-size: 150%;
+        padding: 4px 13px;
+    }
+
+    #delete {
+        margin-left: 1vw;
+        font-size: 150%;
+        padding: 4px 13px;
+        color: #900202;
+    }
+    .back-btn-nav {
+        display: block;
+    }
+
+    .navbar-nav {
+        background-color: #14279b;
+        width: 32vw;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        font-size: 6vw;
+        position: fixed;
+        top: 0;
+    }
+    #chapter-btn {
+        margin-top: 0;
+        background-color: #33699f;
+        color: white;
+        border: 1px solid white;
+    }
+    .back-btn-nav button {
+        background-color: transparent;
+        color: white;
+        font-size: 2.5vw;
+    }
+
+    .back-btn-nav button:focus {
+        outline: none;
+    }
+
+    .back-btn-nav {
+        display: block;
+        background-color: transparent;
+        text-align: right;
+        margin-right: 7%;
+    }
+
+    .navbar li a {
+        font-size: 2.7vw;
+        padding: 15%;
+        margin: 0;
+    }
+
+    .navbar {
+        background-color: transparent;
+        height: 10vh;
+        width: 100%;
+        padding: 0;
+    }
+
+    .navbar-light .navbar-toggler {
+        margin-left: 4%;
+        background-color: #8d82ee;
+    }
+}
+@media screen and (max-width:600px) {
+    .navbar {
+        background-color: transparent;
+        height: 10vh;
+        width: 100%;
+        padding: 0;
+    }
+
+    .back-btn-nav {
+        display: block;
+    }
+
+    .navbar-nav :first-child:hover {
+        background-color: transparent;
+        color: white;
+    }
+
+    .navbar-nav {
+        background-color: #14279b;
+        width: 32vw;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        font-size: 6vw;
+        position: fixed;
+        top: 0;
+    }
+
+    .back-btn-nav button {
+        background-color: transparent;
+        color: white;
+    }
+    .back-btn-nav button:focus {
+        outline: none;
+    }
+
+    .back-btn-nav {
+        display: block;
+        background-color: transparent;
+        text-align: right;
+        margin-right: 7%;
+    }
+
+    .navbar li a {
+        font-size: 2.7vw;
+        color: white;
+        padding: 15%;
+        margin: 0;
+    }
+
+    .navbar-light .navbar-toggler {
+        color: rgba(0, 0, 0, .5);
+        border-color: rgba(0, 0, 0, .1);
+        margin-left: 5vw;
+        background-color: #89a1d9;
+        padding: 1px 6px;
+    }
+
+    .navbar-light .navbar-toggler-icon {
+        width: 18px;
+    }
+    .modal-footer {
+        justify-content: center;
+    }
+    .modal-content {
+        width: 100%;
+        margin-top: 16%;
+        margin-left: 0%;
+    }
+    #edit {
+        padding: 7px 15px;
+        font-size: 80%;
+        margin-left: -47%;
+        border-radius: 5px;
+    }
+    #back-btn {
+        margin-left: 6%;
+        padding: 1% 2%;
+        font-size: 11px;
+    }
+    .text-center {
+        text-align: center !important;
+        margin-top: 5%;
+        font-family: 'cinzel';
+    }
+}

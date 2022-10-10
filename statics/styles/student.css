@@ -1,0 +1,397 @@
+.userDetails {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.container2 thead th:last-child {
+    text-align: start;
+    padding-left: px;
+}
+#add {
+    width: 8%;
+    background-color: #14279b;
+    padding: 0% 1%;
+    color: white;
+    border-radius: 5px;
+    margin-left: 33%;
+    position: absolute;
+    height: 3.4%;
+    margin-top: 3%;
+}
+.sort-input {
+    margin-left: 14%;
+    margin-top: 3%;
+}
+.--user {
+    font-size: 15px;
+    margin-left: 14%;
+    margin-top: 4%;
+
+}
+.--staff {
+    margin-left: 13%;
+}
+.standards-list {
+    position: absolute;
+    margin-left: 101%;
+    margin-top: 0%;
+    background-color: #edc81452;
+    padding: 1%;
+    width: 18%;
+}
+#addstaff {
+    width: 120px;
+    background-color: #14279b;
+    padding: 6px 15px;
+    color: white;
+    border-radius: 5px;
+    position: absolute;
+    height: 32px;
+    float: right;
+    margin-top: 0vh;
+    margin-left: 1vw;
+    outline: none;
+}
+#sort {
+    background-color: #f3db92;
+    width: 5%;
+    padding: 5px;
+    padding: 5px;
+    outline: none;
+}
+#action {
+    padding-left: 2vh;
+}
+#userdetail-btn {
+    width: 110px;
+    height: 39px;
+    margin-left: 68px;
+    margin-top: 56px;
+    margin-bottom: 17px;
+    background-color: #b2c8df;
+    color: #14279b;
+    border: 1px solid #14279b;
+}
+
+#userdetail-btn:hover {
+    background-color: #14279b;
+    color: white;
+}
+
+#userdetail-btn {
+    width: 14vw;
+    height: 39px;
+    margin-left: 0vw;
+    margin-top: 5%;
+    margin-bottom: 17px;
+    background-color: #b2c8df;
+    color: #14279b;
+    border: 1px solid #14279b;
+}
+@media screen and (min-width:1024px) and (max-width:1200px) {
+    #sort {
+        width: 9vw;
+    }
+    #add {
+        width: 11%;
+        background-color: #14279b;
+        padding: 0% 1%;
+        color: white;
+        border-radius: 5px;
+        margin-left: 48%;
+        position: absolute;
+        height: 4%;
+        margin-top: 3.2%;
+    }
+    #addstaff {
+        width: min-content;
+        height: max-content;
+        margin-right: 0vw;
+        margin-top: 1vh;
+        margin-left: 123vh;
+    }
+    .container2 {
+        width: 100%;
+    }
+    .container2 thead th:last-child {
+        text-align: start;
+        padding-left: 3vw;
+    }
+    .--user {
+        font-size: 15px;
+        margin-left: 6%;
+        margin-top: 2%;
+        background-color: rgb(255 248 220 / 94%);
+    }
+
+    .--user #edit {
+        padding: 0.5% 2%;
+        margin-left: -2%;
+        border-radius: 5px;
+        position: absolute;
+        font-size: 102%;
+    }
+
+    .--user #delete {
+        margin-top: 0vh;
+        margin-left: 5vw;
+        padding: 3%;
+        font-size: 113%;
+    }
+    .--staff {
+        background-color: cornsilk;
+        margin-left: 4%;
+        margin-top: 8%;
+    }
+
+    .--staff #delete {
+        margin-top: 0vh;
+        margin-left: 5vw;
+    }
+
+    .--staff #edit {
+        padding: 7px 15px;
+        margin-left: -2%;
+        border-radius: 5px;
+        position: absolute;
+    }
+    #action {
+        padding-left: 4vh;
+    }
+    #userdetail-btn {
+        width: 14vw;
+        height: 39px;
+        margin-left: 0vw;
+        margin-top: 56px;
+        margin-bottom: 17px;
+        background-color: #b2c8df;
+        color: #14279b;
+        border: 1px solid #14279b;
+    }
+}
+@media screen and (min-width:1359px) and (max-width:1450px) {
+
+    .container2 {
+        width: 100%;
+    }
+    .container2 thead th:last-child {
+        text-align: start;
+        padding-left: 3vw;
+    }
+    .container2 #edit {
+        width: 5vw;
+        padding: 5px 15px;
+        margin-left: -1vw;
+        border-radius: 5px;
+        height: 1%;
+    }
+
+    .container2 #delete {
+        width: 5vw;
+        padding: 5px 15px;
+        margin-left: 1vw;
+        border-radius: 5px;
+    }
+    #add {
+        width: 9%;
+        background-color: #14279b;
+        padding: 6px 15px;
+        color: white;
+        border-radius: 5px;
+        margin-left: 43%;
+        position: absolute;
+        height: 4.7%;
+        margin-top: 3%;
+    }
+    .--user {
+        font-size: 15px;
+        margin-left: 4%;
+        margin-top: 4%;
+        width: 93%;
+        background-color: rgb(255 248 220 / 94%);
+    }
+    .--user #delete {
+        padding: 4px 14px;
+        margin-left: -1%;
+        border-radius: 5px;
+        margin-top: 0;
+        position: absolute;
+    }
+    #sort {
+        width: 9vw;
+    }
+    .--staff {
+        margin-top: 5%;
+        font-size: 15px;
+        width: 97%;
+        margin-left: 2%;
+    }
+    #addstaff {
+        width: 9vw;
+        height: 5vh;
+        margin-right: 3vw;
+        margin-left: 1vw;
+        margin-top: 0vh;
+    }
+    #action {
+        padding-left: 5vh;
+    }
+    #userdetail-btn {
+        width: 14vw;
+        height: 39px;
+        margin-left: 0vw;
+        margin-top: 10%;
+        margin-bottom: 17px;
+        background-color: #b2c8df;
+        color: #14279b;
+        border: 1px solid #14279b;
+    }
+
+}
+@media screen and (min-width:700px) and (max-width:800px) {
+    .userDetails {
+        grid-template-columns: auto auto;
+    }
+    #add {
+        width: 14%;
+        background-color: #14279b;
+        padding: 0% 1%;
+        color: white;
+        border-radius: 5px;
+        margin-left: 58%;
+        position: absolute;
+        height: 3.4%;
+        margin-top: 3%;
+    }
+    .--user {
+        margin-top: 1%;
+        margin-left: 2%;
+    }
+    .--user th:last-child {
+        padding-left: 1%;
+        position: absolute;
+        margin-left: 3%;
+    }
+    #addstaff {
+        width: 7vw;
+        height: 5vh;
+        margin-left: 3vw;
+        margin-top: 1vh;
+        font-size: 10px;
+        position: absolute;
+    }
+
+    #sort {
+        width: 10vw;
+    }
+
+    .--staff {
+        margin-left: 4%;
+        font-size: 1.2vw;
+        width: 20vw;
+        white-space: nowrap;
+        margin-top: 8%;
+    }
+        #action {
+        padding-left: 1%;
+    }
+
+    #userdetail-btn {
+        width: 10vw;
+        height: 3vh;
+        font-size: 10px;
+    }
+}
+@media screen and (max-width:600px) {
+    .userDetails {
+        grid-template-columns: auto;
+    }
+    .container2 table {
+        width: 20vw;
+    }
+    .container2 {
+        width: 82vw;
+        overflow: scroll;
+        margin-left: 3%;
+        min-height: 70vh;
+    }
+
+    #add {
+        width: 20%;
+        margin-left: -1%;
+        font-size: 64%;
+        height: 3.5%;
+        margin-left: 47%;
+        margin-top: 3%;
+    }
+    .sort-input input {
+        width: 37%;
+    }
+    .--user #edit {
+        font-size: 150%;
+        margin-left: -26%;
+    }
+
+    .--user #delete {
+        padding: 1%;
+        margin-left: 1%;
+        border-radius: 5px;
+        margin-top: -69%;
+        font-size: 150%;
+    }
+    .--user {
+        overflow-x: scroll;
+    }
+    #standard_add_btn {
+        margin-left: 49%;
+        position: absolute;
+        margin-top: -18%;
+    }
+    .--staff #edit {
+        padding: 7px 4px;
+        font-size: 150%;
+        display: inline;
+        margin-left: 8%;
+        border-radius: 5px;
+    }
+
+    #action {
+        padding-left: 2%;
+    }
+
+    .--staff #action {
+        padding-left: 4%;
+    }
+
+    .--staff #delete {
+        padding: 7px 15px;
+        margin-left: 0%;
+        border-radius: 5px;
+        font-size: 150%;
+        display: inline;
+    }
+    .--staff {
+        font-size: 15px;
+        margin-left: 8%;
+        margin-top: 16%;
+    }
+    #addstaff {
+        width: 21%;
+        margin-left: 1%;
+        font-size: 2vw;
+        height: 3.4%;
+        margin-top: 0%;
+    }
+    #userdetail-btn {
+        font-size: 12px;
+        margin-top: 2vh;
+        margin-left: 7%;
+    }
+
+    #sort {
+        width: 17%;
+        position: absolute;
+        padding: 1.2%;
+        margin-left: 23%;
+        margin-top: 0%;
+    }
+}
