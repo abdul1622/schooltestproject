@@ -249,8 +249,8 @@ element.style {
 }
 
 .modal-content {
-    width: 120%;
-    /* margin-left: -14%; */
+    width: 200%;
+    margin-left: -34%;
     padding: 2% 5%;
     background-color: #b2c8df;
 }
@@ -273,7 +273,9 @@ p.section-btn {
 p.section-btn {
     margin: 5% 14%;
 }
-
+form.userDetails input {
+    width: 90%;
+}
 @media screen and (min-width:1024px) and (max-width:1200px) {
     .navbar {
         width: 100%;
@@ -298,6 +300,11 @@ p.section-btn {
         border-radius: 5px;
         color: #850b0b;
     }
+
+    .modal-content {
+        width: 150%;
+        margin-left: -28%;
+}
 }
 @media screen and (min-width:1359px) and (max-width:1450px) {
     .navbar {
@@ -308,7 +315,10 @@ p.section-btn {
     .nav-item {
         padding: 0.7%;
     }
-
+    #QFormModal .modal-content {
+    width: 200%;
+    margin-left: -50%;
+    }
     .navbar li a {
         padding: 2.8vh;
         margin-left: 2%;
@@ -369,10 +379,18 @@ p.section-btn {
         ;
         color: white;
     }
+    .modal-content {
+        width: auto;
+        margin-left: auto;
+    }
     #bach-btn {
         margin-left: -11vw;
     }
 
+   #QFormModal .modal-content {
+        width: 120%;
+        margin-left: -14%;
+    }
     #edit {
         margin-left: -2vw;
         font-size: 150%;
@@ -506,10 +524,14 @@ p.section-btn {
     .modal-footer {
         justify-content: center;
     }
-    .modal-content {
+    #QFormModal .modal-content {
         width: 100%;
         margin-top: 16%;
         margin-left: 0%;
+    }
+    #Form-modal-content {
+         width: auto;
+         margin-left: auto;
     }
     #edit {
         padding: 7px 15px;

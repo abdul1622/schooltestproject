@@ -14,7 +14,7 @@
     border-radius: 5px;
     margin-left: 33%;
     position: absolute;
-    height: 3.4%;
+    height: auto;
     margin-top: 3%;
 }
 .sort-input {
@@ -103,12 +103,13 @@
         margin-top: 3.2%;
     }
     #addstaff {
-        width: min-content;
-        height: max-content;
-        margin-right: 0vw;
-        margin-top: 1vh;
-        margin-left: 123vh;
-    }
+        width: auto;
+        height: auto;
+       /* margin-right: 0vw; */
+        /* margin-top: 1vh;
+        margin-left: 123vh; */
+
+    } 
     .container2 {
         width: 100%;
     }
@@ -319,7 +320,7 @@
         width: 20%;
         margin-left: -1%;
         font-size: 64%;
-        height: 3.5%;
+        height:auto;
         margin-left: 47%;
         margin-top: 3%;
     }
