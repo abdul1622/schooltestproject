@@ -191,7 +191,7 @@ function get(){
                 data.forEach((d, index) => {
                     i += 1
                 content += `<tr><td>${i}</td><td>${d.student_name}</td><td>${d.register_number}</td><td>${d.result}</td><td>${d.score}</td><td>${d.correct_answer}</td><td>${d.wrong_answer}</td><td>${d.unanswered_questions
-}</td><td><button data-toggle="modal" data-target="#test-details-model" onclick=details(${d.id})>details</td></tr>`
+}</td><td><button data-toggle="modal" data-target="#test-details-model"  onclick=details(${d.id})>details</td></tr>`
         })
       content += `</table></div>`
         container.innerHTML = content
