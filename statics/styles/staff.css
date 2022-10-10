@@ -1,0 +1,24 @@
+
+       #Form-modal-content {
+        width: 172%;
+        background-color: #b2c8df;
+        padding: 2% 5%;
+        margin-left: -31%;
+    }
+@media screen and (min-width:1024px) and (max-width:1200px) {
+
+}
+@media screen and (min-width:1359px) and (max-width:1450px) {}
+@media screen and (min-width:700px) and (max-width:800px) {
+    #Form-modal-content {
+        width: 121%;
+        padding: 2% 5%;
+        margin-left: -23%;
+    }
+}
+@media screen and (max-width:600px) {
+    #Form-modal-content {
+        width: 78%;
+        margin-left: 0%;
+    }
+}

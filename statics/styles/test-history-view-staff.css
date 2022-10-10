@@ -1,0 +1,98 @@
+.history-container-form {
+    width: 20%;
+    margin: 4% 39%;
+    padding: 2% 3%;
+    line-height: 2;
+    color: white;
+    background-color: #435cf9;
+}
+
+.history-container-form button.btn.btn-sm.btn-primary {
+    margin: 10% 36% 0%;
+}
+.history-container-div {
+    background-color: darkgrey;
+    width: 70%;
+    margin: 2% 15%;
+    padding: 1% 4%;
+    overflow-x: auto;
+}
+
+.history-container table {
+    width: 100%;
+}
+
+.history-container table,
+.history-container th,
+.history-container td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.history-container button {
+    margin-bottom: 1%;
+}
+
+.history-container span.test-heading {
+    text-transform: capitalize;
+    font-size: 30px;
+}
+
+.history-container p.heading {
+    display: flex;
+    justify-content: space-around;
+}
+
+.history-container-form select {
+    width: 100%;
+}
+
+.history-container-head {
+    margin: 1% 15%;
+}
+
+@media screen and (min-width:1024px) and (max-width:1200px) {
+.history-container-form {
+width: 33%;
+margin: 4% 37%;
+}
+}
+@media screen and (min-width:1359px) and (max-width:1450px) {}
+@media screen and (min-width:700px) and (max-width:800px) {
+.history-container-div th:last-child {
+position: static;
+}
+
+.history-container-form {
+width: 38%;
+margin: 3% 30%;
+}
+
+.history-container-div {
+width: 85%;
+margin: 2% 15%;
+}
+}
+@media screen and (max-width:600px) {
+.history-container-form {
+width: 70%;
+margin: 4% 15%;
+padding: 2% 7%;
+}
+
+.history-container-div {
+background-color: darkgrey;
+width: 70%;
+margin: 2% 15%;
+}
+
+.history-container p.heading {
+flex-direction: column;
+}
+
+.history-container span.test-heading {
+text-transform: capitalize;
+font-size: 16px;
+}
+
+}
