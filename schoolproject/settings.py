@@ -41,8 +41,6 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'adminlte3',
     'adminlte3_theme',
-   # 'jet.dashboard',
-    #'jet',
     'rest_framework',
     'rest_framework.authtoken',
     'django.contrib.admin',
@@ -51,8 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'cloudinary',
-    # 'cloudinary_storage',
+   
     'accounts',
     'academics',
     'corsheaders',

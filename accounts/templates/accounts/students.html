@@ -349,8 +349,6 @@ let grade_list;
             document.getElementById('lname').value = lastname
             document.getElementById('fname').value = firstname
             document.getElementById('std').value = standard
-
-                  // for section drop down
                   let sec_list;
         content = ''
         for(i=0;i<grade_list.length;i++){
@@ -370,7 +368,6 @@ let grade_list;
             document.getElementById('sec').value = section
             document.getElementById('address').value = address
             button.addEventListener('click', () => {
-              form.style.display = 'none'
               if (!standards.length) {
                 standard = document.getElementById('std').value
                 section = (document.getElementById('sec').value).toUpperCase()
