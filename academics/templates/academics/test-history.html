@@ -156,7 +156,12 @@
       let table2 = ' <div class= "test-details"> <table >';
                         table2 += `<thead class="thead"><th>Question</th><th>correct answer</th><th>given answer</th></thead>`;
                         for(i=0;i<current_details.length;i++){
-                            table2 = table2 + `<tr>`;
+                            
+                          if(current_details[i].answer == current_details[i].correct_answer){
+                              table2 = table2 + `<tr>`;
+                            }else{
+                              table2 = table2 + `<tr class='text-danger'>`;
+                            }
                             table2 = table2 + `<td>` + `${current_details[i].question}` + `</td>`,
                                 table2 = table2 + `<td>` + `${current_details[i].correct_answer}` + '</td>';
                             table2 = table2 + '<td>' + `${current_details[i].answer}` + '</td>';
