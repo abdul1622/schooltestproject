@@ -71,7 +71,7 @@
           <label for="email">Email:</label><br>
           <input type="email" id='email' placeholder="Email">
         </div>
-        <div class="standards-list"></div>
+        <div class="standards-list" id="stdl"><p>standard-list</p></div>
       
       
         <div class='grid-item'>
@@ -169,6 +169,7 @@
 
   $('#FormModal').on('hidden.bs.modal', function () {
     $(this).find('form').trigger('reset');
+    console.log($(this).find('#stdl')[0].innerHTML='standard-list')
 })
   fetch('https://schooltestproject.herokuapp.com/api/grades/', {
             method: 'GET',
