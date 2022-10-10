@@ -4,7 +4,6 @@
 <div class="modal fade" id="QFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
-
     <div class=" modal-content" id="QForm-modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Student</h5>
@@ -13,10 +12,10 @@
         </button>
       </div>
       <form class="questionanswer" id="questionanswer">
+        {%csrf_token%}
         <div class='grid-item'>
           <label for=""> Grade: </label>
           <span class="grade-p">{{questionform.grade}}</span>
-
         </div>
         <div class="grid-item"> <label for="id_subject">Subject:</label> <br> <select name="subject" required=""
             id="id_subject">
@@ -26,27 +25,45 @@
             id="id_chapter">
             <option value="" selected="">---------</option>
           </select></div>
-        <div class='grid-item'> {{questionform.question.label_tag}} <br>{{questionform.question}}</div>
-        <div class='grid-item'> {{questionform.question_type.label_tag}} <br>{{questionform.question_type}}</div>
-        <div class='grid-item'> {{questionform.cognitive_level.label_tag}} <br>{{questionform.cognitive_level}}</div>
-        <div class='grid-item'> {{questionform.difficulty_level.label_tag}} <br> {{questionform.difficulty_level}}</div>
-        <div class='grid-item'> {{answerform.option_a.label_tag}} <br>{{answerform.option_a}}</div>
-        <div class='grid-item'> {{answerform.option_b.label_tag}} <br>{{answerform.option_b}}</div>
-        <div class='grid-item'> {{answerform.option_c.label_tag}} <br>{{answerform.option_c}}</div>
-        <div class='grid-item'> {{answerform.option_d.label_tag}} <br>{{answerform.option_d}}</div>
-        <div class='grid-item'> {{answerform.answer.label_tag}} <br>{{answerform.answer}}</div>
-        <div class='grid-item'> {{questionform.duration.label_tag}} <br> {{questionform.duration}}</div>
-        <div class='grid-item'> {{questionform.mark.label_tag}} <br> {{questionform.mark}}</div>
-        <div></div>
-
+        <div class='grid-item'><label for="id_question">Question:</label> <input type='text' id='id_question'></div>
+        <div class='grid-item'><label for="id_question_type">Question type:</label> <br><select name="question_type"
+            id="id_question_type">
+            <option value="MCQ" selected>MCQ</option>
+            <option value="Fill_in_the_blanks">Fill_in_the_blanks</option>
+            <option value="Match_the_following">Match_the_following</option>
+          </select></div>
+        <div class='grid-item'><label for="id_cognitive_level">Cognitive level:</label> <br><select
+            name="cognitive_level" id="id_cognitive_level">
+            <option value="Knowledge" selected>Knowledge</option>
+            <option value="Comprehension">Comprehension</option>
+            <option value="Application">Application</option>
+          </select> </div>
+        <div class='grid-item'><label for="id_difficulty_level">Difficulty level:</label> <br> <select
+            name="difficulty_level" id="id_difficulty_level">
+            <option value="Easy" selected>Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select> </div>
+        <div class='grid-item'><label for="id_option_a">Option A:</label> <input type='text' id='id_option_a'></div>
+        <div class='grid-item'><label for="id_option_b">Option B:</label> <input type='text' id='id_option_b'></div>
+        <div class='grid-item'><label for="id_option_c">Option C:</label> <input type='text' id='id_option_c'></div>
+        <div class='grid-item'><label for="id_option_d">Option D:</label> <input type='text' id='id_option_d'></div>
+        <div class='grid-item'> <label for="id_answer">Answer:</label> <br><select name="answer" id="id_answer">
+            <option value="option_a" selected>option_a</option>
+            <option value="option_b">option_b</option>
+            <option value="option_c">option_c</option>
+            <option value="option_d">option_d</option>
+          </select></div>
+        <div class='grid-item'><label for="id_duration">Duration:</label><input type='text' id='id_duration' value="0"></div>
+        <div class='grid-item'><label for="id_mark">Mark:</label><input type='text' id='id_mark' value="0"></div>
       </form>
       <div class="modal-footer">
         <span class="create-btn-container"> <button type="button" id="question-btn"
             class="btn btn-primary">Submit</button></span>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="erase()">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
-    
+
   </div>
 </div>
 <!-- end  -->
@@ -57,7 +74,7 @@
   <div class="modal-dialog" id="media-question" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" id="close-btn" data-dismiss="modal"  aria-label="Close">
+        <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -125,7 +142,7 @@
 <div class="question-list">
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   let head = document.querySelector('.header')
   var token = localStorage.getItem('token')
@@ -139,12 +156,15 @@
   let grade_name;
   let grade;
   let subject;
+  $('[data-dismiss=modal]').on('click', function (e) {
+    var $t = $(this),
+        target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
 
-  $('#QFormModal').on('hidden.bs.modal', function (e) {
-   
-        $('#questionanswer').find("input[type=text]").val("");
-        console.log('hi')
-    })
+  $(target)
+    .find("input,textarea,select")
+       .val('')
+       .end()
+  })
   function get_subject_name(element) {
     subject_name = element.options[element.selectedIndex].text;
     subject = element.options[element.selectedIndex].value
@@ -308,18 +328,18 @@
       </div>
       `
 
-        })
-        content += `</fieldset>`
-        head.style.display = 'block'
-        document.getElementById('grade-head-question').textContent = grade
-        document.getElementById('subject-head-question').textContent = data.data[0]['subject_name']
-        document.querySelector('.question-error').innerHTML = ''
-        container2.innerHTML = content;
-      }else{
-        head.style.display = 'none'
-        container2.innerHTML = ''
-        document.querySelector('.question-error').innerHTML = `<li>subject - ${subject_name} has no questions</li>`
-      }
+          })
+          content += `</fieldset>`
+          head.style.display = 'block'
+          document.getElementById('grade-head-question').textContent = grade
+          document.getElementById('subject-head-question').textContent = data.data[0]['subject_name']
+          document.querySelector('.question-error').innerHTML = ''
+          container2.innerHTML = content;
+        } else {
+          head.style.display = 'none'
+          container2.innerHTML = ''
+          document.querySelector('.question-error').innerHTML = `<li>subject - ${subject_name} has no questions</li>`
+        }
         edit = false
       })
     } else {
@@ -516,7 +536,7 @@
         {
           method: 'POST',
           body: JSON.stringify({
-            'grade':grade,
+            'grade': grade,
             'subject': subject,
             'chapter': chapter,
             'grade': grade,
