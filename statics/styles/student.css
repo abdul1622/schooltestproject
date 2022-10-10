@@ -7,15 +7,16 @@
     padding-left: px;
 }
 #add {
-    width: 8%;
+    width: 7%;
     background-color: #14279b;
-    padding: 0% 1%;
+    padding: 0.2% 1%;
     color: white;
     border-radius: 5px;
-    margin-left: 33%;
+    margin-left: 29%;
     position: absolute;
     height: auto;
     margin-top: 3%;
+
 }
 .sort-input {
     margin-left: 14%;
