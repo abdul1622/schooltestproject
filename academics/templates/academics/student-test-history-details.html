@@ -87,10 +87,7 @@ aria-hidden="true">
            } 
            if(grade_list.length == 1){
             grade = grade_list[0].id
-            // document.querySelector('.grade-p').innerHTML = grade
-                // content += ` <option value="${grade_list[0].id}">${grade_list[0].grade}</option>`
                 document.querySelector('.grade-p').innerHTML = ` ${grade_list[0]['grade']}`
-                // document.querySelector('.grade-p-get').innerHTML = ` ${grade_list[0].grade}`
                 var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
             grade_name =   grade_list[0]['grade']
             console.log(grade_name)
@@ -119,14 +116,7 @@ aria-hidden="true">
 
 
 
-    // var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-grade/'; 
-    
-    // $.ajax({                       
-    //   url: url_for_change,                  
-    //   success: function (data) {
-    //     $("#id_grade").html(data); 
-    //   }
-    // });
+   
        
        $("#id_grade").change(function () {
       var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
@@ -171,7 +161,6 @@ function get(){
       return
     }
     test_name = element.options[element.selectedIndex].text;
-    // grade_name = grade_element.options[grade_element.selectedIndex].text
     subject_name = subject_element.options[subject_element.selectedIndex].text
     console.log(subject_name)
     url = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
