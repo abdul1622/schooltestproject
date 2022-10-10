@@ -247,6 +247,9 @@
         color: #14279b;
         border: 1px solid #14279b;
     }
+    .modal-content{
+        margin-left: -57%;
+    }
 
 }
 @media screen and (min-width:700px) and (max-width:800px) {
