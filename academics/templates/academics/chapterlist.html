@@ -77,8 +77,8 @@
 
 <!-- chapter edit form -->
 <div class="form box" id="form-chaplist">
-
-    <button onclick=closeform() class='back-btn'>&#x2715;</button>
+    <p class="chapter-edit-close text-end"> <button onclick=closeform() class='back-btn'>&#x2715;</button></p>
+  
     {% csrf_token %}
     {{form2.as_p}}
     <button class="submit-btn" data-toggle="modal" data-target="#messageModal-chapterlist" id="chapter-btn">Submit</button>
@@ -193,6 +193,7 @@
     //         });
     function closeform(){
         document.querySelector('.form').style.display ='none'
+
         }
 
         $("#id_grade").change(function () {
@@ -219,6 +220,7 @@
 // 
     function back() {
         document.querySelector('.chapter-table').innerHTML = ''
+        document.querySelector('.form').style.display ='none'
         flag = false
         document.querySelector('.box').style.display='block'
         if(document.getElementById('id_grade')){
@@ -269,8 +271,8 @@
                             table2 = table2 + '<td class="chapter_no">' + `${d.chapter_no}` + '</td>';
                             table2 = table2 + '<td class="chapter_name">' + `${d.name}` + '</td>';
                             table2 = table2 + '<td class="description">' + `${d.description}` + '</td>',
-                                table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i>` + '</td>',
-                                table2 = table2 + '<td>' + `<i class="fa fa-trash-o" id="delete" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist"></i>` + '</td>',
+                                table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i>` + `<i class="fa fa-trash-o" id="delete" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist"></i>` +'</td>',
+                                // table2 = table2 + '<td>' + + '</td>',
                                 table2 = table2 + `</tr>`;
                         })
                         table2 += "</table>";

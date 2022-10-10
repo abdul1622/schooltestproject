@@ -1,0 +1,280 @@
+.box .back-btn {
+    margin-left: 105%;
+    margin-bottom: 8%;
+}
+
+.form-box input {
+    padding: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+    color: black;
+    font-size: 15px;
+    border: none;
+    outline: none;
+}
+
+.form-box input[type=text] {
+    padding: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+    color: black;
+    font-size: 15px;
+    border: none;
+}
+
+#chapterlist-btn:hover {
+    color: white;
+    background-color: #14279b;
+}
+
+.chapterlist a {
+    color: white;
+    padding: 8px;
+}
+
+.chapterlist label {
+    color: #000000;
+    display: inline-block;
+    width: 100px;
+}
+
+.chapterlist h4 {
+    margin-left: 41.3%;
+    margin-top: 1%;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    color: #14279b;
+}
+
+.box {
+    margin: 4% 40%;
+    /* margin-top: 4%; */
+    width: 20%;
+    min-width: 200px;
+    padding: 2% 3%;
+    border-radius: 5px;
+    background-color: #33699f;
+}
+
+p.chapter-edit-close {
+    text-align: end;
+}
+
+.box label {
+    width: 23%;
+}
+
+.box button {
+    margin-left: 30%;
+}
+
+.chapter-table {
+    /* margin-left: 18%; */
+    margin-top: 5%;
+}
+
+.chapter-table table {
+    width: 60%;
+    margin-left: 20%;
+}
+
+.chapter-table table,
+.chapter-table td,
+.chapter-table th {
+    border: 1px dotted;
+    text-align: center;
+}
+
+.chapter-table .btn {
+    margin-bottom: 2%;
+    margin-left: 20%;
+}
+
+#chapterlist-btn {
+    width: 41%;
+    height: 32px;
+    margin-left: 28%;
+    margin-top: 20px;
+    background-color: #b2c8df;
+    color: #14279b;
+    padding: 5px 10px;
+    outline: none;
+    border: 1px solid #14279b;
+}
+
+.chapter-table #delete {
+    padding: 2% 5%;
+    margin-left: 0%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 150%;
+}
+
+.chapter-table #edit {
+    padding: 2% 5%;
+    margin-left: 0vw;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media screen and (min-width:1024px) and (max-width:1200px) {
+    .box {
+        margin-left: 34%;
+        width: 32%;
+        padding: 4%;
+        background-color: #33699f;
+    }
+
+    p.chapter-edit-close {
+        margin: 0;
+    }
+
+    .chapter-table {
+        width: 100%;
+        margin-top: 5%;
+    }
+}
+
+@media screen and (min-width:1359px) and (max-width:1450px) {
+    .box {
+        margin-left: 33%;
+        width: 25%;
+        padding: 2% 4%;
+        background-color: #33699f;
+    }
+
+    #chapterlist-btn {
+        width: 47%;
+        margin-top: 5%;
+    }
+
+    .form .back-btn {
+        margin-left: 103%;
+    }
+
+    .chapter-table {
+        margin-top: 5%;
+    }
+
+    .chapter-table #delete {
+        position: static;
+    }
+}
+
+@media screen and (min-width:700px) and (max-width:800px) {
+    .box {
+        margin: 9vh 30vw 4vh;
+        width: 40vw;
+        padding-top: 2vh;
+        padding-left: 3vh;
+        min-height: 30vh;
+    }
+
+    .box label {
+        font-size: 1.8vw;
+    }
+
+    .chapter-table td {
+        text-align: center;
+        font-size: 100%;
+    }
+
+    .chapter-table th {
+        padding-left: 4%;
+    }
+
+    .box input[type=text] {
+        font-size: 1.5vh;
+    }
+
+    .box #chapterlist-btn {
+        width: 12vw;
+        height: 4vh;
+        font-size: 10px;
+        margin-top: 0vh;
+        margin-left: 11vw;
+    }
+
+    #chapterlist-btn {
+        width: 12vw;
+        font-size: 11px;
+        height: 4vh;
+        margin-left: 9vw;
+    }
+
+    .chapter-table table {
+        white-space: nowrap;
+        width: 70%;
+        margin-left: 15%;
+    }
+
+    .chapter-table thead {
+        font-size: 100%;
+    }
+
+    .chapter-table #edit {
+        font-size: 145%;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .box label {
+        margin-left: 5%;
+    }
+
+    .box {
+        margin-left: 11%;
+        padding: 5%;
+        margin-top: 15%;
+        width: 79%;
+    }
+
+    .box label {
+        margin-left: 5%;
+    }
+
+    .box select {
+        margin-left: 5%;
+    }
+
+    #chapterlist-btn {
+        width: 45%;
+        height: 2%;
+        margin-left: 27%;
+        margin-top: 5%;
+        background-color: #b2c8df;
+        color: #14279b;
+        padding: 2%;
+        outline: none;
+        border: 1px solid #14279b;
+        font-size: 75%;
+    }
+
+    .form .back-btn {
+        margin-left: 93%;
+    }
+
+    .chapter-table {
+        margin-top: 5%;
+        overflow: scroll;
+    }
+
+    .chapter-table table {
+        font-size: 65%;
+        margin-left: 6%;
+        margin-top: 8%;
+        width: 128%;
+    }
+
+    .chapter-table #edit {
+        font-size: 155%;
+    }
+
+    .chapter-table #delete {
+        font-size: 155%;
+    }
+
+    .chapter-table table td {
+        text-align: center;
+    }
+}
