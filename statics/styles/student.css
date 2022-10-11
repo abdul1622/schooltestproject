@@ -100,6 +100,13 @@
     border: 1px solid #14279b;
 }
 
+.userDetails input[type=file] {
+    position: static;
+    margin: 0;
+}
+button#standard_add_btn {
+    margin: 9% 0% 2%;
+}
 @media screen and (min-width:1024px) and (max-width:1200px) {
     #sort {
         width: 9vw;
@@ -394,11 +401,7 @@
         overflow-x: scroll;
     }
 
-    #standard_add_btn {
-        margin-left: 49%;
-        position: absolute;
-        margin-top: -25.7%;
-    }
+
 
     .--staff #edit {
         padding: 7px 4px;
@@ -452,5 +455,7 @@
         margin-left: 23%;
         margin-top: 0%;
     }
-   
-}
+    #userdetail-btn {
+        width: auto;
+    }
+    }
