@@ -88,7 +88,9 @@ button {
 table {
     white-space: nowrap;
 }
-
+.inner{
+    display: none;
+}
 @media screen and (min-width:1024px) and (max-width:1200px) {
     th {
         padding: 10px;
