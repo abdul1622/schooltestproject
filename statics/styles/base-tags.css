@@ -89,7 +89,7 @@ table {
     white-space: nowrap;
 }
 .inner{
-    display: none;
+    display: block;
 }
 @media screen and (min-width:1024px) and (max-width:1200px) {
     th {
