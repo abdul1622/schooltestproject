@@ -75,7 +75,7 @@ aria-hidden="true">
   let content = ''
   let grade_list = []
 
-if(user == 'is_student'){
+if(user != 'is_staff'){
   document.getElementById('standard-details').style.display = 'none'
 }else{
   fetch('https://schooltestproject.herokuapp.com/api/grades/', {
