@@ -22,4 +22,12 @@
         width: 78%;
         margin-left: 0%;
     }
+    .standards-list {
+        position: absolute;
+        margin-left: 62%;
+        margin-top: 190%;
+        background-color: #edc81452;
+        padding: 1%;
+        width: 26%;
+    }
 }

@@ -312,13 +312,6 @@
                 }
             }
             new_list = []
-
-            /*for(i = 0; i <chapters.length; i++) {
-                chapter_no = chapters[i]['chapter_no'] 
-                if(chapters[i]['chapter_no'] >= from_chapter['chapter_no'] && chapters[i]['chapter_no'] <= to_chapter['chapter_no']){
-                    new_list()
-                }
-            }*/
             val = from_chapter['chapter_no'] - 1
             for (i = val; i <= to_chapter['chapter_no'] - 1; i++) {
                 new_list.push(chapters[i])
@@ -390,15 +383,6 @@
 
         document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=with_customize()>Review</button>`
 
-        // document.getElementById('id_knowledge').value = 0
-        // document.getElementById('id_comprehension').value = 0
-        // document.getElementById('id_application').value = 0
-
-        // if((questions_total+knowledge+application+comprehension) == no_of_questions){
-        //     document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=get_chapter('review')>Review</button>`
-        // }else{
-        //     document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=get_chapter('review') disabled>Review</button>`
-        // }
         let content3 = ''
 
         questions_total = 0;

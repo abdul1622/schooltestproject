@@ -55,7 +55,7 @@
   </div>
 </div>
 <!-- Creation and updation modal -->
-<div class="modal fade" id="FormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="SFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     
     <div class="modal-content" id="Form-modal-content">
@@ -143,7 +143,7 @@
 <div class="standard-errors"></div>
 <div class='sort-input'>
   <input type="text" id="student-filter" placeholder="search" min="0" max="12"   onkeyup="filter()">
-  <button data-toggle="modal" data-target="#FormModal" id="addstaff" >Add Staff</button>
+  <button data-toggle="modal" data-target="#SFormModal" id="addstaff" >Add Staff</button>
 </div>
 <div class="details"></div>
 <div class="container2"></div>
@@ -167,7 +167,7 @@
   })
 
 
-  $('#FormModal').on('hidden.bs.modal', function () {
+  $('#SFormModal').on('hidden.bs.modal', function () {
     $(this).find('form').trigger('reset');
     console.log($(this).find('#stdl')[0].innerHTML='standard-list')
 })
@@ -316,7 +316,7 @@
             table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
             table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
             table2 = table2 + `<td class="userstandard" onclick="std('${std}',${index},${false})" id=${std}>` +`${std[0]} (${std.length})`+ '</td>';
-            table2 = table2 + '<td>' + ` <i id="edit" data-toggle="modal" data-target="#FormModal"  class="fa fa-edit" onclick="edit(${index},${d.id})"></i><i id="delete" data-toggle="modal" data-target="#delete-staff-Modal" class="fa fa-trash-o" onclick="deleteuser(${d.id})" ></i>` + '</td></tbody>',
+            table2 = table2 + '<td>' + ` <i id="edit" data-toggle="modal" data-target="#SFormModal"  class="fa fa-edit" onclick="edit(${index},${d.id})"></i><i id="delete" data-toggle="modal" data-target="#delete-staff-Modal" class="fa fa-trash-o" onclick="deleteuser(${d.id})" ></i>` + '</td></tbody>',
               table2 = table2 + `</tr>`;
             })
         table2 += "</table>";
@@ -384,12 +384,13 @@ function edit(index,id){
         standards = []
         console.log(standards)
       }
-      let content = ` <p> standards list</p>`
+      let content = ` <p> standards list</p>
+    <div class='inner'>`
       for (i = 0; i < standards.length; i++) {
         content += ` 
           <li>${standards[i]}<button onclick=delete_standard(${i})>delete</button></li>`
       }
-      document.querySelector('.standards-list').innerHTML = content
+      document.querySelector('.standards-list').innerHTML = content+`</div>`
       let address = tr.querySelector('.useraddress').textContent;
       document.getElementById('email').value = email
       document.getElementById('phone').value = phone
@@ -519,7 +520,9 @@ if(!flag){
     let content = ''
     content += `    <p> standards list</p>`
     for (i = 0; i < standards.length; i++) {
-      content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
+    
+      content += `
+      <div class='inner'><li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li></div>`
     }
     document.querySelector('.standards-list').innerHTML = content
   }
@@ -533,5 +536,15 @@ if(!flag){
     }
     document.querySelector('.standards-list').innerHTML = content
   }
+  var stdl=document.getElementById('stdl')
+  stdl.addEventListener('click',() =>{
+   console.log(stdl.querySelector('.inner').style)
+    if (stdl.querySelector('.inner').style.display == 'block'){
+          stdl.querySelector('.inner').style.display='none'
+    }
+    else{
+       stdl.querySelector('.inner').style.display='block'
+    }
+  })
 </script>
 {% endblock %}

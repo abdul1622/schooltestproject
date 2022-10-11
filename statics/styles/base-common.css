@@ -302,10 +302,15 @@ form.userDetails input {
         color: #850b0b;
     }
 
-    .modal-content {
+  #SFormModal  .modal-content{
         width: 150%;
-        margin-left: -28%;
+        margin-left: -37%;
 }
+#FormModal .modal-content {
+    width: 150%;
+    margin-left: -28%;
+}
+
 }
 @media screen and (min-width:1359px) and (max-width:1450px) {
     .navbar {
