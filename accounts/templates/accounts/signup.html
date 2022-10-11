@@ -30,11 +30,14 @@
 
         </select>
         <hr>
-        <label>Standard:</label>
+       <p id="standard-p"> <label for="id_standard">Standard:</label>
        <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required="" id="id_standard">
-      </select>
-        <label>Section:</label>
+      </select></p>
+      <p id="section-p">
+
+        <label for="id_section">Section:</label>
         <select name="grade" class="sec-in-form form-control" required="" id="id_section">      </select>
+    </p>
         <button id="standard_add_btn" onclick=add_standard() disabled>Add standard</button>
         <div class="signup-errors"></div>
         <div class="details"></div>
@@ -151,11 +154,20 @@
         content = ''
         standards = []
         console.log(user)
-        if (user != 'is_student') {
+        document.getElementById('id_standard').style.display = 'block'
+            document.getElementById('id_section').style.display = 'block'
+        if(user=='is_admin'){
+            document.getElementById('standard-p').style.display = 'none'
+            document.getElementById('section-p').style.display = 'none'
+            document.getElementById('standard_add_btn').style.display = 'none'
+        }
+        else if (user == 'is_staff') {
+            document.getElementById('standard_add_btn').style.display = 'block'
             document.getElementById('standard_add_btn').disabled = false
         } else {
-            document.getElementById('standard_add_btn').disabled = true
+            document.getElementById('standard_add_btn').style.display = 'none'
         }
+    
     }
 
 
@@ -232,8 +244,10 @@
         var fullname = 'sp'
         var address ='home'
         var is_dataentry = 'false'*/
+        if(document.getElementById('id_standard')){
         standard = document.getElementById('id_standard').value
         section = document.getElementById('id_section').value
+        }
         if (!standards.length && standard && section) {
             standards.push(standard + '-' + section)
         }else if(type=='is_student'){
