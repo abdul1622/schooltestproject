@@ -1029,7 +1029,7 @@ var id = url.substring(url.lastIndexOf('/') + 1); -->
                             }
                             else {
                                 if (answer_details[i][`${answer_details[i].correct_answer}`] == answer_details[i][`${answer_details[i].answer}`]) {
-                                    overallreview += `<tr ><td>${answer_details[i].question}</td>` + `<td>${answer_details[i][`${answer_details[i].correct_answer}`]}</td>` `<td>${answer_details[i][`${answer_details[i].answer}`]}</td>`
+                                    overallreview += `<tr ><td>${answer_details[i].question}</td>` + `<td>${answer_details[i][`${answer_details[i].correct_answer}`]}</td>` + `<td>${answer_details[i][`${answer_details[i].answer}`]}</td>`
                                 }
                                 else {
                                     overallreview += `<tr><td>${answer_details[i].question}</td>` + `<td>${answer_details[i][`${answer_details[i].correct_answer}`]}</td>` + `<td>${answer_details[i][`${answer_details[i].answer}`]}</td>`
