@@ -318,6 +318,8 @@
       <p >Cognitive Level : <span class="cognitive_level" id=${d.grade}>${d.cognitive_level}</span></p>
       <p >Difficulty Level : <span class="difficulty_level">${d.difficulty_level}</span></p>
       <p >Question : <span class="question">${d.question}</span></p>
+      <p >Marks : <span class="mark">${d.mark}<span></p>
+        <p >Duration : <span class="duration">${d.duration}<span></p>
       <div class="d-flex justify-content-around question-edit-btn" data-toggle="modal" data-target="#QFormModal"><i id="edit" class="fa fa-edit"></i>&nbsp <i class="fa fa-trash-o" data-toggle="modal" data-target="#delete-box-Modal-question" href="#" id="delete"></i></div>
       <div style="display: none;"> 
       <p >Option A : <span class="option_a">${d.answers.option_a}</span></p>
@@ -440,6 +442,8 @@
       var option_c = parent.querySelector('.option_c').textContent;
       var option_d = parent.querySelector('.option_d').textContent;
       var answer = parent.querySelector('.answer').textContent;
+      var mark = parent.querySelector('.mark').textContent;
+      var duration = parent.querySelector('.duration').textContent;
       if (form_grade) {
         form_grade.value = grade
       }
@@ -475,6 +479,8 @@
       form_option_c.value = option_c
       form_option_d.value = option_d
       form_answer.value = answer
+      form_mark.value = mark
+      form_duration.value = duration
       id = parent.id
       let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
       question_btn.addEventListener('click', () => {
