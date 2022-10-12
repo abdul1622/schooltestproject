@@ -24,21 +24,21 @@
         font-size: 140%;
     
       }
-      .signbox {
+      .signupbox {
         display: flex;
         flex-wrap: nowrap;
       }
   
-      .signbox2 {
+      .signup-profile-details {
         margin-left: 50px;
       }
   
-      .signbox2 select,
+      .signup-profile-details select,
       label {
         margin-bottom: 5px;
       }
   
-      .signbox {
+      .signupbox {
         background-color: #B2C8DF;
         color: black;
         box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
@@ -74,7 +74,7 @@
         position: absolute;
       }
   
-      .signbox input[type=text] {
+      .signupbox input[type=text] {
         padding: 5px;
         width: 250px;
         margin-bottom: 10px;
@@ -88,7 +88,7 @@
 
 }
 @media screen and (min-width:1366px) and (max-width:1440px) {
-    .signbox {
+    .signupbox {
         background-color: #B2C8DF;
         color: black;
         box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
@@ -100,14 +100,14 @@
       }
 }
 @media screen and (min-width:700px) and (max-width:780px) {
-    .signbox {
+    .signupbox {
         margin-left: 6%;
         width: 88%;
         margin-bottom: 16%;
       }
 }
 @media screen and (max-width:600px) {
-    .signbox input[type=text] {
+    .signupbox input[type=text] {
         padding: 5px;
         width: 100%;
         margin-bottom: 0%;
@@ -116,7 +116,7 @@
         border: none;
       }
 
-      .signbox input[type=text] {
+      .signupbox input[type=text] {
         padding: 2%;
         width: 100%;
         margin-bottom: 2%;
@@ -128,19 +128,19 @@
         margin-top: 129%;
       }
 
-      .signbox2 select,
+      .signup-profile-details select,
       label {
         margin-bottom: 5px;
       }
 
-      .signbox {
+      .signupbox {
         margin-left: 5%;
         display: block;
         padding: 8%;
         width: 90%;
       }
 
-      .signbox2 {
+      .signup-profile-details {
         margin-left: 0vw;
       }
 

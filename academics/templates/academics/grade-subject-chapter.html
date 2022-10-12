@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
 
+<!-- form to edit and create grade,subject,chapter -->
 <div id="grade">
 
     {% csrf_token %}
@@ -12,138 +14,137 @@
     <button class="submit-btn" id="chapter-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
 </div>
 
+<!-- message popup -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="messages container-fluid">
+
+                </div>
+                <div class="error-messages container-fluid">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="message-close-btn" class="btn btn-secondary"
+                    data-dismiss="modal">Close</button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- delete confirm popup -->
+<div class="modal fade" id="delete-box-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="media-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="delete-box">
+                    <h4>Are you want to delete?</h4>
+                    <p class="chapter-btns"> </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="delete-btn-yes" data-dismiss="modal" class="delete-btn-yes btn btn-danger">Yes</button>
+                <button id="delete-btn-no" data-dismiss="modal" class="delete-btn-no btn btn-primary">Back</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- grade,subject,chapter container -->
 <div class="grade-container container" id="grade-container">
-
-
+    <!-- subject container -->
     <div id="subjects-by-grade" class="subjects-by-grade">
 
         <h2>Grade - <span id="grade-title"></span> </h2>
         <hr>
         <div class="subject-head">
-        <i id="back-btn"  class='fa fa-angle-left'   onclick=get() style='font-size:24px'></i>
+            <i id="back-btn" class='fa fa-angle-left' onclick=get() style='font-size:24px'></i>
             <h3 class="subject-title-subjects"> Subjects </h3>
         </div>
         <div class="cards container-fluid">
         </div>
     </div>
 
-
-    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="messages container-fluid">
-
-                    </div>
-                    <div class="error-messages container-fluid">
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="message-close-btn" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="delete-box-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" id="media-content">
-                <div class="modal-header">
-                    <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="delete-box">
-                        <h4>Are you want to delete?</h4>
-                        <p class="chapter-btns"> </p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button id="delete-btn-yes" data-dismiss="modal" class="delete-btn-yes btn btn-danger">Yes</button>
-                    <button id="delete-btn-no" data-dismiss="modal" class="delete-btn-no btn btn-primary">Back</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
+    <!-- chapter container -->
     <div id="chapterlist" class="chapterlist">
-
 
         <h4>Grade - <span id="grade-title-chapter"></span> </h4>
         <h2><span id="subject-title"></span> </h2>
         <hr>
         <div class="subject-head">
-            <a type="button" class="btn btn-sm btn-primary" id="back-btn-chapter"><i class='fa fa-angle-left' style='font-size:24px'></i></a>
+            <a type="button" class="btn btn-sm btn-primary" id="back-btn-chapter"><i class='fa fa-angle-left'
+                    style='font-size:24px'></i></a>
             <h3 class="subject-title-subjects"> Chapters </h3>
         </div>
         <div class="chapter-cards container">
         </div>
     </div>
+
+    <!-- grade container -->
     <div id="grade-list" class="grade-list container">
 
-
-
     </div>
-  
-
 
 </div>
 <script>
-    $(document).ready(function(){ 
-        if(!token){
-      return window.location.href = '/login';
-    }
+    // check for user type
+    $(document).ready(function () {
+        if (!token) {
+            return window.location.href = '/login';
+        }
         var user = localStorage.getItem('user_type')
-        if (user == 'is_student'){
-         return window.location.href = '/404'; 
+        if (user == 'is_student') {
+            return window.location.href = '/404';
         }
     })
-    // function
+    // variable
     var token = localStorage.getItem('token')
-    var form_all = document.querySelector('.form-all')
     let user_type = localStorage.getItem('user_type')
-    let edit = null
-    let chapter_list = []
     const subject_create = document.getElementById('subject-btn')
     const grade_create = document.getElementById('grade-btn')
     const chapter_create = document.getElementById('chapter-btn')
+    var form_all = document.querySelector('.form-all')
     let messages = document.querySelector('.messages')
     let error_messages = document.querySelector('.error-messages')
     let container2 = document.querySelector('.cards')
+    var container = document.querySelector('.cards')
+    var container3 = document.querySelector('.chapter-cards')
+    var list = document.querySelector('.grade-list');
+    document.getElementById('nav-academics').style.opacity = '0.5';
+    let edit = null
+    let chapter_list = []
     var subject_id;
     var grade_val;
     let current_grade;
-    var container = document.querySelector('.cards')
     var host = window.location.protocol + "//" + window.location.host;
-    var container3 = document.querySelector('.chapter-cards')
-    let section_list=[]
-    var list = document.querySelector('.grade-list');
-    document.getElementById('nav-academics').style.opacity = '0.5';
+    let section_list = []
+
     document.getElementById('back-btn-chapter').addEventListener('click', () => {
         getsubject(grade_val, grade_id);
         messages.innerHTML = ''
         error_messages.innerHTML = ''
     })
 
-function section_change(){
-    document.querySelector('.section-list').innerHTML = ''
-    section_list = []
-}
+    function section_change() {
+        document.querySelector('.section-list').innerHTML = ''
+        section_list = []
+    }
 
     // get grade
     function get() {
@@ -160,25 +161,25 @@ function section_change(){
             console.log(data.data)
             grade_list = data.data
             console.log(data.data)
-           if(data.status == 'failure'){
-            window.location.href = `${host}/404`
-           } 
-        if(data.data){
-            document.getElementById('grade').style.display = 'block'
-            document.getElementById('grade-container').style.display = 'block'
-        }
+            if (data.status == 'failure') {
+                window.location.href = `${host}/404`
+            }
+            if (data.data) {
+                document.getElementById('grade').style.display = 'block'
+                document.getElementById('grade-container').style.display = 'block'
+            }
             data.data.forEach((d, index) => {
-        if(user_type == 'is_admin'){
-                content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button> <button id="edit" onclick=edit_grade(${d.id})><i class="fa fa-edit"></i></button>
+                if (user_type == 'is_admin') {
+                    content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button> <button id="edit" onclick=edit_grade(${d.id})><i class="fa fa-edit"></i></button>
         <p  onclick=getsubject(${d.grade},${d.id}) class="grade">${d.grade} </p>
         
  </div>`
-}else{
-    content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button>
+                } else {
+                    content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button>
         <p  onclick=getsubject(${d.grade},${d.id}) class="grade">${d.grade} </p>
         
  </div>`
-}
+                }
             })
             content += '</div>'
             list.innerHTML = content;
@@ -197,15 +198,15 @@ function section_change(){
                 <p class='section-error'></p>
                 </div>`
             document.getElementById('subjects-by-grade').style.display = "none"
-            if(user_type != 'is_admin'){
+            if (user_type != 'is_admin') {
                 document.getElementById('grade').style.display = 'none'
             }
         })
     };
     // <p> <label for='id_section'>Section :</label>
-                // <input type="text" name="" maxlength="1" id="id_section">
-        get();
-   
+    // <input type="text" name="" maxlength="1" id="id_section">
+    get();
+
     // delete grade 
     function deletegradesetup(id) {
         let url = 'https://schooltestproject.herokuapp.com/api/grades/'
@@ -214,15 +215,16 @@ function section_change(){
         yes_button.setAttribute("onClick", `deletegrade(${id})`);
     }
 
-function edit_grade(id){
-    edit = true
-    for(i=0;i<grade_list.length;i++){
-        if(grade_list[i].id == id){
-            current_grade = grade_list[i]
-            section_list = grade_list[i].section
+    //  edit grade
+    function edit_grade(id) {
+        edit = true
+        for (i = 0; i < grade_list.length; i++) {
+            if (grade_list[i].id == id) {
+                current_grade = grade_list[i]
+                section_list = grade_list[i].section
+            }
         }
-    }
-    form_all.innerHTML = `<div class='grade-form-box'>
+        form_all.innerHTML = `<div class='grade-form-box'>
             {% csrf_token %}
                 <p><label for="id_grade">Grade:</label> <input type="number" disabled name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
                <p class='section-btn'><span> <button onclick=add_section('edit') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
@@ -231,74 +233,77 @@ function edit_grade(id){
                 <p> <button onclick=cancel()> cancel </button> </p>
                 </div>`
         let section_content = ''
-        for(i=0;i<section_list.length;i++){
+        for (i = 0; i < section_list.length; i++) {
             section_content += `<li>${section_list[i]}</li> `
         }
-        if(section_list.length){
-        document.querySelector('.delete-section').innerHTML =  ` <button onclick=remove_section() id='add-section'>remove_section</button>`
+        if (section_list.length) {
+            document.querySelector('.delete-section').innerHTML = ` <button onclick=remove_section() id='add-section'>remove_section</button>`
         }
         document.querySelector('.section-list').innerHTML = section_content
-}
+    }
 
-function cancel(){
-    form_all.innerHTML = `<div class='grade-form-box'>
+    //  cancel section adding
+    function cancel() {
+        form_all.innerHTML = `<div class='grade-form-box'>
             {% csrf_token %}
                 <p><label for="id_grade">Grade:</label> <input type="number" name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
                <p class='section-btn'><span> <button onclick=add_section('create') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
                 <p class='section-list'> </p>
                 <p class='section-error'></p>
                 </div>`
-                edit = false
-}
-
-function add_section(flag){
-    let standard
-    if(flag=='edit'){
-        standard = current_grade.grade
+        edit = false
     }
-    else{
-          standard = document.getElementById('id_grade').value
-    }
-    let section;
 
-        if(!standard){
+    // add section 
+    function add_section(flag) {
+        let standard
+        if (flag == 'edit') {
+            standard = current_grade.grade
+        }
+        else {
+            standard = document.getElementById('id_grade').value
+        }
+        let section;
+
+        if (!standard) {
             document.querySelector('.section-error').innerHTML = `<li>add standard</li>`
             return
         }
-        if(section_list.length){
-            if(section_list[section_list.length-1] == 'Z'){
+        if (section_list.length) {
+            if (section_list[section_list.length - 1] == 'Z') {
                 document.querySelector('.section-error').innerHTML = `<li>no more section</li>`
                 return
             }
-           as_sec = ((section_list[section_list.length-1]).charCodeAt(0))+1
-           section = String.fromCharCode(as_sec)
-           section_list.push(section)
-        }else{
+            as_sec = ((section_list[section_list.length - 1]).charCodeAt(0)) + 1
+            section = String.fromCharCode(as_sec)
+            section_list.push(section)
+        } else {
             section_list.push('A')
         }
-        document.querySelector('.section-error').innerHTML =''
+        document.querySelector('.section-error').innerHTML = ''
 
         let section_content = ''
-        for(i=0;i<section_list.length;i++){
+        for (i = 0; i < section_list.length; i++) {
             section_content += `<li>${section_list[i]}</li> `
         }
-        if(section_list.length){
-        document.querySelector('.delete-section').innerHTML =  ` <button onclick=remove_section() id='add-section'>remove_section</button>`
+        if (section_list.length) {
+            document.querySelector('.delete-section').innerHTML = ` <button onclick=remove_section() id='add-section'>remove_section</button>`
         }
         document.querySelector('.section-list').innerHTML = section_content
-}
+    }
 
-function remove_section(){
-    section_list.pop()
-    let section_content = ''
-    for(i=0;i<section_list.length;i++){
+    // remove section
+    function remove_section() {
+        section_list.pop()
+        let section_content = ''
+        for (i = 0; i < section_list.length; i++) {
             section_content += `<li>${section_list[i]}</li> `
         }
         document.querySelector('.section-list').innerHTML = section_content
-        document.querySelector('.section-error').innerHTML =''
-}
+        document.querySelector('.section-error').innerHTML = ''
+    }
 
-
+    // delete section
     function deletegrade(id) {
         let url = 'https://schooltestproject.herokuapp.com/api/grades/'
         fetch(`${url}${id}/`, {
@@ -313,8 +318,8 @@ function remove_section(){
         )
     }
 
-
-    document.getElementById('message-close-btn').addEventListener('click',()=> {
+    // message popup close
+    document.getElementById('message-close-btn').addEventListener('click', () => {
         messages.innerHTML = ''
         error_messages.innerHTML = ''
     })
@@ -324,70 +329,70 @@ function remove_section(){
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         let url_grade = 'https://schooltestproject.herokuapp.com/api/grades/'
         let id = current_grade.id
-        if(edit){
+        if (edit) {
             fetch(`${url_grade}${id}/`, {
-                        method: 'PUT',
-                        headers: {
-                            'content-Type': 'application/json',
-                            'Authorization': 'token' + ' ' + token,
-                            'X-CSRFToken': csrftoken
-                        },
-                        body: JSON.stringify({
-                            'section':section_list
-                        })
-                    }).then(function (response) {
-                        if (response.status == 200) {
-                            console.log("Sucess response", response)
-                            messages.innerHTML = 'Updated succesfully';
-                            error_messages.innerHTML = ''
-                            // get();
-                            get();
-                        } else {
-                            console.log(response);
-                        }
-                        return response.json()
-                    }).then(data => {
-                        console.log(data)
-                        if (data.status != 'success') {
-                            error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-                            messages.innerHTML = ''
-                        }
-                        edit = false
-                        return
-                    })
-        }
-else{
-    console.log('nja')
-        var grade = document.getElementById('id_grade').value
-        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        fetch(url_grade,
-            {
-                method: 'POST',
-                body: JSON.stringify({ 'grade': grade,'section':section_list }
-                ),
+                method: 'PUT',
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
+                    'content-Type': 'application/json',
                     'Authorization': 'token' + ' ' + token,
                     'X-CSRFToken': csrftoken
                 },
-            }).then(response => {
-                if (response.status == 201) {
+                body: JSON.stringify({
+                    'section': section_list
+                })
+            }).then(function (response) {
+                if (response.status == 200) {
                     console.log("Sucess response", response)
-                    messages.innerHTML = 'created successfully'
+                    messages.innerHTML = 'Updated succesfully';
                     error_messages.innerHTML = ''
+                    // get();
                     get();
+                } else {
+                    console.log(response);
                 }
-                return response.json();
-            }).then(function (data) {
+                return response.json()
+            }).then(data => {
                 console.log(data)
                 if (data.status != 'success') {
                     error_messages.innerHTML = `<li>${(data.data.error)}</li>`
                     messages.innerHTML = ''
                 }
+                edit = false
+                return
             })
-        return true;
-}
+        }
+        else {
+            console.log('nja')
+            var grade = document.getElementById('id_grade').value
+            let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            fetch(url_grade,
+                {
+                    method: 'POST',
+                    body: JSON.stringify({ 'grade': grade, 'section': section_list }
+                    ),
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': 'token' + ' ' + token,
+                        'X-CSRFToken': csrftoken
+                    },
+                }).then(response => {
+                    if (response.status == 201) {
+                        console.log("Sucess response", response)
+                        messages.innerHTML = 'created successfully'
+                        error_messages.innerHTML = ''
+                        get();
+                    }
+                    return response.json();
+                }).then(function (data) {
+                    console.log(data)
+                    if (data.status != 'success') {
+                        error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+                        messages.innerHTML = ''
+                    }
+                })
+            return true;
+        }
     })
 
 
@@ -622,28 +627,28 @@ else{
             return res.json()
         }).then(data => {
             container3.innerHTML = ''
-            if(data.status == 'success'){
-            subject_id = data.data[0].subject_id
-            console.log(data.data[0].subject_id)
-            chapter_list = data.data
-            console.log(chapter_list)
-            data.data.forEach((d, index) => {
-                // <p><label> Subject </label> <span>: <span id="${d.subject_id}" class="subject">${d.subject}</span></span></p>
-                content = content + `<div class="chapter-card" id=${d.id}>
+            if (data.status == 'success') {
+                subject_id = data.data[0].subject_id
+                console.log(data.data[0].subject_id)
+                chapter_list = data.data
+                console.log(chapter_list)
+                data.data.forEach((d, index) => {
+                    // <p><label> Subject </label> <span>: <span id="${d.subject_id}" class="subject">${d.subject}</span></span></p>
+                    content = content + `<div class="chapter-card" id=${d.id}>
         <p><label> Chapter_no </label> <span>: <span class="chapter_no">${d.chapter_no}</span></span></p>
         <p><label> Chapter </label> <span>: <span class="name">${d.name}</span></span></p>
         <p><label> Description </label> <span>: <span class="description">${d.description}</span></span></p>
         <br>
         <p><i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></p>
  </div>`
- container3.innerHTML = content;
+                    container3.innerHTML = content;
 
-            });
-        }else{
-            container3.innerHTML = 'no chapter in this subject';
+                });
+            } else {
+                container3.innerHTML = 'no chapter in this subject';
 
-        }
-            
+            }
+
 
             console.log(document.querySelector('.submit-btn').id)
         })
@@ -720,7 +725,7 @@ else{
                     }).then(function (response) {
                         if (response.status == 200) {
                             console.log("Sucess response", response)
-                            messages.innerHTML ='Updated succesfully';
+                            messages.innerHTML = 'Updated succesfully';
                             error_messages.innerHTML = ''
                             getchapter(grade_val, subject_val, subject_id);
                         } else {

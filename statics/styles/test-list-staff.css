@@ -119,6 +119,7 @@
     .question-papers-card {
         grid-template-columns: auto;
         gap: 1%;
+        margin: 0;
     }
     .test-model {
         transform: rotate(0deg);

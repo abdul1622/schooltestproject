@@ -340,4 +340,8 @@ p.chapter-edit-close {
         background-color: #33699f;
         transform: rotate(0deg);
     }
+    #delete-box-Modal-chapterlist .modal-content {
+        width: auto;
+        margin-left: auto;
+    }
 }

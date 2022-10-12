@@ -628,7 +628,6 @@
         display: grid;
         grid-template-columns: auto;
         gap: 1%;
-        margin: 0% -20%;
     }
 
     .chapter-cards .chapter-card {
@@ -637,7 +636,7 @@
         width: 91%;
         padding: 15% 10%;
         cursor: pointer;
-        margin-left: 27%;
+        margin-left: 6%;
         font-size: 16px;
         box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
     }

@@ -30,10 +30,10 @@ button#questioncreate-btn {
     font-size: 14px;
 }
 
-#question-box label {
+/* #question-box label {
     width: 5vw;
     display: inline-block;
-}
+} */
 
 .question-btn {
     width: 110px;
@@ -136,7 +136,9 @@ button#questioncreate-btn {
     height: auto;
     box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
 }
-
+.question-card-details {
+    height: 85%;
+}
 .question-card #edit {
     padding: 5px 15px;
     margin-left: -1vw;
@@ -152,7 +154,9 @@ button#questioncreate-btn {
     font-size: 150%;
     color: #900202;
 }
-
+#q-form-1 input#id_no_of_questions {
+    width: 88%;
+}
 
 .question-card p:nth-child(8),
 .question-card p:nth-child(9),
@@ -599,11 +603,7 @@ input[type=text] {
     }
 
     #questioncreate-btn {
-        margin-left: 24%;
         width: 47%;
-    }
-    #media-question {
-        transform: rotate(90deg);
     }
     #QForm-modal-content {
         width: 81%;
@@ -646,9 +646,9 @@ input[type=text] {
         margin-left: 8%;
         grid-template-columns: auto;
     }
-    #question-box label {
+    /* #question-box label {
         margin-left: 5%;
-    }
+    } */
 
     #question-box select {
         margin-left: 5%;
@@ -671,5 +671,9 @@ input[type=text] {
     }
     #QForm-modal-content input {
         width: 92%;
+    }
+    #delete-box-Modal-question .modal-content {
+        width: auto;
+        margin: auto;
     }
 }

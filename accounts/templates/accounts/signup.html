@@ -1,14 +1,20 @@
 {% extends 'main.html'%}
 {% block signup %}
+{% load static %}
 <p id='response'></p>
 
-<div class="signbox">
+<div class="signupbox">
+    {% csrf_token %}
+    <div class="signup-user-details">
 
-    {%csrf_token%}
-    <div class="signbox1">
+        <label>UserType:</label>
+        <select class="form-control" onchange=user_type_change() name="user_type" id="id_user_type">
+            <option value="" selected="">-------</option>
+            <option value="is_student">is_student</option>
+            <option value="is_staff">is_staff</option>
+            <option value="is_admin">is_admin</option>
+        </select>
 
-        <input type="hidden" name="csrfmiddlewaretoken"
-            value="a3cCmEUXAWnNpEIH7egd6gKS37Lpb0sOsWq6lZ3gJ2ZGxkw2lXj9ScZLoTAyXVtn">
         <label>Email:</label>
         <input type="text" name="email" class="form-control" placeholder="Email" id="id_email">
         <label>Phone:</label>
@@ -18,36 +24,30 @@
             id="id_register_number">
         <label>DOB:</label>
         <input type="date" name="date_of_birth" class="form-control" placeholder="Date of Birth" id="id_date_of_birth">
-        <label>UserType:</label>
-        <select onchange=user_type_change() name="user_type" id="id_user_type">
-            <option value="" selected="">-------</option>
 
-            <option value="is_student">is_student</option>
-
-            <option value="is_staff">is_staff</option>
-
-            <option value="is_admin">is_admin</option>
-
-        </select>
         <hr>
-       <p id="standard-p"> 
 
-        <label for="id_standard">Standard:</label>
+        <p id="standard-p">
+            <label for="id_standard">Standard:</label>
 
-       <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required="" id="id_standard">
-      </select></p>
-      <p id="section-p">
+            <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required=""
+                id="id_standard">
+            </select>
+        </p>
 
-        <label for="id_section">Section:</label>
-        <select name="grade" class="sec-in-form form-control" required="" id="id_section">      </select>
+        <p id="section-p">
 
-        <button id="standard_add_btn" onclick=add_standard() disabled>Add standard</button>
+            <label for="id_section">Section:</label>
+            <select name="grade" class="sec-in-form form-control" required="" id="id_section"> </select>
+
+            <button id="standard_add_btn" onclick=add_standard() disabled>Add standard</button>
         <div class="signup-errors"></div>
         <div class="details"></div>
         <hr>
-    </p>
+        </p>
+
     </div>
-    <div class="signbox2">
+    <div class="signup-profile-details">
 
         <label>FirstName:</label>
         <input type="text" name="first_name" class="form-control" placeholder="First Name" id="id_first_name">
@@ -62,6 +62,8 @@
     </div>
     <button data-toggle="modal" data-target="#messageModal-signup" id="signup-btn" onclick=signup()>Register</button>
 </div>
+
+
 <div class="modal fade" id="messageModal-signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -87,6 +89,7 @@
         </div>
     </div>
 </div>
+
 <footer style="background-color: whitesmoke;" class=" text-center text-white ">
     <div class="container p-4 pb-0">
         <section class="mb-4">
@@ -100,192 +103,7 @@
 
         <p> © 2020 Copyright:www.school.com</p>
     </div>
+
 </footer>
-<script>
-    let messages = document.querySelector('.messages')
-    let error_messages = document.querySelector('.error-messages')
-    let user, standards = [];
-    let content = ''
-    let grade_list = []
- 
-    function getsectionname(element){
-        let standard = element.value
-        let sec_list;
-        content = ''
-        for(i=0;i<grade_list.length;i++){
-            if(grade_list[i].grade==standard){
-                sec_list = grade_list[i].section
-            }
-        }
-        content += ` 
-            <option value="" selected="">---------</option>`
-        if(sec_list.length){
-        for(i=0;i<sec_list.length;i++){
-            content += ` <option value="${sec_list[i]}">${sec_list[i]}</option>`
-        }
-    }
-        document.querySelector('.sec-in-form').innerHTML = content
-    }
-
-
-    fetch('https://schooltestproject.herokuapp.com/api/grades/', {
-            method: 'GET',
-        }).then(res => {
-            return res.json()
-        }).then(data => {
-            grade_list = data.data
-            console.log(data.data)
-           if(data.status == 'failure'){
-            window.location.href = `${host}/404`
-           } 
-        content += ` 
-            <option value="" selected="">---------</option>`
-        if(grade_list.length){
-        for(i=0;i<grade_list.length;i++){
-            content += ` <option value="${grade_list[i].grade}">${grade_list[i].grade}</option>`
-        }
-    }
-        document.querySelector('.std-in-form').innerHTML = content
-        })
-
-
-
-
-    function user_type_change() {
-        user = document.getElementById('id_user_type').value
-        document.querySelector('.signup-errors').innerHTML = ''
-        document.querySelector('.details').innerHTML = ''
-        content = ''
-        standards = []
-        console.log(user)
-        document.getElementById('standard-p').style.display = 'block'
-            document.getElementById('section-p').style.display = 'block'
-        if(user=='is_admin'){
-            document.getElementById('standard-p').style.display = 'none'
-            document.getElementById('section-p').style.display = 'none'
-            document.getElementById('standard_add_btn').style.display = 'none'
-        }
-        else if (user == 'is_staff') {
-            document.getElementById('standard_add_btn').style.display = 'block'
-            document.getElementById('standard_add_btn').disabled = false
-        } else {
-            document.getElementById('standard_add_btn').style.display = 'none'
-        }
-    
-    }
-
-
-
-    function add_standard() {
-        standard = document.getElementById('id_standard').value
-        section = (document.getElementById('id_section').value).toUpperCase()
-        if (!section.match(/[a-z]/i)) {
-            document.querySelector('.signup-errors').innerHTML = '<li class="text-danger">give a valid section</li>'
-            return
-        }
-        if(!standard){
-            document.querySelector('.signup-errors').innerHTML = '<li class="text-danger">give a valid standard</li>'
-            return
-        }
-        if(standards.includes(standard + '-' + section)){
-        document.querySelector('.signup-errors').innerHTML = '<li class="text-danger">given standard and section altready exist</li>'
-        return
-        }
-        standards.push(standard + '-' + section)
-        document.getElementById('id_standard').value = ''
-        document.getElementById('id_section').value = ''
-        let content = ''
-        if(standards.length){
-    content += `<ul>Standards list 
-            <p> No of standards-${standards.length} </p>`
-    
-        for (i = 0; i < standards.length; i++) {
-            content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
-        }
-        content += `</ul>`
-    }
-        document.querySelector('.signup-errors').innerHTML = ''
-        document.querySelector('.details').innerHTML = content
-    }
-
-    function delete_standard(index){
-    standards.splice(index,1);
-    let content = ''
-        if(standards.length){
-    content += `<ul>Standards list 
-            <p> No of standards-${standards.length} </p>`
-    
-                    for(i=0;i<standards.length;i++){
-                      content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
-                    }
-        }
-        document.querySelector('.signup-errors').innerHTML = ''
-                    document.querySelector('.details').innerHTML = content
-  }
-
-
-    function signup() {
-        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        var email = document.getElementById('id_email').value
-        var phone = document.getElementById('id_phone').value
-        var dob = document.getElementById('id_date_of_birth').value
-        var reg = document.getElementById('id_register_number').value
-        var type = document.getElementById('id_user_type').value
-        var firstname = document.getElementById('id_first_name').value
-        var lastname = document.getElementById('id_last_name').value
-        var fullname = document.getElementById('id_full_name').value
-        var address = document.getElementById('id_address').value
-        var is_dataentry = document.getElementById('id_data_entry_user').value
-        /*var email = 's@gmail.com'
-        var phone =  9992945428
-        var dob = '2000-02-10'
-        var reg ='s10'
-        var standard = 1
-        var section = 'c'
-        var type = 'is_student'
-        var firstname = 's'
-        var lastname = 'p'
-        var fullname = 'sp'
-        var address ='home'
-        var is_dataentry = 'false'*/
-        if(document.getElementById('id_standard')){
-        standard = document.getElementById('id_standard').value
-        section = document.getElementById('id_section').value
-        }
-        if (!standards.length && standard && section) {
-            standards.push(standard + '-' + section)
-        }else if(type=='is_student'){
-            document.querySelector('.signup-errors').innerHTML = '<li class="text-center text-danger">add a standard and section</li>'
-            return
-        }
-        fetch('https://schooltestproject.herokuapp.com/api/signup/',
-            {
-                method: 'POST',
-                body: JSON.stringify({
-                    'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
-                    'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standards, 'full_name': fullname, 'address': address
-                }
-                ),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken
-                },
-            }).then(res => {
-                return res.json()
-            }).then(data => {
-                if (`${data.status}` == 'Registered succesfull') {
-                    window.location.href = `${host}/login`
-                }
-                document.getElementById('response').innerHTML = `${data.data.error[0]}`
-                document.getElementById('response').style.display = 'block'
-            })
-        return true;
-    }
-    let input = document.getElementById('id_address')
-    input.addEventListener('keyup', (e) => {
-        if (e.keyCode === 13) {
-            signup();
-        }
-    })
-</script>
+<script src="{% static 'script_files/signup.js' %}" type="text/javascript"></script>
 {% endblock %}
