@@ -574,6 +574,7 @@ input[type=text] {
     form.questionanswer {
         display: grid;
         grid-template-columns: auto;
+        margin-left: 11%;
     }
     .question_create {
         display: none;
@@ -670,6 +671,6 @@ input[type=text] {
         grid-template-columns: auto;
     }
     #QForm-modal-content input {
-        width: 92%;
+        width: 88%;
     }
 }

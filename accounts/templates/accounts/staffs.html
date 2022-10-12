@@ -172,7 +172,10 @@
        .val('')
        .end()
     standards=[]
-    document.querySelector('.inner').innerHTML=''
+    if ( document.querySelector('.inner')){
+      document.querySelector('.inner').innerHTML=''
+    }
+    
     
 })
   fetch('https://schooltestproject.herokuapp.com/api/grades/', {
