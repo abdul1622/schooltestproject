@@ -291,7 +291,7 @@ button#standard_add_btn {
 
 }
 
-@media screen and (min-width:700px) and (max-width:800px) {
+@media screen and (min-width:430px) and (max-width:800px) {
     .userDetails {
         grid-template-columns: auto auto;
     }
@@ -354,7 +354,7 @@ button#standard_add_btn {
     }
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:420px) {
     .userDetails {
         grid-template-columns: auto;
     }

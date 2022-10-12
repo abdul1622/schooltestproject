@@ -76,7 +76,7 @@
   
       .signupbox input[type=text] {
         padding: 5px;
-        width: 250px;
+        width: 80%;
         margin-bottom: 10px;
         color: black;
         font-size: 15px;
@@ -99,14 +99,14 @@
         margin-bottom: 3%;
       }
 }
-@media screen and (min-width:700px) and (max-width:780px) {
+@media screen and (min-width:430px) and (max-width:780px) {
     .signupbox {
         margin-left: 6%;
         width: 88%;
         margin-bottom: 16%;
       }
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width:420px) {
     .signupbox input[type=text] {
         padding: 5px;
         width: 100%;

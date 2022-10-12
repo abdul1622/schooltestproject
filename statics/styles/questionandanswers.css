@@ -456,7 +456,7 @@ input[type=text] {
 
 
 }
-@media screen and (min-width:700px) and (max-width:800px) {
+@media screen and (min-width:430px) and (max-width:800px) {
     .grid-item {
         font-size: 10px;
         width: 23vw;
@@ -574,7 +574,7 @@ input[type=text] {
         grid-template-columns: auto auto;
     }
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width:420px) {
     form.questionanswer {
         display: grid;
         grid-template-columns: auto;

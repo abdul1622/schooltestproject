@@ -23,14 +23,14 @@
 
 }
 @media screen and (min-width:1359px) and (max-width:1450px) {}
-@media screen and (min-width:700px) and (max-width:800px) {
+@media screen and (min-width:430px) and (max-width:800px) {
 
     #instruction-btn {
         margin-left: 77%;
         width: 22%;
     }
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width:420px) {
 
     .instructionForm textarea {
         width: 270%;

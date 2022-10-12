@@ -37,6 +37,8 @@
         <p> <label for="subject">SUBJECT</label> <span id="subject_value"></span> </p>
         <p> <label for="chapter">CHAPTER</label> <span id="chapter_value"></span> </p>
         <p> <label for="no_of_questions">NO_OF_QUESTIONS</label> <span id="No_of_questions"></span> </p>
+        <span id="create-quespaper-btn"><button class="btn btn-primary" onclick=question_paper_create()>Create Question Paper</button></span>
+        <span id="question-paper-details-btn" class="question-paper-details-btn"></span>
         <p> <label for="remarks">REMARKS</label>{{test_form.remarks}}</p>
         <p> <label for="remarks">DESCRIPTION</label>{{test_form.description}}</p>
         <p> <label for="remarks">PASS PERCENTAGE</label>{{test_form.pass_percentage}}</p>
@@ -77,7 +79,25 @@
 
     </div>
 </div>
-
+<div class="modal fade" id="question-paper-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" id="media-question" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <!-- <button id="delete-btn-yes" data-dismiss="modal" class="delete-btn-yes btn btn-danger">Yes</button> -->
+        <button id="delete-btn-no" data-dismiss="modal" aria-label="Close"
+          class="delete-btn-no btn btn-primary">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
     var messages = document.querySelector('.messages')
     var token = localStorage.getItem('token')
@@ -448,7 +468,7 @@ function getnext() {
         document.getElementById('subject_value').innerHTML = subject_name
         document.getElementById('chapter_value').innerHTML = content
         document.querySelector('.back-btn-review').innerHTML = `<button class="btn btn-primary" onclick=get_customize()>Back</button>`
-        document.querySelector('.next-btn-woc').innerHTML = '  <button  class="submit-btn btn btn-primary" onclick=submit_woc()>Create test</button>'
+        document.querySelector('.next-btn-woc').innerHTML = '  <button  class="submit-btn btn btn-primary" disabled onclick=submit_woc()>Create test</button>'
         review();
         document.getElementById('No_of_questions').innerHTML = question_list.length
         document.getElementById('q-form-4').style.display = 'none';
@@ -576,7 +596,7 @@ function getnext() {
         document.getElementById('chapter_value').innerHTML = content
         console.log(chapters)
         document.querySelector('.back-btn-review').innerHTML = `<button class="btn btn-primary" onclick=without_customize()>Back</button>`
-        document.querySelector('.next-btn-woc').innerHTML = '  <button  class="submit-btn btn btn-primary" onclick=submit_woc()>Create test</button>'
+        document.querySelector('.next-btn-woc').innerHTML = '  <button  class="submit-btn btn btn-primary" disabled onclick=submit_woc()>Create test</button>'
         review();
     }
 
@@ -586,94 +606,59 @@ function getnext() {
 // submit without customize
 
 function submit_woc(){
-    let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
-        url1.searchParams.append('type', 'save');
-        from_chapter_id = null
-        to_chapter_id = null
-        all_chapter = false
-        fetch(url1,
-            {
-                method: 'POST',
-                body: JSON.stringify({
-                    'grade': grade_id, 'subject': subject_id, 'timing': timing, 'overall_marks': overall_marks, 'customize': null
-                    ,'list_of_questions':question_list,
-                }
-                ),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': 'token' + ' ' + token,
-                    'X-CSRFToken': csrftoken
-                },
-            }).then(function (response) {
-                return response.json()
-            }).then(data => {
- console.log(data)
-                console.log(data.status)
-                if (data.status != 'success') {
-                    document.getElementById('q-form-5').style.display = 'block'
-                    error_messages.innerHTML = `<li class='test-warning'>${(data.data)}</li>`;
-                }
-                else {
-                    question_paper_id = data.data.id
-                   question_name = data.questions
-                   console.log(question_name)
-                    timing = data.data.timing
-                    overall_marks = data.data.overall_marks
-                    userId = localStorage.getItem('id')
-                    let form_remarks = document.getElementById('id_remarks').value
-                    let form_description = document.getElementById('id_description').value
-                    let form_percentage = document.getElementById('id_pass_percentage').value
-                    fetch('https://schooltestproject.herokuapp.com/api/test/',
-                        {
-                            method: 'POST',
-                            body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_paper_id, 
-                            'created_staff_id': userId, 'marks': overall_marks, 'duration': timing, 
-                            'remarks': form_remarks, 'pass_percentage': form_percentage, 'description': form_description }
-                            ),
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json',
-                                'Authorization': 'token' + ' ' + token,
-                                'X-CSRFToken': csrftoken
-                            },
-                        }).then(response => {
-                            if (response.status == 201) {
-                                console.log("Sucess response", response);
-                                // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
-                                // test_errors.innerHTML = ''
+    userId = localStorage.getItem('id')
+    let form_remarks = document.getElementById('id_remarks').value
+    let form_description = document.getElementById('id_description').value
+    let form_percentage = document.getElementById('id_pass_percentage').value
+    fetch('https://schooltestproject.herokuapp.com/api/test/',
+        {
+            method: 'POST',
+            body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_paper_id, 
+            'created_staff_id': userId, 'marks': overall_marks, 'duration': timing, 
+            'remarks': form_remarks, 'pass_percentage': form_percentage, 'description': form_description }
+            ),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'token' + ' ' + token,
+                'X-CSRFToken': csrftoken
+            },
+        }).then(response => {
+            if (response.status == 201) {
+                console.log("Sucess response", response);
+                // test_messages.innerHTML = `<p class="text-success"> ${form_remarks} test created successfully</p>`;
+                // test_errors.innerHTML = ''
 
-                            }
-                            return response.json();
-                        }).then(function (data) {
-                            console.log(data)
-                            document.getElementById('q-form-5').style.display = 'block'
-                            document.getElementById('q-form-3').style.display = 'none'
-                            let content4= ''
-                            if (data.status != 'success') {
-                                messages.innerHTML = ''
-                                error_messages.innerHTML = `<li class='test-warning'>${(data.data)}</li>`;
-                            }
-                            else {
-                               content4 += `<p class="success"> ${form_remarks} test created successfully</p>
-                <p class="success">Test ID :  ${data.data.test_id}</p>
-                <p> Grade : ${grade}</p>
-                <p> subject : ${subject_name}</p>
-                <div> <p class='heading'> list of questions </p>
-                `;
-                    for(i=0;i<question_name.length;i++){
-                        content4 += `<p>${i+1}. ${question_name[i]}</p>`
-                    }
-                content4 += `<p><button class='btn btn-sm btn-primary' onclick=refresh()>Ok</button></p>`
-                    content4 += `</div>`
-                    document.querySelector('.q-form-5').innerHTML= content4
-                                error_messages.innerHTML = ''
-                                document.getElementById('q-form-4').style.display = 'none';
-                            }
-                        })
-                    }
-            })
-}
+            }
+            return response.json();
+        }).then(function (data) {
+            console.log(data)
+            document.getElementById('q-form-5').style.display = 'block'
+            document.getElementById('q-form-3').style.display = 'none'
+            let content4= ''
+            if (data.status != 'success') {
+                messages.innerHTML = ''
+                error_messages.innerHTML = `<li class='test-warning'>${(data.data)}</li>`;
+            }
+            else {
+                content4 += `<p class="success"> ${form_remarks} test created successfully</p>
+<p class="success">Test ID :  ${data.data.test_id}</p>
+<p> Grade : ${grade}</p>
+<p> subject : ${subject_name}</p>
+<div> <p class='heading'> list of questions </p>
+`;
+    for(i=0;i<question_name.length;i++){
+        content4 += `<p>${i+1}. ${question_name[i]}</p>`
+    }
+content4 += `<p><button class='btn btn-sm btn-primary' onclick=refresh()>Ok</button></p>`
+    content4 += `</div>`
+    document.querySelector('.q-form-5').innerHTML= content4
+                error_messages.innerHTML = ''
+                document.getElementById('q-form-4').style.display = 'none';
+            }
+        })
+    }
+
 
     
 // review
@@ -790,7 +775,50 @@ function refresh(){
     location.reload();
 }
 
+function question_paper_create(){
+    let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
+        url1.searchParams.append('type', 'save');
+        from_chapter_id = null
+        to_chapter_id = null
+        all_chapter = false
+        fetch(url1,
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    'grade': grade_id, 'subject': subject_id, 'timing': timing, 'overall_marks': overall_marks, 'customize': null
+                    ,'list_of_questions':question_list,
+                }
+                ),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'token' + ' ' + token,
+                    'X-CSRFToken': csrftoken
+                },
+            }).then(function (response) {
+                return response.json()
+            }).then(data => {
+ console.log(data)
+                console.log(data.status)
+                if (data.status != 'success') {
+                    document.getElementById('q-form-5').style.display = 'block'
+                    error_messages.innerHTML = `<li class='test-warning'>${(data.data)}</li>`;
+                }
+                else {
+                    question_paper_id = data.data.id
+                    timing = data.data.timing
+                    overall_marks = data.data.overall_marks
+                   question_name = data.questions
+                   console.log('ut',data.question_details)
+                   console.log(question_name)
+                   document.querySelector('.next-btn-woc').innerHTML = '  <button  class="submit-btn btn btn-primary" onclick=submit_woc()>Create test</button>'
+               document.queryselector('question-paper-details-btn').innerHTML = '<button class="btn btn-primary" onclick="question_paper_details()">details</button>' 
+                }      
+            })
+}
 
+function question_paper_details(){
 
+}
 </script>
 {% endblock %}
