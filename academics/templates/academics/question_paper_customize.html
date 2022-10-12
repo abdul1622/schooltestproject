@@ -813,8 +813,13 @@ function question_paper_create(){
                    console.log(question_name)
                    document.querySelector('.next-btn-woc').innerHTML = '  <button  class="submit-btn btn btn-primary" onclick=submit_woc()>Create test</button>'
                document.queryselector('question-paper-details-btn').innerHTML = '<button class="btn btn-primary" onclick="question_paper_details()">details</button>' 
-                }      
+                }
+                let content = '<div class="question-details">';
+                data.question_details.forEach((d, index) => {
+                    content += ''
+                })
             })
+
 }
 
 function question_paper_details(){
