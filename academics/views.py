@@ -514,7 +514,7 @@ class QuestionList(APIView):
                         questions.append(j)
                     except:
                         continue
-            serializer = QuestionSerializer(questions,many=True)
+            serializer_for_question = QuestionSerializer(questions,many=True)
             type = type.lower()
             # answers
             answers = []
@@ -523,9 +523,9 @@ class QuestionList(APIView):
                 ans = getattr(question.answers,str(question.answers))
                 question_list.append(question.question)
                 answers.append(ans)
-            context = {'data': serializer.data, 'grade': grade.grade,
+            context = {'data': serializer_for_question.data, 'grade': grade.grade,
                 'subject': subject_obj.name, 'register_number': user.register_number}
-            context1 = {'data': serializer.data, 'grade': grade.grade, 'subject': subject_obj.name,
+            context1 = {'data': serializer_for_question.data, 'grade': grade.grade, 'subject': subject_obj.name,
                 'register_number': user.register_number, 'answers': answers}
             answer_file, status = render_to_pdf2(
                 'academics/answer_file.html', 'answer_files', None, context1)
@@ -552,7 +552,7 @@ class QuestionList(APIView):
                 if not status:
                     return Response({"status": "failure", "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
                 serializer = QuestionPaperSerializer(question_paper)
-                return Response({'status':'success','data':serializer.data,'questions':question_list,'answer-file-path':'/media/answer_files/{answer_file}.pdf','subject_id':subject_obj.id,'grade_id':grade.id},status=HTTP_200_OK)
+                return Response({'status':'success','data':serializer.data,'question_details':serializer_for_question.data,'questions':question_list,'answer-file-path':'/media/answer_files/{answer_file}.pdf','subject_id':subject_obj.id,'grade_id':grade.id},status=HTTP_200_OK)
             filename,status = render_to_pdf2('academics/question.html','question_paper',None,context)
             if not status:
                 return Response({"status": "failure", "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
