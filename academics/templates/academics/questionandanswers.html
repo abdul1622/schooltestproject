@@ -38,8 +38,7 @@
             <option value="Comprehension">Comprehension</option>
             <option value="Application">Application</option>
           </select> </div>
-        <div class='grid-item'><label for="id_difficulty_level">Difficulty level:</label> <br> <select
-            name="difficulty_level" id="id_difficulty_level">
+        <div class='grid-item'><label for="id_difficulty_level">Difficulty level:</label> <br> <select name="difficulty_level" id="id_difficulty_level">
             <option value="Easy" selected>Easy</option>
             <option value="Medium">Medium</option>
             <option value="Hard">Hard</option>
@@ -313,6 +312,7 @@
             }
             // name_value = data.name[index]
             content = content + `<div class="question-card" id='${d.id}'>
+      <div class='question-card-details'>
       <p >Chapter : <span id='${d.chapter}' class="chapter-name">${d.chapter_name}</span></p>
       <p >Question Type : <span class="question_type" id=${d.subject}>${d.question_type}</span></p>
       <p >Cognitive Level : <span class="cognitive_level" id=${d.grade}>${d.cognitive_level}</span></p>
@@ -320,7 +320,8 @@
       <p >Question : <span class="question">${d.question}</span></p>
       <p >Marks : <span class="mark">${d.mark}<span></p>
         <p >Duration : <span class="duration">${d.duration}<span></p>
-      <div class="d-flex justify-content-around question-edit-btn" data-toggle="modal" data-target="#QFormModal"><i id="edit" class="fa fa-edit"></i>&nbsp <i class="fa fa-trash-o" data-toggle="modal" data-target="#delete-box-Modal-question" href="#" id="delete"></i></div>
+      </div>
+      <div class="d-flex justify-content-around question-edit-btn"><i id="edit"  data-toggle="modal" data-target="#QFormModal" class="fa fa-edit"></i>&nbsp <i class="fa fa-trash-o" data-toggle="modal" data-target="#delete-box-Modal-question" href="#" id="delete"></i></div>
       <div style="display: none;"> 
       <p >Option A : <span class="option_a">${d.answers.option_a}</span></p>
       <p >Option B : <span class="option_b">${d.answers.option_b}</span></p>

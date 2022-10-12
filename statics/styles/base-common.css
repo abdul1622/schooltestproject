@@ -419,7 +419,7 @@ form.userDetails input {
         display: flex;
         flex-direction: column;
         height: 100vh;
-        font-size: 6vw;
+        font-size: 5vw;
         position: fixed;
         top: 0;
     }
@@ -537,6 +537,21 @@ form.userDetails input {
     #Form-modal-content {
          width: auto;
          margin-left: auto;
+    }
+    button#delete-btn-yes {
+        font-size: 10px;
+    }
+    button#delete-btn-no {
+        font-size: 10px;
+    }
+    .delete-box {
+        text-align: center;
+        font-size: 10px;
+        background-color: #b2c8df;
+    }
+    #delete-box-Modal .modal-content{
+        width: auto;
+        margin: 0;
     }
     #edit {
         padding: 7px 15px;

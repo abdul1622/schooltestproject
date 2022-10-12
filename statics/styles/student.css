@@ -458,4 +458,15 @@ button#standard_add_btn {
     #userdetail-btn {
         width: auto;
     }
+    
+    div#delete-user-Modal .modal-content,#delete-staff-Modal .modal-content{
+        width: auto;
+        margin-left: auto;
+    }
+    #confirmationuser h3{
+        font-size: 14px;
+    }
+    #delete-user-Modal #yes,#delete-user-Modal #no,#delete-staff-Modal #yes,#delete-staff-Modal #no{
+        font-size: 10px;
+    }
     }
