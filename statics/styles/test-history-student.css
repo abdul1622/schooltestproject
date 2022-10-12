@@ -84,7 +84,7 @@
     
 }
 #test-details-model .modal-content {
-    margin-left: 0; 
+    margin-left: -50%; 
     padding: 2% 5%;
     background-color: #b2c8df;
 }
