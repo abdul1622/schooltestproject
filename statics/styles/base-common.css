@@ -214,7 +214,6 @@ i#back-btn {
 }
 .modal-body {
     text-align: center;
-    overflow: scroll;
 }
 #edit {
     padding: 5px 15px;
@@ -247,10 +246,6 @@ i#back-btn {
 element.style {
     display: block;
 }
-.modal-body {
-    overflow: scroll;
-}
-
 .modal-content {
     width: 200%;
     margin-left: -34%;
