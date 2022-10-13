@@ -173,7 +173,7 @@
     let grade_list;
     var host = window.location.protocol + "//" + window.location.host;
 
-
+//  get grade
     fetch('https://schooltestproject.herokuapp.com/api/grades/', {
         method: 'GET',
         headers: {
@@ -422,10 +422,6 @@
         // document.getElementById('q-form-5').style.display = 'block';
         console.log('back', subject_id)
         var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
-
-
-
-
         $.ajax({
             url: url_for_change,
             data: {
@@ -497,7 +493,6 @@
                     question_list.push(current_list[j])
                 }
             }
-
         }
         document.getElementById('grade_value').innerHTML = grade
         document.getElementById('subject_value').innerHTML = subject_name
@@ -507,7 +502,7 @@
         review();
         document.getElementById('No_of_questions').innerHTML = question_list.length
         document.getElementById('q-form-4').style.display = 'none';
-        document.querySelector('.q-form-6').innerHTML = ''
+        document.querySelector('.q-form-6').innerHTML = '';
 
     }
 
@@ -562,6 +557,37 @@
                 } else {
                     question_content += `<span>no of questions : ${no_of_questions} </span> <button onclick="get_random()" class="btn btn-primary btn-sm" disabled>select random questions</button>`
                 }
+        var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+        $.ajax({
+            url: url_for_change,
+            data: {
+                'subject': subject_id
+            },
+            success: function (data) {
+                $("#id_chapter_get").html(data)
+            }
+        });
+                question_content += `<span><label for="id_chapter_get">Chapters :</label> <select name="chapters" onchange="filter_question()" required="" id="id_chapter_get"><option value="">---------</option>
+</select>
+    </span>`
+    question_content += `<span><label>	Question Type :</label> <select name="chapters" onchange="filter_question()" required="" id="q_type_get">
+        <option value="">---------</option>
+        <option value="MCQ">MCQ</option>
+        <option value="Fill_in_the_blanks">Fill_in_the_blanks</option>
+</select>
+    </span>`
+    question_content += `<span><label>Cognitive Level :</label> <select name="chapters" onchange="filter_question()" required="" id="cognitive_get">
+        <option value="">---------</option><option value="Knowledge">Knowledge</option>
+        <option value="Comprehension">Comprehension</option>
+        <option value="Application">Application</option>
+</select>
+    </span>`
+    question_content += `<span><label>Difficulty Level :</label> <select name="chapters" onchange="filter_question()" required="" id="difficulty_get">
+        <option value="">---------</option><option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
+</select>
+    </span>`
                 question_content += `<div class='question-container-table'>`
                 question_content += `<table> <tr class='table-heading'><th>sl.no</th><th>select</th><th>question</th><th>question type</th><th>cognitive level</th><th>difficulty level</th><th>marks</th></tr>`
 
@@ -594,6 +620,21 @@
 
     }
 
+    function filter_question(){
+
+        let chapter = document.getElementById('id_chapter_get').value
+        let cognitive = document.getElementById('cognitive_get').value
+        let q_type = document.getElementById('q_type_get').value
+        let difficulty = document.getElementById('difficulty_get').value
+        for(i=0;i<overall_question_list.length;i++){
+            if(question_id_list.includes(overall_question_list[i].id)){
+                if(chapter == overall_question_list[i].chapter){
+                    
+                }
+            }
+        }
+        
+    }
 
     function get_random() {
         for (i = 0; i < question_id_list.length; i++) {
@@ -898,7 +939,6 @@
                     document.getElementById('id_timing').value = timing
                 }
             })
-
     }
 
     function question_paper_pdf() {
