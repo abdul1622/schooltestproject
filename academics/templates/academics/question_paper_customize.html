@@ -906,6 +906,7 @@
         from_chapter_id = null
         to_chapter_id = null
         all_chapter = false
+        if(question_list.length){
         fetch(url1,
             {
                 method: 'POST',
@@ -931,11 +932,15 @@
                 }
                 else {
                     var link = document.createElement('a');
-                    link.href = `${host}${data.question_path}`;
-                    link.download = 'file.pdf';
-                    link.dispatchEvent(new MouseEvent('click'));
+                    link.setAttribute("download",'file');
+                    link.setAttribute("href", `https://schooltestproject.herokuapp.com${data.question_path}`);
+                    console.log(link)
+                    document.body.appendChild(link);
+                    // link.click();
+                    document.body.removeChild(link);
                 }
             })
     }
+}
 </script>
 {% endblock %}
