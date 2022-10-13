@@ -132,7 +132,7 @@
       <div class="modal-footer">
         <span class="create-btn-container"> <button type="button" id="userdetail-btn"
           class="btn btn-primary">Submit</button></span>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="erase()">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
       </div>
     </div>
   </div>
@@ -224,7 +224,6 @@
     }
 
     button.addEventListener('click', () => {
-      console.log('hi')
       let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
       var email = document.getElementById('email').value
       var phone = document.getElementById('phone').value
@@ -407,7 +406,7 @@ function edit(index,id){
       document.getElementById('lname').value = lastname
       document.getElementById('fname').value = firstname
       document.getElementById('address').value = address
-      button.addEventListener('click', () => {
+      button.addEventListener('click', (e) => {
         if (!standards.length) {
           std = document.getElementById('std').value
           sec = (document.getElementById('sec').value).toUpperCase()
@@ -433,6 +432,7 @@ function edit(index,id){
             error_messages.innerHTML = ''
             console.log(messages)
             console.log("Sucess response", response)
+            $('#SFormModal').modal('dispose')
             messages.innerHTML = 'updated successfully'
           }
           else {
@@ -482,6 +482,7 @@ if(!flag){
                   j = alltags.length;
                   isFound = true;
               }
+
             }       
           }
           if(!isFound && tr[i].className !== "header") {
@@ -506,7 +507,6 @@ if(!flag){
       messages.innerHTML = ''
       error_messages.innerHTML=''
       error_messages.innerHTML = 'standard and section already added'
-      $("#myModal").modal('show');
       return
     }
     let content = ''
