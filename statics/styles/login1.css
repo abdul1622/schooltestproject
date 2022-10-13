@@ -68,7 +68,7 @@
                 display: none;
               }
         }
-        @media screen and (min-width:700px) and (max-width:780px) {
+        @media screen and (min-width:430px) and (max-width:780px) {
             #loginerror {
                 display: none;
                 margin-left: 15%;
@@ -95,7 +95,7 @@
                 display: none;
               }
         }
-            @media screen and (max-width:600px) {
+            @media screen and (max-width:420px) {
                 #loginerror {
                     display: none;
                     margin-left: 20%;

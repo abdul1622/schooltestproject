@@ -1,153 +1,153 @@
 
     .response {
-        margin-left: 807px;
-        margin-top: 19px;
-        position: absolute;
-  
-        height: 26px;
-        background-color: ghostwhite;
-        padding: 2px;
-      }
-      #response {
+      margin-left: 807px;
+      margin-top: 19px;
+      position: absolute;
 
-        margin-left: 45%;
-        width: 8%;
-        background-color: white;
-        height: 4%;
-        padding: 1%;
-        padding-top: 0.1%;
-        padding-left: 1.3%;
-        display: none;
-        border-radius: 6px;
-        margin-top: 2.5%;
-        position: absolute;
-        font-size: 140%;
-    
-      }
-      .signupbox {
-        display: flex;
-        flex-wrap: nowrap;
-      }
+      height: 26px;
+      background-color: ghostwhite;
+      padding: 2px;
+    }
+    #response {
+
+      margin-left: 45%;
+      width: 8%;
+      background-color: white;
+      height: 4%;
+      padding: 1%;
+      padding-top: 0.1%;
+      padding-left: 1.3%;
+      display: none;
+      border-radius: 6px;
+      margin-top: 2.5%;
+      position: absolute;
+      font-size: 140%;
   
-      .signup-profile-details {
-        margin-left: 50px;
-      }
-  
-      .signup-profile-details select,
-      label {
-        margin-bottom: 5px;
-      }
-  
-      .signupbox {
-        background-color: #B2C8DF;
-        color: black;
-        box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-        border-radius: 5px;
-        margin-left: 33%;
-        width: 35%;
-        margin-top: 6%;
-        margin-bottom: 6%;
-        padding: 2% 2%;
-      }
-  
-      #signup-btn {
-        width: 250px;
-        height: 39px;
-        border-radius: 5px;
-        margin-left: -240px;
-        margin-top: 434px;
-        color: #14279B;
-        outline: none;
-        background-color: #b2c8df;
-        border: 1px solid #14279B;
-      }
-  
-      #signup-btn:hover {
-        background: #14279B;
-        color: white;
-      }
-  
-      #id_data_entry_user {
-        margin-top: -31px;
-        margin-left: 84px;
-        width: 14px;
-        position: absolute;
-      }
-  
-      .signupbox input[type=text] {
-        padding: 5px;
-        width: 250px;
-        margin-bottom: 10px;
-        color: black;
-        font-size: 15px;
-        border: none;
-      }
-  
+    }
+    .signupbox {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
+    .signup-profile-details {
+      margin-left: 50px;
+    }
+
+    .signup-profile-details select,
+    label {
+      margin-bottom: 5px;
+    }
+
+    .signupbox {
+      background-color: #B2C8DF;
+      color: black;
+      box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+      border-radius: 5px;
+      margin-left: 33%;
+      width: 35%;
+      margin-top: 6%;
+      margin-bottom: 6%;
+      padding: 2% 2%;
+    }
+
+    #signup-btn {
+      width: 250px;
+      height: 39px;
+      border-radius: 5px;
+      margin-left: -240px;
+      margin-top: 434px;
+      color: #14279B;
+      outline: none;
+      background-color: #b2c8df;
+      border: 1px solid #14279B;
+    }
+
+    #signup-btn:hover {
+      background: #14279B;
+      color: white;
+    }
+
+    #id_data_entry_user {
+      margin-top: -31px;
+      margin-left: 84px;
+      width: 14px;
+      position: absolute;
+    }
+
+    .signupbox input[type=text] {
+      padding: 5px;
+      width: 250px;
+      margin-bottom: 10px;
+      color: black;
+      font-size: 15px;
+      border: none;
+    }
+
 
 @media screen and (min-width:1000px) and (max-width:1024px) {
 
 }
 @media screen and (min-width:1366px) and (max-width:1440px) {
-    .signupbox {
-        background-color: #B2C8DF;
-        color: black;
-        box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-        border-radius: 5px;
-        margin-left: 26vw;
-        width: 47%;
-        margin-top: 2%;
-        margin-bottom: 3%;
-      }
+  .signupbox {
+      background-color: #B2C8DF;
+      color: black;
+      box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+      border-radius: 5px;
+      margin-left: 26vw;
+      width: 47%;
+      margin-top: 2%;
+      margin-bottom: 3%;
+    }
 }
 @media screen and (min-width:700px) and (max-width:780px) {
-    .signupbox {
-        margin-left: 6%;
-        width: 88%;
-        margin-bottom: 16%;
-      }
+  .signupbox {
+      margin-left: 6%;
+      width: 88%;
+      margin-bottom: 16%;
+    }
 }
 @media screen and (max-width:600px) {
+  .signupbox input[type=text] {
+      padding: 5px;
+      width: 100%;
+      margin-bottom: 0%;
+      color: black;
+      font-size: 15px;
+      border: none;
+    }
+
     .signupbox input[type=text] {
-        padding: 5px;
-        width: 100%;
-        margin-bottom: 0%;
-        color: black;
-        font-size: 15px;
-        border: none;
-      }
+      padding: 2%;
+      width: 100%;
+      margin-bottom: 2%;
+      color: black;
+      font-size: 15px;
+      border: none;
+    }
+    .log {
+      margin-top: 129%;
+    }
 
-      .signupbox input[type=text] {
-        padding: 2%;
-        width: 100%;
-        margin-bottom: 2%;
-        color: black;
-        font-size: 15px;
-        border: none;
-      }
-      .log {
-        margin-top: 129%;
-      }
+    .signup-profile-details select,
+    label {
+      margin-bottom: 5px;
+    }
 
-      .signup-profile-details select,
-      label {
-        margin-bottom: 5px;
-      }
+    .signupbox {
+      margin-left: 5%;
+      display: block;
+      padding: 8%;
+      width: 90%;
+    }
 
-      .signupbox {
-        margin-left: 5%;
-        display: block;
-        padding: 8%;
-        width: 90%;
-      }
+    .signup-profile-details {
+      margin-left: 0vw;
+    }
 
-      .signup-profile-details {
-        margin-left: 0vw;
-      }
-
-      #signup-btn {
-        font-variant: common-ligatures;
-        margin-top: 6%;
-        margin-left: 5%;
-        width: 95%;
-      }
+    #signup-btn {
+      font-variant: common-ligatures;
+      margin-top: 6%;
+      margin-left: 5%;
+      width: 95%;
+    }
 }

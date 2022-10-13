@@ -71,10 +71,10 @@ input:focus {
 @media screen and (min-width:1366px) and (max-width:1440px) {
 
 }
-@media screen and (min-width:700px) and (max-width:780px) {
+@media screen and (min-width:430px) and (max-width:780px) {
 
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width:420px) {
     select {
         padding: 2%;
         width: 102%;

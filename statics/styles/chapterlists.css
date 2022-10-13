@@ -199,7 +199,7 @@ p.chapter-edit-close {
 
 }
 
-@media screen and (min-width:700px) and (max-width:800px) {
+@media screen and (min-width:430px) and (max-width:800px) {
     .box {
         margin: 9vh 30vw 4vh;
         width: 40vw;
@@ -261,7 +261,7 @@ p.chapter-edit-close {
 
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:420px) {
     .box label {
         margin-left: 5%;
     }
