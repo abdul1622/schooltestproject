@@ -30,7 +30,10 @@
     margin-left: auto;
 }
 
-
+.test-create-container .modal-content{
+    width: auto;
+    margin: 0;
+}
 .questions-paper-card {
     font-size: 15px;
     background-color: #fff8dcb0;
@@ -78,7 +81,7 @@
         background-color: #364de4;
     }
 }
-@media screen and (min-width:700px) and (max-width:800px) {
+@media screen and (min-width:430px) and (max-width:800px) {
     .question-papers-get {
         width: 45%;
         margin: 2% 25%;
@@ -105,7 +108,7 @@
     }
 
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width:420px) {
     .question-papers-get {
         width: 86%;
         margin: 8% 8%;

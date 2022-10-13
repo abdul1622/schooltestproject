@@ -59,8 +59,9 @@
         <input type="text" name="address" class="form-control" placeholder="Address" id="id_address">
         <label>DataEntry:</label>
         <input type="checkbox" name="data_entry_user" id="id_data_entry_user">
+        <button data-toggle="modal" data-target="#messageModal-signup" id="signup-btn" onclick=signup()>Register</button>
     </div>
-    <button data-toggle="modal" data-target="#messageModal-signup" id="signup-btn" onclick=signup()>Register</button>
+
 </div>
 
 
@@ -75,7 +76,6 @@
             </div>
             <div class="modal-body">
                 <div class="messages container-fluid">
-
                 </div>
                 <div class="error-messages container-fluid">
 

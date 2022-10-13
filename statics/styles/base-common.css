@@ -367,7 +367,7 @@ form.userDetails input {
         outline: none;
     }
 }
-@media screen and (min-width:700px) and (max-width:800px) {
+@media screen and (min-width:430px) and (max-width:800px) {
     .back-btn {
         margin-left: 56vw;
         color: black;
@@ -422,6 +422,7 @@ form.userDetails input {
         font-size: 5vw;
         position: fixed;
         top: 0;
+        overflow-y: auto;
     }
     #chapter-btn {
         margin-top: 0;
@@ -464,7 +465,7 @@ form.userDetails input {
         background-color: #8d82ee;
     }
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width:420px) {
     .navbar {
         background-color: transparent;
         height: 10vh;

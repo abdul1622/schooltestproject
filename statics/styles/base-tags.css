@@ -107,7 +107,7 @@ table {
         padding: 10px;
     }
 }
-@media screen and (min-width:700px) and (max-width:800px) {
+@media screen and (min-width:430px) and (max-width:800px) {
     th {
         padding-left: 0%;
         text-align: center;
@@ -122,7 +122,7 @@ table {
         font-size: 1.5vw;
     }
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width:420px) {
     th {
         padding: 4px;
     }
