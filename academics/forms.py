@@ -102,9 +102,12 @@ class answer_form(forms.ModelForm):
 
 
 class TestForm(forms.ModelForm):
+    timing = forms.IntegerField(min_value=0,widget=forms.NumberInput(
+    attrs={"placeholder": "duration in seconds"}))
+    overall_marks = forms.IntegerField(min_value=0) 
     class Meta:
         model = Test
-        fields = [ 'remarks', 'description','pass_percentage']
+        fields = ['timing','overall_marks','remarks', 'description','pass_percentage']
  
 
 class instruction_form(forms.Form):
@@ -116,9 +119,7 @@ class questionCustomForm(forms.Form):
     to_chapter = forms.ChoiceField()
     allChapter = forms.BooleanField()
 
-    # timing = forms.IntegerField(min_value=0,widget=forms.NumberInput(
-    # attrs={"class": "form-control", "placeholder": "duration in seconds"}))
-    # overallmarks = forms.IntegerField(min_value=0) 
+
 class customizeForm(forms.Form):
     Chapter = forms.ChoiceField()
     cognitive_level = forms.ChoiceField()

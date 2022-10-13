@@ -44,9 +44,25 @@
             height: 2.2vh;
             position: absolute;
             margin: 0.1% -6%;
-
         }
-    
+    #test-create-details .modal-content{
+        width: auto;
+        margin: auto;
+    }
+    .question-container-table {
+        height: 70vh;
+        overflow: auto;
+        margin-bottom: 1%;
+    }
+    .question-container-table .table-heading{
+        position: sticky;
+        top: 0%;
+        background-color: aliceblue;
+    }
+    .question-paper-form label{
+    margin: 3%;
+    }
+
 @media screen and (min-width:1024px) and (max-width:1200px) {
     .question-paper-form {
         background-color: #435cf9;
