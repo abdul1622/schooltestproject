@@ -902,11 +902,11 @@
     }
 
     function question_paper_pdf() {
+        if(question_list.length){
         let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
         from_chapter_id = null
         to_chapter_id = null
         all_chapter = false
-        if(question_list.length){
         fetch(url1,
             {
                 method: 'POST',
@@ -932,12 +932,9 @@
                 }
                 else {
                     var link = document.createElement('a');
-                    link.setAttribute("download",'file');
-                    link.setAttribute("href", `https://schooltestproject.herokuapp.com${data.question_path}`);
-                    console.log(link)
-                    document.body.appendChild(link);
-                    // link.click();
-                    document.body.removeChild(link);
+                    link.href = `https://schooltestproject.herokuapp.com${data.question_path}`;
+                    link.download = 'file.pdf';
+                    link.dispatchEvent(new MouseEvent('click'));
                 }
             })
     }
