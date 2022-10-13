@@ -115,5 +115,7 @@
         text-transform: capitalize;
         font-size: 16px;
     }
-
+    .history-container-div table button {
+        width: 100%;
+    }
 }

@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" onclick="reload()" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
 
       </div>
@@ -506,6 +506,7 @@ if(!flag){
       messages.innerHTML = ''
       error_messages.innerHTML=''
       error_messages.innerHTML = 'standard and section already added'
+      $("#myModal").modal('show');
       return
     }
     let content = ''
