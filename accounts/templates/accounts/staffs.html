@@ -29,7 +29,7 @@
   </div>
 
 </div>
-<div class="modal fade" id="messageModal-staff" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="messageModal-staff"  role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -57,7 +57,6 @@
 <!-- Creation and updation modal -->
 <div class="modal fade" id="SFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    
     <div class="modal-content" id="Form-modal-content">
       <div class="modal-header" >
         <h5 class="modal-title" id="exampleModalLabel">Add Staff</h5>
@@ -256,13 +255,28 @@
         }).then(response => {
           if (response.status == 201) {
             console.log("Sucess response", response)
-            messages.innerHTML = 'created successfully'
+            document.querySelector('#SFormModal').classList.remove('show');
+            document.querySelector('body').classList.remove('modal-open');
+            const mdbackdrop = document.querySelector('.modal-backdrop');
+            if (mdbackdrop){
+              mdbackdrop.classList.remove('modal-backdrop', 'show');
+              messages.innerHTML = 'created successfully'
+              $('#messageModal-staff').modal('show')
+            }
             error_messages.innerHTML = ''
           }
           return response.json();
         }).then(function (data) {
           console.log(data)
-          if (data.status != 'success') {
+          if (data.status != 'Registered succesfull') {
+            document.querySelector('#SFormModal').classList.remove('show');
+            document.querySelector('body').classList.remove('modal-open');
+            const mdbackdrop = document.querySelector('.modal-backdrop');
+            if (mdbackdrop){
+              mdbackdrop.classList.remove('modal-backdrop', 'show');
+              messages.innerHTML = 'created successfully'
+              $('#messageModal-staff').modal('show')
+            }
             error_messages.innerHTML = `<li>${(data.data.error[0])}</li>`
             messages.innerHTML = ''
           }
@@ -432,9 +446,15 @@ function edit(index,id){
             error_messages.innerHTML = ''
             console.log(messages)
             console.log("Sucess response", response)
-            $('#SFormModal').modal('dispose')
-            messages.innerHTML = 'updated successfully'
+            document.querySelector('#SFormModal').classList.remove('show');
+            document.querySelector('body').classList.remove('modal-open');
+            const mdbackdrop = document.querySelector('.modal-backdrop');
+            if (mdbackdrop){
+              mdbackdrop.classList.remove('modal-backdrop', 'show');
+              messages.innerHTML = `<li>${'updated successfully '}</li>`
+            }
           }
+          
           else {
             error_messages.innerHTML = `<li>${(data.data.error)}</li>`
             messages.innerHTML = ''
