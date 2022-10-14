@@ -1,353 +1,63 @@
 {% extends 'base.html' %}
 {% block profile %}
-
+{% load static %}
 <div class="profile-container">
-<div class="container">
-</div>
-<div id='profile-box'>
-  
-  {%csrf_token%}
-  <button onclick=back() class='delete-grade profile-back-btn'>&#x2715; </button>
-  <div class="standard-edit" id="standard-edit">
+  <!-- profile details -->
+  <div class="container">
+  </div>
+  <!-- profile edit -->
+  <div id='profile-box'>
+
+    {%csrf_token%}
+    <button onclick=back() class='delete-grade profile-back-btn'>&#x2715; </button>
+    <div class="standard-edit" id="standard-edit">
+
+    </div>
+    <div class="standard-details" id="standard-details">
+      <label>Standard:</label>
+      <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required="" id="std">
+      </select>
+      <label>Section:</label>
+      <select name="grade" class="sec-in-form form-control" required="" id="sec"></select>
+      <button onclick=add()>add</button>
+      <div class="profile-errors"></div>
+      <hr>
+    </div>
+
+    <p></p><label>Firstname:</label><br><input type="text" id="fname" placeholder="First Name"> </p>
+    <p></p><label>Lastname:</label><br><input type="text" id="lname" placeholder="Last Name"> </p>
+    <p></p><label>Fullname:</label><br><input type="text" id="ffname" placeholder="Full Name"> </p>
+    <p></p><label>Address:</label><br><input type="text" id="address" placeholder="Address"> </p>
+    <p></p><button data-toggle="modal" data-target="#messageModal-profile" id='profile-btn'>update</button></p>
 
   </div>
-  <div class="standard-details" id="standard-details">
-    <label>Standard:</label>
-    <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required="" id="std">
-    </select>
-    <label>Section:</label>
-  <select name="grade" class="sec-in-form form-control" required="" id="sec"></select>
-  <button onclick=add()>add</button>
-  <div class="profile-errors"></div>
-  <hr>
 </div>
-
-<p></p><label >Firstname:</label><br><input type="text" id="fname" placeholder="First Name"> </p>
-<p></p><label >Lastname:</label><br><input type="text" id="lname" placeholder="Last Name"> </p>
-<p></p><label >Fullname:</label><br><input type="text" id="ffname"placeholder="Full Name"> </p>
-<p></p><label >Address:</label><br><input type="text" id="address"placeholder="Address"> </p>
-<p></p><button data-toggle="modal" data-target="#messageModal-profile" id='profile-btn'>update</button></p>
-
-</div>
-</div>
+<!-- messages -->
 <div class="modal fade" id="messageModal-profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
         <div class="messages container-fluid">
 
         </div>
         <div class="error-messages container-fluid">
-    
+
         </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
 
+      </div>
     </div>
   </div>
 </div>
-</div>
-<script>
-  let token = localStorage.getItem("token")
-  var user = localStorage.getItem('user_type')
-  $(document).ready(function(){ 
-  
-    if ( !token){
-     return window.location.href = '/login'; 
-    }
-  })
-  
-  var host = window.location.protocol + "//" + window.location.host;
-  let container = document.querySelector('.container');
-  let messages = document.querySelector('.messages')
-  let error_messages = document.querySelector('.error-messages')
-  let standards,get_standard;
-  let form=document.getElementById('profile-box')
-  let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-  let content = ''
-  let grade_list = []
-
-if(user != 'is_staff'){
-  document.getElementById('standard-details').style.display = 'none'
-}else{
-  fetch('https://schooltestproject.herokuapp.com/api/grades/', {
-            method: 'GET',
-        }).then(res => {
-            return res.json()
-        }).then(data => {
-            grade_list = data.data
-            console.log(data.data)
-           if(data.status == 'failure'){
-            window.location.href = `${host}/404`
-           } 
-        content += ` 
-            <option value="" selected="">---------</option>`
-        if(grade_list.length){
-          document.getElementById('standard-edit').style.display = 'block'
-        for(i=0;i<grade_list.length;i++){
-            content += ` <option value="${grade_list[i].grade}">${grade_list[i].grade}</option>`
-        }
-    }
-        document.querySelector('.std-in-form').innerHTML = content
-        })
-      }
-  
-if(!grade_list.length){
-  document.getElementById('standard-edit').style.display = 'none'
-}
-
-      function getsectionname(element){
-        let standard = element.value
-        let sec_list;
-        content = ''
-        for(i=0;i<grade_list.length;i++){
-            if(grade_list[i].grade==standard){
-                sec_list = grade_list[i].section
-            }
-        }
-        content += ` 
-            <option value="" selected="">---------</option>`
-        if(sec_list && sec_list.length){
-        for(i=0;i<sec_list.length;i++){
-            content += ` <option value="${sec_list[i]}">${sec_list[i]}</option>`
-        }
-    }
-        document.querySelector('.sec-in-form').innerHTML = content
-    }
-
-
-  document.getElementById('nav-profile').style.opacity = '0.5';
-  function back(){
-    form.style.display='none'
-    container.style.display = 'block'
-  }
-
-  function delete_standard(index){
-    standards.splice(index,1);
-    let content = ''
-    content += `    <p> standards list</p>`
-                    for(i=0;i<standards.length;i++){
-                      content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
-                    }
-                    // content += `<input type="number" id="std" placeholder="Standard">
-                    // <label >Section:</label><br><input type="text" id="sec" placeholder="section">
-                    // <button onclick=add()>add</button>
-                    // <hr>
-                    // `
-                    document.querySelector('.standard-edit').innerHTML = content
-  }
-  function add(){
-    let std = document.getElementById('std').value
-    let section = (document.getElementById('sec').value).toUpperCase()
-    if(!section.match(/[a-z]/i)){
-            document.querySelector('.profile-errors').innerHTML = '<li class="text-danger">give a valid section</li>'
-            return
-    }
-    if(!standards.includes(std+'-'+section)){
-    standards.push(std+'-'+section)
-    }else{
-      document.querySelector('.profile-errors').innerHTML = '<li class="text-danger">standard and section altready added</li>'
-            return
-    }
-    let content = ''      
-    content += `    <p> standards list</p>`
-                    for(i=0;i<standards.length;i++){
-                      content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
-                    }
-                    // content += `<input type="number" id="std" placeholder="Standard">
-                    // <label >Section:</label><br><input type="text" id="sec" placeholder="section">
-                    // <button onclick=add()>add</button>
-                    // <hr>`
-                    document.querySelector('.standard-edit').innerHTML = content
-  }
-
-  function profile() {
-        let token = localStorage.getItem('token')
-        console.log(token)
-        if (token){
-          fetch('https://schooltestproject.herokuapp.com/api/profile/', {
-            method: 'GET',
-            headers: new Headers({
-              'Authorization': 'token' + ' ' + token,
-              'Content-Type': 'application/x-www-form-urlencoded',
-             
-            })
-          })
-            .then(response => response.json())
-            .then(data => {
-              console.log("data=", data.data.email)
-              console.log("data=", data)
-    
-              let htmlSegment = `<div class="user" id='${data.data.id}'>
-                <div class="profile-head">
-                <div class='image'> <img src='https://schooltestproject.herokuapp.com${data.data.profile?.profile_picture}'></div>  
-                <p class="fullname">${data.data.profile?.full_name}</p><br>`
-                  console.log(data.data.profile?.standard.length)
-                  if(data.data.user_type!='is_student'){
-                    let content = ''
-                  content += `    <p> standards list</p>`
-                    standards = data.data.profile?.standard
-                    for(i=0;i<standards.length;i++){
-                      content += `
-                      <li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
-                    }
-                    // content += `<input type="number" id="std" placeholder="Standard">
-                    // <label >Section:</label><br><input type="text" id="sec" placeholder="section">
-                    // <button onclick=add()>add</button>
-                    // <hr>`
-
-                    document.querySelector('.standard-edit').innerHTML = content
-                  }
-                  if(data.data.user_type=='is_admin'){
-                    htmlSegment += `<p class ='occupation'> Admin </p>
-                     </div>
-                    <div class="profile-content">
-                      <p ><label class=profile-label>First Name:</label><span  class="firstname">${data.data.profile?.first_name}</span></p>
-                      <p><label class=profile-label>Last Name:</label><span class="lastname">${data.data.profile?.last_name}</span></p>
-                      <p style='display:none;'> <label class=profile-label>Standard:</label><span  class="std">${data.data.profile?.standard}</span></p>
-                      <p>  <label class=profile-label>Address: </label><span class="address">${data.data.profile?.address}</span></p>
-                         <i id='profile-edit' class="fa fa-edit"></i>
-                         </div>`;
-                  container.innerHTML = htmlSegment;
-                  }
-                  else if(data.data.user_type=='is_staff'){
-                    htmlSegment += `<p class ='occupation'> Staff </p>
-                     </div>
-                    <div class="profile-content">
-                    <p><label class=profile-label>First Name:</label><span  class="firstname">${data.data.profile?.first_name}</span></p>
-                    <p><label class=profile-label>Last Name:</label><span class="lastname">${data.data.profile?.last_name}</span></p>
-                    <p style='display:none;'> <label class=profile-label>Standard:</label><span  class="std">${data.data.profile?.standard}</span></p>
-                    <p>  <label class=profile-label>Address: </label><span class="address">${data.data.profile?.address}</span></p>
-      
-                         <i id='profile-edit' class="fa fa-edit"></i>
-                         </div>`;
-                  container.innerHTML = htmlSegment;
-                  }
-                  else if(data.data.user_type=='is_student'){
-                    standards = data.data.profile?.standard
-                    htmlSegment += `<p class ='occupation'> Student</p>
-                     </div>
-                    <div class="profile-content">
-                    <p><label class=profile-label>First Name:</label><span  class="firstname">${data.data.profile?.first_name}</span></p>
-                    <p><label class=profile-label>Last Name:</label><span class="lastname">${data.data.profile?.last_name}</span></p>
-                    <p> <label class=profile-label>Standard:</label><span  class="std">${data.data.profile?.standard}</span></p>
-                    <p>  <label class=profile-label>Address: </label><span class="address">${data.data.profile?.address}</span></p>
-      
-                         <i id='profile-edit' class="fa fa-edit"></i>
-                         </div>`;
-                         container.innerHTML = htmlSegment;
-                  }
-                 else{
-                    htmlSegment += `<p class ='occupation'> Data entry operator </p>
-                     </div>
-                    <div class="profile-content">
-                    <p><label class=profile-label>First Name:</label><span  class="firstname">${data.data.profile?.first_name}</span></p>
-                    <p><label class=profile-label>Last Name:</label><span class="lastname">${data.data.profile?.last_name}</span></p>
-                    <p> <label class=profile-label>Standard:</label><span  class="std">${data.data.profile?.standard}</span></p>
-                    <p>     <label class=profile-label>Section:</label><span class="sec">${data.data.profile?.section}</span></p>
-                    <p>  <label class=profile-label>Address: </label><span class="address">${data.data.profile?.address}</span></p>
-      
-                         <i id='profile-edit' class="fa fa-edit"></i>
-                         </div>`;
-                  container.innerHTML = htmlSegment;
-                  }
-            }
-            )
-
-            container.addEventListener('click',(e)=>{
-              fname= document.getElementById('fname');
-              lname= document.getElementById('lname');
-              ffname= document.getElementById('ffname');
-              // std= document.getElementById('std');
-              // sec= document.getElementById('sec');
-              ad=document.getElementById('address');
-              button= document.getElementById('profile-btn')
-              e.preventDefault();
-              let editbutton = e.target.id == 'profile-edit';
-              let id = e.target.parentElement.parentElement.id;
-              console.log(id)
-              if (editbutton) 
-              {
-                form.style.display='block'
-                container.style.display = 'none'
-                console.log('hi')
-                url="https://schooltestproject.herokuapp.com/api/student-profile/"
-                const parent = e.target.parentElement;
-                console.log(parent)
-                let fullname = parent.parentElement.querySelector('.fullname').textContent;
-                let lastname= parent.querySelector('.lastname').textContent;
-                let firstname= parent.querySelector('.firstname').textContent;
-                // let standard= parent.querySelector('.std').textContent;
-                // let section= parent.querySelector('.sec').textContent;
-                let address= parent.querySelector('.address').textContent;
-                document.getElementById('ffname').value=fullname
-                document.getElementById('lname').value=lastname
-                document.getElementById('fname').value=firstname
-                // document.getElementById('std').value=standard
-                // document.getElementById('sec').value=section
-                document.getElementById('address').value=address
-                button.addEventListener('click',()=>{
-                  fetch(`${url}${id}/`,{
-                    method : 'PUT',
-                    headers : {
-                      'Content-Type' : 'application/json',
-                      'Authorization':'token'+" " +localStorage.getItem('token'),
-                      'X-CSRFToken': csrftoken
-                    },
-                    body:JSON.stringify(
-                    {'first_name':fname.value,'last_name':lname.value,'standard':standards,'full_name':ffname.value,'address':ad.value}
-                    )
-                }).then(response => {
-                  if (response.status == 200) {
-                      console.log("Sucess response", response)
-                      messages.innerHTML = 'updated successfully'
-                      error_messages.innerHTML= ''
-                      fetch('https://schooltestproject.herokuapp.com/api/profile/', {
-                        method: 'GET',
-                        headers: {
-                          'content-Type': 'application/json',
-                          'Authorization': 'token' + ' ' + token,
-                        }
-                      }).then(res => {
-                        return res.json()
-                      }).then(d => {
-                        if(d.data.profile.standard){
-                          localStorage.setItem("standard", d.data.profile.standard);
-                        }
-                    profile();
-                  })
-                }else{
-                  error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-                  messages.innerHTML = ''
-                }
-                form.style.display='none'
-                container.style.display = 'block'
-                  return response.json();
-              }).then(function (data) {
-                  console.log(data)
-                  // if (data.status != 'success'){
-                  // error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-                  // messages.innerHTML = ''
-                  // }
-              })            })
-             
-            }
-          
-           
-            }
-           
-          );
-        } 
-      }profile();
-</script>
+<script src="{% static 'script_files/profile.js' %}" type="text/javascript"></script>
 
 {% endblock %}
-

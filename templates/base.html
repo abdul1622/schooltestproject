@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+{% load static %}
+
 <head>
     <!-- JavaScript Bundle with Popper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
@@ -22,6 +23,10 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
+    <link href="https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
+<!-- drag -->
+    <!-- ✅ load jQuery ✅ -->
+<!-- drag -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,21 +43,25 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<!-- stylesheets -->
+    <!-- stylesheets -->
     <link rel="stylesheet" href="{% static 'styles/chapterlists.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/academics.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/grade.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/subject.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/chapter.css' %}">
     <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
     <link rel="stylesheet" href="{% static 'styles/question-paper.css' %}">
     <link rel="stylesheet" href="{% static 'styles/question.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/questionandanswers.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/question_answer.css' %}">
     <link rel="stylesheet" href="{% static 'styles/test-history-staff.css' %}">
     <link rel="stylesheet" href="{% static 'styles/test-history-student.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/test-list-staff.css' %}">
     <link rel="stylesheet" href="{% static 'styles/test-list-student.css' %}">
     <link rel="stylesheet" href="{% static 'styles/base-common.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/base-common-responsive.css' %}">
     <link rel="stylesheet" href="{% static 'styles/base-tags.css' %}">
     <link rel="stylesheet" href="{% static 'styles/student.css' %}">
     <link rel="stylesheet" href="{% static 'styles/backup.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/backup-responsive.css' %}">
     <!-- <link rel="stylesheet" href="{% static 'styles/userdetails.css' %}"> -->
 
     <!-- <link rel="stylesheet" href="{% static 'styles/question.css' %}"> -->
@@ -63,8 +72,9 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" id="nav-btn" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" id="nav-btn" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">

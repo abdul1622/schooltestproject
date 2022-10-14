@@ -251,17 +251,19 @@
         console.log(grade);
     }
 
+
+
     // for chapter selection
 
     function getnext() {
         document.querySelector('.q-form-6').innerHTML = ''
         question_per_chapter_get = []
         question_per_chapter = []
-        document.getElementById('q-form').style.display = 'block'
         no_of_questions = parseInt(document.getElementById('id_no_of_questions').value);
         grade_id = parseInt(document.getElementById('id_grade').value);
         subject_id = parseInt(document.getElementById('id_subject').value)
         console.log('isgrade', grade_id, subject_id)
+
         if (isNaN(grade_id) || isNaN(subject_id)) {
             if (!isNaN(grade_id)) {
                 document.querySelector('.error-form-1').innerHTML = "<li style='color:white'>subject is a required field </li>"
@@ -301,9 +303,10 @@
 
             customize = false
             document.getElementById('q-form-1').style.display = 'none';
-            document.getElementById('q-form-2').style.display = 'block';
             document.getElementById('q-form-3').style.display = 'none';
             document.getElementById('q-form-4').style.display = 'none';
+            document.getElementById('q-form-2').style.display = 'block';
+            document.getElementById('q-form').style.display = 'block'
             result = []
 
         })
@@ -384,7 +387,8 @@
             if (d.chapter == chapter_id) {
                 i += 1
                 question_per_chapter.push(d.id)
-                question_content += `<tr><td>${i}</td> <td><input type="checkbox" id="question_${d.id}" value="${d.id}"></td>
+                question_content += `<tr onClick='selectitem(${d.id})'><td><input type="checkbox" id="question_${d.id}" value="${d.id}"></td>
+                    <td>${i}</td>
                  <td><label for="question_${d.id}">${d.question}</label></td>
                  <td>${d.question_type}</td>
                  <td>${d.cognitive_level}</td>
@@ -413,8 +417,6 @@
     function get_customize() {
         document.getElementById('q-form').style.display = 'none'
         customize = true
-
-
         // document.getElementById('q-form-1').style.display = 'none';
         // document.getElementById('q-form-2').style.display = 'none';
         // document.getElementById('q-form-3').style.display = 'none';
@@ -503,7 +505,6 @@
         document.getElementById('No_of_questions').innerHTML = question_list.length
         document.getElementById('q-form-4').style.display = 'none';
         document.querySelector('.q-form-6').innerHTML = '';
-
     }
 
     function without_customize() {
@@ -567,34 +568,34 @@
                 $("#id_chapter_get").html(data)
             }
         });
-                question_content += `<span><label for="id_chapter_get">Chapters :</label> <select name="chapters" onchange="filter_question()" required="" id="id_chapter_get"><option value="">---------</option>
-</select>
-    </span>`
-    question_content += `<span><label>	Question Type :</label> <select name="chapters" onchange="filter_question()" required="" id="q_type_get">
-        <option value="">---------</option>
-        <option value="MCQ">MCQ</option>
-        <option value="Fill_in_the_blanks">Fill_in_the_blanks</option>
-</select>
-    </span>`
-    question_content += `<span><label>Cognitive Level :</label> <select name="chapters" onchange="filter_question()" required="" id="cognitive_get">
-        <option value="">---------</option><option value="Knowledge">Knowledge</option>
-        <option value="Comprehension">Comprehension</option>
-        <option value="Application">Application</option>
-</select>
-    </span>`
-    question_content += `<span><label>Difficulty Level :</label> <select name="chapters" onchange="filter_question()" required="" id="difficulty_get">
-        <option value="">---------</option><option value="Easy">Easy</option>
-        <option value="Medium">Medium</option>
-        <option value="Hard">Hard</option>
-</select>
-    </span>`
+//                 question_content += `<span><label for="id_chapter_get">Chapters :</label> <select name="chapters" onchange="filter_question()" required="" id="id_chapter_get"><option value="">---------</option>
+// </select>
+//     </span>`
+//     question_content += `<span><label>	Question Type :</label> <select name="chapters" onchange="filter_question()" required="" id="q_type_get">
+//         <option value="">---------</option>
+//         <option value="MCQ">MCQ</option>
+//         <option value="Fill_in_the_blanks">Fill_in_the_blanks</option>
+// </select>
+//     </span>`
+//     question_content += `<span><label>Cognitive Level :</label> <select name="chapters" onchange="filter_question()" required="" id="cognitive_get">
+//         <option value="">---------</option><option value="Knowledge">Knowledge</option>
+//         <option value="Comprehension">Comprehension</option>
+//         <option value="Application">Application</option>
+// </select>
+//     </span>`
+//     question_content += `<span><label>Difficulty Level :</label> <select name="chapters" onchange="filter_question()" required="" id="difficulty_get">
+//         <option value="">---------</option><option value="Easy">Easy</option>
+//         <option value="Medium">Medium</option>
+//         <option value="Hard">Hard</option>
+// </select>
+//     </span>`
                 question_content += `<div class='question-container-table'>`
                 question_content += `<table> <tr class='table-heading'><th>sl.no</th><th>select</th><th>question</th><th>question type</th><th>cognitive level</th><th>difficulty level</th><th>marks</th></tr>`
 
                 data.data.forEach((d, index) => {
                     i += 1
                     question_id_list.push(d.id)
-                    question_content += `<tr><td>${i}</td> <td><input type="checkbox" id="question_${d.id}" name="vehicle1" value="${d.id}"></td>
+                    question_content += `<tr onClick="selectitem(${d.id})"><td><input type="checkbox" id="question_${d.id}" name="vehicle1" value="${d.id}"></td><td>${i}</td>
                  <td><label for="vehicle1">${d.question}</label></td><td>${d.question_type}</td>
                  <td>${d.cognitive_level}</td><td>${d.difficulty_level}</td><td>${d.mark}</td></tr>
 `
@@ -617,24 +618,27 @@
                 document.querySelector('.error-form-2').innerHTML = `<li style='color:white;'>Chapters selected is not in correct order</li>`
             }
         })
-
     }
+   function selectitem(id){
+    if(document.getElementById(`question_${id}`).checked){
+        document.getElementById(`question_${id}`).checked = false
+    }else{
+    document.getElementById(`question_${id}`).checked = true
+    }
+   }
+    // function filter_question(){
 
-    function filter_question(){
+    //     let chapter = document.getElementById('id_chapter_get').value
+    //     let cognitive = document.getElementById('cognitive_get').value
+    //     let q_type = document.getElementById('q_type_get').value
+    //     let difficulty = document.getElementById('difficulty_get').value
+    //     for(i=0;i<overall_question_list.length;i++){
+    //         if(question_id_list.includes(overall_question_list[i].id)){
 
-        let chapter = document.getElementById('id_chapter_get').value
-        let cognitive = document.getElementById('cognitive_get').value
-        let q_type = document.getElementById('q_type_get').value
-        let difficulty = document.getElementById('difficulty_get').value
-        for(i=0;i<overall_question_list.length;i++){
-            if(question_id_list.includes(overall_question_list[i].id)){
-                if(chapter == overall_question_list[i].chapter){
-                    
-                }
-            }
-        }
+    //         }
+    //     }
         
-    }
+    // }
 
     function get_random() {
         for (i = 0; i < question_id_list.length; i++) {
@@ -980,4 +984,48 @@
     }
 }
 </script>
+<!-- <script>
+    dragElement(document.getElementById("q-form-4"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+</script> -->
 {% endblock %}
