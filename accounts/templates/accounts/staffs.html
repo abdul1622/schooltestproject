@@ -523,7 +523,7 @@ if(!flag){
     let content = ''
     content += `    <p> standards list</p>`
     for (i = 0; i < standards.length; i++) {
-      content += `<li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li>`
+      content += `<div class='inner'><li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li></div>`
     }
     document.querySelector('.standards-list').innerHTML = content
   }
