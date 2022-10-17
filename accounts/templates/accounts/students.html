@@ -54,11 +54,12 @@
   </div>
 </div>
 <!-- Creation and updation modal -->
-<div class="modal fade" id="FormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="FormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
-    
+
     <div class="modal-content" id="Form-modal-content">
-      <div class="modal-header" >
+      <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel"> Add Student</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -74,57 +75,58 @@
           <label for="phone">Phone:</label><br>
           <input type="phone" id="phone" placeholder="Phone">
         </div>
-      
+
         <div class='grid-item'>
           <label for="reg">Reg:</label><br>
           <input type="text" id="reg" placeholder="Reg">
         </div>
-      
+
         <div class='grid-item'>
           <label for="dob">DOB:</label><br>
           <input type="date" id="dob" placeholder="DOB">
         </div>
-      
-       
+
+
         <div class='grid-item'>
           <label for="fname">Firstname:</label><br>
           <input type="text" id="fname" placeholder="First Name">
         </div>
-      
+
         <div class='grid-item'>
           <label for="lname">Last Name:</label><br>
           <input type="text" id="lname" placeholder="Last Name">
         </div>
-      
+
         <div class='grid-item'>
           <label for="ffname">Full Name:</label><br>
           <input type="text" id="ffname" placeholder="Full Name">
         </div>
-       <div class='grid-item'>
+        <div class='grid-item'>
           <label for="std">Standard:</label><br>
-          <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required="" id="std"></select>
+          <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required=""
+            id="std"></select>
         </div>
-      
+
         <div class='grid-item'>
           <label for="sec">Section:</label><br>
-          <select name="grade" class="sec-in-form form-control" required="" id="sec">      </select>
+          <select name="grade" class="sec-in-form form-control" required="" id="sec"> </select>
         </div>
         <div class='grid-item'>
           <label for="address">Address:</label><br>
           <input type="text" id="address" placeholder="Address">
         </div>
-      
+
         <div class='grid-item'>
           <label for="file">Profile picture:</label><br>
           <input type="file" id="file">
         </div>
       </form>
       <div class="formmodal-body">
-        
+
       </div>
       <div class="modal-footer">
-        <span class="create-btn-container"> <button type="button" id="userdetail-btn"
-          class="btn btn-primary">Submit</button></span>
+        <span class="create-btn-container"> <button type="button" id="userdetail-btn" class="btn btn-primary"
+            data-target="#messageModal-student">Submit</button></span>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="erase()">Close</button>
       </div>
     </div>
@@ -134,24 +136,27 @@
 
 <button id="add" data-toggle="modal" data-target="#FormModal">Add Student</button>
 <div class="sort-input">
-  <input type="text" id="student-filter" placeholder="search" min="0" max="12"  onkeyup="filter()" >
+  <input type="text" id="student-filter" placeholder="search" min="0" max="12" onkeyup="filter()">
 </div>
 <div class="container2"></div>
 
 <script>
   let user, standards = [];
-  let students=[];
-let content = '';
-let grade_list;
-  
+  let students = [];
+  let content = '';
+  let grade_list;
+  var editbutton = false
+  let messages = document.querySelector('.messages')
+  console.log(messages.innerHTML)
+  let error_messages = document.querySelector('.error-messages')
   let token = localStorage.getItem("token")
-  $(document).ready(function(){ 
-    if(!token){
+  $(document).ready(function () {
+    if (!token) {
       return window.location.href = '/login';
     }
     var user = localStorage.getItem('user_type')
-    if (user == 'is_student'){
-     return window.location.href = '/404'; 
+    if (user == 'is_student') {
+      return window.location.href = '/404';
     }
   })
   function reload() {
@@ -159,80 +164,72 @@ let grade_list;
   }
   $('#FormModal').on('hidden.bs.modal', function () {
     $(this).find('form').trigger('reset');
-})
+  })
   fetch('https://schooltestproject.herokuapp.com/api/grades/', {
-            method: 'GET',
-            headers: new Headers({
-            'Authorization': 'token' + ' ' + token,
-            'Content-Type': 'application/json'
-          })
-        }).then(res => {
-            return res.json()
-        }).then(data => {
-            grade_list = data.data
-            console.log(data.data)
-           if(data.status == 'failure'){
-            window.location.href = `${host}/404`
-           } 
-        content += ` 
+    method: 'GET',
+    headers: new Headers({
+      'Authorization': 'token' + ' ' + token,
+      'Content-Type': 'application/json'
+    })
+  }).then(res => {
+    return res.json()
+  }).then(data => {
+    grade_list = data.data
+    console.log(data.data)
+    if (data.status == 'failure') {
+      window.location.href = `${host}/404`
+    }
+    content += ` 
             <option value="" selected="">---------</option>`
-        if(grade_list.length){
-        for(i=0;i<grade_list.length;i++){
-            content += ` <option value="${grade_list[i].grade}">${grade_list[i].grade}</option>`
-        }
+    if (grade_list.length) {
+      for (i = 0; i < grade_list.length; i++) {
+        content += ` <option value="${grade_list[i].grade}">${grade_list[i].grade}</option>`
+      }
     }
-        document.querySelector('.std-in-form').innerHTML = content
-        })
-
-
-
-
-
-  function getsectionname(element){
-        let standard = element.value
-        let sec_list;
-        content = ''
-        for(i=0;i<grade_list.length;i++){
-            if(grade_list[i].grade==standard){
-                sec_list = grade_list[i].section
-            }
-        }
-        content += ` 
+    document.querySelector('.std-in-form').innerHTML = content
+  })
+  function getsectionname(element) {
+    let standard = element.value
+    let sec_list;
+    content = ''
+    for (i = 0; i < grade_list.length; i++) {
+      if (grade_list[i].grade == standard) {
+        sec_list = grade_list[i].section
+      }
+    }
+    content += ` 
             <option value="" selected="">---------</option>`
-        if(sec_list.length){
-        for(i=0;i<sec_list.length;i++){
-            content += ` <option value="${sec_list[i]}">${sec_list[i]}</option>`
-        }
+    if (sec_list.length) {
+      for (i = 0; i < sec_list.length; i++) {
+        content += ` <option value="${sec_list[i]}">${sec_list[i]}</option>`
+      }
     }
-        document.querySelector('.sec-in-form').innerHTML = content
-    }
-
-
-  let messages = document.querySelector('.messages')
-  let error_messages = document.querySelector('.error-messages')
+    document.querySelector('.sec-in-form').innerHTML = content
+  }
+  
   button = document.getElementById('userdetail-btn');
   var host = window.location.protocol + "//" + window.location.host;
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
   let form = document.getElementById('userDetails')
   const container2 = document.querySelector('.container2');
   document.getElementById('nav-students').style.opacity = '0.5';
-    fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
-      method: 'GET',
-      headers: new Headers({
-        'Authorization': 'token' + ' ' + token,
-        'Content-Type': 'application/json',
-      })
-    }).then(res => {
-      return res.json()
-    }).then(data => {
-      data.forEach((d, index) => {
-        if (`${d.user_type}` == 'is_student') {
-          students.push(d)
-        }
+  fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
+    method: 'GET',
+    headers: new Headers({
+      'Authorization': 'token' + ' ' + token,
+      'Content-Type': 'application/json',
+    })
+  }).then(res => {
+    return res.json()
+  }).then(data => {
+    data.forEach((d, index) => {
+      if (`${d.user_type}` == 'is_student') {
+        students.push(d)
+      }
     })
     console.log(students)
     let table2 = `<table class='--user' id='usr'>`;
-      table2 += `<tr class="header">
+    table2 += `<tr class="header">
              <th >Email</th>
              <th >Phone</th>
              <th>RegNo</th>
@@ -244,208 +241,215 @@ let grade_list;
              <th>Standard</th>
              <th id="action" >Action</th>
       </tr>`;
-           console.log(students.length)
-           students.forEach((d, index) => {
-            console.log('to')
-              table2 = table2 + `<tbody><tr id=${d.id}>`;
-              table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
-              table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
-              table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
-              table2 = table2 + '<td class="userfullname">' + `${d.profile?.full_name}` + '</td>';
-              table2 = table2 + '<td class="userfirstname">' + `${d.profile?.first_name}` + '</td>';
-              table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
-              table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
-              table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
-              table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
-              table2 = table2 + '<td>' + ` <i id="edit" data-toggle="modal" data-target="#FormModal" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
-                table2 = table2 + `</tr>`;
-              })
-          table2 += "</table>";
-          container2.innerHTML = table2;
-  })  
+    console.log(students.length)
+    students.forEach((d, index) => {
+      console.log('to')
+      table2 = table2 + `<tbody><tr id=${d.id}>`;
+      table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
+      table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
+      table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
+      table2 = table2 + '<td class="userfullname">' + `${d.profile?.full_name}` + '</td>';
+      table2 = table2 + '<td class="userfirstname">' + `${d.profile?.first_name}` + '</td>';
+      table2 = table2 + '<td class="userlastname">' + `${d.profile?.last_name}` + '</td>';
+      table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
+      table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
+      table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
+      table2 = table2 + '<td>' + ` <i id="edit" data-toggle="modal" data-target="#FormModal" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
+        table2 = table2 + `</tr>`;
+    })
+    table2 += "</table>";
+    container2.innerHTML = table2;
+  })
   function filter() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("student-filter");
     filter = input.value.toLowerCase();
     table = document.getElementById("usr");
     tr = table.getElementsByTagName("tr");
-    
-    for (i = 0; i < tr.length; i++) {
-        // td = tr[i].getElementsByTagName("td")[0];
-        alltags = tr[i].getElementsByTagName("td");
-        isFound = false;
-        for(j=0; j< alltags.length; j++) {
-          td = alltags[j];
-          console.log(td)
-          if (td) {
-              txtValue = td.textContent || td.innerText;
-              console.log(txtValue)
-              if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                  tr[i].style.display = "";
-                  j = alltags.length;
-                  isFound = true;
-              }
-            }       
-          }
-          if(!isFound && tr[i].className !== "header") {
-            tr[i].style.display = "none";
-          }
-        }
-    }
-        function deletestudent(id) {
-          url = "https://schooltestproject.herokuapp.com/api/user-details/"
-          fetch(`${url}${id}/`, {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'token' + ' ' + localStorage.getItem('token')
-            },
-          }).then(res => {
-            userdetails();
-          })
-        }
-        container2.addEventListener('click', (e) => {
-          form_email = document.getElementById('email');
-          form_phone = document.getElementById('phone');
-          form_reg = document.getElementById('reg');
-          form_dob = document.getElementById('dob');
-          form_fname = document.getElementById('fname');
-          form_lname = document.getElementById('lname');
-          form_fullname = document.getElementById('ffname');
-          form_std = document.getElementById('std');
-         // form_sec = document.getElementById('sec');
-          form_ad = document.getElementById('address');
-          button = document.getElementById('userdetail-btn');
-          e.preventDefault();
-          let delbutton = e.target.id == 'delete';
-          let editbutton = e.target.id == 'edit';
-          let id = e.target.parentElement.parentElement.id
-          console.log(id)
-          yes = document.getElementById('yes')
-          no = document.getElementById('no')
-          if (delbutton) {
-            yes.setAttribute("onClick", `deletestudent(${id})`);
-          }
-          if (editbutton) {
-            url = "https://schooltestproject.herokuapp.com/api/user-details/"
-            const parent = e.target.parentElement.parentElement;
-            console.log(parent)
-            let email = parent.querySelector(".useremail").textContent;
-            let phone = parent.querySelector('.userphone').textContent;
-            let reg = parent.querySelector('.userreg').textContent;
-            let dob = parent.querySelector('.userDOB').textContent;
-            let fullname = parent.querySelector('.userfullname').textContent;
-            let lastname = parent.querySelector('.userlastname').textContent;
-            let firstname = parent.querySelector('.userfirstname').textContent;
-            let stdsec=parent.querySelector('.userstandard').textContent;
-            let standard = parseInt(stdsec);
-            let section = stdsec.slice(-1);
-            let address = parent.querySelector('.useraddress').textContent;
-            document.getElementById('exampleModalLabel').innerHTML=fullname
-            document.getElementById('email').value = email
-            document.getElementById('phone').value = phone
-            document.getElementById('reg').value = reg
-            document.getElementById('dob').value = dob
-            document.getElementById('ffname').value = fullname
-            document.getElementById('lname').value = lastname
-            document.getElementById('fname').value = firstname
-            document.getElementById('std').value = standard
-                  let sec_list;
-        content = ''
-        for(i=0;i<grade_list.length;i++){
-            if(grade_list[i].grade==standard){
-                sec_list = grade_list[i].section
-            }
-        }
-        content += ` 
-            <option value="" selected="">---------</option>`
-        if(sec_list.length){
-        for(i=0;i<sec_list.length;i++){
-            content += ` <option value="${sec_list[i]}">${sec_list[i]}</option>`
-        }
-    }
-        document.querySelector('.sec-in-form').innerHTML = content
 
-            document.getElementById('sec').value = section
-            document.getElementById('address').value = address
-            button.addEventListener('click', () => {
-              if (!standards.length) {
-                standard = document.getElementById('std').value
-                section = (document.getElementById('sec').value).toUpperCase()
-                standards.push(standard + '-' + section)
-            }
-              fetch(`${url}${id}/`, {
-                method: 'PATCH',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'token' + ' ' + localStorage.getItem('token'),
-                  'X-CSRFToken': csrftoken
-                },
-                body: JSON.stringify({
-                  'email': form_email.value, 'phone': form_phone.value, 'date_of_birth': form_dob.value, 'register_number': form_reg.value,
-                  'profile': { 'first_name': form_fname.value, 'last_name': form_lname.value, 'standard': standards, 'full_name': form_fullname.value, 'address': form_ad.value }
-                }
-                )
-              }).then(response => {
-                console.log(response)
-                if (response.status == 200) {
-                  error_messages.innerHTML = ''
-                  messages.innerHTML = 'updated successfully'
-                }
-              })
-            })
+    for (i = 0; i < tr.length; i++) {
+      alltags = tr[i].getElementsByTagName("td");
+      isFound = false;
+      for (j = 0; j < alltags.length; j++) {
+        td = alltags[j];
+        console.log(td)
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          console.log(txtValue)
+          if (txtValue.toLowerCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+            j = alltags.length;
+            isFound = true;
+          }
+        }
+      }
+      if (!isFound && tr[i].className !== "header") {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+  function deletestudent(id) {
+    url = "https://schooltestproject.herokuapp.com/api/user-details/"
+    fetch(`${url}${id}/`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'token' + ' ' + localStorage.getItem('token')
+      },
+    }).then(res => {
+      userdetails();
+    })
+  }
+  container2.addEventListener('click', (e) => {
+    
+    form_email = document.getElementById('email');
+    form_phone = document.getElementById('phone');
+    form_reg = document.getElementById('reg');
+    form_dob = document.getElementById('dob');
+    form_fname = document.getElementById('fname');
+    form_lname = document.getElementById('lname');
+    form_fullname = document.getElementById('ffname');
+    form_std = document.getElementById('std');
+    // form_sec = document.getElementById('sec');
+    form_ad = document.getElementById('address');
+    button = document.getElementById('userdetail-btn');
+    e.preventDefault();
+    console.log(e.target.id)
+    let delbutton = e.target.id == 'delete';
+    let editbutton = e.target.id == 'edit';
+    console.log(editbutton)
+    let id = e.target.parentElement.parentElement.id
+    console.log(id)
+    yes = document.getElementById('yes')
+    no = document.getElementById('no')
+    if (delbutton) {
+      yes.setAttribute("onClick", `deletestudent(${id})`);
+    }
+    if (editbutton) {
+      url = "https://schooltestproject.herokuapp.com/api/user-details/"
+      const parent = e.target.parentElement.parentElement;
+      console.log(parent)
+      let email = parent.querySelector(".useremail").textContent;
+      let phone = parent.querySelector('.userphone').textContent;
+      let reg = parent.querySelector('.userreg').textContent;
+      let dob = parent.querySelector('.userDOB').textContent;
+      let fullname = parent.querySelector('.userfullname').textContent;
+      let lastname = parent.querySelector('.userlastname').textContent;
+      let firstname = parent.querySelector('.userfirstname').textContent;
+      let stdsec = parent.querySelector('.userstandard').textContent;
+      let standard = parseInt(stdsec);
+      let section = stdsec.slice(-1);
+      let address = parent.querySelector('.useraddress').textContent;
+      document.getElementById('exampleModalLabel').innerHTML = fullname
+      document.getElementById('email').value = email
+      document.getElementById('phone').value = phone
+      document.getElementById('reg').value = reg
+      document.getElementById('dob').value = dob
+      document.getElementById('ffname').value = fullname
+      document.getElementById('lname').value = lastname
+      document.getElementById('fname').value = firstname
+      document.getElementById('std').value = standard
+      let sec_list;
+      content = ''
+      for (i = 0; i < grade_list.length; i++) {
+        if (grade_list[i].grade == standard) {
+          sec_list = grade_list[i].section
+        }
+      }
+      content += ` 
+            <option value="" selected="">---------</option>`
+      if (sec_list.length) {
+        for (i = 0; i < sec_list.length; i++) {
+          content += ` <option value="${sec_list[i]}">${sec_list[i]}</option>`
+        }
+      }
+      document.querySelector('.sec-in-form').innerHTML = content
+
+      document.getElementById('sec').value = section
+      document.getElementById('address').value = address
+      button.addEventListener('click', () => {
+        if (!standards.length) {
+          standard = document.getElementById('std').value
+          section = (document.getElementById('sec').value).toUpperCase()
+          standards.push(standard + '-' + section)
+        }
+        fetch(`${url}${id}/`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'token' + ' ' + localStorage.getItem('token'),
+            'X-CSRFToken': csrftoken
+          },
+          body: JSON.stringify({
+            'email': form_email.value, 'phone': form_phone.value, 'date_of_birth': form_dob.value, 'register_number': form_reg.value,
+            'profile': { 'first_name': form_fname.value, 'last_name': form_lname.value, 'standard': standards, 'full_name': form_fullname.value, 'address': form_ad.value }
+          }
+          )
+        }).then(response => {
+          console.log(response)
+          if (response.status == 200) {
+            error_messages.innerHTML = ''
+            console.log('updated')
+            messages.innerHTML = 'updated successfully'
+            return response.json()
+          }
+          else {
+            console.log(response)
+            error_messages.innerHTML = `<li>${(data.error[0])}</li>`
+            return
           }
         })
-          var is_dataentry = 'false'
-          button.addEventListener('click', () => {
-            let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-            var email = document.getElementById('email').value
-            var phone = document.getElementById('phone').value
-            var dob = document.getElementById('dob').value
-            var reg = document.getElementById('reg').value
-            var standard = document.getElementById('std').value
-            var section = document.getElementById('sec').value
-            var type = 'is_student'
-            var firstname = document.getElementById('fname').value
-            var lastname = document.getElementById('lname').value
-            var fullname = document.getElementById('ffname').value
-            var address = document.getElementById('address').value
-            var is_dataentry = 'false'
-            if (!standards.length) {
-              standard = document.getElementById('std').value
-              section = (document.getElementById('sec').value).toUpperCase()
-              console.log(standards)
-              standards.push(standard + '-' + section)
+      })
+    }
+    if (!editbutton) {
+      let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      var is_dataentry = 'false'
+      var email = document.getElementById('email').value
+      var phone = document.getElementById('phone').value
+      var dob = document.getElementById('dob').value
+      var reg = document.getElementById('reg').value
+      var standard = document.getElementById('std').value
+      var section = document.getElementById('sec').value
+      var type = 'is_student'
+      var firstname = document.getElementById('fname').value
+      var lastname = document.getElementById('lname').value
+      var fullname = document.getElementById('ffname').value
+      var address = document.getElementById('address').value
+      var is_dataentry = 'false'
+      if (!standards.length) {
+        standard = document.getElementById('std').value
+        section = (document.getElementById('sec').value).toUpperCase()
+        console.log(standards)
+        standards.push(standard + '-' + section)
+      }
+      fetch('https://schooltestproject.herokuapp.com/api/signup/',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
+            'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standards, 'full_name': fullname, 'address': address
           }
-            fetch('https://schooltestproject.herokuapp.com/api/signup/',
-              {
-                method: 'POST',
-                body: JSON.stringify({
-                  'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
-                  'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standards, 'full_name': fullname, 'address': address
-                }
-                ),
-                headers: {
-                  'Content-Type': 'application/json',
-                  'X-CSRFToken': csrftoken
-                  // 'Content-Type': 'application/x-www-form-urlencoded',
-                }
-              }).then(response => {
-                if (response.status == 201) {
-                  console.log("Sucess response", response)
-                  error_messages.innerHTML = ''
-                  messages.innerHTML = 'created successfully'
-                }
-                return response.json();
-              }).then(function (data) {
-                if (data.status != 'success') {
-                  console.log(data)
-                  messages.innerHTML = ''
-                  error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+          ),
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          }
+        }).then(response => {
+          if (response.status == 200) {
+            error_messages.innerHTML = ''
+            messages.innerHTML = 'Created successfully'
+          }
+          else {
+            error_messages.innerHTML = `<li>${(data.error[0])}</li>`
+          }
+          return response.json();
+        }).then(function (data) {
+          console.log(data)
+        })
+    }
+  })
 
-                }
-              })
-          })
-        
+
 </script>
 {% endblock %}

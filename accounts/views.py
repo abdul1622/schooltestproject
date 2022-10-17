@@ -143,11 +143,8 @@ class StudentProfileView(RetrieveUpdateAPIView):
 
 
 class UserDetailsView(ListAPIView):
-
     serializer_class=UserDetailsSerializer
     permission_classes=[AllowAny]
-
-
     def get_queryset(self):
         standard = self.request.query_params.get('standard')
         user_type =(self.request.query_params.get('user_type'))

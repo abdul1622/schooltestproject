@@ -130,7 +130,7 @@
       </div>
       <div class="modal-footer">
         <span class="create-btn-container"> <button type="button" id="userdetail-btn"
-          class="btn btn-primary">Submit</button></span>
+          class="btn btn-primary"  data-target="#messageModal-staff">Submit</button></span>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
       </div>
     </div>
@@ -443,16 +443,9 @@ function edit(index,id){
           } )
         }).then(response => {
           if (response.status == 200) {
-            error_messages.innerHTML = ''
-            console.log(messages)
-            console.log("Sucess response", response)
-            document.querySelector('#SFormModal').classList.remove('show');
-            document.querySelector('body').classList.remove('modal-open');
-            const mdbackdrop = document.querySelector('.modal-backdrop');
-            if (mdbackdrop){
-              mdbackdrop.classList.remove('modal-backdrop', 'show');
+            error_messages.innerHTML=''
               messages.innerHTML = `<li>${'updated successfully '}</li>`
-            }
+            
           }
           
           else {
