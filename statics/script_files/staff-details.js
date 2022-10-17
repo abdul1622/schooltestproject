@@ -157,7 +157,7 @@ function std(id, index, flag) {
   }
 }
 function edit(index, id) {
-  userid=id
+  document.getElementById('userdetail-btn').id='update'
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
   tr = document.querySelectorAll('.list')[index]
   let email = tr.querySelector(".useremail").textContent;
@@ -179,7 +179,7 @@ function edit(index, id) {
   form_std = document.getElementById('std');
   form_sec = document.getElementById('sec');
   form_ad = document.getElementById('address');
-  button = document.getElementById('userdetail-btn');
+  button = document.getElementById('update');
   if ((tr.querySelector('.userstandard').id).split(',').length) {
     standards = tr.querySelector('.userstandard').id.split(',');
     console.log(standards)
