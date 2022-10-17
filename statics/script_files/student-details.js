@@ -2,7 +2,6 @@ let user, standards = [];
 let students=[];
 let content = '';
 let grade_list;
-
 let token = localStorage.getItem("token")
 $(document).ready(function(){ 
   if(!token){
@@ -16,9 +15,7 @@ $(document).ready(function(){
 function reload() {
   window.location.href = window.location.href;
 }
-$('#FormModal').on('hidden.bs.modal', function () {
-  $(this).find('form').trigger('reset');
-})
+
 fetch('https://schooltestproject.herokuapp.com/api/grades/', {
           method: 'GET',
           headers: new Headers({
@@ -70,7 +67,6 @@ button = document.getElementById('userdetail-btn');
 var host = window.location.protocol + "//" + window.location.host;
 let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 let form = document.getElementById('userDetails')
-const container2 = document.querySelector('.container2');
 document.getElementById('nav-students').style.opacity = '0.5';
   fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
     method: 'GET',
