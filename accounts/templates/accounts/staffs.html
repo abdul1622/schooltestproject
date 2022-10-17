@@ -1,6 +1,7 @@
 {% extends 'base.html'%}
 {% block users %}
-
+{% load static %}
+<!-- delete confirm message -->
 <div class="modal fade" id="delete-staff-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -29,7 +30,8 @@
   </div>
 
 </div>
-<div class="modal fade" id="messageModal-staff"  role="dialog" aria-labelledby="exampleModalLabel"
+<!-- message dropdown -->
+<div class="modal fade" id="messageModal-staff" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -143,8 +145,10 @@
   <button data-toggle="modal" data-target="#SFormModal" id="addstaff" >Add Staff</button>
 </div>
 <div class="details"></div>
+<!-- list staff user details -->
 <div class="container2"></div>
 
+<<<<<<< HEAD
 <script>
   let stdsec;
   let user, standards = [];
@@ -558,4 +562,8 @@ if(!flag){
     }
   })
 </script>
+=======
+<script src="{% static 'script_files/staff-details.js' %}" type="text/javascript"></script>
+<script src="{% static 'script_files/staff-edit.js' %}" type="text/javascript"></script>
+>>>>>>> 55c9362e1edea5e3b2cb6ea79974d5120eb2d594
 {% endblock %}
