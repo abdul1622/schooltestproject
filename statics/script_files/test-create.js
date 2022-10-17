@@ -243,11 +243,10 @@
   }
 
   function edit_question_paper(id, timing, overall_marks) {
-    document.querySelector('.modal-body-2').innerHTML = `<p><label for="id_timing">Timing:</label> <input type="number" name="timing"           placeholder="duration in seconds" min="0" required="" id="id_timing"></p>
-          <p><label for="id_overallmarks">Overallmarks:</label> <input type="number" name="overallmarks" min="0"
+    document.querySelector('.modal-body-2').innerHTML = `<p><label for="id_timing">Timing:</label> <input type="number" name="timing"
+    placeholder="duration in seconds" min="0" required="" value='${parseInt(timing)}' id="id_timing"></p>
+          <p><label for="id_overallmarks">Overallmarks:</label> <input type="number" value='${overall_marks}' name="overallmarks" min="0"
               required="" id="id_overallmarks"></p>`
-    document.getElementById('id_timing').value = timing
-    document.getElementById('id_overallmarks').value = overall_marks
     document.querySelector('.question-edit-btn-container').innerHTML = `<button type="button" id="questionpaper-edit-btn"
               class="btn btn-primary" onclick=question_paper_update(${id})>Update</button>`
   }
