@@ -1,4 +1,5 @@
-  var userId = localStorage.getItem('id')
+
+    var userId = localStorage.getItem('id')
   var grade_name;
   var token = localStorage.getItem('token')
   let head = document.querySelector('.header')
@@ -119,7 +120,7 @@
             <button onclick=edit_question_paper(${d.id},${d.timing},${d.overall_marks}) class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editquestion-paper">Edit</button>
             `
           } else {
-            content += `<button type="button" onclick=test_create(${d.id}) class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+            content += `<button type="button" onclick=test_create(${d.id},${d.timing},${d.overall_marks}) class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
   Create-Test
 </button> <button onclick=edit_question_paper(${d.id},${d.timing},${d.overall_marks}) class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editquestion-paper">Edit</button>`
           }
@@ -164,19 +165,22 @@
       }
     });
 
-  });
-
-  function test_create(id) {
+  });  
+  function test_create(id,timing,overall_marks) {
     let create_btn_container = document.querySelector('.create-btn-container')
-    modal_body.innerHTML = `          {% csrf_token %}
-          {{ test_form.as_p }}`
+    modal_body.innerHTML = `         <input type="hidden" name="csrfmiddlewaretoken" value="KoFDB9Il5yZuuRnJZE4TsclCWZa1kX4j2UqN5ADQDHxGELrWWdy1E1mOMtEPH9uN">
+          <p><label for="id_timing">Timing:</label> <input type="number" value=${timing} name="timing" placeholder="duration in seconds" min="0" required="" id="id_timing"></p>
+<p><label for="id_overall_marks">Overall marks:</label> <input type="number" value=${overall_marks} name="overall_marks" min="0" required="" id="id_overall_marks"></p>
+<p><label for="id_remarks">Remarks:</label> <input type="text" name="remarks" maxlength="25" required="" id="id_remarks"></p>
+<p><label for="id_description">Description:</label> <input type="text" name="description" maxlength="50" required="" id="id_description"></p>
+<p><label for="id_pass_percentage">Pass percentage:</label> <input type="number" name="pass_percentage" value="35" min="0" required="" id="id_pass_percentage"></p>`
     create_btn_container.innerHTML = `<button type="button" id="test-create-btn" onclick=create(${id}) class="btn btn-primary ">Create</button>`
     document.getElementById('test-create-btn').style.display = 'block'
   }
 
   // user_id, user_type = get_user_id();
   function create(question_id) {
-    var grade = document.getElementById('id_grade').value
+    var grade = document.getElementById('get_grade').value
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     // let form_duration = document.getElementById('id_duration').value
     //   let form_marks = document.getElementById('id_marks').value
@@ -243,18 +247,23 @@
   }
 
   function edit_question_paper(id, timing, overall_marks) {
-    document.querySelector('.modal-body-2').innerHTML = `<p><label for="id_timing">Timing:</label> <input type="number" name="timing"
-    placeholder="duration in seconds" min="0" required="" value='${parseInt(timing)}' id="id_timing"></p>
-          <p><label for="id_overallmarks">Overallmarks:</label> <input type="number" value='${overall_marks}' name="overallmarks" min="0"
-              required="" id="id_overallmarks"></p>`
+
+    document.querySelector('.modal-body-2').innerHTML = `<p><label for="id_timing">Timing <small>in sections</small>:</label> <input type="number" name="timing" 
+ required min="0" value=${timing} id="id_timings"></p>
+          <p><label for="id_overallmarks">Overallmarks:</label> <input type="number" name="overallmarks" min="0"
+              required="" value=${overall_marks} id="id_overallmarks"></p>`
+    // document.getElementById('id_timing').value = timing
+    // document.getElementById('id_overallmarks').value = overall_marks
     document.querySelector('.question-edit-btn-container').innerHTML = `<button type="button" id="questionpaper-edit-btn"
               class="btn btn-primary" onclick=question_paper_update(${id})>Update</button>`
   }
 
 
   function question_paper_update(id) {
-    let timing = document.getElementById('id_timing').value
+    console.log(document.getElementById('id_timings'))
+    let timing = parseInt(document.getElementById('id_timings').value)
     let overall_marks = document.getElementById('id_overallmarks').value
+    console.log(timing,overall_marks)
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     let modal2 =   document.querySelector('.modal-body-2')
     fetch(`https://schooltestproject.herokuapp.com/api/question-paper/${id}/`,

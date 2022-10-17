@@ -4,6 +4,7 @@ from operator import truediv
 from os import stat
 import json
 from itertools import chain
+from pickle import TRUE
 from re import sub
 from matplotlib import test
 from rest_framework.generics import (
@@ -639,9 +640,17 @@ class QuestionFromQuestionPaper(APIView):
         question_paper = Question_Paper.objects.get(id=question_paper_id)
         question_list = question_paper.no_of_questions
         data = []
+        change = False
         for i in question_list:
-            queryset = Question.objects.get(id=int(i))
-            data.append((QuestionAnswerSerializer(queryset)).data)
+            try:
+                queryset = Question.objects.get(id=int(i))
+                data.append((QuestionAnswerSerializer(queryset)).data)
+            except:
+                question_list.remove(i)
+                change = True
+        if change:
+            question_paper.no_of_questions = question_list
+            question_paper.save()
         return Response(data)
 
 
