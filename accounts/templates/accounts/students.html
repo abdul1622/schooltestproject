@@ -1,6 +1,7 @@
 {% extends 'base.html'%}
 {% block userd %}
-
+{% load static %}
+<!-- delete student -->
 <div class="modal fade" id="delete-user-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -27,7 +28,7 @@
     </div>
   </div>
 </div>
-
+<!-- message -->
 <div class="modal fade" id="messageModal-student" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -134,12 +135,15 @@
 </div>
 <!-- end  -->
 
+<!-- filter -->
 <button id="add" data-toggle="modal" data-target="#FormModal">Add Student</button>
 <div class="sort-input">
   <input type="text" id="student-filter" placeholder="search" min="0" max="12" onkeyup="filter()">
 </div>
+<!-- student details -->
 <div class="container2"></div>
 
+<<<<<<< HEAD
 <script>
   let user, standards = [];
   let students = [];
@@ -452,4 +456,9 @@
 
 
 </script>
+=======
+<script src="{% static 'script_files/student-edit.js' %}" type="text/javascript"></script>
+<script src="{% static 'script_files/student-details.js' %}" type="text/javascript"></script>
+
+>>>>>>> 9574fac1a43a00e3b20dd5ee7981b2246d49a8e6
 {% endblock %}

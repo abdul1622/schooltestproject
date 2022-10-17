@@ -1,0 +1,270 @@
+@media screen and (min-width:1024px) and (max-width:1200px) {
+    .grid-item select {
+        padding: 8px;
+        width: 20vw;
+        color: black;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+    }
+
+    .grid-item input[type=text] {
+        width: 27vh;
+        margin-bottom: -7px;
+        color: black;
+        font-size: 15px;
+        border: none;
+        margin-top: 0vh;
+    }
+    #question-box {
+        margin-left: 34vw;
+        background-color: #b2c8df;
+        width: 32vw;
+        height: 32vh;
+        padding: 3vh;
+        border-radius: 9px;
+        margin-top: -3vh;
+    }
+    #QForm-modal-content {
+        width: 203%;
+        background-color: #b2c8df;
+        padding: 2% 5%;
+        margin-left: -50%;
+    }
+    .question_create {
+        display: none;
+        grid-template-columns: auto auto auto;
+        padding: 2vh;
+        width: 80vw;
+        height: 47vh;
+        grid-gap: 0.5vw;
+        background-color: #b2c8df;
+        margin-left: 8.5vw;
+        margin-top: 6vh;
+        position: fixed;
+        z-index: 1;
+    }
+
+    .question_create .back-btn {
+        margin-left: 76vw;
+        color: black;
+        height: 0;
+        margin-top: 2vh;
+        background-color: transparent;
+        font-size: 1.5vw;
+        outline: none;
+        position: absolute;
+    }
+
+ 
+
+    .question-card {
+        margin-top: 1vh;
+        font-size: 15px;
+        width: 84%;
+        padding: 25px;
+        background-color: #5c7aea;
+        border-radius: 5px;
+        box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+    }
+
+    .question-list fieldset {
+        grid-template-columns: auto auto auto;
+    }
+
+    .question-card p {
+        color: rgba(0, 0, 0, 0.753);
+        width: 199px;
+        display: block;
+        font-weight: bold;
+        font-size: 1.2vw;
+    }
+
+    .questionlist {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 1%;
+        column-gap: 0vh;
+        margin-top: -1170px;
+        margin-left: -116px;
+    }
+
+    .question-card p:nth-child(8),
+    .question-card p:nth-child(9),
+    .question-card p:nth-child(10),
+    .question-card p:nth-child(11),
+    .question-card p:nth-child(12) {
+        margin-left: 20vw;
+    }
+
+    .question-list .question-card:nth-child(even) {
+        margin-left: 1vh;
+        width: 85%;
+    }
+
+    #--question {
+        display: block;
+        color: #14279b;
+        /* margin-left: 38vw; */
+        outline: 1px solid;
+        background: transparent;
+        margin-bottom: 0;
+        margin-top: 2vh;
+    }
+
+    .question_create {
+        display: none;
+    }
+
+    .question_create label {
+        font-size: 1.2vw;
+    }
+
+
+    #questionForm {
+        display: none;
+    }
+
+}
+@media screen and (min-width:1359px) and (max-width:1450px) {
+    .grid-item {
+        font-size: 10px;
+    }
+    #question-box {
+        /* margin-left: 3vw; */
+        background-color: #b2c8df;
+        width: 21%;
+        margin: 1% 39%;
+        height: 36vh;
+        padding: 3vh;
+        border-radius: 9px;
+
+    }
+    form.questionanswer{
+        grid-template-columns: auto auto auto;
+    }
+    #question-box button {
+        border: none;
+        border-radius: 5px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 15px;
+        font-weight: 800;
+        margin-top: 1vh;
+        /* margin-left: 5vw; */
+    }
+    .question-card {
+        margin-left: -1vh;
+        margin-top: 1vh;
+        font-size: 15px;
+        width: 87%;
+        padding: 25px;
+        background-color: #5c7aea;
+        border-radius: 5px;
+        box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+    }
+
+.question-card {
+    margin-left: 17vh;
+    margin-top: 1vh;
+    font-size: 15px;
+    width: 64%;
+    padding: 25px;
+    background-color: #5c7aea;
+    border-radius: 5px;
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+}
+
+.question-card p {
+    color: rgba(0, 0, 0, 0.753);
+    width: 199px;
+    display: block;
+    font-weight: bold;
+    font-size: 1.2vw;
+}
+.question-list #delete {
+    margin-left: auto;
+}
+
+.question-list #edit {
+    margin-left: 3%;
+    border-radius: 5px;
+}
+
+.question-card p:nth-child(8),
+.question-card p:nth-child(9),
+.question-card p:nth-child(10),
+.question-card p:nth-child(11),
+.question-card p:nth-child(12) {
+    margin-left: 20vw;
+}
+
+#--question {
+    display: block;
+    color: #14279b;
+    margin-left: 4vw;
+    outline: 1px solid;
+    background: transparent;
+    margin-bottom: 2vh;
+    margin-top: 1vh;
+}
+
+.question_create {
+    display: none;
+}
+
+.question_create {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 4vh;
+    width: 64vw;
+    height: 53vh;
+    background-color: #b2c8df;
+    margin-left: 20vw;
+    margin-top: 5vh;
+    z-index: 4;
+    position: fixed;
+}
+
+
+
+.question-btn {
+    width: 12vh;
+    height: 31px;
+    margin-top: -1vh;
+    margin-left: 52vw;
+    margin-bottom: 17px;
+    background-color: #b2c8df;
+    color: #14279b;
+    border: 1px solid #14279b;
+    position: absolute;
+}
+.question-list #delete {
+    margin-left: 6%;
+}
+.question-list fieldset {
+    grid-template-columns: auto auto auto;
+}
+#QForm-modal-content {
+    
+    margin-left: -64%;
+}
+.question_create label {
+    font-size: 1vw;
+    margin-bottom: 0.2vh;
+}
+
+input[type=text] {
+    padding: 5px;
+    width: 250px;
+    margin-bottom: -7px;
+    color: black;
+    font-size: 15px;
+    border: none;
+}
+
+#questionForm {
+    display: none;
+}
+
+
+}
