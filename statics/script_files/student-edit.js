@@ -138,6 +138,10 @@ function filter() {
                     mdbackdrop.classList.remove('modal-backdrop', 'show');
                     messages.innerHTML = 'updated successfully'
                     $('#messageModal-student').modal('show')
+                    setTimeout(function () {
+                      $('#messageModal-student').modal('hide')
+                      window.location.reload();
+                   }, 2000);
                   }
                   error_messages.innerHTML = ''
                   return response.json();
@@ -191,6 +195,10 @@ button.addEventListener('click', (e) => {
             mdbackdrop.classList.remove('modal-backdrop', 'show');
             messages.innerHTML = 'created successfully'
             $('#messageModal-student').modal('show')
+            setTimeout(function () {
+              $('#messageModal-student').modal('hide')
+              window.location.reload();
+           }, 2000);
             return response.json()
           }
           error_messages.innerHTML = ''

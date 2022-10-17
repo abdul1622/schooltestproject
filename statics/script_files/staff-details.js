@@ -35,6 +35,9 @@ $('[data-dismiss=modal]').on('click', function (e) {
   if (document.querySelector('.inner')) {
     document.querySelector('.inner').innerHTML = ''
   }
+  if (document.getElementById('update')) {
+    document.getElementById('update').id='userdetail-btn'
+  }
 
 
 })
@@ -157,7 +160,7 @@ function std(id, index, flag) {
   }
 }
 function edit(index, id) {
-  document.getElementById('userdetail-btn').id='update'
+  document.getElementById('userdetail-btn').id ='update'
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
   tr = document.querySelectorAll('.list')[index]
   let email = tr.querySelector(".useremail").textContent;
@@ -316,6 +319,10 @@ button.addEventListener('click', () => {
             mdbackdrop.classList.remove('modal-backdrop', 'show');
             messages.innerHTML = 'created successfully'
             $('#messageModal-staff').modal('show')
+            setTimeout(function () {
+              $('#messageModal-staff').modal('hide')
+              window.location.reload();
+           }, 2000);
           }
           error_messages.innerHTML = `<li>${(data.data.error[0])}</li>`
           messages.innerHTML = ''
