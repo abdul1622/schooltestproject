@@ -9,6 +9,7 @@
             return window.location.href = '/404';
         }
     })
+
     // variable
     var token = localStorage.getItem('token')
     let user_type = localStorage.getItem('user_type')

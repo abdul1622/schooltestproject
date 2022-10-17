@@ -10,6 +10,8 @@ let grade_list
 let grade_name;
 let grade;
 let subject;
+
+
 $('[data-dismiss=modal]').on('click', function (e) {
   var $t = $(this),
       target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];

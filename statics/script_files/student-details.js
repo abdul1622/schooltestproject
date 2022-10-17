@@ -168,6 +168,7 @@ container2.addEventListener('click', (e) => {
       document.getElementById('std').value = standard
             let sec_list;
   content = ''
+  
   for(i=0;i<grade_list.length;i++){
       if(grade_list[i].grade==standard){
           sec_list = grade_list[i].section
@@ -175,7 +176,7 @@ container2.addEventListener('click', (e) => {
   }
   content += ` 
       <option value="" selected="">---------</option>`
-  if(sec_list.length){
+  if(sec_list && sec_list.length){
   for(i=0;i<sec_list.length;i++){
       content += ` <option value="${sec_list[i]}">${sec_list[i]}</option>`
   }
@@ -207,6 +208,8 @@ container2.addEventListener('click', (e) => {
           if (response.status == 200) {
             error_messages.innerHTML = ''
             messages.innerHTML = 'updated successfully'
+            $("#messageModal-student").modal("show")
+            $("#FormModal").modal("hide")
           }
         })
       })
@@ -257,7 +260,6 @@ container2.addEventListener('click', (e) => {
             console.log(data)
             messages.innerHTML = ''
             error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-  
           }
           
         })

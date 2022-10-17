@@ -11,6 +11,7 @@ let content = ''
 let grade_list = []
 document.getElementById('nav-profile').style.opacity = '0.5';
 
+
 // user check
 $(document).ready(function () {
   if (!token) {
