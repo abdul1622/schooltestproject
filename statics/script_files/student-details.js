@@ -211,55 +211,56 @@ container2.addEventListener('click', (e) => {
         })
       })
     }
+    if (!editbutton) {
+      let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      var is_dataentry = 'false'
+      var email = document.getElementById('email').value
+      var phone = document.getElementById('phone').value
+      var dob = document.getElementById('dob').value
+      var reg = document.getElementById('reg').value
+      var standard = document.getElementById('std').value
+      var section = document.getElementById('sec').value
+      var type = 'is_student'
+      var firstname = document.getElementById('fname').value
+      var lastname = document.getElementById('lname').value
+      var fullname = document.getElementById('ffname').value
+      var address = document.getElementById('address').value
+      var is_dataentry = 'false'
+      if (!standards.length) {
+        standard = document.getElementById('std').value
+        section = (document.getElementById('sec').value).toUpperCase()
+        console.log(standards)
+        standards.push(standard + '-' + section)
+      }
+      fetch('https://schooltestproject.herokuapp.com/api/signup/',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
+            'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standards, 'full_name': fullname, 'address': address
+          }
+          ),
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          }
+        }).then(response => {
+          if (response.status == 201) {
+            console.log("Sucess response", response)
+            error_messages.innerHTML = ''
+            messages.innerHTML = 'created successfully'
+          }
+          return response.json();
+        }).then(function (data) {
+          if (data.status != 'success') {
+            console.log(data)
+            messages.innerHTML = ''
+            error_messages.innerHTML = `<li>${(data.data.error)}</li>`
+  
+          }
+          
+        })
+    }
   })
 
-  var is_dataentry = 'false'
-  button.addEventListener('click', () => {
-    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    var email = document.getElementById('email').value
-    var phone = document.getElementById('phone').value
-    var dob = document.getElementById('dob').value
-    var reg = document.getElementById('reg').value
-    var standard = document.getElementById('std').value
-    var section = document.getElementById('sec').value
-    var type = 'is_student'
-    var firstname = document.getElementById('fname').value
-    var lastname = document.getElementById('lname').value
-    var fullname = document.getElementById('ffname').value
-    var address = document.getElementById('address').value
-    var is_dataentry = 'false'
-    if (!standards.length) {
-      standard = document.getElementById('std').value
-      section = (document.getElementById('sec').value).toUpperCase()
-      console.log(standards)
-      standards.push(standard + '-' + section)
-  }
-    fetch('https://schooltestproject.herokuapp.com/api/signup/',
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
-          'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standards, 'full_name': fullname, 'address': address
-        }
-        ),
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrftoken
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        }
-      }).then(response => {
-        if (response.status == 201) {
-          console.log("Sucess response", response)
-          error_messages.innerHTML = ''
-          messages.innerHTML = 'created successfully'
-        }
-        return response.json();
-      }).then(function (data) {
-        if (data.status != 'success') {
-          console.log(data)
-          messages.innerHTML = ''
-          error_messages.innerHTML = `<li>${(data.data.error)}</li>`
-
-        }
-      })
-  })
