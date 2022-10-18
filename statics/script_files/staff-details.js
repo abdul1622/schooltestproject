@@ -247,14 +247,13 @@ function edit(index, id) {
           document.querySelector('body').classList.remove('modal-open');
           const mdbackdrop = document.querySelector('.modal-backdrop');
           if (mdbackdrop) {
-            document.getElementById('update').id='usr'
             mdbackdrop.classList.remove('modal-backdrop', 'show');
             messages.innerHTML = 'updated successfully'
-            $('#messageModal-student').modal('show')
-          /*setTimeout(function () {
+            $('#messageModal-staff').modal('show')
+            setTimeout(function () {
               $('#messageModal-staff').modal('hide')
               window.location.reload();
-           }, 2000);*/
+            }, 2000); 
           }
           error_messages.innerHTML = ''
           return response.json();
