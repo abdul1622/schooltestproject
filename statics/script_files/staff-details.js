@@ -6,7 +6,6 @@ let userid;
   let grade_list;
   let content = ''
   let token = localStorage.getItem("token")
-  document.getElementById('nav-staffs').style.opacity = '0.5';
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
   add = document.getElementById('addstaff')
@@ -22,6 +21,7 @@ $(document).ready(function () {
   if (user != 'is_admin') {
     return window.location.href = '/404';
   }
+  document.getElementById('nav-staffs').style.opacity = '0.5';
 })
 $('[data-dismiss=modal]').on('click', function (e) {
   var $t = $(this),
@@ -83,7 +83,6 @@ function getsectionname(element) {
   }
   document.querySelector('.sec-in-form').innerHTML = content
 }
-document.getElementById('nav-staffs').style.opacity = '0.5';
 add = document.getElementById('addstaff')
 button = document.getElementById('userdetail-btn');
 var host = window.location.protocol + "//" + window.location.host;

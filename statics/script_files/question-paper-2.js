@@ -2,11 +2,8 @@
     function get_customize() {
         document.getElementById('q-form').style.display = 'none'
         customize = true
-        // document.getElementById('q-form-1').style.display = 'none';
-        // document.getElementById('q-form-2').style.display = 'none';
-        // document.getElementById('q-form-3').style.display = 'none';
         document.getElementById('q-form-4').style.display = 'block';
-        // document.getElementById('q-form-5').style.display = 'block';
+         document.getElementById('q-form-5').style.display = 'block';
         console.log('back', subject_id)
         var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
         $.ajax({
@@ -24,27 +21,6 @@
         document.querySelector('.back-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Back</button>`
         console.log(result)
     }
-
-    // function add() {
-    //     let chapter_id = parseInt(document.getElementById('id_chapter_get').value)
-    //     let list = []
-    //     for(i=0;i<question_per_chapter.length;i++){
-    //     console.log(document.getElementById(`question_${question_per_chapter[i]}`))
-    //     if(document.getElementById(`question_${question_per_chapter[i]}`).checked){
-    //         list.push(question_per_chapter[i])
-    //     }
-    // }
-    // console.log(list)
-    // for(i=0;i<question_per_chapter_get.length;i++){
-    //     if(question_per_chapter_get[i].key == chapter_id){
-    //         question_per_chapter_get[i].value = list
-    //     }
-    // }
-    //     // question_per_chapter_get[`${chapter_id}`] = list
-    // console.log(question_per_chapter_res)
-
-    // }
-
     function with_customize() {
         document.getElementById('q-form').style.display = 'block'
         custom_end = true

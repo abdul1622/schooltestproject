@@ -3,7 +3,7 @@ var subjectId,gradeId,testId,content='',data2;
 let container = document.querySelector('.history-container')
 let current_details,student_details;
 let grade_name;
-document.getElementById('nav-studenttesthistory').style.opacity = '0.5';
+
 $(document).ready(function(){ 
  if(!token){
 return window.location.href = '/login';
@@ -12,6 +12,7 @@ return window.location.href = '/login';
  if (user == 'is_student'){
   return window.location.href = '/404'; 
  }
+ document.getElementById('nav-studenttesthistory').style.opacity = '0.5';
 })
 let element = document.getElementById('id_test')
  let grade_element = document.getElementById('id_grade')

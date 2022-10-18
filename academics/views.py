@@ -199,38 +199,6 @@ class ChapterEditView(RetrieveUpdateDestroyAPIView):
             return Response({"status": "success", 'data': serializer.data}, status=HTTP_200_OK)
         return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
- # class ChapterListView(APIView):
-#     serializer_class=ChapterViewSerializer
-#     permission_classes=[AllowAny]
-
-#     def post(self,request):
-#         grade = request.data.get('grade')
-#         subject=(request.data.get('subject')).upper()
-#         try:
-#             if subject:
-#                 data = []
-#                grade = Grade.objects.get(grade=grade)
-#                 subject = Subject.objects.get(name=subject,grade=grade.grade)
-#                 chapters = Chapter.objects.filter(subject=subject)
-#                 for object in chapters:
-#                     data.append( {
-#                     "subject" : subject.name,
-#                     "grade" :subject.grade.grade,
-#                     "name": object.name,
-#                     "chapter_no": object.chapter_no,
-#                     "description": object.description,
-#                     })
-#                 host = request.get_host()
-#                 context = {'data':data}
-#                 filename,status = render_to_pdf('academics/chapter.html','chapter_files',context)
-#                 if not status:
-#                     return Response({'status':'given details incorrect'},status=HTTP_206_PARTIAL_CONTENT)
-
-#                 return Response({'path':f'/media/chapter_files/{filename}.pdf'})
-#         except:
-#             return Response({"status": "Not found"}, status=HTTP_206_PARTIAL_CONTENT)
-#         return Response({"status": "failed"}, status=HTTP_206_PARTIAL_CONTENT)
-
 
 class ChapterListView(APIView):
     serializer_class = ChapterViewSerializer

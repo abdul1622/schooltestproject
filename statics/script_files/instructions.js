@@ -1,7 +1,7 @@
 
     var token = localStorage.getItem('token')
     var host = window.location.protocol + "//" + window.location.host;
-    document.getElementById('nav-instruction').style.opacity = '0.5';
+   
     $(document).ready(function(){ 
       if(!token){
       return window.location.href = '/login';
@@ -10,6 +10,7 @@
       if (user == 'is_student'){
        return window.location.href = '/404'; 
       }
+      document.getElementById('nav-instruction').style.opacity = '0.5';
     })
     function createinstruction() {
        var instruction = document.getElementById('id_instruction').value

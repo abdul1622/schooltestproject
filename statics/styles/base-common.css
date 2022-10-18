@@ -1,3 +1,7 @@
+.navbar li a:focus {
+    color: cornflowerblue;
+}
+
 .gradient-custom {
     /* fallback for old browsers */
     background: #f6d365;
@@ -8,6 +12,7 @@
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
 }
+
 .back-btn-nav {
     display: none;
 }
@@ -73,6 +78,7 @@
     color: black;
     text-decoration: none;
 }
+
 #create {
     color: #343a40;
     margin-left: 100px;
@@ -85,6 +91,7 @@
 .id_grade {
     font-size: 15px;
 }
+
 .delete {
     border: none;
     border-radius: 2px;
@@ -101,6 +108,7 @@
     padding: 10px;
     text-decoration: none;
 }
+
 .delete a:hover {
     color: black;
     text-decoration: none;
@@ -116,23 +124,27 @@
     font-size: 20px;
     color: white;
     background-color: #343a40;
-}  
-        .download a {
-            padding-left: 0;
-            text-decoration: underline;
-            color: white;
-        }
+}
+
+.download a {
+    padding-left: 0;
+    text-decoration: underline;
+    color: white;
+}
+
 .navbar-brand {
     padding: 12px;
     color: black;
     font-weight: 500px;
     font-size: 18px;
 }
+
 .container {
     width: 100%;
     padding-top: 60px;
     padding-bottom: 100px;
 }
+
 .frame {
     height: 425px;
     width: 430px;
@@ -149,13 +161,16 @@
     padding-left: 60px;
     margin-top: 200px;
 }
+
 .text-center {
     text-align: center !important;
     font-family: cinzel;
 }
+
 .container3 {
     margin-top: 175px;
 }
+
 .back-btn {
     margin-left: 0;
 }
@@ -165,12 +180,15 @@
     font-size: 16px;
     background-color: #b2c8df;
 }
-.grid-item-button{
+
+.grid-item-button {
     margin-top: 9%;
 }
+
 .delete-box h4 {
     font-size: 192%;
 }
+
 i#back-btn {
     padding: 1%;
     cursor: pointer;
@@ -193,6 +211,7 @@ i#back-btn {
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 }
+
 .chapter-btns {
     display: flex;
     justify-content: space-around;
@@ -212,9 +231,11 @@ i#back-btn {
     color: white;
     border: 1px solid white;
 }
+
 .modal-body {
     text-align: center;
 }
+
 #edit {
     padding: 5px 15px;
     margin-left: -1vw;
@@ -231,6 +252,7 @@ i#back-btn {
     color: #900202;
     font-size: 150%;
 }
+
 .modal-content label {
     width: 30%;
     white-space: nowrap;
@@ -239,6 +261,7 @@ i#back-btn {
 .modal-title span {
     font-size: 20px;
 }
+
 .cards {
     margin-bottom: 2%;
 }
@@ -246,16 +269,19 @@ i#back-btn {
 element.style {
     display: block;
 }
+
 .modal-content {
     width: 200%;
     margin-left: -34%;
     padding: 2% 5%;
     background-color: #b2c8df;
 }
+
 .success {
     color: white;
     font-size: 15px;
 }
+
 input#id_section {
     width: 20%;
 }
@@ -271,6 +297,7 @@ p.section-btn {
 p.section-btn {
     margin: 5% 14%;
 }
+
 form.userDetails input {
     width: 90%;
 }

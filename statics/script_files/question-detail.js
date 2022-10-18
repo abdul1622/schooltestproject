@@ -30,13 +30,17 @@ function getgradename(element) {
 }
 
 $(document).ready(function () {
+  
   if (!token) {
     return window.location.href = '/login';
+   
   }
   var user = localStorage.getItem('user_type')
   if (user == 'is_student') {
     return window.location.href = '/404';
   }
+document.getElementById('nav-question').style.opacity = '0.5';
+
 })
 function back() {
   document.getElementById('questionForm').style.display = 'none'
@@ -62,7 +66,6 @@ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
   grade_list = data.data
   console.log(data.data)
   if (data.status == 'failure') {
-    window.location.href = `${host}/404`
   }
   if (grade_list.length == 1) {
     grade = grade_list[0].id
@@ -96,7 +99,6 @@ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
 
 
 
-document.getElementById('nav-question').style.opacity = '0.5';
 document.getElementById('message-close-btn').addEventListener('click', () => {
   messages.innerHTML = '';
   error_messages.innerHTML = '';

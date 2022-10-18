@@ -4,6 +4,8 @@
     if (user != 'is_student' || !token){
      return window.location.href = '/404'; 
     }
+ document.getElementById('nav-testhistory').style.opacity = '0.5';
+
   })
   var student_id = localStorage.getItem('id')
   var token = localStorage.getItem('token')
@@ -13,7 +15,6 @@
   let content = ''
   let result = [],test_content= ''
   let list;
-  document.getElementById('nav-testhistory').style.opacity = '0.5';
   url = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
   url.searchParams.append('grade', standard[0]);
   url.searchParams.append('student_id', student_id)

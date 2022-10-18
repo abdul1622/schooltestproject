@@ -24,9 +24,9 @@
         crossorigin="anonymous"></script>
 
     <link href="https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
-<!-- drag -->
+    <!-- drag -->
     <!-- ✅ load jQuery ✅ -->
-<!-- drag -->
+    <!-- drag -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,50 +79,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="back-btn-nav">
-                        <button data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
-                            aria-expanded="false" aria-label="Toggle navigation"> &#x2715; </button>
-                    </li>
-                    <li class="nav-item" id="nav-profile">
-                        <a href="/profile">Profile</a>
-                    </li>
 
-                    <li class="nav-item" id="nav-academics">
-                        <a id="nav-academics-link" href="/academics">Academics</a>
-                    </li>
-                    <li class="nav-item" id="nav-chapterlist">
-                        <a id="nav-chapterlist-link">ChapterList</a>
-                    </li>
-                    <li class="nav-item" id="nav-students">
-                        <a id="nav-students-link">Students</a>
-                    </li>
-                    <li class="nav-item" id="nav-staffs">
-                        <a id="nav-staffs-link">Staff</a>
-                    </li>
-                    <li class="nav-item" id="nav-question">
-                        <a id="nav-question-link" href='/questions'>Question</a>
-                    </li>
-                    <li class="nav-item" id="nav-questionpaper">
-                        <a id="nav-questionpaper-link">QuestionPaper</a>
-                    </li>
-                    <li class="nav-item" id="nav-test">
-                        <a id="nav-test-link">Test</a>
-                    <li class="nav-item" id="nav-testhistory">
-                        <a id="nav-testhistory-link">Test History</a>
-                    </li>
-                    </li>
-                    <li class="nav-item" id="nav-questionpaperlist">
-                        <a id="nav-questionpaperlist-link">QuestionPaperlist</a>
-                    </li>
-                    <li class="nav-item" id="nav-studenttesthistory">
-                        <a id="nav-studenttesthistory-link">Testresults</a>
-                    </li>
-                    <li class="nav-item" id="nav-instruction">
-                        <a id="nav-instruction-link">Instruction</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" onclick="logout()">Logout</a>
-                    </li>
+
                 </ul>
             </div>
         </div>
@@ -143,28 +101,30 @@
 
     <script>
         var host = window.location.protocol + "//" + window.location.host;
-        var staff = document.getElementById('nav-staffs')
-        var academics = document.getElementById('nav-academics')
-        var student = document.getElementById('nav-students')
-        var chapter = document.getElementById('nav-chapterlist')
-        var question = document.getElementById('nav-question')
-        var questionpaper = document.getElementById('nav-questionpaper')
-        var questionpaperlist = document.getElementById('nav-questionpaperlist')
-        var instruction = document.getElementById('nav-instruction')
-        var test = document.getElementById('nav-test')
-        var testhistory = document.getElementById('nav-testhistory')
-        var studenttesthistory = document.getElementById('nav-studenttesthistory')
-        document.getElementById('nav-academics-link').href = `${host}/academics`
-        document.getElementById('nav-chapterlist-link').href = `${host}/chapterlist`
-        document.getElementById('nav-question-link').href = `${host}/questions`
-        document.getElementById('nav-questionpaper-link').href = `${host}/question-paper`
-        document.getElementById('nav-students-link').href = `${host}/students`
-        document.getElementById('nav-staffs-link').href = `${host}/staffs`
-        document.getElementById('nav-questionpaperlist-link').href = `${host}/test-create`
-        document.getElementById('nav-test-link').href = `${host}/test-list`
-        document.getElementById('nav-testhistory-link').href = `${host}/test-history`
-        document.getElementById('nav-instruction-link').href = `${host}/instructions`
-        document.getElementById('nav-studenttesthistory-link').href = `${host}/student-test-history`
+        /* 
+         var staff = document.getElementById('nav-staffs')
+         var academics = document.getElementById('nav-academics')
+         var student = document.getElementById('nav-students')
+         var chapter = document.getElementById('nav-chapterlist')
+         var question = document.getElementById('nav-question')
+         var questionpaper = document.getElementById('nav-questionpaper')
+         var questionpaperlist = document.getElementById('nav-questionpaperlist')
+         var instruction = document.getElementById('nav-instruction')
+         var test = document.getElementById('nav-test')
+         var testhistory = document.getElementById('nav-testhistory')
+         var studenttesthistory = document.getElementById('nav-studenttesthistory')
+         document.getElementById('nav-academics-link').href = `${host}/academics`
+         document.getElementById('nav-chapterlist-link').href = `${host}/chapterlist`
+         document.getElementById('nav-question-link').href = `${host}/questions`
+         document.getElementById('nav-questionpaper-link').href = `${host}/question-paper`
+         document.getElementById('nav-students-link').href = `${host}/students`
+         document.getElementById('nav-staffs-link').href = `${host}/staffs`
+         document.getElementById('nav-questionpaperlist-link').href = `${host}/test-create`
+         document.getElementById('nav-test-link').href = `${host}/test-list`
+         document.getElementById('nav-testhistory-link').href = `${host}/test-history`
+         document.getElementById('nav-instruction-link').href = `${host}/instructions`
+         document.getElementById('nav-studenttesthistory-link').href = `${host}/student-test-history`
+         */
         function logout() {
             var host = window.location.protocol + "//" + window.location.host;
             fetch('https://schooltestproject.herokuapp.com/api/logout/',
@@ -183,26 +143,99 @@
             var user = localStorage.getItem('user_type');
             var dataentry = localStorage.getItem('data_entry');
             if (user == 'is_student') {
-                staff.style.display = 'none'
-                academics.style.display = 'none'
-                student.style.display = 'none'
-                chapter.style.display = 'none'
-                question.style.display = 'none'
-                questionpaper.style.display = 'none'
-                questionpaperlist.style.display = 'none'
-                instruction.style.display = 'none'
-                studenttesthistory.style.display = 'none'
-
+                nav = ` <li class="back-btn-nav">
+                    <button data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation"> &#x2715; </button>
+                </li> 
+            </li> <li class="nav-item" id="nav-profile">
+                <a href= '${host}/profile'>Profile</a>
+            </li>
+            <li class="nav-item" id="nav-test">
+                <a id="nav-test-link" href='${host}/test-list'>Test</a></li>
+                <li class="nav-item" id="nav-testhistory">
+                    <a id="nav-testhistory-link" href='${host}/test-history'>Test History</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="logout()">Logout</a>
+                </li>`
+                document.querySelector('.navbar-nav').innerHTML = nav
             }
             else if (user == 'is_staff' && dataentry) {
-                staff.style.display = 'none'
-                questionpaper.style.display = 'none'
-                test.style.display = 'none'
-                testhistory.style.display = 'none'
+                nav = ` 
+                <li class="back-btn-nav">
+                    <button data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation"> &#x2715; </button>
+                </li> <li class="nav-item" id="nav-profile">
+                    <a href= '${host}/profile' tabindex="1">Profile</a>
+                </li>
+
+                <li class="nav-item" id="nav-academics">
+                    <a id="nav-academics-link" href="${host}/academics" tabindex="1">Academics</a>
+                </li>
+                <li class="nav-item" id="nav-chapterlist">
+                    <a id="nav-chapterlist-link" href='${host}/chapterlist' tabindex="1">ChapterList</a>
+                </li>
+                <li class="nav-item" id="nav-students">
+                    <a id="nav-students-link" href='${host}/students' tabindex="1">Students</a>
+                </li>
+                <li class="nav-item" id="nav-question">
+                    <a id="nav-question-link" href='${host}/questions' tabindex="1">Question</a>
+                </li>
+                <li class="nav-item" id="nav-questionpaperlist">
+                    <a id="nav-questionpaperlist-link" href='${host}/test-create' tabindex="1">QuestionPaperlist</a>
+                </li>
+                <li class="nav-item" id="nav-testhistory">
+                    <a id="nav-testhistory-link" href='${host}/test-history' tabindex="1">Test History</a>
+                </li>
+                <li class="nav-item" id="nav-instruction">
+                    <a id="nav-instruction-link" href='${host}/instructions' tabindex="1">Instruction</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="logout()">Logout</a>
+                </li>`
+                document.querySelector('.navbar-nav').innerHTML = nav
             }
             else if (user == 'is_admin' && dataentry) {
-                test.style.display = 'none'
-                testhistory.style.display = 'none'
+                nav = ` 
+                <li class="back-btn-nav">
+                    <button data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation"> &#x2715; </button>
+                </li> <li class="nav-item" id="nav-profile">
+                    <a href= '${host}/profile' tabindex="1">Profile</a>
+                </li>
+
+                <li class="nav-item" id="nav-academics">
+                    <a id="nav-academics-link" href="${host}/academics" tabindex="1">Academics</a>
+                </li>
+                <li class="nav-item" id="nav-chapterlist">
+                    <a id="nav-chapterlist-link" href='${host}/chapterlist' tabindex="1">ChapterList</a>
+                </li>
+                <li class="nav-item" id="nav-students">
+                    <a id="nav-students-link" href='${host}/students' tabindex="1">Students</a>
+                </li>
+                <li class="nav-item" id="nav-staffs">
+                    <a id="nav-staffs-link" href='${host}/staffs' tabindex="1">Staff</a>
+                </li>
+                <li class="nav-item" id="nav-question">
+                    <a id="nav-question-link" href='${host}/questions' tabindex="1">Question</a>
+                </li>
+                <li class="nav-item" id="nav-questionpaper">
+                    <a id="nav-questionpaper-link" href='${host}/question-paper' tabindex="1">QuestionPaper</a>
+                </li>
+                <li class="nav-item" id="nav-questionpaperlist">
+                    <a id="nav-questionpaperlist-link" href='${host}/test-create'tabindex="1">QuestionPaperlist</a>
+                </li>
+                <li class="nav-item" id="nav-studenttesthistory">
+                    <a id="nav-studenttesthistory-link" href='${host}/student-test-history'tabindex="1">Testresults</a>
+                </li>
+                <li class="nav-item" id="nav-instruction">
+                    <a id="nav-instruction-link" href='${host}/instructions' tabindex="1">Instruction</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="logout()">Logout</a>
+                </li>`
+                document.querySelector('.navbar-nav').innerHTML = nav
+
             }
             if (dataentry && user == '') {
                 staff.style.display = 'none'

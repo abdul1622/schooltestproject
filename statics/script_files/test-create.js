@@ -17,7 +17,7 @@
   let container = document.querySelector('.question-papers-card')
   let content = '';
     let grade_list
-    document.getElementById('nav-questionpaperlist').style.opacity = '0.5';
+   
 
     function getgradename(element){
     grade_name = element.options[element.selectedIndex].text;
@@ -72,6 +72,7 @@
     if (user == 'is_student' || !token){
      return window.location.href = '/404'; 
     }
+    document.getElementById('nav-questionpaperlist').style.opacity = '0.5';
   })
 
   function get() {

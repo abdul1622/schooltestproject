@@ -83,7 +83,6 @@ class ChapterSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'error':'chapter name already exists'})
         if queryset.filter(subject=data['subject'],chapter_no=data['chapter_no']).exists():
             raise serializers.ValidationError({'error':'chapter no already exists'})
-
         return data 
 
 

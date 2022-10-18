@@ -22,7 +22,7 @@ let question_id_list = [], question_list = []
 document.getElementById('q-form-2').style.display = 'none';
 document.getElementById('q-form-3').style.display = 'none';
 document.getElementById('q-form-4').style.display = 'none';
-document.getElementById('nav-questionpaper').style.opacity = '0.5';
+
 // document.getElementById('id_grade').setAttribute("onchange", getgradename());
 $(document).ready(function () {
     if (!token) {
@@ -32,6 +32,7 @@ $(document).ready(function () {
     if (user != 'is_admin') {
         return window.location.href = '/404';
     }
+    document.getElementById('nav-questionpaper').style.opacity = '0.5';
 })
 
 let grade_list;

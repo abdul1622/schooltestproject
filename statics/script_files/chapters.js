@@ -26,7 +26,7 @@
         document.getElementById('subjects-by-grade').style.display = "none"
         // delete_box.style.display = 'none';
 
-        // document.getElementById('grade').style.height = '30vh';
+         document.getElementById('grade').style.height = '30vh';
         url3 = ('https://schooltestproject.herokuapp.com/api/chapter-list/');
         var content = ''
         fetch(url3, {

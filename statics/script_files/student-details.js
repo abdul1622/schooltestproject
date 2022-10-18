@@ -11,6 +11,8 @@ $(document).ready(function(){
   if (user == 'is_student'){
    return window.location.href = '/404'; 
   }
+document.getElementById('nav-students').style.opacity = '0.5';
+
 })
 function reload() {
   window.location.href = window.location.href;
@@ -67,7 +69,6 @@ button = document.getElementById('userdetail-btn');
 var host = window.location.protocol + "//" + window.location.host;
 let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 let form = document.getElementById('userDetails')
-document.getElementById('nav-students').style.opacity = '0.5';
   fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
     method: 'GET',
     headers: new Headers({

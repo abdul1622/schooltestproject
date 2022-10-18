@@ -9,6 +9,7 @@ $(document).ready(function () {
     if (user == 'is_student') {
         return window.location.href = '/404';
     }
+    document.getElementById('nav-chapterlist-link').style.opacity = '0.5';
 })
 
 // variables
@@ -21,7 +22,7 @@ let user_type = localStorage.getItem('user_type')
 let container3 = document.querySelector('.chapter-table')
 let error_messages = document.querySelector('.error-messages')
 let messages = document.querySelector('.messages')
-document.getElementById('nav-chapterlist').style.opacity = '0.5';
+
 let flag = false
 let edit = null;
 var host = window.location.protocol + "//" + window.location.host;

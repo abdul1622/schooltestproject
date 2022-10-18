@@ -5,7 +5,7 @@
     let head = document.querySelector('.header')
     var standard =localStorage.getItem('standard')
     let history=[]
-    document.getElementById('nav-test').style.opacity = '0.5';
+    
     var  student_id=localStorage.getItem('id')
     let single_test = document.querySelector('.single-test')
     head.style.display = 'none'
@@ -19,6 +19,7 @@
       if (user != 'is_student'){
        return window.location.href = '/404'; 
       }
+      document.getElementById('nav-test').style.opacity = '0.5';
     })
     url1 = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
     url1.searchParams.append('grade', standard[0]);

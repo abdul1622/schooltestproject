@@ -7,7 +7,9 @@
         var user = localStorage.getItem('user_type')
         if (user == 'is_student') {
             return window.location.href = '/404';
+            
         }
+        document.getElementById('nav-academics').style.opacity = '0.5';
     })
     // variable
     var token = localStorage.getItem('token')
@@ -22,7 +24,6 @@
     var container = document.querySelector('.cards')
     var container3 = document.querySelector('.chapter-cards')
     var list = document.querySelector('.grade-list');
-    document.getElementById('nav-academics').style.opacity = '0.5';
     let edit = null
     let chapter_list = []
     var subject_id;

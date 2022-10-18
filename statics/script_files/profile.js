@@ -9,13 +9,14 @@ let form = document.getElementById('profile-box')
 let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 let content = ''
 let grade_list = []
-document.getElementById('nav-profile').style.opacity = '0.5';
+
 
 // user check
 $(document).ready(function () {
   if (!token) {
     return window.location.href = '/login';
   }
+  document.getElementById('nav-profile').style.opacity = '0.5';
 })
 
 if (user != 'is_staff') {
