@@ -11,6 +11,7 @@
         }
         document.getElementById('nav-academics').style.opacity = '0.5';
     })
+
     // variable
     var token = localStorage.getItem('token')
     let user_type = localStorage.getItem('user_type')

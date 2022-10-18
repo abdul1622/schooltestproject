@@ -38,6 +38,7 @@ $(document).ready(function () {
 let grade_list;
 var host = window.location.protocol + "//" + window.location.host;
 
+
 //  get grade
 fetch('https://schooltestproject.herokuapp.com/api/grades/', {
     method: 'GET',

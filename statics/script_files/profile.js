@@ -11,6 +11,7 @@ let content = ''
 let grade_list = []
 
 
+
 // user check
 $(document).ready(function () {
   if (!token) {
