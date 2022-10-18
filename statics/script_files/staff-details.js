@@ -84,7 +84,6 @@ function getsectionname(element) {
   document.querySelector('.sec-in-form').innerHTML = content
 }
 add = document.getElementById('addstaff')
-button = document.getElementById('userdetail-btn');
 var host = window.location.protocol + "//" + window.location.host;
 fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
   method: 'GET',
@@ -248,9 +247,14 @@ function edit(index, id) {
           document.querySelector('body').classList.remove('modal-open');
           const mdbackdrop = document.querySelector('.modal-backdrop');
           if (mdbackdrop) {
+            document.getElementById('update').id='usr'
             mdbackdrop.classList.remove('modal-backdrop', 'show');
             messages.innerHTML = 'updated successfully'
             $('#messageModal-student').modal('show')
+            setTimeout(function () {
+              $('#messageModal-staff').modal('hide')
+              window.location.reload();
+           }, 2000);
           }
           error_messages.innerHTML = ''
           return response.json();
@@ -318,10 +322,7 @@ button.addEventListener('click', () => {
             mdbackdrop.classList.remove('modal-backdrop', 'show');
             messages.innerHTML = 'created successfully'
             $('#messageModal-staff').modal('show')
-            setTimeout(function () {
-              $('#messageModal-staff').modal('hide')
-              window.location.reload();
-           }, 2000);
+
           }
           error_messages.innerHTML = `<li>${(data.data.error[0])}</li>`
           messages.innerHTML = ''
