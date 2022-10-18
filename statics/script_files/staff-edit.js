@@ -76,7 +76,7 @@ function filter() {
 }
 function addstandard() {
   let std = document.getElementById('std').value
-  let section = (document.getElementById('sec').value).toUpperCase()
+  let section = document.getElementById('sec').value.toUpperCase()
   if (!std) {
     error_messages.innerHTML = '<li class="text-danger">give a valid standard</li>'
     return
@@ -99,6 +99,8 @@ function addstandard() {
     content += `
     <div class='inner'><li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li></div>`
   }
+  document.getElementById('std').value=''
+  document.getElementById('sec').value=''
   document.querySelector('.standards-list').innerHTML = content
 }
 function delete_standard(index) {

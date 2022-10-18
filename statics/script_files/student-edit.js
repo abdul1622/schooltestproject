@@ -42,7 +42,7 @@ function filter() {
               'Authorization': 'token' + ' ' + localStorage.getItem('token')
             },
           }).then(res => {
-            userdetails();
+            window.location.reload();
           })
         }
         container2.addEventListener('click', (e) => {
@@ -138,6 +138,10 @@ function filter() {
                     mdbackdrop.classList.remove('modal-backdrop', 'show');
                     messages.innerHTML = 'updated successfully'
                     $('#messageModal-student').modal('show')
+                    setTimeout(function () {
+                      $('#messageModal-student').modal('hide')
+                      window.location.reload();
+                   }, 2000);
                   }
                   error_messages.innerHTML = ''
                   return response.json();
@@ -191,18 +195,30 @@ button.addEventListener('click', (e) => {
             mdbackdrop.classList.remove('modal-backdrop', 'show');
             messages.innerHTML = 'created successfully'
             $('#messageModal-student').modal('show')
+            setTimeout(function () {
+              $('#messageModal-student').modal('hide')
+              window.location.reload();
+           }, 2000);
             return response.json()
           }
           error_messages.innerHTML = ''
-          return response.json();
         }
+        return response.json();
       }).then(function (data) {
-        if (data.status != 'success') {
+        if (data.status != 'Registered succesfull') {
           console.log(data)
           messages.innerHTML = ''
           error_messages.innerHTML = `<li>${(data.data.error)}</li>`
       
         }
+        else{
+          messages.innerHTML = 'Registered succesfull'
+          $('#messageModal-student').modal('show')
+          setTimeout(function () {
+            window.location.reload();
+         }, 2000);
+        }
+
               
       })
   }
