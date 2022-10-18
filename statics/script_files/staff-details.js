@@ -9,7 +9,7 @@ let userid;
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
   add = document.getElementById('addstaff')
-  let button = document.getElementById('userdetail-btn');
+  let button;
   var host = window.location.protocol + "//" + window.location.host;
   let form = document.getElementById('userDetails')
   const container2 = document.querySelector('.container2');
@@ -251,10 +251,10 @@ function edit(index, id) {
             mdbackdrop.classList.remove('modal-backdrop', 'show');
             messages.innerHTML = 'updated successfully'
             $('#messageModal-student').modal('show')
-            setTimeout(function () {
+          /*setTimeout(function () {
               $('#messageModal-staff').modal('hide')
               window.location.reload();
-           }, 2000);
+           }, 2000);*/
           }
           error_messages.innerHTML = ''
           return response.json();
@@ -269,7 +269,9 @@ function edit(index, id) {
     }
   })
 }
-button.addEventListener('click', () => {
+document.getElementById('addstaff').addEventListener('click', () => {
+  button = document.getElementById('userdetail-btn')
+  button.addEventListener('click', () => {
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     var email = document.getElementById('email').value
     var phone = document.getElementById('phone').value
@@ -328,5 +330,8 @@ button.addEventListener('click', () => {
           messages.innerHTML = ''
         }
       })
+  
   })
   
+})
+
