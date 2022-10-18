@@ -8,3 +8,4 @@ myenv
 todo.txt
 *staticfiles
 staticfiles
+.myenv
