@@ -185,7 +185,7 @@ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
         if(!address){
             error_content += `<li class='text-danger'>address is requied</li>`
         }
-        if(!email || !phone || !dob || !firstname || !fullname || address){
+        if(!email || !phone || !dob || !firstname || !fullname || !address){
             $('#messageModal-signup').modal('show')
             signup_errors.innerHTML = error_content
             return
