@@ -9,7 +9,7 @@ let userid;
   let messages = document.querySelector('.messages')
   let error_messages = document.querySelector('.error-messages')
   add = document.getElementById('addstaff')
-  let button = document.getElementById('userdetail-btn');
+  let button;
   var host = window.location.protocol + "//" + window.location.host;
   let form = document.getElementById('userDetails')
   const container2 = document.querySelector('.container2');
@@ -84,7 +84,6 @@ function getsectionname(element) {
   document.querySelector('.sec-in-form').innerHTML = content
 }
 add = document.getElementById('addstaff')
-button = document.getElementById('userdetail-btn');
 var host = window.location.protocol + "//" + window.location.host;
 fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
   method: 'GET',
@@ -250,7 +249,11 @@ function edit(index, id) {
           if (mdbackdrop) {
             mdbackdrop.classList.remove('modal-backdrop', 'show');
             messages.innerHTML = 'updated successfully'
-            $('#messageModal-student').modal('show')
+            $('#messageModal-staff').modal('show')
+            setTimeout(function () {
+              $('#messageModal-staff').modal('hide')
+              window.location.reload();
+            }, 2000); 
           }
           error_messages.innerHTML = ''
           return response.json();
@@ -265,7 +268,9 @@ function edit(index, id) {
     }
   })
 }
-button.addEventListener('click', () => {
+document.getElementById('addstaff').addEventListener('click', () => {
+  button = document.getElementById('userdetail-btn')
+  button.addEventListener('click', () => {
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     var email = document.getElementById('email').value
     var phone = document.getElementById('phone').value
@@ -318,14 +323,14 @@ button.addEventListener('click', () => {
             mdbackdrop.classList.remove('modal-backdrop', 'show');
             messages.innerHTML = 'created successfully'
             $('#messageModal-staff').modal('show')
-            setTimeout(function () {
-              $('#messageModal-staff').modal('hide')
-              window.location.reload();
-           }, 2000);
+
           }
           error_messages.innerHTML = `<li>${(data.data.error[0])}</li>`
           messages.innerHTML = ''
         }
       })
+  
   })
   
+})
+
