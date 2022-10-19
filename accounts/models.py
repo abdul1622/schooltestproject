@@ -101,10 +101,23 @@ class User(AbstractBaseUser):
     def is_admin(self):
         return self.user_type == 'is_admin'
 
-    # def save(self, *args, **kwargs):
-    #     self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')   
+    def save(self, *args, **kwargs):
+        if self.user_type:
+            users = User.objects.filter(user_type=self.user_type)
+            last = (users[len(users)-1]).register_number
+            last = int(last[3:])
+            self.register_number = self.user_type[3:5] + self.user_type[-1] +str(last+1)
+        elif self.is_data_entry:
+            users = User.objects.filter(user_type='',is_data_entry=True)
+            last = int(((users[len(users)-1]).register_number)[3:])
+            self.register_number = 'deo' + str(last+1)
+            print(self.register_number)
+        super(User, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ('created_at',)
+
 class Profile(models.Model):
-    
     def upload_design_to(self, filename):
         return f'user_profile/{self.user.id}/{filename}'
     user = models.OneToOneField(User,on_delete=models.CASCADE,null =True)

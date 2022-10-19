@@ -9,6 +9,8 @@ let custom_end = false;
 let question_paper_id, userId, user_type, chapters_list = [];
 var content = '';
 da = null
+let data_entry = localStorage.getItem('data_entry')
+data_entry = (data_entry === 'true')
 let customize_details = document.querySelector('.customize-details')
 let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 let question_details_list = [], question_name
@@ -29,7 +31,7 @@ $(document).ready(function () {
         return window.location.href = '/login';
     }
     var user = localStorage.getItem('user_type')
-    if (user != 'is_admin') {
+    if (!data_entry && user != 'is_admin') {
         return window.location.href = '/404';
     }
     document.getElementById('nav-questionpaper').style.opacity = '0.5';

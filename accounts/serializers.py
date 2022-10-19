@@ -30,7 +30,7 @@ usertype_choice=(
 class SignupSerializer(serializers.Serializer):
     email = serializers.EmailField()
     phone = serializers.CharField(max_length=10)
-    register_number = serializers.CharField(max_length=15)
+    # register_number = serializers.CharField(max_length=15)
     date_of_birth = serializers.DateField()
     user_type = serializers.ChoiceField(
     choices = usertype_choice,
@@ -49,7 +49,7 @@ class SignupSerializer(serializers.Serializer):
         userdetails = validated_data
         email = (validated_data.pop("email")).lower()
         phone = validated_data.pop("phone")
-        register_number = validated_data.pop("register_number")
+        # register_number = validated_data.pop("register_number")
         date_of_birth = validated_data.pop("date_of_birth")
         user_type = validated_data.pop("user_type")
         first_name = validated_data.pop("first_name")
@@ -60,19 +60,19 @@ class SignupSerializer(serializers.Serializer):
         print(standard)
         address = validated_data.pop("address")
         is_data_entry = validated_data.pop("is_data_entry")
-        user =   User.objects.create(email =email,phone=phone,date_of_birth=date_of_birth,
-        register_number=register_number,user_type = user_type,is_data_entry=is_data_entry)
+        user =   User.objects.create(email =email,phone=phone,date_of_birth=date_of_birth,user_type = user_type,is_data_entry=is_data_entry)
         user.save()
         Profile.objects.create(user=user,first_name=first_name,last_name=last_name,
         standard=standard,address=address, full_name=full_name,
         profile_picture=profile_picture)
-        # user_details = (email,phone,register_number,date_of_birth,user_type,first_name,last_name,full_name,profile_picture,standard,section,address,is_data_entry)
+        user_details = (email,phone,date_of_birth,user_type,first_name,last_name,full_name,profile_picture,standard,address,is_data_entry)
         subject = 'Welcome to our school'
         message = f'Hi {full_name}, thank you for joining in our school'
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [user.email,]
         send_mail(subject,message,email_from,recipient_list)
         return userdetails
+
     def validate(self,data):
         queryset=User.objects.all()
         if self.instance:
@@ -82,8 +82,6 @@ class SignupSerializer(serializers.Serializer):
               raise serializers.ValidationError({'error':'email already exists'})
         elif queryset.filter(phone=data['phone']).exists() :
              raise serializers.ValidationError({'error':'phone already exists'})
-        elif queryset.filter(register_number=data['register_number']).exists() :
-            raise serializers.ValidationError({'error':'register number already exists'})
         return data
 
 class SigninSerializer(serializers.ModelSerializer):

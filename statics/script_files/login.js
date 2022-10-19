@@ -34,7 +34,14 @@ function login() {
                 console.log(data.data)
                 localStorage.setItem('id', data.data.id)
                 localStorage.setItem('user_type', data.data.user_type)
-                localStorage.setItem('data_entry', data.data.data_entry)
+                if(data.data.data_entry){
+                    localStorage.setItem('data_entry', true)
+                }else{
+                    localStorage.setItem('data_entry', false)
+                }
+               let  data_entry = localStorage.getItem('data_entry')
+               data_entry = (data_entry === 'true')
+                console.log(data_entry)
                 localStorage.setItem("token", data.data.token);
 
                 fetch('https://schooltestproject.herokuapp.com/api/profile/', {
