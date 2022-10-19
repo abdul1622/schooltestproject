@@ -32,7 +32,6 @@
     let current_grade;
     var host = window.location.protocol + "//" + window.location.host;
     let section_list = []
-
     document.getElementById('back-btn-chapter').addEventListener('click', () => {
         getsubject(grade_val, grade_id);
         messages.innerHTML = ''

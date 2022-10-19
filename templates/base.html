@@ -239,9 +239,39 @@
 
             }
             if (dataentry && user == '') {
-                staff.style.display = 'none'
-                test.style.display = 'none'
-                testhistory.style.display = 'none'
+                nav = ` 
+                <li class="back-btn-nav">
+                    <button data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation"> &#x2715; </button>
+                </li> <li class="nav-item" id="nav-profile">
+                    <a href= '${host}/profile' tabindex="1">Profile</a>
+                </li>
+                <li class="nav-item" id="nav-academics">
+                    <a id="nav-academics-link" href="${host}/academics" tabindex="1">Academics</a>
+                </li>
+                <li class="nav-item" id="nav-chapterlist">
+                    <a id="nav-chapterlist-link" href='${host}/chapterlist' tabindex="1">ChapterList</a>
+                </li>
+                <li class="nav-item" id="nav-students">
+                    <a id="nav-students-link" href='${host}/students' tabindex="1">Students</a>
+                </li>
+
+                <li class="nav-item" id="nav-question">
+                    <a id="nav-question-link" href='${host}/questions' tabindex="1">Question</a>
+                </li>
+                <li class="nav-item" id="nav-questionpaper">
+                    <a id="nav-questionpaper-link" href='${host}/question-paper' tabindex="1">QuestionPaper</a>
+                </li>
+                <li class="nav-item" id="nav-questionpaperlist">
+                    <a id="nav-questionpaperlist-link" href='${host}/test-create'tabindex="1">QuestionPaperlist</a>
+                </li>
+                <li class="nav-item" id="nav-instruction">
+                    <a id="nav-instruction-link" href='${host}/instructions' tabindex="1">Instruction</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="logout()">Logout</a>
+                </li>`
+                document.querySelector('.navbar-nav').innerHTML = nav
 
 
             }

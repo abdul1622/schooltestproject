@@ -151,23 +151,28 @@ class UserDetailsView(ListAPIView):
         user = self.request.user
         queryset = []
         queryset_all = User.objects.all()
-        if user.user_type == 'is_student':
-            queryset = User.objects.get(id = user.id)
-        elif user.user_type == 'is_staff':
-            staff_standard = user.profile.standard
-            print(staff_standard)
-            queryset = User.objects.all()
-            # for i in staff_standard:
-                # queryset.append(User.objects.filter(user_type = 'is_student',profile__standard=i))
-            queryset = User.objects.filter(user_type = 'is_student',profile__standard__overlap=staff_standard)
-            print(queryset)
-        elif user.user_type == 'is_admin':
-            queryset= User.objects.all()
-        if standard and user.user_type != 'is_student':
-            queryset = queryset.filter(profile__standard__overlap=[standard])
-            if user_type:
-                queryset =queryset.filter(user_type = user_type)
-            print(queryset)
+        if user.user_type != '':
+             if user.user_type == 'is_student':
+                queryset = User.objects.get(id = user.id)
+             elif user.user_type == 'is_staff':
+                staff_standard = user.profile.standard
+                print(staff_standard)
+                queryset = User.objects.all()
+                # for i in staff_standard:
+                    # queryset.append(User.objects.filter(user_type = 'is_student',profile__standard=i))
+                queryset = User.objects.filter(user_type = 'is_student',profile__standard__overlap=staff_standard)
+                print(queryset)
+             elif user.user_type == 'is_admin':
+                queryset= User.objects.all()
+             if standard and user.user_type != 'is_student':
+                queryset = queryset.filter(profile__standard__overlap=[standard])
+                if user_type:
+                    queryset =queryset.filter(user_type = user_type)
+                print(queryset)
+        else:
+             if user.is_data_entry:
+                queryset = User.objects.all()
+                print(len(queryset))
         return queryset
 
     def list(self, request):
