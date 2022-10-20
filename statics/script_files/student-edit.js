@@ -46,6 +46,7 @@ function filter() {
           })
         }
         container2.addEventListener('click', (e) => {
+          document.getElementById('reg-no-div').style.display = 'block'
           form_email = document.getElementById('email');
           form_phone = document.getElementById('phone');
           form_reg = document.getElementById('reg');
@@ -54,7 +55,6 @@ function filter() {
           form_lname = document.getElementById('lname');
           form_fullname = document.getElementById('ffname');
           form_std = document.getElementById('std');
-         // form_sec = document.getElementById('sec');
           form_ad = document.getElementById('address');
           button = document.getElementById('userdetail-btn');
           e.preventDefault();
@@ -152,12 +152,12 @@ function filter() {
         })
 button.addEventListener('click', (e) => {
   if (!editbutton) {
+    document.getElementById('reg-no-div').style.display = 'none'
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     var is_dataentry = 'false'
     var email = document.getElementById('email').value
     var phone = document.getElementById('phone').value
     var dob = document.getElementById('dob').value
-    var reg = document.getElementById('reg').value
     var standard = document.getElementById('std').value
     var section = document.getElementById('sec').value
     var type = 'is_student'
@@ -176,7 +176,7 @@ button.addEventListener('click', (e) => {
       {
         method: 'POST',
         body: JSON.stringify({
-          'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
+          'email': email, 'phone': phone, 'date_of_birth': dob, 'user_type': type,
           'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standards, 'full_name': fullname, 'address': address
         }
         ),
@@ -217,9 +217,7 @@ button.addEventListener('click', (e) => {
           setTimeout(function () {
             window.location.reload();
          }, 2000);
-        }
-
-              
+        }    
       })
   }
 })

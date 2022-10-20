@@ -57,10 +57,22 @@ class SignupSerializer(serializers.Serializer):
         full_name = validated_data.pop("full_name")
         profile_picture = validated_data.pop("profile_picture")
         standard = validated_data.pop('standard')
+        # standard = ['2-B']
         print(standard)
         address = validated_data.pop("address")
         is_data_entry = validated_data.pop("is_data_entry")
         user =   User.objects.create(email =email,phone=phone,date_of_birth=date_of_birth,user_type = user_type,is_data_entry=is_data_entry)
+        if user_type:
+            users = User.objects.filter(user_type=user_type)
+            last = (users[len(users)-2]).register_number
+            print(last[3:])
+            last = int(last[3:])
+            register_number = user_type[3:5] + user_type[-1] +str(last+1)
+        elif is_data_entry:
+            users = User.objects.filter(user_type='',is_data_entry=True)
+            last = int(((users[len(users)-2]).register_number)[3:])
+            register_number = 'deo' + str(last+1)
+        user.register_number = register_number
         user.save()
         Profile.objects.create(user=user,first_name=first_name,last_name=last_name,
         standard=standard,address=address, full_name=full_name,

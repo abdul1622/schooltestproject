@@ -159,6 +159,7 @@ function std(id, index, flag) {
 }
 function edit(index, id) {
   document.getElementById('userdetail-btn').id ='update'
+  document.getElementById('reg-no-div').style.display = 'block'
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
   tr = document.querySelectorAll('.list')[index]
   let email = tr.querySelector(".useremail").textContent;
@@ -271,11 +272,11 @@ function edit(index, id) {
 document.getElementById('addstaff').addEventListener('click', () => {
   button = document.getElementById('userdetail-btn')
   button.addEventListener('click', () => {
+    document.getElementById('reg-no-div').style.display = 'none'
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     var email = document.getElementById('email').value
     var phone = document.getElementById('phone').value
     var dob = document.getElementById('dob').value
-    var reg = document.getElementById('reg').value
     var standard = document.getElementById('std').value
     var section = document.getElementById('sec').value
     var type = 'is_staff'
@@ -291,7 +292,7 @@ document.getElementById('addstaff').addEventListener('click', () => {
       {
         method: 'POST',
         body: JSON.stringify({
-          'email': email, 'phone': phone, 'date_of_birth': dob, 'register_number': reg, 'user_type': type,
+          'email': email, 'phone': phone, 'date_of_birth': dob, 'user_type': type,
           'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standards, 'full_name': fullname, 'address': address
         }
         ),
@@ -323,14 +324,11 @@ document.getElementById('addstaff').addEventListener('click', () => {
             mdbackdrop.classList.remove('modal-backdrop', 'show');
             messages.innerHTML = 'created successfully'
             $('#messageModal-staff').modal('show')
-
           }
           error_messages.innerHTML = `<li>${(data.data.error[0])}</li>`
           messages.innerHTML = ''
         }
       })
-  
   })
-  
 })
 
