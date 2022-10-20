@@ -3,6 +3,7 @@ let students=[];
 let content = '';
 let grade_list;
 let token = localStorage.getItem("token")
+document.getElementById('reg-no-div').style.display = 'none'
 $(document).ready(function(){ 
   if(!token){
     return window.location.href = '/login';

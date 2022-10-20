@@ -12,6 +12,7 @@ let userid;
   let button;
   var host = window.location.protocol + "//" + window.location.host;
   let form = document.getElementById('userDetails')
+  document.getElementById('reg-no-div').style.display = 'none'
   const container2 = document.querySelector('.container2');
 $(document).ready(function () {
   if (!token) {
