@@ -140,5 +140,10 @@ table {
     input[type=file] {
         width: 30vw;
     }
-
+   .sort-input input[type=text]{
+        width: 65%;
+    }
+    input[type=text] {
+        width: 90%;
+    }
 }

@@ -295,42 +295,9 @@ button#standard_add_btn {
 
 }
 
-/* @media screen and (max-width:375px) {
-    .--user {
-        margin-left: 3%;
-    }
-
-    #add {
-        width: 18%;
-        margin-left: 77%;
-    }
-
-    .sort-input {
-        margin-left: 5%;
-    }
-
-    .container2 {
-        overflow: scroll;
-    }
-
-    #userdetail-btn {
-        width: 25vw;
-        margin-left: 32vw;
-        margin-top: 8%;
-    }
-
-    #addstaff {
-        width: 20%;
-        padding: 4px 6px;
-        height: 9%;
-    }
-
-    .userDetails {
-        display: grid;
-        grid-template-columns: auto;
-    }
+ @media screen and (max-width:375px) {
 
     button#standard_add_btn {
         margin: 0% 0% 2%;
     }
-} */
+} 

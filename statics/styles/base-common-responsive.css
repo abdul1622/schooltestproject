@@ -191,6 +191,7 @@
     form.userDetails input {
         width: 144%;
     }
+   
 }
 @media screen and (max-width:420px) {
     .navbar {
