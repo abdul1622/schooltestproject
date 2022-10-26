@@ -18,10 +18,9 @@ input {
     border: none;
     outline: none;
 }
-
 input[type=text] {
     padding: 5px;
-    width: 250px;
+    width: 141%;
     margin-bottom: 10px;
     color: black;
     font-size: 15px;
@@ -112,14 +111,19 @@ table {
         padding-left: 0%;
         text-align: center;
     }
-
+    input[type=text] {
+        width: 38%;
+    }
     td {
         padding: 2%;
     }
     td {
-        padding: 1.5vw;
+        padding: 1.7vw;
         width: 1vw;
         font-size: 1.5vw;
+    }
+    .std-in-form, .sec-in-form {
+        width: 145%;
     }
 }
 @media screen and (max-width:420px) {

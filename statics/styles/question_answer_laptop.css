@@ -26,10 +26,13 @@
         margin-top: -3vh;
     }
     #QForm-modal-content {
-        width: 203%;
+        width: 181%;
         background-color: #b2c8df;
         padding: 2% 5%;
         margin-left: -50%;
+    }
+  .questionanswer input[type=text]{
+        width: 91.5%;
     }
     .question_create {
         display: none;

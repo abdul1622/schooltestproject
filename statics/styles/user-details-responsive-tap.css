@@ -11,7 +11,7 @@
     border-radius: 5px;
     margin-left: 48%;
     position: absolute;
-    height: 4.2%;
+    height: 5.2%;
     margin-top: 3%;
     }
 
@@ -29,10 +29,10 @@
 
     #addstaff {
         width: 13vw;
-        height: 4.5vh;
+        height: 5.5vh;
         margin-left: 3vw;
         margin-top: 0vh;
-        font-size: 10px;
+        font-size: 1.9vw;
         position: absolute;
     }
 
@@ -83,12 +83,12 @@
         padding: 2%;
         font-size: 64%;
         height: auto;
-        margin-left: 47%;
+        margin-left: 75%;
         margin-top: 3%;
     }
 
     .sort-input input {
-        width: 37%;
+        width: 68%;
     }
 
     .--user #edit {
@@ -141,12 +141,12 @@
     }
 
     #addstaff {
-        width: 21%;
-        margin-left: 1%;
-        font-size: 3vw;
-        height: 4.4%;
-        margin-top: 0%;
-        padding: 2%;
+        width: 16%;
+        margin-left: 3%;
+        font-size: 4vw;
+        height: 8.4%;
+        margin-top: -3%;
+        padding: 1% 2%;
     }
 
     #userdetail-btn {
@@ -175,5 +175,11 @@
     }
     #delete-user-Modal #yes,#delete-user-Modal #no,#delete-staff-Modal #yes,#delete-staff-Modal #no{
         font-size: 10px;
+    }
+    #Form-modal-content {
+        width: 96%;
+        background-color: #b2c8df;
+        padding: 2% 5%;
+        margin-left: 5%;
     }
     }

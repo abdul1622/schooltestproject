@@ -115,6 +115,14 @@
         display: grid;
         grid-template-columns: auto auto;
     }
+    .questionanswer select {
+        padding: 10px;
+        width: 141%;
+        color: black;
+        border: none;
+        outline: none;
+        display: grid;
+    }
 }
 @media screen and (max-width:420px) {
     form.questionanswer {

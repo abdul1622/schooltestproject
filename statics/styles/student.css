@@ -21,9 +21,10 @@
 
 }
 
-#add :focus{
+#add :focus {
     outline-style: inherit;
 }
+
 .sort-input {
     margin-left: 14%;
     margin-top: 3%;
@@ -104,9 +105,11 @@
     position: static;
     margin: 0;
 }
+
 button#standard_add_btn {
     margin: 9% 0% 2%;
 }
+
 @media screen and (min-width:1024px) and (max-width:1200px) {
     #sort {
         width: 9vw;
@@ -130,7 +133,8 @@ button#standard_add_btn {
         /* margin-right: 0vw; */
         /* margin-top: 1vh;
         margin-left: 123vh; */
-    } 
+    }
+
     .container2 {
         width: 100%;
     }
@@ -290,3 +294,43 @@ button#standard_add_btn {
     }
 
 }
+
+/* @media screen and (max-width:375px) {
+    .--user {
+        margin-left: 3%;
+    }
+
+    #add {
+        width: 18%;
+        margin-left: 77%;
+    }
+
+    .sort-input {
+        margin-left: 5%;
+    }
+
+    .container2 {
+        overflow: scroll;
+    }
+
+    #userdetail-btn {
+        width: 25vw;
+        margin-left: 32vw;
+        margin-top: 8%;
+    }
+
+    #addstaff {
+        width: 20%;
+        padding: 4px 6px;
+        height: 9%;
+    }
+
+    .userDetails {
+        display: grid;
+        grid-template-columns: auto;
+    }
+
+    button#standard_add_btn {
+        margin: 0% 0% 2%;
+    }
+} */
