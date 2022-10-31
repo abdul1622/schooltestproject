@@ -298,4 +298,8 @@
         margin-top: 5%;
         font-family: 'cinzel';
     }
+    .userDetails {
+        display: grid;
+        grid-template-columns: auto;
+    }
 }

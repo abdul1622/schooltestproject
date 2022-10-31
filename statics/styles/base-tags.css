@@ -8,19 +8,13 @@ label {
     font-size: 15px;
     color: black;
 }
-
-input {
+input[type=text],input[type=email],input[type=phone]{
     padding: 5px;
-    width: 250px;
-    margin-bottom: 10px;
-    color: black;
-    font-size: 15px;
-    border: none;
-    outline: none;
-}
-input[type=text] {
-    padding: 5px;
+<<<<<<< Updated upstream
     width: 141%;
+=======
+    width: 13%;
+>>>>>>> Stashed changes
     margin-bottom: 10px;
     color: black;
     font-size: 15px;
@@ -95,6 +89,14 @@ table {
         padding: 10px;
         text-align: revert;
     }
+    input[type=text], input[type=email], input[type=phone] {
+        padding: 5px;
+        width: 95%;
+        margin-bottom: 10px;
+        color: black;
+        font-size: 15px;
+        border: none;
+    }
 }
 @media screen and (min-width:1359px) and (max-width:1450px) {
     td {
@@ -143,7 +145,7 @@ table {
    .sort-input input[type=text]{
         width: 65%;
     }
-    input[type=text] {
+   input[type=text],input[type=email],input[type=phone] {
         width: 90%;
     }
 }
