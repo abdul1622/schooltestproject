@@ -1,8 +1,19 @@
 const container2 = document.querySelector('.container2');
 let button = document.getElementById('userdetail-btn');
 let editbutton=false
-$('#FormModal').on('hidden.bs.modal', function () {
-  $(this).find('form').trigger('reset');
+$('[data-dismiss=modal]').on('click', function (e) {
+  var $t = $(this),
+      target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
+
+$(target)
+  .find("input,textarea,select")
+     .val('')
+     .end()
+  if ( document.querySelector('.inner')){
+    document.querySelector('.inner').innerHTML=''
+  }
+  
+  
 })
 function filter() {
     var input, filter, table, tr, td, i, txtValue;
@@ -131,7 +142,7 @@ function filter() {
                 console.log(response)
                 if (response.status == 200) {
                   console.log("Sucess response", response)
-                  document.querySelector('#FormModal').classList.remove('show');
+                  document.querySelector('#student-FormModal').classList.remove('show');
                   document.querySelector('body').classList.remove('modal-open');
                   const mdbackdrop = document.querySelector('.modal-backdrop');
                   if (mdbackdrop){
