@@ -21,9 +21,10 @@
 
 }
 
-#add :focus{
+#add :focus {
     outline-style: inherit;
 }
+
 .sort-input {
     margin-left: 14%;
     margin-top: 3%;
@@ -104,9 +105,11 @@
     position: static;
     margin: 0;
 }
+
 button#standard_add_btn {
     margin: 9% 0% 2%;
 }
+
 @media screen and (min-width:1024px) and (max-width:1200px) {
     #sort {
         width: 9vw;
@@ -130,7 +133,8 @@ button#standard_add_btn {
         /* margin-right: 0vw; */
         /* margin-top: 1vh;
         margin-left: 123vh; */
-    } 
+    }
+
     .container2 {
         width: 100%;
     }
@@ -290,3 +294,10 @@ button#standard_add_btn {
     }
 
 }
+
+ @media screen and (max-width:375px) {
+
+    button#standard_add_btn {
+        margin: 0% 0% 2%;
+    }
+} 

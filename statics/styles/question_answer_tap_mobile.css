@@ -58,6 +58,7 @@
         color: black;
         width: 33vw;
         display: block;
+        font-size: 2vw;
     }
 
     .question-card label {
@@ -114,6 +115,14 @@
         display: grid;
         grid-template-columns: auto auto;
     }
+    .questionanswer select {
+        padding: 10px;
+        width: 141%;
+        color: black;
+        border: none;
+        outline: none;
+        display: grid;
+    }
 }
 @media screen and (max-width:420px) {
     form.questionanswer {
@@ -160,13 +169,14 @@
         font-size: 150%;
     }
     .question-card {
-        margin-left: 11%;
+        margin-left: 0%;
         font-size: 93%;
-        width: 75%;
+        width: 97%;
         margin-bottom: 5%;
     }
     .question-card p {
         width: 100%;
+        font-size: 4.2vw;
     }
 
     .question-card #delete {

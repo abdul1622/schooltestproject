@@ -5,29 +5,13 @@
         padding: 2% 5%;
         margin-left: -31%;
     }
-    
-@media screen and (min-width:1024px) and (max-width:1200px) {
-
-}
-@media screen and (min-width:1359px) and (max-width:1450px) {}
 @media screen and (min-width:430px) and (max-width:800px) {
     #Form-modal-content {
         width: 121%;
         padding: 2% 5%;
         margin-left: -23%;
     }
-}
-@media screen and (max-width:420px) {
-    #Form-modal-content {
-        width: 78%;
-        margin-left: 0%;
-    }
-    .standards-list {
-        position: absolute;
-        margin-left: 62%;
-        margin-top: 190%;
-        background-color: #edc81452;
-        padding: 1%;
-        width: 26%;
+    .userDetails input{
+        width: 144%;
     }
 }

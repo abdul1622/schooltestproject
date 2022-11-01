@@ -8,24 +8,16 @@ label {
     font-size: 15px;
     color: black;
 }
-
-input {
+input[type=text],input[type=email],input[type=phone]{
     padding: 5px;
-    width: 250px;
+    width: 98%;
     margin-bottom: 10px;
     color: black;
     font-size: 15px;
     border: none;
-    outline: none;
 }
-
-input[type=text] {
-    padding: 5px;
-    width: 250px;
-    margin-bottom: 10px;
-    color: black;
-    font-size: 15px;
-    border: none;
+.sort-input input[type=text] {
+    width: 17%;
 }
 input[type=file] {
     border: none;
@@ -96,6 +88,14 @@ table {
         padding: 10px;
         text-align: revert;
     }
+    input[type=text], input[type=email], input[type=phone] {
+        padding: 5px;
+        width: 95%;
+        margin-bottom: 10px;
+        color: black;
+        font-size: 15px;
+        border: none;
+    }
 }
 @media screen and (min-width:1359px) and (max-width:1450px) {
     td {
@@ -112,14 +112,26 @@ table {
         padding-left: 0%;
         text-align: center;
     }
-
+    input[type=text] {
+        width: 38%;
+    }
     td {
         padding: 2%;
     }
     td {
-        padding: 1.5vw;
+        padding: 1.7vw;
         width: 1vw;
         font-size: 1.5vw;
+    }
+    .std-in-form, .sec-in-form {
+        width: 145%;
+    }
+    .sort-input input[type=text] {
+        width: 32%;
+    }
+    #student-Form-modal-content{
+        width: 126%;
+        margin-left: -13%;
     }
 }
 @media screen and (max-width:420px) {
@@ -136,5 +148,10 @@ table {
     input[type=file] {
         width: 30vw;
     }
-
+   .sort-input input[type=text]{
+        width: 65%;
+    }
+   input[type=text],input[type=email],input[type=phone] {
+        width: 90%;
+    }
 }

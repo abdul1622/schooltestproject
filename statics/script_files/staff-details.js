@@ -1,19 +1,18 @@
-  let stdsec;
+let stdsec;
 let editbutton = false
 let userid;
-  let user, standards = [];
-  let staffs=[];
-  let grade_list;
-  let content = ''
-  let token = localStorage.getItem("token")
-  let messages = document.querySelector('.messages')
-  let error_messages = document.querySelector('.error-messages')
-  add = document.getElementById('addstaff')
-  let button;
-  var host = window.location.protocol + "//" + window.location.host;
-  let form = document.getElementById('userDetails')
-  document.getElementById('reg-no-div').style.display = 'none'
-  const container2 = document.querySelector('.container2');
+let user, standards = [];
+let staffs = [];
+let grade_list;
+let content = ''
+let token = localStorage.getItem("token")
+let messages = document.querySelector('.messages')
+let error_messages = document.querySelector('.error-messages')
+add = document.getElementById('addstaff')
+let button;
+var host = window.location.protocol + "//" + window.location.host;
+let form = document.getElementById('userDetails')
+const container2 = document.querySelector('.container2');
 $(document).ready(function () {
   if (!token) {
     return window.location.href = '/login';
@@ -37,7 +36,7 @@ $('[data-dismiss=modal]').on('click', function (e) {
     document.querySelector('.inner').innerHTML = ''
   }
   if (document.getElementById('update')) {
-    document.getElementById('update').id='userdetail-btn'
+    document.getElementById('update').id = 'userdetail-btn'
   }
 
 
@@ -175,8 +174,7 @@ function std(id, index, flag) {
   }
 }
 function edit(index, id) {
-  document.getElementById('userdetail-btn').id ='update'
-  document.getElementById('reg-no-div').style.display = 'block'
+  document.getElementById('userdetail-btn').id = 'update'
   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
   tr = document.querySelectorAll('.list')[index]
   let email = tr.querySelector(".useremail").textContent;
@@ -271,12 +269,12 @@ function edit(index, id) {
             setTimeout(function () {
               $('#messageModal-staff').modal('hide')
               window.location.reload();
-            }, 2000); 
+            }, 2000);
           }
           error_messages.innerHTML = ''
           return response.json();
         }
-     
+
 
         else {
           error_messages.innerHTML = `<li>${(data.data.error)}</li>`
@@ -346,6 +344,8 @@ document.getElementById('addstaff').addEventListener('click', () => {
           messages.innerHTML = ''
         }
       })
+
   })
+
 })
 

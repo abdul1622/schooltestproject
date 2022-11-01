@@ -1,12 +1,13 @@
-
 #questionForm span.grade-p {
     font-size: 15px;
     display: block;
 }
+
 form.questionanswer {
     display: grid;
     grid-template-columns: auto auto auto auto;
 }
+
 .grid-item {
     font-size: 10px;
 }
@@ -96,6 +97,7 @@ button#questioncreate-btn {
 .question-list-container {
     margin: 5%;
 }
+
 .question_create {
     display: none;
     grid-template-columns: auto auto auto auto;
@@ -109,6 +111,7 @@ button#questioncreate-btn {
     position: fixed;
     border-radius: 5px;
 }
+
 #--question {
     color: #ffffff;
     margin: 2vh 4vw;
@@ -136,9 +139,11 @@ button#questioncreate-btn {
     height: auto;
     box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
 }
+
 .question-card-details {
     height: 85%;
 }
+
 .question-card #edit {
     padding: 5px 15px;
     margin-left: -1vw;
@@ -154,6 +159,7 @@ button#questioncreate-btn {
     font-size: 150%;
     color: #900202;
 }
+
 #q-form-1 input#id_no_of_questions {
     width: 88%;
 }
@@ -179,9 +185,39 @@ button#questioncreate-btn {
     display: block;
     font-weight: bold;
 }
-#QForm-modal-content{
+
+#QForm-modal-content {
     width: 233%;
     background-color: #b2c8df;
     padding: 2% 5%;
     margin-left: -31%;
+}
+
+@media screen and (max-width:420px) {
+    #question-box {
+        width: 60%;
+        margin: 1% 20%;
+        padding: 1% 0% 4% 4%;
+    }
+
+    .question-list fieldset {
+        grid-template-columns: auto;
+    }
+
+    form.questionanswer {
+        grid-template-columns: auto;
+    }
+
+    #QForm-modal-content {
+        width: 88%;
+        margin-left: 5%;
+    }
+    .questionanswer select {
+        padding: 10px;
+        width: 141%;
+        color: black;
+        border: none;
+        outline: none;
+        display: grid;
+    }
 }

@@ -123,7 +123,7 @@ let form = document.getElementById('userDetails')
             table2 = table2 + '<td class="userDOB">' + `${d.date_of_birth}` + '</td>';
             table2 = table2 + '<td class="useraddress">' + `${d.profile?.address}` + '</td>';
             table2 = table2 + '<td class="userstandard">' + `${d.profile?.standard}` + '</td>';
-            table2 = table2 + '<td>' + ` <i id="edit" data-toggle="modal" data-target="#FormModal" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
+            table2 = table2 + '<td>' + ` <i id="edit" data-toggle="modal" data-target="#student-FormModal" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-user-Modal" class="fa fa-trash-o" ></i>` + '</td></tbody>',
               table2 = table2 + `</tr>`;
             })
         table2 += "</table>";

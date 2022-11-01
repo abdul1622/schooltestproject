@@ -38,7 +38,7 @@ function deletestaff(id) {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'token' + ' ' + localStorage.getItem('token')
+      'Authorization': 'token' + ' ' + localStorage.getItem('token') 
     },
   }).then(res => {
 
