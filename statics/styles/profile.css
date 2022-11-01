@@ -6,7 +6,9 @@
         .profile-back-btn {
             margin-left: 96%;
         }
-
+        #profile-box input {
+            width: 100%;
+        }
         #profile-edit {
             position: absolute;
             bottom: 8%;

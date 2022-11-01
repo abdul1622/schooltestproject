@@ -24,6 +24,17 @@
 .chapter-edit-close .back-btn {
     margin: auto;
 }
+#form-chaplist input {
+    width: 95%;
+}
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
 .chapterhead {
     text-align: center;
 }
@@ -96,6 +107,7 @@ p.chapter-edit-close {
 .chapter-table .btn {
     margin-bottom: 2%;
     margin-left: 20%;
+    color: white;
 }
 .chapter-table table{
     width: 60%;
@@ -222,21 +234,24 @@ p.chapter-edit-close {
     }
 
     .box input[type=text] {
-        font-size: 1.5vh;
+        font-size: 13px;
     }
 
     .box #chapterlist-btn {
-        width: 12vw;
-        height: 4vh;
         font-size: 10px;
-
         margin-left: 11vw;
     }
-
+    #form-chaplist .back-btn {
+        color: white;
+        top: 3%;
+        right: 2%;
+        background-color: transparent;
+        font-size: 2vw;
+        outline: none;
+        position: absolute;
+    }
     #chapterlist-btn {
-        width: 12vw;
         font-size: 11px;
-        height: 4vh;
         margin-left: 9vw;
     }
 

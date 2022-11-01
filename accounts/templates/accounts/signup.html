@@ -2,7 +2,7 @@
 {% block signup %}
 {% load static %}
 <p id='response'></p>
-
+<!-- check_for_user -->
 <div class="signupbox">
     {% csrf_token %}
     <div class="signup-user-details">
@@ -15,16 +15,17 @@
             <option value="is_admin">is_admin</option>
         </select>
         <label>Email:</label>
-        <input type="text" name="email" class="form-control" placeholder="Email" id="id_email">
+        <input type="text" name="email" class="form-control" onchange="check_email(this)" placeholder="Email" id="id_email">
+        <p class="email-error text-danger"></p>
         <label>Phone:</label>
-        <input type="text" name="phone" class="form-control" placeholder="Phone" id="id_phone">
+        <input type="text" name="phone" class="form-control" onchange="check_phone(this)" placeholder="Phone" id="id_phone">
+        <p class="phone-error text-danger"></p>
         <label>DOB:</label>
         <input type="date" name="date_of_birth" class="form-control" placeholder="Date of Birth" id="id_date_of_birth">
         <hr>
 
         <p id="standard-p">
             <label for="id_standard">Standard:</label>
-
             <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required=""
                 id="id_standard">
             </select>

@@ -42,6 +42,22 @@ $('[data-dismiss=modal]').on('click', function (e) {
 
 
 })
+
+function add_form(){
+ document.getElementById('email').value= ''
+ document.getElementById('phone').value= ''
+ document.getElementById('reg').value= ''
+  document.getElementById('dob').value= ''
+ document.getElementById('fname').value= ''
+   document.getElementById('lname').value= ''
+ document.getElementById('ffname').value= ''
+  document.getElementById('std').value= ''
+ document.getElementById('sec').value= ''
+  document.getElementById('address').value= ''
+  document.getElementById('reg-no-div').style.display = 'none'
+   $('#SFormModal').modal('show')
+}
+
 fetch('https://schooltestproject.herokuapp.com/api/grades/', {
   method: 'GET',
   headers: new Headers({

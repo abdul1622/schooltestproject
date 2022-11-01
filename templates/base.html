@@ -44,28 +44,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- stylesheets -->
+    <link rel="stylesheet" href="{% static 'styles/backup.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/backup-responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/base-common.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/base-common-responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/base-tags.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/chapter.css' %}">
     <link rel="stylesheet" href="{% static 'styles/chapterlists.css' %}">
     <link rel="stylesheet" href="{% static 'styles/grade.css' %}">
     <link rel="stylesheet" href="{% static 'styles/subject.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/chapter.css' %}">
     <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/question_answer.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/question_answer_laptop.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/question_answer_tap_mobile.css' %}">
+
     <link rel="stylesheet" href="{% static 'styles/question-paper.css' %}">
     <link rel="stylesheet" href="{% static 'styles/question.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/question_answer.css' %}">
+
+    <link rel="stylesheet" href="{% static 'styles/staff.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/student.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'styles/take-test.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/take-test.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'styles/user-details-responsive-tap.css' %}">
     <link rel="stylesheet" href="{% static 'styles/test-history-staff.css' %}">
     <link rel="stylesheet" href="{% static 'styles/test-history-student.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/test-list-staff.css' %}">
     <link rel="stylesheet" href="{% static 'styles/test-list-student.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/base-common.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/base-common-responsive.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/base-tags.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/student.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/backup.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/backup-responsive.css' %}">
-    <!-- <link rel="stylesheet" href="{% static 'styles/userdetails.css' %}"> -->
 
-
-    <!-- <link rel="stylesheet" href="{% static 'styles/question.css' %}"> -->
     <title>School</title>
 
 </head>
@@ -80,8 +85,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-
-
                 </ul>
             </div>
         </div>
@@ -100,11 +103,6 @@
     {% block history %}{% endblock %}
     {% block index %}{% endblock %}
     {% block question-bank %}{% endblock %}
-
-
-
-
-
 
 </body>
 

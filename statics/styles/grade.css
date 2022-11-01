@@ -12,6 +12,13 @@
 #grade-form button {
     margin-left: 37%;
 }
+.grade-list .card .delete-grade {
+    top: 4%;
+    right: 8%;
+}
+p.grade {
+    margin: 12%;
+}
 #grade-btn {
     color: #14279B;
     outline: none;

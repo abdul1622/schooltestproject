@@ -243,3 +243,33 @@ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
             signup();
         }
     })
+
+    function check_email(element){
+        console.log(element.value)
+        url_for_check = new URL('http://127.0.0.1:8000/api/check-user/');
+        url_for_check.searchParams.append('email', element.value);
+        fetch(url_for_check, {
+            method: 'GET',
+        }).then(res => {
+            console.log(res,res.status)
+            if(res.status != 200){
+                document.querySelector('.email-error').innerHTML = 'email altready exits' 
+            }
+            else{
+                document.querySelector('.email-error').innerHTML = ''
+            }
+        })
+    }
+    function check_phone(element){
+        url_for_check = new URL('http://127.0.0.1:8000/api/check-user/');
+        url_for_check.searchParams.append('phone', element.value);
+        fetch(url_for_check, {
+            method: 'GET',
+        }).then(res => {
+            if(res.status != 200){
+                document.querySelector('.phone-error').innerHTML = 'phone number altready exits' 
+            }else{
+                document.querySelector('.phone-error').innerHTML = ''
+            }
+        })
+    }
