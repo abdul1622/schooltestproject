@@ -225,8 +225,8 @@
     grade_create.addEventListener('click', () => {
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         let url_grade = 'https://schooltestproject.herokuapp.com/api/grades/'
-        let id = current_grade.id
         if (edit) {
+            let id = current_grade.id
             fetch(`${url_grade}${id}/`, {
                 method: 'PUT',
                 headers: {
