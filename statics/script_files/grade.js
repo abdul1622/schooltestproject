@@ -122,7 +122,6 @@
             }
         }
         form_all.innerHTML = `<div class='grade-form-box'>
-            {% csrf_token %}
                 <p><label for="id_grade">Grade:</label> <input type="number" disabled name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
                <p class='section-btn'><span> <button onclick=add_section('edit') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
                 <p class='section-list'> </p>
@@ -142,7 +141,6 @@
     //  cancel section adding
     function cancel() {
         form_all.innerHTML = `<div class='grade-form-box'>
-            {% csrf_token %}
                 <p><label for="id_grade">Grade:</label> <input type="number" name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
                <p class='section-btn'><span> <button onclick=add_section('create') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
                 <p class='section-list'> </p>
@@ -250,7 +248,7 @@
                 return response.json()
             }).then(data => {
                 console.log(data)
-                if (data.status != 'success') {
+                if (data.status && data.status != 'success') {
                     error_messages.innerHTML = `<li>${(data.data.error)}</li>`
                     messages.innerHTML = ''
                 }
@@ -283,7 +281,7 @@
                     return response.json();
                 }).then(function (data) {
                     console.log(data)
-                    if (data.status != 'success') {
+                    if (data.status && data.status != 'success') {
                         error_messages.innerHTML = `<li>${(data.data.error)}</li>`
                         messages.innerHTML = ''
                     }
