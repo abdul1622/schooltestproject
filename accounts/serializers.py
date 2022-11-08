@@ -15,11 +15,7 @@ from django.core.mail import send_mail
 
 User = get_user_model()
 
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = ['first_name','last_name','full_name',"profile_picture","standard",
-                    "address"]
+
 usertype_choice=(
 (None,'-------'),
 ('is_student','is_student'),
@@ -61,7 +57,7 @@ class SignupSerializer(serializers.Serializer):
         print(standard)
         address = validated_data.pop("address")
         is_data_entry = validated_data.pop("is_data_entry")
-        user =   User.objects.create(email =email,phone=phone,date_of_birth=date_of_birth,user_type = user_type,is_data_entry=is_data_entry)
+        user =   User.objects.create(email=email,phone=phone,date_of_birth=date_of_birth,user_type = user_type,is_data_entry=is_data_entry)
         if user_type:
             users = User.objects.filter(user_type=user_type)
             last = (users[len(users)-2]).register_number
@@ -100,6 +96,11 @@ class SigninSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email','phone']
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['first_name','last_name','full_name',"profile_picture","standard",
+                    "address"]
 class UserDetailsSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
     class Meta:
@@ -107,7 +108,6 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         fields = ['id','email','phone','register_number','date_of_birth','is_active',
                     'user_type','created_at','profile']
         read_only_fields = ['id','created_at','user_type','is_data_entry']
-    
     def update(self, instance, validated_data):
         profile_data = validated_data.pop('profile')
         profile = instance.profile
