@@ -31,11 +31,7 @@ input:focus {
   body {
     font-family: 'Oswald', sans-serif;
     font-weight: 300;
-<<<<<<< HEAD
-    background-color: #B2C8DF;
-=======
     background-color: #F5E6CA;
->>>>>>> c7841df70cf2bb0714d31c7a8c7f757872b00c4f
   }
   h1 {
     color: #000000;
@@ -46,15 +42,6 @@ input:focus {
     text-align: center;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   }
-<<<<<<< HEAD
-  a {
-    color: white;
-    padding-left: 70px;
-    padding-top: 10px;
-  }
-
-=======
->>>>>>> c7841df70cf2bb0714d31c7a8c7f757872b00c4f
   a:hover {
     color: white;
     text-decoration: none;

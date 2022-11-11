@@ -30,17 +30,6 @@
     margin-top: 3%;
 }
 
-<<<<<<< HEAD
-.--user {
-    border-radius: 5px;
-    font-size: 15px;
-    margin-left: 24%;
-    margin-top: 4%;
-    background-color: rgb(255 248 220 / 94%);
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-
-}
-=======
 
     .--user {
         width: 100%;
@@ -51,7 +40,6 @@
         background-color: rgb(255 248 220 / 94%);
         box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
     }
->>>>>>> c7841df70cf2bb0714d31c7a8c7f757872b00c4f
 
 .--staff {
     border-radius: 5px;
