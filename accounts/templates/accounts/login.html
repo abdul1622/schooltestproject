@@ -3,17 +3,18 @@
 {% load static %}
 <div id='loginerror'> Invalid Email or Phone</div>
 <div class="logo-container">
-    <img src="https://cdn-icons-png.flaticon.com/512/1086/1086721.png">
+    <img src="https://cdn-icons-png.flaticon.com/512/1086/1086721.png" class='w-100'>
 </div>
 </div>
 <section class="log">
     <div class="container py-5 h-100">
-        <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="row d-flex  justify-content-center w-100">
             <div class="col-md-8 col-lg-7 col-xl-6 fullscreen-logo">
                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
                     class="img-fluid" alt="Phone image">
             </div>
-            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 login-box">
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 cols-xs-1
+            login-box">
                 {%csrf_token%}
                 <div class="form-outline mb-4">
                     <div class="login-err-message">
@@ -28,25 +29,10 @@
                 </div>
                 <button class="login-btn btn btn-primary btn-lg btn-block" onclick=login()>Sign in</button>
                 <hr>
-                <p class="text-right"> <a class="btn btn-light signInLink" href="/signup">Signup?</a> </p>
             </div>
         </div>
     </div>
 </section>
 
-<footer style="background-color: whitesmoke;" class=" text-center text-white ">
-    <div class="container p-4 pb-0">
-        <section class="mb-4">
-            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-facebook"></i></a>
-            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-twitter"></i></a>
-            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-google"></i></a>
-            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-instagram"></i></a>
-            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-linkedin"></i></a>
-            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-github"></i></a>
-        </section>
-
-        <p> © 2020 Copyright:www.school.com</p>
-    </div>
-</footer>
 <script src="{% static 'script_files/login.js' %}" type="text/javascript"></script>
 {% endblock %}

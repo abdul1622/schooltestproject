@@ -23,8 +23,13 @@
     #question-box {
         margin-left: 34vw;
         background-color: #b2c8df;
+<<<<<<< HEAD
         width: 32vw;
         height: 32vh;
+=======
+        width: 17vw;
+        height: 27vh;
+>>>>>>> c7841df70cf2bb0714d31c7a8c7f757872b00c4f
         padding: 3vh;
         border-radius: 9px;
         margin-top: -3vh;
@@ -68,7 +73,11 @@
     .question-card {
         margin-top: 1vh;
         font-size: 15px;
+<<<<<<< HEAD
         width: 84%;
+=======
+        width: 71%;
+>>>>>>> c7841df70cf2bb0714d31c7a8c7f757872b00c4f
         padding: 25px;
         background-color: #5c7aea;
         border-radius: 5px;
@@ -81,10 +90,17 @@
 
     .question-card p {
         color: rgba(0, 0, 0, 0.753);
+<<<<<<< HEAD
         width: 199px;
         display: block;
         font-weight: bold;
         font-size: 1.2vw;
+=======
+        width: 90%;
+        display: block;
+        font-weight: bold;
+        font-size: 1vw;
+>>>>>>> c7841df70cf2bb0714d31c7a8c7f757872b00c4f
     }
 
     .questionlist {
