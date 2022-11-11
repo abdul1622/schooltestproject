@@ -23,8 +23,8 @@
     #question-box {
         margin-left: 34vw;
         background-color: #b2c8df;
-        width: 32vw;
-        height: 32vh;
+        width: 17vw;
+        height: 27vh;
         padding: 3vh;
         border-radius: 9px;
         margin-top: -3vh;
@@ -68,7 +68,7 @@
     .question-card {
         margin-top: 1vh;
         font-size: 15px;
-        width: 84%;
+        width: 71%;
         padding: 25px;
         background-color: #5c7aea;
         border-radius: 5px;
@@ -81,10 +81,10 @@
 
     .question-card p {
         color: rgba(0, 0, 0, 0.753);
-        width: 199px;
+        width: 90%;
         display: block;
         font-weight: bold;
-        font-size: 1.2vw;
+        font-size: 1vw;
     }
 
     .questionlist {

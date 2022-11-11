@@ -31,7 +31,7 @@ input:focus {
   body {
     font-family: 'Oswald', sans-serif;
     font-weight: 300;
-    background-color: #B2C8DF;
+    background-color: #F5E6CA;
   }
   h1 {
     color: #000000;
@@ -42,12 +42,6 @@ input:focus {
     text-align: center;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   }
-  a {
-    color: white;
-    padding-left: 70px;
-    padding-top: 10px;
-  }
-
   a:hover {
     color: white;
     text-decoration: none;

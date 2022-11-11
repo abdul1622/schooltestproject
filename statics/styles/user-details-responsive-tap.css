@@ -182,4 +182,10 @@
         padding: 2% 5%;
         margin-left: 5%;
     }
+    #student-Form-modal-content {
+        width: 92%;
+        margin-left: 5%;
+        padding: 2% 5%;
+        background-color: #b2c8df;
+    }
     }
