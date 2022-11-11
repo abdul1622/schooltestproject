@@ -73,11 +73,7 @@ function add_form(){
    document.getElementById('std').value = ''
    document.getElementById('address').value = ''
    document.getElementById('reg-no-div').style.display = 'none'
-<<<<<<< HEAD
-   $('#FormModal').modal('show')
-=======
    $('#student-Form-modal-content').modal('show')
->>>>>>> c7841df70cf2bb0714d31c7a8c7f757872b00c4f
 }
 
 let messages = document.querySelector('.messages')
