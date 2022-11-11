@@ -1,0 +1,17 @@
+
+       #Form-modal-content {
+        width: 172%;
+        background-color: #b2c8df;
+        padding: 2% 5%;
+        margin-left: -31%;
+    }
+@media screen and (min-width:430px) and (max-width:800px) {
+    #Form-modal-content {
+        width: 121%;
+        padding: 2% 5%;
+        margin-left: -23%;
+    }
+    .userDetails input{
+        width: 144%;
+    }
+}

@@ -1,0 +1,121 @@
+.history-container-form {
+    width: 20%;
+    margin: 4% 39%;
+    padding: 2% 3%;
+    line-height: 2;
+    color: white;
+    background-color: #435cf9;
+}
+
+.history-container-form button.btn.btn-sm.btn-primary {
+    margin: 10% 36% 0%;
+}
+
+.history-container-div {
+    background-color: #FFF5E4;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    width: 70%;
+    margin: 2% 15%;
+    padding: 1% 1%;
+    overflow-x: auto;
+}
+
+.history-container table {
+    width: 100%;
+}
+
+.history-container table,
+.history-container th,
+.history-container td {
+    border: 1px solid#00000017;
+    border-collapse: collapse;
+}
+
+.history-container button {
+    margin-bottom: 1%;
+}
+
+.history-container-div table button {
+    width: 87%;
+    background: transparent;
+    border: 1px solid #00000030;
+}
+.history-container-div table button:focus{
+    outline-style: inherit;
+}
+
+.history-container span.test-heading {
+    text-transform: capitalize;
+    font-size: 30px;
+}
+
+.history-container p.heading {
+    display: flex;
+    justify-content: space-around;
+}
+
+.history-container-form select {
+    width: 100%;
+}
+
+.history-container-head {
+    margin: 1% 15%;
+}
+
+@media screen and (min-width:1024px) and (max-width:1200px) {
+    .history-container-form {
+        width: 33%;
+        margin: 4% 37%;
+    }
+}
+
+@media screen and (min-width:1359px) and (max-width:1450px) {
+    #test-details-model .modal-content {
+        width: 100%;
+        margin-left: -1%;
+        padding: 2% 5%;
+        background-color: #b2c8df;
+    }
+}
+
+@media screen and (min-width:430px) and (max-width:800px) {
+    .history-container-div th:last-child {
+        position: static;
+    }
+
+    .history-container-form {
+        width: 38%;
+        margin: 3% 30%;
+    }
+
+    .history-container-div {
+        width: 85%;
+        margin: 2% 15%;
+    }
+}
+
+@media screen and (max-width:420px) {
+    .history-container-form {
+        width: 70%;
+        margin: 4% 15%;
+        padding: 2% 7%;
+    }
+
+    .history-container-div {
+        background-color: darkgrey;
+        width: 70%;
+        margin: 2% 15%;
+    }
+
+    .history-container p.heading {
+        flex-direction: column;
+    }
+
+    .history-container span.test-heading {
+        text-transform: capitalize;
+        font-size: 16px;
+    }
+    .history-container-div table button {
+        width: 100%;
+    }
+}

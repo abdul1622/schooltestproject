@@ -1,0 +1,303 @@
+.userDetails {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.container2 thead th:last-child {
+    text-align: start;
+    padding-left: px;
+}
+
+#add {
+    width: 7%;
+    background-color: #14279b;
+    padding: 0.2% 1%;
+    color: white;
+    border-radius: 5px;
+    margin-left: 29%;
+    position: absolute;
+    height: auto;
+    margin-top: 3%;
+
+}
+
+#add :focus {
+    outline-style: inherit;
+}
+
+.sort-input {
+    margin-left: 14%;
+    margin-top: 3%;
+}
+
+.--user {
+    border-radius: 5px;
+    font-size: 15px;
+    margin-left: 24%;
+    margin-top: 4%;
+    background-color: rgb(255 248 220 / 94%);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+}
+
+.--staff {
+    border-radius: 5px;
+    margin-left: 23%;
+    background-color: rgb(255 248 220 / 94%);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.standards-list {
+    position: absolute;
+    margin-left: 101%;
+    margin-top: 0%;
+    background-color: #edc81452;
+    padding: 1%;
+    width: 18%;
+}
+
+#addstaff {
+    width: 120px;
+    background-color: #14279b;
+    padding: 6px 15px;
+    color: white;
+    border-radius: 5px;
+    position: absolute;
+    height: 32px;
+    float: right;
+    margin-top: 0vh;
+    margin-left: 1vw;
+    outline: none;
+}
+
+#action {
+    padding-left: 2vh;
+}
+
+#userdetail-btn {
+    width: 110px;
+    height: 39px;
+    margin-left: 68px;
+    margin-top: 56px;
+    margin-bottom: 17px;
+    background-color: #b2c8df;
+    color: #14279b;
+    border: 1px solid #14279b;
+}
+
+#userdetail-btn:hover {
+    background-color: #14279b;
+    color: white;
+}
+
+#userdetail-btn {
+    width: 14vw;
+    height: 39px;
+    margin-left: 0vw;
+    margin-top: 5%;
+    margin-bottom: 17px;
+    background-color: #b2c8df;
+    color: #14279b;
+    border: 1px solid #14279b;
+}
+
+.userDetails input[type=file] {
+    position: static;
+    margin: 0;
+}
+
+button#standard_add_btn {
+    margin: 9% 0% 2%;
+}
+
+@media screen and (min-width:1024px) and (max-width:1200px) {
+    #sort {
+        width: 9vw;
+    }
+
+    #add {
+        width: 11%;
+        background-color: #14279b;
+        padding: 0% 1%;
+        color: white;
+        border-radius: 5px;
+        margin-left: 48%;
+        position: absolute;
+        height: 4%;
+        margin-top: 3.2%;
+    }
+
+    #addstaff {
+        width: auto;
+        height: auto;
+        /* margin-right: 0vw; */
+        /* margin-top: 1vh;
+        margin-left: 123vh; */
+    }
+
+    .container2 {
+        width: 100%;
+    }
+
+    .container2 thead th:last-child {
+        text-align: start;
+        padding-left: 3vw;
+    }
+
+    .--user {
+        font-size: 15px;
+        margin-left: 6%;
+        margin-top: 2%;
+        background-color: rgb(255 248 220 / 94%);
+
+    }
+
+    .--user #edit {
+        padding: 0.5% 2%;
+        margin-left: -2%;
+        border-radius: 5px;
+        position: absolute;
+        font-size: 102%;
+    }
+
+    .--user #delete {
+        margin-top: 0vh;
+        margin-left: 5vw;
+        padding: 3%;
+        font-size: 113%;
+    }
+
+    .--staff {
+        background-color: cornsilk;
+        margin-left: 4%;
+        margin-top: 8%;
+    }
+
+    .--staff #delete {
+        margin-top: 0vh;
+        margin-left: 5vw;
+    }
+
+    .--staff #edit {
+        padding: 7px 15px;
+        margin-left: -2%;
+        border-radius: 5px;
+        position: absolute;
+    }
+
+    #action {
+        padding-left: 4vh;
+    }
+
+    #userdetail-btn {
+        width: 14vw;
+        height: 39px;
+        margin-left: 0vw;
+        margin-top: 12%;
+        margin-bottom: 17px;
+        background-color: #b2c8df;
+        color: #14279b;
+        border: 1px solid #14279b;
+    }
+}
+
+@media screen and (min-width:1359px) and (max-width:1450px) {
+
+    .container2 {
+        width: 100%;
+    }
+
+    .container2 thead th:last-child {
+        text-align: start;
+        padding-left: 3vw;
+    }
+
+    .container2 #edit {
+        width: 5vw;
+        padding: 5px 15px;
+        margin-left: -1vw;
+        border-radius: 5px;
+        height: 1%;
+    }
+
+    .container2 #delete {
+        width: 5vw;
+        padding: 5px 15px;
+        margin-left: 1vw;
+        border-radius: 5px;
+    }
+
+    #add {
+        width: 9%;
+        background-color: #14279b;
+        padding: 6px 15px;
+        color: white;
+        border-radius: 5px;
+        margin-left: 43%;
+        position: absolute;
+        height: 4.7%;
+        margin-top: 3%;
+    }
+
+    .--user {
+        font-size: 15px;
+        margin-left: 4%;
+        margin-top: 4%;
+        width: 93%;
+        background-color: rgb(255 248 220 / 94%);
+    }
+
+    .--user #delete {
+        padding: 4px 14px;
+        margin-left: -1%;
+        border-radius: 5px;
+        margin-top: 0;
+        position: absolute;
+    }
+
+    #sort {
+        width: 9vw;
+    }
+
+    .--staff {
+        margin-top: 5%;
+        font-size: 15px;
+        width: 97%;
+        margin-left: 2%;
+    }
+
+    #addstaff {
+        width: 9vw;
+        height: 5vh;
+        margin-right: 3vw;
+        margin-left: 1vw;
+        margin-top: 0vh;
+    }
+
+    #action {
+        padding-left: 5vh;
+    }
+
+    #userdetail-btn {
+        width: 14vw;
+        height: 39px;
+        margin-left: 0vw;
+        margin-top: 10%;
+        margin-bottom: 17px;
+        background-color: #b2c8df;
+        color: #14279b;
+        border: 1px solid #14279b;
+    }
+
+    .modal-content {
+        margin-left: -57%;
+    }
+
+}
+
+ @media screen and (max-width:375px) {
+
+    button#standard_add_btn {
+        margin: 0% 0% 2%;
+    }
+} 

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="history-container-form" id="history-container-form">
+    <label for=""> Grade: </label>
+    <span class="grade-p"><select name="grade" required="" class="grade-in-form" id="id_grade">
+      </select></span>
+      <!-- {{form.as_p}} -->
+    <br><label for=""> Subject: </label>
+    <select name="subject" required="" id="id_subject">
+        <option value="" selected="">---------</option>
+      </select>
+      <label for=""> Test: </label>
+      <select name="test" required="" id="id_test">
+          <option value="" selected="">---------</option>
+        </select>
+        <button class="btn btn-sm btn-primary" onclick=get()>Get</button>
+        <div class="error-messages">
+
+        </div>
+</div>
+<div class="history-container">
+
+</div>
+
+<div class="modal fade" id="test-details-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content test-model ">
+    <div class="modal-header">
+      <h4 class="modal-title" id="exampleModalLabel">Test details</h4>
+      <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body modal-body-1">
+      <div class="test-details"></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="{% static 'script_files/student-test-history.js' %}" type="text/javascript"></script>
+{% endblock %}

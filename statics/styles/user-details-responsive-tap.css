@@ -1,0 +1,185 @@
+@media screen and (min-width:430px) and (max-width:800px) {
+    .userDetails {
+        grid-template-columns: auto auto;
+    }
+
+    #add {
+        width: 14%;
+    background-color: #14279b;
+    padding: 0% 1%;
+    color: white;
+    border-radius: 5px;
+    margin-left: 48%;
+    position: absolute;
+    height: 5.2%;
+    margin-top: 2%;
+    }
+
+    .--user {
+        margin-top: 1%;
+        margin-left: 2%;
+        font-size: 12px;
+    }
+
+    .--user th:last-child {
+        padding-left: 1%;
+        position: absolute;
+        margin-left: 3%;
+    }
+
+    #addstaff {
+        width: 13vw;
+        height: 5.5vh;
+        margin-left: 3vw;
+        margin-top: -1vh;
+        font-size: 1.9vw;
+        position: absolute;
+    }
+
+    #sort {
+        width: 10vw;
+    }
+
+    .--staff {
+        margin-left: 4%;
+        font-size: 1.2vw;
+        width: 20vw;
+        white-space: nowrap;
+        margin-top: 8%;
+    }
+
+    #action {
+        padding-left: 1%;
+    }
+
+    #userdetail-btn {
+        width: 10vw;
+        height: 5vh;
+        font-size: 14px;
+        position: static;
+        margin-top: 20.99%;
+    }
+}
+
+@media screen and (max-width:420px) {
+    .userDetails {
+        grid-template-columns: auto;
+    }
+
+    .container2 table {
+        width: 20vw;
+    }
+
+    .container2 {
+        width: 82vw;
+        overflow: scroll;
+        margin-left: 3%;
+        min-height: 70vh;
+    }
+
+    #add {
+        width: 20%;
+        margin-left: -1%;
+        padding: 2%;
+        font-size: 64%;
+        height: auto;
+        margin-left: 75%;
+        margin-top: 3%;
+    }
+
+    .sort-input input {
+        width: 68%;
+    }
+
+    .--user #edit {
+        font-size: 150%;
+        margin-left: -26%;
+    }
+
+    .--user #delete {
+        padding: 1%;
+        margin-left: 1%;
+        border-radius: 5px;
+        margin-top: -69%;
+        font-size: 150%;
+    }
+
+    .--user {
+        overflow-x: scroll;
+    }
+
+
+
+    .--staff #edit {
+        padding: 7px 4px;
+        font-size: 150%;
+        display: inline;
+        margin-left: 8%;
+        border-radius: 5px;
+    }
+
+    #action {
+        padding-left: 2%;
+    }
+
+    .--staff #action {
+        padding-left: 4%;
+    }
+
+    .--staff #delete {
+        padding: 7px 15px;
+        margin-left: 0%;
+        border-radius: 5px;
+        font-size: 150%;
+        display: inline;
+    }
+
+    .--staff {
+        font-size: 15px;
+        margin-left: 8%;
+        margin-top: 16%;
+    }
+
+    #addstaff {
+        width: 13%;
+        margin-left: 3%;
+        font-size: 3vw;
+        height: 5.4%;
+        margin-top: -4%;
+        padding: 1% 2%;
+    }
+
+    #userdetail-btn {
+        font-size: 12px;
+        margin-top: 2vh;
+        margin-left: 7%;
+    }
+
+    #sort {
+        width: 17%;
+        position: absolute;
+        padding: 1.2%;
+        margin-left: 23%;
+        margin-top: 0%;
+    }
+    #userdetail-btn {
+        width: auto;
+    }
+    
+    div#delete-user-Modal .modal-content,#delete-staff-Modal .modal-content{
+        width: auto;
+        margin-left: auto;
+    }
+    #confirmationuser h3{
+        font-size: 14px;
+    }
+    #delete-user-Modal #yes,#delete-user-Modal #no,#delete-staff-Modal #yes,#delete-staff-Modal #no{
+        font-size: 10px;
+    }
+    #Form-modal-content {
+        width: 96%;
+        background-color: #b2c8df;
+        padding: 2% 5%;
+        margin-left: 5%;
+    }
+    }

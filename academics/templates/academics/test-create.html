@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="test-create-container">
+  <div class="question-papers-get">
+    <div class="container">
+      {% csrf_token %}
+      <p><label for="get_grade">Grade:</label> <span class="grade-p"> <select name="grade" class="grade-in-form" onchange=getgradename(this) required="" id="get_grade">
+      </select></span></p>
+      <!-- {{form.as_p}} -->
+      <label for=""> Subject: </label>
+      <select name="subject" required="" onchange=getsubjectname(this) id="id_subject_2">
+        <option value="" selected="">---------</option>
+      </select>
+      <!-- 
+      <p class="row"><label class="col-3" for="id_grade">Grade:</label><input class="col-7 form-control" type="text"
+          name="grade" maxlength="14" required="" id="id_grade"></p>
+      <p class="row"><label class="col-3" for="id_subject">Subject:</label><input type="text" class="col-7 form-control"
+          name="subject" maxlength="20" required="" id="id_subject"></p> -->
+
+      <!-- <p class="text-center"> <button id="get-question-papers" onclick=get()>Get</button> </p> -->
+    </div>
+  </div>
+  <div class="header">
+    <h2 class="text-center">Grade - <span id="grade-head"></span></h2>
+    <hr>
+    <h3 class="text-center">Subject - <span id="subject-head"></span></h3>
+  </div>
+  <div class="question-papers-card"></div>
+  <div class="messages container-fluid">
+
+  </div>
+  <div class="error-messages container-fluid">
+
+  </div>
+
+  <!-- Modal -->
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content test-model ">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Create Test</h4>
+          <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body modal-body-1">
+          {% csrf_token %}
+          {{ test_form.as_p }}
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <span class="create-btn-container"> <button type="button" id="test-create-btn"
+              class="btn btn-primary">Create</button></span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editquestion-paper" tabindex="-1" role="dialog" aria-labelledby="editquestion-paperLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content test-model ">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Question Paper</h4>
+          <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body modal-body-2">
+          {% csrf_token %}
+          <p><label for="id_timing">Timing:</label> <input type="number" name="timing"
+              placeholder="duration in seconds" min="0" required="" id="id_timing"></p>
+          <p><label for="id_overallmarks">Overallmarks:</label> <input type="number" name="overallmarks" min="0"
+              required="" id="id_overallmarks"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <span class="question-edit-btn-container"> </span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  <!-- <script src="js/bootstrap.js"></script> -->
+</div>
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="{% static 'script_files/test-create.js' %}" type="text/javascript"></script>
+
+{% endblock %}
