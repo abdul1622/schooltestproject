@@ -1,5 +1,6 @@
 #addstaff{
-    font-family: 'Montserrat'
+        font-family: 'Montserrat';
+        margin-top: -3%;
 }
        #Form-modal-content {
         width: 172%;
@@ -17,8 +18,11 @@
         width: 144%;
     }
 }
-@media screen and (min-width: 1359px) and (max-width: 1450px){
+@media screen and (min-width: 500px) and (max-width: 1450px){
     #addstaff{
         margin-top:-2.4%;
+    }
+    .container2{
+        margin-top: 9%;
     }
 }

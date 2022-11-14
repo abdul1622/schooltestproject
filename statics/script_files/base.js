@@ -37,8 +37,6 @@ function navbar() {
     }
     else if (user == 'is_staff' && dataentry) {
         nav = ` 
-            <button data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
-                aria-expanded="false" aria-label="Toggle navigation"> &#x2715; </button>
         <li class="nav-item" id="nav-profile">
             <a href= '${host}/profile' class="nav-link" tabindex="1">Profile</a>
         </li>
@@ -71,9 +69,6 @@ function navbar() {
     }
     else if (user == 'is_admin' && dataentry) {
         nav = ` 
-        <li class="back-btn-nav">
-            <button data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
-                aria-expanded="false" aria-label="Toggle navigation"> &#x2715; </button>
         </li> <li class="nav-item" id="nav-profile">
             <a href= '${host}/profile' tabindex="1" class="nav-link">Profile</a>
         </li>
@@ -113,9 +108,6 @@ function navbar() {
     }
     if (dataentry && user == '') {
         nav = ` 
-        <li class="back-btn-nav">
-            <button data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
-                aria-expanded="false" aria-label="Toggle navigation"> &#x2715; </button>
         </li> <li class="nav-item" id="nav-profile">
             <a href= '${host}/profile' tabindex="1">Profile</a>
         </li>

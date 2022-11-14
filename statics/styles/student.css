@@ -7,9 +7,10 @@
 }
 .container2 thead th:last-child {
     text-align: start;
-    padding-left: px;
 }
-
+.container2{
+    overflow: auto;
+}
 #add :focus {
     outline-style: inherit;
 }

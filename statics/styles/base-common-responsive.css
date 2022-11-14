@@ -1,16 +1,4 @@
 @media screen and (min-width:1024px) and (max-width:1200px) {
-    .navbar {
-        width: 100%;
-        height: 7%;
-    }
-
-    .navbar li a {
-        padding: 0.12vh;
-    }
-
-    .navbar-nav {
-        margin-left: -3%;
-    }
     #edit {
         padding: 7px 15px;
         border-radius: 5px;
@@ -34,23 +22,9 @@
 
 }
 @media screen and (min-width:1359px) and (max-width:1450px) {
-    .navbar {
-        width: 100vw;
-        height: 8vh;
-    }
-    .navbar-nav {
-        width: 28%;
-    }
-    .nav-item {
-        padding: 0.7%;
-    }
     #QFormModal .modal-content {
     width: 200%;
     margin-left: -50%;
-    }
-    .navbar li a {
-        padding: 2.8vh;
-        margin-left: 2%;
     }
     .already {
         margin-left: 45vw;
@@ -99,11 +73,6 @@
         outline: none;
         position: absolute;
     }
-    .navbar .nav-item a:hover {
-        background-color: #14279b;
-        ;
-        color: white;
-    }
     .modal-content {
         width: auto;
         margin-left: auto;
@@ -131,19 +100,6 @@
     .back-btn-nav {
         display: block;
     }
-
-    .navbar-nav {
-        background-color: #14279b;
-        width: 32vw;
-        color: white;
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        font-size: 5vw;
-        position: fixed;
-        top: 0;
-        overflow-y: auto;
-    }
     #chapter-btn {
         margin-top: 0;
         background-color: #33699f;
@@ -166,23 +122,9 @@
         text-align: right;
         margin-right: 7%;
     }
-
-    .navbar li a {
-        font-size: 2.7vw;
-        padding: 15%;
-        margin: 0;
-    }
-
-    .navbar {
-        background-color: transparent;
-        height: 10vh;
-        width: 100%;
-        padding: 0;
-    }
-
     .navbar-light .navbar-toggler {
         margin-left: 4%;
-        background-color: #8d82ee;
+        background-color: #8ec1b6;
     }
     form.userDetails input {
         width: 144%;
