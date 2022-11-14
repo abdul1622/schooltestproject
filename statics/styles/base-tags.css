@@ -34,14 +34,6 @@ select {
 .std-in-form,.sec-in-form{
     width: 91%;
 }
-a {
-    color: white;
-    padding-left: 5px;
-    margin-left: 28px;
-    padding-top: 10px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
-
 a:active {
     text-decoration: none;
     color: white;

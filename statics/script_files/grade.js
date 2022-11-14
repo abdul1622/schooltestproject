@@ -45,11 +45,7 @@
 
     // get grade
     function get() {
-<<<<<<< HEAD
-        var content = ' <h2>Grades </h2> <hr> <div class="cards">'
-=======
-        var content = ' <h2>Grades </h2> <hr><div class="col-lg-4">'
->>>>>>> c7841df70cf2bb0714d31c7a8c7f757872b00c4f
+        var content = ' <h2>Grades </h2> <hr><div class="row">'
         fetch('https://schooltestproject.herokuapp.com/api/grades/', {
             method: 'GET',
             headers: {
@@ -71,11 +67,7 @@
             }
             data.data.forEach((d, index) => {
                 if (user_type == 'is_admin') {
-<<<<<<< HEAD
-                    content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button> <button id="edit" onclick=edit_grade(${d.id})><i class="fa fa-edit"></i></button>
-=======
-                    content = content + ` <div class="gradecard"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button> <button id="edit" onclick=edit_grade(${d.id})><i class="fa fa-edit"></i></button>
->>>>>>> c7841df70cf2bb0714d31c7a8c7f757872b00c4f
+                    content = content + ` <div class="row-lg-3"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button> <button id="edit" onclick=edit_grade(${d.id})><i class="fa fa-edit"></i></button>
         <p  onclick=getsubject(${d.grade},${d.id}) class="grade">${d.grade} </p>
         
  </div>`

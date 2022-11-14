@@ -3,6 +3,7 @@
 {% load static %}
 
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <!-- JavaScript Bundle with Popper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -40,7 +41,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Uchen&display=swap"
         rel="stylesheet">
-
+      
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- stylesheets -->
@@ -70,21 +71,33 @@
     <link rel="stylesheet" href="{% static 'styles/test-history-student.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/test-list-staff.css' %}">
     <link rel="stylesheet" href="{% static 'styles/test-list-student.css' %}">
+   
 
     <title>School</title>
 
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light ">
+    <nav class="navbar navbar-expand-sm navbar-light fixed-top">
+        <!-- Toggler/collapsibe Button -->
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" id="nav-btn" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler ms-auto ms-sm-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle Navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+            <div class="navbar-collapse collapse justify-content-end" id="navbarCollapse">
+                <ul class="navbar-nav ms-2 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="nav-home">Home</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#">About us</a>
+                    </li>
+                    <li>
+                      <a class="nav-link" href="#">Contact</a>
+                  </li>
+                    <li>
+                        <a class="nav-link" href="#" id="nav-login">Login</a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -12,6 +12,14 @@
     padding: 30px 50px;
     position: fixed;
 }
+.fa-light{
+
+    font-size: 150%;
+    color: white;
+    margin-left: 2%;
+    margin-bottom: 2%;
+
+}
 .form-box input {
     padding: 5px;
     width: 100%;
@@ -110,10 +118,10 @@ p.chapter-edit-close {
     color: white;
 }
 .chapter-table table {
-    width: 100%;
-    margin-left: 0%;
-    background-color: rgb(255 248 220 / 94%);
+    background-color: rgba(252, 252, 252, 0.287);
     box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
+    color:white;
+    font-family: 'Oswald', sans-serif;
 }
 
 #chapterlist-btn {

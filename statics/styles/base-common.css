@@ -28,40 +28,20 @@
     border-color: rgba(0, 0, 0, .1);
     margin-left: 86vw;
 }
-
-.nav-item :hover {
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-}
-
-.nav-item {
-    padding: 1%;
-}
-
 .errorlist {
     display: none;
 }
 
 .navbar {
-    background-color: #14279B;
-    font-size: 16px;
-    border-radius: 0px;
-    width: 100%;
-    z-index: 3;
-    height: 6vh;
+    background-color: rgba(22,34,57,0.95);
+    border-bottom: 1px solid #ffffff59;
+    font-size: 1.3em;
+    font-weight: 400;
+    font-family: 'Oswald', sans-serif;
 }
-
-.navbar .nav-item a:hover {
-    background-color: white;
-    color: black;
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(217, 217, 217, 0.778);
 }
-
-.navbar li a {
-    padding: 1.8vh;
-    margin-left: 2%;
-    white-space: nowrap;
-}
-
 .update {
     border: none;
     border-radius: 2px;
@@ -188,14 +168,6 @@
 
 .delete-box h4 {
     font-size: 192%;
-}
-
-i#back-btn {
-    padding: 1%;
-    cursor: pointer;
-    border-radius: 16%;
-    background-color: #0062cc;
-    color: white;
 }
 
 .messages {
