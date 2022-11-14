@@ -1,4 +1,6 @@
-
+#addstaff{
+    font-family: 'Montserrat'
+}
        #Form-modal-content {
         width: 172%;
         background-color: #b2c8df;
@@ -13,5 +15,10 @@
     }
     .userDetails input{
         width: 144%;
+    }
+}
+@media screen and (min-width: 1359px) and (max-width: 1450px){
+    #addstaff{
+        margin-top:-2.4%;
     }
 }
