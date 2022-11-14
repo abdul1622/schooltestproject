@@ -20,15 +20,6 @@
         width: 26%;
     }
     }
-    #question-box {
-        margin-left: 34vw;
-        background-color: #b2c8df;
-        width: 17vw;
-        height: 27vh;
-        padding: 3vh;
-        border-radius: 9px;
-        margin-top: -3vh;
-    }
     #QForm-modal-content {
         width: 181%;
         background-color: #b2c8df;
@@ -66,13 +57,8 @@
  
 
     .question-card {
-        margin-top: 1vh;
-        font-size: 15px;
-        width: 71%;
-        padding: 25px;
-        background-color: #5c7aea;
+        background-color: #ffffff32;
         border-radius: 5px;
-        box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
     }
 
     .question-list fieldset {
@@ -105,12 +91,10 @@
     }
     #--question {
         display: block;
-        color: #14279b;
-        /* margin-left: 38vw; */
         outline: 1px solid;
         background: transparent;
         margin-bottom: 0;
-        margin-top: 2vh;
+        margin-top: 9vh;
     }
 
     .question_create {
@@ -129,16 +113,6 @@
     .grid-item {
         font-size: 10px;
     }
-    #question-box {
-        /* margin-left: 3vw; */
-        background-color: #b2c8df;
-        width: 21%;
-        margin: 1% 39%;
-        height: 36vh;
-        padding: 3vh;
-        border-radius: 9px;
-
-    }
     form.questionanswer{
         grid-template-columns: auto auto auto;
     }
@@ -151,28 +125,6 @@
         margin-top: 1vh;
         /* margin-left: 5vw; */
     }
-    .question-card {
-        margin-left: -1vh;
-        margin-top: 1vh;
-        font-size: 15px;
-        width: 87%;
-        padding: 25px;
-        background-color: #5c7aea;
-        border-radius: 5px;
-        box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-    }
-
-.question-card {
-   margin-left: 0vh;
-    margin-top: 1vh;
-    font-size: 15px;
-    width: 86%;
-    padding: 25px;
-    background-color: #5c7aea;
-    border-radius: 5px;
-    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-}
-
 .question-card p {
     color: rgba(0, 0, 0, 0.753);
     width: 100%;
@@ -196,20 +148,11 @@
 .question-card p:nth-child(12) {
     margin-left: 20vw;
 }
-
-#--question {
-    display: block;
-    color: #14279b;
-    margin-left: 4vw;
-    outline: 1px solid;
-    background: transparent;
-    margin-bottom: 2vh;
-    margin-top: 1vh;
-}
-
 .question_create {
     display: none;
 }
+
+   
 
 .question_create {
     display: grid;

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<script src="https://kit.fontawesome.com/e732652cab.js" crossorigin="anonymous"></script>
 {% load static %}
 <!-- Creation and updation modal -->
 <div class="modal fade" id="QFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -118,19 +119,19 @@
   </div>
 </div>
 <button id="--question" data-toggle="modal" data-target="#QFormModal">Add Question</button>
-<div id="question-box">
+<div id="question-box" class="qformbox panel-group">
   {% csrf_token %}
   <!-- {{ form.as_p }} -->
   <label for=""> Grade: </label>
   <span class="grade-p-get">
-    <select name="grade" onchange="getgradename(this)" required="" class="grade-in-form" id="get_grade">
+    <select name="grade" onchange="getgradename(this)" required="" class="grade-in-form form-control" id="get_grade">
     </select></span>
   <br> <label for=""> Subject: </label>
-  <select name="subject" onchange="get_subject_name(this)" required="" id="id_subject_2">
+  <select name="subject" onchange="get_subject_name(this)" required="" id="id_subject_2" class="form-control">
     <option value="" selected="">---------</option>
   </select>
 
-  <button id="questioncreate-btn" onclick=get()>Get Question</button>
+  <p class="text-center mt-3"><button id="questioncreate-btn" class="btn btn-warning " onclick=get()>Get Question</button></p></div>
 </div>
 
 <div class="header">

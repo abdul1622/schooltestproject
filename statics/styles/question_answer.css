@@ -2,7 +2,9 @@
     font-size: 15px;
     display: block;
 }
-
+#questioncreate-btn{
+    font-family: 'Montserrat';
+}
 form.questionanswer {
     display: grid;
     grid-template-columns: auto auto auto auto;
@@ -11,31 +13,10 @@ form.questionanswer {
 .grid-item {
     font-size: 10px;
 }
-
-#question-box {
-    text-align: center;
-    background-color: #b2c8df;
-    width: 16%;
-    margin: 1% 42%;
-    padding: 1%;
-    border-radius: 9px;
-}
-
 .question-error {
     text-align: center;
     margin-top: 3%;
 }
-
-button#questioncreate-btn {
-    margin-top: 9%;
-    font-size: 14px;
-}
-
-/* #question-box label {
-    width: 5vw;
-    display: inline-block;
-} */
-
 .question-btn {
     width: 110px;
     height: 39px;
@@ -89,7 +70,9 @@ button#questioncreate-btn {
 .questionlist #delete {
     margin-left: 4vw;
 }
-
+.header{
+    color:antiquewhite;
+}
 .question-container-table table {
     width: 90%;
 }
@@ -97,7 +80,16 @@ button#questioncreate-btn {
 .question-list-container {
     margin: 5%;
 }
-
+.qformbox{
+    margin: 2% 40%;
+    width: 20%;
+    min-width: 200px;
+    padding: 2% 3%;
+    border-radius: 5px;
+    background-color: #ffffff14;
+}.qformbox label{
+    color: antiquewhite;
+}
 .question_create {
     display: none;
     grid-template-columns: auto auto auto auto;
@@ -132,8 +124,7 @@ button#questioncreate-btn {
 
 .question-card {
     font-size: 15px;
-    padding: 20px 9%;
-    background-color: #5c7aea;
+    padding: 4% 9%;
     border-radius: 5px;
     margin: 1% 5% 6%;
     height: auto;
@@ -149,7 +140,6 @@ button#questioncreate-btn {
     margin-left: -1vw;
     border-radius: 5px;
     font-size: 150%;
-    color: #14279B;
 }
 
 .question-card #delete {

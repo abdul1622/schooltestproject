@@ -90,18 +90,6 @@
     #questionForm input[type=select] {
         padding: 1vh;
     }
-
-    #--question {
-        display: block;
-        margin-left: 4vw;
-        /* text-align: center; */
-        outline: 1px solid;
-        padding: 5px;
-        margin-bottom: 0;
-        margin-top: 2vh;
-    }
-
-
     #question_creation {
         display: none;
     }
