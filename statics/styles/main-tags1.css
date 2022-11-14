@@ -5,7 +5,6 @@ input:focus {
     font-family: 'Oswald', sans-serif;
     font-weight: 400;
    background-image: url('./img/background.jpg');
-   background-repeat: no-repeat;
     background-size: cover;
 }
   input[type=checkbox]:focus {
@@ -58,7 +57,9 @@ input:focus {
     margin: 0 3px;
     line-height: 1.5;
   }
-
+.already{
+  color: darkcyan;
+}
 @media screen and (min-width:1000px) and (max-width:1024px) {
 
 }
