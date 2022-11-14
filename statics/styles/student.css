@@ -8,19 +8,6 @@
     padding-left: px;
 }
 
-#add {
-    width: 7%;
-    background-color: #14279b;
-    padding: 0.2% 1%;
-    color: white;
-    border-radius: 5px;
-    margin-left: 29%;
-    position: absolute;
-    height: auto;
-    margin-top: 3%;
-
-}
-
 #add :focus {
     outline-style: inherit;
 }
@@ -56,21 +43,6 @@
     padding: 1%;
     width: 18%;
 }
-
-#addstaff {
-    width: 120px;
-    background-color: #14279b;
-    padding: 6px 15px;
-    color: white;
-    border-radius: 5px;
-    position: absolute;
-    height: 32px;
-    float: right;
-    margin-top: 0vh;
-    margin-left: 1vw;
-    outline: none;
-}
-
 #action {
     padding-left: 2vh;
 }
@@ -115,27 +87,6 @@ button#standard_add_btn {
     #sort {
         width: 9vw;
     }
-
-    #add {
-        width: 11%;
-        background-color: #14279b;
-        padding: 0% 1%;
-        color: white;
-        border-radius: 5px;
-        margin-left: 48%;
-        position: absolute;
-        height: 4%;
-        margin-top: 3.2%;
-    }
-
-    #addstaff {
-        width: auto;
-        height: auto;
-        /* margin-right: 0vw; */
-        /* margin-top: 1vh;
-        margin-left: 123vh; */
-    }
-
     .container2 {
         width: 100%;
     }
@@ -227,19 +178,6 @@ button#standard_add_btn {
         margin-left: 1vw;
         border-radius: 5px;
     }
-
-    #add {
-        width: 9%;
-        background-color: #14279b;
-        padding: 6px 15px;
-        color: white;
-        border-radius: 5px;
-        margin-left: 43%;
-        position: absolute;
-        height: 4.7%;
-        margin-top: 3%;
-    }
-
     .--user {
         font-size: 15px;
         margin-left: 4%;
@@ -266,15 +204,6 @@ button#standard_add_btn {
         width: 97%;
         margin-left: 2%;
     }
-
-    #addstaff {
-        width: 9vw;
-        height: 5vh;
-        margin-right: 3vw;
-        margin-left: 1vw;
-        margin-top: 0vh;
-    }
-
     #action {
         padding-left: 5vh;
     }

@@ -151,7 +151,3 @@ function navbar() {
     }
 } navbar();
 
-function closemessage(e){
-element = e.parentElement.parentElement.parentElement.parentElement
-    $(`#${element.id}`).modal('hide')
-}
