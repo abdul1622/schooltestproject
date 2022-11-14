@@ -115,7 +115,7 @@ fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
       staffs.push(d)
     }
   })
-  let table2 = `<table class='table text-white' id='usr'>`;
+  let table2 = `<table class='table text-white md-mt-2' id='usr'>`;
   table2 += `<tr class="header">
          <th  scope="col" >Email</th>
          <th  scope="col">Phone</th>

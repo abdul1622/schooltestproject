@@ -176,9 +176,9 @@ function getchapter() {
                 table2 += `<table class="table"><thead class="thead"><th>Chapter No</th><th>Chapter Name</th><th>Description</th><th>Action</th></thead>`;
                 data.data.map(d => {
                     table2 = table2 + `<tr id=${d.id}>`;
-                    table2 = table2 + '<td class="chapter_no">' + `${d.chapter_no}` + '</td>';
-                    table2 = table2 + '<td class="chapter_name">' + `${d.name}` + '</td>';
-                    table2 = table2 + '<td class="description">' + `${d.description}` + '</td>',
+                    table2 = table2 + '<td scope="col" class="chapter_no">' + `${d.chapter_no}` + '</td>';
+                    table2 = table2 + '<td scope="col" class="chapter_name">' + `${d.name}` + '</td>';
+                    table2 = table2 + '<td scope="col" class="description">' + `${d.description}` + '</td>',
                         table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i>` + `<i class="fa fa-trash-o" id="delete" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist"></i>` + '</td>',
                         // table2 = table2 + '<td>' + + '</td>',
                         table2 = table2 + `</tr>`;

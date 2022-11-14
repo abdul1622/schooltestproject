@@ -135,12 +135,13 @@
 <!-- end  -->
 
 <!-- filter -->
-<button id="add" class="btn  btn-md float-right mt-5 mr-5 bg-warning text-white border-none;"  data-toggle="modal"  data-target="#student-FormModal" >Add Student</button>
-<div class="sort-input form-group">
+
+<div class="sort-input form-group text-center">
   <input type="search" class="form-control" id="student-filter" placeholder="search" min="0" max="12" onkeyup="filter()">
 </div>
+<button id="add" class="btn  btn-md float-right mr-5 mb-2 bg-warning text-white border-none;"  data-toggle="modal"  data-target="#student-FormModal" >Add Student</button>
 <!-- student details -->
-<div class="container2 "></div>
+<div class=" container2 w-100 "></div>
 
 <script src="{% static 'script_files/student-edit.js' %}" type="text/javascript"></script>
 <script src="{% static 'script_files/student-details.js' %}" type="text/javascript"></script>

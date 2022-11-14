@@ -4,21 +4,23 @@
 {% load static %}
 <!-- get chapter form -->
 <div class="form-box">
-    <div class="box" id="mediabox">
+    <div class="box panel-group" id="mediabox">
 
         {% csrf_token %}
-        <p class="grade-p"><label for=""> Grade: </label>
-            <select class="grade-in-form" onchange=getgradename(this) name="grade" required="" id="id_grade"></select>
+        <p class="grade-p form-group"><label for=""> Grade: </label>
+            <select class="grade-in-form form-control " onchange=getgradename(this) name="grade" required="" id="id_grade"></select>
         </p>
         <!--   <label for=""> Grade: </label>
         <select name="grade" required="" id="id_grade">
             <option value="" selected="">---------</option>
           </select>-->
         <label for=""> Subject: </label>
-        <select name="subject" onchange=getsubjectname(this) required="" id="id_subject">
+        <select name="subject" onchange=getsubjectname(this) class="form-control" required="" id="id_subject">
             <option value="" selected="">---------</option>
         </select>
-        <button id="chapterlist-btn" onclick=getchapter()>Getchapters</button>
+        <div class="text-center">
+        <button id="chapterlist-btn" class="btn btn-warning mt-3 md-btn-md" onclick=getchapter()>Getchapters</button>
+    </div>
     </div>
 </div>
 
