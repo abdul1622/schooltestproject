@@ -8,6 +8,9 @@
         padding: 2% 5%;
         margin-left: -31%;
     }
+    /* .staff-sort-input{
+        width: 20%;
+    } */
 @media screen and (min-width:430px) and (max-width:800px) {
     #Form-modal-content {
         width: 121%;
@@ -21,8 +24,5 @@
 @media screen and (min-width: 500px) and (max-width: 1450px){
     #addstaff{
         margin-top:-2.4%;
-    }
-    .container2{
-        margin-top: 9%;
     }
 }
