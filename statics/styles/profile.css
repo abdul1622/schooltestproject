@@ -3,6 +3,9 @@
             justify-content: space-around;
             font-family: 'Cinzel', serif;
         }
+        .container{
+            margin-top: 7rem;
+        }
         .profile-back-btn {
             margin-left: 96%;
         }
@@ -85,12 +88,12 @@
             margin-top: 5%;
             font-size: 18px;
             border-radius: 5px;
-            background-color: #fff8dcd9;
             position: relative;
         }
         .user label {
             width: 100px;
             display: inline-block;
+            color: bisque;
         }
 
         .profile-content {
@@ -98,12 +101,12 @@
             flex-basis: 80%;
             text-align: left;
             margin-bottom: 5%;
-            color: black;
+            color:white;
         }
         .profile-head {
             padding: 8% 12%;
             text-align: center;
-            background-color: #5c7aea;
+            background-color: #ededed32;
             flex-basis: 20%;
             line-height: 150%;
         }

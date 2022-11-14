@@ -1,13 +1,23 @@
-#grade {
-  background-color: #b2c8df;
-  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-  width: 20vw;
-  height: auto;
-  text-align: center;
-  padding: 3% 3%;
-  margin-top: 4%;
-  margin-bottom: 4%;
-  margin-left: 38%;
+
+  #grade {
+    background-color: #ffffff14;
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+    height: auto;
+    text-align: center;
+    padding: 3% 3%;
+    margin-bottom: 4%;
+    margin-left: 37%;
+    margin-top: 5rem;
+
+
+
+}
+.gradecard{
+  background-color: aliceblue;
+}
+.gradecard p{
+  padding: 6%;
+  font-size: xx-large;
 }
 #grade-form button {
   margin-left: 37%;
@@ -27,37 +37,13 @@
 
 }
 #grade-btn {
-  color: #14279b;
-  outline: none;
-  background-color: #b2c8df;
-  border: 1px solid #14279b;
-  border-radius: 5px;
+  font-family: 'Montserrat'
 }
 
-#grade-btn:hover {
-  color: white;
-  background-color: #14279b;
-}
 
 .grade-container .container {
   padding-top: 1%;
   padding-bottom: 1%;
-}
-.grade-container h2 {
-  margin-left: -5%;
-  font-family: "Cinzel", serif;
-  font-weight: 600;
-  display: inline;
-  padding: 1% 3%;
-  border-radius: 5px;
-  margin-top: 5%;
-  color: #14279b;
-}
-
-.grade-container hr {
-  width: 30%;
-  margin-left: 32%;
-  border: 2px solid gray;
 }
 #grade {
   display: none;
@@ -67,17 +53,6 @@
   display: none;
   padding-bottom: 4%;
 }
-.grade-list .card {
-  position: relative;
-  text-align: center;
-  height: 15vh;
-  padding-top: 25%;
-  cursor: pointer;
-  background-color: antiquewhite;
-  font-size: 25px;
-  box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-}
-
 .grade-list .cards {
   width: 70%;
   padding-left: 5%;
@@ -132,19 +107,11 @@
     color: #850b0b;
   } */
 @media screen and (min-width: 1024px) and (max-width: 1200px) {
-  #grade {
-    width: 44%;
-    margin-left: 26vw;
-  }
   .grade-list .card {
     height: 15vh;
   }
   .grade-container #edit {
     margin-left: 0;
-  }
-
-  .grade-container h2 {
-    margin-left: 36%;
   }
   .d-flex > div {
     background-color: blanchedalmond;
@@ -155,10 +122,6 @@
   
 }
 @media screen and (min-width: 1359px) and (max-width: 1450px) {
-  #grade {
-    width: 32%;
-    margin: 1% 36%;
-  }
   .grade-list .card {
     height: 22vh;
     border-radius: 10px;
@@ -173,7 +136,7 @@
     position: static;
   }
 }
-@media screen and (min-width: 430px) and (max-width: 800px) {
+@media screen and  (max-width: 420px) {
   .grade-list .cards {
     margin: 0% 27% 20%;
   }

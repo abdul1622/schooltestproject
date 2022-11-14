@@ -73,7 +73,7 @@ function add_form(){
    document.getElementById('std').value = ''
    document.getElementById('address').value = ''
    document.getElementById('reg-no-div').style.display = 'none'
-   $('#student-Form-modal-content').modal('show')
+   $('#student-FormModal').modal('show')
 }
 
 let messages = document.querySelector('.messages')

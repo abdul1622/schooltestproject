@@ -14,11 +14,18 @@
 #add :focus {
     outline-style: inherit;
 }
-
+#addstudent{
+    font-family: 'Montserrat';
+}
 .sort-input {
     margin-left: 14%;
     margin-top: 6%;
     width: 17%;
+}
+#usr #edit{
+
+    margin-right: 23%;
+
 }
     .--user {
         width: 100%;
@@ -49,32 +56,6 @@
     padding-left: 2vh;
 }
 
-#userdetail-btn {
-    width: 110px;
-    height: 39px;
-    margin-left: 68px;
-    margin-top: 56px;
-    margin-bottom: 17px;
-    background-color: #b2c8df;
-    color: #14279b;
-    border: 1px solid #14279b;
-}
-
-#userdetail-btn:hover {
-    background-color: #14279b;
-    color: white;
-}
-
-#userdetail-btn {
-    width: 14vw;
-    height: 39px;
-    margin-left: 0vw;
-    margin-top: 5%;
-    margin-bottom: 17px;
-    background-color: #b2c8df;
-    color: #14279b;
-    border: 1px solid #14279b;
-}
 
 .userDetails input[type=file] {
     position: static;

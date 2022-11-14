@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
+<script src="https://kit.fontawesome.com/e732652cab.js" crossorigin="anonymous"></script>
 {% load static %}
 
 <!-- form to edit and create grade,subject,chapter -->
-<div id="grade">
+<div id="grade" class="col-lg-3 col-md-4 col-sm-6 col-5">
 
     {% csrf_token %}
     <div class="form-all">
 
     </div>
-    <button class="submit-btn" id="grade-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
-    <button class="submit-btn" id="subject-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
-    <button class="submit-btn" id="chapter-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
+    <button class="submit-btn btn btn-warning" id="grade-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
+    <button class="submit-btn btn btn-warning"  id="subject-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
+    <button class="submit-btn btn btn-warning"  id="chapter-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
 </div>
 
 <!-- message popup -->
@@ -97,7 +98,7 @@
     </div>
 
     <!-- grade container -->
-    <div id="grade-list" class="grade-list text-center">
+    <div id="grade-list" class="grade-list grades text-center">
 
     </div>
 
