@@ -13,13 +13,12 @@
     position: fixed;
 }
 .fa-light{
-
     font-size: 150%;
     color: white;
     margin-left: 2%;
     margin-bottom: 2%;
-
 }
+
 .form-box input {
     padding: 5px;
     width: 100%;
@@ -29,9 +28,11 @@
     border: none;
     outline: none;
 }
+
 .chapter-edit-close .back-btn {
     margin: auto;
 }
+
 #form-chaplist input {
     width: 95%;
 }
