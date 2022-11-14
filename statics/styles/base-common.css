@@ -214,7 +214,7 @@
     margin-left: -1vw;
     border-radius: 5px;
     font-size: 150%;
-    color: #14279B;
+    color: #35b9dc;
 }
 
 #delete {
@@ -279,4 +279,5 @@ form.userDetails input {
 }
 table{
     overflow: auto;
+    
 }

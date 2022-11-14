@@ -2,7 +2,9 @@
     display: grid;
     grid-template-columns: auto auto auto;
 }
-
+#add{
+    font-family: 'Montserrat'
+}
 .container2 thead th:last-child {
     text-align: start;
     padding-left: px;
@@ -157,6 +159,7 @@ button#standard_add_btn {
 
     .container2 {
         width: 100%;
+        font-family: 'Montserrat'
     }
 
     .container2 thead th:last-child {

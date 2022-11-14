@@ -2,6 +2,7 @@
 {% block userd %}
 {% load static %}
 <!-- delete student -->
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 <div class="modal fade" id="delete-user-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -134,12 +135,12 @@
 <!-- end  -->
 
 <!-- filter -->
-<button id="add" class="btn btn-primary btn-md float-right mt-5 mr-5"  data-toggle="modal"  data-target="#student-FormModal" >Add Student</button>
+<button id="add" class="btn  btn-md float-right mt-5 mr-5 bg-warning text-white border-none;"  data-toggle="modal"  data-target="#student-FormModal" >Add Student</button>
 <div class="sort-input form-group">
   <input type="search" class="form-control" id="student-filter" placeholder="search" min="0" max="12" onkeyup="filter()">
 </div>
 <!-- student details -->
-<div class="container2"></div>
+<div class="container2 "></div>
 
 <script src="{% static 'script_files/student-edit.js' %}" type="text/javascript"></script>
 <script src="{% static 'script_files/student-details.js' %}" type="text/javascript"></script>
