@@ -76,10 +76,6 @@
     #add-section {
         width: 50%;
     }
-    .navbar .nav-item a:hover {
-        background-color: white;
-        color: black;
-    }
     .back-btn {
         margin-left: 88%;
         color: black;
