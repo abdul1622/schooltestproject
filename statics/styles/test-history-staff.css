@@ -1,15 +1,25 @@
 .history-container-form {
     width: 20%;
-    margin: 4% 39%;
+    margin: 9% 39%;
     padding: 2% 3%;
     line-height: 2;
     color: white;
-    background-color: #435cf9;
+    background-color: #292c4070;
+}
+.history-container-form label{
+    color: antiquewhite;
+    font-family: 'Montserrat';
+}
+.test-result-btn{
+    font-family: 'Montserrat';
 }
 
-.history-container-form button.btn.btn-sm.btn-primary {
+
+/* .history-container-form button.btn.btn-sm.btn-primary {
     margin: 10% 36% 0%;
-}
+    border-color: #fff8dc;
+     */
+
 
 .history-container-div {
     background-color: #FFF5E4;
