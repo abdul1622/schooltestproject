@@ -45,13 +45,13 @@ h1 {
     margin-top: -69px;
     margin-left: -75px;
     text-align: center;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'Montserrat';
 }
 
 button {
     border: none;
     border-radius: 5px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'Montserrat';
     font-size: 15px;
     font-weight: 800;
 }

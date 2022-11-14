@@ -1,6 +1,6 @@
 .history-container-form {
-    width: 20%;
-    margin: 9% 39%;
+    width: 30%;
+    margin: 12% 39%;
     padding: 2% 3%;
     line-height: 2;
     color: white;
@@ -72,7 +72,7 @@
     margin: 1% 15%;
 }
 
-@media screen and (min-width:1024px) and (max-width:1200px) {
+/* @media screen and (min-width:1024px) and (max-width:1200px) {
     .history-container-form {
         width: 33%;
         margin: 4% 37%;
@@ -128,4 +128,4 @@
     .history-container-div table button {
         width: 100%;
     }
-}
+} */
