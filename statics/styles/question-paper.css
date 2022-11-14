@@ -1,6 +1,6 @@
 
         .question-paper-form {
-            background-color: #435cf9;
+            background-color: #6264705e;
             padding: 30px 50px;
             border-radius: 5px;
             flex-basis: 23%;
@@ -86,7 +86,7 @@
 
 @media screen and (min-width:1024px) and (max-width:1200px) {
     .question-paper-form {
-        background-color: #435cf9;
+        background-color: #8388a72b;
         width: 34vw;
         padding: 30px 50px;
         margin: 10% 32%;
@@ -99,7 +99,7 @@
 }
 @media screen and (min-width:1359px) and (max-width:1450px) {
     .question-paper-form {
-        background-color: #435cf9;
+        background-color: #8388a72b;
         width: 24vw;
         padding: 30px 3%;
         margin: 7% 38%;
@@ -151,7 +151,7 @@
 @media screen and (max-width:420px) {
 
     .question-paper-form {
-        background-color: #435cf9;
+        background-color: #6264705e;
         width: 100%;
         padding: 30px 50px;
         margin-bottom: 15%;

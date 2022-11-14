@@ -145,7 +145,7 @@
 
 .text-center {
     text-align: center !important;
-    font-family: cinzel;
+    font-family: 'Montserrat';
 }
 
 .container3 {
@@ -174,12 +174,14 @@
     text-align: center;
     color: green;
     font-size: 14px;
+    font-family: 'Montserrat';
 }
 
 .error-messages {
     text-align: center;
     color: #ff0000;
     font-size: 14px;
+    font-family: 'Montserrat';
     background-color: white;
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
@@ -224,6 +226,7 @@
     margin-top: 0vh;
     color: #900202;
     font-size: 150%;
+    
 }
 
 .modal-content label {
@@ -233,6 +236,7 @@
 
 .modal-title span {
     font-size: 20px;
+    font-family: 'Montserrat';
 }
 
 .cards {
@@ -253,6 +257,7 @@ element.style {
 .success {
     color: white;
     font-size: 15px;
+    font-family: 'Montserrat';
 }
 
 input#id_section {

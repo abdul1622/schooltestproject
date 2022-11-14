@@ -2,7 +2,7 @@ input:focus {
     outline: 1px solid#14279B;
   }
   body {
-    font-family: 'Oswald', sans-serif;
+   font-family: 'Montserrat' sans-serif;
     font-weight: 400;
    background-image: url('./img/background.jpg');
     background-size: cover;
@@ -39,7 +39,7 @@ input:focus {
     margin-top: 0px;
     margin-left: -75px;
     text-align: center;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
   a:hover {
     color: white;

@@ -1,6 +1,7 @@
 .box .back-btn {
     margin-left: 105%;
     margin-bottom: 8%;
+   
 }
 .chapterlist-box {
     background-color: #b2c8df;
@@ -91,6 +92,7 @@
     width: 20%;
     min-width: 200px;
     padding: 2% 3%;
+    font-family: 'Montserrat';
     border-radius: 5px;
     background-color: #33699f;
 }
@@ -105,6 +107,7 @@ p.chapter-edit-close {
 
 .box button {
     margin-left: 30%;
+    
 }
 .chapter-table table,
 .chapter-table td,
@@ -122,7 +125,7 @@ p.chapter-edit-close {
     background-color: rgba(252, 252, 252, 0.287);
     box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
     color:white;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Montserrat';
 }
 
 #chapterlist-btn {
@@ -132,9 +135,10 @@ p.chapter-edit-close {
     margin-top: 20px;
     background-color: #b2c8df;
     color: #14279b;
-    padding: 5px 10px;
+    padding: 5px 5px;
     outline: none;
     border: 1px solid #14279b;
+    font-family: 'Montserrat';
 }
 
 .chapter-table #delete {
@@ -316,6 +320,7 @@ p.chapter-edit-close {
         outline: none;
         border: 1px solid #14279b;
         font-size: 75%;
+        font-family: 'Montserrat';
     }
 
     .form .back-btn {
@@ -329,6 +334,7 @@ p.chapter-edit-close {
 
     .chapter-table table {
         font-size: 65%;
+        font-family: 'Montserrat';
         margin-left: 6%;
         margin-top: 8%;
         width: 128%;
