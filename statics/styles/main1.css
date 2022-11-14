@@ -2,7 +2,12 @@
   padding-left: 3.5rem;
 }
 .navbar{
-  background-color:#25316dd1;
+    background-color: rgba(22,34,57,0.95);
+    border-bottom: 1px solid #ffffff59;
+  
+}
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(217, 217, 217, 0.778);
 }
 .navbar img{
   width: 5%;
@@ -29,6 +34,7 @@
   bottom: 0;
   width: 100%;
   text-align: center;
+  position: fixed;
 }
   @media screen and (min-width:1000px) and (max-width:1024px) {
     .login-box {

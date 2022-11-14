@@ -1,7 +1,13 @@
 input:focus {
     outline: 1px solid#14279B;
   }
-
+  body {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+   background-image: url('./img/background.jpg');
+   background-repeat: no-repeat;
+    background-size: cover;
+}
   input[type=checkbox]:focus {
     outline: none;
   }
@@ -26,12 +32,6 @@ input:focus {
     background-color: white;
     border-radius: 5px;
     margin: 5px;
-  }
-
-  body {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 300;
-    background-color: #F5E6CA;
   }
   h1 {
     color: #000000;

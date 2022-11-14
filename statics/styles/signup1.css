@@ -1,18 +1,28 @@
-
+.signdiv{
+  justify-content: space-evenly;
+}
   .signup-call {
     margin-left: 26%;
-    margin-top: 12%;
-    border: 2px solid;
+    margin-top: 7%;
     padding: 2%;
     width: 52%;
 }
 .form-control {
   width:100%;
 }
-
+.signup-call label{
+  color: white;
+}
+.signup-call input {
+  margin-bottom: 12%;
+}
+.signup-call select{
+  margin-bottom: 12%;
+}
 @media screen and (min-width:425px) and (max-width:580px) {
   .signup-call{
     flex-direction: column;
+    margin-top: 10%;
   }
   
 }
@@ -30,8 +40,6 @@
 }
 .signup-profile-details{
   margin-top: 1%;
-  margin-left: 10%;
-  
 }
 .signup-profile-details label {
   display: block;
@@ -52,93 +60,15 @@
   background: #14279B;
   color: white;
 }
-/* input { */
-  /* padding: 6px; */
-  /* width: auto; */
-  /* width: 485%; */
-  /* color: black;
-  font-size: 15px;
-  border: none;
-  outline: none;
-  background-color: #f8f9fa;
-  border-radius: 158px;
-  margin: 5px; */
 
+@media screen  and (min-width:991px)
+{
+.signup-profile-details {
+  margin-top: 1%;
+  margin-left: 5%;
+}
 
-/* #id_data_entry_user {
-  margin-top: -13px;
-  margin-left: 125px;
-  width: 1%;
-  height: 3%;
-  position: absolute;
-} */
-
-
-/* @media screen and (min-width:700px) and (max-width:780px) {
-  .signup-call { */
-      /* margin-left: 6%;
-      width: 88%;
-      margin-bottom: 16%;
-      background-color: cadetblue;
-      flex-direction: column;
-      display: block;
-    }
-    .signup label{
-      display: block;
-    }
-    .signup select {
-      width: 75%;
-    }
-    #id_data_entry_user{
-      width: 5%;
-      height: 3%;
-    }
-    #signup-btn {
-      margin: 7% 34% 8% 11%;
-      width: 52%;
-    }
-    .signup input{
-       width: 75%;
-    }
-    #id_standard{
-      width: 75%;
-    }
-    #id_section{
-    width: 75%;
-    } */
-
-  /* .signup-profile-details{
-    margin-top: 1%;
-    margin-left: 0%;
-
-  } */
-  /* .signup-profile-details input{
-    width: 75%;
-  } */
-/* }
-@media screen and (max-width:600px) { */
-  /* .signup input[type=text] {
-      padding: 5px;
-      width: 100%;
-      margin-bottom: 0%;
-      color: black;
-      font-size: 15px;
-      border: none;
-    } */
-    /* @media screen and (min-width:1000px) and (max-width:1024px) {
-      .signupbox {
-        margin-left: 17%;
-        width: 67vw;
-        margin-top: 6%;
-        margin-bottom: 6%;
-        padding: 2% 6%;
-    }
-    } */
-
-
-
-
-
+}
 
 
 
