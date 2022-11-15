@@ -121,7 +121,7 @@
     #question-box button {
         border: none;
         border-radius: 5px;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-family: 'Montserrat';
         font-size: 15px;
         font-weight: 800;
         margin-top: 1vh;
@@ -181,6 +181,7 @@
     color: #14279b;
     border: 1px solid #14279b;
     position: absolute;
+    font-family: 'Montserrat';
 }
 .question-list #delete {
     margin-left: 6%;

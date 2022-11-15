@@ -30,6 +30,7 @@
 
     .questions-paper-card {
         font-size: 15px;
+        font-family: 'Montserrat';
         background-color: #fff8dcb0;
         color: black;
         width: 92%;
@@ -39,6 +40,7 @@
     .question-paper-card {
         margin-left: 0vw;
         font-size: 15px;
+        font-family: 'Montserrat';
         color: white;
         width: 100%;
         margin-top: 28px;
@@ -48,6 +50,7 @@
         margin-left: 95%;
         color: black;
         font-size: 1.2vw;
+        font-family: 'Montserrat';
         margin-top: 1vh;
         background-color: transparent;
     }
@@ -98,10 +101,12 @@
 
     #userDetails label {
         font-size: 10px;
+        font-family: 'Montserrat';
     }
 
     #userDetails input {
         font-size: 10px;
+        font-family: 'Montserrat';
         width: 18vw;
     }
 
@@ -112,6 +117,7 @@
     #userDetails .back-btn {
         margin-left: 92%;
         font-size: 2.3vw;
+        font-family: 'Montserrat';
         margin-top: 1.5%;
     }            .chaplist-box {
         margin-left: 28vw;
@@ -126,6 +132,7 @@
 
     .question-paper-card {
         font-size: 15px;
+        font-family: 'Montserrat';
         width: 64vw;
         margin-bottom: -19vw;
     }
@@ -196,6 +203,7 @@
         margin-left: 90%;
         margin-top: -38%;
         font-size: 12px;
+        font-family: 'Montserrat';
     }
 
     #customize #customize-btn {

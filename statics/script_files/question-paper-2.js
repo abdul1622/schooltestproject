@@ -60,8 +60,8 @@
         });
         // document.querySelector('.more-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=add()>Add More</button>`
         // document.querySelector('.more-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=add()>Add More</button>`
-        document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=with_customize()>Review</button>`
-        document.querySelector('.back-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Back</button>`
+        document.querySelector('.next-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-warning" onclick=with_customize()>Review</button>`
+        document.querySelector('.back-btn').innerHTML = `<button id="next-btn" class="submit-btn btn btn-warning" onclick=getnext()>Back</button>`
         console.log(result)
         dragElement(document.getElementById("q-form-4"));
     }
@@ -104,8 +104,8 @@
         document.getElementById('grade_value').innerHTML = grade
         document.getElementById('subject_value').innerHTML = subject_name
         document.getElementById('chapter_value').innerHTML = content
-        document.querySelector('.back-btn-review').innerHTML = `<button class="btn btn-primary" onclick=get_customize()>Back</button>`
-        document.querySelector('.next-btn-woc').innerHTML = '  <button  class="submit-btn btn btn-sm btn-primary" disabled onclick=submit_woc()>Create test</button>'
+        document.querySelector('.back-btn-review').innerHTML = `<button class="btn btn-warning" onclick=get_customize()>Back</button>`
+        document.querySelector('.next-btn-woc').innerHTML = '  <button  class="submit-btn btn btn-sm btn-warning" disabled onclick=submit_woc()>Create test</button>'
         review();
         document.getElementById('No_of_questions').innerHTML = question_list.length
         document.getElementById('q-form-4').style.display = 'none';
@@ -159,9 +159,9 @@
                 <p>`
                 console.log(data.data.length, 'len')
                 if (no_of_questions < data.data.length) {
-                    question_content += `<span>no of questions : ${no_of_questions} </span> <button onclick="get_random()" class="btn btn-primary btn-sm">select random questions</button>`
+                    question_content += `<span>no of questions : ${no_of_questions} </span> <button onclick="get_random()" class="btn btn-warning btn-sm">select random questions</button>`
                 } else {
-                    question_content += `<span>no of questions : ${no_of_questions} </span> <button onclick="get_random()" class="btn btn-primary btn-sm" disabled>select random questions</button>`
+                    question_content += `<span>no of questions : ${no_of_questions} </span> <button onclick="get_random()" class="btn btn-warning btn-sm" disabled>select random questions</button>`
                 }
         var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
         $.ajax({
@@ -208,8 +208,8 @@
                 question_content += `</table>
             </div>
             <p class='quespaper-btns'>
-            <button class='btn btn-sm btn-primary' onclick=getnext()>Back</button>
-            <button class='btn btn-sm btn-primary' onclick=review_woc() >Next</button>
+            <button class='btn btn-sm btn-warning' onclick=getnext()>Back</button>
+            <button class='btn btn-sm btn-warning' onclick=review_woc() >Next</button>
             </p>
             </div>`
                 document.getElementById('q-form').style.display = 'none'
@@ -291,8 +291,8 @@
         }
         document.getElementById('chapter_value').innerHTML = content
         console.log(chapters)
-        document.querySelector('.back-btn-review').innerHTML = `<button class="btn btn-sm btn-primary" onclick=without_customize()>Back</button>`
-        document.querySelector('.next-btn-woc').innerHTML = '  <button  class="submit-btn btn btn-sm btn-primary" disabled onclick=submit_woc()>Create test</button>'
+        document.querySelector('.back-btn-review').innerHTML = `<button class="btn btn-sm btn-warning" onclick=without_customize()>Back</button>`
+        document.querySelector('.next-btn-woc').innerHTML = '  <button  class="submit-btn btn btn-sm btn-warning" disabled onclick=submit_woc()>Create test</button>'
         review();
         let content2 = '<div class="question-details">';
         question_details_list.forEach((d, index) => {
