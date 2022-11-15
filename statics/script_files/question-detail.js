@@ -157,26 +157,26 @@ function get() {
       if (data.status == 'success') {
         if (data.data.length) {
           temp = (data.data[0].chapter)
-          content += `<fieldset>
+          content += `<fieldset class="card-group justify-content-start">
 <legend> ${data.data[0].chapter_name} </legend>`
         }
 
 
         data.data.forEach((d, index) => {
           if (temp != d.chapter) {
-            content += `</fieldset>`
+            content += `</fieldset >`
             temp = d.chapter
-            content += `<fieldset>
+            content += `<fieldset class="card-group justify-content-center" >
 <legend> ${d.chapter_name} </legend>`
           }
           // name_value = data.name[index]
-          content = content + `<div class="question-card" id='${d.id}'>
+          content = content + `<div class="question-card col-md-5 col-lg-3" id='${d.id}'>
     <div class='question-card-details'>
     <p >Chapter : <span id='${d.chapter}' class="chapter-name">${d.chapter_name}</span></p>
     <p >Question Type : <span class="question_type" id=${d.subject}>${d.question_type}</span></p>
     <p >Cognitive Level : <span class="cognitive_level" id=${d.grade}>${d.cognitive_level}</span></p>
     <p >Difficulty Level : <span class="difficulty_level">${d.difficulty_level}</span></p>
-    <p >Question : <span class="question">${d.question}</span></p>
+    <p class="w-75" >Question : <span class="question">${d.question}</span></p>
     <p >Marks : <span class="mark">${d.mark}<span></p>
       <p >Duration : <span class="duration">${d.duration}<span></p>
     </div>

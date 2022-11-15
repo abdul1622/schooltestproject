@@ -119,13 +119,6 @@
     font-size: 18px;
 }
 
-.container {
-    width: 100%;
-    padding-top: 60px;
-    padding-bottom: 100px;
-    margin-left: 0;
-}
-
 .frame {
     height: 425px;
     width: 430px;
@@ -213,21 +206,13 @@
 }
 
 #edit {
-    padding: 5px 15px;
-    margin-left: -1vw;
-    border-radius: 5px;
-    font-size: 150%;
     color: #35b9dc;
+    font-size: 1.5rem;
 }
 
 #delete {
-    padding: 5px 15px;
-    margin-left: 1%;
-    border-radius: 5px;
-    margin-top: 0vh;
     color: #900202;
-    font-size: 150%;
-    
+    font-size: 1.5rem;
 }
 
 .modal-content label {
@@ -279,9 +264,6 @@ p.section-btn {
 
 form.userDetails input {
     width: 90%;
-}
-.form-control{
-    width:18%;
 }
 table{
     overflow: auto;

@@ -1,16 +1,4 @@
 @media screen and (min-width:1024px) and (max-width:1200px) {
-    #edit {
-        padding: 7px 15px;
-        border-radius: 5px;
-    }
-    
-    #delete {
-        padding: 7px 15px;
-        margin-top: 0vh;
-        border-radius: 5px;
-        color: #850b0b;
-    }
-
   #SFormModal  .modal-content{
         width: 150%;
         margin-left: -37%;
@@ -31,7 +19,6 @@
     }
 
     #edit {
-        padding: 5px 15px;
         margin-left: 20vw;
         border-radius: 5px;
     }
@@ -85,20 +72,6 @@
    #QFormModal .modal-content {
         width: 120%;
         margin-left: -14%;
-    }
-    #edit {
-        margin-left: -2vw;
-        font-size: 150%;
-        font-family: 'Montserrat';
-        padding: 4px 13px;
-    }
-
-    #delete {
-        margin-left: 1vw;
-        font-size: 150%;
-        font-family: 'Montserrat';
-        padding: 4px 13px;
-        color: #900202;
     }
     .back-btn-nav {
         display: block;

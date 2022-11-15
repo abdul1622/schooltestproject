@@ -116,7 +116,7 @@ fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
     }
   })
   let table2 = `<table class='table text-white md-mt-2' id='usr'>`;
-  table2 += `<tr class="header">
+  table2 += `<tr >
          <th  scope="col" >Email</th>
          <th  scope="col">Phone</th>
          <th  scope="col">RegNo</th>

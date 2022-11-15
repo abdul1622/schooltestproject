@@ -111,12 +111,6 @@
             box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
         }
 
-        #subject-btn {
-            background-color: #33699f;
-            color: white;
-            border: 1px solid white;
-        }
-
 
 @media screen and (min-width:1024px) and (max-width:1200px) {
 
@@ -153,14 +147,6 @@
     }
     .subject-card #edit {
         margin-left: 1vw;
-    }
-    #subject-btn {
-        width: 22%;
-        height: 23%;
-        margin-top: 0;
-        background-color: #33699f;
-        color: white;
-        border: 1px solid white;
     }
 
 }

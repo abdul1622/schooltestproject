@@ -137,6 +137,7 @@ p.chapter-edit-close {
     margin-left: 0vw;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 150%;
 }
 .chapterhead {
     /* position: absolute; */

@@ -73,7 +73,7 @@ function add_form(){
    document.getElementById('std').value = ''
    document.getElementById('address').value = ''
    document.getElementById('reg-no-div').style.display = 'none'
-   $('#student-Form-modal-content').modal('show')
+   $('#student-FormModal').modal('show')
 }
 
 let messages = document.querySelector('.messages')
@@ -98,7 +98,7 @@ let form = document.getElementById('userDetails')
   })
   console.log(students)
   let table2 = `<table class='table md-mt-2 text-white' id='usr'>`;
-    table2 += `<tr class="header">
+    table2 += `<tr >
            <th  scope="col" >Email</th>
            <th  scope="col" >Phone</th>
            <th  scope="col">RegNo</th>
