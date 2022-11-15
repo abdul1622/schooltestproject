@@ -65,9 +65,6 @@
     #chapterlist hr {
         margin-left: 35%;
     }
-    #back-btn-chapter {
-        margin-left: -9%
-    }
 }
 @media screen and (max-width:420px) {
     #back-btn-chapter {
