@@ -41,7 +41,7 @@
                 content = content + `<div class="subject-card"   id=${d.id}>
         <p><label> Subject </label> <span>: <span class="name">${d.name}</span></span></p>
         <p><label> Subject-code </label> <span>: <span class="code">${d.code}</span></span></p>
-        <p class="text-center"> <a type="button" class="btn btn-sm btn-primary ch-btn" href=# onclick=getchapter(${d.grade_name},"${temp}",${d.id})>Chapters</a></p>
+        <p class="text-center"> <button  class=" btn btn-warning btn-sm  ch-btn"  onclick=getchapter(${d.grade_name},"${temp}",${d.id})>Chapters</button></p>
         <br>
         <div class="d-flex  justify-content-around"><i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></div>
  </div>`

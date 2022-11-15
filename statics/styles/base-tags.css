@@ -12,10 +12,7 @@ input[type=file] {
     margin-top: -3px;
     position: absolute;
 }
-checked:before {
-    border: #1C4CBD;
-    background-color: #1C4CBD;
-}
+
 select {
     padding: 4px;
     width: 91%;
@@ -52,11 +49,8 @@ h1 {
 }
 
 button {
-    border: none;
-    border-radius: 5px;
     font-family: 'Montserrat';
-    font-size: 15px;
-    font-weight: 800;
+   
 }
 
 table {
