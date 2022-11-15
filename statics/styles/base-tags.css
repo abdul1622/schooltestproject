@@ -76,9 +76,6 @@ table {
     }
 }
 @media screen and (min-width:430px) and (max-width:800px) {
-    input[type=text] {
-        width: 38%;
-    }
     .std-in-form, .sec-in-form {
         width: 145%;
     }

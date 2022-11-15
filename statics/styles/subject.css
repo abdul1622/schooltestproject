@@ -132,33 +132,12 @@
 
 }
 @media screen and (min-width:430px) and (max-width:800px) {
-
-
-    .subjects-by-grade .cards {
-        grid-template-columns: auto auto;
-        height: auto;
-        column-gap: 3%;
-        row-gap: 2%;
-    }
     .subjects-by-grade {
         margin-left: -5vw;
     }
     .subjects-by-grade hr {
         margin-left: 35%;
     }
-
-
-
-    .ch-btn {
-        margin-left: 0%;
-        background-color: #0062cc;
-        border-color: #005cbf;
-        color: white;
-        font-size: 1.5vw;
-        padding: 2%;
-        border-radius: 5px;
-    }
-
     .subject-title-subjects {
         margin-right: 26%;
     }
