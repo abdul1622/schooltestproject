@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-<div class="test-create-container">
-  <div class="question-papers-get">
+<div class="test-create-container ">
+  <div class="question-papers-get w-25 h-50  px-2 py-2 ">
     <div class="container">
       {% csrf_token %}
       <p><label for="get_grade">Grade:</label> <span class="grade-p"> <select name="grade" class="grade-in-form" onchange=getgradename(this) required="" id="get_grade">

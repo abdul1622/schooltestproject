@@ -21,8 +21,9 @@
 }
 .question-papers-get {
     width: 30%;
+    height: 2%;
     margin: 18% 40%;
-    padding: 1%;
+    padding: -1%;
     background-color: #31354f5e;
 }
 .text-center {
