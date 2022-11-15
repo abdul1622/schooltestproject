@@ -60,10 +60,14 @@
         overflow: auto;
         margin-bottom: 1%;
     }
+    .question-container-table tr {
+        color: white;
+    }
     .question-container-table .table-heading{
         position: sticky;
         top: 0%;
         background-color: aliceblue;
+        color:rgba(22,34,57,0.95);
     }
     .question-paper-form label{
     margin: 3%;

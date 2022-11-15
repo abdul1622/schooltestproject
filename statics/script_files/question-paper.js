@@ -234,8 +234,8 @@ function getcustomize_details() {
     question_content = ''
     question_content += `<div class='question-list-container-customize'>
             <p>`
-    question_content += `<div class='question-container-table text-white'>`
-    question_content += `<table> <tr class='table-heading'><th>sl.no</th>
+    question_content += `<div class='question-container-table '>`
+    question_content += `<table> <tr class='table-heading '><th>sl.no</th>
                     <th>select</th>
                     <th>question</th>
                     <th>question type</th>
@@ -250,7 +250,7 @@ function getcustomize_details() {
         if (d.chapter == chapter_id) {
             i += 1
             question_per_chapter.push(d.id)
-            question_content += `<tr onClick='selectitem(${d.id})'><td><input type="checkbox" id="question_${d.id}" value="${d.id}"></td>
+            question_content += `<tr  onClick="selectitem(${d.id})"  ><td><input type="checkbox" id="question_${d.id}" value="${d.id}"></td>
                 <td>${i}</td>
              <td><label for="question_${d.id}">${d.question}</label></td>
              <td>${d.question_type}</td>
