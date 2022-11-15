@@ -173,27 +173,6 @@
                 $("#id_chapter_get").html(data)
             }
         });
-//                 question_content += `<span><label for="id_chapter_get">Chapters :</label> <select name="chapters" onchange="filter_question()" required="" id="id_chapter_get"><option value="">---------</option>
-// </select>
-//     </span>`
-//     question_content += `<span><label>	Question Type :</label> <select name="chapters" onchange="filter_question()" required="" id="q_type_get">
-//         <option value="">---------</option>
-//         <option value="MCQ">MCQ</option>
-//         <option value="Fill_in_the_blanks">Fill_in_the_blanks</option>
-// </select>
-//     </span>`
-//     question_content += `<span><label>Cognitive Level :</label> <select name="chapters" onchange="filter_question()" required="" id="cognitive_get">
-//         <option value="">---------</option><option value="Knowledge">Knowledge</option>
-//         <option value="Comprehension">Comprehension</option>
-//         <option value="Application">Application</option>
-// </select>
-//     </span>`
-//     question_content += `<span><label>Difficulty Level :</label> <select name="chapters" onchange="filter_question()" required="" id="difficulty_get">
-//         <option value="">---------</option><option value="Easy">Easy</option>
-//         <option value="Medium">Medium</option>
-//         <option value="Hard">Hard</option>
-// </select>
-//     </span>`
                 question_content += `<div class='question-container-table'>`
                 question_content += `<table> <tr class='table-heading'><th>sl.no</th><th>select</th><th>question</th><th>question type</th><th>cognitive level</th><th>difficulty level</th><th>marks</th></tr>`
 

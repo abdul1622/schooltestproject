@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-<div class="test-create-container">
-  <div class="question-papers-get">
-    <div class="container">
+<div class="test-create-container ">
+  <div class="question-papers-get ">
+    <div class="question-paper-list">
       {% csrf_token %}
-      <p><label for="get_grade">Grade:</label> <span class="grade-p"> <select name="grade" class="grade-in-form" onchange=getgradename(this) required="" id="get_grade">
+      <p><label for="get_grade">Grade:</label> <span class="grade-p"> <select name="grade" class=" grade-in-form form-control" onchange=getgradename(this) required="" id="get_grade">
       </select></span></p>
       <!-- {{form.as_p}} -->
       <label for=""> Subject: </label>
-      <select name="subject" required="" onchange=getsubjectname(this) id="id_subject_2">
+      <select name="subject"  class ='form-control'required="" onchange=getsubjectname(this) id="id_subject_2">
         <option value="" selected="">---------</option>
       </select>
     </div>
@@ -19,7 +19,7 @@
     <hr>
     <h3 class="text-center">Subject - <span id="subject-head"></span></h3>
   </div>
-  <div class="question-papers-card d-flex flex-nowrap text-white w-25 h-25"></div>
+  <div class="question-papers-card card-group flex-wrap text-white justify-content-start"></div>
   <div class="messages container-fluid">
 
   </div>

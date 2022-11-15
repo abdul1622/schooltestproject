@@ -28,15 +28,6 @@
         margin-bottom: 0.9vh;
     }
 
-    .questions-paper-card {
-        font-size: 15px;
-        font-family: 'Montserrat';
-        background-color: #fff8dcb0;
-        color: black;
-        width: 92%;
-        box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-        padding: 10%;
-    }
     .question-paper-card {
         margin-left: 0vw;
         font-size: 15px;
