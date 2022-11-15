@@ -1,4 +1,4 @@
-.chapter-cards {
+/* .chapter-cards {
     display: grid;
     width: 80%;
     padding-left: 0%;
@@ -7,16 +7,10 @@
     padding-top: 5%;
     grid-template-columns: auto auto auto;
     gap: 8%;
-}
-.chapter-card {
-    width: 100%;
-    color: block;
-    height: auto;
-    margin-top: 10px;
-    font-size: 18px;
-    padding: 20px;
-    border-radius: 10px;
-}
+} */
+/* .chapter-card {
+   ;
+} */
 #back-btn-chapter {
     display: inline;
 }
@@ -30,13 +24,9 @@
 }
 
 .chapter-cards .chapter-card {
-    min-height: 30vh;
-    height: auto;
-
-    padding: 15% 12%;
-    cursor: pointer;
-    font-size: 16px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: #dcddff66;
+    margin: 3%;
+    padding: 2%;
 }
     
 .chapter-list label {

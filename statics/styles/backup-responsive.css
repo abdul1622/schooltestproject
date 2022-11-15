@@ -27,16 +27,6 @@
     #userDetails input {
         margin-bottom: 0.9vh;
     }
-
-    .question-paper-card {
-        margin-left: 0vw;
-        font-size: 15px;
-        font-family: 'Montserrat';
-        color: white;
-        width: 100%;
-        margin-top: 28px;
-        padding: 12px;
-    }
     .question_create .back-btn {
         margin-left: 95%;
         color: black;
