@@ -68,14 +68,6 @@
     display: inline-block;
     width: 100px;
 }
-
-.chapterlist h4 {
-    margin-left: 41.3%;
-    margin-top: 1%;
-    font-family: 'Cinzel', serif;
-    font-weight: 600;
-    color: #14279b;
-}
 .thead {
     font-size: 15px;
     color:rgba(255, 253, 253, 0.714);

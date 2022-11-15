@@ -31,11 +31,6 @@
             font-weight: 600;
         }
 
-        .subject-head {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 2%;
-        }
         .subjects-by-grade .subject-card {
             background-color: #dcddff66;
             padding: 2%;
@@ -148,11 +143,6 @@
     .subjects-by-grade {
         margin-left: -5vw;
     }
-
-    .subjects-by-grade h2 {
-        margin-left: 38%;
-    }
-
     .subjects-by-grade hr {
         margin-left: 35%;
     }
@@ -167,9 +157,6 @@
         font-size: 1.5vw;
         padding: 2%;
         border-radius: 5px;
-    }
-    #subject-title {
-        margin-left: -15vw;
     }
 
     .subject-title-subjects {

@@ -47,7 +47,6 @@
                 chapter_list = data.data
                 console.log(chapter_list)
                 data.data.forEach((d, index) => {
-                    // <p><label> Subject </label> <span>: <span id="${d.subject_id}" class="subject">${d.subject}</span></span></p>
                     content = content + `<div class="chapter-card " id=${d.id}>
         <p><label> Chapter_no </label> <span>: <span class="chapter_no">${d.chapter_no}</span></span></p>
         <p><label> Chapter </label> <span>: <span class="name">${d.name}</span></span></p>

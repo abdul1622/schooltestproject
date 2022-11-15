@@ -73,12 +73,6 @@ table{
     .back-btn-nav {
         display: block;
     }
-    #chapter-btn {
-        margin-top: 0;
-        background-color: #33699f;
-        color: white;
-        border: 1px solid white;
-    }
     .back-btn-nav button {
         background-color: transparent;
         color: white;
