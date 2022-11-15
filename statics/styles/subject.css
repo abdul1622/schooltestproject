@@ -35,6 +35,9 @@
             background-color: #dcddff66;
             padding: 2%;
             margin: 3%;
+            font-family: 'Montserrat';
+            font-weight: 400;
+            color:white;
         }
 
         .subject-list {

@@ -71,11 +71,11 @@
 <div class="grade-container" id="grade-container">
     <!-- subject container -->
     <div id="subjects-by-grade" class="subjects-by-grade">
-
+        <i id="back-btn" class=' fa fa-light fa-arrow-left-long ' onclick=get() style='font-size:24px'></i>
         <h2 class="text-center text-white">Grade - <span id="grade-title"></span> </h2>
         <hr>
         <div class="subject-head">
-            <i id="back-btn" class=' fa fa-light fa-arrow-left-long ' onclick=get() style='font-size:24px'></i>
+          
             <h3 class=" text-center text-white "> Subjects </h3>
         </div>
         <div class="cards d-flex flex-wrap justify-content-center">
@@ -83,17 +83,16 @@
     </div>
 
     <!-- chapter container -->
-    <div id="chapterlist" class="chapterlist">
-
+    <div id="chapterlist" class="chapterlist"><i id="back-btn-chapter" class=' fa fa-light fa-arrow-left-long'
+            style='font-size:24px'></i>
         <h4 class="text-center text-white">Grade - <span id="grade-title-chapter"></span> </h4>
         <h2 class="text-center text-white mt-4" ><span id="subject-title"></span> </h2>
         <hr>
         <div class="subject-head">
-            <a type="button" id="back-btn-chapter"><i class=' fa fa-light fa-arrow-left-long'
-                    style='font-size:24px'></i></a>
+           
             <h3 class="text-center text-white"> Chapters </h3>
         </div>
-        <div class="chapter-cards container d-flex flex-wrap justify-content-center justify-content-md-start ">
+        <div class="chapter-cards d-flex flex-wrap justify-content-center">
         </div> 
     </div>
 

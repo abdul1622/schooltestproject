@@ -3,20 +3,16 @@
     margin-bottom: 8%;
    
 }
-.chapterlist-box {
-    background-color: #b2c8df;
-    color: white;
-    float: right;
-    margin-left: 1100px;
-    width: 20%;
-    margin-top: 200px;
-    padding: 30px 50px;
-    position: fixed;
+.chapter-cards{
+    font-family: 'Montserrat';
+    color:white;
+    font-weight: 400;
 }
-.fa-light{
+
+.fa-light {
     font-size: 150%;
     color: white;
-    margin-left: 2%;
+    margin-left: 12%;
     margin-bottom: 2%;
 }
 
@@ -64,7 +60,7 @@
 }
 
 .chapterlist label {
-    color: white;
+    color: black;
     display: inline-block;
     width: 100px;
 }
