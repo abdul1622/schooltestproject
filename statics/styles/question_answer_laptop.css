@@ -58,7 +58,9 @@
 
     .question-card {
         background-color: #ffffff32;
-        border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #00bfff7a;
+    font-family: 'Montserrat';
     }
 
     .question-list fieldset {
@@ -67,7 +69,7 @@
 
     .question-card p {
         color: rgba(0, 0, 0, 0.753);
-        width: 90%;
+        width: 100%;
         display: block;
         font-weight: bold;
         font-size: 1vw;

@@ -56,23 +56,23 @@
 
     .question-card p {
         color: black;
-        width: 33vw;
+        width: 45vw;
         display: block;
         font-size: 2vw;
     }
+    
 
     .question-card label {
         width: 100px;
         display: inline-block;
     }
 
-    .question-list fieldset {
+    /* .question-list fieldset {
         grid-template-columns: auto auto;
-    }
+    } */
 
     #questionForm input[type=text] {
         padding: 6px;
-        width: 76%;
         margin-bottom: -4px;
         color: black;
         font-size: 11px;
