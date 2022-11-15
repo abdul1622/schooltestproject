@@ -21,18 +21,12 @@
      */
 
 
-.history-container-div {
-    background-color: #FFF5E4;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    width: 70%;
-    margin: 2% 15%;
-    padding: 1% 1%;
-    overflow-x: auto;
-}
+     .history-container-div {
+        background-color: #f8f9fa14;
+        overflow-x: auto;
+        color: white;
+    }
 
-.history-container table {
-    width: 100%;
-}
 
 .history-container table,
 .history-container th,
@@ -47,7 +41,6 @@
 
 .history-container-div table button {
     width: 87%;
-    background: transparent;
     border: 1px solid #00000030;
 }
 .history-container-div table button:focus{

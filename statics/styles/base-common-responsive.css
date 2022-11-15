@@ -1,3 +1,7 @@
+table{
+    letter-spacing: 0.5px;
+
+}
 @media screen and (min-width:1024px) and (max-width:1200px) {
   #SFormModal  .modal-content{
         width: 150%;
@@ -20,13 +24,6 @@
 
     #edit {
         margin-left: 20vw;
-        border-radius: 5px;
-    }
-    #delete {
-        color: #900202;
-        padding: 5px 15px;
-        margin-left: 21%;
-        position: absolute;
         border-radius: 5px;
     }
     .chapter-btns {

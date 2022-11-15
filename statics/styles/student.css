@@ -2,6 +2,10 @@
     display: grid;
     grid-template-columns: auto auto auto;
 }
+.table-heading{
+    background-color: aliceblue;
+    color: rgba(22,34,57,0.95);
+}
 #add{
     font-family: 'Montserrat'
 }
@@ -154,13 +158,6 @@ button#standard_add_btn {
         margin-left: -1vw;
         border-radius: 5px;
         height: 1%;
-    }
-
-    .container2 #delete {
-        width: 5vw;
-        padding: 5px 15px;
-        margin-left: 1vw;
-        border-radius: 5px;
     }
     .--user {
         font-size: 15px;

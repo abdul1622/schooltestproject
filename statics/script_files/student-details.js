@@ -98,7 +98,7 @@ let form = document.getElementById('userDetails')
   })
   console.log(students)
   let table2 = `<table class='table md-mt-2 text-white' id='usr'>`;
-    table2 += `<tr >
+    table2 += `<tr class='table-heading'>
            <th  scope="col" >Email</th>
            <th  scope="col" >Phone</th>
            <th  scope="col">RegNo</th>

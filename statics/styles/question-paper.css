@@ -17,7 +17,9 @@
             text-transform: capitalize;
             text-align: center;
         }
-
+        .question-container-table  input[type=checkbox] {
+            accent-color: #E0144C
+          }
         #q-form-2 input[type=checkbox]{
          
             width: 25%;
