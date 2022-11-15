@@ -4,7 +4,7 @@ body{
 }
 label {
     font-size: 15px;
-    color: black;
+    color: white;
 }
 input[type=file] {
     border: none;
@@ -12,10 +12,14 @@ input[type=file] {
     margin-top: -3px;
     position: absolute;
 }
+checked:before {
+    border: #1C4CBD;
+    background-color: #1C4CBD;
+}
 select {
     padding: 4px;
     width: 91%;
-    color: black;
+   
     border: none;
     outline: none;
     display: grid;

@@ -234,7 +234,7 @@ function getcustomize_details() {
     question_content = ''
     question_content += `<div class='question-list-container-customize'>
             <p>`
-    question_content += `<div class='question-container-table'>`
+    question_content += `<div class='question-container-table text-white'>`
     question_content += `<table> <tr class='table-heading'><th>sl.no</th>
                     <th>select</th>
                     <th>question</th>

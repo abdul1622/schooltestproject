@@ -18,9 +18,10 @@
             text-align: center;
         }
 
-        #q-form-2 input[type=checkbox],
-        input[type=radio] {
+        #q-form-2 input[type=checkbox]{
+         
             width: 25%;
+            color: aqua;
         }
         #q-form-6 input {
             width: auto;
