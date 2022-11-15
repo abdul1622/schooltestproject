@@ -8,20 +8,20 @@
             margin: 7% 40%;
         }
 
-        .q-form-5 p {
+        /* .q-form-5 p {
             color: white;
-        }
+        } */
 
-        .q-form-5 p.heading {
+        /* .q-form-5 p.heading {
             font-size: 27px;
             text-transform: capitalize;
             text-align: center;
-        }
+        } */
 
         #q-form-2 input[type=checkbox]{
          
             width: 25%;
-            color: aqua;
+    
         }
         #q-form-6 input {
             width: auto;
