@@ -93,7 +93,7 @@
             document.getElementById('grade-list').style.display = "block"
             document.getElementById('chapterlist').style.display = "none"
             form_all.innerHTML = `<div class='grade-form-box '>
-                <p><label for="id_grade">Grade:</label> <input type="number" class="form-control" name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
+                <p><label for="id_grade">Grade:</label> <input class ='form-control' type="number" class="form-control" name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
                <p class='section-btn'><span> <button onclick=add_section('create') id='add-section' class="btn btn-light">Add Section</button> </span> <span class='delete-section'></span> </p> </p>
                 <p class='section-list'> </p>
                 <p class='section-error'></p>
@@ -124,7 +124,7 @@
             }
         }
         form_all.innerHTML = `<div class='grade-form-box mt-3'>
-                <p><label for="id_grade">Grade:</label> <input type="number" disabled name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade" class="form-control" ></p>
+                <p><label for="id_grade">Grade:</label> <input class='form-control' type="number" disabled name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade" class="form-control" ></p>
                <p class='section-btn'><span> <button onclick=add_section('edit') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
                 <p class='section-list'> </p>
                 <p class='section-error'></p>
@@ -143,7 +143,7 @@
     //  cancel section adding
     function cancel() {
         form_all.innerHTML = `<div class='grade-form-box'>
-                <p><label for="id_grade">Grade:</label> <input type="number" name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade" class="form-control"></p>
+                <p><label for="id_grade">Grade:</label> <input class ='form-control' type="number" name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade" class="form-control"></p>
                <p class='section-btn'><span> <button onclick=add_section('create') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
                 <p class='section-list'> </p>
                 <p class='section-error'></p>
