@@ -53,10 +53,7 @@
     .chapter-cards .chapter-card {
         min-height: auto;
     }
-    .chapterlist h4 {
-        margin-left: 39%;
-        margin-bottom: 2%;
-    }
+    
 }
 @media screen and (min-width:1359px) and (max-width:1450px) {
     .chapter-cards .chapter-card {
