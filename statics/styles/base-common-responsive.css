@@ -90,10 +90,6 @@ table{
         text-align: right;
         margin-right: 7%;
     }
-    .navbar-light .navbar-toggler {
-        margin-left: 4%;
-        background-color: #8ec1b6;
-    }
     form.userDetails input {
         width: 144%;
     }
@@ -151,15 +147,6 @@ table{
         padding: 15%;
         margin: 0;
     }
-
-    .navbar-light .navbar-toggler {
-        color: rgba(0, 0, 0, .5);
-        border-color: rgba(0, 0, 0, .1);
-        margin-left: 5vw;
-        background-color: #89a1d9;
-        padding: 1px 6px;
-    }
-
     .navbar-light .navbar-toggler-icon {
         width: 18px;
     }

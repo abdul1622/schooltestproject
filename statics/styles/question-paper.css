@@ -1,6 +1,6 @@
 
         .question-paper-form {
-            background-color: #6264705e;
+            background-color: #8388a72b;
             padding: 30px 50px;
             border-radius: 5px;
             flex-basis: 23%;
@@ -90,7 +90,7 @@
         background-color: aliceblue;
     }
 
-@media screen and (min-width:1024px) and (max-width:1200px) {
+    @media screen and (min-width: 800px) and (max-width: 1200px){
     .question-paper-form {
         background-color: #8388a72b;
         width: 34vw;
@@ -103,7 +103,7 @@
         margin: 0.5% -11%;
     }
 }
-@media screen and (min-width:1359px) and (max-width:1450px) {
+@media screen and (min-width:1200px) and (max-width:1450px) {
     .question-paper-form {
         background-color: #8388a72b;
         width: 24vw;
@@ -132,9 +132,9 @@
 @media screen and (min-width:430px) and (max-width:800px) {
 
     .question-paper-form {
-        width: 45vw;
+        width: 52vw;
         padding: 30px 50px;
-        margin: 7% 28%;
+        margin: 14% 28%;
     }
     div#q-form-4 .back-btn{
         margin: 0;

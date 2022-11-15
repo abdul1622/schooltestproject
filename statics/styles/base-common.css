@@ -26,7 +26,6 @@
 .navbar-light .navbar-toggler {
     color: rgba(0, 0, 0, .5);
     border-color: rgba(0, 0, 0, .1);
-    margin-left: 86vw;
 }
 .errorlist {
     display: none;
