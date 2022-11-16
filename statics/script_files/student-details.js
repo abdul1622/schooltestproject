@@ -97,7 +97,7 @@ let form = document.getElementById('userDetails')
       }
   })
   console.log(students)
-  let table2 = `<table class='table  md-mt-2 text-white' id='usr'>`;
+  let table2 = `<table class='table md-mt-2 text-white' id='usr'>`;
     table2 += `<tr class='table-heading'>
            <th  scope="col" >Email</th>
            <th  scope="col" >Phone</th>
@@ -113,7 +113,7 @@ let form = document.getElementById('userDetails')
          console.log(students.length)
          students.forEach((d, index) => {
           console.log('to')
-            table2 = table2 + `<tbody'><tr id=${d.id} scope="row">`;
+            table2 = table2 + `<tbody><tr id=${d.id} scope="row">`;
             table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
             table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
             table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
