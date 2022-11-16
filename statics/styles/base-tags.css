@@ -66,15 +66,8 @@ table {
     }
 }
 @media screen and (min-width:430px) and (max-width:800px) {
-    .std-in-form, .sec-in-form {
-        width: 145%;
-    }
     .sort-input input[type=text] {
         width: 32%;
-    }
-    #student-Form-modal-content{
-        width: 126%;
-        margin-left: -13%;
     }
 }
 @media screen and (max-width:420px) {
