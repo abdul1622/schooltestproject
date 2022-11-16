@@ -38,11 +38,11 @@
 
 
 <div id="customize">
-<p><label for="from_chapter">From Chapter:</label> <select name="chapter" required="" id="from_chapter">
+<p><label for="from_chapter">From Chapter:</label> <select name="chapter" required="" id="from_chapter" class="form-control">
   <option value="" selected="">---------</option>
 </select></p> 
 <p><label for="to_chapter">To Chapter:</label> <select name="chapter" required="" id="to_chapter">
-  <option value="" selected="">---------</option>
+  <option value="" selected="" class="form-control">---------</option>
 </select></p>
 {{custom_form.as_p}}
   <button id="customize-btn" class="submit-btn btn btn-warning" onclick=customize()>Customize</button></p>

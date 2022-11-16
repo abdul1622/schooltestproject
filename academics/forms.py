@@ -8,11 +8,12 @@ from.models import *
 class Questionform(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ['grade']
-    def __init__(self, *args, **kwargs):
-        super(Questionform, self).__init__(*args, **kwargs)
-        for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+        fields = "__all__"
+
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['subject'].queryset = Subject.objects.none()
+    #     self.fields['chapter'].queryset = Chapter.objects.none()
 
 
 class Answerform(forms.ModelForm):
@@ -117,7 +118,12 @@ class questionCustomForm(forms.Form):
     from_chapter = forms.ChoiceField()
     to_chapter = forms.ChoiceField()
     allChapter = forms.BooleanField()
-
+    def __init__(self, *args, **kwargs):
+        super(questionCustomForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field_name != 'allChapter':
+                print(type(field_name),field_name)
+                field.widget.attrs['class'] = 'form-control'
 
 class customizeForm(forms.Form):
     Chapter = forms.ChoiceField()
