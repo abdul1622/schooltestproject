@@ -5,6 +5,10 @@ __pycache__/
 db.sqlite3
 *myenv
 myenv
+*env
+env
+*school
+school
 todo.txt
 *staticfiles
 staticfiles/
