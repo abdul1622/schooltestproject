@@ -7,14 +7,6 @@ label {
     color: white;
     margin-top: 3%;
 }
-select {
-    padding: 4px;
-    width: 91%;
-   
-    border: none;
-    outline: none;
-    /* display: grid; */
-}
 a:active {
     text-decoration: none;
     color: white;
@@ -74,13 +66,6 @@ table {
 @media screen and (max-width:420px) {
     th {
         padding: 4px;
-    }
-    select {
-        font-size: 11px;
-        width: 88%;
-        border-radius: unset;
-        padding: 9px;
-        background: white;
     }
     input[type=file] {
         width: 30vw;

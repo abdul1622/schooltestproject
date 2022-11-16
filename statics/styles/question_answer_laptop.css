@@ -68,14 +68,6 @@
     .question-card p:nth-child(12) {
         margin-left: 20vw;
     }
-    #--question {
-        display: block;
-        outline: 1px solid;
-        background: transparent;
-        margin-bottom: 0;
-        margin-top: 13vh;
-    }
-
     .question_create {
         display: none;
     }

@@ -88,21 +88,12 @@
         margin-left: 8%;
         margin-top: 16%;
     }
-    #userdetail-btn {
-        font-size: 12px;
-        margin-top: 2vh;
-        margin-left: 7%;
-    }
-
     #sort {
         width: 17%;
         position: absolute;
         padding: 1.2%;
         margin-left: 23%;
         margin-top: 0%;
-    }
-    #userdetail-btn {
-        width: auto;
     }
     
     div#delete-user-Modal .modal-content,#delete-staff-Modal .modal-content{
@@ -114,17 +105,5 @@
     }
     #delete-user-Modal #yes,#delete-user-Modal #no,#delete-staff-Modal #yes,#delete-staff-Modal #no{
         font-size: 10px;
-    }
-    #Form-modal-content {
-        width: 96%;
-        background-color: #b2c8df;
-        padding: 2% 5%;
-        margin-left: 5%;
-    }
-    #student-Form-modal-content {
-        width: 92%;
-        margin-left: 5%;
-        padding: 2% 5%;
-        background-color: #b2c8df;
     }
     }

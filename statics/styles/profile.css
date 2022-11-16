@@ -157,18 +157,6 @@
 
 }
 @media screen and (min-width:430px) and (max-width:800px) {
-
-    #profile-box {
-        display: none;
-        color: black;
-        width: 46vw;
-        box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-        margin-top: 2.5vh;
-        padding: 30px 50px;
-        font-size: 15px;
-        border-radius: 5px;
-    }
-
     .standard-edit {
         top: 12.5%;
         right: 9%;
@@ -177,22 +165,16 @@
         margin: 8% 17%;
     }
 }
-@media screen and (max-width:420px) {
+@media screen and (max-width:500px) {
     .standard-edit {
         position: static;
     }
 
     #profile-box {
         display: none;
-        color: black;
-        width: 100%;
-        margin-top: 0;
+        width: 76%;
         margin-bottom: 0;
-    }
-
-    .profile-container .container {
-        width: 100%;
-        padding: 0;
+        margin-left: 8%;
     }
 
     .user {

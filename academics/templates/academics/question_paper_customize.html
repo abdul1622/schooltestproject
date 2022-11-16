@@ -5,18 +5,16 @@
 
     <div class="q-form" id="q-form-1">
         {% csrf_token %}
-        <!-- grade form -->
-        <!-- <p><label for="id_grade">Grade:</label>{{form.grade}} </p> -->
-        <p><label for="id_grade">Grade:</label><select name="grade" class="grade-in-form" onchange=getgradename(this)
+        <p><label for="id_grade">Grade:</label><select  class="form-control" name="grade" class="grade-in-form" onchange=getgradename(this)
                 required="" id="id_grade">
                 <option value="" selected="">---------</option>
             </select> </p>
         <p><label for="id_subject">Subject:</label> <select name="subject" onchange=getsubjectname(this) required=""
-                id="id_subject">
+                id="id_subject" class="form-control">
                 <option value="" selected="">---------</option>
             </select></p>
-        <p><label for="id_no_of_questions">No of questions:</label> <input type="text" name="no_of_questions"
-                maxlength="20" required="" id="id_no_of_questions"></p>
+        <p><label for="id_no_of_questions" >No of questions:</label> <input type="text" name="no_of_questions"
+                maxlength="20" required="" id="id_no_of_questions" class="form-control"></p>
         <p class="chapter-btns">
             <button id="next-btn" class="submit-btn btn btn-warning" onclick=getnext()>Next</button>
 

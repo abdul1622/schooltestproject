@@ -76,13 +76,6 @@ table{
    
 }
 @media screen and (max-width:420px) {
-    .navbar {
-        background-color: transparent;
-        height: 10vh;
-        width: 100%;
-        padding: 0;
-    }
-
     .back-btn-nav {
         display: block;
     }
@@ -91,20 +84,6 @@ table{
         background-color: transparent;
         color: white;
     }
-
-    .navbar-nav {
-        background-color: #14279b;
-        width: 32vw;
-        color: white;
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        font-size: 6vw;
-        font-family: 'Montserrat';
-        position: fixed;
-        top: 0;
-    }
-
     .back-btn-nav button {
         background-color: transparent;
         color: white;
@@ -118,17 +97,6 @@ table{
         background-color: transparent;
         text-align: right;
         margin-right: 7%;
-    }
-
-    .navbar li a {
-        font-size: 2.7vw;
-        font-family: 'Montserrat';
-        color: white;
-        padding: 15%;
-        margin: 0;
-    }
-    .navbar-light .navbar-toggler-icon {
-        width: 18px;
     }
     .modal-footer {
         justify-content: center;
@@ -165,17 +133,6 @@ table{
         font-size: 158%;
         margin-left: -13%;
         border-radius: 5px;
-    }
-    #back-btn {
-        margin-left: 6%;
-        padding: 1% 2%;
-        font-size: 11px;
-        font-family: 'Montserrat';
-    }
-    .text-center {
-        text-align: center !important;
-        margin-top: 5%;
-        font-family: 'Montserrat';
     }
     .userDetails {
         display: grid;
