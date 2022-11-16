@@ -10,7 +10,7 @@ input[type=file] {
     border: none;
     margin-left: -4px;
     margin-top: -3px;
-    position: absolute;
+    /* position: absolute; */
 }
 
 select {
@@ -19,7 +19,7 @@ select {
    
     border: none;
     outline: none;
-    display: grid;
+    /* display: grid; */
 }
 .std-in-form,.sec-in-form{
     width: 91%;
