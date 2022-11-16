@@ -14,9 +14,6 @@ select {
     outline: none;
     display: grid;
 }
-.std-in-form,.sec-in-form{
-    width: 91%;
-}
 a:active {
     text-decoration: none;
     color: white;
