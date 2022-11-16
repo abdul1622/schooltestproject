@@ -106,12 +106,6 @@
   .grade-container #edit {
     margin-left: 0;
   }
-  .d-flex > div {
-    background-color: blanchedalmond;
-    margin-left: 11%;
-    padding: 5%;
-    margin-bottom: 5%;
-  }
   
 }
 @media screen and (min-width: 1359px) and (max-width: 1450px) {

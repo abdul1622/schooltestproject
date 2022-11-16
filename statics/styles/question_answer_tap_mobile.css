@@ -1,13 +1,6 @@
 @media screen and (min-width:430px) and (max-width:800px) {
-    .grid-item {
-        font-size: 10px;
-        width: 23vw;
-    }
-    
     #question-box {
         width: 36%;
-        padding-top: 1vh;
-        margin: 2vh 32%;
     }
 
     button#questioncreate-btn {
@@ -92,12 +85,6 @@
     }
     #question_creation {
         display: none;
-    }
-    #QForm-modal-content {
-        width: 133%;
-        background-color: #b2c8df;
-        padding: 2% 5%;
-        margin-left: -16%;
     }
     form.questionanswer {
         display: grid;

@@ -1,7 +1,3 @@
-.userDetails {
-    display: grid;
-    grid-template-columns: auto auto auto;
-}
 .table-heading{
     background-color: aliceblue;
     color: rgba(22,34,57,0.95);
@@ -66,9 +62,6 @@
     margin: 0;
 }
 
-button#standard_add_btn {
-    margin: 9% 0% 2%;
-}
 
 @media screen and (min-width:1024px) and (max-width:1200px) {
     #sort {
@@ -127,17 +120,6 @@ button#standard_add_btn {
     #action {
         padding-left: 4vh;
     }
-
-    #userdetail-btn {
-        width: 14vw;
-        height: 39px;
-        margin-left: 0vw;
-        margin-top: 12%;
-        margin-bottom: 17px;
-        background-color: #b2c8df;
-        color: #14279b;
-        border: 1px solid #14279b;
-    }
 }
 
 @media screen and (min-width:1359px) and (max-width:1450px) {
@@ -187,21 +169,6 @@ button#standard_add_btn {
     }
     #action {
         padding-left: 5vh;
-    }
-
-    #userdetail-btn {
-        width: 14vw;
-        height: 39px;
-        margin-left: 0vw;
-        margin-top: 10%;
-        margin-bottom: 17px;
-        background-color: #b2c8df;
-        color: #14279b;
-        border: 1px solid #14279b;
-    }
-
-    .modal-content {
-        margin-left: -57%;
     }
 
 }

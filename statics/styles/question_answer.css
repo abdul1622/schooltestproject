@@ -18,7 +18,8 @@ form.questionanswer {
     box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
 }
 .grid-item {
-    font-size: 10px;
+    
+    padding: 1%;
 }
 .question-error {
     text-align: center;
@@ -88,29 +89,12 @@ form.questionanswer {
     margin: 5%;
 }
 .qformbox{
-    margin: 2% 40%;
-    width: 20%;
-    min-width: 200px;
-    padding: 2% 3%;
-    border-radius: 5px;
     background-color: #ffffff14;
+    margin-left: 37%;
+    padding: 2%;
 }.qformbox label{
     color: antiquewhite;
 }
-.question_create {
-    display: none;
-    grid-template-columns: auto auto auto auto;
-    padding: 2vh;
-    width: 62vw;
-    /* height: 32vh; */
-    grid-gap: 0.5vw;
-    background-color: #b2c8df;
-    margin-left: 27vw;
-    margin-top: 6vh;
-    position: fixed;
-    border-radius: 5px;
-}
-
 #--question {
     color: #ffffff;
     margin: 2vh 4vw;
@@ -170,25 +154,11 @@ form.questionanswer {
     margin-left: 243px;
 }
 
-/* .question-list fieldset {
-    display: grid;
-    margin: 2% 4%;
-    gap: 3%;
-    grid-template-columns: auto auto auto auto;
-} */
-
 .question-card p {
     color: rgba(0, 0, 0, 0.753);
     width: 237px;
     display: block;
     font-weight: bold;
-}
-
-#QForm-modal-content {
-    width: 233%;
-    background-color: #b2c8df;
-    padding: 2% 5%;
-    margin-left: -31%;
 }
 
 @media screen and (max-width:420px) {

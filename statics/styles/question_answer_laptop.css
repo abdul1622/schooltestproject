@@ -1,31 +1,8 @@
 @media screen and (min-width:1024px) and (max-width:1200px) {
-    .grid-item select {
-        padding: 8px;
-        width: 20vw;
-        color: black;
-        border: none;
-        outline: none;
-        border-radius: 5px;
-    }
-
-    .grid-item input[type=text],input[type=email],input[type=phone],input[type=date] {
-            width: 25vh;
-            margin-bottom: 4%;
-            color: black;
-            font-size: 15px;
-            border: none;
-            margin-top: 0vh;
-        }
     .sort-input input[type=text]{
         width: 26%;
     }
-    }
-    #QForm-modal-content {
-        width: 181%;
-        background-color: #b2c8df;
-        padding: 2% 5%;
-        margin-left: -50%;
-    }
+}
   .questionanswer input[type=text]{
         width: 91.5%;
     }
@@ -123,7 +100,6 @@
         border-radius: 5px;
         font-family: 'Montserrat';
         font-size: 15px;
-        font-weight: 800;
         margin-top: 1vh;
         /* margin-left: 5vw; */
     }
@@ -189,24 +165,10 @@
 .question-list fieldset {
     grid-template-columns: auto auto auto;
 }
-#QForm-modal-content {
-    
-    margin-left: -64%;
-}
 .question_create label {
     font-size: 1vw;
     margin-bottom: 0.2vh;
 }
-
-input[type=text] {
-    padding: 5px;
-    width: 250px;
-    margin-bottom: -7px;
-    color: black;
-    font-size: 15px;
-    border: none;
-}
-
 #questionForm {
     display: none;
 }

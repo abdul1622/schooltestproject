@@ -66,64 +66,65 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="userDetails">
+      <div class="d-flex flex-wrap p-2 ">
         {%csrf_token%}
-        <div class='grid-item'>
+        <div class='m-1'>
           <label for="email">Email:</label><br>
-          <input type="email" onchange="check_email(this)" id='email' placeholder="Email">
+          <input type="email" onchange="check_email(this)" id='email' placeholder="Email" class="form-control">
         </div>
         <div class="standards-list" id="stdl"><p>standard-list</p></div>
 
-        <div class='grid-item'>
+        <div class='m-1'>
           <label for="phone">Phone:</label><br>
-          <input type="phone" onchange="check_phone(this)" id="phone" placeholder="Phone">
-        </div>
-        <div class='grid-item'>
-          <label for="dob">DOB:</label><br>
-          <input type="date" id="dob" placeholder="DOB">
-        </div>
-            
-        <div class='grid-item'>
-          <label for="fname">Firstname:</label><br>
-          <input type="text" id="fname" placeholder="First Name">
-        </div>
-      
-        <div class='grid-item'>
-          <label for="lname">Last Name:</label><br>
-          <input type="text" id="lname" placeholder="Last Name">
-        </div>
-      
-        <div class='grid-item'>
-          <label for="ffname">Full Name:</label><br>
-          <input type="text" id="ffname" placeholder="Full Name">
-        </div>
-       <div class='grid-item'>
-          <label for="std">Standard:</label><br>
-          <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required="" id="std"></select>
-        </div>
-      
-        <div class='grid-item'>
-          <label for="sec">Section:</label><br>
-          <select name="grade" class="sec-in-form form-control" required="" id="sec">      </select>
-         
-        </div>
-        <div class='grid-item-button'>
-          <button id="standard_add_btn" onclick=addstandard() >Add standard</button>
-        </div>
-
-        <div class='grid-item' id="reg-no-div">
-          <label for="reg">Reg:</label><br>
-          <input type="text" id="reg" placeholder="Reg">
+          <input type="phone" onchange="check_phone(this)" id="phone" placeholder="Phone" class="form-control">
         </div>
        
-        <div class='grid-item'>
-          <label for="address">Address:</label><br>
-          <input type="text" id="address" placeholder="Address">
+            
+        <div class='m-1'>
+          <label for="fname">Firstname:</label><br>
+          <input type="text" id="fname" placeholder="First Name" class="form-control">
         </div>
       
-        <div class='grid-item'>
+        <div class='m-1'>
+          <label for="lname">Last Name:</label><br>
+          <input type="text" id="lname" placeholder="Last Name" class="form-control">
+        </div>
+      
+        <div class='m-1'>
+          <label for="ffname">Full Name:</label><br>
+          <input type="text" id="ffname" placeholder="Full Name" class="form-control">
+        </div>
+        <div class='m-1' id="reg-no-div">
+          <label for="reg">Reg:</label><br>
+          <input type="text" id="reg" placeholder="Reg" class="form-control">
+        </div>
+       
+        <div class='m-1'>
+          <label for="address">Address:</label><br>
+          <input type="text" id="address" placeholder="Address" class="form-control">
+        </div>
+        <div class=' col-lg-4 col-md-5 col-sm-5 m-1'>
+          <label for="dob">DOB:</label><br>
+          <input type="date" id="dob" placeholder="DOB" class="form-control">
+        </div>
+       <div class='col-lg-5 col-md-6 col-sm-6 m-1'>
+          <label for="std">Standard:</label><br>
+          <select name="grade" class="form-control std-in-form col-lg-6 col-md-6 col-sm-6 m-1" onchange=getsectionname(this) required="" id="std" class="form-control"></select>
+        </div>
+      
+        <div class='col-lg-5 col-md-6 col-sm-6 m-1'>
+          <label for="sec">Section:</label><br>
+          <select name="grade" class="sec-in-form form-control col-lg-6 col-md-6 col-sm-6 m-1" required="" id="sec" class="form-control">      </select>
+         
+        </div>
+          <button id="standard_add_btn" class="btn btn-light" onclick=addstandard() >Add standard</button>
+        </div>
+
+       
+      
+        <div class='m-1'>
           <label for="file">Profile picture:</label><br>
-          <input type="file" id="file">
+          <input type="file" id="file" >
         </div>
       </div>
       <div class="formmodal-body">
@@ -131,7 +132,7 @@
       </div>
       <div class="modal-footer">
         <span class="create-btn-container"> <button type="button" id="userdetail-btn"
-          class="btn btn-primary"  >Submit</button></span>
+          class="btn btn-warning"  >Submit</button></span>
         <button type="button" class="btn btn-secondary">Close</button>
       </div>
     </div>

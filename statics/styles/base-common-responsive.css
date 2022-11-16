@@ -3,21 +3,9 @@ table{
 
 }
 @media screen and (min-width:1024px) and (max-width:1200px) {
-  #SFormModal  .modal-content{
-        width: 150%;
-        margin-left: -37%;
-}
-#FormModal .modal-content {
-    width: 150%;
-    margin-left: -28%;
-}
 
 }
 @media screen and (min-width:1359px) and (max-width:1450px) {
-    #QFormModal .modal-content {
-    width: 200%;
-    margin-left: -50%;
-    }
     .already {
         margin-left: 45vw;
     }
@@ -30,9 +18,6 @@ table{
         display: flex;
         justify-content: space-around;
         margin: 7%;
-    }
-    #add-section {
-        width: 50%;
     }
     .back-btn {
         margin-left: 88%;
@@ -64,11 +49,6 @@ table{
     }
     #bach-btn {
         margin-left: -11vw;
-    }
-
-   #QFormModal .modal-content {
-        width: 120%;
-        margin-left: -14%;
     }
     .back-btn-nav {
         display: block;

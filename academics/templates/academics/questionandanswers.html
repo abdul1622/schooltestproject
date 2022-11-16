@@ -8,59 +8,61 @@
   <div class="modal-dialog" role="document">
     <div class=" modal-content" id="QForm-modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Student</h5>
+        <h5 class="modal-title text-white" id="exampleModalLabel">Add Question</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form class="questionanswer" id="questionanswer">
+      <form class="d-flex flex-wrap p-1" id="questionanswer">
         {%csrf_token%}
-        <div class='grid-item'>
+        <div class='grid-item col-lg-4 col-md-4 col-sm-4'>
           <label for=""> Grade: </label>
-          <span class="grade-p">{{questionform.grade}}</span>
+          <span class="grade-p" >{{questionform.grade}}</span>
         </div>
-        <div class="grid-item"> <label for="id_subject">Subject:</label> <br> <select name="subject" required=""
-            id="id_subject">
+        <div class="grid-item col-lg-4 col-md-4  col-sm-4"> <label for="id_subject">Subject:</label> <br> <select name="subject" required=""
+            id="id_subject" class="form-control">
             <option value="" selected="">---------</option>
           </select></div>
-        <div class="grid-item"> <label for="id_chapter">Chapter:</label> <br> <select name="chapter" required=""
-            id="id_chapter">
+        <div class="grid-item col-lg-4 col-md-4  col-sm-4"> <label for="id_chapter">Chapter:</label> <br> <select name="chapter" required=""
+            id="id_chapter" class="form-control">
             <option value="" selected="">---------</option>
           </select></div>
-        <div class='grid-item'><label for="id_question">Question:</label> <input type='text' id='id_question'></div>
-        <div class='grid-item'><label for="id_question_type">Question type:</label> <br><select name="question_type"
-            id="id_question_type">
+          <div class='grid-item col-lg-4 col-md-4  col-sm-4'><label for="id_question_type">Question type:</label> <br><select name="question_type"
+            id="id_question_type" class="form-control">
             <option value="MCQ" selected>MCQ</option>
-            <option value="Fill_in_the_blanks">Fill_in_the_blanks</option>
+            <option value="Fill_in_the_blanks" >Fill_in_the_blanks</option>
             <option value="Match_the_following">Match_the_following</option>
           </select></div>
-        <div class='grid-item'><label for="id_cognitive_level">Cognitive level:</label> <br><select
-            name="cognitive_level" id="id_cognitive_level">
+    
+       
+        <div class='grid-item col-lg-4 col-md-4  col-sm-4'><label for="id_cognitive_level">Cognitive level:</label> <br><select
+            name="cognitive_level" id="id_cognitive_level" class="form-control">
             <option value="Knowledge" selected>Knowledge</option>
             <option value="Comprehension">Comprehension</option>
             <option value="Application">Application</option>
           </select> </div>
-        <div class='grid-item'><label for="id_difficulty_level">Difficulty level:</label> <br> <select name="difficulty_level" id="id_difficulty_level">
+        <div class='grid-item col-lg-4 col-md-4 col-sm-4'><label for="id_difficulty_level">Difficulty level:</label> <br> <select name="difficulty_level" id="id_difficulty_level" class="form-control">
             <option value="Easy" selected>Easy</option>
             <option value="Medium">Medium</option>
             <option value="Hard">Hard</option>
           </select> </div>
-        <div class='grid-item'><label for="id_option_a">Option A:</label> <input type='text' id='id_option_a'></div>
-        <div class='grid-item'><label for="id_option_b">Option B:</label> <input type='text' id='id_option_b'></div>
-        <div class='grid-item'><label for="id_option_c">Option C:</label> <input type='text' id='id_option_c'></div>
-        <div class='grid-item'><label for="id_option_d">Option D:</label> <input type='text' id='id_option_d'></div>
-        <div class='grid-item'> <label for="id_answer">Answer:</label> <br><select name="answer" id="id_answer">
+          <div class='grid-item'><label for="id_question">Question:</label> <input type='text' id='id_question' class="form-control"></div>
+        <div class='grid-item'><label for="id_option_a">Option A:</label> <input type='text' id='id_option_a' class="form-control"></div>
+        <div class='grid-item'><label for="id_option_b">Option B:</label> <input type='text' id='id_option_b' class="form-control"></div>
+        <div class='grid-item'><label for="id_option_c">Option C:</label> <input type='text' id='id_option_c' class="form-control"></div>
+        <div class='grid-item'><label for="id_option_d">Option D:</label> <input type='text' id='id_option_d' class="form-control"></div>
+        <div class='grid-item'> <label for="id_answer">Answer:</label> <br><select name="answer" id="id_answer" class="form-control">
             <option value="option_a" selected>option_a</option>
             <option value="option_b">option_b</option>
             <option value="option_c">option_c</option>
             <option value="option_d">option_d</option>
           </select></div>
-        <div class='grid-item'><label for="id_duration">Duration:</label><input type='text' id='id_duration' value="0"></div>
-        <div class='grid-item'><label for="id_mark">Mark:</label><input type='text' id='id_mark' value="0"></div>
+        <div class='grid-item'><label for="id_duration">Duration:</label><input type='text' id='id_duration' value="0" class="form-control"></div>
+        <div class='grid-item'><label for="id_mark">Mark:</label><input type='text' id='id_mark' value="0" class="form-control"></div>
       </form>
       <div class="modal-footer">
         <span class="create-btn-container"> <button type="button" id="question-btn"
-            class="btn btn-primary">Submit</button></span>
+            class="btn btn-warning">Submit</button></span>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -119,7 +121,7 @@
   </div>
 </div>
 <button id="--question" data-toggle="modal" data-target="#QFormModal">Add Question</button>
-<div id="question-box" class="qformbox panel-group">
+<div id="question-box" class="qformbox panel-group w-25">
   {% csrf_token %}
   <!-- {{ form.as_p }} -->
   <label for=""> Grade: </label>

@@ -20,14 +20,10 @@
   color:black;
   background-color: white
 }
-#getstarted{
-  margin-top: 10%;
-}
 .para{
   margin-left: 12%;
-  margin-top: 17%;
-  font-weight: normal;
   line-height: 1.6;
+  margin-top: 17%;
 }
 .footer {
   left: 0;
@@ -57,19 +53,6 @@
       width: 41vw;
       margin-left: 8%;
     }
-    .navbar-nav {
-      margin-left: 45vw;
-    }
-
-    #getstarted {
-      margin-left: 42vw;
-    }
-
-    .already {
-      margin-left: 45%;
-      margin-bottom: 7%;
-    }
-
   }
 
 
@@ -83,15 +66,8 @@
       margin-left: 0px;
 
     }
-
-
-
-    .already {
-      margin-bottom: 19%;
-    }
-
-    .para {
-      padding: 85px;
+    .para{
+      margin-top: 15%;
     }
   }
 

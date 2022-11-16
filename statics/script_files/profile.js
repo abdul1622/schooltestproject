@@ -139,7 +139,7 @@ function profile() {
         console.log("data=", data.data.email)
         console.log("data=", data)
 
-        let htmlSegment = `<div class="user" id='${data.data.id}'>
+        let htmlSegment = `<div class="user d-flex flex-wrap flex-column" id='${data.data.id}'>
               <div class="profile-head">
               <div class='image'> <img src='https://schooltestproject.herokuapp.com${data.data.profile?.profile_picture}'></div>  
               <p class="fullname">${data.data.profile?.full_name}</p><br>`

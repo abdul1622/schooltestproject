@@ -184,9 +184,11 @@ p.chapter-edit-close {
 
 @media screen and (min-width:430px) and (max-width:800px) {
 
-    .box label {
-        font-size: 1.8vw;
-    }
+ 
+        .box label {
+            font-size: 2.8vw;
+        }
+    
 
     .chapter-table td {
         text-align: center;
