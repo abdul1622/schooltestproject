@@ -4,10 +4,10 @@
 {% load static %}
 <!-- get chapter form -->
 <div class="form-box">
-    <div class="box panel-group" id="mediabox">
+    <div class="box panel-group col-10" id="mediabox">
 
         {% csrf_token %}
-        <p class="grade-p form-group"><label for=""> Grade: </label>
+        <p class="grade-p form-group "><label for=""> Grade: </label>
             <select class="grade-in-form form-control " onchange=getgradename(this) name="grade" required="" id="id_grade"></select>
         </p>
         <!--   <label for=""> Grade: </label>

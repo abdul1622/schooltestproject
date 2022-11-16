@@ -71,9 +71,7 @@
 }
 
 .box {
-    margin: 14% 40%;
-    /* margin-top: 4%; */
-    width: 20%;
+    margin: 14% 8%;
     min-width: 200px;
     padding: 2% 3%;
     font-family: 'Montserrat';
@@ -128,11 +126,10 @@ p.chapter-edit-close {
     font-size: 150%;
 }
 .chapterhead {
-    /* position: absolute; */
+
     display: flex;
     flex-flow: column;
-    /* margin-left: 45%; */
-    margin-top: 4%;
+    margin-top: 12%;
     text-align: center;
 }
 
@@ -194,15 +191,6 @@ p.chapter-edit-close {
         text-align: center;
         font-size: 100%;
     }
-
-    .chapter-table th {
-        padding-left: 4%;
-    }
-
-    .box input[type=text] {
-        font-size: 13px;
-    }
-
     #form-chaplist .back-btn {
         color: white;
         top: 3%;
@@ -212,24 +200,12 @@ p.chapter-edit-close {
         outline: none;
         position: absolute;
     }
-
-    .chapter-table table {
-        white-space: nowrap;
-        width: 70%;
-        margin-left: 15%;
-    }
-
     .chapter-table thead {
         font-size: 100%;
     }
 
     .chapter-table #edit {
         font-size: 145%;
-    }
-    .thead {
-        font-size: 1.2vw;
-        color: black;
-        text-align: justify;
     }
     #chapterlist-btn{
         font-family: 'Montserrat';
@@ -250,17 +226,14 @@ p.chapter-edit-close {
 
     .chapter-table {
         margin-top: 5%;
-        overflow: scroll;
     }
-
-    .chapter-table table {
-        font-size: 65%;
-        font-family: 'Montserrat';
-        margin-left: 6%;
-        margin-top: 8%;
-        width: 128%;
-    }
-
+.chapterhead{
+    margin-top: 15%;
+    margin-left: 4%;
+}
+.chapter-table table{
+    font-size: smaller;
+}
     .chapter-table #edit {
         font-size: 155%;
     }
@@ -282,7 +255,7 @@ p.chapter-edit-close {
         white-space: nowrap;
     }
     .box {
-        margin: 14% 33%;
+        margin: 14% 29.9%;
     }
     #delete-box-Modal-chapterlist .modal-content {
         width: auto;
