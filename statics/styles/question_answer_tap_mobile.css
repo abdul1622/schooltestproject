@@ -99,7 +99,7 @@
         display: grid;
     }
 }
-@media screen and (max-width:420px) {
+@media screen and (max-width:500px) {
     form.questionanswer {
         display: grid;
         grid-template-columns: auto;
@@ -120,17 +120,11 @@
         font-size: 14px;
     }
 
-    #question-box {
-        margin-left: 13%;
-        width: 70%;
-        padding: 3% 4%;
-        height: 0%;
-        margin-top: 12%;
-    }
-
-    #questioncreate-btn {
-        width: 47%;
-    }
+  .qformbox{
+    width: 53% !important;
+    margin-left: 23% !important;
+    padding: 1% 4% 3% 4%;
+  }
     #QForm-modal-content {
         width: 81%;
         background-color: #b2c8df;
@@ -177,9 +171,6 @@
         margin-left: 5%;
     } */
 
-    #question-box select {
-        margin-left: 5%;
-    }
 
     .question_create label {
         margin-left: 5%;

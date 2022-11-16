@@ -131,13 +131,6 @@
   .grade-list {
     margin-left: -9vw;
   }
-
-  #grade {
-    margin-left: 26vw;
-    width: 52vw;
-    /* margin-top: 30%; */
-  }
-
   .grade-container #grade {
     height: auto;
   }
@@ -146,11 +139,6 @@
     margin-top: 1vw;
     margin-bottom: 1rem;
   }
-
-  .grade-container h2 {
-    margin-left: 52%;
-  }
-
   .grade-container hr {
     margin-left: 49%;
   }
@@ -201,36 +189,12 @@
     font-size: 25px;
     box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
   }
-
-  #grade {
-    width: 82vw;
-    margin-left: 8%;
-  }
-
-  #grade input {
-    padding: 5px;
-    width: 70%;
-    margin-bottom: 10px;
-    color: black;
-    font-size: 15px;
-    border: none;
-  }
   .grade-list .card #edit {
     padding: 0px 3px;
     right: 31%;
   }
-  .grade-container h2 {
-    margin-left: 32%;
-    font-family: "cinzel";
-  }
   .grade-list .card .delete-grade {
     right: 13%;
     color: #850b0b;
-  }
-  .d-flex > div {
-    background-color: blanchedalmond;
-    margin-left: 10%;
-    padding: 5%;
-    margin-bottom: 5%;
   }
 }

@@ -154,15 +154,13 @@
         position: static;
     }
 }
-@media screen and (max-width:420px) {
-
+@media screen and (max-width:500px) {
     .question-paper-form {
-        background-color: #6264705e;
-        width: 100%;
-        padding: 30px 50px;
-        margin-bottom: 15%;
-        border-radius: 5px;
-        margin-left: 0%;
+        width: 77%;
+        padding: 5% 5%;
+        border-radius: 5px; 
+        margin-left: 8%;
+        margin-top: 17%;
     }
     .question-paper-form input {
         width: 90%;

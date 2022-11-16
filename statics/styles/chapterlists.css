@@ -288,15 +288,8 @@ p.chapter-edit-close {
         font-size: 2.4vw;
         white-space: nowrap;
     }
-    #mediabox {
-        margin-left: 16%;
-        margin-top: 4%;
-        width: 64%;
-        min-width: 200px;
-        padding: 2% 3%;
-        border-radius: 5px;
-        background-color: #33699f;
-        transform: rotate(0deg);
+    .box {
+        margin: 14% 33%;
     }
     #delete-box-Modal-chapterlist .modal-content {
         width: auto;
