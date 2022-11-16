@@ -163,12 +163,6 @@
         font-size: 20px;
         margin-left: 8%;
     }
-    #subjects-by-grade #back-btn {
-        margin-top: -20%;
-        position: absolute;
-        margin-left: -64%;
-        transform: none;
-    }
     .subject-card #edit {
         margin-left: 1vw;
         font-size: 150%;

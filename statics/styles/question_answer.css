@@ -148,12 +148,6 @@ form.questionanswer {
 }
 
 @media screen and (max-width:420px) {
-    #question-box {
-        width: 60%;
-        margin: 1% 20%;
-        padding: 1% 0% 4% 4%;
-    }
-
     .question-list fieldset {
         grid-template-columns: auto;
     }

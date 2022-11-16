@@ -95,30 +95,15 @@
         width: 85%;
         margin: 2% 15%;
     }
-}
+}*/
 
-@media screen and (max-width:420px) {
+@media screen and (max-width:500px) {
     .history-container-form {
-        width: 70%;
-        margin: 4% 15%;
-        padding: 2% 7%;
+        width: 66%;
+        margin: 16% 19%;
+        padding: 2% 3%;
+        line-height: 2;
+        color: white;
+        background-color: #292c4070;
     }
-
-    .history-container-div {
-        background-color: darkgrey;
-        width: 70%;
-        margin: 2% 15%;
-    }
-
-    .history-container p.heading {
-        flex-direction: column;
-    }
-
-    .history-container span.test-heading {
-        text-transform: capitalize;
-        font-size: 16px;
-    }
-    .history-container-div table button {
-        width: 100%;
-    }
-} */
+} 
