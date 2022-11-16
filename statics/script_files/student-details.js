@@ -73,7 +73,7 @@ function add_form(){
    document.getElementById('std').value = ''
    document.getElementById('address').value = ''
    document.getElementById('reg-no-div').style.display = 'none'
-   $('#FormModal').modal('show')
+   $('#student-FormModal').modal('show')
 }
 
 let messages = document.querySelector('.messages')
@@ -97,23 +97,23 @@ let form = document.getElementById('userDetails')
       }
   })
   console.log(students)
-  let table2 = `<table class='--user' id='usr'>`;
-    table2 += `<tr class="header">
-           <th >Email</th>
-           <th >Phone</th>
-           <th>RegNo</th>
-           <th>FullName</th>
-           <th>FirstName</th>
-           <th>LastName</th>
-           <th>Date Of Birth</th>
-           <th>Address</th>
-           <th>Standard</th>
-           <th id="action" >Action</th>
+  let table2 = `<table class='table md-mt-2 text-white' id='usr'>`;
+    table2 += `<tr class='table-heading'>
+           <th  scope="col" >Email</th>
+           <th  scope="col" >Phone</th>
+           <th  scope="col">RegNo</th>
+           <th  scope="col">FullName</th>
+           <th  scope="col">FirstName</th>
+           <th  scope="col">LastName</th>
+           <th  scope="col">Date Of Birth</th>
+           <th  scope="col">Address</th>
+           <th  scope="col">Standard</th>
+           <th id="action"  scope="col">Action</th>
     </tr>`;
          console.log(students.length)
          students.forEach((d, index) => {
           console.log('to')
-            table2 = table2 + `<tbody><tr id=${d.id}>`;
+            table2 = table2 + `<tbody><tr id=${d.id} scope="row">`;
             table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
             table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
             table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';

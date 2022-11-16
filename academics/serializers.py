@@ -241,9 +241,10 @@ class TestResultSerializer(serializers.ModelSerializer):
         # print(subject.subject.name)
         return test.subject.name
     def get_student(self,test):
-        return test.student_id.profile.full_name
+        return test.student_id
     def get_register_no(self,test):
-        return test.student_id.register_number
+        print(test.student_id.register_number,'here commint')
+        return test
     class Meta:
         model = TestResult
         fields = ['id','grade','subject','subject_name','register_number','student_name','student_id','test_id','question_paper','result','score','correct_answer','created_at','unanswered_questions','wrong_answer','test_detail']

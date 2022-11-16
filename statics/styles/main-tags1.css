@@ -1,7 +1,12 @@
 input:focus {
     outline: 1px solid#14279B;
   }
-
+  body {
+   font-family: 'Montserrat' sans-serif;
+    font-weight: 400;
+   background-image: url('./img/background.jpg');
+    background-size: cover;
+}
   input[type=checkbox]:focus {
     outline: none;
   }
@@ -27,12 +32,6 @@ input:focus {
     border-radius: 5px;
     margin: 5px;
   }
-
-  body {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 300;
-    background-color: #B2C8DF;
-  }
   h1 {
     color: #000000;
     font-size: 35px;
@@ -40,14 +39,8 @@ input:focus {
     margin-top: 0px;
     margin-left: -75px;
     text-align: center;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
-  a {
-    color: white;
-    padding-left: 70px;
-    padding-top: 10px;
-  }
-
   a:hover {
     color: white;
     text-decoration: none;
@@ -64,7 +57,9 @@ input:focus {
     margin: 0 3px;
     line-height: 1.5;
   }
-
+.already{
+  color: darkcyan;
+}
 @media screen and (min-width:1000px) and (max-width:1024px) {
 
 }

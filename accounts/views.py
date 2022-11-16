@@ -226,22 +226,6 @@ def load_section(request):
             data.append(section)
     print(data)
     return render(request,'accounts/sectiondropdown.html', {'items': data})
-
-# def check_for_user(request):
-#     email = request.GET.get('email', None)
-#     phone = request.GET.get('phone', None)
-#     users = User.objects.all()
-#     for i in users:
-#         if phone:
-#             if i.phone == phone:
-#                 return False
-
-#         if email:
-#             if i.email == email:
-#                 return False
-     
-#     return Response(status=HTTP_200_OK)
-
 class check_for_user(APIView):
     serializer_class=UserDetailsSerializer
     permission_classes=[AllowAny]

@@ -1,4 +1,4 @@
-.chapter-cards {
+/* .chapter-cards {
     display: grid;
     width: 80%;
     padding-left: 0%;
@@ -7,36 +7,27 @@
     padding-top: 5%;
     grid-template-columns: auto auto auto;
     gap: 8%;
-}
-.chapter-card {
-    width: 100%;
-    color: block;
-    height: auto;
-    margin-top: 10px;
-    font-size: 18px;
-    padding: 20px;
-    border-radius: 10px;
-}
+} */
+/* .chapter-card {
+   ;
+} */
 #back-btn-chapter {
     display: inline;
 }
 
-.ch-btn {
+/* .ch-btn {
     margin-left: 0%;
     background-color: #0062cc;
     border-color: #005cbf;
     color: white;
     border-radius: 5px;
-}
+} */
 
 .chapter-cards .chapter-card {
-    min-height: 30vh;
-    height: auto;
-
-    padding: 15% 12%;
-    cursor: pointer;
-    font-size: 16px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: #dcddff66;
+    margin: 3%;
+    padding: 2%;
+    width: 17rem;
 }
     
 .chapter-list label {
@@ -62,20 +53,7 @@
     .chapter-cards .chapter-card {
         min-height: auto;
     }
-    .chapterlist h4 {
-        margin-left: 39%;
-        margin-bottom: 2%;
-    }
-
-    .chapter-cards {
-        display: grid;
-        width: 33vw;
-        padding-left: 0%;
-        height: auto;
-        padding-top: 5%;
-        grid-template-columns: auto auto auto;
-        gap: 8%;
-    }
+    
 }
 @media screen and (min-width:1359px) and (max-width:1450px) {
     .chapter-cards .chapter-card {
@@ -86,25 +64,6 @@
 @media screen and (min-width:430px) and (max-width:800px) {
     #chapterlist hr {
         margin-left: 35%;
-    }
-
-    .chapterlist h4 {
-        margin-left: 43.5%;
-    }
-
-    .chapter-cards {
-        grid-template-columns: auto auto;
-        margin-left: 24%;
-        column-gap: 3%;
-        row-gap: 3%;
-    }
-    .chapter-cards .chapter-card {
-        min-height: 33vh;
-        margin-bottom: -5vh;
-        width: 40vw;
-    }
-    #back-btn-chapter {
-        margin-left: -9%
     }
 }
 @media screen and (max-width:420px) {

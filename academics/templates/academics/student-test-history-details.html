@@ -3,18 +3,19 @@
 {% load static %}
 <div class="history-container-form" id="history-container-form">
     <label for=""> Grade: </label>
-    <span class="grade-p"><select name="grade" required="" class="grade-in-form" id="id_grade">
+    <span class="grade-p"><select name="grade" required="" class="grade-in-form form-control" id="id_grade">
       </select></span>
       <!-- {{form.as_p}} -->
     <br><label for=""> Subject: </label>
-    <select name="subject" required="" id="id_subject">
+    <select name="subject" required="" id="id_subject" class="form-control">
         <option value="" selected="">---------</option>
       </select>
       <label for=""> Test: </label>
-      <select name="test" required="" id="id_test">
+      <select name="test" required="" id="id_test" class="form-control">
           <option value="" selected="">---------</option>
         </select>
-        <button class="btn btn-sm btn-primary" onclick=get()>Get</button>
+        <p class="text-center mt-3">
+        <button class="test-result-btn btn btn-md btn-warning  text-white" onclick=get()>Get</button></p>
         <div class="error-messages">
 
         </div>

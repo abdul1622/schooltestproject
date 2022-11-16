@@ -31,29 +31,13 @@
             font-weight: 600;
         }
 
-        .subject-head {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 2%;
-        }
-
-        .subjects-by-grade .cards {
-            display: grid;
-            width: 80%;
-            padding-left: 0%;
-            margin: 0% 10% 15%;
-            height: auto;
-            padding-top: 5%;
-            grid-template-columns: auto auto auto;
-            gap: 8%;
-        }
-
         .subjects-by-grade .subject-card {
-            height: auto;
-            padding: 15% 12%;
-            cursor: pointer;
-            font-size: 16px;
-            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            background-color: #dcddff66;
+            padding: 2%;
+            margin: 3%;
+            font-family: 'Montserrat';
+            font-weight: 400;
+            color:white;
         }
 
         .subject-list {
@@ -111,12 +95,6 @@
             box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
         }
 
-        #subject-btn {
-            background-color: #33699f;
-            color: white;
-            border: 1px solid white;
-        }
-
 
 @media screen and (min-width:1024px) and (max-width:1200px) {
 
@@ -154,60 +132,15 @@
     .subject-card #edit {
         margin-left: 1vw;
     }
-    #subject-btn {
-        width: 22%;
-        height: 23%;
-        margin-top: 0;
-        background-color: #33699f;
-        color: white;
-        border: 1px solid white;
-    }
 
 }
 @media screen and (min-width:430px) and (max-width:800px) {
-
-
-    .subjects-by-grade .cards {
-        grid-template-columns: auto auto;
-        height: auto;
-        column-gap: 3%;
-        row-gap: 2%;
-    }
-
-    .subjects-by-grade .subject-card {
-        width: 36vw;
-        border-radius: 9px;
-        margin-left: 0vw;
-        height: auto;
-    }
-
     .subjects-by-grade {
         margin-left: -5vw;
     }
-
-    .subjects-by-grade h2 {
-        margin-left: 38%;
-    }
-
     .subjects-by-grade hr {
         margin-left: 35%;
     }
-
-
-
-    .ch-btn {
-        margin-left: 0%;
-        background-color: #0062cc;
-        border-color: #005cbf;
-        color: white;
-        font-size: 1.5vw;
-        padding: 2%;
-        border-radius: 5px;
-    }
-    #subject-title {
-        margin-left: -15vw;
-    }
-
     .subject-title-subjects {
         margin-right: 26%;
     }

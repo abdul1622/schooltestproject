@@ -32,24 +32,6 @@ let content = '';
 let grade_list
 var grade_name;
 var subject_name;
-
-
-// for css
-// function loadCSS(filename){ 
-//     var file = document.createElement("link");
-//     file.setAttribute("rel", "stylesheet");
-//     file.setAttribute("type", "text/css");
-//     file.setAttribute("href", filename);
-//     document.head.appendChild(file);
-//     console.log('check css',file)
-//  }
-
- //just call a function to load your CSS
- //this path should be relative your HTML location
-//  loadCSS(host+'/static/styles/chapterlists.css');
-
-// get grade 
-
 fetch('https://schooltestproject.herokuapp.com/api/grades/', {
     method: 'GET',
     headers: {
@@ -190,13 +172,13 @@ function getchapter() {
                     </div>`
                 console.log(data);
                 let table2 = ''
-                table2 += `<a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back()> Back </a>`
-                table2 += `<table><thead class="thead"><th>Chapter No</th><th>Chapter Name</th><th>Description</th><th>Action</th></thead>`;
+                table2 += `<i class=" fa fa-light fa-arrow-left-long" id="back-btn" onclick=back() ></i>`
+                table2 += `<table class="table"><thead class="thead"><th>Chapter No</th><th>Chapter Name</th><th>Description</th><th>Action</th></thead>`;
                 data.data.map(d => {
                     table2 = table2 + `<tr id=${d.id}>`;
-                    table2 = table2 + '<td class="chapter_no">' + `${d.chapter_no}` + '</td>';
-                    table2 = table2 + '<td class="chapter_name">' + `${d.name}` + '</td>';
-                    table2 = table2 + '<td class="description">' + `${d.description}` + '</td>',
+                    table2 = table2 + '<td scope="col" class="chapter_no">' + `${d.chapter_no}` + '</td>';
+                    table2 = table2 + '<td scope="col" class="chapter_name">' + `${d.name}` + '</td>';
+                    table2 = table2 + '<td scope="col" class="description">' + `${d.description}` + '</td>',
                         table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i>` + `<i class="fa fa-trash-o" id="delete" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist"></i>` + '</td>',
                         // table2 = table2 + '<td>' + + '</td>',
                         table2 = table2 + `</tr>`;

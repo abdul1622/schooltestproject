@@ -1,84 +1,23 @@
+table{
+    letter-spacing: 0.5px;
+
+}
 @media screen and (min-width:1024px) and (max-width:1200px) {
-    .navbar {
-        width: 100%;
-        height: 7%;
-    }
-
-    .navbar li a {
-        padding: 0.12vh;
-    }
-
-    .navbar-nav {
-        margin-left: -3%;
-    }
-    #edit {
-        padding: 7px 15px;
-        border-radius: 5px;
-    }
-    
-    #delete {
-        padding: 7px 15px;
-        margin-top: 0vh;
-        border-radius: 5px;
-        color: #850b0b;
-    }
-
-  #SFormModal  .modal-content{
-        width: 150%;
-        margin-left: -37%;
-}
-#FormModal .modal-content {
-    width: 150%;
-    margin-left: -28%;
-}
 
 }
 @media screen and (min-width:1359px) and (max-width:1450px) {
-    .navbar {
-        width: 100vw;
-        height: 8vh;
-    }
-    .navbar-nav {
-        width: 28%;
-    }
-    .nav-item {
-        padding: 0.7%;
-    }
-    #QFormModal .modal-content {
-    width: 200%;
-    margin-left: -50%;
-    }
-    .navbar li a {
-        padding: 2.8vh;
-        margin-left: 2%;
-    }
     .already {
         margin-left: 45vw;
     }
 
     #edit {
-        padding: 5px 15px;
         margin-left: 20vw;
-        border-radius: 5px;
-    }
-    #delete {
-        color: #900202;
-        padding: 5px 15px;
-        margin-left: 21%;
-        position: absolute;
         border-radius: 5px;
     }
     .chapter-btns {
         display: flex;
         justify-content: space-around;
         margin: 7%;
-    }
-    #add-section {
-        width: 50%;
-    }
-    .navbar .nav-item a:hover {
-        background-color: white;
-        color: black;
     }
     .back-btn {
         margin-left: 88%;
@@ -99,14 +38,10 @@
         margin-top: -1vh;
         background-color: transparent;
         font-size: 1.5vw;
+        font-family: 'Montserrat';
         margin-top: -2vh;
         outline: none;
         position: absolute;
-    }
-    .navbar .nav-item a:hover {
-        background-color: #14279b;
-        ;
-        color: white;
     }
     .modal-content {
         width: auto;
@@ -115,49 +50,14 @@
     #bach-btn {
         margin-left: -11vw;
     }
-
-   #QFormModal .modal-content {
-        width: 120%;
-        margin-left: -14%;
-    }
-    #edit {
-        margin-left: -2vw;
-        font-size: 150%;
-        padding: 4px 13px;
-    }
-
-    #delete {
-        margin-left: 1vw;
-        font-size: 150%;
-        padding: 4px 13px;
-        color: #900202;
-    }
     .back-btn-nav {
         display: block;
-    }
-
-    .navbar-nav {
-        background-color: #14279b;
-        width: 32vw;
-        color: white;
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        font-size: 5vw;
-        position: fixed;
-        top: 0;
-        overflow-y: auto;
-    }
-    #chapter-btn {
-        margin-top: 0;
-        background-color: #33699f;
-        color: white;
-        border: 1px solid white;
     }
     .back-btn-nav button {
         background-color: transparent;
         color: white;
         font-size: 2.5vw;
+        font-family: 'Montserrat';
     }
 
     .back-btn-nav button:focus {
@@ -169,24 +69,6 @@
         background-color: transparent;
         text-align: right;
         margin-right: 7%;
-    }
-
-    .navbar li a {
-        font-size: 2.7vw;
-        padding: 15%;
-        margin: 0;
-    }
-
-    .navbar {
-        background-color: transparent;
-        height: 10vh;
-        width: 100%;
-        padding: 0;
-    }
-
-    .navbar-light .navbar-toggler {
-        margin-left: 4%;
-        background-color: #8d82ee;
     }
     form.userDetails input {
         width: 144%;
@@ -218,6 +100,7 @@
         flex-direction: column;
         height: 100vh;
         font-size: 6vw;
+        font-family: 'Montserrat';
         position: fixed;
         top: 0;
     }
@@ -239,19 +122,11 @@
 
     .navbar li a {
         font-size: 2.7vw;
+        font-family: 'Montserrat';
         color: white;
         padding: 15%;
         margin: 0;
     }
-
-    .navbar-light .navbar-toggler {
-        color: rgba(0, 0, 0, .5);
-        border-color: rgba(0, 0, 0, .1);
-        margin-left: 5vw;
-        background-color: #89a1d9;
-        padding: 1px 6px;
-    }
-
     .navbar-light .navbar-toggler-icon {
         width: 18px;
     }
@@ -269,13 +144,16 @@
     }
     button#delete-btn-yes {
         font-size: 10px;
+        font-family: 'Montserrat';
     }
     button#delete-btn-no {
         font-size: 10px;
+        font-family: 'Montserrat';
     }
     .delete-box {
         text-align: center;
         font-size: 10px;
+        font-family: 'Montserrat';
         background-color: #b2c8df;
     }
     #delete-box-Modal .modal-content{
@@ -284,19 +162,20 @@
     }
     #edit {
         padding: 7px 15px;
-        font-size: 80%;
-        margin-left: -47%;
+        font-size: 158%;
+        margin-left: -13%;
         border-radius: 5px;
     }
     #back-btn {
         margin-left: 6%;
         padding: 1% 2%;
         font-size: 11px;
+        font-family: 'Montserrat';
     }
     .text-center {
         text-align: center !important;
         margin-top: 5%;
-        font-family: 'cinzel';
+        font-family: 'Montserrat';
     }
     .userDetails {
         display: grid;

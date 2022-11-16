@@ -115,18 +115,18 @@ fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
       staffs.push(d)
     }
   })
-  let table2 = `<table class='--user' id='usr'>`;
-  table2 += `<tr class="header">
-         <th >Email</th>
-         <th >Phone</th>
-         <th>RegNo</th>
-         <th>FullName</th>
-         <th>FirstName</th>
-         <th>LastName</th>
-         <th>Date Of Birth</th>
-         <th>Address</th>
-         <th>Standard</th>
-         <th id="action" >Action</th>
+  let table2 = `<table class='table text-white md-mt-2' id='usr'>`;
+  table2 += `<tr class='table-heading' >
+         <th  scope="col" >Email</th>
+         <th  scope="col">Phone</th>
+         <th  scope="col">RegNo</th>
+         <th  scope="col">FullName</th>
+         <th  scope="col">FirstName</th>
+         <th  scope="col">LastName</th>
+         <th scope="col" >Date Of Birth</th>
+         <th scope="col">Address</th>
+         <th scope="col">Standard</th>
+         <th scope="col" id="action" >Action</th>
   </tr>`;
   console.log(staffs.length)
   staffs.forEach((d, index) => {

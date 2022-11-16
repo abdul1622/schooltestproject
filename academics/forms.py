@@ -8,12 +8,11 @@ from.models import *
 class Questionform(forms.ModelForm):
     class Meta:
         model = Question
-        fields = "__all__"
-
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['subject'].queryset = Subject.objects.none()
-    #     self.fields['chapter'].queryset = Chapter.objects.none()
+        fields = ['grade']
+    def __init__(self, *args, **kwargs):
+        super(Questionform, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
 
 
 class Answerform(forms.ModelForm):

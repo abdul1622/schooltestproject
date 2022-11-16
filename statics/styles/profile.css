@@ -1,13 +1,17 @@
         .profile-container {
-            display: flex;
-            justify-content: space-around;
             font-family: 'Cinzel', serif;
+        }
+        .container{
+            margin-top: 7rem;
         }
         .profile-back-btn {
             margin-left: 96%;
         }
         #profile-box input {
             width: 100%;
+        }
+        #profile-box i{
+            float:right
         }
         #profile-edit {
             position: absolute;
@@ -24,15 +28,6 @@
         }
         .occupation {
             margin-top: 21%;
-        }
-        #profile-btn {
-            width: 110px;
-            height: 39px;
-            /* margin-left: 68px; */
-            margin-top: 20px;
-            background-color: #b2c8df;
-            color: #14279b;
-            border: 1px solid #14279b;
         }
 
         .standard-edit li {
@@ -62,7 +57,7 @@
             border-radius: 7%;
         }
         #profile-box {
-            background-color: #5c7aea;
+            background-color: #ffffff14;;
             display: none;
             color: black;
             width: 20%;
@@ -72,25 +67,22 @@
             text-align: center;
             margin-bottom: 4%;
             border-radius: 5px;
+            margin-left: 42%;
         }
 
 
         .user {
-            width: 65%;
-            height: auto;
-            margin-left: 12%;
-            display: flex;
             color: white;
             box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
             margin-top: 5%;
             font-size: 18px;
             border-radius: 5px;
-            background-color: #fff8dcd9;
             position: relative;
         }
         .user label {
             width: 100px;
             display: inline-block;
+            color: bisque;
         }
 
         .profile-content {
@@ -98,18 +90,14 @@
             flex-basis: 80%;
             text-align: left;
             margin-bottom: 5%;
-            color: black;
+            color:white;
         }
         .profile-head {
             padding: 8% 12%;
             text-align: center;
-            background-color: #5c7aea;
+            background-color: #ededed32;
             flex-basis: 20%;
             line-height: 150%;
-        }
-        #profile-btn:hover {
-            color: white;
-            background-color: #14279b;
         }
         .profile-label {
             display: inline;
@@ -142,9 +130,6 @@
         width: 35vw;
         margin-top: 1%;
     }
-    .user {
-        margin: 8% 16%;
-    }
     .standard-edit {
         top: 10%;
         right: 17%;
@@ -168,10 +153,6 @@
 
     #profile-box input[type='text'] {
         margin-bottom: 1vh;
-    }
-
-    .user {
-        margin-left: 18%;
     }
 
 }

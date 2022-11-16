@@ -136,13 +136,13 @@ document.querySelector('.error-messages').innerHTML =''
 content +=             `<div class='history-container-head'> <button onclick=back() class='btn btn-sm btn-primary'>Back</button>
      <p  class='heading'> <span>Grade : ${grade_list[0]['grade']}</span> <span class='test-heading'>${test_name}</span> <span>Subject : ${subject_name}</span></p>
     </div> `
-     content += `<div class='history-container-div'><table>`
+     content += `<div class='history-container-div'><table  class="text-nowrap table text-white" >`
 
-     content += '<tr><th>Sl.no</th><th>Name</th><th>Register_number</th><th>Result</th><th>Score</th><th>Correct <br> answer</th><th>Wrong <br> answer</th><th>Unanswered <br> questions</th><th>Details</th></tr>'
+     content += '<tr class="table-heading"><th>Sl.no</th><th>Name</th><th>Register_number</th><th>Result</th><th>Score</th><th>Correct <br> answer</th><th>Wrong <br> answer</th><th>Unanswered <br> questions</th><th>Details</th></tr>'
          data.forEach((d, index) => {
              i += 1
          content += `<tr><td>${i}</td><td>${d.student_name}</td><td>${d.register_number}</td><td>${d.result}</td><td>${d.score}</td><td>${d.correct_answer}</td><td>${d.wrong_answer}</td><td>${d.unanswered_questions
-}</td><td><button data-toggle="modal" data-target="#test-details-model"  onclick=details(${d.id})>details</td></tr>`
+}</td><td><button data-toggle="modal" class="btn btn-light" data-target="#test-details-model"  onclick=details(${d.id})>details</td></tr>`
  })
 content += `</table></div>`
  container.innerHTML = content

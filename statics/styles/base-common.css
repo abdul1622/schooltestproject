@@ -26,42 +26,21 @@
 .navbar-light .navbar-toggler {
     color: rgba(0, 0, 0, .5);
     border-color: rgba(0, 0, 0, .1);
-    margin-left: 86vw;
 }
-
-.nav-item :hover {
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-}
-
-.nav-item {
-    padding: 1%;
-}
-
 .errorlist {
     display: none;
 }
 
 .navbar {
-    background-color: #14279B;
-    font-size: 16px;
-    border-radius: 0px;
-    width: 100%;
-    z-index: 3;
-    height: 6vh;
+    background-color: rgba(22,34,57,0.95);
+    border-bottom: 1px solid #ffffff59;
+    font-size: 1.3em;
+    font-weight: 400;
+    font-family: 'Oswald', sans-serif;
 }
-
-.navbar .nav-item a:hover {
-    background-color: white;
-    color: black;
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(217, 217, 217, 0.778);
 }
-
-.navbar li a {
-    padding: 1.8vh;
-    margin-left: 2%;
-    white-space: nowrap;
-}
-
 .update {
     border: none;
     border-radius: 2px;
@@ -139,12 +118,6 @@
     font-size: 18px;
 }
 
-.container {
-    width: 100%;
-    padding-top: 60px;
-    padding-bottom: 100px;
-}
-
 .frame {
     height: 425px;
     width: 430px;
@@ -164,7 +137,7 @@
 
 .text-center {
     text-align: center !important;
-    font-family: cinzel;
+    font-family: 'Montserrat';
 }
 
 .container3 {
@@ -178,7 +151,7 @@
 .delete-box {
     text-align: center;
     font-size: 16px;
-    background-color: #b2c8df;
+    color: white;
 }
 
 .grid-item-button {
@@ -189,24 +162,19 @@
     font-size: 192%;
 }
 
-i#back-btn {
-    padding: 1%;
-    cursor: pointer;
-    border-radius: 16%;
-    background-color: #0062cc;
-    color: white;
-}
-
 .messages {
     text-align: center;
     color: green;
     font-size: 14px;
+    font-family: 'Montserrat';
 }
 
 .error-messages {
     text-align: center;
     color: #ff0000;
     font-size: 14px;
+    font-family: 'Montserrat';
+    font-weight: bold;
     background-color: white;
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
@@ -237,20 +205,13 @@ i#back-btn {
 }
 
 #edit {
-    padding: 5px 15px;
-    margin-left: -1vw;
-    border-radius: 5px;
-    font-size: 150%;
-    color: #14279B;
+    color: #35b9dc;
+    font-size: 1.5rem;
 }
 
 #delete {
-    padding: 5px 15px;
-    margin-left: 1%;
-    border-radius: 5px;
-    margin-top: 0vh;
     color: #900202;
-    font-size: 150%;
+    font-size: 1.5rem;
 }
 
 .modal-content label {
@@ -260,6 +221,7 @@ i#back-btn {
 
 .modal-title span {
     font-size: 20px;
+    font-family: 'Montserrat';
 }
 
 .cards {
@@ -271,15 +233,13 @@ element.style {
 }
 
 .modal-content {
-    width: 200%;
-    margin-left: -34%;
-    padding: 2% 5%;
-    background-color: #b2c8df;
+    background-color:#1c1e4fb8
 }
 
 .success {
     color: white;
     font-size: 15px;
+    font-family: 'Montserrat';
 }
 
 input#id_section {
@@ -300,4 +260,8 @@ p.section-btn {
 
 form.userDetails input {
     width: 90%;
+}
+table{
+    overflow: auto;
+    
 }

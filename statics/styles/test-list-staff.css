@@ -1,23 +1,28 @@
-.test-create-container {
-    width: 100vw;
+
+.question-papers-get {
+    background: #4548a136;
+    margin-top: 13%;
+    width: 25%;
+    padding: 3%;
+    margin-left: 38%;
 }
+.header{
+    display: block;
+    color: antiquewhite;
+}
+
 #Test_id {
     padding: 7px 10px;
     margin: 1% 1% 1% 10%;
 }
 .question-papers-card {
-    display: grid;
     height: auto;
-    width: 87%;
-    margin: 2% 10%;
-    grid-template-columns: auto auto auto auto;
-    gap: 2%;
+    margin: 2% 6%;
 }
-.question-papers-get {
-    width: 20%;
-    margin: 2% 40%;
-    padding: 1%;
-    background-color: #364de4;
+
+.text-center {
+    text-align: center;
+    font-family: 'Montserrat';
 }
 
 .question-papers-get .container {
@@ -36,17 +41,22 @@
 }
 .questions-paper-card {
     font-size: 15px;
-    background-color: #fff8dcb0;
+    background-color: #dcddff66;
     color: black;
-    /* width: 69%; */
     box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-    padding: 10%;
-    margin: 6%;
+    padding: 2%;
+    margin: 1%;
 }
 
 
-
-.question-papers-get input {
+/* .question-papers-get {
+    width: 30%;
+    height: 2%;
+    margin: 18% 40%;
+    padding: -1%;
+    background-color: #31354f5e;
+} */
+/* .question-papers-get input {
     display: block;
     width: 100%;
     padding: 0.375rem 0.75rem;
@@ -62,9 +72,9 @@
     appearance: none;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
+} */
 
-@media screen and (min-width:1024px) and (max-width:1200px) {
+/* @media screen and (min-width:1024px) and (max-width:1200px) {
     .question-papers-get {
         width: 35%;
         margin: 2% 30%;
@@ -75,12 +85,13 @@
 }
 @media screen and (min-width:1359px) and (max-width:1450px) {
     .question-papers-get {
-        width: 25%;
-        margin: 2% 35%;
-        padding: 1%;
-        background-color: #364de4;
+        width: 30%;
+    margin: 17% 35%;
+    padding: 2%;
+    background-color: #4f52684d;
+      }
     }
-}
+
 @media screen and (min-width:430px) and (max-width:800px) {
     .question-papers-get {
         width: 45%;
@@ -100,7 +111,6 @@
         font-size: 15px;
         background-color: #fff8dcb0;
         color: black;
-        width: 208%;
         box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
         padding: 10%;
         margin: 6%;
@@ -138,4 +148,4 @@
         width: 35%;
     }
 
-}
+} */

@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
+<script src="https://kit.fontawesome.com/e732652cab.js" crossorigin="anonymous"></script>
 {% load static %}
 
 <!-- form to edit and create grade,subject,chapter -->
-<div id="grade">
+<div id="grade" class="col-lg-3 col-md-4 col-sm-6 col-5">
 
     {% csrf_token %}
     <div class="form-all">
 
     </div>
-    <button class="submit-btn" id="grade-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
-    <button class="submit-btn" id="subject-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
-    <button class="submit-btn" id="chapter-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
+    <button class="submit-btn btn btn-warning" id="grade-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
+    <button class="submit-btn btn btn-warning"  id="subject-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
+    <button class="submit-btn btn btn-warning"  id="chapter-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
 </div>
 
 <!-- message popup -->
@@ -67,37 +68,36 @@
 </div>
 
 <!-- grade,subject,chapter container -->
-<div class="grade-container container" id="grade-container">
+<div class="grade-container" id="grade-container">
     <!-- subject container -->
     <div id="subjects-by-grade" class="subjects-by-grade">
-
-        <h2>Grade - <span id="grade-title"></span> </h2>
+        <i id="back-btn" class=' fa fa-light fa-arrow-left-long ' onclick=get() style='font-size:24px'></i>
+        <h2 class="text-center text-white">Grade - <span id="grade-title"></span> </h2>
         <hr>
         <div class="subject-head">
-            <i id="back-btn" class='fa fa-angle-left' onclick=get() style='font-size:24px'></i>
-            <h3 class="subject-title-subjects"> Subjects </h3>
+          
+            <h3 class=" text-center text-white "> Subjects </h3>
         </div>
-        <div class="cards container-fluid">
+        <div class="cards d-flex flex-wrap justify-content-center">
         </div>
     </div>
 
     <!-- chapter container -->
-    <div id="chapterlist" class="chapterlist">
-
-        <h4>Grade - <span id="grade-title-chapter"></span> </h4>
-        <h2><span id="subject-title"></span> </h2>
+    <div id="chapterlist" class="chapterlist"><i id="back-btn-chapter" class=' fa fa-light fa-arrow-left-long'
+            style='font-size:24px'></i>
+        <h4 class="text-center text-white">Grade - <span id="grade-title-chapter"></span> </h4>
+        <h2 class="text-center text-white mt-4" ><span id="subject-title"></span> </h2>
         <hr>
         <div class="subject-head">
-            <a type="button" class="btn btn-sm btn-primary" id="back-btn-chapter"><i class='fa fa-angle-left'
-                    style='font-size:24px'></i></a>
-            <h3 class="subject-title-subjects"> Chapters </h3>
+           
+            <h3 class="text-center text-white"> Chapters </h3>
         </div>
-        <div class="chapter-cards container">
-        </div>
+        <div class="chapter-cards d-flex flex-wrap justify-content-center">
+        </div> 
     </div>
 
     <!-- grade container -->
-    <div id="grade-list" class="grade-list container">
+    <div id="grade-list" class="grade-list grades text-center">
 
     </div>
 
