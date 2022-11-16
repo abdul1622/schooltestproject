@@ -30,14 +30,6 @@
     #action {
         padding-left: 1%;
     }
-
-    #userdetail-btn {
-        width: 10vw;
-        height: 5vh;
-        font-size: 14px;
-        position: static;
-        margin-top: 20.99%;
-    }
 }
 
 @media screen and (max-width:420px) {

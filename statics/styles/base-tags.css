@@ -6,13 +6,6 @@ label {
     font-size: 15px;
     color: white;
 }
-input[type=file] {
-    border: none;
-    margin-left: -4px;
-    margin-top: -3px;
-    position: absolute;
-}
-
 select {
     padding: 4px;
     width: 91%;
