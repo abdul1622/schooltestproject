@@ -17,18 +17,18 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="delete-btn-yes" data-dismiss="modal" class="delete-btn-yes btn btn-danger">Yes</button>
+                <button id="delete-btn-yes" data-dismiss="modal" class="delete-btn-yes btn btn-danger ">Yes</button>
                 <button id="delete-btn-no" data-dismiss="modal" class="delete-btn-no btn btn-primary">Back</button>
             </div>
         </div>
     </div>
 </div>
-    <div class="instructionForm">
+    <div class="instructionForm mt-5">
            {% csrf_token %}
         {{form.as_p}}
           
-        <button id="instruction-btn" class=''onclick=createinstruction()>Create</button></div>
-       <ol class="instructions"></ol>
+        <button id="instruction-btn" class='btn-warning'onclick=createinstruction()>Create</button></div>
+       <ol class="instructions mt-1"></ol>
 
 <script src="{% static 'script_files/instructions.js' %}" type="text/javascript"></script>
 {% endblock %}

@@ -113,7 +113,7 @@ class TestForm(forms.ModelForm):
 class instruction_form(forms.Form):
     instruction = forms.CharField(widget=forms.Textarea(
 
-    attrs={"class": "form-control", "placeholder": "Instructions"}))
+    attrs={"class": "form-control", "placeholder": "Instructions","style":"color:black; width:50%;"}))
 class questionCustomForm(forms.Form):
     from_chapter = forms.ChoiceField()
     to_chapter = forms.ChoiceField()

@@ -214,10 +214,10 @@
     font-size: 1.5rem;
 }
 
-.modal-content label {
+/* .modal-content label {
     width: 30%;
     white-space: nowrap;
-}
+} */
 
 .modal-title span {
     font-size: 20px;
@@ -255,9 +255,9 @@ p.section-btn {
 }
 
 
-form.userDetails input {
+/* form.userDetails input {
     width: 90%;
-}
+} */
 table{
     overflow: auto;
     
