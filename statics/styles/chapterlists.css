@@ -237,19 +237,12 @@ p.chapter-edit-close {
 
 }
 
-@media screen and (max-width:420px) {
+@media screen and (max-width:500px) {
     .box label {
         margin-left: 5%;
     }
     #chapterlist-btn{
         font-family: 'Montserrat';
-    }
-    .box label {
-        margin-left: 5%;
-    }
-
-    .box select {
-        margin-left: 5%;
     }
     .form .back-btn {
         margin-left: 93%;

@@ -5,7 +5,7 @@
 
     <div class="q-form" id="q-form-1">
         {% csrf_token %}
-        <p><label for="id_grade">Grade:</label><select  class="form-control" name="grade" class="grade-in-form" onchange=getgradename(this)
+        <p><label for="id_grade">Grade:</label><select  class="form-control grade-in-form" name="grade" class="grade-in-form" onchange=getgradename(this)
                 required="" id="id_grade">
                 <option value="" selected="">---------</option>
             </select> </p>
