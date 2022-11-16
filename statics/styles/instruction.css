@@ -4,7 +4,9 @@
 }
 #id_instruction {
     resize: none;
+    color: black;
 }
+
 #instruction-btn {
     margin-left: 88%;
     width: 12%;

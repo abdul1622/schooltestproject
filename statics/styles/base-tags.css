@@ -5,6 +5,7 @@ body{
 label {
     font-size: 15px;
     color: white;
+    margin-top: 3%;
 }
 select {
     padding: 4px;
