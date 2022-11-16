@@ -11,9 +11,13 @@
         console.log(subject_val)
         list.innerHTML = ''
         container.innerHTML = ''
-        form_all.innerHTML = `<div class="chapter-form-box"> <p><label for="id_chapter_no">Chapter no:</label> <input class='form-control' type="number" name="chapter_no" min="0" required="" id="id_chapter_no"></p>
-        <p><label for="id_name">Name:</label> <input class='form-control' type="text" name="name" maxlength="30" required="" id="id_name"></p>
-        <p><label for="id_description">Description:</label> <input class='form-control type="text" name="description" maxlength="50" required="" id="id_description"></p> <div></div></div>`
+        form_all.innerHTML = `<div class="chapter-form-box"> 
+        <p><label for="id_chapter_no">Chapter no:</label> 
+        <input class='form-control' type="number" name="chapter_no" min="0" required="" id="id_chapter_no"></p>
+        <p><label for="id_name">Name:</label> 
+        <input class='form-control' type="text" name="name" maxlength="30" required="" id="id_name"></p>
+        <p><label for="id_description">Description:</label> 
+        <input class='form-control' type="text" name="description" maxlength="50" required="" id="id_description"></p></div>`
         document.getElementById('grade-title-chapter').textContent = `${grade_val}`
         document.getElementById('subject-title').textContent = `${subject_val}`
         document.getElementById('grade-btn').style.display = "none"
