@@ -1,0 +1,14 @@
+#addstaff{
+        font-family: 'Montserrat';
+}
+.sort{
+    margin-top: 10vh;
+    justify-content: space-between;
+}
+@media screen and (min-width:430px) and (max-width:800px) {
+    .userDetails input{
+        width: 144%;
+    }
+}
+@media screen and (min-width: 500px) and (max-width: 1450px){
+}

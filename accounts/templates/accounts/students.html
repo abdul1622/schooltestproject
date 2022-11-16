@@ -1,0 +1,152 @@
+{% extends 'base.html'%}
+{% block userd %}
+<script src="https://kit.fontawesome.com/e732652cab.js" crossorigin="anonymous"></script>
+{% load static %}
+<!-- delete student -->
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+<div class="modal fade" id="delete-user-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id='confirmationuser'>
+
+          <h3>Are you sure to delete?</h3>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="no" data-dismiss="modal">No</button>
+        <span class="create-btn-container"> <button data-dismiss="modal" type="button" id='yes'
+            class="btn btn-primary">Yes</button></span>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- message -->
+<div class="modal fade" id="messageModal-student" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" id="close-btn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="messages container-fluid">
+
+        </div>
+        <div class="error-messages container-fluid">
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick=reload()>Close</button>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Creation and updation modal -->
+<div class="modal fade" id="student-FormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+
+    <div class="modal-content" id="student-Form-modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> Add Student</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="d-flex flex-wrap p-2">
+        {%csrf_token%}
+        <div class='m-1'>
+          <label for="email">Email:</label><br>
+          <input class="form-control" type="email" id='email' placeholder="Email">
+        </div>
+        <div class='m-1'>
+          <label for="phone">Phone:</label><br>
+          <input class="form-control" type="phone" id="phone" placeholder="Phone">
+        </div>
+
+        <div class='m-1' id="reg-no-div">
+          <label for="reg">Reg:</label><br>
+          <input type="text" id="reg" placeholder="Reg" class="form-control">
+        </div>
+        <div class='m-1'>
+          <label for="address">Address:</label><br>
+          <input class="form-control" type="text" id="address" placeholder="Address">
+        </div>
+
+        <div class='m-1'>
+          <label for="fname">Firstname:</label><br>
+          <input class="form-control" type="text" id="fname" placeholder="First Name">
+        </div>
+
+        <div class='m-1'>
+          <label for="lname">Last Name:</label><br>
+          <input class="form-control" type="text" id="lname" placeholder="Last Name">
+        </div>
+
+        <div class='m-1'>
+          <label for="ffname">Full Name:</label><br>
+          <input class="form-control" type="text" id="ffname" placeholder="Full Name">
+        </div>
+        <div class='m-1'>
+          <label for="dob">DOB:</label><br>
+          <input class="form-control" type="date" id="dob" placeholder="DOB">
+        </div>
+        <div class='m-1'>
+          <label for="std">Standard:</label><br>
+          <select name="grade" class="std-in-form form-control" onchange=getsectionname(this) required=""
+            id="std" class="form-control"></select>
+        </div>
+
+        <div class='m-1'>
+          <label for="sec">Section:</label><br>
+          <select name="grade" class="sec-in-form form-control" required="" id="sec" class="form-control"> </select>
+        </div>
+
+       
+        <div class='m-1'>
+          <label for="file">Profile picture:</label><br>
+          <input type="file" id="file">
+        </div>
+      </form>
+      <div class="formmodal-body">
+
+      </div>
+      <div class="modal-footer">
+        <span class="create-btn-container"> <button type="button" id="userdetail-btn" data-dismiss="modal" class="btn btn-warning"
+            data-target="#messageModal-student">Submit</button></span>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closemessage(this)">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end  -->
+
+<!-- filter -->
+
+<div class='d-flex flext-row form-group sort'>
+  <input type="text" id="student-filter"  class="form-control w-25 ml-3" placeholder="search" min="0" max="12"   onkeyup="filter()">
+
+<button onclick="add_form()" id="addstudent" class="btn btn-warning  text-white btn-md float-right  mr-5"  >Add Student</button>
+</div>
+<!-- student details -->
+<div class=" container2 w-100 "></div>
+
+<script src="{% static 'script_files/student-edit.js' %}" type="text/javascript"></script>
+<script src="{% static 'script_files/student-details.js' %}" type="text/javascript"></script>
+
+{% endblock %}

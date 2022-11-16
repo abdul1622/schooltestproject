@@ -1,0 +1,267 @@
+.navbar li a:focus {
+    color: cornflowerblue;
+}
+
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #f6d365;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+}
+
+.back-btn-nav {
+    display: none;
+}
+
+.container-1 {
+    width: 34%;
+    margin-top: 5%;
+    margin-left: 15%;
+}
+
+.navbar-light .navbar-toggler {
+    color: rgba(0, 0, 0, .5);
+    border-color: rgba(0, 0, 0, .1);
+}
+.errorlist {
+    display: none;
+}
+
+.navbar {
+    background-color: rgba(22,34,57,0.95);
+    border-bottom: 1px solid #ffffff59;
+    font-size: 1.3em;
+    font-weight: 400;
+    font-family: 'Oswald', sans-serif;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(217, 217, 217, 0.778);
+}
+.update {
+    border: none;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.update a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.update a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+#create {
+    color: #343a40;
+    margin-left: 100px;
+    margin-top: 20px;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.id_grade {
+    font-size: 15px;
+}
+
+.delete {
+    border: none;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.pdf {
+    padding: 5px;
+    color: black
+}
+
+.delete a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.delete a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.download {
+    width: 20%;
+    height: 120px;
+    border-radius: 5px;
+    margin-top: 350px;
+    margin-left: 200px;
+    padding: 50px;
+    font-size: 20px;
+    color: white;
+    background-color: #343a40;
+}
+
+.download a {
+    padding-left: 0;
+    text-decoration: underline;
+    color: white;
+}
+
+.navbar-brand {
+    padding: 12px;
+    color: black;
+    font-weight: 500px;
+    font-size: 18px;
+}
+
+.frame {
+    height: 425px;
+    width: 430px;
+    background-color: #ffffff;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    border-top: solid 1px rgba(255, 255, 255, .5);
+    border-radius: 5px;
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: all .5s ease;
+    padding-top: 107px;
+    padding-left: 60px;
+    margin-top: 200px;
+}
+
+.text-center {
+    text-align: center !important;
+    font-family: 'Montserrat';
+}
+
+.container3 {
+    margin-top: 175px;
+}
+
+.back-btn {
+    margin-left: 0;
+}
+
+.delete-box {
+    text-align: center;
+    font-size: 16px;
+    color: white;
+}
+
+.grid-item-button {
+    margin-top: 9%;
+}
+
+.delete-box h4 {
+    font-size: 192%;
+}
+
+.messages {
+    text-align: center;
+    color: green;
+    font-size: 14px;
+    font-family: 'Montserrat';
+}
+
+.error-messages {
+    text-align: center;
+    color: #ff0000;
+    font-size: 14px;
+    font-family: 'Montserrat';
+    font-weight: bold;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.chapter-btns {
+    display: flex;
+    justify-content: space-around;
+}
+
+.chapter-btns button {
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+#submit {
+    width: 110px;
+    height: 39px;
+    margin-left: 68px;
+    margin-top: 50px;
+    background-color: #343a40;
+    color: white;
+    border: 1px solid white;
+}
+
+.modal-body {
+    text-align: center;
+}
+
+#edit {
+    color: #35b9dc;
+    font-size: 1.5rem;
+}
+
+#delete {
+    color: #900202;
+    font-size: 1.5rem;
+}
+
+.modal-content label {
+    width: 30%;
+    white-space: nowrap;
+}
+
+.modal-title span {
+    font-size: 20px;
+    font-family: 'Montserrat';
+}
+
+.cards {
+    margin-bottom: 2%;
+}
+
+element.style {
+    display: block;
+}
+
+.modal-content {
+    background-color:#1c1e4fb8
+}
+
+.success {
+    color: white;
+    font-size: 15px;
+    font-family: 'Montserrat';
+}
+
+input#id_section {
+    width: 20%;
+}
+
+button#add-section {
+    margin-left: 1%;
+}
+
+p.section-btn {
+    text-align: center;
+}
+
+p.section-btn {
+    margin: 5% 14%;
+}
+
+form.userDetails input {
+    width: 90%;
+}
+table{
+    overflow: auto;
+    
+}
