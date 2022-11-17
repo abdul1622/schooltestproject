@@ -45,7 +45,7 @@
 
     // get grade
     function get() {
-        var content = ' <h2 class="text-center text-white">Grades </h2> <div class="justify-content-lg-center justify-content-sm-start card-group  d-flex flex-wrap ">'
+        var content = ' <h2 class="text-center text-white">Grades </h2> <div class="justify-content-lg-center ml-4 col-12 justify-content-sm-start card-group  d-flex flex-wrap ">'
         fetch('https://schooltestproject.herokuapp.com/api/grades/', {
             method: 'GET',
             headers: {
