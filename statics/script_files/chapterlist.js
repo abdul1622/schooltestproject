@@ -124,7 +124,7 @@ document.getElementById('message-close-btn').addEventListener('click', () => {
 
 function back() {
     document.querySelector('.chapter-table').innerHTML = ''
-    document.querySelector('.form').style.display = 'none'
+
     flag = false
     document.querySelector('.box').style.display = 'block'
     if (document.getElementById('id_grade')) {
@@ -249,7 +249,8 @@ container3.addEventListener('click', (e) => {
             window.location.href = '#grade';
             var chapter_no = parent.querySelector('.chapter_no').textContent;
             var name = parent.querySelector('.chapter_name').textContent;
-           document.getElementById('exampleModalLabel').innerHTML=name
+            document.getElementById('exampleModalLabel').style.textTransform='capitalize'
+            document.getElementById('exampleModalLabel').innerHTML=name
             console.log(name)
             var description = parent.querySelector('.description').textContent;
             console.log(chapter_no)
