@@ -239,18 +239,17 @@ container3.addEventListener('click', (e) => {
         console.log(e.target.parentElement.parentElement)
         let yes_button = document.getElementById('delete-btn-yes')
         let no_btn = document.getElementById('delete-btn-no')
-
         const parent = e.target.parentElement.parentElement;
         var subject = document.querySelector('.subjectname').id;
         console.log(subject)
         if (delbutton) {
             yes_button.setAttribute("onClick", `deletechapter(${id},${grade_name},'${subject}')`)
         }
-
         if (editbutton) {
             window.location.href = '#grade';
             var chapter_no = parent.querySelector('.chapter_no').textContent;
             var name = parent.querySelector('.chapter_name').textContent;
+           document.getElementById('exampleModalLabel').innerHTML=name
             console.log(name)
             var description = parent.querySelector('.description').textContent;
             console.log(chapter_no)
