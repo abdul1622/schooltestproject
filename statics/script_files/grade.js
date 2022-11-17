@@ -123,7 +123,7 @@
                 section_list = grade_list[i].section
             }
         }
-        form_all.innerHTML = `<div class='grade-form-box mt-3'>
+        form_all.innerHTML = `<div class='grade-form-box'>
                 <p><label for="id_grade">Grade:</label> <input class='form-control' type="number" disabled name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade" class="form-control" ></p>
                <p class='section-btn'><span> <button onclick=add_section('edit') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
                 <p class='section-list'> </p>
@@ -135,7 +135,7 @@
             section_content += `<li>${section_list[i]}</li> `
         }
         if (section_list.length) {
-            document.querySelector('.delete-section').innerHTML = ` <button onclick=remove_section() id='add-section'>remove_section</button>`
+            document.querySelector('.delete-section').innerHTML = ` <button  onclick=remove_section()  id='add-section' class='btn btn-light'>Remove Section</button>`
         }
         document.querySelector('.section-list').innerHTML = section_content
     }
