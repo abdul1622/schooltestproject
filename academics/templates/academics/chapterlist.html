@@ -74,6 +74,33 @@
         </div>
     </div>
 </div>
+{% comment %} Edit form {% endcomment %}
+<div class="modal fade" id="chapter-edit-popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div>
+                
+            
+                {% csrf_token %}
+                {{form2.as_p}}
+                <button class="btn btn-warning" data-toggle="modal" data-target="#messageModal-chapterlist"
+                    id="chapter-btn">Submit</button>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
 
 <!-- chapter-list -->
 <div class="chapter-table">
@@ -81,14 +108,7 @@
 </div>
 
 <!-- chapter edit form -->
-<div class="form box" id="form-chaplist">
-    <p class="chapter-edit-close text-end"> <button onclick=closeform() class='back-btn'>&#x2715;</button></p>
 
-    {% csrf_token %}
-    {{form2.as_p}}
-    <button class="submit-btn" data-toggle="modal" data-target="#messageModal-chapterlist"
-        id="chapter-btn">Submit</button>
-</div>
 <div class="messages container-fluid">
 </div>
 <div class="error-message container-fluid">

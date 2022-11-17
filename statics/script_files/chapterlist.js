@@ -13,8 +13,7 @@ $(document).ready(function () {
 })
 
 // variables
-let form = document.querySelector('.form')
-form.style.display = 'none'
+
 let grade_element = document.getElementById('id_grade')
 let subject_element = document.getElementById('id_subject')
 let standards = localStorage.getItem('standard')
@@ -173,13 +172,13 @@ function getchapter() {
                 console.log(data);
                 let table2 = ''
                 table2 += `<i class=" fa fa-light fa-arrow-left-long" id="back-btn" onclick=back() ></i>`
-                table2 += `<table class="table"><thead class="thead"><th>Chapter No</th><th>Chapter Name</th><th>Description</th><th>Action</th></thead>`;
+                table2 += `<table class="table chapter-table"><thead class="thead"><th>Chapter No</th><th>Chapter Name</th><th>Description</th><th>Action</th></thead>`;
                 data.data.map(d => {
                     table2 = table2 + `<tr id=${d.id}>`;
                     table2 = table2 + '<td scope="col" class="chapter_no">' + `${d.chapter_no}` + '</td>';
                     table2 = table2 + '<td scope="col" class="chapter_name">' + `${d.name}` + '</td>';
                     table2 = table2 + '<td scope="col" class="description">' + `${d.description}` + '</td>',
-                        table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i>` + `<i class="fa fa-trash-o" id="delete" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist"></i>` + '</td>',
+                        table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit" data-toggle='modal' data-target='#chapter-edit-popup'></i>` + `<i class="fa fa-trash-o" id="delete" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist"></i>` + '</td>',
                         // table2 = table2 + '<td>' + + '</td>',
                         table2 = table2 + `</tr>`;
                 })
@@ -240,19 +239,17 @@ container3.addEventListener('click', (e) => {
         console.log(e.target.parentElement.parentElement)
         let yes_button = document.getElementById('delete-btn-yes')
         let no_btn = document.getElementById('delete-btn-no')
-
         const parent = e.target.parentElement.parentElement;
         var subject = document.querySelector('.subjectname').id;
         console.log(subject)
         if (delbutton) {
             yes_button.setAttribute("onClick", `deletechapter(${id},${grade_name},'${subject}')`)
         }
-
         if (editbutton) {
             window.location.href = '#grade';
-            form.style.display = 'block'
             var chapter_no = parent.querySelector('.chapter_no').textContent;
             var name = parent.querySelector('.chapter_name').textContent;
+           document.getElementById('exampleModalLabel').innerHTML=name
             console.log(name)
             var description = parent.querySelector('.description').textContent;
             console.log(chapter_no)
