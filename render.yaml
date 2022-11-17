@@ -1,0 +1,24 @@
+databases:
+  - name: mysite
+    databaseName: school_n9g0
+    user: school_n9g0_user
+
+services:
+ - type: pserv
+   name: pgbouncer
+   env: docker
+   plan: starter plus
+   repo: https://github.com/render-oss/docker-pgbouncer
+   envVars:
+   - key: postgres://school_n9g0_user:hxhmZX9jyjG0fEwr5LkH92l4omrpFtKD@dpg-cdqamdkgqg47to1jpc3g-a/school_n9g0
+     fromDatabase:
+       name: mysite
+       property: connectionString
+   - key: POOL_MODE
+     value: transaction
+   - key: SERVER_RESET_QUERY
+     value: DISCARD ALL
+   - key: MAX_CLIENT_CONN
+     value: 500
+   - key: DEFAULT_POOL_SIZE
+     value: 50

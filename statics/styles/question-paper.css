@@ -4,8 +4,7 @@
             padding: 30px 50px;
             border-radius: 5px;
             flex-basis: 23%;
-            width: 19%;
-            margin: 7% 40%;
+             margin: 7% 34%;
         }
         .q-form-5 p {
             color: white;
@@ -93,7 +92,6 @@
     @media screen and (min-width: 800px) and (max-width: 1200px){
     .question-paper-form {
         background-color: #8388a72b;
-        width: 34vw;
         padding: 30px 50px;
         margin: 10% 32%;
     }
@@ -108,7 +106,7 @@
         background-color: #8388a72b;
         width: 24vw;
         padding: 30px 3%;
-        margin: 7% 38%;
+        margin: 7% 43%;
     }
 
     .question-paper-form label {
@@ -132,9 +130,8 @@
 @media screen and (min-width:430px) and (max-width:800px) {
 
     .question-paper-form {
-        width: 52vw;
         padding: 30px 50px;
-        margin: 14% 28%;
+        margin: 14% 12%;
     }
     div#q-form-4 .back-btn{
         margin: 0;

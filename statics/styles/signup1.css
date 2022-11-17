@@ -40,17 +40,6 @@
   
 }
 @media screen and (min-width:1366px) and (max-width:1440px) {
-  .signup-call {
-      background-color: #B2C8DF;
-      color: black;
-      box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-      border-radius: 5px;
-      margin-left: 26vw;
-      width: 47%;
-      margin-top: 6%;
-      margin-bottom: 3%;
-    
-}
 .signup-profile-details{
   margin-top: 1%;
 }

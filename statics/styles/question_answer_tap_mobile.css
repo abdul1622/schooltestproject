@@ -122,16 +122,9 @@
 
   .qformbox{
     width: 53% !important;
-    margin-left: 23% !important;
+    margin-left: 24% !important;
     padding: 1% 4% 3% 4%;
   }
-    #QForm-modal-content {
-        width: 81%;
-        background-color: #b2c8df;
-        padding: 2% 5%;
-        margin-left: 9%;
-    }
-
     .question-list #delete {
         padding: 0;
         margin-left: 0%;
@@ -186,9 +179,6 @@
 
     .question-list fieldset {
         grid-template-columns: auto;
-    }
-    #QForm-modal-content input {
-        width: 88%;
     }
     #delete-box-Modal-question .modal-content {
         width: auto;

@@ -11,13 +11,7 @@
         console.log(subject_val)
         list.innerHTML = ''
         container.innerHTML = ''
-        form_all.innerHTML = `<div class="chapter-form-box"> 
-        <p><label for="id_chapter_no">Chapter no:</label> 
-        <input class='form-control' type="number" name="chapter_no" min="0" required="" id="id_chapter_no"></p>
-        <p><label for="id_name">Name:</label> 
-        <input class='form-control' type="text" name="name" maxlength="30" required="" id="id_name"></p>
-        <p><label for="id_description">Description:</label> 
-        <input class='form-control' type="text" name="description" maxlength="50" required="" id="id_description"></p></div>`
+        form_all.innerHTML = `<button class="btn btn-warning" data-toggle="modal" data-target="#chaptermodal" >Add Chapter</button>`
         document.getElementById('grade-title-chapter').textContent = `${grade_val}`
         document.getElementById('subject-title').textContent = `${subject_val}`
         document.getElementById('grade-btn').style.display = "none"
@@ -56,7 +50,7 @@
         <p><label> Chapter </label> <span>: <span class="name">${d.name}</span></span></p>
         <p><label> Description </label> <span>: <span class="description">${d.description}</span></span></p>
         <br>
-        <div class ='d-flex justify-content-around'><i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></div>
+        <div class ='d-flex justify-content-around'><i id="edit" class="fa fa-edit" data-toggle="modal" data-target="#chaptermodal"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></div>
  </div>`
                     container3.innerHTML = content;
 

@@ -115,7 +115,16 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'school_n9g0',
+#         'USER': 'school_n9g0_user',
+#         'PASSWORD': 'hxhmZX9jyjG0fEwr5LkH92l4omrpFtKD',
+#         'HOST': 'dpg-cdqamdkgqg47to1jpc3g-a',
+#         'PORT': '5432',
+#     }
+# }
 
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
