@@ -6,8 +6,7 @@
         document.getElementById('grade').style.display = 'block'
         console.log(grade_val);
 
-        form_all.innerHTML = `<div class="subject-form-box"><p><label for="id_name">Name:</label> <input class='form-control' type="text" name="name" maxlength="20" required="" id="id_name"></p>
-        <p><label for="id_code">Code:</label> <input class='form-control' type="text" name="code" maxlength="15" required="" id="id_code"></p> </div>`
+        form_all.innerHTML = `<button class=' btn btn-warning 'data-toggle='modal' data-target='#subjectmodal'> Add subject</button>`
         list.innerHTML = ''
         document.getElementById('grade-title').textContent = `${grade_val}`
         document.getElementById('grade-btn').style.display = "none"
@@ -43,7 +42,8 @@
         <p><label> Subject-code </label> <span>: <span class="code">${d.code}</span></span></p>
         <p class="text-center"> <button  class=" btn btn-warning btn-sm  ch-btn"  onclick=getchapter(${d.grade_name},"${temp}",${d.id})>Chapters</button></p>
         <br>
-        <div class="d-flex  justify-content-around"><i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></div>
+        <div class="d-flex  justify-content-around"><i id="edit" class="fa fa-edit"data-toggle='modal' data-target='#subjectmodal'></i>
+        <i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></div>
  </div>`
             });
             container.innerHTML = content;
