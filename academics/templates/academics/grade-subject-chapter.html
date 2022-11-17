@@ -10,9 +10,11 @@
     <div class="form-all">
 
     </div>
-    <button class="submit-btn btn btn-warning" id="grade-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
-    <button class="submit-btn btn btn-warning"  id="subject-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
-    <button class="submit-btn btn btn-warning"  id="chapter-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
+    <button class="submit-btn btn btn-warning" id="grade-btn" data-toggle="modal"
+        data-target="#messageModal">Submit</button>
+    <button class="submit-btn btn btn-warning" id="subject-btn" data-toggle="modal"
+        data-target="#messageModal">Submit</button>
+
 </div>
 
 <!-- message popup -->
@@ -66,7 +68,40 @@
         </div>
     </div>
 </div>
-
+<!-- create update chapter -->
+<div class="modal fade" id="chaptermodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="form-body">
+                <div class="chapter-form-box">
+                    <p><label for="id_chapter_no">Chapter no:</label>
+                        <input class='form-control' type="number" name="chapter_no" min="0" required=""
+                            id="id_chapter_no">
+                    </p>
+                    <p><label for="id_name">Name:</label>
+                        <input class='form-control' type="text" name="name" maxlength="30" required="" id="id_name">
+                    </p>
+                    <p><label for="id_description">Description:</label>
+                        <input class='form-control' type="text" name="description" maxlength="50" required=""
+                            id="id_description">
+                    </p>
+                <button class="submit-btn btn btn-warning" id="chapter-btn" data-toggle="modal"
+                    data-target="#messageModal">Submit</button>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+</div>
 <!-- grade,subject,chapter container -->
 <div class="grade-container" id="grade-container">
     <!-- subject container -->
@@ -75,7 +110,7 @@
         <h2 class="text-center text-white">Grade - <span id="grade-title"></span> </h2>
         <hr>
         <div class="subject-head">
-          
+
             <h3 class=" text-center text-white "> Subjects </h3>
         </div>
         <div class="cards d-flex flex-wrap justify-content-center">
@@ -86,14 +121,14 @@
     <div id="chapterlist" class="chapterlist"><i id="back-btn-chapter" class=' fa fa-light fa-arrow-left-long'
             style='font-size:24px'></i>
         <h4 class="text-center text-white">Grade - <span id="grade-title-chapter"></span> </h4>
-        <h2 class="text-center text-white mt-4" ><span id="subject-title"></span> </h2>
+        <h2 class="text-center text-white mt-4"><span id="subject-title"></span> </h2>
         <hr>
         <div class="subject-head">
-           
+
             <h3 class="text-center text-white"> Chapters </h3>
         </div>
         <div class="chapter-cards d-flex flex-wrap justify-content-center">
-        </div> 
+        </div>
     </div>
 
     <!-- grade container -->
