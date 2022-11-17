@@ -110,7 +110,7 @@
           }
           let new_date = new Date(d.created_at)
           console.log(new_date)
-          content = content + `<div class="questions-paper-card " id='${d.id}'>
+          content = content + `<div class="questions-paper-card  " id='${d.id}'>
 <p >created_by : <span class="created_by">${d.created_by}</span></p>
 
 <p >created_at : <span class="created_at">${(new_date.toDateString())}</span></p>

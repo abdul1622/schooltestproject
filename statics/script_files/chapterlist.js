@@ -124,7 +124,8 @@ document.getElementById('message-close-btn').addEventListener('click', () => {
 
 function back() {
     document.querySelector('.chapter-table').innerHTML = ''
-
+    grade_name=''
+    subject_name=''
     flag = false
     document.querySelector('.box').style.display = 'block'
     if (document.getElementById('id_grade')) {
@@ -189,16 +190,13 @@ function getchapter() {
                 flag = true
                 container.innerHTML = content + table2;
                 document.querySelector('.box').style.display = "none"
-                document.getElementById('id_chapter_no').value = ''
-                document.getElementById('id_name').value = ''
-                document.getElementById('id_description').value = ''
                 edit = null
                 document.querySelector('.error-message').innerHTML = ''
             }
             else {
                 // error_messages.innerHTML = `${data.status}`
-                document.querySelector('.error-message').innerHTML = `<li class='text-center'>${subject_name} don't have a chapters</li>`
-            }
+                document.querySelector('.error-messages').innerHTML = `<li class='text-center'>${subject_name} don't have a chapters</li>`
+            }    $('#messageModal-chapterlist').modal('show');
         })
     } else {
         document.querySelector('.error-message').innerHTML = `<li class='text-center'>select subject</li>`
