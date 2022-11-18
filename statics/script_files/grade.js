@@ -45,7 +45,7 @@
 
     // get grade
     function get() {
-        var content = ' <h2 class="text-center text-white">Grades </h2> <div class="row  align-content-between justify-content-center card-group ">'
+        var content = ' <h2 class="text-center text-white">Grades </h2> <div class="justify-content-lg-center ml-4 col-12 justify-content-sm-start card-group  d-flex flex-wrap ">'
         fetch('https://schooltestproject.herokuapp.com/api/grades/', {
             method: 'GET',
             headers: {
@@ -76,10 +76,11 @@
         
  </div>`
                 } else {
-                    content = content + `  <div class="card container"  id=${d.id}>
+                    content = content + `  <div class="gradecard-staff"  ml-3 mt-3 text-center fs-4"  id=${d.id}>
         <p  onclick=getsubject(${d.grade},${d.id}) class="grade">${d.grade} </p>
         
  </div>`
+ document.getElementById('grade-list').style.marginTop="8%"
                 }
             })
             content += '</div>'
@@ -125,7 +126,7 @@
         }
         form_all.innerHTML = `<div class='grade-form-box'>
                 <p><label for="id_grade">Grade:</label> <input class='form-control' type="number" disabled name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade" class="form-control" ></p>
-               <p class='section-btn'><span> <button onclick=add_section('edit') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
+               <p class='section-btn'><span> <button onclick=add_section('edit') id='add-section' class="btn btn-light">Add Section</button> </span> <span class='delete-section'></span> </p> </p>
                 <p class='section-list'> </p>
                 <p class='section-error'></p>
                 <p> <button onclick=cancel()> cancel </button> </p>

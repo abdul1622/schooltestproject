@@ -57,7 +57,7 @@
 
     subject_create.addEventListener('click', () => {
         var code = document.getElementById('id_code').value
-        var name = document.getElementById('id_name').value
+        var name = document.getElementById('id_subject_name').value
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         console.log(edit)
         if (!edit) {
@@ -113,8 +113,6 @@
 
     container2.addEventListener('click', (e) => {
         //   form_grade = document.getElementById('id_grade')
-        form_code = document.getElementById('id_code')
-        form_name = document.getElementById('id_name')
         let url = 'https://schooltestproject.herokuapp.com/api/subjects/'
         subject_btn = document.getElementById('subject-btn')
         e.preventDefault();
@@ -128,23 +126,19 @@
         if (delbutton) {
             console.log('RRR')
             yes_button.setAttribute("onClick", `deletesubject(${id})`);
-            // const parent1 = e.target.parentElement.parentElement;
-            // var name = parent1.querySelector('.name').textContent
-            // no_btn.addEventListener('click',()=>{
-            //     getsubject(grade_val,grade_id);
-            // })
-
         }
         console.log(editbutton, 'dfg')
-
         if (editbutton) {
             window.location.href = '#grade';
             const parent = e.target.parentElement.parentElement;
-            // var grade = parent.querySelector('.grade').textContent;
+            var subjectcode = document.getElementById('id_code')
+            var subjectname = document.getElementById('id_subject_name')
             var code = parent.querySelector('.code').textContent;
             var name = parent.querySelector('.name').textContent;
-            form_code.value = code
-            form_name.value = name
+            console.log(name,'subject name')
+            document.getElementById('exampleModalLabel').innerHTML=name
+            subjectcode.value = code
+            subjectname.value = name
             let id = e.target.parentElement.parentElement.id;
             console.log(id)
             console.log(grade_val)

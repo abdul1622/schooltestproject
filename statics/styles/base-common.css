@@ -1,22 +1,75 @@
-.navbar li a:focus {
-    color: cornflowerblue;
-}
-
-.gradient-custom {
-    /* fallback for old browsers */
-    background: #f6d365;
-
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
-
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
-}
-
 .back-btn-nav {
     display: none;
 }
 
+  nav ul li a,
+  nav ul li a:after,
+  nav ul li a:before {
+    transition: all .5s;
+  }
+  nav ul li a:hover {
+    color: #555;
+  }
+  .nav-item:hover{
+    color: inherit;
+  }
+nav.stroke ul li a,
+nav.fill ul li a {
+  position: relative;
+}
+nav.stroke ul li a:after,
+nav.fill ul li a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: #aaa;
+  height: 1px;
+}
+nav.stroke ul li a:hover:after {
+  width: 100%;
+}
+
+nav.fill ul li a {
+  transition: all 2s;
+}
+
+nav.fill ul li a:after {
+  text-align: left;
+  content: '.';
+  margin: 0;
+  opacity: 0;
+}
+nav.fill ul li a:hover {
+  color: #fff;
+  z-index: 1;
+}
+nav.fill ul li a:hover:after {
+  z-index: -10;
+  animation: fill 1s forwards;
+  -webkit-animation: fill 1s forwards;
+  -moz-animation: fill 1s forwards;
+  opacity: 1;
+}
+nav ul li a,
+nav ul li a:after,
+nav ul li a:before {
+  transition: all .5s;
+}
+nav ul li a:hover {
+  color: #555;
+}
+nav ul {
+  list-style: none;
+  text-align: center;
+}
+nav ul li a:hover {
+  color: #555;
+}
 .container-1 {
     width: 34%;
     margin-top: 5%;
@@ -30,7 +83,6 @@
 .errorlist {
     display: none;
 }
-
 .navbar {
     background-color: rgba(22,34,57,0.95);
     border-bottom: 1px solid #ffffff59;
@@ -40,6 +92,7 @@
 }
 .navbar-light .navbar-nav .nav-link {
     color: rgba(217, 217, 217, 0.778);
+    margin-left: 0.3rem;
 }
 .update {
     border: none;
@@ -233,8 +286,7 @@ element.style {
 }
 
 .modal-content {
-    background-color:#1c1e4f;
-    box-shadow: #1c1e4f;
+    background-color:rgba(22,34,57,0.95);
 }
 
 .success {
