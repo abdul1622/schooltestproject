@@ -173,16 +173,6 @@ function getnext() {
         result = []
 
     })
-
-    // }else{
-
-    //     customize = false
-    // document.getElementById('q-form-1').style.display = 'none';
-    // document.getElementById('q-form-2').style.display = 'block';
-    // document.getElementById('q-form-3').style.display = 'none';
-    // document.getElementById('q-form-4').style.display = 'none';
-    // result = []
-    // }
     document.querySelector('.error-form-1').innerHTML = '';
     url3 = ('https://schooltestproject.herokuapp.com/api/chapter-list/');
     fetch(url3, {
@@ -235,7 +225,7 @@ function getcustomize_details() {
     question_content += `<div class='question-list-container-customize'>
             <p>`
     question_content += `<div class='question-container-table '>`
-    question_content += `<table> <tr class='table-heading '><th>sl.no</th>
+    question_content += `<table class="table mt-5"> <tr class='table-heading '><th>sl.no</th>
                     <th>select</th>
                     <th>question</th>
                     <th>question type</th>

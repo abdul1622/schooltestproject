@@ -80,9 +80,6 @@
     .question-list-container-customize {
         margin: 5%;
     }
-    .question-list-container-customize table{
-        width: 80%;
-    }
     div#q-form-4 select {
         width: auto;
         display: inline;
@@ -107,7 +104,7 @@
         background-color: #8388a72b;
         width: 24vw;
         padding: 30px 3%;
-        margin: 7% 43%;
+        margin: 7% 38%;
     }
 
     .question-paper-form label {
@@ -117,9 +114,6 @@
         height: 3vh;
         position: absolute;
         margin: 0.4% -8.2%;
-    }
-    .question-container-table table {
-        width: 84%;
     }
     div#q-form-4 {
         width: 17%;
@@ -157,7 +151,7 @@
         width: 77%;
         padding: 5% 5%;
         border-radius: 5px; 
-        margin-left: 8%;
+        margin-left:11%;
         margin-top: 17%;
     }
     .question-paper-form input {
@@ -172,5 +166,8 @@
                 width: 56%;
                 background-color: beige;
                 margin: 1% 26%;
+            }
+            .question-papers-card {
+                margin-left: 2rem !important;
             }
 }

@@ -8,6 +8,10 @@
     padding: 30px 50px;
     position: fixed;
 }
+.question-papers-card{
+    margin-left: 5rem !important;
+
+}
 .questionpath {
     width: 20%;
     height: 52px;
