@@ -52,8 +52,8 @@
     position: absolute;
     margin-left: 101%;
     margin-top: 0%;
-    background-color: #edc81452;
-    padding: 1%;
+    background-color: var(--white);
+    padding: 2%;
     width: 18%;
 }
 #action {
