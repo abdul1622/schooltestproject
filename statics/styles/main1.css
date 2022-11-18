@@ -41,13 +41,8 @@
 
     .navbar-nav {
       margin-left: 3vh;
-    }
-    .already {
-      margin-left: 35vw;
-    }
-
   }
-
+  }
   @media screen and (min-width:1366px) and (max-width:1440px) {
     .login-box {
       width: 41vw;
