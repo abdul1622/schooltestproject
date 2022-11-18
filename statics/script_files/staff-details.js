@@ -207,7 +207,7 @@ function edit(index, id) {
   let editcontent = ` <p> standards list</p>`
   for (i = 0; i < standards.length; i++) {
     editcontent += ` 
-          <li>${standards[i]}<button onclick=delete_standard(${i})>delete</button></li>`
+          <li>${standards[i]}<button class="btn btn-dark btn-sm" onclick=delete_standard(${i})>delete</button></li>`
   }
   document.querySelector('.standards-list').innerHTML = editcontent
   let url = "https://schooltestproject.herokuapp.com/api/user-details/"
@@ -222,7 +222,7 @@ function edit(index, id) {
   <div class='inner'>`
   for (i = 0; i < standards.length; i++) {
     content += ` 
-        <li>${standards[i]}<button onclick=delete_standard(${i})>delete</button></li>`
+        <li>${standards[i]}<button class="btn btn-dark btn-sm"  onclick=delete_standard(${i})>delete</button></li>`
   }
   document.querySelector('.standards-list').innerHTML = content + `</div>`
   let address = tr.querySelector('.useraddress').textContent;

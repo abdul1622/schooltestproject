@@ -18,21 +18,18 @@ function navbar() {
     var user = localStorage.getItem('user_type');
     var dataentry = localStorage.getItem('data_entry');
     if (user == 'is_student') {
-        nav = ` <li class="back-btn-nav">
-            <button data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
-                aria-expanded="false" aria-label="Toggle navigation"> &#x2715; </button>
-        </li> 
-    </li> <li class="nav-item" id="nav-profile">
-        <a href= '${host}/profile'>Profile</a>
+        nav = `
+        <li class="nav-item" id="nav-profile">
+        <a href= '${host}/profile' class="nav-link" tabindex="1">Profile</a>
     </li>
     <li class="nav-item" id="nav-test">
-        <a id="nav-test-link" href='${host}/test-list'>Test</a></li>
+        <a id="nav-test-link" href='${host}/test-list' class="nav-link" >Test</a></li>
         <li class="nav-item" id="nav-testhistory">
-            <a id="nav-testhistory-link" href='${host}/test-history'>Test History</a>
-        </li>
-        <li class="nav-item">
-            <a href="#" onclick="logout()">Logout</a>
-        </li>`
+        <a id="nav-testhistory-link" class="nav-link" href='${host}/test-history' tabindex="1">Test History</a>
+    </li>
+    <li class="nav-item">
+    <a href="#" class="nav-link" onclick="logout()">Logout</a>
+</li>`
         document.querySelector('.navbar-nav').innerHTML = nav
     }
     else if (user == 'is_staff' && dataentry) {
