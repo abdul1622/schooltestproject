@@ -116,6 +116,7 @@
             form_chapter_no.value = chapter_no
             form_name.value = name
             form_description.value = description
+            document.getElementById("exampleModalLongTitle").innerHTML=name
             let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             url3 = 'https://schooltestproject.herokuapp.com/api/chapters/'
             chapter_btn.addEventListener('click', () => {

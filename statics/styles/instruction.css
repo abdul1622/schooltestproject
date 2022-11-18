@@ -1,20 +1,13 @@
-.instructionForm {
-    width: 35%;
-    margin: 6% 3%;
+.instructionForm{
+    margin-top: 5%;
+    margin-left: 33%;
+    color: white;
 }
 #id_instruction {
     resize: none;
 }
 
-#instruction-btn {
-    margin-left: 88%;
-    width: 12%;
-    color: #14279B;
-    outline: none;
-    background-color: #b2c8df;
-    border: 1px solid #14279B;
-    border-radius: 5px;
-}
+
 .instructions {
     margin-left: 1%;
     margin-top: 2%;

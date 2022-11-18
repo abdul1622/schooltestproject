@@ -92,12 +92,6 @@ function getsubjectname(element) {
     }
     getchapter();
 }
-
-// close chapter edit form
-function closeform() {
-    document.querySelector('.form').style.display = 'none'
-}
-
 // on grade input change
 $("#id_grade").change(function () {
     var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
@@ -277,7 +271,7 @@ container3.addEventListener('click', (e) => {
                             console.log("Sucess response", response)
                             messages.innerHTML = `${name} is updated succesfully`;
                             error_messages.innerHTML = ''
-                            form.style.display = 'none'
+                           
                             get(grade_name, subject)
                         } else {
                             console.log(response);
@@ -289,8 +283,6 @@ container3.addEventListener('click', (e) => {
                         if (data.status != 'success') {
                             error_messages.innerHTML = `<li>${(data.data.error)}</li>`
                             messages.innerHTML = ''
-                            form.innerHTML = ``
-                            form.style.display = 'none'
                             get(grade_name, subject)
                         }
                     }

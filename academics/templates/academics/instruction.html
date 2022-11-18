@@ -23,11 +23,11 @@
         </div>
     </div>
 </div>
-    <div class="instructionForm mt-5">
+    <div class="instructionForm">
            {% csrf_token %}
         {{form.as_p}}
           
-        <button id="instruction-btn" class='btn-warning'onclick=createinstruction()>Create</button></div>
+        <button id="instruction-btn" class='btn btn-warning'onclick=createinstruction()>Create</button></div>
        <ol class="instructions mt-1"></ol>
 
 <script src="{% static 'script_files/instructions.js' %}" type="text/javascript"></script>

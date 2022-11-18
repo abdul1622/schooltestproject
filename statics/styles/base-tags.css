@@ -6,6 +6,7 @@ label {
     font-size: 15px;
     color: white;
     margin-top: 3%;
+    font-family: system-ui;
 }
 a:active {
     text-decoration: none;

@@ -7,7 +7,7 @@
 <div id="grade" class="col-lg-3 col-md-4 col-sm-6 col-9">
 
     {% csrf_token %}
-    <div class="form-all">
+    <div class="form-all text-white">
 
     </div>
     <button class="submit-btn btn btn-warning" id="grade-btn" data-toggle="modal"
@@ -72,7 +72,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <h5 class="modal-title text-white" id="exampleModalLongTitle">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -139,13 +139,13 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title text-white" id="exampleModalLabel">Modal title</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-            <div class="subject-form-box"><p><label for="id_name">Name:</label> <input class='form-control' type="text" name="name" maxlength="20" required="" id="id_name"></p>
+            <div class="subject-form-box"><p><label for="id_name">Name:</label> <input class='form-control' type="text" name="subjectname" maxlength="20" required="" id="id_subject_name"></p>
                 <p><label for="id_code">Code:</label> <input class='form-control' type="text" name="code" maxlength="15" required="" id="id_code"></p> </div>
                 <button class="submit-btn btn btn-warning"  id="subject-btn" data-toggle="modal" data-target="#messageModal">Submit</button>
             </div>
