@@ -76,7 +76,7 @@
     padding: 2% 3%;
     font-family: 'Montserrat';
     border-radius: 5px;
-    background-color:#ffffff14;
+    box-shadow: #39438091 0px 5px 15px;
 }
 
 p.chapter-edit-close {
@@ -104,7 +104,7 @@ p.chapter-edit-close {
 }
 .chapter-table table {
     color:white;
-    font-family: 'Montserrat';
+    font-family: 'Poppins', sans-serif;
 }
 .chapterhead h4{
     color: white;
@@ -158,7 +158,7 @@ p.chapter-edit-close {
         margin-top: 5%;
     } */
     #chapterlist-btn{
-        font-family: 'Montserrat';
+        font-family: 'Poppins', sans-serif;
     }
     .form .back-btn {
         margin-left: 103%;
@@ -199,6 +199,8 @@ p.chapter-edit-close {
         font-size: 2vw;
         outline: none;
         position: absolute;
+        font-family: 'Poppins', sans-serif;
+        
     }
     .chapter-table thead {
         font-size: 100%;
@@ -208,7 +210,7 @@ p.chapter-edit-close {
         font-size: 145%;
     }
     #chapterlist-btn{
-        font-family: 'Montserrat';
+        font-family: 'Poppins', sans-serif;
     }
 
 }
@@ -218,7 +220,7 @@ p.chapter-edit-close {
         margin-left: 5%;
     }
     #chapterlist-btn{
-        font-family: 'Montserrat';
+        font-family: 'Poppins', sans-serif;
     }
     .form .back-btn {
         margin-left: 93%;

@@ -5,6 +5,7 @@
             border-radius: 5px;
             flex-basis: 23%;
              margin: 7% 34%;
+             box-shadow: #39438091 0px 5px 15px;
         }
         .q-form-5 p {
             color: white;

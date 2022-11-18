@@ -36,7 +36,7 @@
     border-bottom: 1px solid #ffffff59;
     font-size: 1.3em;
     font-weight: 400;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 .navbar-light .navbar-nav .nav-link {
     color: rgba(217, 217, 217, 0.778);
@@ -137,7 +137,7 @@
 
 .text-center {
     text-align: center !important;
-    font-family: 'Montserrat';
+    font-family: 'Poppins', sans-serif;
 }
 
 .container3 {
@@ -166,14 +166,14 @@
     text-align: center;
     color: green;
     font-size: 14px;
-    font-family: 'Montserrat';
+    font-family: 'Poppins', sans-serif;
 }
 
 .error-messages {
     text-align: center;
     color: #ff0000;
     font-size: 14px;
-    font-family: 'Montserrat';
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
     background-color: white;
     border-radius: 3px;
@@ -221,7 +221,7 @@
 
 .modal-title span {
     font-size: 20px;
-    font-family: 'Montserrat';
+    font-family: 'Poppins', sans-serif;
 }
 
 .cards {
@@ -233,13 +233,14 @@ element.style {
 }
 
 .modal-content {
-    background-color:#1c1e4fb8
+    background-color:#1c1e4f;
+    box-shadow: #1c1e4f;
 }
 
 .success {
     color: white;
     font-size: 15px;
-    font-family: 'Montserrat';
+    font-family: 'Poppins', sans-serif;
 }
 
 input#id_section {

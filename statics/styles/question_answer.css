@@ -85,7 +85,7 @@ form.questionanswer {
     color: antiquewhite;
 }
 #--question {
-    color: #ffffff;
+    color: hwb(0 0% 99%);
     margin: 10vh 4vw;
 }
 

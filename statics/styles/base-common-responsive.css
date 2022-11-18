@@ -57,7 +57,7 @@ table{
         background-color: transparent;
         color: white;
         font-size: 2.5vw;
-        font-family: 'Montserrat';
+        font-family: 'Poppins', sans-serif;
     }
 
     .back-btn-nav button:focus {
@@ -112,7 +112,7 @@ table{
     }
     button#delete-btn-yes {
         font-size: 10px;
-        font-family: 'Montserrat';
+        font-family: 'Poppins', sans-serif;
     }
     button#delete-btn-no {
         font-size: 10px;
