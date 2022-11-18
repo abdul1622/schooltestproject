@@ -39,8 +39,10 @@
     })
 
     function section_change() {
+        add=document.getElementById('add-section')
         document.querySelector('.section-list').innerHTML = ''
         section_list = []
+        console.log(document.getElementById('id_grade').value)
     }
 
     // get grade
