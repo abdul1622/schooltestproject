@@ -8,7 +8,7 @@
     transition: all .5s;
   }
   nav ul li a:hover {
-    color: #555;
+    color: rgb(85, 85, 85);
   }
   .nav-item:hover{
     color: inherit;
