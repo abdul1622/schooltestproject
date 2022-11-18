@@ -185,7 +185,7 @@
             section_content += `<li>${section_list[i]}</li> `
         }
         if (section_list.length) {
-            document.querySelector('.delete-section').innerHTML = ` <button onclick=remove_section() id='add-section'>Remove section</button>`
+            document.querySelector('.delete-section').innerHTML = ` <button onclick=remove_section() id='add-section' class='btn btn-light'>Remove Section</button>`
         }
         document.querySelector('.section-list').innerHTML = section_content
     }
