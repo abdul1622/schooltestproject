@@ -233,13 +233,7 @@ nav ul li a:hover {
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 }
 
-.chapter-btns {
-    display: flex;
-    justify-content: space-around;
-}
-
 .chapter-btns button {
-    padding: 5px 10px;
     font-size: 12px;
 }
 
