@@ -97,7 +97,7 @@ function addstandard() {
   content += `    <p> standards list</p>`
   for (i = 0; i < standards.length; i++) {
     content += `
-    <div class='inner'><li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li></div>`
+    <div class='inner'><li>${standards[i]} <button class='btn btn-light' onclick=delete_standard(${i})>delete</button></li></div>`
   }
   document.getElementById('std').value=''
   document.getElementById('sec').value=''
@@ -109,7 +109,7 @@ function delete_standard(index) {
   let content = ''
   content += `    <p> standards list</p>`
   for (i = 0; i < standards.length; i++) {
-    content += `<div class='inner'><li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li></div>`
+    content += `<div class='inner'><li>${standards[i]} <button class='btn btn-light' onclick=delete_standard(${i})>delete</button></li></div>`
   }
   document.querySelector('.standards-list').innerHTML = content
 }
