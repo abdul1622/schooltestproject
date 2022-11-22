@@ -47,12 +47,6 @@
     }
 }
 @media screen and (max-width:420px) {
-    #back-btn-chapter {
-        display: inline;
-        position: absolute;
-        margin-left: -75%;
-        margin-top: -31%;
-    }
     .chapter-cards {
         display: grid;
         width: 100%;
@@ -63,11 +57,6 @@
         grid-template-columns: auto auto auto;
         gap: 8%;
     }
-    .chapterlist h4 {
-        margin-left: 37.5%;
-        font-family: 'Poppins', sans-serif;
-    }
-
     .chapter-cards {
         display: grid;
         grid-template-columns: auto;
@@ -95,13 +84,6 @@
         margin-top: 0;
         margin-left: 0%;
         color: #850b0b;
-    }
-
-    #back-btn-chapter {
-        display: inline;
-        margin-left: -71%;
-        position: absolute;
-        margin-top: -30%;
     }
 
 }

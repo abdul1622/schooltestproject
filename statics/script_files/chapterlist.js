@@ -189,8 +189,11 @@ function getchapter() {
             }
             else {
                 // error_messages.innerHTML = `${data.status}`
+                console.log('error_messages.innerHTML')
                 document.querySelector('.error-messages').innerHTML = `<li class='text-center'>${subject_name} don't have a chapters</li>`
-            }    $('#messageModal-chapterlist').modal('show');
+                $('#messageModal-chapterlist').modal('show');
+            } 
+              
         })
     } else {
         document.querySelector('.error-message').innerHTML = `<li class='text-center'>select subject</li>`
