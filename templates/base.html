@@ -62,8 +62,8 @@
 
     <link rel="stylesheet" href="{% static 'styles/staff.css' %}">
     <link rel="stylesheet" href="{% static 'styles/student.css' %}">
-    <!-- <link rel="stylesheet" href="{% static 'styles/take-test.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/take-test.css' %}"> -->
+     <link rel="stylesheet" href="{% static 'styles/chatbot.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'styles/main1.css' %}"> -->
     <link rel="stylesheet" href="{% static 'styles/user-details-responsive-tap.css' %}">
     <link rel="stylesheet" href="{% static 'styles/test-history-staff.css' %}">
     <link rel="stylesheet" href="{% static 'styles/test-history-student.css' %}">
@@ -115,7 +115,33 @@
     {% block history %}{% endblock %}
     {% block index %}{% endblock %}
     {% block question-bank %}{% endblock %}
-
+    <div class="chat" id="chat" style="opacity:0;">
+        <div class="d-flex flex-wrap p-3 justify-content-between">
+            <button type="button" class="btn btn-primary btn-sm mt-1">Primary</button>
+           <button type="button" class="btn btn-primary  btn-sm mt-1">Primary</button>
+            <button type="button" class="btn btn-primary  btn-sm mt-1">Primary</button>
+            <button type="button" class="btn btn-primary  btn-sm mt-1">Primary</button>
+        </div>
+        <div class="form-group d-flex flex-wrap" id="bot-text">
+            <input type="text"  class="form-control w-75 mx-2" placeholder="">
+           <div><i class="fa fa-send-o text-white" style="font-size:24px"></i></div>
+        </div>
+    </div>
+<div class="footer">
+    <div class="chatdiv" id="chatbot"><h1><i class='fa fa-comment text-white' ></i></h1>
+        </div>
+</div>
 </body>
+<script >
+    document.getElementById('chatbot').addEventListener('click',()=>{
+        var box=document.getElementById('chat').style
+        if (box.opacity <= 0){
+            box.opacity=1;
+            box.transition='opacity 0.25s ease-in-out';
+            return
+        }
+        box.opacity=0
 
+})
+</script>
 </html>

@@ -1,0 +1,19 @@
+.chat{
+    right: 2%;
+    bottom: 11%;
+    height: 46%;
+    top: 2;
+    width: 18%;
+    text-align: center;
+    background-color:rgba(255, 255, 255, 0.132);
+    position: fixed;
+    border: 2px solid #00bfff7a ;
+    border-radius: 5px;
+}
+.chatdiv i:hover{
+    cursor: pointer;
+   
+}
+#bot-text{
+    margin-top: 84%;
+}
