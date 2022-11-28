@@ -115,7 +115,7 @@
     {% block history %}{% endblock %}
     {% block index %}{% endblock %}
     {% block question-bank %}{% endblock %}
-    <div class="chat" id="chat" style="opacity:0;">
+    <div class="chat" id="chat" style="opacity:0; display: none;">
         <div class="d-flex flex-wrap px-2 justify-content-start">
             <button type="button " class="btn btn-primary btn-sm mt-1 ml-1">Primary</button>
            <button type="button" class="btn btn-primary  btn-sm mt-1 ml-1">Primary</button>
@@ -135,13 +135,15 @@
 <script >
     document.getElementById('chatbot').addEventListener('click',()=>{
         var box=document.getElementById('chat').style
-        if (box.opacity <= 0){
+        if (box.opacity <= 0 && box.display=='none'){
             box.opacity=1;
             box.transition='opacity 0.25s ease-in-out';
+            box.display = 'block';
             return
         }
+        box.display='none'
         box.opacity=0
-
+     
 })
 </script>
 </html>

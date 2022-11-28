@@ -174,7 +174,6 @@ class UserDetailsView(ListAPIView):
                 queryset = User.objects.all()
                 print(len(queryset))
         return queryset
-
     def list(self, request):
         user = self.request.user
         queryset = self.get_queryset()

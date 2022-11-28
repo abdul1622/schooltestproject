@@ -18,7 +18,6 @@ document.getElementById('nav-students').style.opacity = '0.5';
 function reload() {
   window.location.href = window.location.href;
 }
-
 fetch('https://schooltestproject.herokuapp.com/api/grades/', {
           method: 'GET',
           headers: new Headers({
@@ -41,6 +40,7 @@ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
       }
     }
       document.querySelector('.grade-in-form').innerHTML = content
+      document.getElementById('std').innerHTML=content
       })
 
 //  section list
@@ -62,6 +62,7 @@ function getsectionname(element){
       }
   }
       document.querySelector('.section-in-form').innerHTML = content
+      document.getElementById('sec').innerHTML=content
   }
 document.getElementById('id_section').addEventListener('change',()=>{
   var std=document.getElementById('id_grade').value
@@ -73,7 +74,6 @@ document.getElementById('id_section').addEventListener('change',()=>{
   tr = table.getElementsByTagName("tr");
   const stdcount=[]
   for (i = 0; i < tr.length; i++) {
-      // td = tr[i].getElementsByTagName("td")[0];
       alltags = tr[i].getElementsByClassName("userstandard");
       isFound = false;
       for(j=0; j< alltags.length; j++) {

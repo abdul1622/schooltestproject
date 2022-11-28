@@ -42,19 +42,19 @@ $('[data-dismiss=modal]').on('click', function (e) {
 
 })
 
-function add_form(){
- document.getElementById('email').value= ''
- document.getElementById('phone').value= ''
- document.getElementById('reg').value= ''
-  document.getElementById('dob').value= ''
- document.getElementById('fname').value= ''
-   document.getElementById('lname').value= ''
- document.getElementById('ffname').value= ''
-  document.getElementById('std').value= ''
- document.getElementById('sec').value= ''
-  document.getElementById('address').value= ''
+function add_form() {
+  document.getElementById('email').value = ''
+  document.getElementById('phone').value = ''
+  document.getElementById('reg').value = ''
+  document.getElementById('dob').value = ''
+  document.getElementById('fname').value = ''
+  document.getElementById('lname').value = ''
+  document.getElementById('ffname').value = ''
+  document.getElementById('std').value = ''
+  document.getElementById('sec').value = ''
+  document.getElementById('address').value = ''
   document.getElementById('reg-no-div').style.display = 'none'
-   $('#SFormModal').modal('show')
+  $('#SFormModal').modal('show')
 }
 
 fetch('https://schooltestproject.herokuapp.com/api/grades/', {
@@ -258,24 +258,17 @@ function edit(index, id) {
         })
       }).then(response => {
         if (response.status == 200) {
-          console.log("Sucess response", response)
           document.querySelector('#SFormModal').classList.remove('show');
           document.querySelector('body').classList.remove('modal-open');
           const mdbackdrop = document.querySelector('.modal-backdrop');
           if (mdbackdrop) {
             mdbackdrop.classList.remove('modal-backdrop', 'show');
-            messages.innerHTML = 'updated successfully'
+            messages.innerHTML = 'Updated Successfully'
             $('#messageModal-staff').modal('show')
-            setTimeout(function () {
-              $('#messageModal-staff').modal('hide')
-              window.location.reload();
-            }, 2000);
           }
-          error_messages.innerHTML = ''
-          return response.json();
+          error_messages.innerHTML = `<li>${(data.data.error[0])}</li>`
+          messages.innerHTML = ''
         }
-
-
         else {
           error_messages.innerHTML = `<li>${(data.data.error)}</li>`
           messages.innerHTML = ''
