@@ -56,7 +56,15 @@
 
                 });
             } else {
-                container3.innerHTML = 'no chapter in this subject';
+                node=document.createElement('h3')
+                tnode=document.createTextNode('No Chapters in this subject')
+                newnode=node.appendChild(tnode)
+                error=document.querySelectorAll('.subject-head')[1]
+                error.appendChild(node)
+                error.lastElementChild .classList.add('d-flex','justify-content-center','text-white','mt-5')
+               
+
+                // container3.innerHTML = 'no chapter in this subject';
 
             }
 

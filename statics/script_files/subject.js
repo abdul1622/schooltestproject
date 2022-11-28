@@ -4,8 +4,10 @@
         grade_val = val1
         grade_id = val2
         document.getElementById('grade').style.display = 'block'
+        form=document.getElementById('grade')
+        form.style.backgroundColor='Transparent'
+        form.style.boxShadow='none'
         console.log(grade_val);
-
         form_all.innerHTML = `<button class=' btn btn-warning 'data-toggle='modal' data-target='#subjectmodal'> Add subject</button>`
         list.innerHTML = ''
         document.getElementById('grade-title').textContent = `${grade_val}`
@@ -31,6 +33,7 @@
         }).then(res => {
             return res.json()
         }).then(data => {
+            if (data.length < 0){
             console.log(data)
             data.forEach((d, index) => {
                 temp = `${d.name}`
@@ -47,7 +50,15 @@
  </div>`
             });
             container.innerHTML = content;
-
+        }else{
+            console.log('None Content')
+            node=document.createElement('h3')
+            tnode=document.createTextNode('No Subjects in this grade')
+            newnode=node.appendChild(tnode)
+            error=document.querySelectorAll('.subject-head')[0]
+            error.appendChild(node)
+            error.lastElementChild .classList.add('d-flex','justify-content-center','text-white','mt-5')
+        }
         })
     }
 
