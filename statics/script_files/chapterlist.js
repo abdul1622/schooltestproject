@@ -13,8 +13,7 @@ $(document).ready(function () {
 })
 
 // variables
-let form = document.querySelector('.form')
-form.style.display = 'none'
+
 let grade_element = document.getElementById('id_grade')
 let subject_element = document.getElementById('id_subject')
 let standards = localStorage.getItem('standard')
@@ -32,24 +31,6 @@ let content = '';
 let grade_list
 var grade_name;
 var subject_name;
-
-
-// for css
-// function loadCSS(filename){ 
-//     var file = document.createElement("link");
-//     file.setAttribute("rel", "stylesheet");
-//     file.setAttribute("type", "text/css");
-//     file.setAttribute("href", filename);
-//     document.head.appendChild(file);
-//     console.log('check css',file)
-//  }
-
- //just call a function to load your CSS
- //this path should be relative your HTML location
-//  loadCSS(host+'/static/styles/chapterlists.css');
-
-// get grade 
-
 fetch('https://schooltestproject.herokuapp.com/api/grades/', {
     method: 'GET',
     headers: {
@@ -111,12 +92,6 @@ function getsubjectname(element) {
     }
     getchapter();
 }
-
-// close chapter edit form
-function closeform() {
-    document.querySelector('.form').style.display = 'none'
-}
-
 // on grade input change
 $("#id_grade").change(function () {
     var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
@@ -143,7 +118,8 @@ document.getElementById('message-close-btn').addEventListener('click', () => {
 
 function back() {
     document.querySelector('.chapter-table').innerHTML = ''
-    document.querySelector('.form').style.display = 'none'
+    grade_name=''
+    subject_name=''
     flag = false
     document.querySelector('.box').style.display = 'block'
     if (document.getElementById('id_grade')) {
@@ -190,14 +166,14 @@ function getchapter() {
                     </div>`
                 console.log(data);
                 let table2 = ''
-                table2 += `<a type="button" class="btn btn-sm btn-primary" id="back-btn" onclick=back()> Back </a>`
-                table2 += `<table><thead class="thead"><th>Chapter No</th><th>Chapter Name</th><th>Description</th><th>Action</th></thead>`;
+                table2 += `<i class=" fa fa-light fa-arrow-left-long" id="back-btn" onclick=back() ></i>`
+                table2 += `<table class="table chapter-table"><thead class="thead"><th>Chapter No</th><th>Chapter Name</th><th>Description</th><th>Action</th></thead>`;
                 data.data.map(d => {
                     table2 = table2 + `<tr id=${d.id}>`;
-                    table2 = table2 + '<td class="chapter_no">' + `${d.chapter_no}` + '</td>';
-                    table2 = table2 + '<td class="chapter_name">' + `${d.name}` + '</td>';
-                    table2 = table2 + '<td class="description">' + `${d.description}` + '</td>',
-                        table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i>` + `<i class="fa fa-trash-o" id="delete" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist"></i>` + '</td>',
+                    table2 = table2 + '<td scope="col" class="chapter_no">' + `${d.chapter_no}` + '</td>';
+                    table2 = table2 + '<td scope="col" class="chapter_name">' + `${d.name}` + '</td>';
+                    table2 = table2 + '<td scope="col" class="description">' + `${d.description}` + '</td>',
+                        table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit" data-toggle='modal' data-target='#chapter-edit-popup'></i>` + `<i class="fa fa-trash-o" id="delete" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist"></i>` + '</td>',
                         // table2 = table2 + '<td>' + + '</td>',
                         table2 = table2 + `</tr>`;
                 })
@@ -208,16 +184,16 @@ function getchapter() {
                 flag = true
                 container.innerHTML = content + table2;
                 document.querySelector('.box').style.display = "none"
-                document.getElementById('id_chapter_no').value = ''
-                document.getElementById('id_name').value = ''
-                document.getElementById('id_description').value = ''
                 edit = null
                 document.querySelector('.error-message').innerHTML = ''
             }
             else {
                 // error_messages.innerHTML = `${data.status}`
-                document.querySelector('.error-message').innerHTML = `<li class='text-center'>${subject_name} don't have a chapters</li>`
-            }
+                console.log('error_messages.innerHTML')
+                document.querySelector('.error-messages').innerHTML = `<li class='text-center'>${subject_name} don't have a chapters</li>`
+                $('#messageModal-chapterlist').modal('show');
+            } 
+              
         })
     } else {
         document.querySelector('.error-message').innerHTML = `<li class='text-center'>select subject</li>`
@@ -258,19 +234,18 @@ container3.addEventListener('click', (e) => {
         console.log(e.target.parentElement.parentElement)
         let yes_button = document.getElementById('delete-btn-yes')
         let no_btn = document.getElementById('delete-btn-no')
-
         const parent = e.target.parentElement.parentElement;
         var subject = document.querySelector('.subjectname').id;
         console.log(subject)
         if (delbutton) {
             yes_button.setAttribute("onClick", `deletechapter(${id},${grade_name},'${subject}')`)
         }
-
         if (editbutton) {
             window.location.href = '#grade';
-            form.style.display = 'block'
             var chapter_no = parent.querySelector('.chapter_no').textContent;
             var name = parent.querySelector('.chapter_name').textContent;
+            document.getElementById('exampleModalLabel').style.textTransform='capitalize'
+            document.getElementById('exampleModalLabel').innerHTML=name
             console.log(name)
             var description = parent.querySelector('.description').textContent;
             console.log(chapter_no)
@@ -299,7 +274,7 @@ container3.addEventListener('click', (e) => {
                             console.log("Sucess response", response)
                             messages.innerHTML = `${name} is updated succesfully`;
                             error_messages.innerHTML = ''
-                            form.style.display = 'none'
+                           
                             get(grade_name, subject)
                         } else {
                             console.log(response);
@@ -311,8 +286,6 @@ container3.addEventListener('click', (e) => {
                         if (data.status != 'success') {
                             error_messages.innerHTML = `<li>${(data.data.error)}</li>`
                             messages.innerHTML = ''
-                            form.innerHTML = ``
-                            form.style.display = 'none'
                             get(grade_name, subject)
                         }
                     }

@@ -97,7 +97,7 @@ function addstandard() {
   content += `    <p> standards list</p>`
   for (i = 0; i < standards.length; i++) {
     content += `
-    <div class='inner'><li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li></div>`
+    <div class='inner'><li>${standards[i]} <button class='btn btn-dark btn-sm' onclick=delete_standard(${i})>delete</button></li></div>`
   }
   document.getElementById('std').value=''
   document.getElementById('sec').value=''
@@ -109,7 +109,7 @@ function delete_standard(index) {
   let content = ''
   content += `    <p> standards list</p>`
   for (i = 0; i < standards.length; i++) {
-    content += `<div class='inner'><li>${standards[i]} <button onclick=delete_standard(${i})>delete</button></li></div>`
+    content += `<div class='inner'><li>${standards[i]} <button class='btn btn-dark btn-sm' onclick=delete_standard(${i})>delete</button></li></div>`
   }
   document.querySelector('.standards-list').innerHTML = content
 }
@@ -123,3 +123,32 @@ stdl.addEventListener('click', (e) => {
     stdl.querySelector('.inner').style.display = 'block'
   }
 })
+function check_email(element){
+  console.log(element.value)
+  url_for_check = new URL('http://127.0.0.1:8000/api/check-user/');
+  url_for_check.searchParams.append('email', element.value);
+  fetch(url_for_check, {
+      method: 'GET',
+  }).then(res => {
+      console.log(res,res.status)
+      if(res.status != 200){
+          document.querySelector('.email-error').innerHTML = 'email altready exits' 
+      }
+      else{
+          document.querySelector('.email-error').innerHTML = ''
+      }
+  })
+}
+function check_phone(element){
+  url_for_check = new URL('http://127.0.0.1:8000/api/check-user/');
+  url_for_check.searchParams.append('phone', element.value);
+  fetch(url_for_check, {
+      method: 'GET',
+  }).then(res => {
+      if(res.status != 200){
+          document.querySelector('.phone-error').innerHTML = 'phone number altready exits' 
+      }else{
+          document.querySelector('.phone-error').innerHTML = ''
+      }
+  })
+}

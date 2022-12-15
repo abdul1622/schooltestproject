@@ -18,7 +18,7 @@
   </div> -->
 
 
-  <div class="question-paper-form"  id="q-form">
+  <div class="question-paper-form col-md-9 col-10"  id="q-form">
 
     <div class="q-form">
       {% csrf_token %}
@@ -28,9 +28,10 @@
         <option value="" selected="">---------</option>
       </select></p>
       <p><label for="id_no_of_questions">No of questions:</label> <input type="text" name="no_of_questions" maxlength="20" required="" id="id_no_of_questions"></p>
-      <p class="chapter-btns">
+      <p class="text-center">
          <!-- <button  id="chapter-btn" class="submit-btn btn btn-primary" onclick=getquestion()>Get</button> -->
-      <button  id="next-btn" class="submit-btn btn btn-primary" onclick=getnext()>Next</button>
+      <button  id="next-btn" class="submit-btn btn btn-warning" onclick=getnext()>Next</button>
+      </p>
         <!-- <button id="save-button" class="submit-btn btn btn-primary" onclick=savequestion()>Save</button></p> -->
     </div>
   </div>
@@ -38,20 +39,20 @@
 
 
 <div id="customize">
-<p><label for="from_chapter">From Chapter:</label> <select name="chapter" required="" id="from_chapter">
+<p><label for="from_chapter">From Chapter:</label> <select name="chapter" required="" id="from_chapter" class="form-control">
   <option value="" selected="">---------</option>
 </select></p> 
 <p><label for="to_chapter">To Chapter:</label> <select name="chapter" required="" id="to_chapter">
-  <option value="" selected="">---------</option>
+  <option value="" selected="" class="form-control">---------</option>
 </select></p>
 {{custom_form.as_p}}
-  <button id="customize-btn" class="submit-btn btn btn-primary" onclick=customize()>Customize</button></p>
-  <button id="next-btn" class="submit-btn btn btn-primary" onclick=>Next</button></p>
+  <button id="customize-btn" class="submit-btn btn btn-warning" onclick=customize()>Customize</button></p>
+  <button id="next-btn" class="submit-btn btn btn-warning" onclick=>Next</button></p>
 </div>
 
 <div id="customize-form">
   {{form1.as_p}}     
-    <button id="next-btn" class="submit-btn btn btn-primary" onclick=getpreview()>Next</button></p>
+    <button id="next-btn" class="submit-btn btn btn-warning" onclick=getpreview()>Next</button></p>
   </div>
 
 
@@ -61,8 +62,8 @@
      <p>Chapters:</p>
      <p>No of questions:</p>
      <p>Remarks/Descrption:</p>
-     <button id="back-btn" class="submit-btn btn btn-primary" onclick=customize()>Back</button></p>   
-      <button id="createtest-btn" class="submit-btn btn btn-primary" onclick=savequestion()>Creat Test</button></p>
+     <button id="back-btn" class="submit-btn btn btn-warning" onclick=customize()>Back</button></p>   
+      <button id="createtest-btn" class="submit-btn btn btn-warning" onclick=savequestion()>Creat Test</button></p>
     </div>
   
 

@@ -12,6 +12,7 @@ from .views import (
     SimpleLoginView,
     ProfileView,
     load_section,
+    check_for_user,
 )
 from django.views.decorators.csrf import csrf_exempt
 
@@ -28,5 +29,6 @@ urlpatterns=[
     path('user-details/',UserDetailsView.as_view()),
     path('user-details/<int:pk>/',UserDetailsEditView.as_view()),
     path('profile/',ProfileView.as_view()),
-    path('loadsection/',load_section)
+    path('loadsection/',load_section),
+    path('check-user/',check_for_user.as_view()),
 ]

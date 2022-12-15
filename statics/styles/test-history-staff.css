@@ -1,28 +1,32 @@
 .history-container-form {
-    width: 20%;
-    margin: 4% 39%;
+    margin: 12% 35%;
     padding: 2% 3%;
     line-height: 2;
     color: white;
-    background-color: #435cf9;
+    background-color: #8388a72b;
+    box-shadow: #39438091 0px 5px 15px;
+}
+.history-container-form label{
+    color: antiquewhite;
+    font-family: 'Montserrat';
+}
+.test-result-btn{
+    font-family: 'Montserrat';
 }
 
-.history-container-form button.btn.btn-sm.btn-primary {
+
+/* .history-container-form button.btn.btn-sm.btn-primary {
     margin: 10% 36% 0%;
-}
+    border-color: #fff8dc;
+     */
 
-.history-container-div {
-    background-color: #FFF5E4;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    width: 70%;
-    margin: 2% 15%;
-    padding: 1% 1%;
-    overflow-x: auto;
-}
 
-.history-container table {
-    width: 100%;
-}
+     .history-container-div {
+        background-color: #f8f9fa14;
+        overflow-x: auto;
+        color: white;
+    }
+
 
 .history-container table,
 .history-container th,
@@ -37,7 +41,6 @@
 
 .history-container-div table button {
     width: 87%;
-    background: transparent;
     border: 1px solid #00000030;
 }
 .history-container-div table button:focus{
@@ -62,7 +65,7 @@
     margin: 1% 15%;
 }
 
-@media screen and (min-width:1024px) and (max-width:1200px) {
+/* @media screen and (min-width:1024px) and (max-width:1200px) {
     .history-container-form {
         width: 33%;
         margin: 4% 37%;
@@ -92,30 +95,24 @@
         width: 85%;
         margin: 2% 15%;
     }
-}
+}*/
 
-@media screen and (max-width:420px) {
+@media screen and (max-width:600px) {
     .history-container-form {
-        width: 70%;
-        margin: 4% 15%;
-        padding: 2% 7%;
+        width: 66%;
+        margin: 16% 19%;
+        padding: 2% 3%;
+        line-height: 2;
+        color: white;
+        background-color: #292c4070;
     }
 
-    .history-container-div {
-        background-color: darkgrey;
-        width: 70%;
-        margin: 2% 15%;
-    }
-
-    .history-container p.heading {
-        flex-direction: column;
-    }
-
-    .history-container span.test-heading {
-        text-transform: capitalize;
-        font-size: 16px;
-    }
-    .history-container-div table button {
-        width: 100%;
+.history-container-form {
+    margin: 12% 22%;
+} 
+}
+@media screen and (min-width:601px) and (max-width:901px) {
+    .history-container-form {
+        margin: 11% 26%;
     }
 }

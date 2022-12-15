@@ -20,12 +20,6 @@
             padding: 30px 50px;
             position: fixed;
         }
-
-        #chapter-btn {
-            border: 1px solid #14279B;
-            border-radius: 5px;
-            color: #14279B;
-        }
         .box1 {
             background-color: #343a40;
             color: white;

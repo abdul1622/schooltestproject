@@ -1,22 +1,75 @@
-.navbar li a:focus {
-    color: cornflowerblue;
-}
-
-.gradient-custom {
-    /* fallback for old browsers */
-    background: #f6d365;
-
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
-
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
-}
-
 .back-btn-nav {
     display: none;
 }
 
+  nav ul li a,
+  nav ul li a:after,
+  nav ul li a:before {
+    transition: all .5s;
+  }
+  nav ul li a:hover {
+    color: rgb(85, 85, 85);
+  }
+  .nav-item:hover{
+    color: inherit;
+  }
+nav.stroke ul li a,
+nav.fill ul li a {
+  position: relative;
+}
+nav.stroke ul li a:after,
+nav.fill ul li a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: #aaa;
+  height: 1px;
+}
+nav.stroke ul li a:hover:after {
+  width: 100%;
+}
+
+nav.fill ul li a {
+  transition: all 2s;
+}
+
+nav.fill ul li a:after {
+  text-align: left;
+  content: '.';
+  margin: 0;
+  opacity: 0;
+}
+nav.fill ul li a:hover {
+  color: #fff;
+  z-index: 1;
+}
+nav.fill ul li a:hover:after {
+  z-index: -10;
+  animation: fill 1s forwards;
+  -webkit-animation: fill 1s forwards;
+  -moz-animation: fill 1s forwards;
+  opacity: 1;
+}
+nav ul li a,
+nav ul li a:after,
+nav ul li a:before {
+  transition: all .5s;
+}
+nav ul li a:hover {
+  color: #555;
+}
+nav ul {
+  list-style: none;
+  text-align: center;
+}
+nav ul li a:hover {
+  color: #555;
+}
 .container-1 {
     width: 34%;
     margin-top: 5%;
@@ -26,42 +79,20 @@
 .navbar-light .navbar-toggler {
     color: rgba(0, 0, 0, .5);
     border-color: rgba(0, 0, 0, .1);
-    margin-left: 86vw;
 }
-
-.nav-item :hover {
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-}
-
-.nav-item {
-    padding: 1%;
-}
-
 .errorlist {
     display: none;
 }
-
 .navbar {
-    background-color: #14279B;
-    font-size: 16px;
-    border-radius: 0px;
-    width: 100%;
-    z-index: 3;
-    height: 6vh;
+    background-color: rgba(22,34,57,0.95);
+    border-bottom: 1px solid #ffffff59;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
 }
-
-.navbar .nav-item a:hover {
-    background-color: white;
-    color: black;
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(217, 217, 217, 0.778);
+    margin-left: 0.3rem;
 }
-
-.navbar li a {
-    padding: 1.8vh;
-    margin-left: 2%;
-    white-space: nowrap;
-}
-
 .update {
     border: none;
     border-radius: 2px;
@@ -139,12 +170,6 @@
     font-size: 18px;
 }
 
-.container {
-    width: 100%;
-    padding-top: 60px;
-    padding-bottom: 100px;
-}
-
 .frame {
     height: 425px;
     width: 430px;
@@ -164,7 +189,7 @@
 
 .text-center {
     text-align: center !important;
-    font-family: cinzel;
+    font-family: 'Poppins', sans-serif;
 }
 
 .container3 {
@@ -178,7 +203,7 @@
 .delete-box {
     text-align: center;
     font-size: 16px;
-    background-color: #b2c8df;
+    color: white;
 }
 
 .grid-item-button {
@@ -189,36 +214,25 @@
     font-size: 192%;
 }
 
-i#back-btn {
-    padding: 1%;
-    cursor: pointer;
-    border-radius: 16%;
-    background-color: #0062cc;
-    color: white;
-}
-
 .messages {
     text-align: center;
     color: green;
     font-size: 14px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .error-messages {
     text-align: center;
     color: #ff0000;
     font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
     background-color: white;
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 }
 
-.chapter-btns {
-    display: flex;
-    justify-content: space-around;
-}
-
 .chapter-btns button {
-    padding: 5px 10px;
     font-size: 12px;
 }
 
@@ -237,29 +251,23 @@ i#back-btn {
 }
 
 #edit {
-    padding: 5px 15px;
-    margin-left: -1vw;
-    border-radius: 5px;
-    font-size: 150%;
-    color: #14279B;
+    color: #35b9dc;
+    font-size: 1.5rem;
 }
 
 #delete {
-    padding: 5px 15px;
-    margin-left: 1%;
-    border-radius: 5px;
-    margin-top: 0vh;
     color: #900202;
-    font-size: 150%;
+    font-size: 1.5rem;
 }
 
-.modal-content label {
+/* .modal-content label {
     width: 30%;
     white-space: nowrap;
-}
+} */
 
 .modal-title span {
     font-size: 20px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .cards {
@@ -271,15 +279,13 @@ element.style {
 }
 
 .modal-content {
-    width: 200%;
-    margin-left: -34%;
-    padding: 2% 5%;
-    background-color: #b2c8df;
+    background-color:rgba(22,34,57,0.95);
 }
 
 .success {
     color: white;
     font-size: 15px;
+    font-family: 'Poppins', sans-serif;
 }
 
 input#id_section {
@@ -294,10 +300,11 @@ p.section-btn {
     text-align: center;
 }
 
-p.section-btn {
-    margin: 5% 14%;
-}
 
-form.userDetails input {
+/* form.userDetails input {
     width: 90%;
+} */
+table{
+    overflow: auto;
+    
 }

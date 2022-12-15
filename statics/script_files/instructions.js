@@ -46,7 +46,7 @@ function get(){
     data.data.forEach((d, index) => {
       console.log(d.note)
       content += `<div class="cards" id=${d.id}>
-        <li class="grade">${d.note} <button class="btn btn-danger btn-sm" id=delete-ins  data-toggle="modal" data-target="#instruction-delete" >Delete</button>  </li> 
+        <li class="grade text-white">${d.note} <button class="btn btn-danger btn-sm" id=delete-ins  data-toggle="modal" data-target="#instruction-delete" >Delete</button>  </li> 
        
        </div>`
       })

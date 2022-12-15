@@ -26,23 +26,16 @@ def simple(request):
     return render(request,'accounts/login.html',{'form':form})
 
 def profile(request): 
-   # if request.user != 'AnonymousUser':
-        print(request.user,'hi')
-        return render(request,'accounts/profile.html')
-  #  return redirect('/login/')
+    print(request.user,'hi')
+    return render(request,'accounts/profile.html')
 
 
 def students(request):
-     #   if request.user.user_type=='is_admin' or request.user.user_type=='is_staff':
-            return render(request,'accounts/students.html')
-      #  return render(request,'404.html')
+    return render(request,'accounts/students.html')
 
 
 def staff(request):
-       # if request.user.user_type=='is_admin' :
-            return render(request,'accounts/staffs.html')
-     #   return render(request,'404.html')
-
+    return render(request,'accounts/staffs.html')
 
 def index(request):
     return render(request,'index.html')

@@ -9,6 +9,10 @@ class Questionform(forms.ModelForm):
     class Meta:
         model = Question
         fields = "__all__"
+    def __init__(self, *args, **kwargs):
+        super(Questionform, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'    
 
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
@@ -28,6 +32,12 @@ class Chapterform(forms.ModelForm):
         model = Chapter
         fields = "__all__"
         exclude = ['subject']
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field_name != 'allChapter':
+                print(type(field_name),field_name)
+                field.widget.attrs['class'] = 'form-control'
 
 
 class Subjectform(forms.ModelForm):
@@ -113,12 +123,17 @@ class TestForm(forms.ModelForm):
 class instruction_form(forms.Form):
     instruction = forms.CharField(widget=forms.Textarea(
 
-    attrs={"class": "form-control", "placeholder": "Instructions"}))
+    attrs={"class": "form-control", "placeholder": "Instructions","style":"color:black; width:50%;"}))
 class questionCustomForm(forms.Form):
     from_chapter = forms.ChoiceField()
     to_chapter = forms.ChoiceField()
     allChapter = forms.BooleanField()
-
+    def __init__(self, *args, **kwargs):
+        super(questionCustomForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field_name != 'allChapter':
+                print(type(field_name),field_name)
+                field.widget.attrs['class'] = 'form-control'
 
 class customizeForm(forms.Form):
     Chapter = forms.ChoiceField()

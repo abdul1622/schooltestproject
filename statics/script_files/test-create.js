@@ -110,7 +110,7 @@
           }
           let new_date = new Date(d.created_at)
           console.log(new_date)
-          content = content + `<div class="questions-paper-card" id='${d.id}'>
+          content = content + `<div class="questions-paper-card  " id='${d.id}'>
 <p >created_by : <span class="created_by">${d.created_by}</span></p>
 
 <p >created_at : <span class="created_at">${(new_date.toDateString())}</span></p>
@@ -118,12 +118,12 @@
 <p> No of questions : ${(d.no_of_questions).length} </p>`
           if (d.test_id) {
             content += `Test ID : ${d.test_id}        
-            <button onclick=edit_question_paper(${d.id},${d.timing},${d.overall_marks}) class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editquestion-paper">Edit</button>
+            <div><button onclick=edit_question_paper(${d.id},${d.timing},${d.overall_marks}) class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editquestion-paper">Edit</button></div>
             `
           } else {
-            content += `<button type="button" onclick=test_create(${d.id},${d.timing},${d.overall_marks}) class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+            content += `<div d-flex flex-wrap><button type="button" onclick=test_create(${d.id},${d.timing},${d.overall_marks}) class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">
   Create-Test
-</button> <button onclick=edit_question_paper(${d.id},${d.timing},${d.overall_marks}) class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editquestion-paper">Edit</button>`
+</button> <button onclick=edit_question_paper(${d.id},${d.timing},${d.overall_marks}) class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editquestion-paper">Edit</button></div>`
           }
           content += `</div>`
 
@@ -175,7 +175,7 @@
 <p><label for="id_remarks">Remarks:</label> <input type="text" name="remarks" maxlength="25" required="" id="id_remarks"></p>
 <p><label for="id_description">Description:</label> <input type="text" name="description" maxlength="50" required="" id="id_description"></p>
 <p><label for="id_pass_percentage">Pass percentage:</label> <input type="number" name="pass_percentage" value="35" min="0" required="" id="id_pass_percentage"></p>`
-    create_btn_container.innerHTML = `<button type="button" id="test-create-btn" onclick=create(${id}) class="btn btn-primary ">Create</button>`
+    create_btn_container.innerHTML = `<button type="button" id="test-create-btn" onclick=create(${id}) class="btn btn-warning ">Create</button>`
     document.getElementById('test-create-btn').style.display = 'block'
   }
 
@@ -256,7 +256,7 @@
     // document.getElementById('id_timing').value = timing
     // document.getElementById('id_overallmarks').value = overall_marks
     document.querySelector('.question-edit-btn-container').innerHTML = `<button type="button" id="questionpaper-edit-btn"
-              class="btn btn-primary" onclick=question_paper_update(${id})>Update</button>`
+              class="btn btn-warning" onclick=question_paper_update(${id})>Update</button>`
   }
 
 

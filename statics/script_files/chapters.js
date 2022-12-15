@@ -11,9 +11,7 @@
         console.log(subject_val)
         list.innerHTML = ''
         container.innerHTML = ''
-        form_all.innerHTML = `<div class="chapter-form-box"> <p><label for="id_chapter_no">Chapter no:</label> <input type="number" name="chapter_no" min="0" required="" id="id_chapter_no"></p>
-        <p><label for="id_name">Name:</label> <input type="text" name="name" maxlength="30" required="" id="id_name"></p>
-        <p><label for="id_description">Description:</label> <input type="text" name="description" maxlength="50" required="" id="id_description"></p> <div></div></div>`
+        form_all.innerHTML = `<button class="btn btn-warning" data-toggle="modal" data-target="#chaptermodal" >Add Chapter</button>`
         document.getElementById('grade-title-chapter').textContent = `${grade_val}`
         document.getElementById('subject-title').textContent = `${subject_val}`
         document.getElementById('grade-btn').style.display = "none"
@@ -26,7 +24,7 @@
         document.getElementById('subjects-by-grade').style.display = "none"
         // delete_box.style.display = 'none';
 
-         document.getElementById('grade').style.height = '30vh';
+        //  document.getElementById('grade').style.height = '30vh';
         url3 = ('https://schooltestproject.herokuapp.com/api/chapter-list/');
         var content = ''
         fetch(url3, {
@@ -47,19 +45,26 @@
                 chapter_list = data.data
                 console.log(chapter_list)
                 data.data.forEach((d, index) => {
-                    // <p><label> Subject </label> <span>: <span id="${d.subject_id}" class="subject">${d.subject}</span></span></p>
-                    content = content + `<div class="chapter-card" id=${d.id}>
-        <p><label> Chapter_no </label> <span>: <span class="chapter_no">${d.chapter_no}</span></span></p>
+                    content = content + `<div class="chapter-card " id=${d.id}>
+        <p><label> Chapter no </label> <span>: <span class="chapter_no">${d.chapter_no}</span></span></p>
         <p><label> Chapter </label> <span>: <span class="name">${d.name}</span></span></p>
         <p><label> Description </label> <span>: <span class="description">${d.description}</span></span></p>
         <br>
-        <p><i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></p>
+        <div class ='d-flex justify-content-around'><i id="edit" class="fa fa-edit" data-toggle="modal" data-target="#chaptermodal"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></div>
  </div>`
                     container3.innerHTML = content;
 
                 });
             } else {
-                container3.innerHTML = 'no chapter in this subject';
+                node=document.createElement('h3')
+                tnode=document.createTextNode('No Chapters in this subject')
+                newnode=node.appendChild(tnode)
+                error=document.querySelectorAll('.subject-head')[1]
+                error.appendChild(node)
+                error.lastElementChild .classList.add('d-flex','justify-content-center','text-white','mt-5')
+               
+
+                // container3.innerHTML = 'no chapter in this subject';
 
             }
 
@@ -119,6 +124,7 @@
             form_chapter_no.value = chapter_no
             form_name.value = name
             form_description.value = description
+            document.getElementById("exampleModalLongTitle").innerHTML=name
             let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             url3 = 'https://schooltestproject.herokuapp.com/api/chapters/'
             chapter_btn.addEventListener('click', () => {

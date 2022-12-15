@@ -4,10 +4,11 @@
         grade_val = val1
         grade_id = val2
         document.getElementById('grade').style.display = 'block'
+        form=document.getElementById('grade')
+        form.style.backgroundColor='Transparent'
+        form.style.boxShadow='none'
         console.log(grade_val);
-
-        form_all.innerHTML = `<div class="subject-form-box"><p><label for="id_name">Name:</label> <input type="text" name="name" maxlength="20" required="" id="id_name"></p>
-        <p><label for="id_code">Code:</label> <input type="text" name="code" maxlength="15" required="" id="id_code"></p> </div>`
+        form_all.innerHTML = `<button class=' btn btn-warning 'data-toggle='modal' data-target='#subjectmodal'> Add subject</button>`
         list.innerHTML = ''
         document.getElementById('grade-title').textContent = `${grade_val}`
         document.getElementById('grade-btn').style.display = "none"
@@ -32,6 +33,7 @@
         }).then(res => {
             return res.json()
         }).then(data => {
+            if (data.length < 0){
             console.log(data)
             data.forEach((d, index) => {
                 temp = `${d.name}`
@@ -41,13 +43,22 @@
                 content = content + `<div class="subject-card"   id=${d.id}>
         <p><label> Subject </label> <span>: <span class="name">${d.name}</span></span></p>
         <p><label> Subject-code </label> <span>: <span class="code">${d.code}</span></span></p>
-        <p class="text-center"> <a type="button" class="btn btn-sm btn-primary ch-btn" href=# onclick=getchapter(${d.grade_name},"${temp}",${d.id})>Chapters</a></p>
+        <p class="text-center"> <button  class=" btn btn-warning btn-sm  ch-btn"  onclick=getchapter(${d.grade_name},"${temp}",${d.id})>Chapters</button></p>
         <br>
-        <p class="text-center"><i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></p>
+        <div class="d-flex  justify-content-around"><i id="edit" class="fa fa-edit"data-toggle='modal' data-target='#subjectmodal'></i>
+        <i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></div>
  </div>`
             });
             container.innerHTML = content;
-
+        }else{
+            console.log('None Content')
+            node=document.createElement('h3')
+            tnode=document.createTextNode('No Subjects in this grade')
+            newnode=node.appendChild(tnode)
+            error=document.querySelectorAll('.subject-head')[0]
+            error.appendChild(node)
+            error.lastElementChild .classList.add('d-flex','justify-content-center','text-white','mt-5')
+        }
         })
     }
 
@@ -57,7 +68,7 @@
 
     subject_create.addEventListener('click', () => {
         var code = document.getElementById('id_code').value
-        var name = document.getElementById('id_name').value
+        var name = document.getElementById('id_subject_name').value
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         console.log(edit)
         if (!edit) {
@@ -113,8 +124,6 @@
 
     container2.addEventListener('click', (e) => {
         //   form_grade = document.getElementById('id_grade')
-        form_code = document.getElementById('id_code')
-        form_name = document.getElementById('id_name')
         let url = 'https://schooltestproject.herokuapp.com/api/subjects/'
         subject_btn = document.getElementById('subject-btn')
         e.preventDefault();
@@ -128,23 +137,19 @@
         if (delbutton) {
             console.log('RRR')
             yes_button.setAttribute("onClick", `deletesubject(${id})`);
-            // const parent1 = e.target.parentElement.parentElement;
-            // var name = parent1.querySelector('.name').textContent
-            // no_btn.addEventListener('click',()=>{
-            //     getsubject(grade_val,grade_id);
-            // })
-
         }
         console.log(editbutton, 'dfg')
-
         if (editbutton) {
             window.location.href = '#grade';
             const parent = e.target.parentElement.parentElement;
-            // var grade = parent.querySelector('.grade').textContent;
+            var subjectcode = document.getElementById('id_code')
+            var subjectname = document.getElementById('id_subject_name')
             var code = parent.querySelector('.code').textContent;
             var name = parent.querySelector('.name').textContent;
-            form_code.value = code
-            form_name.value = name
+            console.log(name,'subject name')
+            document.getElementById('exampleModalLabel').innerHTML=name
+            subjectcode.value = code
+            subjectname.value = name
             let id = e.target.parentElement.parentElement.id;
             console.log(id)
             console.log(grade_val)

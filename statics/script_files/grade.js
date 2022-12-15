@@ -39,13 +39,15 @@
     })
 
     function section_change() {
+        add=document.getElementById('add-section')
         document.querySelector('.section-list').innerHTML = ''
         section_list = []
+        console.log(document.getElementById('id_grade').value)
     }
-
+   
     // get grade
     function get() {
-        var content = ' <h2>Grades </h2> <hr> <div class="cards">'
+        var content = ' <h2 class="text-center text-white">Grades </h2> <div class="col-12 justify-content-lg-center  justify-content-sm-start justify-content-center  card-group  d-flex flex-wrap ">'
         fetch('https://schooltestproject.herokuapp.com/api/grades/', {
             method: 'GET',
             headers: {
@@ -67,15 +69,20 @@
             }
             data.data.forEach((d, index) => {
                 if (user_type == 'is_admin') {
-                    content = content + `  <div class="card container"  id=${d.id}> <button data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade'>&#x2715; </button> <button id="edit" onclick=edit_grade(${d.id})><i class="fa fa-edit"></i></button>
-        <p  onclick=getsubject(${d.grade},${d.id}) class="grade">${d.grade} </p>
+                    content = content + ` <div class="gradecard  ml-3 mt-3 text-center fs-4"  id=${d.id}>
+                    <div class="d-flex flex-row justify-content-end text-right mt-2">
+                    <h5><i class="fa fa-edit ml-5" onclick=edit_grade(${d.id}) id="edit"></i>
+                    <i  class="fa fa-trash mr-3" aria-hidden="true"  data-toggle="modal" data-target="#delete-box-Modal" onclick=deletegradesetup(${d.id}) class='delete-grade' id="delete"></i></h5>
+                    </div>
+                    <p  onclick=getsubject(${d.grade},${d.id}) class="grade">${d.grade} </p>
         
  </div>`
                 } else {
-                    content = content + `  <div class="card container"  id=${d.id}>
+                    content = content + `  <div class="gradecard-staff"  ml-3 mt-3 text-center fs-4"  id=${d.id}>
         <p  onclick=getsubject(${d.grade},${d.id}) class="grade">${d.grade} </p>
         
  </div>`
+ document.getElementById('grade-list').style.marginTop="8%"
                 }
             })
             content += '</div>'
@@ -88,9 +95,9 @@
             document.getElementById('grade-btn').style.display = "inline"
             document.getElementById('grade-list').style.display = "block"
             document.getElementById('chapterlist').style.display = "none"
-            form_all.innerHTML = `<div class='grade-form-box'>
-                <p><label for="id_grade">Grade:</label> <input type="number" name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
-               <p class='section-btn'><span> <button onclick=add_section('create') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
+            form_all.innerHTML = `<div class='grade-form-box '>
+                <p><label for="id_grade">Grade:</label> <input class ='form-control' type="number" class="form-control" name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
+               <p class='section-btn'><span> <button onclick=add_section('create') id='add-section' class="btn btn-light">Add Section</button> </span> <span class='delete-section'></span> </p> </p>
                 <p class='section-list'> </p>
                 <p class='section-error'></p>
                 </div>`
@@ -100,8 +107,6 @@
             }
         })
     };
-    // <p> <label for='id_section'>Section :</label>
-    // <input type="text" name="" maxlength="1" id="id_section">
     get();
 
     // delete grade 
@@ -122,9 +127,8 @@
             }
         }
         form_all.innerHTML = `<div class='grade-form-box'>
-            {% csrf_token %}
-                <p><label for="id_grade">Grade:</label> <input type="number" disabled name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
-               <p class='section-btn'><span> <button onclick=add_section('edit') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
+                <p><label for="id_grade">Grade:</label> <input class='form-control' type="number" disabled name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade" class="form-control" ></p>
+               <p class='section-btn'><span> <button onclick=add_section('edit') id='add-section' class="btn btn-light">Add Section</button> </span> <span class='delete-section'></span> </p> </p>
                 <p class='section-list'> </p>
                 <p class='section-error'></p>
                 <p> <button onclick=cancel()> cancel </button> </p>
@@ -134,7 +138,7 @@
             section_content += `<li>${section_list[i]}</li> `
         }
         if (section_list.length) {
-            document.querySelector('.delete-section').innerHTML = ` <button onclick=remove_section() id='add-section'>remove_section</button>`
+            document.querySelector('.delete-section').innerHTML = ` <button  onclick=remove_section()  id='add-section' class='btn btn-light'>Remove Section</button>`
         }
         document.querySelector('.section-list').innerHTML = section_content
     }
@@ -142,15 +146,13 @@
     //  cancel section adding
     function cancel() {
         form_all.innerHTML = `<div class='grade-form-box'>
-            {% csrf_token %}
-                <p><label for="id_grade">Grade:</label> <input type="number" name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade"></p>
-               <p class='section-btn'><span> <button onclick=add_section('create') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
+                <p><label for="id_grade">Grade:</label> <input class ='form-control' type="number" name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade" class="form-control"></p>
+               <p class='section-btn'><span> <button onclick=add_section('create') id='add-section' class="btn btn-light">Add Section</button> </span> <span class='delete-section'></span> </p> </p>
                 <p class='section-list'> </p>
                 <p class='section-error'></p>
                 </div>`
         edit = false
     }
-
     // add section 
     function add_section(flag) {
         let standard
@@ -184,7 +186,7 @@
             section_content += `<li>${section_list[i]}</li> `
         }
         if (section_list.length) {
-            document.querySelector('.delete-section').innerHTML = ` <button onclick=remove_section() id='add-section'>remove_section</button>`
+            document.querySelector('.delete-section').innerHTML = ` <button onclick=remove_section() id='add-section' class='btn btn-light'>Remove Section</button>`
         }
         document.querySelector('.section-list').innerHTML = section_content
     }
@@ -225,8 +227,8 @@
     grade_create.addEventListener('click', () => {
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         let url_grade = 'https://schooltestproject.herokuapp.com/api/grades/'
-        let id = current_grade.id
         if (edit) {
+            let id = current_grade.id
             fetch(`${url_grade}${id}/`, {
                 method: 'PUT',
                 headers: {
@@ -250,7 +252,7 @@
                 return response.json()
             }).then(data => {
                 console.log(data)
-                if (data.status != 'success') {
+                if (data.status && data.status != 'success') {
                     error_messages.innerHTML = `<li>${(data.data.error)}</li>`
                     messages.innerHTML = ''
                 }
@@ -283,7 +285,7 @@
                     return response.json();
                 }).then(function (data) {
                     console.log(data)
-                    if (data.status != 'success') {
+                    if (data.status && data.status != 'success') {
                         error_messages.innerHTML = `<li>${(data.data.error)}</li>`
                         messages.innerHTML = ''
                     }

@@ -3,6 +3,7 @@
 {% load static %}
 
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <!-- JavaScript Bundle with Popper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -31,58 +32,71 @@
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Uchen&display=swap"
         rel="stylesheet">
-
+      
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{% static 'styles/backup.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/backup-responsive.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/base-common.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/base-common-responsive.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/base-tags.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/chapter.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/chapterlists.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/grade.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/subject.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/question_answer.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/question_answer_laptop.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/question_answer_tap_mobile.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/question-paper.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/question.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/staff.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/student.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/user-details-responsive-tap.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/test-history-staff.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/test-history-student.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'styles/test-list-staff.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/test-list-student.css' %}">
-    
-    
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="{% static 'styles/backup.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/backup-responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/base-common.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/base-common-responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/base-tags.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/chapter.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/chapterlists.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/grade.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/subject.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/question_answer.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/question_answer_laptop.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/question_answer_tap_mobile.css' %}">
+
+    <link rel="stylesheet" href="{% static 'styles/question-paper.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/question.css' %}">
+
+    <link rel="stylesheet" href="{% static 'styles/staff.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/student.css' %}">
+     <link rel="stylesheet" href="{% static 'styles/chatbot.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'styles/main1.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'styles/user-details-responsive-tap.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/test-history-staff.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/test-history-student.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/test-list-staff.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/test-list-student.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/instruction.css' %}">
+   
+
     <title>School</title>
 
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light ">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top stroke">
+        <!-- Toggler/collapsibe Button -->
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" id="nav-btn" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler ms-auto ms-sm-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle Navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-
-
+            <div class="navbar-collapse collapse  justify-content-end " id="navbarCollapse">
+                <ul class="navbar-nav ms-2 align-items-center .align-items-md-start ">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="nav-home">Home</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#">About us</a>
+                    </li>
+                    <li>
+                      <a class="nav-link" href="#">Contact</a>
+                  </li>
+                    <li>
+                        <a class="nav-link" href="#" id="nav-login">Login</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -101,12 +115,35 @@
     {% block history %}{% endblock %}
     {% block index %}{% endblock %}
     {% block question-bank %}{% endblock %}
-
-
-
-
-
-
+    <div class="chat" id="chat" style="opacity:0; display: none;">
+        <div class="d-flex flex-wrap px-2 justify-content-start">
+            <button type="button " class="btn btn-primary btn-sm mt-1 ml-1">Primary</button>
+           <button type="button" class="btn btn-primary  btn-sm mt-1 ml-1">Primary</button>
+            <button type="button" class="btn btn-primary  btn-sm mt-1 ml-1">Primary</button>
+            <button type="button" class="btn btn-primary  btn-sm mt-1 ml-1">Primary</button>
+        </div>
+        <div class="form-group d-flex flex-wrap" id="bot-text">
+            <input type="text"  class="form-control w-75 mx-2" placeholder="">
+           <div><i class="fa fa-send-o text-white" style="font-size:24px"></i></div>
+        </div>
+    </div>
+<div class="footer">
+    <div class="chatdiv" id="chatbot"><h1><i class='fa fa-comment text-white' ></i></h1>
+        </div>
+</div>
 </body>
-
+<script >
+    document.getElementById('chatbot').addEventListener('click',()=>{
+        var box=document.getElementById('chat').style
+        if (box.opacity <= 0 && box.display=='none'){
+            box.opacity=1;
+            box.transition='opacity 0.25s ease-in-out';
+            box.display = 'block';
+            return
+        }
+        box.display='none'
+        box.opacity=0
+     
+})
+</script>
 </html>

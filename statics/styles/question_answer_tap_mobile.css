@@ -1,14 +1,6 @@
 @media screen and (min-width:430px) and (max-width:800px) {
-    .grid-item {
-        font-size: 10px;
-        width: 23vw;
-    }
-    
     #question-box {
         width: 36%;
-        /* height: 29vh; */
-        padding-top: 1vh;
-        margin: 2vh 32%;
     }
 
     button#questioncreate-btn {
@@ -57,23 +49,23 @@
 
     .question-card p {
         color: black;
-        width: 33vw;
+
         display: block;
-        font-size: 2vw;
+        font-size: 1.1rem;
     }
+    
 
     .question-card label {
         width: 100px;
         display: inline-block;
     }
 
-    .question-list fieldset {
+    /* .question-list fieldset {
         grid-template-columns: auto auto;
-    }
+    } */
 
     #questionForm input[type=text] {
         padding: 6px;
-        width: 76%;
         margin-bottom: -4px;
         color: black;
         font-size: 11px;
@@ -91,26 +83,8 @@
     #questionForm input[type=select] {
         padding: 1vh;
     }
-
-    #--question {
-        display: block;
-        margin-left: 4vw;
-        /* text-align: center; */
-        outline: 1px solid;
-        padding: 5px;
-        margin-bottom: 0;
-        margin-top: 2vh;
-    }
-
-
     #question_creation {
         display: none;
-    }
-    #QForm-modal-content {
-        width: 133%;
-        background-color: #b2c8df;
-        padding: 2% 5%;
-        margin-left: -16%;
     }
     form.questionanswer {
         display: grid;
@@ -125,7 +99,7 @@
         display: grid;
     }
 }
-@media screen and (max-width:420px) {
+@media screen and (max-width:500px) {
     form.questionanswer {
         display: grid;
         grid-template-columns: auto;
@@ -146,24 +120,11 @@
         font-size: 14px;
     }
 
-    #question-box {
-        margin-left: 13%;
-        width: 70%;
-        padding: 3% 4%;
-        height: 0%;
-        margin-top: 12%;
-    }
-
-    #questioncreate-btn {
-        width: 47%;
-    }
-    #QForm-modal-content {
-        width: 81%;
-        background-color: #b2c8df;
-        padding: 2% 5%;
-        margin-left: 9%;
-    }
-
+  .qformbox{
+    width: 53% !important;
+    margin-left: 24% !important;
+    padding: 1% 4% 3% 4%;
+  }
     .question-list #delete {
         padding: 0;
         margin-left: 0%;
@@ -203,9 +164,6 @@
         margin-left: 5%;
     } */
 
-    #question-box select {
-        margin-left: 5%;
-    }
 
     .question_create label {
         margin-left: 5%;
@@ -221,9 +179,6 @@
 
     .question-list fieldset {
         grid-template-columns: auto;
-    }
-    #QForm-modal-content input {
-        width: 88%;
     }
     #delete-box-Modal-question .modal-content {
         width: auto;

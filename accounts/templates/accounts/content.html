@@ -1,8 +1,8 @@
 {% extends 'main.html' %}
+
 {% block contents %}
 <div class ="body">
-    <div id="getstarted"><a class="getstarted" id="signup" href="" >GetStarted</a></div>
-    <p class="para">Examination Process is Important BUT Preparing Question Paper is Challenging. 
+    <p class="w-75 text-center para text-white">Examination Process is Important BUT Preparing Question Paper is Challenging. 
         A simplified and easy to use solution to create question papers. With SetNow 
         question Paper Generator entire tedious task of manual question paper creation
         is eradicated swiftly and efficiently. SetNow question paper generator is a remarkable 
@@ -16,25 +16,21 @@
          marks on question wise, module wise, module to module also the functionality of without displaying
           marks on the question paper. One can export question paper to pdf format after question paper generated.
     </p>
-     <p class="already">Already have an account? <a class="login" href="/login" >login</a></p>
-  </div>  
-  <footer style="background-color: whitesmoke;" class=" text-center text-white ">
+     <p class="already text-center">Already have an account? <a class="login" style="color: #00fff5;" href="/login" >login</a></p>
+  
+    </div>  
+  <footer style="background-color: #152036;" class="text-center text-white footer ">
     <div class="container p-4 pb-0">
       <section class="mb-4">
-        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-facebook"></i></a>
-        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-twitter"></i></a>
-        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-google"></i></a>
-        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-instagram"></i></a>
-        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-linkedin"></i></a>
-        <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fa fa-github"></i></a>
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fa fa-facebook"></i></a>
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fa fa-google"></i></a>
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fa fa-linkedin"></i></a>
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fa fa-twitter"></i></a>
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fa fa-instagram"></i></a>
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fa fa-github"></i></a>
       </section>
-
-      <p> © 2020 Copyright:www.school.com</p>
+      
+      <p class="text-white"> © 2020 Copyright:www.school.com</p>
     </div>
-    </footer>
-<script>
-  var host = window.location.protocol + "//" + window.location.host;
-  document.getElementById('signup').href = `${host}/signup`
-</script>
-     
+    </footer>   
 {% endblock %}

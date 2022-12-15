@@ -18,7 +18,6 @@ document.getElementById('nav-students').style.opacity = '0.5';
 function reload() {
   window.location.href = window.location.href;
 }
-
 fetch('https://schooltestproject.herokuapp.com/api/grades/', {
           method: 'GET',
           headers: new Headers({
@@ -39,13 +38,15 @@ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
       for(i=0;i<grade_list.length;i++){
           content += ` <option value="${grade_list[i].grade}">${grade_list[i].grade}</option>`
       }
-  }
-      document.querySelector('.std-in-form').innerHTML = content
+    }
+      document.querySelector('.grade-in-form').innerHTML = content
+      document.getElementById('std').innerHTML=content
       })
 
 //  section list
 function getsectionname(element){
       let standard = element.value
+      console.log(standard,'selected')
       let sec_list;
       content = ''
       for(i=0;i<grade_list.length;i++){
@@ -60,9 +61,51 @@ function getsectionname(element){
           content += ` <option value="${sec_list[i]}">${sec_list[i]}</option>`
       }
   }
-      document.querySelector('.sec-in-form').innerHTML = content
+      document.querySelector('.section-in-form').innerHTML = content
+      document.getElementById('sec').innerHTML=content
   }
-
+document.getElementById('id_section').addEventListener('change',()=>{
+  var std=document.getElementById('id_grade').value
+  var sec=document.getElementById('id_section').value
+  var whole= std+'-'+sec
+  console.log(whole)
+  var table, tr, td, txtValue;
+  table = document.getElementById("usr");
+  tr = table.getElementsByTagName("tr");
+  const stdcount=[]
+  for (i = 0; i < tr.length; i++) {
+      alltags = tr[i].getElementsByClassName("userstandard");
+      isFound = false;
+      for(j=0; j< alltags.length; j++) {
+        td = alltags[j];
+        if (td) {
+            console.log(td)
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.indexOf(whole) > -1) {
+                tr[i].style.display = "";
+                isFound = true;
+                stdcount.push(tr)
+                document.getElementById('count').innerHTML=`No of students - ${stdcount.length}`
+            }
+          }       
+        }
+        if(!isFound && tr[i].className !== "header") {
+          tr[i].style.display = "none";
+        }
+      }
+})
+function add_form(){
+   document.getElementById('email').value = ''
+   document.getElementById('phone').value = ''
+   document.getElementById('dob').value = ''
+   document.getElementById('fname').value = ''
+   document.getElementById('lname').value = ''
+   document.getElementById('ffname').value = ''
+   document.getElementById('std').value = ''
+   document.getElementById('address').value = ''
+   document.getElementById('reg-no-div').style.display = 'none'
+   $('#student-FormModal').modal('show')
+}
 
 let messages = document.querySelector('.messages')
 let error_messages = document.querySelector('.error-messages')
@@ -85,23 +128,23 @@ let form = document.getElementById('userDetails')
       }
   })
   console.log(students)
-  let table2 = `<table class='--user' id='usr'>`;
-    table2 += `<tr class="header">
-           <th >Email</th>
-           <th >Phone</th>
-           <th>RegNo</th>
-           <th>FullName</th>
-           <th>FirstName</th>
-           <th>LastName</th>
-           <th>Date Of Birth</th>
-           <th>Address</th>
-           <th>Standard</th>
-           <th id="action" >Action</th>
+  let table2 = `<table class='table md-mt-2 text-white' id='usr'>`;
+    table2 += `<tr class='table-heading'>
+           <th  scope="col" >Email</th>
+           <th  scope="col" >Phone</th>
+           <th  scope="col">RegNo</th>
+           <th  scope="col">FullName</th>
+           <th  scope="col">FirstName</th>
+           <th  scope="col">LastName</th>
+           <th  scope="col">Date Of Birth</th>
+           <th  scope="col">Address</th>
+           <th  scope="col">Standard</th>
+           <th id="action"  scope="col">Action</th>
     </tr>`;
          console.log(students.length)
          students.forEach((d, index) => {
           console.log('to')
-            table2 = table2 + `<tbody><tr id=${d.id}>`;
+            table2 = table2 + `<tbody><tr id=${d.id} scope="row">`;
             table2 = table2 + '<td class="useremail">' + `${d.email}` + '</td>';
             table2 = table2 + '<td class="userphone">' + `${d.phone}` + '</td>';
             table2 = table2 + '<td class="userreg">' + `${d.register_number}` + '</td>';
@@ -264,3 +307,32 @@ container2.addEventListener('click', (e) => {
     }
   })
 
+  function check_email(element){
+    console.log(element.value)
+    url_for_check = new URL('http://127.0.0.1:8000/api/check-user/');
+    url_for_check.searchParams.append('email', element.value);
+    fetch(url_for_check, {
+        method: 'GET',
+    }).then(res => {
+        console.log(res,res.status)
+        if(res.status != 200){
+            document.querySelector('.email-error').innerHTML = 'email already exits' 
+        }
+        else{
+            document.querySelector('.email-error').innerHTML = ''
+        }
+    })
+}
+function check_phone(element){
+    url_for_check = new URL('http://127.0.0.1:8000/api/check-user/');
+    url_for_check.searchParams.append('phone', element.value);
+    fetch(url_for_check, {
+        method: 'GET',
+    }).then(res => {
+        if(res.status != 200){
+            document.querySelector('.phone-error').innerHTML = 'phone number altready exits' 
+        }else{
+            document.querySelector('.phone-error').innerHTML = ''
+        }
+    })
+}

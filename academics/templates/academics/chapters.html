@@ -55,8 +55,6 @@
   })
   };
   get();
-
-
 container2.addEventListener('click',(e) => {
   form_subject = document.getElementById('id_subject')
   form_chapter_no = document.getElementById('id_chapter_no')
@@ -81,9 +79,7 @@ container2.addEventListener('click',(e) => {
    location.reload()
 )
   }
-
   }
-
   if(editbutton){
     const parent = e.target.parentElement.parentElement;
     var subject = parent.querySelector('.subject').id;
@@ -113,13 +109,10 @@ container2.addEventListener('click',(e) => {
         })
       }).then(res =>console.log( res.json())).then(() => 
        location.reload()
-      )
-      
-  }}) 
+      )   
+  ) 
   }
 });
-  
-
   const chapter_create = document.getElementById('chapter-btn')
   chapter_create.addEventListener('click',()=>{
       var chapterno = document.getElementById('id_chapter_no').value
@@ -146,7 +139,7 @@ container2.addEventListener('click',(e) => {
             console.log(response);
           }
         })
-  }})
+  })
 </script>
 </div>
 {% endblock %}

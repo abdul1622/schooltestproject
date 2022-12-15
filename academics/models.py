@@ -46,6 +46,7 @@ class Subject(models.Model):
 
     def save(self, *args, **kwargs):
         name = re.findall(r"[^\W\d_]+|\d+", self.name)
+        print(name)
         # self.created_at = (datetime.now()).strftime('%Y-%m-%d %H:%M')
         self.name = (' '.join(name)).upper()
         super(Subject, self).save(*args, **kwargs)

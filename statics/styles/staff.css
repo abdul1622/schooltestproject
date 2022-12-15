@@ -1,17 +1,21 @@
-
-       #Form-modal-content {
-        width: 172%;
-        background-color: #b2c8df;
-        padding: 2% 5%;
-        margin-left: -31%;
-    }
+#addstaff{
+        font-family: 'Montserrat';
+}
+.sort{
+    margin-top: 10vh;
+    justify-content: space-between;
+}
+.sort select{
+    width: 48%;
+    margin-left: 2%;
+}
+#count{
+    color:white;
+}
 @media screen and (min-width:430px) and (max-width:800px) {
-    #Form-modal-content {
-        width: 121%;
-        padding: 2% 5%;
-        margin-left: -23%;
-    }
     .userDetails input{
         width: 144%;
     }
+}
+@media screen and (min-width: 500px) and (max-width: 1450px){
 }

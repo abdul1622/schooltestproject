@@ -7,6 +7,7 @@ let grade_list = []
 let standard;
 let sec_list;
 var element ;
+var section;
 // geting standard dropdown
 fetch('https://schooltestproject.herokuapp.com/api/grades/', {
             method: 'GET',
@@ -80,6 +81,7 @@ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
     function add_standard() {
         standard = document.getElementById('id_standard').value
         section = (document.getElementById('id_section').value).toUpperCase()
+        console.log(document.getElementById('id_sec'))
         if (!section.match(/[a-z]/i)) {
             document.querySelector('.signup-errors').innerHTML = '<li class="text-danger">give a valid section</li>'
             return
@@ -124,34 +126,12 @@ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
         document.querySelector('.signup-errors').innerHTML = ''
                     document.querySelector('.details').innerHTML = content
   }
-//   $("#signupbox").validate({
-//     rules: {
-//      id_email: "required",
-//      id_phone: "required",
-//      id_register_number: "required",
-//      id_date_of_birth : "required",
-//      id_first_name : "required",
-//      id_full_name : "required",
-//      id_address : "required",
-//     },
-//     messages: {
-//      id_email: "Please fill your email",
-//      id_phone: "Please fill your email",
-//      id_register_number: "Please fill your register number",
-//      id_date_of_birth : "Please fill your data birth",
-//      id_first_name : "Please fill your first name",
-//      id_full_name : "Please specify your name",
-//      id_address : "Please fill your address",
-//     }
-//  })
- 
-    // signup function
-  
     function closemessage(e){
         element = e.parentElement.parentElement.parentElement.parentElement
             $(`#${element.id}`).modal('hide')
         }
     function signup() {
+        console.log('signup called')
         // // console.log(($("#signupbox").valid())) 
         // document.getElementById("myForm").submit();
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -243,3 +223,33 @@ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
             signup();
         }
     })
+
+    function check_email(element){
+        console.log(element.value)
+        url_for_check = new URL('http://127.0.0.1:8000/api/check-user/');
+        url_for_check.searchParams.append('email', element.value);
+        fetch(url_for_check, {
+            method: 'GET',
+        }).then(res => {
+            console.log(res,res.status)
+            if(res.status != 200){
+                document.querySelector('.email-error').innerHTML = 'email altready exits' 
+            }
+            else{
+                document.querySelector('.email-error').innerHTML = ''
+            }
+        })
+    }
+    function check_phone(element){
+        url_for_check = new URL('http://127.0.0.1:8000/api/check-user/');
+        url_for_check.searchParams.append('phone', element.value);
+        fetch(url_for_check, {
+            method: 'GET',
+        }).then(res => {
+            if(res.status != 200){
+                document.querySelector('.phone-error').innerHTML = 'phone number altready exits' 
+            }else{
+                document.querySelector('.phone-error').innerHTML = ''
+            }
+        })
+    }

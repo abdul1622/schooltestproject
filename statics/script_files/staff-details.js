@@ -41,6 +41,22 @@ $('[data-dismiss=modal]').on('click', function (e) {
 
 
 })
+
+function add_form() {
+  document.getElementById('email').value = ''
+  document.getElementById('phone').value = ''
+  document.getElementById('reg').value = ''
+  document.getElementById('dob').value = ''
+  document.getElementById('fname').value = ''
+  document.getElementById('lname').value = ''
+  document.getElementById('ffname').value = ''
+  document.getElementById('std').value = ''
+  document.getElementById('sec').value = ''
+  document.getElementById('address').value = ''
+  document.getElementById('reg-no-div').style.display = 'none'
+  $('#SFormModal').modal('show')
+}
+
 fetch('https://schooltestproject.herokuapp.com/api/grades/', {
   method: 'GET',
   headers: new Headers({
@@ -99,18 +115,18 @@ fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
       staffs.push(d)
     }
   })
-  let table2 = `<table class='--user' id='usr'>`;
-  table2 += `<tr class="header">
-         <th >Email</th>
-         <th >Phone</th>
-         <th>RegNo</th>
-         <th>FullName</th>
-         <th>FirstName</th>
-         <th>LastName</th>
-         <th>Date Of Birth</th>
-         <th>Address</th>
-         <th>Standard</th>
-         <th id="action" >Action</th>
+  let table2 = `<table class='table text-white md-mt-2' id='usr'>`;
+  table2 += `<tr class='table-heading' >
+         <th  scope="col" >Email</th>
+         <th  scope="col">Phone</th>
+         <th  scope="col">RegNo</th>
+         <th  scope="col">FullName</th>
+         <th  scope="col">FirstName</th>
+         <th  scope="col">LastName</th>
+         <th scope="col" >Date Of Birth</th>
+         <th scope="col">Address</th>
+         <th scope="col">Standard</th>
+         <th scope="col" id="action" >Action</th>
   </tr>`;
   console.log(staffs.length)
   staffs.forEach((d, index) => {
@@ -191,7 +207,7 @@ function edit(index, id) {
   let editcontent = ` <p> standards list</p>`
   for (i = 0; i < standards.length; i++) {
     editcontent += ` 
-          <li>${standards[i]}<button onclick=delete_standard(${i})>delete</button></li>`
+          <li>${standards[i]}<button class="btn btn-dark btn-sm" onclick=delete_standard(${i})>delete</button></li>`
   }
   document.querySelector('.standards-list').innerHTML = editcontent
   let url = "https://schooltestproject.herokuapp.com/api/user-details/"
@@ -206,7 +222,7 @@ function edit(index, id) {
   <div class='inner'>`
   for (i = 0; i < standards.length; i++) {
     content += ` 
-        <li>${standards[i]}<button onclick=delete_standard(${i})>delete</button></li>`
+        <li>${standards[i]}<button class="btn btn-dark btn-sm"  onclick=delete_standard(${i})>delete</button></li>`
   }
   document.querySelector('.standards-list').innerHTML = content + `</div>`
   let address = tr.querySelector('.useraddress').textContent;
@@ -242,24 +258,17 @@ function edit(index, id) {
         })
       }).then(response => {
         if (response.status == 200) {
-          console.log("Sucess response", response)
           document.querySelector('#SFormModal').classList.remove('show');
           document.querySelector('body').classList.remove('modal-open');
           const mdbackdrop = document.querySelector('.modal-backdrop');
           if (mdbackdrop) {
             mdbackdrop.classList.remove('modal-backdrop', 'show');
-            messages.innerHTML = 'updated successfully'
+            messages.innerHTML = 'Updated Successfully'
             $('#messageModal-staff').modal('show')
-            setTimeout(function () {
-              $('#messageModal-staff').modal('hide')
-              window.location.reload();
-            }, 2000);
           }
-          error_messages.innerHTML = ''
-          return response.json();
+          error_messages.innerHTML = `<li>${(data.data.error[0])}</li>`
+          messages.innerHTML = ''
         }
-
-
         else {
           error_messages.innerHTML = `<li>${(data.data.error)}</li>`
           messages.innerHTML = ''

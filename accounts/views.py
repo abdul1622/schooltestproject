@@ -34,7 +34,7 @@ from random import randint
 from http import client
 from django.contrib.auth import get_user_model
 # Create your views here.
-
+from utils.pagination import Pagination
 User = get_user_model()
 
 class SignupView(APIView):
@@ -142,7 +142,7 @@ class StudentProfileView(RetrieveUpdateAPIView):
         return Response(serializer.data,status=HTTP_200_OK)
 
 
-class UserDetailsView(ListAPIView):
+class UserDetailsView(ListAPIView,Pagination):
     serializer_class=UserDetailsSerializer
     permission_classes=[AllowAny]
     def get_queryset(self):
@@ -174,15 +174,15 @@ class UserDetailsView(ListAPIView):
                 queryset = User.objects.all()
                 print(len(queryset))
         return queryset
-
     def list(self, request):
-        user = self.request.user
+        user = request.user
         queryset = self.get_queryset()
+        results=self.paginate_queryset(queryset)
         if user.user_type == 'is_student':
-            serializer = UserDetailsSerializer(queryset)
+            serializer = UserDetailsSerializer(results)
         else:
             serializer = UserDetailsSerializer(queryset,many=True)
-        return Response(serializer.data,status=HTTP_200_OK)
+        return self.get_paginated_response(serializer.data)
 
 
 class UserDetailsEditView(RetrieveUpdateDestroyAPIView):
@@ -226,3 +226,16 @@ def load_section(request):
             data.append(section)
     print(data)
     return render(request,'accounts/sectiondropdown.html', {'items': data})
+class check_for_user(APIView):
+    serializer_class=UserDetailsSerializer
+    permission_classes=[AllowAny]
+    def get(self,request):
+        email = (self.request.query_params.get('email'))
+        phone = self.request.query_params.get('phone')
+        users = User.objects.all()
+        for i in users:
+            if phone and i.phone == phone:
+                return Response(status=HTTP_206_PARTIAL_CONTENT)
+            if email and i.email == email.lower():
+                return Response(status=HTTP_206_PARTIAL_CONTENT)
+        return Response(status=HTTP_200_OK)

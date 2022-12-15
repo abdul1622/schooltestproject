@@ -4,6 +4,7 @@
     width: 33%;
     margin-left: 31%;
     font-size: 14px;
+    font-family: 'Poppins', sans-serif;
     margin-top: 3%;
 }
 .list h1 {
@@ -52,5 +53,6 @@
         width: 85%;
         margin-left: 11%;
         font-size: 14px;
+        font-family: 'Poppins', sans-serif;
     }
 }
