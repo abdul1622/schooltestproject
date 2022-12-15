@@ -5,6 +5,8 @@ __pycache__/
 db.sqlite3
 *myenv
 myenv
+*venv
+venv
 todo.txt
 *staticfiles
 staticfiles/

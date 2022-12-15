@@ -105,17 +105,26 @@ WSGI_APPLICATION = 'schoolproject.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'daaio5irlq32i8',
+#         'USER': 'npcvekopocdjwf',
+#         'PASSWORD': 'be529dea4fbea05b7fad3e2ee989276e359c748f5563af04fb6effcf6b981d0f',
+#         'HOST': 'ec2-3-213-228-206.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'daaio5irlq32i8',
-        'USER': 'npcvekopocdjwf',
-        'PASSWORD': 'be529dea4fbea05b7fad3e2ee989276e359c748f5563af04fb6effcf6b981d0f',
-        'HOST': 'ec2-3-213-228-206.compute-1.amazonaws.com',
+        'NAME': 'school',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
-
 
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
@@ -129,7 +138,8 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated",
                                    'rest_framework.permissions.AllowAny'],
-
+   'DEFAULT_PAGINATION_CLASS': 'utils.pagination.Pagination',
+    'PAGE_SIZE': 100
 }
 
 
