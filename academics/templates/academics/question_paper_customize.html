@@ -1,24 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-<div class="question-paper-form" id="q-form">
+<div class="question-paper-form col-md-6 col-lg-4  col-sm-7 col-10" id="q-form">
 
     <div class="q-form" id="q-form-1">
         {% csrf_token %}
-        <!-- grade form -->
-        <!-- <p><label for="id_grade">Grade:</label>{{form.grade}} </p> -->
-        <p><label for="id_grade">Grade:</label><select name="grade" class="grade-in-form" onchange=getgradename(this)
-                required="" id="id_grade">
+        <p><label for="id_grade">Grade:</label><select class="form-control grade-in-form" name="grade"
+                class="grade-in-form" onchange=getgradename(this) required="" id="id_grade">
                 <option value="" selected="">---------</option>
             </select> </p>
         <p><label for="id_subject">Subject:</label> <select name="subject" onchange=getsubjectname(this) required=""
-                id="id_subject">
+                id="id_subject" class="form-control">
                 <option value="" selected="">---------</option>
             </select></p>
         <p><label for="id_no_of_questions">No of questions:</label> <input type="text" name="no_of_questions"
-                maxlength="20" required="" id="id_no_of_questions"></p>
-        <p class="chapter-btns">
-            <button id="next-btn" class="submit-btn btn btn-warning" onclick=getnext()>Next</button>
+                maxlength="20" required="" id="id_no_of_questions" class="form-control"></p>
+        <p class="text-center">
+            <button id="next-btn" class="btn btn-md btn-warning" onclick=getnext()>Next</button>
 
         <div class="error-form-1"></div>
     </div>
@@ -39,11 +37,13 @@
         <p> <label for="subject">SUBJECT :</label> <span id="subject_value"></span> </p>
         <p> <label for="chapter">CHAPTER :</label> <span id="chapter_value"></span> </p>
         <p> <label for="no_of_questions">NO_OF_QUESTIONS :</label> <span id="No_of_questions"></span> </p>
-        <p> <label>Download pdf :</label> <button class="btn btn-warning"
-                onclick=question_paper_pdf()> <i class="fa fa-download" aria-hidden="true"></i> </button> </p>
-        <p> <label for="question-paper-details-btn">Question Details :</label> <span id="question-paper-details-btn" class="question-paper-details-btn"></span> </p>
+        <p> <label>Download pdf :</label> <button class="btn btn-warning" onclick=question_paper_pdf()> <i
+                    class="fa fa-download" aria-hidden="true"></i> </button> </p>
+        <p> <label for="question-paper-details-btn">Question Details :</label> <span id="question-paper-details-btn"
+                class="question-paper-details-btn"></span> </p>
 
-        <span id="create-quespaper-btn"><button class="btn btn-sm btn-warning" onclick=question_paper_create()>Create Question
+        <span id="create-quespaper-btn"><button class="btn btn-sm btn-warning" onclick=question_paper_create()>Create
+                Question
                 Paper</button></span>
         <span class="create-test-modal-btn"></span>
         <span class="back-btn-review"></span>

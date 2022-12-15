@@ -110,7 +110,11 @@
           }
           let new_date = new Date(d.created_at)
           console.log(new_date)
+<<<<<<< HEAD
           content = content + `<div class="questions-paper-card " id='${d.id}'>
+=======
+          content = content + `<div class="questions-paper-card  " id='${d.id}'>
+>>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
 <p >created_by : <span class="created_by">${d.created_by}</span></p>
 
 <p >created_at : <span class="created_at">${(new_date.toDateString())}</span></p>

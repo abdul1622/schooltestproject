@@ -1,24 +1,25 @@
-{% extends "base.html" %}
-{% block content %}
-{% load static %}
-<input type="text" placeholder="test_id" name="" id="Test_id">
-<button class="btn btn-sm btn-primary" onclick=getrequiredtest()>
-Get Test
-</button>
-<div class="header">
-    <h2 class="text-center">Grade - <span id="grade-head"></span></h2>
-    <hr>
+{% extends "base.html" %} {% block content %} {% load static %}
+<div class="d-flex flex-wrap align-items-baseline mt-5">
+  <div class="w-25" >
+    <input class="form-control " type="text" placeholder="Test id" name="" id="Test_id" />
   </div>
-<div class="single-test"></div>
-<div class="test-list">
 
+  <div class="ml-5" >
+    <button class="btn btn-md btn-warning" onclick="getrequiredtest()">
+      Get Test
+    </button>
+  </div>
+  </div>
+    <div class="header">
+      <h2 class="text-center">Grade - <span id="grade-head"></span></h2>
+      <hr />
+    </div>
+    <div class="single-test"></div>
+    <div class="test-list"></div>
+    <div class="messages container-fluid"></div>
+    <div class="error-messages container-fluid"></div>
+
+    <script src="{% static 'script_files/student-test-list.js' %}" type="text/javascript"></script>
+    {% endblock %}
+  </div>
 </div>
-<div class="messages container-fluid">
-
-</div>
-<div class="error-messages container-fluid">
-
-</div>
-
-<script src="{% static 'script_files/student-test-list.js' %}" type="text/javascript"></script>
-{% endblock %}

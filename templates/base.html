@@ -32,9 +32,7 @@
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -64,13 +62,17 @@
 
     <link rel="stylesheet" href="{% static 'styles/staff.css' %}">
     <link rel="stylesheet" href="{% static 'styles/student.css' %}">
-    <!-- <link rel="stylesheet" href="{% static 'styles/take-test.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/take-test.css' %}"> -->
+     <link rel="stylesheet" href="{% static 'styles/chatbot.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'styles/main1.css' %}"> -->
     <link rel="stylesheet" href="{% static 'styles/user-details-responsive-tap.css' %}">
     <link rel="stylesheet" href="{% static 'styles/test-history-staff.css' %}">
     <link rel="stylesheet" href="{% static 'styles/test-history-student.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/test-list-staff.css' %}">
     <link rel="stylesheet" href="{% static 'styles/test-list-student.css' %}">
+<<<<<<< HEAD
+=======
+    <link rel="stylesheet" href="{% static 'styles/instruction.css' %}">
+>>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
    
 
     <title>School</title>
@@ -78,7 +80,11 @@
 </head>
 
 <body>
+<<<<<<< HEAD
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+=======
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top stroke">
+>>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
         <!-- Toggler/collapsibe Button -->
         <div class="container-fluid">
             <button class="navbar-toggler ms-auto ms-sm-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle Navigation">
@@ -116,7 +122,35 @@
     {% block history %}{% endblock %}
     {% block index %}{% endblock %}
     {% block question-bank %}{% endblock %}
-
+    <div class="chat" id="chat" style="opacity:0; display: none;">
+        <div class="d-flex flex-wrap px-2 justify-content-start">
+            <button type="button " class="btn btn-primary btn-sm mt-1 ml-1">Primary</button>
+           <button type="button" class="btn btn-primary  btn-sm mt-1 ml-1">Primary</button>
+            <button type="button" class="btn btn-primary  btn-sm mt-1 ml-1">Primary</button>
+            <button type="button" class="btn btn-primary  btn-sm mt-1 ml-1">Primary</button>
+        </div>
+        <div class="form-group d-flex flex-wrap" id="bot-text">
+            <input type="text"  class="form-control w-75 mx-2" placeholder="">
+           <div><i class="fa fa-send-o text-white" style="font-size:24px"></i></div>
+        </div>
+    </div>
+<div class="footer">
+    <div class="chatdiv" id="chatbot"><h1><i class='fa fa-comment text-white' ></i></h1>
+        </div>
+</div>
 </body>
-
+<script >
+    document.getElementById('chatbot').addEventListener('click',()=>{
+        var box=document.getElementById('chat').style
+        if (box.opacity <= 0 && box.display=='none'){
+            box.opacity=1;
+            box.transition='opacity 0.25s ease-in-out';
+            box.display = 'block';
+            return
+        }
+        box.display='none'
+        box.opacity=0
+     
+})
+</script>
 </html>

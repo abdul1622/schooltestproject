@@ -4,8 +4,8 @@
             padding: 30px 50px;
             border-radius: 5px;
             flex-basis: 23%;
-            width: 19%;
-            margin: 7% 40%;
+             margin: 7% 34%;
+             box-shadow: #39438091 0px 5px 15px;
         }
         .q-form-5 p {
             color: white;
@@ -80,9 +80,6 @@
     .question-list-container-customize {
         margin: 5%;
     }
-    .question-list-container-customize table{
-        width: 80%;
-    }
     div#q-form-4 select {
         width: auto;
         display: inline;
@@ -93,7 +90,10 @@
     @media screen and (min-width: 800px) and (max-width: 1200px){
     .question-paper-form {
         background-color: #8388a72b;
+<<<<<<< HEAD
         width: 34vw;
+=======
+>>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
         padding: 30px 50px;
         margin: 10% 32%;
     }
@@ -119,9 +119,6 @@
         position: absolute;
         margin: 0.4% -8.2%;
     }
-    .question-container-table table {
-        width: 84%;
-    }
     div#q-form-4 {
         width: 17%;
     }
@@ -132,9 +129,14 @@
 @media screen and (min-width:430px) and (max-width:800px) {
 
     .question-paper-form {
+<<<<<<< HEAD
         width: 52vw;
         padding: 30px 50px;
         margin: 14% 28%;
+=======
+        padding: 30px 50px;
+        margin: 14% 12%;
+>>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
     }
     div#q-form-4 .back-btn{
         margin: 0;
@@ -154,15 +156,22 @@
         position: static;
     }
 }
-@media screen and (max-width:420px) {
-
+@media screen and (max-width:500px) {
     .question-paper-form {
+<<<<<<< HEAD
         background-color: #6264705e;
         width: 100%;
         padding: 30px 50px;
         margin-bottom: 15%;
         border-radius: 5px;
         margin-left: 0%;
+=======
+        width: 77%;
+        padding: 5% 5%;
+        border-radius: 5px; 
+        margin-left:11%;
+        margin-top: 17%;
+>>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
     }
     .question-paper-form input {
         width: 90%;
@@ -176,5 +185,8 @@
                 width: 56%;
                 background-color: beige;
                 margin: 1% 26%;
+            }
+            .question-papers-card {
+                margin-left: 2rem !important;
             }
 }

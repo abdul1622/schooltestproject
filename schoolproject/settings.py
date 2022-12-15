@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'accounts',
     'academics',
     'corsheaders',
@@ -127,7 +126,16 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'school_n9g0',
+#         'USER': 'school_n9g0_user',
+#         'PASSWORD': 'hxhmZX9jyjG0fEwr5LkH92l4omrpFtKD',
+#         'HOST': 'dpg-cdqamdkgqg47to1jpc3g-a',
+#         'PORT': '5432',
+#     }
+# }
 
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
@@ -188,7 +196,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # STATIC_ROOT = 'staticfiles'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "statics"),

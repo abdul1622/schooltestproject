@@ -18,7 +18,6 @@ document.getElementById('nav-students').style.opacity = '0.5';
 function reload() {
   window.location.href = window.location.href;
 }
-
 fetch('https://schooltestproject.herokuapp.com/api/grades/', {
           method: 'GET',
           headers: new Headers({
@@ -39,13 +38,15 @@ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
       for(i=0;i<grade_list.length;i++){
           content += ` <option value="${grade_list[i].grade}">${grade_list[i].grade}</option>`
       }
-  }
-      document.querySelector('.std-in-form').innerHTML = content
+    }
+      document.querySelector('.grade-in-form').innerHTML = content
+      document.getElementById('std').innerHTML=content
       })
 
 //  section list
 function getsectionname(element){
       let standard = element.value
+      console.log(standard,'selected')
       let sec_list;
       content = ''
       for(i=0;i<grade_list.length;i++){
@@ -60,16 +61,46 @@ function getsectionname(element){
           content += ` <option value="${sec_list[i]}">${sec_list[i]}</option>`
       }
   }
-      document.querySelector('.sec-in-form').innerHTML = content
+      document.querySelector('.section-in-form').innerHTML = content
+      document.getElementById('sec').innerHTML=content
   }
-
+document.getElementById('id_section').addEventListener('change',()=>{
+  var std=document.getElementById('id_grade').value
+  var sec=document.getElementById('id_section').value
+  var whole= std+'-'+sec
+  console.log(whole)
+  var table, tr, td, txtValue;
+  table = document.getElementById("usr");
+  tr = table.getElementsByTagName("tr");
+  const stdcount=[]
+  for (i = 0; i < tr.length; i++) {
+      alltags = tr[i].getElementsByClassName("userstandard");
+      isFound = false;
+      for(j=0; j< alltags.length; j++) {
+        td = alltags[j];
+        if (td) {
+            console.log(td)
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.indexOf(whole) > -1) {
+                tr[i].style.display = "";
+                isFound = true;
+                stdcount.push(tr)
+                document.getElementById('count').innerHTML=`No of students - ${stdcount.length}`
+            }
+          }       
+        }
+        if(!isFound && tr[i].className !== "header") {
+          tr[i].style.display = "none";
+        }
+      }
+})
 function add_form(){
-  document.getElementById('email').value = ''
-  document.getElementById('phone').value = ''
- document.getElementById('dob').value = ''
- document.getElementById('fname').value = ''
- document.getElementById('lname').value = ''
-  document.getElementById('ffname').value = ''
+   document.getElementById('email').value = ''
+   document.getElementById('phone').value = ''
+   document.getElementById('dob').value = ''
+   document.getElementById('fname').value = ''
+   document.getElementById('lname').value = ''
+   document.getElementById('ffname').value = ''
    document.getElementById('std').value = ''
    document.getElementById('address').value = ''
    document.getElementById('reg-no-div').style.display = 'none'
@@ -285,7 +316,7 @@ container2.addEventListener('click', (e) => {
     }).then(res => {
         console.log(res,res.status)
         if(res.status != 200){
-            document.querySelector('.email-error').innerHTML = 'email altready exits' 
+            document.querySelector('.email-error').innerHTML = 'email already exits' 
         }
         else{
             document.querySelector('.email-error').innerHTML = ''

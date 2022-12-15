@@ -3,16 +3,16 @@ let button = document.getElementById('userdetail-btn');
 let editbutton=false
 $('[data-dismiss=modal]').on('click', function (e) {
   var $t = $(this),
+      
       target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
-
+      console.log('hi')
 $(target)
   .find("input,textarea,select")
      .val('')
      .end()
   if ( document.querySelector('.inner')){
     document.querySelector('.inner').innerHTML=''
-  }
-  
+  } 
   
 })
 function filter() {
@@ -149,10 +149,10 @@ function filter() {
                     mdbackdrop.classList.remove('modal-backdrop', 'show');
                     messages.innerHTML = 'updated successfully'
                     $('#messageModal-student').modal('show')
-                    setTimeout(function () {
-                      $('#messageModal-student').modal('hide')
-                      window.location.reload();
-                   }, 2000);
+                  //   setTimeout(function () {
+                  //     $('#messageModal-student').modal('hide')
+                  //     window.location.reload();
+                  //  }, 2000);
                   }
                   error_messages.innerHTML = ''
                   return response.json();

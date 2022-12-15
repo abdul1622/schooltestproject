@@ -8,11 +8,17 @@ from.models import *
 class Questionform(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ['grade']
+        fields = "__all__"
+
     def __init__(self, *args, **kwargs):
         super(Questionform, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['subject'].queryset = Subject.objects.none()
+    #     self.fields['chapter'].queryset = Chapter.objects.none()
 
 
 class Answerform(forms.ModelForm):
@@ -27,6 +33,13 @@ class Chapterform(forms.ModelForm):
         model = Chapter
         fields = "__all__"
         exclude = ['subject']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field_name != 'allChapter':
+                print(type(field_name), field_name)
+                field.widget.attrs['class'] = 'form-control'
 
 
 class Subjectform(forms.ModelForm):
@@ -75,21 +88,23 @@ class subjectlist_form(forms.Form):
 class questionlist_form(forms.ModelForm):
     # grade_name = forms.CharField(max_length=14)
     no_of_questions = forms.CharField(max_length=20)
+
     class Meta:
         model = Question
         fields = ['grade', 'subject', 'chapter', 'no_of_questions']
 
 
-       
 class question_form(forms.ModelForm):
     class Meta:
         model = Question
         fields = '__all__'
 
+
 class form_for_chapterlist(forms.ModelForm):
     class Meta:
         model = Subject
-        fields = ['grade',]
+        fields = ['grade', ]
+
 
 class answer_form(forms.ModelForm):
     ans = question_form
@@ -101,27 +116,38 @@ class answer_form(forms.ModelForm):
 
 
 class TestForm(forms.ModelForm):
-    timing = forms.IntegerField(min_value=0,widget=forms.NumberInput(
-    attrs={"placeholder": "duration in seconds"}))
-    overall_marks = forms.IntegerField(min_value=0) 
+    timing = forms.IntegerField(min_value=0, widget=forms.NumberInput(
+        attrs={"placeholder": "duration in seconds"}))
+    overall_marks = forms.IntegerField(min_value=0)
+
     class Meta:
         model = Test
-        fields = ['timing','overall_marks','remarks', 'description','pass_percentage']
- 
+        fields = ['timing', 'overall_marks', 'remarks',
+                  'description', 'pass_percentage']
+
 
 class instruction_form(forms.Form):
     instruction = forms.CharField(widget=forms.Textarea(
 
-    attrs={"class": "form-control", "placeholder": "Instructions"}))
+        attrs={"class": "form-control", "placeholder": "Instructions", "style": "color:black; width:50%;"}))
+
+
 class questionCustomForm(forms.Form):
     from_chapter = forms.ChoiceField()
     to_chapter = forms.ChoiceField()
     allChapter = forms.BooleanField()
 
+    def __init__(self, *args, **kwargs):
+        super(questionCustomForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field_name != 'allChapter':
+                print(type(field_name), field_name)
+                field.widget.attrs['class'] = 'form-control'
+
 
 class customizeForm(forms.Form):
     Chapter = forms.ChoiceField()
     cognitive_level = forms.ChoiceField()
-    no_cognitive_level=forms.IntegerField(label='')
-    difficulty_level= forms.ChoiceField()
-    no_difficulty_level=forms.IntegerField(label='')
+    no_cognitive_level = forms.IntegerField(label='')
+    difficulty_level = forms.ChoiceField()
+    no_difficulty_level = forms.IntegerField(label='')

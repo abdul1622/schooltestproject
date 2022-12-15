@@ -15,6 +15,7 @@ from django.core.mail import send_mail
 
 User = get_user_model()
 
+
 usertype_choice = (
     (None, '-------'),
     ('is_student', 'is_student'),

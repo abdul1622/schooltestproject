@@ -5,6 +5,13 @@
     margin-top: 10vh;
     justify-content: space-between;
 }
+.sort select{
+    width: 48%;
+    margin-left: 2%;
+}
+#count{
+    color:white;
+}
 @media screen and (min-width:430px) and (max-width:800px) {
     .userDetails input{
         width: 144%;

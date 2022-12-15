@@ -231,17 +231,17 @@ class ProfileView(APIView):
         return Response({"status": "success", "data": serializer.data}, status=HTTP_200_OK)
 
 
-# def load_section(request):
-#     standard = request.GET.get('standard', None)
-#     data = []
-#     student_list = User.objects.filter(
-#         user_type='is_student', profile__standard=standard)
-#     for i in student_list:
-#         section = (i.profile.section).upper()
-#         if section not in data:
-#             data.append(section)
-#     print(data)
-#     return render(request, 'accounts/sectiondropdown.html', {'items': data})
+def load_section(request):
+    standard = request.GET.get('standard', None)
+    data = []
+    student_list = User.objects.filter(
+        user_type='is_student', profile__standard=standard)
+    for i in student_list:
+        section = (i.profile.section).upper()
+        if section not in data:
+            data.append(section)
+    print(data)
+    return render(request, 'accounts/sectiondropdown.html', {'items': data})
 
 
 class check_for_user(APIView):

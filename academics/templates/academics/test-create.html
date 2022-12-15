@@ -5,21 +5,22 @@
   <div class="question-papers-get ">
     <div class="question-paper-list">
       {% csrf_token %}
-      <p><label for="get_grade">Grade:</label> <span class="grade-p"> <select name="grade" class=" grade-in-form form-control" onchange=getgradename(this) required="" id="get_grade">
-      </select></span></p>
+      <p><label for="get_grade">Grade:</label> <span class="grade-p"> <select name="grade"
+            class=" grade-in-form form-control" onchange=getgradename(this) required="" id="get_grade">
+          </select></span></p>
       <!-- {{form.as_p}} -->
       <label for=""> Subject: </label>
-      <select name="subject"  class ='form-control'required="" onchange=getsubjectname(this) id="id_subject_2">
+      <select name="subject" class='form-control' required="" onchange=getsubjectname(this) id="id_subject_2">
         <option value="" selected="">---------</option>
       </select>
     </div>
   </div>
-  <div class="header">
+  <div class="header mt-4">
     <h2 class="text-center">Grade - <span id="grade-head"></span></h2>
     <hr>
     <h3 class="text-center">Subject - <span id="subject-head"></span></h3>
   </div>
-  <div class="question-papers-card card-group flex-wrap text-white justify-content-start"></div>
+  <div class="question-papers-card flex-wrap text-white justify-content-center d-flex ml-5 col-10"></div>
   <div class="messages container-fluid">
 
   </div>
@@ -66,8 +67,8 @@
         </div>
         <div class="modal-body modal-body-2">
           {% csrf_token %}
-          <p><label for="id_timing">Timing:</label> <input type="number" name="timing"
-              placeholder="duration in seconds" min="0" required="" id="id_timing"></p>
+          <p><label for="id_timing">Timing:</label> <input type="number" name="timing" placeholder="duration in seconds"
+              min="0" required="" id="id_timing"></p>
           <p><label for="id_overallmarks">Overallmarks:</label> <input type="number" name="overallmarks" min="0"
               required="" id="id_overallmarks"></p>
         </div>
