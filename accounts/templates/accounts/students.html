@@ -4,14 +4,10 @@
 {% load static %}
 <!-- delete student -->
 <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-<<<<<<< HEAD
 <div class="modal fade" id="delete-user-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-=======
-<div class="modal fade" id="delete-user-Modal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
   aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content" >
+    <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="btn btn-warning" id="close-btn" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true" class='btn btn-warning'>&times;</span>
@@ -119,30 +115,17 @@
           <select name="grade" class="sec-in-form form-control" required="" id="sec" class="form-control"> </select>
         </div>
 
-<<<<<<< HEAD
-       
-        <div class='m-1'>
-          <label for="file">Profile picture:</label><br>
-          <input type="file" id="file">
-=======
 
         <div class="input-group mb-3">
           <input type="file" id="inputGroupFile02">
 
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
         </div>
 
       </form>
       <div class="modal-footer">
-<<<<<<< HEAD
-        <span class="create-btn-container"> <button type="button" id="userdetail-btn" data-dismiss="modal" class="btn btn-warning"
-            data-target="#messageModal-student">Submit</button></span>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closemessage(this)">Close</button>
-=======
         <span class="create-btn-container"> <button type="button" class="btn btn-warning" id="userdetail-btn"
             data-dismiss="modal" data-target="#messageModal-student">Submit</button></span>
-        <button type="button" class="btn btn-warning " data-dismiss="modal" >Close</button>
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
+        <button type="button" class="btn btn-warning " data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -155,9 +138,10 @@
   <input class='form-control w-25 ml-3' type="text" id="student-filter" placeholder="search" min="0" max="12"
     onkeyup="filter()">
   <div class="w-25 d-flex">
-    <select class="grade-in-form form-control " onchange='getsectionname(this)' name="grade" required="" id="id_grade"></select>
+    <select class="grade-in-form form-control " onchange='getsectionname(this)' name="grade" required=""
+      id="id_grade"></select>
     </p>
-    <select name="subject"  class="section-in-form form-control" required="" id="id_section">
+    <select name="subject" class="section-in-form form-control" required="" id="id_section">
       <option value="" selected="">---------</option>
     </select>
   </div>

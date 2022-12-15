@@ -115,7 +115,6 @@ WSGI_APPLICATION = 'schoolproject.wsgi.application'
 #         'PORT': '5432',
 #     }
 # }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -149,8 +148,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated",
                                    'rest_framework.permissions.AllowAny'],
-    'DEFAULT_PAGINATION_CLASS': 'academics.utils.Paginate',
-    'PAGE_SIZE': 2,
+    'DEFAULT_PAGINATION_CLASS': 'utils.pagination.Pagination',
 
 }
 

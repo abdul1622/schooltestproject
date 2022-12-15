@@ -49,8 +49,8 @@ from .serializers import (
 )
 from .models import Question, Subject, Grade, Chapter, Question_Paper, Answers, Questionbank
 from accounts.models import User
-from .utils import render_to_pdf, render_to_pdf2, Paginate
-
+from .utils import render_to_pdf, render_to_pdf2
+from utils.pagination import Pagination
 # Create your views here.
 
 
@@ -109,7 +109,7 @@ class GradeEditView(RetrieveUpdateDestroyAPIView):
         return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
 
-class SubjectCreateView(ListCreateAPIView, Paginate):
+class SubjectCreateView(ListCreateAPIView, Pagination):
     serializer_class = SubjectSerializer
     queryset = Subject.objects.all().order_by('grade', 'code')
     permission_classes = [AllowAny]

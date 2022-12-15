@@ -6,12 +6,10 @@ from django.shortcuts import get_list_or_404
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.core.mail import send_mail
-
 from academics.forms import question_form
 from .models import Profile
 from django.conf import settings
 from django.core.mail import send_mail
-
 
 User = get_user_model()
 
