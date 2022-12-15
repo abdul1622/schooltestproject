@@ -11,24 +11,20 @@ from .views import (
     LoginVerifyView,
     SimpleLoginView,
     ProfileView,
-    load_section,
     check_for_user,
 )
 from django.views.decorators.csrf import csrf_exempt
 
 
-
-
-urlpatterns=[
-    path('signup/',csrf_exempt(SignupView.as_view())),
-    path('login/',LoginView.as_view()),
-    path('login-verify/',LoginVerifyView.as_view()),
-    path('simple-login/',csrf_exempt(SimpleLoginView.as_view())),
-    path('logout/',LogoutView.as_view()),
-    path('student-profile/<int:pk>/',StudentProfileView.as_view()),
-    path('user-details/',UserDetailsView.as_view()),
-    path('user-details/<int:pk>/',UserDetailsEditView.as_view()),
-    path('profile/',ProfileView.as_view()),
-    path('loadsection/',load_section),
-    path('check-user/',check_for_user.as_view()),
+urlpatterns = [
+    path('signup/', csrf_exempt(SignupView.as_view())),
+    path('login/', LoginView.as_view()),
+    path('login-verify/', LoginVerifyView.as_view()),
+    path('simple-login/', csrf_exempt(SimpleLoginView.as_view())),
+    path('logout/', LogoutView.as_view()),
+    path('student-profile/<int:pk>/', StudentProfileView.as_view()),
+    path('user-details/', UserDetailsView.as_view()),
+    path('user-details/<int:pk>/', UserDetailsEditView.as_view()),
+    path('profile/', ProfileView.as_view()),
+    path('check-user/', check_for_user.as_view()),
 ]

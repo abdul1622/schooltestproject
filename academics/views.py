@@ -48,7 +48,7 @@ from .serializers import (
 )
 from .models import Question, Subject, Grade, Chapter, Question_Paper, Answers, Questionbank
 from accounts.models import User
-from .utils import render_to_pdf, render_to_pdf2
+from .utils import render_to_pdf, render_to_pdf2, Paginate
 
 # Create your views here.
 
@@ -61,15 +61,16 @@ class GradeView(ListCreateAPIView):
     def list(self, request):
         user = self.request.user
         queryset = self.get_queryset()
-       
+
         if user.is_anonymous:
             queryset = Grade.objects.all()
         elif user.user_type == 'is_staff':
             grade = user.profile.standard
             grade_list = []
             for i in grade:
-                grade_list.append(int(i[0]))
-            print(grade,grade_list)
+                # grade_list.append(int(i[0]))
+                grade_list.append(int((i.split('-'))[0]))
+            print(grade, grade_list)
             queryset = queryset.filter(grade__in=grade_list)
         elif user.user_type == 'is_student':
             return Response({"status": "failure", 'data': 'Your not have access to view this page'})
@@ -107,15 +108,21 @@ class GradeEditView(RetrieveUpdateDestroyAPIView):
         return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
 
-class SubjectCreateView(ListCreateAPIView):
+class SubjectCreateView(ListCreateAPIView, Paginate):
     serializer_class = SubjectSerializer
     queryset = Subject.objects.all().order_by('grade', 'code')
     permission_classes = [AllowAny]
+    # pagination_class = Paginate
 
     def list(self, request):
         queryset = self.get_queryset()
-        serializer = SubjectSerializer(queryset, many=True)
-        return Response(serializer.data)
+        result = self.paginate_queryset(queryset)
+        print(result)
+        serializer = SubjectSerializer(result, many=True)
+        # print(serializer.data)
+        # result =
+        # print(result)
+        return self.get_paginated_response(serializer.data)
 
     def create(self, request):
         serializer = SubjectSerializer(data=request.data)
@@ -130,7 +137,7 @@ class SubjectCreateView(ListCreateAPIView):
                 subject = 'Subject creation'
                 message = f'{user.profile.full_name} HAD CREATED,ON GRADE : {grade.grade} SUBJECT : {subjects}'
                 email_from = settings.EMAIL_HOST_USER
-                recipient_list = [admin.email,]
+                recipient_list = [admin.email, ]
                 send_mail(subject, message, email_from, recipient_list)
             return Response({"status": "success", 'data': serializer.data}, status=HTTP_201_CREATED)
         return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
@@ -234,7 +241,7 @@ class ChapterListView(APIView):
 class SubjectListView(ListAPIView):
     serializer_class = SubjectSerializer
     permission_classes = [AllowAny]
-    
+
     def get_queryset(self):
         queryset = Subject.objects.all()
         grade = self.request.query_params.get('grade')
@@ -273,11 +280,11 @@ class QuestionCreateView(CreateAPIView):
                         grade_id=int(grade), subject_id=int(subject))
             except:
                 # questions = Question.objects.all()
-                 return Response({'status': 'failed','data':'give a valid grade and subject'}, status=HTTP_206_PARTIAL_CONTENT)
+                return Response({'status': 'failed', 'data': 'give a valid grade and subject'}, status=HTTP_206_PARTIAL_CONTENT)
         if len(questions):
             serializer = QuestionAnswerSerializer(questions, many=True)
-            return Response({"status": "success",'data': serializer.data})
-        return Response({'status': 'failed','data':"subject don't have a questions"}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status": "success", 'data': serializer.data})
+        return Response({'status': 'failed', 'data': "subject don't have a questions"}, status=HTTP_206_PARTIAL_CONTENT)
 
     def post(self, request):
         serializer = QuestionAnswerSerializer(data=request.data)
@@ -392,9 +399,9 @@ class QuestionList2(APIView):
                 ans = getattr(question.answers, str(question.answers))
                 answers.append(ans)
             context = {'data': serializer.data, 'grade': grade.grade,
-                'subject': subject_obj.name, 'register_number': user.register_number}
+                       'subject': subject_obj.name, 'register_number': user.register_number}
             context1 = {'data': serializer.data, 'grade': grade.grade, 'subject': subject_obj.name,
-                'register_number': user.register_number, 'answers': answers}
+                        'register_number': user.register_number, 'answers': answers}
             answer_file, status = render_to_pdf2(
                 'academics/answer_file.html', 'answer_files', None, context1)
             # save question_paper in data_base
@@ -437,7 +444,7 @@ class QuestionList(APIView):
     def post(self, request):
         type = str(self.request.query_params.get('type'))
         grade = request.data.get('grade')
-        subject=(request.data.get('subject'))
+        subject = (request.data.get('subject'))
         timing = request.data.get('timing')
         overall_marks = request.data.get('overall_marks')
         list_of_questions = request.data.get('list_of_questions')
@@ -466,16 +473,18 @@ class QuestionList(APIView):
                     for j in i['cognitive_level']:
                         try:
                             cognitive = j.capitalize()
-                            newlist = Question.objects.filter(chapter=chapter.id,cognitive_level=cognitive)
-                            newlist =(sorted(newlist,key=lambda x: random.random()))
+                            newlist = Question.objects.filter(
+                                chapter=chapter.id, cognitive_level=cognitive)
+                            newlist = (
+                                sorted(newlist, key=lambda x: random.random()))
                             num = int(i['cognitive_level'][j])
                             if len(newlist) >= num:
                                 newlist = newlist[:num]
                                 questions.append(newlist)
                             else:
-                                return Response({'status':'failure','data':('Required questions not available in {} level in chapter {}. Available number of questions is {}').format(cognitive,chapter,len(newlist))},status=HTTP_206_PARTIAL_CONTENT)
+                                return Response({'status': 'failure', 'data': ('Required questions not available in {} level in chapter {}. Available number of questions is {}').format(cognitive, chapter, len(newlist))}, status=HTTP_206_PARTIAL_CONTENT)
                         except:
-                            return Response({"status": "failure","data":"given details are incorrect"},status=HTTP_206_PARTIAL_CONTENT)
+                            return Response({"status": "failure", "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
                 questions = [item for sublist in questions for item in sublist]
             else:
                 for i in list_of_questions:
@@ -484,20 +493,21 @@ class QuestionList(APIView):
                         questions.append(j)
                     except:
                         continue
-            serializer = QuestionSerializer(questions,many=True)
-            serializer_for_questions = QuestionAnswerSerializer(questions,many=True)
+            serializer = QuestionSerializer(questions, many=True)
+            serializer_for_questions = QuestionAnswerSerializer(
+                questions, many=True)
             type = type.lower()
             # answers
             answers = []
             question_list = []
             for question in questions:
-                ans = getattr(question.answers,str(question.answers))
+                ans = getattr(question.answers, str(question.answers))
                 question_list.append(question.question)
                 answers.append(ans)
             context = {'data': serializer.data, 'grade': grade.grade,
-                'subject': subject_obj.name, 'register_number': user.register_number}
+                       'subject': subject_obj.name, 'register_number': user.register_number}
             context1 = {'data': serializer.data, 'grade': grade.grade, 'subject': subject_obj.name,
-                'register_number': user.register_number, 'answers': answers}
+                        'register_number': user.register_number, 'answers': answers}
             answer_file, status = render_to_pdf2(
                 'academics/answer_file.html', 'answer_files', None, context1)
             # save question_paper in data_base
@@ -523,14 +533,14 @@ class QuestionList(APIView):
                 if not status:
                     return Response({"status": "failure", "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
                 serializer = QuestionPaperSerializer(question_paper)
-                return Response({'status':'success','data':serializer.data,'question_details':serializer_for_questions.data,'questions':question_list,'answer-file-path':'/media/answer_files/{answer_file}.pdf','subject_id':subject_obj.id,'grade_id':grade.id},status=HTTP_200_OK)
-            filename,status = render_to_pdf2('academics/question.html','question_paper',None,context)
+                return Response({'status': 'success', 'data': serializer.data, 'question_details': serializer_for_questions.data, 'questions': question_list, 'answer-file-path': '/media/answer_files/{answer_file}.pdf', 'subject_id': subject_obj.id, 'grade_id': grade.id}, status=HTTP_200_OK)
+            filename, status = render_to_pdf2(
+                'academics/question.html', 'question_paper', None, context)
             if not status:
                 return Response({"status": "failure", "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
             return Response({'status': 'success', 'question_path': f'/media/question_paper/{filename}.pdf', 'answer_path': f'/media/answer_files/{answer_file}.pdf', 'subject_id': subject_obj.id, 'grade_id': grade.id})
         except:
             return Response({"status": "failure", "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
-
 
 
 class QuestionPaperList(ListAPIView):
@@ -579,7 +589,7 @@ class QuestionPaperView(RetrieveUpdateDestroyAPIView):
                     answers_list.append(answer)
                 user = self.request.user
                 context = {'answers': answers_list, 'grade': question_paper.grade.grade,
-                    'subject': question_paper.subject.name, 'register_number': user.register_number}
+                           'subject': question_paper.subject.name, 'register_number': user.register_number}
                 filename, status = render_to_pdf2(
                     'academics/answer_file.html', 'answer_files', None, context)
                 if not status:
@@ -597,6 +607,7 @@ class QuestionPaperView(RetrieveUpdateDestroyAPIView):
             serializer.save()
             return Response({"status": "success", 'data': serializer.data}, status=HTTP_200_OK)
         return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
+
 
 class QuestionFromQuestionPaper(APIView):
     serializer_class = QuestionAnswerSerializer
@@ -656,7 +667,8 @@ class TestCreateView(CreateAPIView):
             question_paper.save()
             return Response({"status": "success", 'data': serializer.data}, status=HTTP_201_CREATED)
         return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
-        
+
+
 class TestEditView(RetrieveUpdateDestroyAPIView):
     serializer_class = TestSerializer
     permission_classes = [AllowAny]
@@ -678,7 +690,7 @@ class TestEditView(RetrieveUpdateDestroyAPIView):
             return Response({"status": "success", 'data': serializer.data}, status=HTTP_200_OK)
         return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
-    def destroy(self, request,pk, *args, **kwargs):
+    def destroy(self, request, pk, *args, **kwargs):
         test = Test.objects.get(id=pk)
         test_id = test.test_id
         question_paper = Question_Paper.objects.get(test_id=test_id)
@@ -812,6 +824,7 @@ def load_subject_chapter(request):
     chapter = Chapter.objects.filter(subject=subject_id)
     return render(request, 'academics/dropdown_list_options.html', {'items': chapter})
 
+
 def load_grade(request):
     user = request.user
     print(user)
@@ -822,13 +835,17 @@ def load_grade(request):
         grades = Grade.objects.filter(grade=standard)
     else:
         return None
-    return render(request, 'academics/dropdown_grade.html', {'items':grades})
+    return render(request, 'academics/dropdown_grade.html', {'items': grades})
+
+
 def load_test(request):
     # grade_id = request.GET.get('grade', None)
     subject_id = request.GET.get('subject', None)
     if subject_id:
-        test = Test.objects.filter(subject_id= subject_id)
-    return render(request, 'academics/test_dropdown.html', {'items':test})
+        test = Test.objects.filter(subject_id=subject_id)
+    return render(request, 'academics/test_dropdown.html', {'items': test})
+
+
 def load_chapter_no(request):
     subject_id = request.GET.get('subject', None)
     chapter = Chapter.objects.filter(subject=subject_id)

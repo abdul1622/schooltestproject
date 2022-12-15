@@ -17,7 +17,8 @@ import dj_database_url
 # import cloudinary_storage
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-JET_MODULE_GOOGLE_ANALYTICS_CLIENT_SECRETS_FILE = os.path.join(BASE_DIR, 'client_secrets.json')
+JET_MODULE_GOOGLE_ANALYTICS_CLIENT_SECRETS_FILE = os.path.join(
+    BASE_DIR, 'client_secrets.json')
 # updated settings
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -49,7 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-   
+
     'accounts',
     'academics',
     'corsheaders',
@@ -66,7 +67,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "corsheaders.middleware.CorsMiddleware",
-   # 'academics.middleware.SimpleMiddleware'
+    # 'academics.middleware.SimpleMiddleware'
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -105,13 +106,24 @@ WSGI_APPLICATION = 'schoolproject.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'daaio5irlq32i8',
+#         'USER': 'npcvekopocdjwf',
+#         'PASSWORD': 'be529dea4fbea05b7fad3e2ee989276e359c748f5563af04fb6effcf6b981d0f',
+#         'HOST': 'ec2-3-213-228-206.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'daaio5irlq32i8',
-        'USER': 'npcvekopocdjwf',
-        'PASSWORD': 'be529dea4fbea05b7fad3e2ee989276e359c748f5563af04fb6effcf6b981d0f',
-        'HOST': 'ec2-3-213-228-206.compute-1.amazonaws.com',
+        'NAME': 'school',
+        'USER': 'abd',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -129,6 +141,8 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated",
                                    'rest_framework.permissions.AllowAny'],
+    'DEFAULT_PAGINATION_CLASS': 'academics.utils.Paginate',
+    'PAGE_SIZE': 2,
 
 }
 
@@ -170,14 +184,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-#location where django collect all static files
+# location where django collect all static files
 
 # STATIC_ROOT = 'staticfiles'
 
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR , "statics"),
+    os.path.join(BASE_DIR, "statics"),
 ]
 # CLOUDINARY_STORAGE = {
 #     'CLOUD_NAME': 'your_cloud_name',
@@ -186,7 +200,7 @@ STATICFILES_DIRS = [
 # }
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Default primary key field type
@@ -201,4 +215,3 @@ EMAIL_USE_TLS = os.environ['EMAIL_USE_TLS']
 EMAIL_PORT = os.environ['EMAIL_PORT']
 EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-
