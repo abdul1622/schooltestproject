@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
+import debug_toolbar
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from utils.pagination import response_for_404
@@ -31,6 +32,7 @@ urlpatterns = [
     path('api/', include('accounts.urls')),
     path('', include('accounts.frontendUrls')),
     path('', include('academics.FrontendUrl')),
+    path('__debug__/', include('debug_toolbar.urls')),
 
 ]
 # handler404 = response_for_404
