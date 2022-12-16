@@ -17,6 +17,7 @@ from rest_framework.generics import (
     ListAPIView,
     RetrieveDestroyAPIView,
 )
+from utils.response import ResponseChoices
 from accounts.permission import IsAdminUser, IsStaffUser
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.views import APIView
@@ -26,14 +27,12 @@ from rest_framework.status import (
     HTTP_200_OK, HTTP_404_NOT_FOUND, HTTP_401_UNAUTHORIZED, HTTP_206_PARTIAL_CONTENT,
     HTTP_400_BAD_REQUEST, HTTP_201_CREATED, HTTP_203_NON_AUTHORITATIVE_INFORMATION, HTTP_204_NO_CONTENT, HTTP_422_UNPROCESSABLE_ENTITY
 )
-import requests
 from .forms import *
 from django.conf import settings
 from django.core.mail import send_mail
 import random
 from django.shortcuts import render
 from .serializers import (
-    AnswerSerializer,
     SubjectSerializer,
     ChapterSerializer,
     GradeSerializer,
@@ -42,8 +41,6 @@ from .serializers import (
     QuestionGetSerializer,
     QuestionSerializer,
     QuestionPaperSerializer,
-    Question_answer_serializer,
-    questionanswerserializer,
     TestSerializer,
     TestResultSerializer,
     TestInstruction,
@@ -75,17 +72,17 @@ class GradeView(ListCreateAPIView):
             print(grade, grade_list)
             queryset = queryset.filter(grade__in=grade_list)
         elif user.user_type == 'is_student':
-            return Response({"status": "failure", 'data': 'Your not have access to view this page'})
+            return Response({"status": Response.FAILURE, 'data': 'Your not have access to view this page'})
         serializer = GradeSerializer(queryset, many=True)
-        return Response({"status": "success", 'data': serializer.data})
+        return Response({"status": ResponseChoices.SUCCESS, 'data': serializer.data})
 
     def create(self, request):
         serializer = GradeSerializer(data=request.data)
         print(serializer)
         if serializer.is_valid():
             serializer.save()
-            return Response({"status": "success", 'data': serializer.data}, status=HTTP_201_CREATED)
-        return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status": ResponseChoices.SUCCESS, 'data': serializer.data}, status=HTTP_201_CREATED)
+        return Response({"status":ResponseChoices.FAILURE , "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
 
 class GradeEditView(RetrieveUpdateDestroyAPIView):
@@ -106,8 +103,8 @@ class GradeEditView(RetrieveUpdateDestroyAPIView):
         serializer = GradeSerializer(subject, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response({"status": "success", 'data': serializer.data}, status=HTTP_200_OK)
-        return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status": ResponseChoices.SUCCESS, 'data': serializer.data}, status=HTTP_200_OK)
+        return Response({"status": ResponseChoices.FAILURE, "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
 
 class SubjectCreateView(ListCreateAPIView, Pagination):
@@ -137,8 +134,8 @@ class SubjectCreateView(ListCreateAPIView, Pagination):
                 email_from = settings.EMAIL_HOST_USER
                 recipient_list = [admin.email, ]
                 send_mail(subject, message, email_from, recipient_list)
-            return Response({"status": "success", 'data': serializer.data}, status=HTTP_201_CREATED)
-        return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status":  ResponseChoices.SUCCESS, 'data': serializer.data}, status=HTTP_201_CREATED)
+        return Response({"status": ResponseChoices.FAILURE, "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
 
 class SubjectEditView(RetrieveUpdateDestroyAPIView):
@@ -159,8 +156,8 @@ class SubjectEditView(RetrieveUpdateDestroyAPIView):
         serializer = SubjectSerializer(subject, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"status": "success", 'data': serializer.data}, status=HTTP_200_OK)
-        return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status":ResponseChoices.SUCCESS, 'data': serializer.data}, status=HTTP_200_OK)
+        return Response({"status": ResponseChoices.FAILURE, "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
 
 class ChaptersCreateView(CreateAPIView, Pagination):
@@ -179,8 +176,8 @@ class ChaptersCreateView(CreateAPIView, Pagination):
         serializer = ChapterSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"status": "success", 'data': serializer.data}, status=HTTP_201_CREATED)
-        return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status": ResponseChoices.SUCCESS, 'data': serializer.data}, status=HTTP_201_CREATED)
+        return Response({"status":  ResponseChoices.FAILURE, "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
 
 class ChapterEditView(RetrieveUpdateDestroyAPIView):
@@ -193,7 +190,7 @@ class ChapterEditView(RetrieveUpdateDestroyAPIView):
         try:
             queryset = Chapter.objects.get(pk=pk)
         except:
-            return Response({'status': 'failure', "data": "Chapter doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({'status': ResponseChoices.FAILURE, "data": "Chapter doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
         serializer = ChapterSerializer(queryset)
         return Response(serializer.data)
 
@@ -202,8 +199,8 @@ class ChapterEditView(RetrieveUpdateDestroyAPIView):
         serializer = ChapterSerializer(subject, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"status": "success", 'data': serializer.data}, status=HTTP_200_OK)
-        return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status": ResponseChoices.SUCCESS, 'data': serializer.data}, status=HTTP_200_OK)
+        return Response({"status": ResponseChoices.FAILURE, "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
 
 class ChapterListView(APIView):
@@ -231,10 +228,10 @@ class ChapterListView(APIView):
                         "description": object.description,
                     })
             if len(data):
-                return Response({"status": "success", 'data': data})
+                return Response({"status":ResponseChoices.SUCCESS, 'data': data})
         except:
             return Response({"status": "Not found"}, status=HTTP_206_PARTIAL_CONTENT)
-        return Response({"status": "failed"}, status=HTTP_206_PARTIAL_CONTENT)
+        return Response({"status":ResponseChoices.FAILURE}, status=HTTP_206_PARTIAL_CONTENT)
 
 
 class SubjectListView(ListAPIView, Pagination):
@@ -249,7 +246,7 @@ class SubjectListView(ListAPIView, Pagination):
                 grades = Grade.objects.get(grade=grade)
                 queryset = (queryset.filter(grade=grades.id).order_by('code'))
             except:
-                return Response({'status': 'failed'}, status=HTTP_206_PARTIAL_CONTENT)
+                return Response({'status': ResponseChoices.FAILURE}, status=HTTP_206_PARTIAL_CONTENT)
             return queryset
 
     def list(self, request):
@@ -281,18 +278,18 @@ class QuestionCreateView(CreateAPIView, Pagination):
                         grade_id=int(grade), subject_id=int(subject))
             except:
                 # questions = Question.objects.all()
-                return Response({'status': 'failed', 'data': 'give a valid grade and subject'}, status=HTTP_206_PARTIAL_CONTENT)
+                return Response({'status': Response.FAILURE, 'data': 'give a valid grade and subject'}, status=HTTP_206_PARTIAL_CONTENT)
         if len(questions):
             serializer = QuestionAnswerSerializer(data, many=True)
             return self.get_paginated_response(serializer.data)
-        return Response({'status': 'failed', 'data': "subject don't have a questions"}, status=HTTP_206_PARTIAL_CONTENT)
+        return Response({'status': ResponseChoices.FAILURE, 'data': "subject don't have a questions"}, status=HTTP_206_PARTIAL_CONTENT)
 
     def post(self, request):
         serializer = QuestionAnswerSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"status": "success", 'data': serializer.data}, status=HTTP_201_CREATED)
-        return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status":ResponseChoices.SUCCESS, 'data': serializer.data}, status=HTTP_201_CREATED)
+        return Response({"status": ResponseChoices.FAILURE, "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
 
 class QuestionEditView(RetrieveUpdateDestroyAPIView):
@@ -304,9 +301,9 @@ class QuestionEditView(RetrieveUpdateDestroyAPIView):
         try:
             question = Question.objects.get(pk=pk)
             serializer = QuestionAnswerSerializer(question)
-            return Response({"status": "success", 'data': serializer.data}, status=HTTP_200_OK)
+            return Response({"status":ResponseChoices.SUCCESS, 'data': serializer.data}, status=HTTP_200_OK)
         except:
-            return Response({'status': 'failure', "data": "Question doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({'status': ResponseChoices.FAILURE, "data": "Question doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
 
 
 class QuestionList(APIView):
@@ -354,9 +351,9 @@ class QuestionList(APIView):
                                 newlist = newlist[:num]
                                 questions.append(newlist)
                             else:
-                                return Response({'status': 'failure', 'data': ('Required questions not available in {} level in chapter {}. Available number of questions is {}').format(cognitive, chapter, len(newlist))}, status=HTTP_206_PARTIAL_CONTENT)
+                                return Response({'status': Response.FAILURE, 'data': ('Required questions not available in {} level in chapter {}. Available number of questions is {}').format(cognitive, chapter, len(newlist))}, status=HTTP_206_PARTIAL_CONTENT)
                         except:
-                            return Response({"status": "failure", "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
+                            return Response({"status": Response.FAILURE, "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
                 questions = [item for sublist in questions for item in sublist]
             else:
                 for i in list_of_questions:
@@ -403,16 +400,16 @@ class QuestionList(APIView):
                 question_paper, status = render_to_pdf2(
                     'academics/question.html', 'question_files', question_paper, context)
                 if not status:
-                    return Response({"status": "failure", "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
+                    return Response({"status":ResponseChoices.FAILURE, "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
                 serializer = QuestionPaperSerializer(question_paper)
-                return Response({'status': 'success', 'data': serializer.data, 'question_details': serializer_for_questions.data, 'questions': question_list, 'answer-file-path': '/media/answer_files/{answer_file}.pdf', 'subject_id': subject_obj.id, 'grade_id': grade.id}, status=HTTP_200_OK)
+                return Response({'status':ResponseChoices.SUCCESS, 'data': serializer.data, 'question_details': serializer_for_questions.data, 'questions': question_list, 'answer-file-path': '/media/answer_files/{answer_file}.pdf', 'subject_id': subject_obj.id, 'grade_id': grade.id}, status=HTTP_200_OK)
             filename, status = render_to_pdf2(
                 'academics/question.html', 'question_paper', None, context)
             if not status:
-                return Response({"status": "failure", "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
-            return Response({'status': 'success', 'question_path': f'/media/question_paper/{filename}.pdf', 'answer_path': f'/media/answer_files/{answer_file}.pdf', 'subject_id': subject_obj.id, 'grade_id': grade.id})
+                return Response({"status": ResponseChoices.FAILURE, "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({'status': ResponseChoices.SUCCESS, 'question_path': f'/media/question_paper/{filename}.pdf', 'answer_path': f'/media/answer_files/{answer_file}.pdf', 'subject_id': subject_obj.id, 'grade_id': grade.id})
         except:
-            return Response({"status": "failure", "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status":ResponseChoices.FAILURE, "data": "given details are incorrect"}, status=HTTP_206_PARTIAL_CONTENT)
 
 
 class QuestionPaperList(ListAPIView, Pagination):
@@ -468,9 +465,9 @@ class QuestionPaperView(RetrieveUpdateDestroyAPIView):
                 if not status:
                     return Response({'status': 'given details incorrect'}, status=HTTP_200_OK)
                 return Response({'path': f'/media/answer_files/{filename}.pdf', 'data': serializer.data}, status=HTTP_200_OK)
-            return Response({'status': 'success', 'data': serializer.data}, status=HTTP_200_OK)
+            return Response({'status':ResponseChoices.SUCCESS, 'data': serializer.data}, status=HTTP_200_OK)
         except:
-            return Response({"status": "failure", "data": "Question-paper doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status": ResponseChoices.FAILURE, "data": "Question-paper doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
 
     def patch(self, request, pk):
         question_paper = Question_Paper.objects.get(pk=pk)
@@ -478,8 +475,8 @@ class QuestionPaperView(RetrieveUpdateDestroyAPIView):
             question_paper, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response({"status": "success", 'data': serializer.data}, status=HTTP_200_OK)
-        return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status": ResponseChoices.SUCCESS, 'data': serializer.data}, status=HTTP_200_OK)
+        return Response({"status": ResponseChoices.FAILURE, "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
 
 class QuestionFromQuestionPaper(APIView):
@@ -523,7 +520,7 @@ class TestCreateView(CreateAPIView):
             try:
                 queryset = Test.objects.get(test_id=test_id)
                 serializer = TestSerializer(queryset)
-                return Response({'status': 'success', 'data': serializer.data}, status=HTTP_200_OK)
+                return Response({'status': Response.SUCCESS, 'data': serializer.data}, status=HTTP_200_OK)
             except:
                 return Response({"status": "failure", "data": "please give a valid test id"}, status=HTTP_206_PARTIAL_CONTENT)
 
@@ -542,8 +539,8 @@ class TestCreateView(CreateAPIView):
             question_paper = Question_Paper.objects.get(id=question_paper)
             question_paper.test_id = Test_obj.test_id
             question_paper.save()
-            return Response({"status": "success", 'data': serializer.data}, status=HTTP_201_CREATED)
-        return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status":ResponseChoices.SUCCESS, 'data': serializer.data}, status=HTTP_201_CREATED)
+        return Response({"status": ResponseChoices.FAILURE, "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
 
 class TestEditView(RetrieveUpdateDestroyAPIView):
@@ -564,8 +561,8 @@ class TestEditView(RetrieveUpdateDestroyAPIView):
         serializer = TestSerializer(test, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"status": "success", 'data': serializer.data}, status=HTTP_200_OK)
-        return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status": ResponseChoices.SUCCESS, 'data': serializer.data}, status=HTTP_200_OK)
+        return Response({"status":ResponseChoices.FAILURE, "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
     def destroy(self, request, pk, *args, **kwargs):
         test = Test.objects.get(id=pk)
@@ -615,8 +612,8 @@ class TestResultCreateView(CreateAPIView):
             print(i)
         if serializer.is_valid():
             serializer.save()
-            return Response({"status": "success", 'data': serializer.data}, status=HTTP_201_CREATED)
-        return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status": ResponseChoices.SUCCESS, 'data': serializer.data}, status=HTTP_201_CREATED)
+        return Response({"status": ResponseChoices.FAILURE, "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
 
 class TestResultEditView(RetrieveDestroyAPIView):
@@ -648,8 +645,8 @@ class TestInstructionView(ListCreateAPIView):
         serializer = TestInstruction(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"status": "success", 'data': serializer.data}, status=HTTP_201_CREATED)
-        return Response({"status": "failure", "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
+            return Response({"status": Response.SUCCESS, 'data': serializer.data}, status=HTTP_201_CREATED)
+        return Response({"status": Response.FAILURE, "data": serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
 
 
 class EditTestInstructionView(RetrieveDestroyAPIView):
@@ -664,16 +661,6 @@ class EditTestInstructionView(RetrieveDestroyAPIView):
             return Response({'status': 'failure', "data": "Instruction doesn't exists"}, status=HTTP_206_PARTIAL_CONTENT)
         serializer = TestInstruction(queryset)
         return Response(serializer.data, status=HTTP_200_OK)
-
-
-# def update(request):
-#     data = Question.objects.all()
-#     for i in data:
-#         chapter = Chapter.objects.get(id=i.chapter_id)
-#         print(chapter)
-#         i.chapter_no = chapter.chapter_no
-#         i.save()
-
 
 def load_subject_chapter(request):
     grade_id = request.GET.get('grade', None)
