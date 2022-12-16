@@ -26,7 +26,7 @@ usertype_choice = (
 class SignupSerializer(serializers.Serializer):
     email = serializers.EmailField()
     phone = serializers.CharField(max_length=10)
-    # register_number = serializers.CharField(max_length=15)
+    register_number = serializers.CharField(max_length=15)
     date_of_birth = serializers.DateField()
     user_type = serializers.ChoiceField(
         choices=usertype_choice,
@@ -48,7 +48,7 @@ class SignupSerializer(serializers.Serializer):
         userdetails = validated_data
         email = (validated_data.pop("email")).lower()
         phone = validated_data.pop("phone")
-        # register_number = validated_data.pop("register_number")
+        register_number = validated_data.pop("register_number")
         date_of_birth = validated_data.pop("date_of_birth")
         user_type = validated_data.pop("user_type")
         first_name = validated_data.pop("first_name")
@@ -60,27 +60,29 @@ class SignupSerializer(serializers.Serializer):
         print(standard)
         address = validated_data.pop("address")
         is_data_entry = validated_data.pop("is_data_entry")
+        if user_type == "is_admin":
+            register_number=''
+        #     users = User.objects.filter(user_type=user_type)
+        #     print(users)
+        #     if len(users) > 3:
+        #         last = (users[len(users)-2]).register_number
+        #         print(last[3:])
+        #         last = int(last[3:])
+        #     last = 1
+        #     register_number = user_type[3:5] + user_type[-1] + str(last+1)
+        # elif is_data_entry:
+        #     users = User.objects.filter(user_type='', is_data_entry=True)
+        #     last = int(((users[len(users)-2]).register_number)[3:])
+        #     register_number = 'deo' + str(last+1)
+        # user.register_number = register_number
+        # user.save()
         user = User.objects.create(email=email, phone=phone, date_of_birth=date_of_birth,
-                                   user_type=user_type, is_data_entry=is_data_entry)
-        if user_type:
-            users = User.objects.filter(user_type=user_type)
-            print(users)
-            if len(users) > 3:
-                last = (users[len(users)-2]).register_number
-                print(last[3:])
-                last = int(last[3:])
-            last = 1
-            register_number = user_type[3:5] + user_type[-1] + str(last+1)
-        elif is_data_entry:
-            users = User.objects.filter(user_type='', is_data_entry=True)
-            last = int(((users[len(users)-2]).register_number)[3:])
-            register_number = 'deo' + str(last+1)
-        user.register_number = register_number
-        user.save()
+                                   user_type=user_type, is_data_entry=is_data_entry,register_number=register_number)
+        
         Profile.objects.create(user=user, first_name=first_name, last_name=last_name,
                                standard=standard, address=address, full_name=full_name,
                                profile_picture=profile_picture)
-        user_details = (email, phone, date_of_birth, user_type, first_name,
+        userdetails = (email, phone, date_of_birth, user_type, first_name,
                         last_name, full_name, profile_picture, standard, address, is_data_entry)
         subject = 'Welcome to our school'
         message = f'Hi {full_name}, thank you for joining in our school'
