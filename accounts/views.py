@@ -47,18 +47,19 @@ class SignupView(APIView):
         serializer = SignupSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"status":ResponseChoices.SUCCESS,"message":f"User {serializer.validated_data.pop('first_name')} Registered Successfully"}, status=HTTP_201_CREATED)
+            return Response({"status": ResponseChoices.SUCCESS, "message": f"User {serializer.validated_data.pop('first_name')} Registered Successfully"}, status=HTTP_201_CREATED)
         return Response({"status": ResponseChoices.FAILURE, "data": serializer.errors, }, status=HTTP_206_PARTIAL_CONTENT)
 
 
 class LogoutView(APIView):
     permission_classes = [AllowAny]
+
     def get(self, request):
         if self.request.user:
             logout(request)
-            return Response({'status':ResponseChoices.LOGOUT}, status=HTTP_200_OK)
+            return Response({'status': ResponseChoices.LOGOUT}, status=HTTP_200_OK)
         return Response(status=HTTP_204_NO_CONTENT)
- 
+
 
 class SimpleLoginView(APIView):
     serializer_class = SigninSerializer
@@ -86,7 +87,7 @@ class SimpleLoginView(APIView):
                     "data_entry": user.is_data_entry,
                     "register_number": user.register_number
                 }
-                return Response({"status": ResponseChoices.SUCCESS,"data": data}, status=HTTP_200_OK)
+                return Response({"status": ResponseChoices.SUCCESS, "data": data}, status=HTTP_200_OK)
         return Response({"status": "failed"}, status=HTTP_203_NON_AUTHORITATIVE_INFORMATION)
 
 
@@ -140,7 +141,7 @@ class StudentProfileView(RetrieveUpdateAPIView):
         if self.request.user.user_type == 'is_student' and self.request.user.id == pk:
             queryset = get_object_or_404(Profile, user=pk)
         else:
-            return Response({"status": Response.SUCCESS,"message":"you don't have a permissions"}, status=HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+            return Response({"status": Response.SUCCESS, "message": "you don't have a permissions"}, status=HTTP_203_NON_AUTHORITATIVE_INFORMATION)
         serializer = ProfileSerializer(queryset)
         return Response(serializer.data, status=HTTP_200_OK)
 
