@@ -211,28 +211,6 @@ URL $~~$ : **$~$ /grade**
   - **Failure Response**<br>
     `{"status": "failure", 'data': '<Exception error while delete>'}`
 
-        grade = self.request.query_params.get('grade')
-        subject = self.request.query_params.get('subject')
-        from_chapter_no = self.request.query_params.get('from_chapter_no')
-        to_chapter_no = self.request.query_params.get('to_chapter_no')
-        questions = Question.objects.all()
-        data = self.paginate_queryset(questions)
-        if grade and subject:
-            try:
-                if from_chapter_no and to_chapter_no:
-                    questions = Question.objects.filter(grade_id=int(grade), subject_id=int(
-                        subject), chapter_no__gte=from_chapter_no, chapter_no__lte=to_chapter_no)
-                else:
-                    questions = Question.objects.filter(
-                        grade_id=int(grade), subject_id=int(subject))
-            except:
-                # questions = Question.objects.all()
-                return Response({'status': Response.FAILURE, 'data': 'give a valid grade and subject'}, status=HTTP_206_PARTIAL_CONTENT)
-        if len(questions):
-            serializer = QuestionAnswerSerializer(data, many=True)
-            return self.get_paginated_response(serializer.data)
-        return Response({'status': ResponseChoices.FAILURE, 'data': "subject don't have a questions"}, status=HTTP_206_PARTIAL_CONTENT)
-
 ---
 
 ## **Questions**
