@@ -58,7 +58,7 @@ class LogoutView(APIView):
         if self.request.user:
             logout(request)
             return Response({'status': ResponseChoices.LOGOUT}, status=HTTP_200_OK)
-        return Response(status=HTTP_204_NO_CONTENT)
+        return Response({'status': 'user doesn\'t logged in'}, status=HTTP_204_NO_CONTENT)
 
 
 class SimpleLoginView(APIView):
@@ -110,7 +110,7 @@ class LoginView(APIView):
                 conn = client.HTTPConnection("2factor.in")
                 conn.request("GET", "https://2factor.in/API/R1/?module=SMS_OTP&apikey=77d6322c-e7b5-11ec-9c12-0200cd936042/&to=" +
                              phone+"&otpvalue="+str(otp)+"&templatename=Login")
-                return Response({"status": "otp generated successfully"})
+                return Response({"status": "otp generated successfully"}, status=HTTP_200_OK)
             return Response({"status": "failed"}, status=HTTP_203_NON_AUTHORITATIVE_INFORMATION)
 
 
@@ -141,16 +141,19 @@ class StudentProfileView(RetrieveUpdateAPIView):
         if self.request.user.user_type == 'is_student' and self.request.user.id == pk:
             queryset = get_object_or_404(Profile, user=pk)
         else:
-            return Response({"status": Response.SUCCESS, "message": "you don't have a permissions"}, status=HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+            return Response({"status": 'failure', "message": "you don't have a permissions"}, status=HTTP_203_NON_AUTHORITATIVE_INFORMATION)
         serializer = ProfileSerializer(queryset)
         return Response(serializer.data, status=HTTP_200_OK)
 
     def update(self, request, pk):
-        profile = Profile.objects.get(user=pk)
-        serializer = ProfileSerializer(profile, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-        return Response(serializer.data, status=HTTP_200_OK)
+        try:
+            profile = Profile.objects.get(user=pk)
+            serializer = ProfileSerializer(profile, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+            return Response(serializer.data, status=HTTP_200_OK)
+        except Exception as e:
+            return Response({'status': 'failure', 'data': str(e)}, status=HTTP_204_NO_CONTENT)
 
 
 class UserDetailsView(ListAPIView, Pagination):
@@ -187,14 +190,17 @@ class UserDetailsView(ListAPIView, Pagination):
         return queryset
 
     def list(self, request):
-        user = request.user
-        queryset = self.get_queryset()
-        results = self.paginate_queryset(queryset)
-        if user.user_type == 'is_student':
-            serializer = UserDetailsSerializer(results)
-        else:
-            serializer = UserDetailsSerializer(queryset, many=True)
-        return self.get_paginated_response(serializer.data)
+        try:
+            user = request.user
+            queryset = self.get_queryset()
+            results = self.paginate_queryset(queryset)
+            if user.user_type == 'is_student':
+                serializer = UserDetailsSerializer(results)
+            else:
+                serializer = UserDetailsSerializer(queryset, many=True)
+            return self.get_paginated_response(serializer.data)
+        except Exception as e:
+            return Response({'status': 'failure', 'data': str(e)}, status=HTTP_204_NO_CONTENT)
 
 
 class UserDetailsEditView(RetrieveUpdateDestroyAPIView):
