@@ -3,7 +3,7 @@ let students=[];
 let content = '';
 let grade_list;
 let token = localStorage.getItem("token")
-document.getElementById('reg-no-div').style.display = 'none'
+// document.getElementById('reg-no-div').style.display = 'none'
 $(document).ready(function(){ 
   if(!token){
     return window.location.href = '/login';
@@ -103,7 +103,7 @@ function add_form(){
    document.getElementById('ffname').value = ''
    document.getElementById('std').value = ''
    document.getElementById('address').value = ''
-   document.getElementById('reg-no-div').style.display = 'none'
+  //  document.getElementById('reg-no-div').style.display = 'none'
    $('#student-FormModal').modal('show')
 }
 
@@ -122,7 +122,7 @@ let form = document.getElementById('userDetails')
   }).then(res => {
     return res.json()
   }).then(data => {
-    data.forEach((d, index) => {
+    data.results.forEach((d, index) => {
       if (`${d.user_type}` == 'is_student') {
         students.push(d)
       }

@@ -53,7 +53,7 @@ function add_form() {
   document.getElementById('std').value = ''
   document.getElementById('sec').value = ''
   document.getElementById('address').value = ''
-  document.getElementById('reg-no-div').style.display = 'none'
+  // document.getElementById('reg-no-div').style.display = 'none'
   $('#SFormModal').modal('show')
 }
 
@@ -108,9 +108,11 @@ fetch('http://127.0.0.1:8000/api/user-details/', {
     'Content-Type': 'application/json',
   })
 }).then(res => {
+  console.log(res)
   return res.json()
 }).then(data => {
-  data.forEach((d, index) => {
+  console.log(data.results)
+  data.results.forEach((d, index) => {
     if (`${d.user_type}` == 'is_staff') {
       staffs.push(d)
     }
@@ -280,7 +282,7 @@ function edit(index, id) {
 document.getElementById('addstaff').addEventListener('click', () => {
   button = document.getElementById('userdetail-btn')
   button.addEventListener('click', () => {
-    document.getElementById('reg-no-div').style.display = 'none'
+    // document.getElementById('reg-no-div').style.display = 'none'
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     var email = document.getElementById('email').value
     var phone = document.getElementById('phone').value
@@ -292,6 +294,7 @@ document.getElementById('addstaff').addEventListener('click', () => {
     var lastname = document.getElementById('lname').value
     var fullname = document.getElementById('ffname').value
     var address = document.getElementById('address').value
+    var reg=document.getElementById('reg').value
     var is_dataentry = 'false'
     if (standard && section) {
       standards.push(standard + '-' + section)
@@ -301,7 +304,7 @@ document.getElementById('addstaff').addEventListener('click', () => {
         method: 'POST',
         body: JSON.stringify({
           'email': email, 'phone': phone, 'date_of_birth': dob, 'user_type': type,
-          'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standards, 'full_name': fullname, 'address': address
+          'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standards, 'full_name': fullname, 'address': address,"register_number": reg
         }
         ),
         headers: {

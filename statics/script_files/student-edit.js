@@ -57,7 +57,7 @@ function filter() {
           })
         }
         container2.addEventListener('click', (e) => {
-          document.getElementById('reg-no-div').style.display = 'block'
+          // document.getElementById('reg-no-div').style.display = 'block'
           form_email = document.getElementById('email');
           form_phone = document.getElementById('phone');
           form_reg = document.getElementById('reg');
@@ -163,7 +163,7 @@ function filter() {
         })
 button.addEventListener('click', (e) => {
   if (!editbutton) {
-    document.getElementById('reg-no-div').style.display = 'none'
+    // document.getElementById('reg-no-div').style.display = 'none'
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     var is_dataentry = 'false'
     var email = document.getElementById('email').value
@@ -176,6 +176,7 @@ button.addEventListener('click', (e) => {
     var lastname = document.getElementById('lname').value
     var fullname = document.getElementById('ffname').value
     var address = document.getElementById('address').value
+    var reg=document.getElementById('reg').value
     var is_dataentry = 'false'
     if (!standards.length) {
       standard = document.getElementById('std').value
@@ -188,7 +189,7 @@ button.addEventListener('click', (e) => {
         method: 'POST',
         body: JSON.stringify({
           'email': email, 'phone': phone, 'date_of_birth': dob, 'user_type': type,
-          'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standards, 'full_name': fullname, 'address': address
+          'is_data_entry': is_dataentry, 'first_name': firstname, 'last_name': lastname, 'standard': standards, 'full_name': fullname, 'address': address,"register_number":reg
         }
         ),
         headers: {
@@ -199,7 +200,7 @@ button.addEventListener('click', (e) => {
       }).then(response => {  console.log("Sucess response", response.status)
         if (response.status == 206) {
           console.log("Sucess response", response)
-          document.querySelector('#FormModal').classList.remove('show');
+          document.querySelector('#student-FormModal').classList.remove('show');
           document.querySelector('body').classList.remove('modal-open');
           const mdbackdrop = document.querySelector('.modal-backdrop');
           if (mdbackdrop) {
@@ -216,7 +217,7 @@ button.addEventListener('click', (e) => {
         }
         return response.json();
       }).then(function (data) {
-        if (data.status != 'Registered succesfull') {
+        if (data.status != "201") {
           console.log(data)
           messages.innerHTML = ''
           error_messages.innerHTML = `<li>${(data.data.error)}</li>`
