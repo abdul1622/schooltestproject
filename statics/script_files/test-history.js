@@ -31,7 +31,7 @@
       return response.json()
     }).then(data => {
       list = data
-      data.forEach((d, index) => {
+      data.results.forEach((d, index) => {
         let test_id = d.test_id
         
         result.push({ index: { 'subject': d.subject, 'result': d.result, 'correct': d.correct_answer, 'wrong': d.wrong_answer, 'unanswered': d.unanswered_questions, 'create': d.created_at }, 'remarks': null })
@@ -55,10 +55,10 @@
             console.log(test_data)
             console.log(d)
             if (!temp) {
-              temp = data[0].subject
+              temp = data.results[0].subject
               console.log(temp)
               content += `<fieldset>
-              <legend> ${data[0].subject_name} </legend>`
+              <legend> ${data.results[0].subject_name} </legend>`
             }
 
             if (temp != d.subject) {
