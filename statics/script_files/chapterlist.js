@@ -273,6 +273,9 @@ container3.addEventListener('click', (e) => {
                         if (response.status == 200) {
                             console.log("Sucess response", response)
                             messages.innerHTML = `${name} is updated succesfully`;
+                            $('#chapter-edit-popup').hide();
+                            $('.modal-backdrop').hide();
+                            chapter-edit-popup
                             error_messages.innerHTML = ''
                            
                             get(grade_name, subject)

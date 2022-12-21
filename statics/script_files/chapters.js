@@ -146,6 +146,11 @@
                         if (response.status == 200) {
                             console.log("Sucess response", response)
                             messages.innerHTML = 'Updated succesfully';
+                            console.log("chapter edited successfully")
+                            // $('#chaptermodal').hide()
+                            $('#chaptermodal').hide();
+                            $('.modal-backdrop').hide();
+                            console.log($('#chaptermodal'))
                             error_messages.innerHTML = ''
                             getchapter(grade_val, subject_val, subject_id);
                         } else {
