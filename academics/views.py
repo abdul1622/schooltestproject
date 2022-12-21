@@ -601,15 +601,17 @@ class TestResultCreateView(CreateAPIView):
                         grade=grade, student_id=student)
                 except:
                     queryset = TestResult.objects.all()
+            else:
+                try:
+                    grade = Grade.objects.get(grade=grade)
+                    queryset = TestResult.objects.filter(grade=grade)
+                except:
+                    return Response({"status": ResponseChoices.FAILURE, 'data': serializer.errors}, status=HTTP_206_PARTIAL_CONTENT)
         elif test_id:
             queryset = TestResult.objects.filter(test_id=test_id)
-        else:
-            try:
-                grade = Grade.objects.get(grade=grade)
-                queryset = TestResult.objects.filter(grade=grade)
-            except:
-                queryset = TestResult.objects.all()
-        queryset = queryset.order_by('grade', 'subject')
+        queryset = TestResult.objects.all()
+        # queryset = queryset.order_by('grade', 'subject')
+        print(type(queryset))
         data = self.paginate_queryset(queryset)
         serializer = TestResultSerializer(data, many=True)
         return self.get_paginated_response(serializer.data)
