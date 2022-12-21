@@ -189,7 +189,7 @@ function submit() {
     }
     testdetails_list = JSON.stringify(testdetails_list)
     console.log('c', correct_answer, 'u', unanswered, 'w', wrong_answer, score)
-    fetch('https://schooltestproject.herokuapp.com/api/test-history/',
+    fetch('http://127.0.0.1:8000/api/test-history/',
         {
             method: 'POST',
             body: JSON.stringify({ 'grade': grade, 'subject': subject, 'student_id': student_id, 'test_id': id, 'question_paper': question_paper_id, 'result': result, 'score': score, 'correct_answer': correct_answer, 'wrong_answer': wrong_answer, 'unanswered_questions': unanswered, 'test_detail': testdetails_list }

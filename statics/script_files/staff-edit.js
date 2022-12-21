@@ -33,7 +33,7 @@ function deleteuser(id) {
   yes.setAttribute("onClick", `deletestaff(${id})`);
 }
 function deletestaff(id) {
-  url = "https://schooltestproject.herokuapp.com/api/user-details/"
+  url = "http://127.0.0.1:8000/api/user-details/"
   fetch(`${url}${id}/`, {
     method: 'DELETE',
     headers: {

@@ -16,7 +16,7 @@
        var instruction = document.getElementById('id_instruction').value
        console.log(instruction)
        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-       fetch(`https://schooltestproject.herokuapp.com/api/instructions/`,
+       fetch(`http://127.0.0.1:8000/api/instructions/`,
             {
            method: 'POST',
            body: JSON.stringify({ 'note': instruction }),
@@ -34,7 +34,7 @@
 var list = document.querySelector('.instructions');
 function get(){
   var content = ''
-  fetch( `https://schooltestproject.herokuapp.com/api/instructions/`,{
+  fetch( `http://127.0.0.1:8000/api/instructions/`,{
       method : 'GET',
       headers : {
         'Authorization':'token'+' '+token 
@@ -58,7 +58,7 @@ function get(){
 
   function deleteInstruction(id){
     console.log(id)
-    fetch( `https://schooltestproject.herokuapp.com/api/instructions/${id}/`,{
+    fetch( `http://127.0.0.1:8000/api/instructions/${id}/`,{
       method : 'DELETE',
       headers : {
       'Content-Type': 'application/json',

@@ -85,7 +85,7 @@
     let timing = null, chapters, from_chapter, to_chapter, from_chapter_id = null, to_chapter_id = null;
     let all_chapter, result = [], questions_total = 0, customize = false;
     let question_paper_id, userId, user_type, chapters_list = [];
-    var content = '';da=null
+    var content = ''; da = null
     let customize_details = document.querySelector('.customize-details')
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     let chapter_name_list = []
@@ -94,22 +94,22 @@
     document.getElementById('q-form-4').style.display = 'none';
     document.getElementById('nav-questionpaper').style.opacity = '0.5';
     // document.getElementById('id_grade').setAttribute("onchange", getgradename());
-    $(document).ready(function(){ 
+    $(document).ready(function () {
         var user = localStorage.getItem('user_type')
-        if (user != 'is_admin' || !token){
-         return window.location.href = '/404'; 
+        if (user != 'is_admin' || !token) {
+            return window.location.href = '/404';
         }
 
-})
- function get(){
-    document.getElementById('q-form-1').style.display = 'block';
-    document.getElementById('q-form-2').style.display = 'none';
-    document.getElementById('q-form-3').style.display = 'none';
-    document.getElementById('q-form-4').style.display = 'none';
- }
+    })
+    function get() {
+        document.getElementById('q-form-1').style.display = 'block';
+        document.getElementById('q-form-2').style.display = 'none';
+        document.getElementById('q-form-3').style.display = 'none';
+        document.getElementById('q-form-4').style.display = 'none';
+    }
 
     $("#id_grade").change(function () {
-        var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+        var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
         grade_id = $(this).val();
         // grade_name = $(this).options[this.selectedIndex].text
         getgradename(this)
@@ -127,7 +127,7 @@
     });
 
     $('#id_subject').change(function () {
-        var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+        var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
         subject_id = $(this).val();
 
         $.ajax({
@@ -196,46 +196,46 @@
             }
             return
         }
-        if(!isNaN(no_of_questions)){
-            url = new URL('https://schooltestproject.herokuapp.com/api/question/');
-  url.searchParams.append('grade',grade_id);
-  url.searchParams.append('subject',subject_id)
-  fetch(url, {
-    method: 'GET',
-            headers: {
-                'content-Type': 'application/json',
-                'Authorization': 'token' + ' ' + token,
-            }
-        }).then(res => {
-            return res.json()
-        }).then(data => {
-            console.log(data)
-            da = data
-            console.log(data['data'].length)
-            if(no_of_questions > data['data'].length){
-                document.querySelector('.error-form-1').innerHTML = `<li style='color:white;'>given number of questions is higher than the actual number of question</li><li style='color:white;'> number of question available is ${data['data'].length}</li>`
-                return
-            }
+        if (!isNaN(no_of_questions)) {
+            url = new URL('http://127.0.0.1:8000/api/question/');
+            url.searchParams.append('grade', grade_id);
+            url.searchParams.append('subject', subject_id)
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'content-Type': 'application/json',
+                    'Authorization': 'token' + ' ' + token,
+                }
+            }).then(res => {
+                return res.json()
+            }).then(data => {
+                console.log(data)
+                da = data
+                console.log(data['data'].length)
+                if (no_of_questions > data['data'].length) {
+                    document.querySelector('.error-form-1').innerHTML = `<li style='color:white;'>given number of questions is higher than the actual number of question</li><li style='color:white;'> number of question available is ${data['data'].length}</li>`
+                    return
+                }
+
+                customize = false
+                document.getElementById('q-form-1').style.display = 'none';
+                document.getElementById('q-form-2').style.display = 'block';
+                document.getElementById('q-form-3').style.display = 'none';
+                document.getElementById('q-form-4').style.display = 'none';
+                result = []
+
+            })
+        } else {
 
             customize = false
-        document.getElementById('q-form-1').style.display = 'none';
-        document.getElementById('q-form-2').style.display = 'block';
-        document.getElementById('q-form-3').style.display = 'none';
-        document.getElementById('q-form-4').style.display = 'none';
-        result = []
-
-        })
-        }else{
-
-            customize = false
-        document.getElementById('q-form-1').style.display = 'none';
-        document.getElementById('q-form-2').style.display = 'block';
-        document.getElementById('q-form-3').style.display = 'none';
-        document.getElementById('q-form-4').style.display = 'none';
-        result = []
+            document.getElementById('q-form-1').style.display = 'none';
+            document.getElementById('q-form-2').style.display = 'block';
+            document.getElementById('q-form-3').style.display = 'none';
+            document.getElementById('q-form-4').style.display = 'none';
+            result = []
         }
         document.querySelector('.error-form-1').innerHTML = '';
-        url3 = ('https://schooltestproject.herokuapp.com/api/chapter-list/');
+        url3 = ('http://127.0.0.1:8000/api/chapter-list/');
         fetch(url3, {
             method: 'POST',
             body: JSON.stringify({ 'grade': grade, 'subject': subject_name }
@@ -259,8 +259,8 @@
         document.getElementById('q-form-3').style.display = 'none';
         document.getElementById('q-form-4').style.display = 'block';
         // document.getElementById('q-form-5').style.display = 'block';
-        console.log('back',subject_id)
-        var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+        console.log('back', subject_id)
+        var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
 
         $.ajax({
             url: url_for_change,
@@ -285,9 +285,9 @@
 
         //    if(from_chapter_id)
         all_chapter = document.getElementById('id_allChapter').checked;
-        if(!all_chapter && !from_chapter_id && !to_chapter_id){
+        if (!all_chapter && !from_chapter_id && !to_chapter_id) {
             document.querySelector('.error-form-2').innerHTML = `<li style='color:white;'>fill any one of the above field</li>`;
-            return 
+            return
         }
         document.querySelector('.error-form-2').innerHTML = ''
         if (!all_chapter) {
@@ -351,8 +351,8 @@
         let application = 0
         chapter_id = parseInt(document.getElementById('id_chapter_get').value)
         knowledge = parseInt(document.getElementById('id_knowledge').value)
-         comprehension = parseInt(document.getElementById('id_comprehension').value)
-         application = parseInt(document.getElementById('id_application').value)
+        comprehension = parseInt(document.getElementById('id_comprehension').value)
+        application = parseInt(document.getElementById('id_application').value)
         let current_index = null
         questions_total = 0
         let no_of_ques_chapter = 0
@@ -392,9 +392,9 @@
                 if (n) {
                     questions_total += n
 
-                for (j = 0; j < chapters.length; j++) {
-                    if (chapters[j]['id'] == result[i]['id']) {
-                        content3 += `<div> <p> CHAPTER ${i + 1} : ${(chapters_list[j]['name']).toUpperCase()} </p>
+                    for (j = 0; j < chapters.length; j++) {
+                        if (chapters[j]['id'] == result[i]['id']) {
+                            content3 += `<div> <p> CHAPTER ${i + 1} : ${(chapters_list[j]['name']).toUpperCase()} </p>
                             <p> NO OF QUESTIONS : ${n} </p> </div>
                             `
                             break
@@ -448,7 +448,7 @@
             console.log(no_of_questions)
             console.log(result)
         }
-        let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
+        let url1 = new URL('http://127.0.0.1:8000/api/question-paper/')
         url1.searchParams.append('type', 'save');
         fetch(url1,
             {
@@ -481,7 +481,7 @@
                     let form_remarks = document.getElementById('id_remarks').value
                     let form_description = document.getElementById('id_description').value
                     let form_percentage = document.getElementById('id_pass_percentage').value
-                    fetch('https://schooltestproject.herokuapp.com/api/test/',
+                    fetch('http://127.0.0.1:8000/api/test/',
                         {
                             method: 'POST',
                             body: JSON.stringify({ 'grade': grade, 'subject': subject_id, 'question_paper': question_paper_id, 'created_staff_id': userId, 'marks': overall_marks, 'duration': timing, 'remarks': form_remarks, 'pass_percentage': form_percentage, 'description': form_description }

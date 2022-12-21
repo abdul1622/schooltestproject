@@ -15,7 +15,7 @@
   let content = ''
   let result = [],test_content= ''
   let list;
-  url = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
+  url = new URL('http://127.0.0.1:8000/api/test-history/');
   url.searchParams.append('grade', standard[0]);
   url.searchParams.append('student_id', student_id)
   fetch(url,
@@ -35,7 +35,7 @@
         let test_id = d.test_id
         
         result.push({ index: { 'subject': d.subject, 'result': d.result, 'correct': d.correct_answer, 'wrong': d.wrong_answer, 'unanswered': d.unanswered_questions, 'create': d.created_at }, 'remarks': null })
-        fetch(`https://schooltestproject.herokuapp.com/api/test/${test_id}/`,
+        fetch(`http://127.0.0.1:8000/api/test/${test_id}/`,
           {
             method: 'GET',
             headers: {

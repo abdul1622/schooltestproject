@@ -34,7 +34,7 @@ function get() {
         return
     }
     var content = ''
-    fetch('https://schooltestproject.herokuapp.com/api/instructions/', {
+    fetch('http://127.0.0.1:8000/api/instructions/', {
         method: 'GET',
         headers: {
             'Authorization': 'token' + ' ' + token
@@ -59,7 +59,7 @@ get();
 
 function test_details() {
 
-    fetch(`https://schooltestproject.herokuapp.com/api/test/${id}/`, {
+    fetch(`http://127.0.0.1:8000/api/test/${id}/`, {
         method: 'GET',
         headers: {
             'content-Type': 'application/json',
@@ -84,7 +84,7 @@ test_details();
 // start test function
 document.getElementById('start-test-btn').addEventListener('click', () => {
     document.querySelector('.instructions').innerHTML = ''
-    fetch(`https://schooltestproject.herokuapp.com/api/question-paper/${question_paper_id}/`, {
+    fetch(`http://127.0.0.1:8000/api/question-paper/${question_paper_id}/`, {
         method: 'GET',
         headers: {
             'content-Type': 'application/json',
@@ -107,7 +107,7 @@ document.getElementById('start-test-btn').addEventListener('click', () => {
             }
             if (data.status == 'success') {
                 //   data.data.no_of_questions.forEach((d, index) => {
-                url2 = new URL(`https://schooltestproject.herokuapp.com/api/test-questions/`);
+                url2 = new URL(`http://127.0.0.1:8000/api/test-questions/`);
                 url2.searchParams.append('question_paper', question_paper_id);
                 fetch(url2, {
                     method: 'GET',

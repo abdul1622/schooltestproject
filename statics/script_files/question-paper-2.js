@@ -48,7 +48,7 @@
         document.getElementById('q-form-4').style.display = 'block';
          document.getElementById('q-form-5').style.display = 'block';
         console.log('back', subject_id)
-        var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+        var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
         $.ajax({
             url: url_for_change,
             data: {
@@ -136,7 +136,7 @@
         }
         // console.log(from)
 
-        url_for_question = new URL('https://schooltestproject.herokuapp.com/api/question/');
+        url_for_question = new URL('http://127.0.0.1:8000/api/question/');
         url_for_question.searchParams.append('grade', grade_id);
         url_for_question.searchParams.append('subject', subject_id);
         url_for_question.searchParams.append('from_chapter_no', from_chapter_no)
@@ -163,7 +163,7 @@
                 } else {
                     question_content += `<span>no of questions : ${no_of_questions} </span> <button onclick="get_random()" class="btn btn-warning btn-sm" disabled>select random questions</button>`
                 }
-        var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+        var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
         $.ajax({
             url: url_for_change,
             data: {

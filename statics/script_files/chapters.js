@@ -11,13 +11,7 @@
         console.log(subject_val)
         list.innerHTML = ''
         container.innerHTML = ''
-<<<<<<< HEAD
-        form_all.innerHTML = `<div class="chapter-form-box"> <p><label for="id_chapter_no">Chapter no:</label> <input class='form-control' type="number" name="chapter_no" min="0" required="" id="id_chapter_no"></p>
-        <p><label for="id_name">Name:</label> <input class='form-control' type="text" name="name" maxlength="30" required="" id="id_name"></p>
-        <p><label for="id_description">Description:</label> <input class='form-control type="text" name="description" maxlength="50" required="" id="id_description"></p> <div></div></div>`
-=======
         form_all.innerHTML = `<button class="btn btn-warning" data-toggle="modal" data-target="#chaptermodal" >Add Chapter</button>`
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
         document.getElementById('grade-title-chapter').textContent = `${grade_val}`
         document.getElementById('subject-title').textContent = `${subject_val}`
         document.getElementById('grade-btn').style.display = "none"
@@ -31,7 +25,7 @@
         // delete_box.style.display = 'none';
 
         //  document.getElementById('grade').style.height = '30vh';
-        url3 = ('https://schooltestproject.herokuapp.com/api/chapter-list/');
+        url3 = ('http://127.0.0.1:8000/api/chapter-list/');
         var content = ''
         fetch(url3, {
             method: 'POST',
@@ -86,7 +80,7 @@
     // chapter edit
 
     function deletechapter(id) {
-        fetch(`https://schooltestproject.herokuapp.com/api/chapters/${id}/`, {
+        fetch(`http://127.0.0.1:8000/api/chapters/${id}/`, {
             method: 'DELETE',
             headers: {
                 'Authorization': 'token' + ' ' + token
@@ -136,7 +130,7 @@
             form_description.value = description
             document.getElementById("exampleModalLongTitle").innerHTML=name
             let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-            url3 = 'https://schooltestproject.herokuapp.com/api/chapters/'
+            url3 = 'http://127.0.0.1:8000/api/chapters/'
             chapter_btn.addEventListener('click', () => {
                 if (edit) {
                     fetch(`${url3}${id}/`, {
@@ -188,7 +182,7 @@
         console.log(subject_id)
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         if (!edit) {
-            fetch('https://schooltestproject.herokuapp.com/api/chapters/',
+            fetch('http://127.0.0.1:8000/api/chapters/',
                 {
                     method: 'POST',
                     body: JSON.stringify({ 'chapter_no': chapterno, 'name': name, 'description': description, 'subject': subject_id }

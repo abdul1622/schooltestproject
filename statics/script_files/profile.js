@@ -23,7 +23,7 @@ $(document).ready(function () {
 if (user != 'is_staff') {
   document.getElementById('standard-details').style.display = 'none'
 } else {
-  fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+  fetch('http://127.0.0.1:8000/api/grades/', {
     method: 'GET',
   }).then(res => {
     return res.json()
@@ -126,7 +126,7 @@ function add() {
 function profile() {
   console.log(token)
   if (token) {
-    fetch('https://schooltestproject.herokuapp.com/api/profile/', {
+    fetch('http://127.0.0.1:8000/api/profile/', {
       method: 'GET',
       headers: new Headers({
         'Authorization': 'token' + ' ' + token,
@@ -141,7 +141,7 @@ function profile() {
 
         let htmlSegment = `<div class="user d-flex flex-wrap flex-column" id='${data.data.id}'>
               <div class="profile-head">
-              <div class='image'> <img src='https://schooltestproject.herokuapp.com${data.data.profile?.profile_picture}'></div>  
+              <div class='image'> <img src='http://127.0.0.1:8000/${data.data.profile?.profile_picture}'></div>  
               <p class="fullname">${data.data.profile?.full_name}</p><br>`
         console.log(data.data.profile?.standard.length)
         if (user != 'is_student') {
@@ -208,7 +208,7 @@ container.addEventListener('click', (e) => {
     form.style.display = 'block'
     container.style.display = 'none'
     console.log('hi')
-    url = "https://schooltestproject.herokuapp.com/api/student-profile/"
+    url = "http://127.0.0.1:8000/api/student-profile/"
     const parent = e.target.parentElement;
     console.log(parent)
     let fullname = parent.parentElement.querySelector('.fullname').textContent;
@@ -239,7 +239,7 @@ container.addEventListener('click', (e) => {
           console.log("Sucess response", response)
           messages.innerHTML = 'updated successfully'
           error_messages.innerHTML = ''
-          fetch('https://schooltestproject.herokuapp.com/api/profile/', {
+          fetch('http://127.0.0.1:8000/api/profile/', {
             method: 'GET',
             headers: {
               'content-Type': 'application/json',

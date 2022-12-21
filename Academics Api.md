@@ -86,7 +86,7 @@ URL $~~$ : **$~$ /grade**
 
 - `GET,POST,PATCH,DELETE`
 
-## **GET**
+### **GET**
 
 - query params
 

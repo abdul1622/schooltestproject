@@ -2,7 +2,7 @@
 var host = window.location.protocol + "//" + window.location.host;
 function logout() {
     var host = window.location.protocol + "//" + window.location.host;
-    fetch('https://schooltestproject.herokuapp.com/api/logout/',
+    fetch('http://127.0.0.1:8000/api/logout/',
         {
             method: 'GET',
             headers: {

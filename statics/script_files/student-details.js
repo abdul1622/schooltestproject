@@ -18,7 +18,7 @@ document.getElementById('nav-students').style.opacity = '0.5';
 function reload() {
   window.location.href = window.location.href;
 }
-fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+fetch('http://127.0.0.1:8000/api/grades/', {
           method: 'GET',
           headers: new Headers({
           'Authorization': 'token' + ' ' + token,
@@ -113,7 +113,7 @@ button = document.getElementById('userdetail-btn');
 var host = window.location.protocol + "//" + window.location.host;
 let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 let form = document.getElementById('userDetails')
-  fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
+  fetch('http://127.0.0.1:8000/api/user-details/', {
     method: 'GET',
     headers: new Headers({
       'Authorization': 'token' + ' ' + token,
@@ -184,7 +184,7 @@ container2.addEventListener('click', (e) => {
       yes.setAttribute("onClick", `deletestudent(${id})`);
     }
     if (editbutton) {
-      url = "https://schooltestproject.herokuapp.com/api/user-details/"
+      url = "http://127.0.0.1:8000/api/user-details/"
       const parent = e.target.parentElement.parentElement;
       console.log(parent)
       let email = parent.querySelector(".useremail").textContent;
@@ -276,7 +276,7 @@ container2.addEventListener('click', (e) => {
         console.log(standards)
         standards.push(standard + '-' + section)
       }
-      fetch('https://schooltestproject.herokuapp.com/api/signup/',
+      fetch('http://127.0.0.1:8000/api/signup/',
         {
           method: 'POST',
           body: JSON.stringify({

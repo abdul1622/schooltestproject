@@ -8,13 +8,7 @@
         form.style.backgroundColor='Transparent'
         form.style.boxShadow='none'
         console.log(grade_val);
-<<<<<<< HEAD
-
-        form_all.innerHTML = `<div class="subject-form-box"><p><label for="id_name">Name:</label> <input class='form-control' type="text" name="name" maxlength="20" required="" id="id_name"></p>
-        <p><label for="id_code">Code:</label> <input class='form-control' type="text" name="code" maxlength="15" required="" id="id_code"></p> </div>`
-=======
         form_all.innerHTML = `<button class=' btn btn-warning 'data-toggle='modal' data-target='#subjectmodal'> Add subject</button>`
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
         list.innerHTML = ''
         document.getElementById('grade-title').textContent = `${grade_val}`
         document.getElementById('grade-btn').style.display = "none"
@@ -27,7 +21,7 @@
         // delete_box.style.display = 'none';
         let temp;
         // document.getElementById('grade').style.height = '26vh';
-        url2 = new URL('https://schooltestproject.herokuapp.com/api/subject-list/');
+        url2 = new URL('http://127.0.0.1:8000/api/subject-list/');
         url2.searchParams.append('grade', grade_val);
         var content = ''
         fetch(url2, {
@@ -51,12 +45,8 @@
         <p><label> Subject-code </label> <span>: <span class="code">${d.code}</span></span></p>
         <p class="text-center"> <button  class=" btn btn-warning btn-sm  ch-btn"  onclick=getchapter(${d.grade_name},"${temp}",${d.id})>Chapters</button></p>
         <br>
-<<<<<<< HEAD
-        <div class="d-flex  justify-content-around"><i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></div>
-=======
         <div class="d-flex  justify-content-around"><i id="edit" class="fa fa-edit"data-toggle='modal' data-target='#subjectmodal'></i>
         <i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></div>
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
  </div>`
             });
             container.innerHTML = content;
@@ -83,7 +73,7 @@
         console.log(edit)
         if (!edit) {
             console.log(edit)
-            fetch('https://schooltestproject.herokuapp.com/api/subjects/',
+            fetch('http://127.0.0.1:8000/api/subjects/',
                 {
                     method: 'POST',
                     body: JSON.stringify({ 'code': code, 'name': name, 'grade': grade_id }
@@ -118,7 +108,7 @@
 
     // edit subjects
     function deletesubject(id) {
-        let url = 'https://schooltestproject.herokuapp.com/api/subjects/'
+        let url = 'http://127.0.0.1:8000/api/subjects/'
         fetch(`${url}${id}/`, {
             method: 'DELETE',
             headers: {
@@ -134,7 +124,7 @@
 
     container2.addEventListener('click', (e) => {
         //   form_grade = document.getElementById('id_grade')
-        let url = 'https://schooltestproject.herokuapp.com/api/subjects/'
+        let url = 'http://127.0.0.1:8000/api/subjects/'
         subject_btn = document.getElementById('subject-btn')
         e.preventDefault();
         let delbutton = e.target.id == 'delete';

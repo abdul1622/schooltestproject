@@ -15,7 +15,7 @@ function login() {
         return
     }
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    fetch('https://schooltestproject.herokuapp.com/api/simple-login/',
+    fetch('http://127.0.0.1:8000/api/simple-login/',
         {
             method: 'POST',
             body: JSON.stringify({ 'email': email, 'phone': phone }),
@@ -44,7 +44,7 @@ function login() {
                 console.log(data_entry)
                 localStorage.setItem("token", data.data.token);
 
-                fetch('https://schooltestproject.herokuapp.com/api/profile/', {
+                fetch('http://127.0.0.1:8000/api/profile/', {
                     method: 'GET',
                     headers: {
                         'content-Type': 'application/json',

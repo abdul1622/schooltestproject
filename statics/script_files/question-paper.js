@@ -42,7 +42,7 @@ var host = window.location.protocol + "//" + window.location.host;
 
 
 //  get grade
-fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+fetch('http://127.0.0.1:8000/api/grades/', {
     method: 'GET',
     headers: {
         // 'X-CSRFToken': csrftoken,
@@ -74,7 +74,7 @@ function get() {
 }
 
 $("#id_grade").change(function () {
-    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+    var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
     grade_id = $(this).val();
     // grade_name = $(this).options[this.selectedIndex].text
     getgradename(this)
@@ -92,10 +92,10 @@ $("#id_grade").change(function () {
 });
 
 $('#id_subject').change(function () {
-    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+    var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
     subject_id = $(this).val();
     $.ajax({
-        url: 'https://schooltestproject.herokuapp.com/api/ajax/load-chapter-no/',
+        url: 'http://127.0.0.1:8000/api/ajax/load-chapter-no/',
         data: {
             'subject': subject_id
         },
@@ -141,7 +141,7 @@ function getnext() {
     }
 
     // if(!isNaN(no_of_questions)){
-    url = new URL('https://schooltestproject.herokuapp.com/api/question/');
+    url = new URL('http://127.0.0.1:8000/api/question/');
     url.searchParams.append('grade', grade_id);
     url.searchParams.append('subject', subject_id)
     fetch(url, {
@@ -174,7 +174,7 @@ function getnext() {
 
     })
     document.querySelector('.error-form-1').innerHTML = '';
-    url3 = ('https://schooltestproject.herokuapp.com/api/chapter-list/');
+    url3 = ('http://127.0.0.1:8000/api/chapter-list/');
     fetch(url3, {
         method: 'POST',
         body: JSON.stringify({ 'grade': grade, 'subject': subject_name }
@@ -225,11 +225,7 @@ function getcustomize_details() {
     question_content += `<div class='question-list-container-customize'>
             <p>`
     question_content += `<div class='question-container-table '>`
-<<<<<<< HEAD
-    question_content += `<table> <tr class='table-heading '><th>sl.no</th>
-=======
     question_content += `<table class="table mt-5"> <tr class='table-heading '><th>sl.no</th>
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
                     <th>select</th>
                     <th>question</th>
                     <th>question type</th>

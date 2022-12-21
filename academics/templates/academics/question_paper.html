@@ -83,11 +83,11 @@
   if (token) {
     blank_url = 'https://schooltestproject.herokuapp.com'
     for_answer = '/api/question-paper/'
-    url = 'https://schooltestproject.herokuapp.com/api/question-paper-list/'
+    url = 'http://127.0.0.1:8000/api/question-paper-list/'
 
 
     $("#id_grade").change(function () {
-      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+      var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
       var gradeId = $(this).val();
 
       $.ajax({
@@ -103,7 +103,7 @@
     });
 
     $('#id_subject').change(function () {
-      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+      var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
       var subjectId = $(this).val();
 
       $.ajax({
@@ -146,7 +146,7 @@
       no_of_question = document.getElementById('id_no_of_questions').value
       chapter = document.getElementById('id_chapter').value
       console.log(grade + subject)
-      let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
+      let url1 = new URL('http://127.0.0.1:8000/api/question-paper/')
       url1.searchParams.append('type', 'save');
       let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
       console.log(url1)
@@ -197,7 +197,7 @@
       chapter = document.getElementById('id_chapter').value
       console.log(subject)
       let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-      fetch('https://schooltestproject.herokuapp.com/api/question-paper/', {
+      fetch('http://127.0.0.1:8000/api/question-paper/', {
         method: 'POST',
         body: JSON.stringify({ 'grade_name': grade, 'subject': subject, 'chapter': chapter, 'number_of_questions': no_of_question }
         ),

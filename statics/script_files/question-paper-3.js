@@ -30,7 +30,7 @@
         let form_remarks = document.getElementById('id_remarks').value
         let form_description = document.getElementById('id_description').value
         let form_percentage = document.getElementById('id_pass_percentage').value
-        fetch('https://schooltestproject.herokuapp.com/api/test/',
+        fetch('http://127.0.0.1:8000/api/test/',
             {
                 method: 'POST',
                 body: JSON.stringify({
@@ -109,7 +109,7 @@
             console.log(no_of_questions)
             console.log(result)
         }
-        let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
+        let url1 = new URL('http://127.0.0.1:8000/api/question-paper/')
         url1.searchParams.append('type', 'save');
         fetch(url1,
             {
@@ -142,7 +142,7 @@
                     let form_remarks = document.getElementById('id_remarks').value
                     let form_description = document.getElementById('id_description').value
                     let form_percentage = document.getElementById('id_pass_percentage').value
-                    fetch('https://schooltestproject.herokuapp.com/api/test/',
+                    fetch('http://127.0.0.1:8000/api/test/',
                         {
                             method: 'POST',
                             body: JSON.stringify({
@@ -201,7 +201,7 @@
     }
 
     function question_paper_create() {
-        let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
+        let url1 = new URL('http://127.0.0.1:8000/api/question-paper/')
         url1.searchParams.append('type', 'save');
         from_chapter_id = null
         to_chapter_id = null
@@ -247,7 +247,7 @@
 
     function question_paper_pdf() {
         if(question_list.length){
-        let url1 = new URL('https://schooltestproject.herokuapp.com/api/question-paper/')
+        let url1 = new URL('http://127.0.0.1:8000/api/question-paper/')
         from_chapter_id = null
         to_chapter_id = null
         all_chapter = false

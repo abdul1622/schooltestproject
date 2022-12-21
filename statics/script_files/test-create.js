@@ -5,7 +5,7 @@
   let head = document.querySelector('.header')
   head.style.display = 'none'
   let modal_body = document.querySelector('.modal-body-1')
-  url = 'https://schooltestproject.herokuapp.com/api/question-paper-list/'
+  url = 'http://127.0.0.1:8000/api/question-paper-list/'
   var host = window.location.protocol + "//" + window.location.host;
   let error = true
   let set_id = false
@@ -25,7 +25,7 @@
     console.log(grade)
   }
 
-    fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+    fetch('http://127.0.0.1:8000/api/grades/', {
             method: 'GET',
             headers: {
                 // 'X-CSRFToken': csrftoken,
@@ -45,7 +45,7 @@
                 // content += ` <option value="${grade_list[0].id}">${grade_list[0].grade}</option>`
                 document.querySelector('.grade-p').innerHTML = ` ${grade_list[0].grade}`
                 // document.querySelector('.grade-p-get').innerHTML = ` ${grade_list[0].grade}`
-                var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/'; 
+                var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/'; 
             grade_name =   grade_list[0].grade
             $.ajax({                       
               url: url_for_change,                  
@@ -80,7 +80,7 @@
     subject = document.getElementById('id_subject_2').value
     error_messages.innerHTML = ''
     messages.innerHTML = ''
-    url2 = new URL('https://schooltestproject.herokuapp.com/api/question-paper-list/');
+    url2 = new URL('http://127.0.0.1:8000/api/question-paper-list/');
     url2.searchParams.append('grade', grade_name);
     url2.searchParams.append('subject', subject_name)
     console.log(grade, subject)
@@ -110,11 +110,7 @@
           }
           let new_date = new Date(d.created_at)
           console.log(new_date)
-<<<<<<< HEAD
-          content = content + `<div class="questions-paper-card " id='${d.id}'>
-=======
           content = content + `<div class="questions-paper-card  " id='${d.id}'>
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
 <p >created_by : <span class="created_by">${d.created_by}</span></p>
 
 <p >created_at : <span class="created_at">${(new_date.toDateString())}</span></p>
@@ -157,7 +153,7 @@
   })
 
   $("#get_grade").change(function () {
-    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+    var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
     var gradeId = $(this).val();
 
     $.ajax({
@@ -195,7 +191,7 @@
     let marks = 0;
     let duration = 0;
     document.getElementById('nav-questionpaperlist').style.opacity = '0.5';
-    url2 = new URL(`https://schooltestproject.herokuapp.com/api/test-questions/`);
+    url2 = new URL(`http://127.0.0.1:8000/api/test-questions/`);
     url2.searchParams.append('question_paper', question_id);
     fetch(url2, {
       method: 'GET',
@@ -214,7 +210,7 @@
       console.log(marks, duration)
     }).then(() => {
       console.log(marks, duration)
-      fetch('https://schooltestproject.herokuapp.com/api/test/',
+      fetch('http://127.0.0.1:8000/api/test/',
         {
           method: 'POST',
           body: JSON.stringify({ 'grade': grade_id, 'subject': subject_id, 'question_paper': question_id, 'created_staff_id': userId, 'marks': marks, 'duration': duration, 'remarks': form_remarks, 'pass_percentage': form_percentage, 'description': form_description }
@@ -271,7 +267,7 @@
     console.log(timing,overall_marks)
     let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     let modal2 =   document.querySelector('.modal-body-2')
-    fetch(`https://schooltestproject.herokuapp.com/api/question-paper/${id}/`,
+    fetch(`http://127.0.0.1:8000/api/question-paper/${id}/`,
       {
         method: 'PATCH',
         body: JSON.stringify({ 'timing': timing, 'overall_marks': overall_marks }

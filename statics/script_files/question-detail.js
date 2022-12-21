@@ -56,7 +56,7 @@ let no_btn = document.getElementById('delete-btn-no')
 var host = window.location.protocol + "//" + window.location.host;
 
 
-fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+fetch('http://127.0.0.1:8000/api/grades/', {
   method: 'GET',
   headers: {
     // 'X-CSRFToken': csrftoken,
@@ -75,7 +75,7 @@ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
     // content += ` <option value="${grade_list[0].id}">${grade_list[0].grade}</option>`
     document.querySelector('.grade-p').innerHTML = ` ${grade_list[0].grade}`
     document.querySelector('.grade-p-get').innerHTML = ` ${grade_list[0].grade}`
-    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+    var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
     grade_name = grade_list[0].grade
     $.ajax({
       url: url_for_change,
@@ -115,7 +115,7 @@ document.getElementById('message-close-btn').addEventListener('click', () => {
 //   });
 
 $("#get_grade").change(function () {
-  var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+  var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
   var gradeId = $(this).val();
 
   $.ajax({
@@ -130,7 +130,7 @@ $("#get_grade").change(function () {
 
 });
 const container2 = document.querySelector('.question-list');
-url = 'https://schooltestproject.herokuapp.com/api/question/'
+url = 'http://127.0.0.1:8000/api/question/'
 
 
 function get() {
@@ -138,7 +138,7 @@ function get() {
   // let subject=document.getElementById('id_subject_2').value
   console.log(grade, subject)
   if (grade && subject) {
-    let url1 = new URL('https://schooltestproject.herokuapp.com/api/question/')
+    let url1 = new URL('http://127.0.0.1:8000/api/question/')
     url1.searchParams.append('grade', grade);
     url1.searchParams.append('subject', subject)
     fetch(url1, {
@@ -213,7 +213,7 @@ function get() {
 var edit = null;
 
 $("#id_grade").change(function () {
-  var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+  var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
   var gradeId = $(this).val();
 
   $.ajax({
@@ -229,7 +229,7 @@ $("#id_grade").change(function () {
 });
 
 $('#id_subject').change(function () {
-  var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+  var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
   var subjectId = $(this).val();
 
   $.ajax({

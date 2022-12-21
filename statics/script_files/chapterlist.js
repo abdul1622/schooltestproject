@@ -31,7 +31,7 @@ let content = '';
 let grade_list
 var grade_name;
 var subject_name;
-fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+fetch('http://127.0.0.1:8000/api/grades/', {
     method: 'GET',
     headers: {
         // 'X-CSRFToken': csrftoken,
@@ -50,7 +50,7 @@ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
         if (grade_list.length == 1) {
             // content += ` <option value="${grade_list[0].id}">${grade_list[0].grade}</option>`
             document.querySelector('.grade-p').innerHTML = `Grade -- ${grade_list[0].grade}`
-            var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+            var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
             var gradeId = grade_list[0].id;
             grade_name = grade_list[0].grade
             $.ajax({
@@ -94,7 +94,7 @@ function getsubjectname(element) {
 }
 // on grade input change
 $("#id_grade").change(function () {
-    var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+    var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
     var gradeId = $(this).val();
 
     $.ajax({
@@ -147,7 +147,7 @@ function getchapter() {
     console.log(grade, subject)
     console.log(grade_name + subject_name)
     if (!isNaN(subject)) {
-        fetch('https://schooltestproject.herokuapp.com/api/chapter-list/', {
+        fetch('http://127.0.0.1:8000/api/chapter-list/', {
             method: 'POST',
             body: JSON.stringify({ 'grade': grade_name, 'subject': subject_name }
             ),
@@ -173,11 +173,7 @@ function getchapter() {
                     table2 = table2 + '<td scope="col" class="chapter_no">' + `${d.chapter_no}` + '</td>';
                     table2 = table2 + '<td scope="col" class="chapter_name">' + `${d.name}` + '</td>';
                     table2 = table2 + '<td scope="col" class="description">' + `${d.description}` + '</td>',
-<<<<<<< HEAD
-                        table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit"></i>` + `<i class="fa fa-trash-o" id="delete" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist"></i>` + '</td>',
-=======
                         table2 = table2 + '<td>' + `<i id="edit" class="fa fa-edit" data-toggle='modal' data-target='#chapter-edit-popup'></i>` + `<i class="fa fa-trash-o" id="delete" btn btn-danger" data-toggle="modal" data-target="#delete-box-Modal-chapterlist"></i>` + '</td>',
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
                         // table2 = table2 + '<td>' + + '</td>',
                         table2 = table2 + `</tr>`;
                 })
@@ -207,7 +203,7 @@ function getchapter() {
 // delete chapter
 function deletechapter(id, grade_name, subject_name) {
     // subject_name = subject_name.replace('_', ' ')
-    fetch(`https://schooltestproject.herokuapp.com/api/chapters/${id}/`, {
+    fetch(`http://127.0.0.1:8000/api/chapters/${id}/`, {
         method: 'DELETE',
         headers: {
             'Authorization': 'token' + ' ' + token
@@ -257,7 +253,7 @@ container3.addEventListener('click', (e) => {
             form_name.value = name
             form_description.value = description
             let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-            url3 = 'https://schooltestproject.herokuapp.com/api/chapters/'
+            url3 = 'http://127.0.0.1:8000/api/chapters/'
             chapter_btn.addEventListener('click', () => {
                 if (edit) {
                     fetch(`${url3}${id}/`, {

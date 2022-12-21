@@ -1,5 +1,5 @@
 
-url = 'https://schooltestproject.herokuapp.com/api/question/'
+url = 'http://127.0.0.1:8000/api/question/'
 
 container2.addEventListener('click', (e) => {
     form_grade = document.getElementById('id_grade')
@@ -50,7 +50,7 @@ container2.addEventListener('click', (e) => {
       if (form_grade) {
         form_grade.value = grade
       }
-      var url_for_change = 'https://schooltestproject.herokuapp.com/api/ajax/load-subject/';
+      var url_for_change = 'http://127.0.0.1:8000/api/ajax/load-subject/';
       $.ajax({
         url: url_for_change,
         data: {

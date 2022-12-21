@@ -11,7 +11,7 @@
     head.style.display = 'none'
     let test_list = []
     let set_id = false
-    url = 'https://schooltestproject.herokuapp.com/api/test/'
+    url = 'http://127.0.0.1:8000/api/test/'
     var container = document.querySelector('.test-list')
 
     $(document).ready(function(){ 
@@ -21,7 +21,7 @@
       }
       document.getElementById('nav-test').style.opacity = '0.5';
     })
-    url1 = new URL('https://schooltestproject.herokuapp.com/api/test-history/');
+    url1 = new URL('http://127.0.0.1:8000/api/test-history/');
     url1.searchParams.append('grade', standard[0]);
     url1.searchParams.append('studentid',student_id)
 
@@ -51,7 +51,7 @@ function get_test(standard){
         head.style.display = 'block';
         document.getElementById('grade-head').textContent = `${standard}`
         let content = '';
-        url2 = new URL('https://schooltestproject.herokuapp.com/api/test/');
+        url2 = new URL('http://127.0.0.1:8000/api/test/');
         url2.searchParams.append('grade', standard[0]);
         fetch(url2, {
       method: 'GET',
@@ -139,7 +139,7 @@ function getrequiredtest(){
   test_id = document.getElementById('Test_id').value
   console.log(test_id)
   if(test_id){
-  url2 = new URL('https://schooltestproject.herokuapp.com/api/test/');
+  url2 = new URL('http://127.0.0.1:8000/api/test/');
   url2.searchParams.append('test_id', test_id);
   fetch(url2, {
     method: 'GET',

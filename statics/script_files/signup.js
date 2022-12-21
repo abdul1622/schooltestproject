@@ -9,7 +9,7 @@ let sec_list;
 var element ;
 var section;
 // geting standard dropdown
-fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+fetch('http://127.0.0.1:8000/api/grades/', {
             method: 'GET',
         }).then(res => {
             return res.json()
@@ -193,7 +193,7 @@ fetch('https://schooltestproject.herokuapp.com/api/grades/', {
             document.querySelector('.signup-errors').innerHTML = '<li class="text-center text-danger">add a standard and section</li>'
             return
         }
-        fetch('https://schooltestproject.herokuapp.com/api/signup/',
+        fetch('http://127.0.0.1:8000/api/signup/',
             {
                 method: 'POST',
                 body: JSON.stringify({

@@ -57,7 +57,7 @@ function add_form() {
   $('#SFormModal').modal('show')
 }
 
-fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+fetch('http://127.0.0.1:8000/api/grades/', {
   method: 'GET',
   headers: new Headers({
     'Authorization': 'token' + ' ' + token,
@@ -101,7 +101,7 @@ function getsectionname(element) {
 }
 add = document.getElementById('addstaff')
 var host = window.location.protocol + "//" + window.location.host;
-fetch('https://schooltestproject.herokuapp.com/api/user-details/', {
+fetch('http://127.0.0.1:8000/api/user-details/', {
   method: 'GET',
   headers: new Headers({
     'Authorization': 'token' + ' ' + token,
@@ -210,7 +210,7 @@ function edit(index, id) {
           <li>${standards[i]}<button class="btn btn-dark btn-sm" onclick=delete_standard(${i})>delete</button></li>`
   }
   document.querySelector('.standards-list').innerHTML = editcontent
-  let url = "https://schooltestproject.herokuapp.com/api/user-details/"
+  let url = "http://127.0.0.1:8000/api/user-details/"
   if ((tr.querySelector('.userstandard').id).split(',').length) {
     standards = tr.querySelector('.userstandard').id.split(',');
     console.log(standards)
@@ -296,7 +296,7 @@ document.getElementById('addstaff').addEventListener('click', () => {
     if (standard && section) {
       standards.push(standard + '-' + section)
     }
-    fetch('https://schooltestproject.herokuapp.com/api/signup/',
+    fetch('http://127.0.0.1:8000/api/signup/',
       {
         method: 'POST',
         body: JSON.stringify({

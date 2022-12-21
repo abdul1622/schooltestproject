@@ -47,12 +47,8 @@
    
     // get grade
     function get() {
-<<<<<<< HEAD
-        var content = ' <h2 class="text-center text-white">Grades </h2> <div class="row  align-content-between justify-content-center card-group ">'
-=======
         var content = ' <h2 class="text-center text-white">Grades </h2> <div class="col-12 justify-content-lg-center  justify-content-sm-start justify-content-center  card-group  d-flex flex-wrap ">'
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
-        fetch('https://schooltestproject.herokuapp.com/api/grades/', {
+        fetch('http://127.0.0.1:8000/api/grades/', {
             method: 'GET',
             headers: {
                 // 'X-CSRFToken': csrftoken,
@@ -115,7 +111,7 @@
 
     // delete grade 
     function deletegradesetup(id) {
-        let url = 'https://schooltestproject.herokuapp.com/api/grades/'
+        let url = 'http://127.0.0.1:8000/api/grades/'
         let yes_button = document.getElementById('delete-btn-yes')
         let no_btn = document.getElementById('delete-btn-no')
         yes_button.setAttribute("onClick", `deletegrade(${id})`);
@@ -130,15 +126,9 @@
                 section_list = grade_list[i].section
             }
         }
-<<<<<<< HEAD
-        form_all.innerHTML = `<div class='grade-form-box mt-3'>
-                <p><label for="id_grade">Grade:</label> <input class='form-control' type="number" disabled name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade" class="form-control" ></p>
-               <p class='section-btn'><span> <button onclick=add_section('edit') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
-=======
         form_all.innerHTML = `<div class='grade-form-box'>
                 <p><label for="id_grade">Grade:</label> <input class='form-control' type="number" disabled name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade" class="form-control" ></p>
                <p class='section-btn'><span> <button onclick=add_section('edit') id='add-section' class="btn btn-light">Add Section</button> </span> <span class='delete-section'></span> </p> </p>
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
                 <p class='section-list'> </p>
                 <p class='section-error'></p>
                 <p> <button onclick=cancel()> cancel </button> </p>
@@ -157,11 +147,7 @@
     function cancel() {
         form_all.innerHTML = `<div class='grade-form-box'>
                 <p><label for="id_grade">Grade:</label> <input class ='form-control' type="number" name="grade" min="0" max="12" onchange=section_change() required="" id="id_grade" class="form-control"></p>
-<<<<<<< HEAD
-               <p class='section-btn'><span> <button onclick=add_section('create') id='add-section'>Add Section</button> </span> <span class='delete-section'></span> </p> </p>
-=======
                <p class='section-btn'><span> <button onclick=add_section('create') id='add-section' class="btn btn-light">Add Section</button> </span> <span class='delete-section'></span> </p> </p>
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
                 <p class='section-list'> </p>
                 <p class='section-error'></p>
                 </div>`
@@ -200,11 +186,7 @@
             section_content += `<li>${section_list[i]}</li> `
         }
         if (section_list.length) {
-<<<<<<< HEAD
-            document.querySelector('.delete-section').innerHTML = ` <button onclick=remove_section() id='add-section'>Remove section</button>`
-=======
             document.querySelector('.delete-section').innerHTML = ` <button onclick=remove_section() id='add-section' class='btn btn-light'>Remove Section</button>`
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
         }
         document.querySelector('.section-list').innerHTML = section_content
     }
@@ -222,7 +204,7 @@
 
     // delete section
     function deletegrade(id) {
-        let url = 'https://schooltestproject.herokuapp.com/api/grades/'
+        let url = 'http://127.0.0.1:8000/api/grades/'
         fetch(`${url}${id}/`, {
             method: 'DELETE',
             headers: {
@@ -244,7 +226,7 @@
     // create grade 
     grade_create.addEventListener('click', () => {
         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        let url_grade = 'https://schooltestproject.herokuapp.com/api/grades/'
+        let url_grade = 'http://127.0.0.1:8000/api/grades/'
         if (edit) {
             let id = current_grade.id
             fetch(`${url_grade}${id}/`, {

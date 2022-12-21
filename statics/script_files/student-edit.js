@@ -45,7 +45,7 @@ function filter() {
         }
     }
         function deletestudent(id) {
-          url = "https://schooltestproject.herokuapp.com/api/user-details/"
+          url = "http://127.0.0.1:8000/api/user-details/"
           fetch(`${url}${id}/`, {
             method: 'DELETE',
             headers: {
@@ -79,7 +79,7 @@ function filter() {
             yes.setAttribute("onClick", `deletestudent(${id})`);
           }
           if (editbutton) {
-            url = "https://schooltestproject.herokuapp.com/api/user-details/"
+            url = "http://127.0.0.1:8000/api/user-details/"
             const parent = e.target.parentElement.parentElement;
             console.log(parent)
             let email = parent.querySelector(".useremail").textContent;
@@ -183,7 +183,7 @@ button.addEventListener('click', (e) => {
       console.log(standards)
       standards.push(standard + '-' + section)
     }
-    fetch('https://schooltestproject.herokuapp.com/api/signup/',
+    fetch('http://127.0.0.1:8000/api/signup/',
       {
         method: 'POST',
         body: JSON.stringify({
