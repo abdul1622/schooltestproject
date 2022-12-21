@@ -276,7 +276,7 @@
                 }
                 else {
                     var link = document.createElement('a');
-                    link.href = `https://schooltestproject.herokuapp.com${data.question_path}`;
+                    link.href = `http://127.0.0.1:8000${data.question_path}`;
                     link.download = 'file.pdf';
                     link.dispatchEvent(new MouseEvent('click'));
                 }

@@ -155,10 +155,11 @@ function getnext() {
     }).then(data => {
         console.log(data)
         da = data
-        overall_question_list = data['data']
+        overall_question_list = data.results
         console.log(overall_question_list, 'list')
-        console.log(data['data'].length)
-        if (no_of_questions > data['data'].length) {
+        // console.log(data['data'].length)
+        data = data.results
+        if (no_of_questions > data.length) {
             document.querySelector('.error-form-1').innerHTML = `<li style='color:white;'>given number 
                 of questions is higher than the actual number of question - ${data['data'].length}</li>`
             return

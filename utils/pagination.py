@@ -4,7 +4,7 @@ from django.http import JsonResponse
 
 
 class Pagination(pagination.PageNumberPagination):
-    page_size = 5
+    page_size = 100
     page_size_query_param = 'page_size'
 
     def get_paginated_response(self, data):

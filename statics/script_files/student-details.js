@@ -122,6 +122,7 @@ let form = document.getElementById('userDetails')
   }).then(res => {
     return res.json()
   }).then(data => {
+    data = data.results
     data.forEach((d, index) => {
       if (`${d.user_type}` == 'is_student') {
         students.push(d)

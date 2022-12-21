@@ -110,6 +110,7 @@ fetch('http://127.0.0.1:8000/api/user-details/', {
 }).then(res => {
   return res.json()
 }).then(data => {
+  data = data.results
   data.forEach((d, index) => {
     if (`${d.user_type}` == 'is_staff') {
       staffs.push(d)
