@@ -156,7 +156,7 @@ function get() {
       // console.log(data.name[0])
       // console.log(data.status)
       data = data.results
-      if (data.length) {
+      if (data && data.length) {
         if (data.length) {
           temp = (data[0].chapter)
           content += `<fieldset class="card-group justify-content-start">

@@ -36,13 +36,13 @@
             }).then(data => {
                 console.log(data)
                 console.log(data.length)
-                for (i = 0; i < data.length; i++) {
-                  history.push(data[i])
+                for (i = 0; i < data.results.length; i++) {
+                  history.push(data.results[i])
                 }
 
-                if (data.status != 'success') {
-                console.log(data)
-                }
+                // if (data.status != 'success') {
+                // console.log(data)
+                // }
                 get_test(standard)
             })
             console.log(history)
@@ -63,6 +63,7 @@ function get_test(standard){
       return res.json()
     }).then(data => {
 let temp;
+data = data.results
       for (i = 0; i < data.length; i++) {
           //   console.log(history[i].test_id,d.id,'as')
           //  if ( history[i].test_id == d.id ){
