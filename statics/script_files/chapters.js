@@ -50,11 +50,7 @@
         <p><label> Chapter </label> <span>: <span class="name">${d.name}</span></span></p>
         <p><label> Description </label> <span>: <span class="description">${d.description}</span></span></p>
         <br>
-<<<<<<< HEAD
-        <div class ='d-flex justify-content-around'><i id="edit" class="fa fa-edit"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></div>
-=======
         <div class ='d-flex justify-content-around'><i id="edit" class="fa fa-edit" data-toggle="modal" data-target="#chaptermodal"></i><i id="delete" data-toggle="modal" data-target="#delete-box-Modal" class="fa fa-trash-o" ></i></div>
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
  </div>`
                     container3.innerHTML = content;
 
