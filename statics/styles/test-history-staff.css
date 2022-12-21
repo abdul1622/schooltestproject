@@ -1,19 +1,10 @@
 .history-container-form {
-<<<<<<< HEAD
     width: 30%;
     margin: 12% 39%;
     padding: 2% 3%;
     line-height: 2;
     color: white;
     background-color: #292c4070;
-=======
-    margin: 12% 35%;
-    padding: 2% 3%;
-    line-height: 2;
-    color: white;
-    background-color: #8388a72b;
-    box-shadow: #39438091 0px 5px 15px;
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
 }
 .history-container-form label{
     color: antiquewhite;
@@ -124,8 +115,8 @@
     .history-container-form {
         margin: 11% 26%;
     }
-<<<<<<< HEAD
+<<<<<<< Updated upstream
 } */
 =======
-}
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
+} 
+>>>>>>> Stashed changes

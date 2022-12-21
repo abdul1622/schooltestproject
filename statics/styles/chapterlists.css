@@ -71,22 +71,14 @@
 }
 
 .box {
-<<<<<<< HEAD
     margin: 14% 40%;
     /* margin-top: 4%; */
     width: 20%;
-=======
-    margin: 14% 33%;
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
     min-width: 200px;
     padding: 2% 3%;
     font-family: 'Montserrat';
     border-radius: 5px;
-<<<<<<< HEAD
     background-color:#ffffff14;
-=======
-    box-shadow: #39438091 0px 5px 15px;
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
 }
 
 p.chapter-edit-close {
@@ -201,7 +193,6 @@ p.chapter-edit-close {
         text-align: center;
         font-size: 100%;
     }
-<<<<<<< HEAD
 
     .chapter-table th {
         padding-left: 4%;
@@ -211,8 +202,6 @@ p.chapter-edit-close {
         font-size: 13px;
     }
 
-=======
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
     #form-chaplist .back-btn {
         color: white;
         top: 3%;
@@ -224,7 +213,6 @@ p.chapter-edit-close {
         font-family: 'Poppins', sans-serif;
         
     }
-<<<<<<< HEAD
 
     .chapter-table table {
         white-space: nowrap;
@@ -232,8 +220,6 @@ p.chapter-edit-close {
         margin-left: 15%;
     }
 
-=======
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
     .chapter-table thead {
         font-size: 100%;
     }
@@ -241,14 +227,11 @@ p.chapter-edit-close {
     .chapter-table #edit {
         font-size: 145%;
     }
-<<<<<<< HEAD
     .thead {
         font-size: 1.2vw;
         color: black;
         text-align: justify;
     }
-=======
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
     #chapterlist-btn{
         font-family: 'Poppins', sans-serif;
     }
@@ -260,7 +243,6 @@ p.chapter-edit-close {
         margin-left: 5%;
     }
     #chapterlist-btn{
-<<<<<<< HEAD
         font-family: 'Montserrat';
     }
     .box label {
@@ -270,17 +252,12 @@ p.chapter-edit-close {
     .box select {
         margin-left: 5%;
     }
-=======
-        font-family: 'Poppins', sans-serif;
-    }
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
     .form .back-btn {
         margin-left: 93%;
     }
 
     .chapter-table {
         margin-top: 5%;
-<<<<<<< HEAD
         overflow: scroll;
     }
 
@@ -290,8 +267,6 @@ p.chapter-edit-close {
         margin-left: 6%;
         margin-top: 8%;
         width: 128%;
-=======
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
     }
 .chapterhead{
     margin-top: 15%;

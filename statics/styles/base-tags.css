@@ -2,7 +2,6 @@
 body{
     background-image: url('./img/background.jpg');
 }
-<<<<<<< HEAD
 label {
     font-size: 15px;
     color: white;
@@ -15,30 +14,6 @@ select {
     outline: none;
     display: grid;
 }
-=======
-.footer {
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    position: fixed;
-}
-.chatdiv{
-    float: right;
-    margin-right: 3%;
-    margin-bottom: 1%;
-}
-.chatdiv i{
-    font-size: 50px;
-   
-}
-label {
-    font-size: 15px;
-    color: white;
-    margin-top: 3%;
-    font-family: system-ui;
-}
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
 a:active {
     text-decoration: none;
     color: white;

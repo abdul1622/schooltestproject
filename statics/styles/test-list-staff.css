@@ -15,11 +15,7 @@
 #Test_id {
     margin: 7% 0% 1% 10%;
 }
-<<<<<<< HEAD
 .question-papers-card {
-=======
-/* .question-papers-card {
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
     height: auto;
     margin: 2% 6%;
 } */
@@ -52,7 +48,6 @@
     margin: 1%;
 }
 
-<<<<<<< HEAD
 
 /* .question-papers-get {
     width: 30%;
@@ -79,8 +74,6 @@
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 } */
 
-=======
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
 /* @media screen and (min-width:1024px) and (max-width:1200px) {
     .question-papers-get {
         width: 35%;
@@ -132,7 +125,6 @@
         margin-left: 8%;
         margin-top: 17%;
     }
-<<<<<<< HEAD
     .test-model {
         transform: rotate(0deg);
         margin-left: 3%;
@@ -147,7 +139,8 @@
         width: 35%;
     }
 
+<<<<<<< Updated upstream
 } */
 =======
 } 
->>>>>>> 39da8ddc8963b33d3e95927ca2f6507b1ddff80c
+>>>>>>> Stashed changes
