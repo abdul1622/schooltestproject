@@ -46,11 +46,8 @@
       margin-left: 35vw;
     }
 
-<<<<<<< Updated upstream
   }
-=======
->>>>>>> Stashed changes
-  }
+  
   @media screen and (min-width:1366px) and (max-width:1440px) {
     .login-box {
       width: 41vw;

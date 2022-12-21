@@ -98,8 +98,8 @@
     }).then(res => res.json()).then(data => {
       console.log(data)
       let content = '';
-      if (data.status == 'success') {
-        data.data.forEach((d, index) => {
+      if (data.results.length) {
+        data.results.forEach((d, index) => {
 
           error = false
           if (!set_id) {

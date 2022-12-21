@@ -150,19 +150,21 @@ function get() {
     }).then(res => {
       return res.json()
     }).then(data => {
-      console.log(data)
+      console.log(data,data.results
+        )
       let content = '';
       // console.log(data.name[0])
       // console.log(data.status)
-      if (data.status == 'success') {
-        if (data.data.length) {
-          temp = (data.data[0].chapter)
+      data = data.results
+      if (data.length) {
+        if (data.length) {
+          temp = (data[0].chapter)
           content += `<fieldset class="card-group justify-content-start">
-<legend> ${data.data[0].chapter_name} </legend>`
+<legend> ${data[0].chapter_name} </legend>`
         }
 
 
-        data.data.forEach((d, index) => {
+        data.forEach((d, index) => {
           if (temp != d.chapter) {
             content += `</fieldset >`
             temp = d.chapter
@@ -194,7 +196,7 @@ function get() {
         content += `</fieldset>`
         head.style.display = 'block'
         document.getElementById('grade-head-question').textContent = grade
-        document.getElementById('subject-head-question').textContent = data.data[0]['subject_name']
+        document.getElementById('subject-head-question').textContent = data[0]['subject_name']
         document.querySelector('.question-error').innerHTML = ''
         container2.innerHTML = content;
       } else {

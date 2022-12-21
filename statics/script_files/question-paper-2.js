@@ -151,14 +151,14 @@
             return res.json()
         }).then(data => {
             console.log(data, 'question-list')
-            if (data.status == 'success') {
+            if (data.results.length){
                 question_content = ''
                 question_id_list = []
                 let i = 0
                 question_content += `<div class='question-list-container'>
                 <p>`
-                console.log(data.data.length, 'len')
-                if (no_of_questions < data.data.length) {
+                // console.log(data.data.length, 'len')
+                if (no_of_questions < data.results.length) {
                     question_content += `<span>no of questions : ${no_of_questions} </span> <button onclick="get_random()" class="btn btn-warning btn-sm">select random questions</button>`
                 } else {
                     question_content += `<span>no of questions : ${no_of_questions} </span> <button onclick="get_random()" class="btn btn-warning btn-sm" disabled>select random questions</button>`
@@ -176,7 +176,7 @@
                 question_content += `<div class='question-container-table'>`
                 question_content += `<table> <tr class='table-heading'><th>sl.no</th><th>select</th><th>question</th><th>question type</th><th>cognitive level</th><th>difficulty level</th><th>marks</th></tr>`
 
-                data.data.forEach((d, index) => {
+                data.results.forEach((d, index) => {
                     i += 1
                     question_id_list.push(d.id)
                     question_content += `<tr onClick="selectitem(${d.id})"><td><input type="checkbox" id="question_${d.id}" name="vehicle1" value="${d.id}"></td><td>${i}</td>
