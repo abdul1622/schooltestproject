@@ -523,11 +523,13 @@ class TestCreateView(CreateAPIView):
             data = self.paginate_queryset(queryset)
             serializer = TestSerializer(data, many=True)
             # serializer = TestSerializer(queryset, many=True)
-        elif test_id:
+        if test_id:
             try:
                 queryset = Test.objects.get(test_id=test_id)
+                print(queryset)
                 serializer = TestSerializer(queryset)
-                return Response({'status': Response.SUCCESS, 'data': serializer.data}, status=HTTP_200_OK)
+                print(serializer)
+                return Response({'status': ResponseChoices.SUCCESS, 'data': serializer.data}, status=HTTP_200_OK)
             except:
                 return Response({"status": "failure", "data": "please give a valid test id"}, status=HTTP_206_PARTIAL_CONTENT)
 
@@ -614,9 +616,9 @@ class TestResultCreateView(CreateAPIView):
 
     def create(self, request):
         serializer = TestResultSerializer(data=request.data)
-        customize = json.loads(request.data['test_detail'])
-        for i in customize:
-            print(i)
+        # customize = json.loads(request.data['test_detail'])
+        # for i in customize:
+        #     print(i)
         if serializer.is_valid():
             serializer.save()
             return Response({"status": ResponseChoices.SUCCESS, 'data': serializer.data}, status=HTTP_201_CREATED)

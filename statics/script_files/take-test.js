@@ -43,8 +43,8 @@ function get() {
         return res.json()
     })
         .then(data => {
-            console.log(data.data)
-            data.data.forEach((d, index) => {
+            console.log(data.results)
+            data.results.forEach((d, index) => {
                 console.log(d.note)
                 content += `<li>${d.note}</li>`
             })

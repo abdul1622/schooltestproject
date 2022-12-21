@@ -53,6 +53,7 @@ function login() {
                 }).then(res => {
                     return res.json()
                 }).then(d => {
+                    console.log(d)
                     if (d.data.profile.standard) {
                         localStorage.setItem("standard", d.data.profile.standard);
                     }
