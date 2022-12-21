@@ -1,11 +1,13 @@
 .signdiv{
   justify-content: space-evenly;
 }
-  .signup-call {
-    margin-left: 26%;
-    margin-top: 7%;
-    padding: 2%;
-    width: 52%;
+.signup-call {
+  background-color: #ffffff14;
+  box-shadow: #39438091 0px 5px 15px;
+  margin-left: 31%;
+  margin-top: 6%;
+  padding: 2%;
+  width: 40%;
 }
 #signup-btn {
   background-color: #ffc107;
