@@ -33,9 +33,11 @@
         }).then(res => {
             return res.json()
         }).then(data => {
-            if (data.length < 0){
+            console.log(data,data.results,data.results.length)
+            // data = data.results
+            if (data.results.length > 0){
             console.log(data)
-            data.forEach((d, index) => {
+            data.results.forEach((d, index) => {
                 temp = `${d.name}`
                 temp = temp.replace(/\s/g, '_')
                 console.log(temp)
@@ -126,6 +128,7 @@
         //   form_grade = document.getElementById('id_grade')
         let url = 'http://127.0.0.1:8000/api/subjects/'
         subject_btn = document.getElementById('subject-btn')
+    
         e.preventDefault();
         let delbutton = e.target.id == 'delete';
         let editbutton = e.target.id == 'edit';
@@ -155,7 +158,11 @@
             console.log(grade_val)
             let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             subject_btn.addEventListener('click', () => {
+
                 if (edit) {
+            var subname = document.getElementById('id_subject_name').value
+            var subcode = document.getElementById('id_code').value
+
                     fetch(`${url}${id}/`, {
                         method: 'PUT',
                         headers: {
@@ -165,8 +172,8 @@
                         },
                         body: JSON.stringify({
                             'grade': grade_id,
-                            'code': form_code.value,
-                            'name': form_name.value,
+                            'code': subcode,
+                            'name': subname,
                         })
                     }).then(function (response) {
                         if (response.status == 200) {
